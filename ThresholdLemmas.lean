@@ -20,7 +20,7 @@ theorem threshold_factor_eq_one
       4 * B ≤ 2 ^ k * B := Nat.mul_le_mul_right B hpow
       _ ≤ 2 ^ k * y := Nat.mul_le_mul_left (2 ^ k) hy
   have hupp : 3 * x + 1 < 4 * B := by omega
-  rw [hfactor] at hlow
+  rw [← hfactor] at hlow
   omega
 
 /-- Odd x and odd y in 3*x + 1 = 2*y imply x = 3 (mod 4). -/
