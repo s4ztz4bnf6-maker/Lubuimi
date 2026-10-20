@@ -1,4 +1,5 @@
 import Mathlib
+import SyracuseQuarterDescent
 
 namespace CollatzSyracuseAudit
 
