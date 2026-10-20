@@ -29,3 +29,7 @@ jobs:
         run: lake env lean IterationLemmas.lean
       - name: Compile ThresholdLemmas.lean
         run: lake env lean ThresholdLemmas.lean
+      - name: Compile SyracuseReferenceTest.lean
+        run: lake env lean SyracuseReferenceTest.lean
+      - name: Compile SyracuseQuarterDescent.lean
+        run: lake env lean SyracuseQuarterDescent.lean
