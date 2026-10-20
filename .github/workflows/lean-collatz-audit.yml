@@ -37,3 +37,5 @@ jobs:
         run: lake env lean SyracuseReferenceTest.lean
       - name: Compile SyracuseQuarterDescent.lean
         run: lake env lean SyracuseQuarterDescent.lean
+      - name: Compile SyracuseSecondStep.lean
+        run: lake env lean SyracuseSecondStep.lean
