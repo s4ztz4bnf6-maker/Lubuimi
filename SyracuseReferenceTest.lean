@@ -25,7 +25,7 @@ theorem two_le_v2_of_four_dvd
     (m : ℕ) (hm : m ≠ 0) (hfour : 4 ∣ m) :
     2 ≤ v2 m := by
   have hpow : 2 ^ 2 ∣ m := by
-    norm_num at hfour ⊢
+    simpa using hfour
   exact (Nat.prime_two.pow_dvd_iff_le_factorization hm).mp hpow
 
 /-- Monotonicity of the power of 2 gives the denominator bound. -/
