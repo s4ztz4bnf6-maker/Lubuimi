@@ -62,7 +62,7 @@ theorem second_step_formula_of_odd_m
   have hval : v2 (3 * (6 * m + 5) + 1) = 1 :=
     v2_eq_one_of_even_not_four _ (by omega) hnum2 hnum4
   dsimp [syracuse]
-  rw [hnum, hval]
+  rw [hval, hnum]
   norm_num
 
 /-- In the odd-m case, two accelerated steps from 4*m+3 remain above
