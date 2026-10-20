@@ -29,3 +29,5 @@ jobs:
         run: lake env lean IterationLemmas.lean
       - name: Compile ThresholdLemmas.lean
         run: lake env lean ThresholdLemmas.lean
+      - name: Compile BBMSTCoreTest.lean
+        run: lake env lean BBMSTCoreTest.lean
