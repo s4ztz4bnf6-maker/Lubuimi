@@ -5,6 +5,7 @@ on:
     branches:
       - collatz/compiler-audit-2026-10-19
       - collatz/quarter-descent-lemma-2026-10-20
+      - collatz/syracuse-quarter-bridge-2026-10-21
   pull_request:
   workflow_dispatch:
 
