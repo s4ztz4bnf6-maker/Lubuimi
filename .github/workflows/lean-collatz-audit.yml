@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - collatz/compiler-audit-2026-10-19
+      - collatz/quarter-descent-lemma-2026-10-20
   pull_request:
   workflow_dispatch:
 
@@ -25,7 +26,13 @@ jobs:
         with:
           build: false
           use-mathlib-cache: true
+      - name: Build Lean library modules
+        run: lake build CollatzAudit
       - name: Compile IterationLemmas.lean
         run: lake env lean IterationLemmas.lean
       - name: Compile ThresholdLemmas.lean
         run: lake env lean ThresholdLemmas.lean
+      - name: Compile SyracuseReferenceTest.lean
+        run: lake env lean SyracuseReferenceTest.lean
+      - name: Compile SyracuseQuarterDescent.lean
+        run: lake env lean SyracuseQuarterDescent.lean
