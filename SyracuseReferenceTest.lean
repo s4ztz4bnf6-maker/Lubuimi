@@ -75,4 +75,17 @@ theorem syracuse_descent_of_four_dvd
 
 #print axioms CollatzSyracuseAudit.syracuse_descent_of_four_dvd
 
+/-- The residue condition n = 1 (mod 4) supplies the divisibility-by-four
+hypothesis needed for the accelerated Syracuse descent theorem. -/
+theorem syracuse_descent_mod_four_one
+    (n : ℕ) (hnmod : n % 4 = 1) (hn_two : 2 ≤ n) :
+    syracuse n < n := by
+  have hn_odd : n % 2 = 1 := by omega
+  have hfour : 4 ∣ 3 * n + 1 := by
+    apply Nat.dvd_iff_mod_eq_zero.mpr
+    omega
+  exact syracuse_descent_of_four_dvd n hn_odd hn_two hfour
+
+#print axioms CollatzSyracuseAudit.syracuse_descent_mod_four_one
+
 end CollatzSyracuseAudit
