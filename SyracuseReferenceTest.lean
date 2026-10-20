@@ -50,4 +50,28 @@ theorem div_pow_le_div_four
 #print axioms CollatzSyracuseAudit.pow_two_ge_four
 #print axioms CollatzSyracuseAudit.div_pow_le_div_four
 
+/-- If the odd Syracuse input has at least two factors of 2 in 3*n+1,
+then the accelerated Syracuse step is strictly smaller than n (for n > 1). -/
+theorem syracuse_descent_of_four_dvd
+    (n : ℕ) (hn : n % 2 = 1) (hn_two : 2 ≤ n)
+    (hfour : 4 ∣ 3 * n + 1) :
+    syracuse n < n := by
+  have hm : 3 * n + 1 ≠ 0 := by omega
+  have ha : 2 ≤ v2 (3 * n + 1) :=
+    two_le_v2_of_four_dvd (3 * n + 1) hm hfour
+  have hden : 4 ≤ 2 ^ v2 (3 * n + 1) :=
+    pow_two_ge_four (v2 (3 * n + 1)) ha
+  have hdiv :
+      (3 * n + 1) / 2 ^ v2 (3 * n + 1) ≤ (3 * n + 1) / 4 :=
+    div_pow_le_div_four (3 * n + 1) (v2 (3 * n + 1)) hden
+  have hmodm : (3 * n + 1) % 4 = 0 :=
+    Nat.dvd_iff_mod_eq_zero.mp hfour
+  have hnmod : n % 4 = 1 := by omega
+  have hquarter : (3 * n + 1) / 4 < n :=
+    quarter_descent_of_mod_four_one n hnmod hn_two
+  dsimp [syracuse]
+  omega
+
+#print axioms CollatzSyracuseAudit.syracuse_descent_of_four_dvd
+
 end CollatzSyracuseAudit
