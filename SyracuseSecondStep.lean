@@ -35,14 +35,14 @@ theorem first_step_formula_mod_four_three (m : ℕ) :
   have hodd : (6 * m + 5) % 2 = 1 := by omega
   have hnum2 : 2 ∣ 3 * (4 * m + 3) + 1 := by
     rw [hnum]
-    exact dvd_mul_right 2 (6 * m + 5)
+    exact ⟨6 * m + 5, rfl⟩
   have hnum4 : ¬ 4 ∣ 3 * (4 * m + 3) + 1 := by
     rw [hnum]
     omega
   have hval : v2 (3 * (4 * m + 3) + 1) = 1 :=
     v2_eq_one_of_even_not_four _ (by omega) hnum2 hnum4
   dsimp [syracuse]
-  rw [hnum, hval]
+  rw [hval, hnum]
   norm_num
 
 /-- If m is odd, the second accelerated step is exactly 9*m+8. -/
@@ -55,7 +55,7 @@ theorem second_step_formula_of_odd_m
     odd_m_implies_odd_nine_m_add_eight m hm
   have hnum2 : 2 ∣ 3 * (6 * m + 5) + 1 := by
     rw [hnum]
-    exact dvd_mul_right 2 (9 * m + 8)
+    exact ⟨9 * m + 8, rfl⟩
   have hnum4 : ¬ 4 ∣ 3 * (6 * m + 5) + 1 := by
     rw [hnum]
     omega
