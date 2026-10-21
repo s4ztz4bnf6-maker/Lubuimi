@@ -47,6 +47,21 @@ theorem v2_eq_three_of_eight_not_sixteen
     exact h16 (by simpa using hpow4)
   omega
 
+ /-- If a natural is divisible by sixteen but not by thirty-two,
+its 2-adic factorization exponent is exactly four. -/
+theorem v2_eq_four_of_sixteen_not_thirty_two
+    (a : ℕ) (ha : a ≠ 0) (h16 : 16 ∣ a) (h32 : ¬ 32 ∣ a) :
+    v2 a = 4 := by
+  have hpow4 : 2 ^ 4 ∣ a := by simpa using h16
+  have hge : 4 ≤ v2 a :=
+    (Nat.prime_two.pow_dvd_iff_le_factorization ha).mp hpow4
+  have hnot : ¬ 5 ≤ v2 a := by
+    intro hle
+    have hpow5 : 2 ^ 5 ∣ a :=
+      (Nat.prime_two.pow_dvd_iff_le_factorization ha).mpr hle
+    exact h32 (by simpa using hpow5)
+  omega
+
 /-- The numerator in the second accelerated step has this exact form. -/
 theorem third_step_numerator_formula (m : ℕ) :
     3 * (6 * m + 5) + 1 = 2 * (9 * m + 8) := by
@@ -216,6 +231,50 @@ theorem second_numerator_divisible_by_sixteen_of_m_mod_eight_zero
       3 * (6 * (8 * k) + 5) + 1 = 16 * (9 * k + 2) := by omega
   rw [hnum]
   exact ⟨9 * k + 2, rfl⟩
+
+ /-- If k is odd, then 9*k+2 is odd. -/
+theorem odd_k_implies_odd_nine_k_add_two
+    (k : ℕ) (hk : k % 2 = 1) :
+    (9 * k + 2) % 2 = 1 := by
+  omega
+
+/-- In the class m = 16*j+8, the second-step numerator is sixteen
+times an odd number, so its 2-adic valuation is exactly four. -/
+theorem second_numerator_v2_of_m_mod_sixteen_eight (j : ℕ) :
+    v2 (3 * (6 * (16 * j + 8) + 5) + 1) = 4 := by
+  have hnum :
+      3 * (6 * (16 * j + 8) + 5) + 1 = 16 * (18 * j + 9) := by omega
+  have hodd : (18 * j + 9) % 2 = 1 := by omega
+  have h16 : 16 ∣ 3 * (6 * (16 * j + 8) + 5) + 1 := by
+    rw [hnum]
+    exact ⟨18 * j + 9, rfl⟩
+  have h32 : ¬ 32 ∣ 3 * (6 * (16 * j + 8) + 5) + 1 := by
+    rw [hnum]
+    intro hdiv
+    obtain ⟨q, hq⟩ := hdiv
+    omega
+  exact v2_eq_four_of_sixteen_not_thirty_two _ (by omega) h16 h32
+
+/-- Exact accelerated output in the class m = 16*j+8. -/
+theorem second_step_formula_of_m_mod_sixteen_eight (j : ℕ) :
+    syracuse (6 * (16 * j + 8) + 5) = 18 * j + 9 := by
+  have hnum :
+      3 * (6 * (16 * j + 8) + 5) + 1 = 16 * (18 * j + 9) := by omega
+  have hval : v2 (3 * (6 * (16 * j + 8) + 5) + 1) = 4 :=
+    second_numerator_v2_of_m_mod_sixteen_eight j
+  dsimp [syracuse]
+  rw [hval, hnum]
+  norm_num
+
+/-- In the class m = 16*j, the second-step numerator is divisible by
+thirty-two; its exact valuation may be larger. -/
+theorem second_numerator_divisible_by_thirty_two_of_m_mod_sixteen_zero
+    (j : ℕ) :
+    32 ∣ 3 * (6 * (16 * j) + 5) + 1 := by
+  have hnum :
+      3 * (6 * (16 * j) + 5) + 1 = 32 * (9 * j + 1) := by omega
+  rw [hnum]
+  exact ⟨9 * j + 1, rfl⟩
 
 /-- For even m the factor 9*m+8 is even, so the next valuation is at least
 two; this records the branch condition without asserting a descent. -/
