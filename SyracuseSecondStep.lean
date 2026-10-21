@@ -106,7 +106,7 @@ theorem even_m_second_numerator_divisible_by_four
   have h : 3 * (6 * m + 5) + 1 = 2 * (9 * m + 8) :=
     third_step_numerator_formula m
   rw [h]
-  have htwo : 2 ∣ 9 * m + 8 := even_m_second_step_reduction m hm
+  have htwo : 2 ∣ 9 * m + 8 := by omega
   obtain ⟨q, hq⟩ := htwo
   refine ⟨q, ?_⟩
   omega
