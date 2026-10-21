@@ -39,7 +39,10 @@ def transition_compose
     BlockTransition S Source Target := by
   refine
     { steps := A.steps + B.steps
-      steps_pos := by omega
+      steps_pos := by
+        have hA := A.steps_pos
+        have hB := B.steps_pos
+        omega
       run := fun n => B.run (A.run n)
       run_eq_iterate := ?_
       slope := B.slope * A.slope
@@ -60,7 +63,7 @@ def transition_compose
   · have hprod : B.slope * A.slope ≤ B.slope := by
       nlinarith [
         mul_nonneg B.slope_nonneg
-          (show 0 ≤ 1 - A.slope by linarith)]
+          (sub_nonneg.mpr (le_of_lt A.slope_lt_one))]
     exact lt_of_le_of_lt hprod B.slope_lt_one
   · intro n hn
     exact B.target_correct (A.run n) (A.target_correct n hn)
@@ -73,7 +76,7 @@ def transition_compose
       (B.run (A.run n) : ℚ) ≤
           B.slope * (A.run n : ℚ) + B.offset := hB
       _ ≤ B.slope * (A.slope * (n : ℚ) + A.offset) +
-          B.offset := add_le_add_right hscale B.offset
+          B.offset := add_le_add_left hscale B.offset
       _ = (B.slope * A.slope) * (n : ℚ) +
           (B.slope * A.offset + B.offset) := by ring
 
@@ -99,8 +102,7 @@ theorem two_step_affine_bound_mod32_three (k : ℕ) :
       (9 / 32 : ℚ) * (32 * k + 3) + 5 / 32 := by
   have hfirst :
       syracuse (32 * k + 3) = 48 * k + 5 := by
-    simpa [Nat.mul_assoc] using
-      first_step_formula_mod_four_three (8 * k)
+    convert first_step_formula_mod_four_three (8 * k) using 1 <;> omega
   have hnum : 3 * (48 * k + 5) + 1 = 16 * (9 * k + 1) := by omega
   have h16 : 16 ∣ 3 * (48 * k + 5) + 1 := by
     rw [hnum]
@@ -126,9 +128,11 @@ theorem two_step_affine_bound_mod32_three (k : ℕ) :
       (3 * (48 * k + 5) + 1) /
           2 ^ v2 (3 * (48 * k + 5) + 1) ≤ 9 * k + 1 := by
     omega
-  norm_num at *
-  push_cast at *
-  nlinarith
+  calc
+    (((3 * (48 * k + 5) + 1) /
+        2 ^ v2 (3 * (48 * k + 5) + 1) : ℕ) : ℚ) ≤
+        (9 * k + 1 : ℕ) := by exact_mod_cast hout
+    _ = (9 / 32 : ℚ) * (32 * k + 3) + 5 / 32 := by ring
 
 /-- Concrete transition for the residue class n ≡ 3 (mod 32). The target
 condition is intentionally True: the output residue need not be constant
@@ -156,8 +160,7 @@ def mod32ThreeTwoStep : BlockTransition
     obtain ⟨k, rfl⟩ : ∃ k : ℕ, n = 32 * k + 3 := by
       refine ⟨n / 32, ?_⟩
       omega
-    simpa [Nat.mul_add, Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using
-      two_step_affine_bound_mod32_three k
+    convert two_step_affine_bound_mod32_three k using 1 <;> ring
 
 #print axioms CollatzSyracuseAudit.transition_compose
 #print axioms CollatzSyracuseAudit.strict_descent_of_affine
