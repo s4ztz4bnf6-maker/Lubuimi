@@ -37,7 +37,7 @@ theorem syracuse_output_odd (n : ℕ) :
         _ = (2 * q) * 2 ^ m.factorization 2 := by rw [hq]
         _ = q * 2 ^ (m.factorization 2 + 1) := by
           rw [pow_succ]
-          ring
+          exact Nat.mul_comm _ _
     have hle :=
       (Nat.prime_two.pow_dvd_iff_le_factorization hm).mp hpow
     omega
@@ -45,7 +45,7 @@ theorem syracuse_output_odd (n : ℕ) :
     intro hz
     apply hnot
     exact Nat.dvd_iff_mod_eq_zero.mpr hz
-  have hlt := Nat.mod_lt (m / 2 ^ m.factorization 2) (by omega)
+  have hlt := Nat.mod_lt (m / 2 ^ m.factorization 2) (by norm_num)
   omega
 
 /-- If n is odd, then 3*n+1 is even. -/
