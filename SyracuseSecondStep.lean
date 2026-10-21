@@ -32,6 +32,21 @@ theorem v2_eq_two_of_four_not_eight
     exact h8 (by simpa using hpow3)
   omega
 
+ /-- If a natural is divisible by eight but not by sixteen, its
+2-adic factorization exponent is exactly three. -/
+theorem v2_eq_three_of_eight_not_sixteen
+    (a : ℕ) (ha : a ≠ 0) (h8 : 8 ∣ a) (h16 : ¬ 16 ∣ a) :
+    v2 a = 3 := by
+  have hpow3 : 2 ^ 3 ∣ a := by simpa using h8
+  have hge : 3 ≤ v2 a :=
+    (Nat.prime_two.pow_dvd_iff_le_factorization ha).mp hpow3
+  have hnot : ¬ 4 ≤ v2 a := by
+    intro hle
+    have hpow4 : 2 ^ 4 ∣ a :=
+      (Nat.prime_two.pow_dvd_iff_le_factorization ha).mpr hle
+    exact h16 (by simpa using hpow4)
+  omega
+
 /-- The numerator in the second accelerated step has this exact form. -/
 theorem third_step_numerator_formula (m : ℕ) :
     3 * (6 * m + 5) + 1 = 2 * (9 * m + 8) := by
@@ -163,6 +178,44 @@ theorem second_numerator_divisible_by_eight_of_m_mod_four_zero
       3 * (6 * (4 * j) + 5) + 1 = 8 * (9 * j + 2) := by omega
   rw [hnum]
   exact ⟨9 * j + 2, rfl⟩
+
+ /-- In the class m = 8*k+4, the second-step numerator is eight
+times the odd number 18*k+11, so its valuation is exactly three. -/
+theorem second_numerator_v2_of_m_mod_eight_four (k : ℕ) :
+    v2 (3 * (6 * (8 * k + 4) + 5) + 1) = 3 := by
+  have hnum :
+      3 * (6 * (8 * k + 4) + 5) + 1 = 8 * (18 * k + 11) := by omega
+  have hodd : (18 * k + 11) % 2 = 1 := by omega
+  have h8 : 8 ∣ 3 * (6 * (8 * k + 4) + 5) + 1 := by
+    rw [hnum]
+    exact ⟨18 * k + 11, rfl⟩
+  have h16 : ¬ 16 ∣ 3 * (6 * (8 * k + 4) + 5) + 1 := by
+    rw [hnum]
+    intro hdiv
+    obtain ⟨q, hq⟩ := hdiv
+    omega
+  exact v2_eq_three_of_eight_not_sixteen _ (by omega) h8 h16
+
+/-- Exact accelerated output in the class m = 8*k+4. -/
+theorem second_step_formula_of_m_mod_eight_four (k : ℕ) :
+    syracuse (6 * (8 * k + 4) + 5) = 18 * k + 11 := by
+  have hnum :
+      3 * (6 * (8 * k + 4) + 5) + 1 = 8 * (18 * k + 11) := by omega
+  have hval : v2 (3 * (6 * (8 * k + 4) + 5) + 1) = 3 :=
+    second_numerator_v2_of_m_mod_eight_four k
+  dsimp [syracuse]
+  rw [hval, hnum]
+  norm_num
+
+/-- In the class m = 8*k, the second-step numerator is divisible by
+sixteen; its exact valuation may be larger. -/
+theorem second_numerator_divisible_by_sixteen_of_m_mod_eight_zero
+    (k : ℕ) :
+    16 ∣ 3 * (6 * (8 * k) + 5) + 1 := by
+  have hnum :
+      3 * (6 * (8 * k) + 5) + 1 = 16 * (9 * k + 2) := by omega
+  rw [hnum]
+  exact ⟨9 * k + 2, rfl⟩
 
 /-- For even m the factor 9*m+8 is even, so the next valuation is at least
 two; this records the branch condition without asserting a descent. -/
