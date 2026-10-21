@@ -17,6 +17,21 @@ theorem v2_eq_one_of_even_not_four
     exact h4 (by simpa using hpow2)
   omega
 
+ /-- If a natural is divisible by four but not by eight, its 2-adic
+factorization exponent is exactly two. -/
+theorem v2_eq_two_of_four_not_eight
+    (a : ℕ) (ha : a ≠ 0) (h4 : 4 ∣ a) (h8 : ¬ 8 ∣ a) :
+    v2 a = 2 := by
+  have hpow2 : 2 ^ 2 ∣ a := by simpa using h4
+  have hge : 2 ≤ v2 a :=
+    (Nat.prime_two.pow_dvd_iff_le_factorization ha).mp hpow2
+  have hnot : ¬ 3 ≤ v2 a := by
+    intro hle
+    have hpow3 : 2 ^ 3 ∣ a :=
+      (Nat.prime_two.pow_dvd_iff_le_factorization ha).mpr hle
+    exact h8 (by simpa using hpow3)
+  omega
+
 /-- The numerator in the second accelerated step has this exact form. -/
 theorem third_step_numerator_formula (m : ℕ) :
     3 * (6 * m + 5) + 1 = 2 * (9 * m + 8) := by
@@ -110,6 +125,44 @@ theorem even_m_second_numerator_divisible_by_four
   obtain ⟨q, hq⟩ := htwo
   refine ⟨q, ?_⟩
   omega
+
+ /-- In the class m = 4*j+2, the second-step numerator is four
+times the odd number 18*j+13, so its 2-adic valuation is exactly two. -/
+theorem second_numerator_v2_of_m_mod_four_two (j : ℕ) :
+    v2 (3 * (6 * (4 * j + 2) + 5) + 1) = 2 := by
+  have hnum :
+      3 * (6 * (4 * j + 2) + 5) + 1 = 4 * (18 * j + 13) := by omega
+  have hodd : (18 * j + 13) % 2 = 1 := by omega
+  have h4 : 4 ∣ 3 * (6 * (4 * j + 2) + 5) + 1 := by
+    rw [hnum]
+    exact ⟨18 * j + 13, rfl⟩
+  have h8 : ¬ 8 ∣ 3 * (6 * (4 * j + 2) + 5) + 1 := by
+    rw [hnum]
+    intro hdiv
+    obtain ⟨q, hq⟩ := hdiv
+    omega
+  exact v2_eq_two_of_four_not_eight _ (by omega) h4 h8
+
+/-- Exact accelerated output in the class m = 4*j+2. -/
+theorem second_step_formula_of_m_mod_four_two (j : ℕ) :
+    syracuse (6 * (4 * j + 2) + 5) = 18 * j + 13 := by
+  have hnum :
+      3 * (6 * (4 * j + 2) + 5) + 1 = 4 * (18 * j + 13) := by omega
+  have hval : v2 (3 * (6 * (4 * j + 2) + 5) + 1) = 2 :=
+    second_numerator_v2_of_m_mod_four_two j
+  dsimp [syracuse]
+  rw [hval, hnum]
+  norm_num
+
+/-- In the class m = 4*j, the second-step numerator has at least
+three factors of two; further factors depend on j. -/
+theorem second_numerator_divisible_by_eight_of_m_mod_four_zero
+    (j : ℕ) :
+    8 ∣ 3 * (6 * (4 * j) + 5) + 1 := by
+  have hnum :
+      3 * (6 * (4 * j) + 5) + 1 = 8 * (9 * j + 2) := by omega
+  rw [hnum]
+  exact ⟨9 * j + 2, rfl⟩
 
 /-- For even m the factor 9*m+8 is even, so the next valuation is at least
 two; this records the branch condition without asserting a descent. -/
