@@ -34,7 +34,7 @@ jobs:
       - name: Compile ThresholdLemmas.lean
         run: lake env lean ThresholdLemmas.lean
       - name: Compile SyracuseReferenceTest.lean
-        run: lake env lean SyracuseReferenceTest.lean
+        run: lake env lean SyracuseReferenceTest.lean -o .lake/build/lib/lean/SyracuseReferenceTest.olean
       - name: Compile SyracuseQuarterDescent.lean
         run: lake env lean SyracuseQuarterDescent.lean
       - name: Compile SyracuseSecondStep.lean
