@@ -32,7 +32,7 @@ structure BlockTransition (S : ℕ → ℕ)
 
 /-- Consecutive affine block certificates compose when the first block's
 target condition implies the second block's source condition. -/
-theorem transition_compose
+def transition_compose
     {S : ℕ → ℕ} {Source Mid Target : ℕ → Prop}
     (A : BlockTransition S Source Mid)
     (B : BlockTransition S Mid Target) :
