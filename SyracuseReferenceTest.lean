@@ -11,6 +11,43 @@ def v2 (m : ℕ) : ℕ :=
 def syracuse (n : ℕ) : ℕ :=
   (3 * n + 1) / 2 ^ v2 (3 * n + 1)
 
+ /-- Every accelerated Syracuse output is odd: the full 2-adic
+factorization exponent removes every factor of two from the numerator. -/
+theorem syracuse_output_odd (n : ℕ) :
+    syracuse n % 2 = 1 := by
+  unfold syracuse v2
+  let m := 3 * n + 1
+  change (m / 2 ^ m.factorization 2) % 2 = 1
+  have hm : m ≠ 0 := by
+    dsimp [m]
+    omega
+  have hdvd : 2 ^ m.factorization 2 ∣ m :=
+    (Nat.prime_two.pow_dvd_iff_le_factorization hm).2 le_rfl
+  have hcancel :
+      (m / 2 ^ m.factorization 2) * 2 ^ m.factorization 2 = m :=
+    Nat.div_mul_cancel hdvd
+  have hnot : ¬ 2 ∣ m / 2 ^ m.factorization 2 := by
+    intro heven
+    obtain ⟨q, hq⟩ := heven
+    have hpow : 2 ^ (m.factorization 2 + 1) ∣ m := by
+      refine ⟨q, ?_⟩
+      calc
+        m = (m / 2 ^ m.factorization 2) * 2 ^ m.factorization 2 :=
+          hcancel.symm
+        _ = (2 * q) * 2 ^ m.factorization 2 := by rw [hq]
+        _ = q * 2 ^ (m.factorization 2 + 1) := by
+          rw [pow_succ]
+          ring
+    have hle :=
+      (Nat.prime_two.pow_dvd_iff_le_factorization hm).mp hpow
+    omega
+  have hmod : (m / 2 ^ m.factorization 2) % 2 ≠ 0 := by
+    intro hz
+    apply hnot
+    exact Nat.dvd_iff_mod_eq_zero.mpr hz
+  have hlt := Nat.mod_lt (m / 2 ^ m.factorization 2) (by omega)
+  omega
+
 /-- If n is odd, then 3*n+1 is even. -/
 theorem three_mul_add_one_even
     (n : ℕ) (h : n % 2 = 1) :
