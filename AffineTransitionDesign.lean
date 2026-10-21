@@ -105,7 +105,12 @@ theorem two_step_affine_bound_mod32_three (k : ℕ) :
       (9 / 32 : ℚ) * (32 * k + 3) + 5 / 32 := by
   have hfirst :
       syracuse (32 * k + 3) = 48 * k + 5 := by
-    convert first_step_formula_mod_four_three (8 * k) using 1 <;> omega
+    calc
+      syracuse (32 * k + 3) = syracuse (4 * (8 * k) + 3) := by
+        congr 1 <;> omega
+      _ = 6 * (8 * k) + 5 :=
+        first_step_formula_mod_four_three (8 * k)
+      _ = 48 * k + 5 := by omega
   have hnum : 3 * (48 * k + 5) + 1 = 16 * (9 * k + 1) := by omega
   have h16 : 16 ∣ 3 * (48 * k + 5) + 1 := by
     rw [hnum]
@@ -135,7 +140,9 @@ theorem two_step_affine_bound_mod32_three (k : ℕ) :
     (((3 * (48 * k + 5) + 1) /
         2 ^ v2 (3 * (48 * k + 5) + 1) : ℕ) : ℚ) ≤
         (9 * k + 1 : ℕ) := by exact_mod_cast hout
-    _ = (9 / 32 : ℚ) * (32 * k + 3) + 5 / 32 := by ring
+    _ = (9 / 32 : ℚ) * (32 * k + 3) + 5 / 32 := by
+      push_cast
+      ring
 
 /-- Concrete transition for the residue class n ≡ 3 (mod 32). The target
 condition is intentionally True: the output residue need not be constant
@@ -163,7 +170,8 @@ def mod32ThreeTwoStep : BlockTransition
     obtain ⟨k, rfl⟩ : ∃ k : ℕ, n = 32 * k + 3 := by
       refine ⟨n / 32, ?_⟩
       omega
-    convert two_step_affine_bound_mod32_three k using 1 <;> ring
+    convert two_step_affine_bound_mod32_three k using 1 <;>
+      push_cast <;> ring
 
 #print axioms CollatzSyracuseAudit.transition_compose
 #print axioms CollatzSyracuseAudit.strict_descent_of_affine
