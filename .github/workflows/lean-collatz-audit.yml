@@ -37,5 +37,10 @@ jobs:
         run: lake env lean SyracuseReferenceTest.lean -o .lake/build/lib/lean/SyracuseReferenceTest.olean
       - name: Compile SyracuseQuarterDescent.lean
         run: lake env lean SyracuseQuarterDescent.lean
-      - name: Compile SyracuseSecondStep.lean
-        run: lake env lean SyracuseSecondStep.lean
+      - name: Compile and audit SyracuseSecondStep.lean
+        run: |
+          lake env lean SyracuseSecondStep.lean 2>&1 | tee /tmp/syracuse-second-step-audit.log
+          if grep -q 'sorryAx' /tmp/syracuse-second-step-audit.log; then
+            echo "Forbidden sorryAx dependency detected"
+            exit 1
+          fi
