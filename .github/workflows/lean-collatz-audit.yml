@@ -44,3 +44,10 @@ jobs:
             echo "Forbidden sorryAx dependency detected"
             exit 1
           fi
+      - name: Compile and audit AffineTransitionDesign.lean
+        run: |
+          lake env lean AffineTransitionDesign.lean 2>&1 | tee /tmp/affine-transition-audit.log
+          if grep -q 'sorryAx' /tmp/affine-transition-audit.log; then
+            echo "Forbidden sorryAx dependency detected"
+            exit 1
+          fi
