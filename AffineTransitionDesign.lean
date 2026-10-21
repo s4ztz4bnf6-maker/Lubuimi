@@ -59,7 +59,10 @@ def transition_compose
       B.run (A.run n) = (S^[B.steps]) (A.run n) := B.run_eq_iterate _
       _ = (S^[B.steps]) ((S^[A.steps]) n) := by rw [A.run_eq_iterate]
       _ = (S^[A.steps + B.steps]) n := by
-        simp [Function.iterate_add_apply, Nat.add_comm]
+        calc
+          (S^[B.steps]) ((S^[A.steps]) n) = (S^[B.steps + A.steps]) n :=
+            (Function.iterate_add_apply S B.steps A.steps n).symm
+          _ = (S^[A.steps + B.steps]) n := by congr 1 <;> omega
   · have hprod : B.slope * A.slope ≤ B.slope := by
       nlinarith [
         mul_nonneg B.slope_nonneg
