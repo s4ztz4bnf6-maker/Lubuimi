@@ -289,6 +289,60 @@ theorem even_m_second_step_reduction
 #print axioms CollatzSyracuseAudit.second_step_still_above_start_of_odd_m
 
 
+/-! ## Two-step descent in the residue class m = 0 (mod 8) -/
+
+/-- A denominator containing at least four factors of two is at least sixteen. -/
+theorem pow_two_ge_sixteen (a : ℕ) (ha : 4 ≤ a) :
+    16 ≤ 2 ^ a := by
+  calc
+    16 = 2 ^ 4 := by norm_num
+    _ ≤ 2 ^ a := Nat.pow_le_pow_right (by omega) ha
+
+/-- Natural division by a power of two is bounded by division by sixteen
+when that power is at least sixteen. -/
+theorem div_pow_le_div_sixteen (N a : ℕ) (ha : 16 ≤ 2 ^ a) :
+    N / 2 ^ a ≤ N / 16 := by
+  apply (Nat.le_div_iff_mul_le (by norm_num : 0 < 16)).2
+  calc
+    (N / 2 ^ a) * 16 ≤ (N / 2 ^ a) * 2 ^ a :=
+      Nat.mul_le_mul_left (N / 2 ^ a) ha
+    _ ≤ N := Nat.div_mul_le_self N (2 ^ a)
+
+/-- For m = 8*k, two accelerated Syracuse steps from 4*m+3
+strictly descend below the original input. The second numerator is
+16*(9*k+1), so its normalized value is at most 9*k+1. -/
+theorem second_step_descent_of_m_mod_eight_zero (k : ℕ) :
+    syracuse (syracuse (4 * (8 * k) + 3)) < 4 * (8 * k) + 3 := by
+  rw [first_step_formula_mod_four_three]
+  have hnum :
+      3 * (6 * (8 * k) + 5) + 1 = 16 * (9 * k + 1) := by omega
+  have h16 : 16 ∣ 3 * (6 * (8 * k) + 5) + 1 := by
+    rw [hnum]
+    exact ⟨9 * k + 1, rfl⟩
+  have hN : 3 * (6 * (8 * k) + 5) + 1 ≠ 0 := by omega
+  have hval : 4 ≤ v2 (3 * (6 * (8 * k) + 5) + 1) := by
+    have hpow : 2 ^ 4 ∣ 3 * (6 * (8 * k) + 5) + 1 := by
+      simpa using h16
+    exact (Nat.prime_two.pow_dvd_iff_le_factorization hN).mp hpow
+  have hden :
+      16 ≤ 2 ^ v2 (3 * (6 * (8 * k) + 5) + 1) :=
+    pow_two_ge_sixteen _ hval
+  have hdiv :
+      (3 * (6 * (8 * k) + 5) + 1) /
+          2 ^ v2 (3 * (6 * (8 * k) + 5) + 1) ≤
+        (3 * (6 * (8 * k) + 5) + 1) / 16 :=
+    div_pow_le_div_sixteen _ _ hden
+  have hquot :
+      (3 * (6 * (8 * k) + 5) + 1) / 16 = 9 * k + 1 := by
+    rw [hnum]
+    norm_num
+  dsimp [syracuse]
+  omega
+
+#print axioms CollatzSyracuseAudit.pow_two_ge_sixteen
+#print axioms CollatzSyracuseAudit.div_pow_le_div_sixteen
+#print axioms CollatzSyracuseAudit.second_step_descent_of_m_mod_eight_zero
+
 -- Full axiom-dependency report for every theorem in this file.
 #print axioms CollatzSyracuseAudit.v2_eq_two_of_four_not_eight
 #print axioms CollatzSyracuseAudit.v2_eq_three_of_eight_not_sixteen
