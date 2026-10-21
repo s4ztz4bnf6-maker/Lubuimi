@@ -73,6 +73,44 @@ theorem second_step_still_above_start_of_odd_m
   rw [first_step_formula_mod_four_three, second_step_formula_of_odd_m m hm]
   omega
 
+
+/-- Every even m has a witness k with m = 2*k. -/
+theorem even_m_has_double_witness
+    (m : ℕ) (hm : m % 2 = 0) :
+    ∃ k : ℕ, m = 2 * k := by
+  exact ⟨m / 2, by omega⟩
+
+/-- Substituting m = 2*k exposes the next numerator factor. -/
+theorem even_m_nine_m_add_eight_formula (k : ℕ) :
+    9 * (2 * k) + 8 = 2 * (9 * k + 4) := by
+  omega
+
+/-- If k is odd, the factor 9*k+4 is odd. -/
+theorem odd_k_implies_odd_nine_k_add_four
+    (k : ℕ) (hk : k % 2 = 1) :
+    (9 * k + 4) % 2 = 1 := by
+  omega
+
+/-- If k is even, the factor 9*k+4 is even, so the valuation split
+continues at the next level. -/
+theorem even_k_implies_even_nine_k_add_four
+    (k : ℕ) (hk : k % 2 = 0) :
+    2 ∣ 9 * k + 4 := by
+  omega
+
+/-- The second-step numerator in the even-m branch has at least two
+factors of two before the final odd part is extracted. -/
+theorem even_m_second_numerator_divisible_by_four
+    (m : ℕ) (hm : m % 2 = 0) :
+    4 ∣ 3 * (6 * m + 5) + 1 := by
+  have h : 3 * (6 * m + 5) + 1 = 2 * (9 * m + 8) :=
+    third_step_numerator_formula m
+  rw [h]
+  have htwo : 2 ∣ 9 * m + 8 := even_m_second_step_reduction m hm
+  obtain ⟨q, hq⟩ := htwo
+  refine ⟨q, ?_⟩
+  omega
+
 /-- For even m the factor 9*m+8 is even, so the next valuation is at least
 two; this records the branch condition without asserting a descent. -/
 theorem even_m_second_step_reduction
