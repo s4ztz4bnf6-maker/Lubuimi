@@ -46,9 +46,6 @@ theorem one_le_v2_three_mul_add_one_of_odd
 
 #print axioms one_le_v2_three_mul_add_one_of_odd
 
-end CollatzSyracuseAudit
-
-
 /-- Exact first-step split: among odd inputs, the accelerated Syracuse
 numerator 3*n+1 has valuation exactly one precisely in the residue class
 3 mod 4. This is a deterministic congruence statement, not a density claim. -/
@@ -75,3 +72,5 @@ theorem v2_three_mul_add_one_eq_one_iff_mod_four_three
       omega
 
 #print axioms v2_three_mul_add_one_eq_one_iff_mod_four_three
+
+end CollatzSyracuseAudit
