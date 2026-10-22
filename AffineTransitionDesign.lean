@@ -281,7 +281,7 @@ theorem affine_iteration_identity
   | zero =>
       simp [cumulativeExponent, affineConstantTerm]
   | succ k ih =>
-      rw [cumulativeExponent, affineConstantTerm, pow_add]
+      rw [cumulativeExponent, affineConstantTerm]
       calc
         2 ^ (cumulativeExponent a k + a k) * n (k + 1) =
             2 ^ cumulativeExponent a k * (2 ^ a k * n (k + 1)) := by
