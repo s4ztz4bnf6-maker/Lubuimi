@@ -331,7 +331,7 @@ theorem syracuse_affine_block_identity (n : ℕ) :
   apply affine_iteration_identity
   intro i
   have hcancel := syracuse_step_cancellation (syracuseOrbit n i)
-  simpa [syracuseOrbit, Function.iterate_succ, Function.iterate_succ_apply,
+  simpa [syracuseOrbit, Function.iterate_succ, Function.iterate_succ_apply',
     Function.comp_def] using hcancel
 
 #print axioms CollatzSyracuseAudit.syracuse_step_cancellation
