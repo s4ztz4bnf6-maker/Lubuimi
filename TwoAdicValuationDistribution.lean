@@ -29,3 +29,20 @@ theorem v2_eq_iff_dvd_pow_not_next
 #print axioms v2_eq_iff_dvd_pow_not_next
 
 end CollatzSyracuseAudit
+
+
+/-- For odd n, the numerator 3n+1 is even, so its 2-adic valuation is
+at least one. This establishes the lower endpoint of the valuation distribution
+without any probabilistic assumptions. -/
+theorem one_le_v2_three_mul_add_one_of_odd
+    (n : ℕ) (hn : n % 2 = 1) :
+    1 ≤ v2 (3 * n + 1) := by
+  have hnum : 3 * n + 1 ≠ 0 := by omega
+  have hdiv : 2 ^ 1 ∣ 3 * n + 1 := by
+    apply Nat.dvd_of_mod_eq_zero
+    omega
+  have hpow := Nat.prime_two.pow_dvd_iff_le_factorization hnum
+  unfold v2
+  exact hpow.mp hdiv
+
+#print axioms one_le_v2_three_mul_add_one_of_odd
