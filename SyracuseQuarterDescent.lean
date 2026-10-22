@@ -44,4 +44,24 @@ theorem first_step_growth_of_mod_four_three
 #print axioms CollatzSyracuseAudit.odd_mod_four_split
 #print axioms CollatzSyracuseAudit.first_step_growth_of_mod_four_three
 
+/-- If an odd input is 3 modulo 8, its first ordinary odd quotient
+(3*n+1)/2 is 1 modulo 4. This is an exact deterministic branch statement,
+not a claim that the following accelerated step descends below the original
+input. -/
+theorem successor_mod_four_one_of_mod_eight_three
+    (n : ℕ) (hn : n % 8 = 3) :
+    ((3 * n + 1) / 2) % 4 = 1 := by
+  omega
+
+/-- If an odd input is 7 modulo 8, its first ordinary odd quotient
+(3*n+1)/2 is 3 modulo 4. This isolates the branch where the local
+growth obstruction can repeat. -/
+theorem successor_mod_four_three_of_mod_eight_seven
+    (n : ℕ) (hn : n % 8 = 7) :
+    ((3 * n + 1) / 2) % 4 = 3 := by
+  omega
+
+#print axioms CollatzSyracuseAudit.successor_mod_four_one_of_mod_eight_three
+#print axioms CollatzSyracuseAudit.successor_mod_four_three_of_mod_eight_seven
+
 end CollatzSyracuseAudit
