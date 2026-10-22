@@ -453,4 +453,61 @@ theorem block_transition_strict_descent
 
 #print axioms block_transition_strict_descent
 
+
+/-!
+## Strong-induction bridge (conditional)
+
+This theorem isolates the logically valid final step of a descent strategy.
+It does not establish the descent hypothesis for Syracuse; it proves that
+if every positive nonterminal input has some strictly smaller positive
+iterate, and the map preserves positivity, then every positive input reaches
+1. Thus a finite residue-class argument must genuinely establish descent for
+all relevant inputs before this induction bridge can be applied.
+-/
+
+/-- Iterates of a positivity-preserving map preserve positivity. -/
+theorem iterate_pos_of_pos
+    (S : ℕ → ℕ) (hpos : ∀ n, 0 < n → 0 < S n) :
+    ∀ k n, 0 < n → 0 < (S^[k]) n := by
+  intro k
+  induction k with
+  | zero =>
+      intro n hn
+      simpa using hn
+  | succ k ih =>
+      intro n hn
+      simpa [Function.iterate_succ_apply'] using
+        hpos ((S^[k]) n) (ih n hn)
+
+/-- If every positive input greater than one admits a positive iterate that
+is strictly smaller, and S preserves positivity, then every positive input
+eventually reaches 1. This is a conditional induction theorem, not a proof
+that the accelerated Syracuse map satisfies the descent premise. -/
+theorem reaches_one_of_strict_descent
+    (S : ℕ → ℕ)
+    (hpos : ∀ n, 0 < n → 0 < S n)
+    (hdesc : ∀ n, 1 < n → ∃ k, 0 < k ∧ (S^[k]) n < n) :
+    ∀ n, 0 < n → ∃ k, (S^[k]) n = 1 := by
+  intro n
+  induction n using Nat.strong_induction_on with
+  | h n ih =>
+      intro hn
+      by_cases hone : n = 1
+      · subst n
+        exact ⟨0, by simp⟩
+      · have hgt : 1 < n := by omega
+        obtain ⟨k, hk, hsmall⟩ := hdesc n hgt
+        have hsmall_pos : 0 < (S^[k]) n :=
+          iterate_pos_of_pos S hpos k n hn
+        obtain ⟨j, hj⟩ := ih ((S^[k]) n) hsmall hsmall_pos
+        refine ⟨k + j, ?_⟩
+        calc
+          (S^[k + j]) n = (S^[j + k]) n := by congr 1 <;> omega
+          _ = (S^[j]) ((S^[k]) n) :=
+            Function.iterate_add_apply S j k n
+          _ = 1 := hj
+
+#print axioms iterate_pos_of_pos
+#print axioms reaches_one_of_strict_descent
+
 end CollatzSyracuseAudit
