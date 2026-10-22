@@ -34,3 +34,12 @@ A Lean proof should isolate the number-theoretic core first: if 2^j divides 3a, 
 ## What this theorem does and does not buy
 
 This gives exact finite-block counts for valuation symbols without assuming independence. It can validate a finite transition graph and its class weights. It does not bound the accumulated additive offset along every path and does not prove that every starting value has a strict descent block. The global target remains: for every n>1, there exists k>=1 with C^k(n)<n, for the relevant accelerated map (with map and domain fixed explicitly). Any use of a probabilistic/density theorem must preserve its actual quantifiers; a statement about almost all starting values cannot be promoted to this universal statement.
+
+
+## Audit correction: what a 2-adic finite-state argument must still prove
+
+A finite residue graph at fixed precision K cannot, by itself, certify a descent block for every positive integer. The transition graph records congruence information; the affine cocycle also contains an integer-dependent additive offset. A negative average drift, a Haar-almost-everywhere statement, or exact valuation frequencies do not imply a pointwise bound on that offset for every orbit.
+
+The proof obligation is therefore not merely to show that some residue classes have a contracting multiplier. It must establish a uniform, orbit-valid descent statement with the exact quantifiers, for example ∀ n > 1, ∃ k ≥ 1, C^[k](n) < n, for one explicitly fixed map C and domain. The block length may depend on n unless a genuinely proved uniform bound is available. Only after that statement is proved can strong induction on n establish termination. A proposed real-valued Lyapunov function is useful only if its strict decrease is proved on every relevant transition and its well-foundedness on the integer state space is established.
+
+The tempting claim that bounded 2-adic states or a lower bound of 1 automatically forces descent is invalid: a lower bound prevents an infinite strictly descending chain only when the potential is well-founded (for example, a natural-valued potential), and it does not show that the dynamics ever decrease that potential. The exact valuation-class theorem is retained as a local lemma, not promoted to the missing global theorem.
