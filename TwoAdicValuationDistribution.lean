@@ -196,3 +196,32 @@ theorem v2_three_mul_add_one_eq_five_iff_mod_sixty_four_fifty_three
 #print axioms v2_three_mul_add_one_eq_five_iff_mod_sixty_four_fifty_three
 
 end CollatzSyracuseAudit
+
+/-- Exact sixth valuation class: among odd inputs, v₂(3n+1)=6 exactly
+when n is 21 modulo 128. This records the unique exact-valuation lift at
+the next 2-adic level; it remains a local congruence result. -/
+theorem v2_three_mul_add_one_eq_six_iff_mod_one_twenty_eight_twenty_one
+    (n : ℕ) (hn : n % 2 = 1) :
+    v2 (3 * n + 1) = 6 ↔ n % 128 = 21 := by
+  have hnum : 3 * n + 1 ≠ 0 := by omega
+  rw [v2_eq_iff_dvd_pow_not_next (3 * n + 1) 6 hnum]
+  norm_num
+  constructor
+  · rintro ⟨hdiv, hnot⟩
+    have hmod64 : (3 * n + 1) % 64 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp hdiv
+    have hmod128 : (3 * n + 1) % 128 ≠ 0 := by
+      intro hz
+      apply hnot
+      exact Nat.dvd_iff_mod_eq_zero.mpr hz
+    omega
+  · intro hmodn
+    constructor
+    · apply Nat.dvd_of_mod_eq_zero
+      omega
+    · intro hdiv
+      have hz : (3 * n + 1) % 128 = 0 :=
+        Nat.dvd_iff_mod_eq_zero.mp hdiv
+      omega
+
+#print axioms v2_three_mul_add_one_eq_six_iff_mod_one_twenty_eight_twenty_one
