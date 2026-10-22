@@ -23,6 +23,17 @@ theorem mod64_thirtyfive_first_step_exact (m : ℕ) :
   omega
 
 #print axioms CollatzSyracuseAudit.mod64_three_two_step_exact
+
+/-- Inputs congruent to 3 modulo 64 strictly descend after two accelerated
+Syracuse steps. The exact output is 18*m+1, which is below 64*m+3;
+this closes a second explicit residue class without claiming global descent. -/
+theorem mod64_three_two_step_descent (m : ℕ) :
+    syracuse (syracuse (64 * m + 3)) < 64 * m + 3 := by
+  rw [mod64_three_two_step_exact]
+  omega
+
+#print axioms mod64_three_two_step_descent
+
 #print axioms CollatzSyracuseAudit.mod64_thirtyfive_second_numerator_factor32
 #print axioms CollatzSyracuseAudit.mod64_thirtyfive_first_step_exact
 
