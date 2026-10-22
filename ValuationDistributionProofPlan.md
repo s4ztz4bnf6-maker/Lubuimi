@@ -21,3 +21,16 @@ The current workflow runs must finish before the newest addition is marked kerne
 
 ## Literature and methodological boundary
 Terras, “A stopping time problem on the positive integers,” Acta Arithmetica 30 (1976), 241–252, DOI 10.4064/aa-30-3-241-252, is a classical stopping-time reference. Congruence-class counts are finite/local information. They do not imply every individual Syracuse orbit reaches a smaller value or terminates.
+
+
+## General residue-class theorem: exact arithmetic target
+
+For every j>=1, the congruence 3n+1 = 0 modulo 2^j has exactly one solution class modulo 2^j, because multiplication by 3 is invertible modulo 2^j. Its two lifts modulo 2^(j+1) have opposite values of the next binary digit of (3n+1)/2^j; exactly one lift is divisible by 2^(j+1). Therefore exactly one of the two lifts has valuation exactly j. It follows that, for K>j, exactly 2^(K-j-1) residue classes modulo 2^K have valuation exactly j.
+
+The implementation should avoid hard-coding the observed residues 3, 1, 13, 5, 53, 21, 213, 85, 853, 341, 3413, 1365. These are regression examples, not the theorem. The reusable result should be expressed in one of two ways: define the unique residue r_j in Fin(2^(j+1)) with 2^j dividing 3r_j+1 and 2^(j+1) not dividing 3r_j+1, then prove uniqueness; or state the counting theorem directly using a finite set of residues and prove its cardinality.
+
+A Lean proof should isolate the number-theoretic core first: if 2^j divides 3a, then 2^j divides a, using coprimality of 3 and 2^j. Then prove uniqueness of the solution class modulo 2^j, the two-lift split, and the lift count. Keep the boundary j=K separate: the event v2(3n+1)>=K has one class modulo 2^K, while exact valuation K is not determined by a residue modulo 2^K alone.
+
+## What this theorem does and does not buy
+
+This gives exact finite-block counts for valuation symbols without assuming independence. It can validate a finite transition graph and its class weights. It does not bound the accumulated additive offset along every path and does not prove that every starting value has a strict descent block. The global target remains: for every n>1, there exists k>=1 with C^k(n)<n, for the relevant accelerated map (with map and domain fixed explicitly). Any use of a probabilistic/density theorem must preserve its actual quantifiers; a statement about almost all starting values cannot be promoted to this universal statement.
