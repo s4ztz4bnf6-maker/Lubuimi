@@ -24,4 +24,24 @@ theorem quarter_descent_of_mod_four_one
 #print axioms CollatzSyracuseAudit.quarter_step_formula
 #print axioms CollatzSyracuseAudit.quarter_descent_of_mod_four_one
 
+
+/-- Every odd natural lies in exactly one of the two residue classes
+1 or 3 modulo 4. This makes the local obstruction to a one-step descent
+explicit: the two cases require different arguments. -/
+theorem odd_mod_four_split
+    (n : ℕ) (hn : n % 2 = 1) :
+    n % 4 = 1 ∨ n % 4 = 3 := by
+  omega
+
+/-- In the residue class 3 modulo 4, the first odd Syracuse quotient
+(division by the known single factor 2) is strictly larger than n.
+This proves why the modulo-4 split alone cannot establish global descent. -/
+theorem first_step_growth_of_mod_four_three
+    (n : ℕ) (hn : n % 4 = 3) :
+    n < (3 * n + 1) / 2 := by
+  omega
+
+#print axioms CollatzSyracuseAudit.odd_mod_four_split
+#print axioms CollatzSyracuseAudit.first_step_growth_of_mod_four_three
+
 end CollatzSyracuseAudit
