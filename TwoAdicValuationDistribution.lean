@@ -195,7 +195,6 @@ theorem v2_three_mul_add_one_eq_five_iff_mod_sixty_four_fifty_three
 
 #print axioms v2_three_mul_add_one_eq_five_iff_mod_sixty_four_fifty_three
 
-end CollatzSyracuseAudit
 
 /-- Exact sixth valuation class: among odd inputs, v₂(3n+1)=6 exactly
 when n is 21 modulo 128. This records the unique exact-valuation lift at
@@ -404,3 +403,5 @@ theorem v2_three_mul_add_one_eq_twelve_iff_mod_eight_thousand_one_hundred_ninety
       omega
 
 #print axioms v2_three_mul_add_one_eq_twelve_iff_mod_eight_thousand_one_hundred_ninety_two_one_thousand_three_hundred_sixty_five
+
+end CollatzSyracuseAudit
