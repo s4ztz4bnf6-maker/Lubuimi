@@ -144,13 +144,13 @@ theorem two_step_affine_bound_mod32_three (k : ℕ) :
       push_cast
       ring
 
-/-- Concrete transition for the residue class n ≡ 3 (mod 32). The target
-condition is intentionally True: the output residue need not be constant
-modulo 32 because the valuation of 9*k+1 can vary with k. -/
+/- Concrete transition for the residue class n ≡ 3 (mod 32).
+The exact output residue modulo 32 can vary with k, but every accelerated
+Syracuse output is odd, so oddness is the target invariant. -/
 def mod32ThreeTwoStep : BlockTransition
     syracuse
     (fun n => n % 32 = 3)
-    (fun _ => True) where
+    (fun n => n % 2 = 1) where
   steps := 2
   steps_pos := by norm_num
   run := fun n => syracuse (syracuse n)
@@ -164,7 +164,7 @@ def mod32ThreeTwoStep : BlockTransition
   offset_nonneg := by norm_num
   target_correct := by
     intro n hn
-    trivial
+    exact syracuse_output_odd (syracuse (syracuse n))
   value_bound := by
     intro n hn
     obtain ⟨k, rfl⟩ : ∃ k : ℕ, n = 32 * k + 3 := by
