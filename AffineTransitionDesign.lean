@@ -241,6 +241,26 @@ theorem two_step_descent_mod32_nineteen (k : ℕ) :
 
 #print axioms CollatzSyracuseAudit.two_step_descent_mod32_nineteen
 
+/-- Residue-class interface for the mod-32 class 3 descent certificate. -/
+theorem two_step_descent_mod32_three_of_residue (n : ℕ)
+    (hn : n % 32 = 3) :
+    syracuse (syracuse n) < n := by
+  have hdecomp : n = 32 * (n / 32) + 3 := by omega
+  rw [hdecomp]
+  exact two_step_descent_mod32_three (n / 32)
+
+/-- Residue-class interface for the mod-32 class 19 descent certificate. -/
+theorem two_step_descent_mod32_nineteen_of_residue (n : ℕ)
+    (hn : n % 32 = 19) :
+    syracuse (syracuse n) < n := by
+  have hdecomp : n = 32 * (n / 32) + 19 := by omega
+  rw [hdecomp]
+  exact two_step_descent_mod32_nineteen (n / 32)
+
+#print axioms CollatzSyracuseAudit.two_step_descent_mod32_three_of_residue
+#print axioms CollatzSyracuseAudit.two_step_descent_mod32_nineteen_of_residue
+
+
 
 /-!
 ## Exact affine numerator identity for a valuation sequence
