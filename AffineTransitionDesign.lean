@@ -529,3 +529,14 @@ theorem syracuse_reaches_one_of_strict_descent
 #print axioms syracuse_reaches_one_of_strict_descent
 
 end CollatzSyracuseAudit
+
+
+/-- Explicit finite-sum candidate for the affine constant term:
+C_k = sum_{j < k} 3^(k-1-j) * 2^(A_j). -/
+def explicitAffineConstant (a : ℕ → ℕ) (k : ℕ) : ℕ :=
+  ∑ j in Finset.range k, 3 ^ (k - 1 - j) * 2 ^ cumulativeExponent a j
+
+/-- The explicit sum has the expected zero base case. -/
+theorem explicitAffineConstant_zero (a : ℕ → ℕ) :
+    explicitAffineConstant a 0 = 0 := by
+  simp [explicitAffineConstant]
