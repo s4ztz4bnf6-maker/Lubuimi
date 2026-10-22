@@ -283,8 +283,10 @@ theorem affine_iteration_identity
   | succ k ih =>
       rw [cumulativeExponent, affineConstantTerm, pow_succ]
       calc
-        2 ^ cumulativeExponent a k * 2 ^ a k * n (k + 1) =
-            2 ^ cumulativeExponent a k * (2 ^ a k * n (k + 1)) := by ring
+        2 ^ (cumulativeExponent a k + a k) * n (k + 1) =
+            2 ^ cumulativeExponent a k * (2 ^ a k * n (k + 1)) := by
+              rw [pow_add]
+              ring
         _ = 2 ^ cumulativeExponent a k * (3 * n k + 1) := by rw [hstep k]
         _ = 3 * (2 ^ cumulativeExponent a k * n k) +
               2 ^ cumulativeExponent a k := by ring
