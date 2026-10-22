@@ -286,11 +286,11 @@ theorem v2_three_mul_add_one_eq_eight_iff_mod_five_twelve_eighty_five
 
 
 /-- Exact ninth valuation class: among odd inputs, v₂(3n+1)=9 precisely
-when n is 341 modulo 1024. This is the unique exact-valuation lift at
+when n is 853 modulo 1024. This is the unique exact-valuation lift at
 the next 2-adic level; it does not imply global termination. -/
-theorem v2_three_mul_add_one_eq_nine_iff_mod_ten_twenty_four_three_forty_one
+theorem v2_three_mul_add_one_eq_nine_iff_mod_ten_twenty_four_eight_fifty_three
     (n : ℕ) (hn : n % 2 = 1) :
-    v2 (3 * n + 1) = 9 ↔ n % 1024 = 341 := by
+    v2 (3 * n + 1) = 9 ↔ n % 1024 = 853 := by
   have hnum : 3 * n + 1 ≠ 0 := by omega
   rw [v2_eq_iff_dvd_pow_not_next (3 * n + 1) 9 hnum]
   norm_num
@@ -309,11 +309,13 @@ theorem v2_three_mul_add_one_eq_nine_iff_mod_ten_twenty_four_three_forty_one
     constructor
     · apply Nat.dvd_of_mod_eq_zero
       rw [← hdecomp]
+      norm_num
       omega
     · intro hdiv
       have hz : (3 * n + 1) % 1024 = 0 :=
         Nat.dvd_iff_mod_eq_zero.mp hdiv
       rw [← hdecomp] at hz
+      norm_num at hz
       omega
 
 #print axioms v2_three_mul_add_one_eq_nine_iff_mod_ten_twenty_four_three_forty_one
