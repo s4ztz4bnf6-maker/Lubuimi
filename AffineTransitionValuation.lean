@@ -14,6 +14,8 @@ theorem v2_mul_32 (a : ℕ) (ha : a ≠ 0) :
 #print axioms CollatzSyracuseAudit.v2_mul_32
 
 
+namespace CollatzSyracuseAudit
+
 /-- Generalization of `v2_mul_32`: multiplying a nonzero natural by
 any power of two adds exactly that exponent to its 2-adic valuation. This
 parameterized form is the reusable lemma for arbitrary-depth residue classes. -/
@@ -24,6 +26,6 @@ theorem v2_mul_pow_two (a k : ℕ) (ha : a ≠ 0) :
   simp only [Finsupp.add_apply]
   rw [Nat.factorization_pow_self (by norm_num : Nat.Prime 2)]
 
-#print axioms CollatzSyracuseAudit.v2_mul_pow_two
+#print axioms v2_mul_pow_two
 
 end CollatzSyracuseAudit
