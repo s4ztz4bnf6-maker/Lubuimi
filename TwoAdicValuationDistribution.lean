@@ -225,3 +225,32 @@ theorem v2_three_mul_add_one_eq_six_iff_mod_one_twenty_eight_twenty_one
       omega
 
 #print axioms v2_three_mul_add_one_eq_six_iff_mod_one_twenty_eight_twenty_one
+
+/-- Exact seventh valuation class: v₂(3n+1)=7 precisely for n=213
+modulo 256 among odd inputs. The residue is the non-divisible-by-256 lift
+of the class divisible by 128. -/
+theorem v2_three_mul_add_one_eq_seven_iff_mod_two_fifty_six_two_thirteen
+    (n : ℕ) (hn : n % 2 = 1) :
+    v2 (3 * n + 1) = 7 ↔ n % 256 = 213 := by
+  have hnum : 3 * n + 1 ≠ 0 := by omega
+  rw [v2_eq_iff_dvd_pow_not_next (3 * n + 1) 7 hnum]
+  norm_num
+  constructor
+  · rintro ⟨hdiv, hnot⟩
+    have hmod128 : (3 * n + 1) % 128 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp hdiv
+    have hmod256 : (3 * n + 1) % 256 ≠ 0 := by
+      intro hz
+      apply hnot
+      exact Nat.dvd_iff_mod_eq_zero.mpr hz
+    omega
+  · intro hmodn
+    constructor
+    · apply Nat.dvd_of_mod_eq_zero
+      omega
+    · intro hdiv
+      have hz : (3 * n + 1) % 256 = 0 :=
+        Nat.dvd_iff_mod_eq_zero.mp hdiv
+      omega
+
+#print axioms v2_three_mul_add_one_eq_seven_iff_mod_two_fifty_six_two_thirteen
