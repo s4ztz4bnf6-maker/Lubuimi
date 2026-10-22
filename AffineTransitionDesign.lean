@@ -329,4 +329,24 @@ theorem affine_threshold_forces_descent
 
 #print axioms CollatzSyracuseAudit.affine_threshold_forces_descent
 
+
+/-- A block transition gives a genuine strict descent above its affine
+threshold. This packages the affine estimate into a reusable dynamical
+certificate; it does not assert that every odd input has such a block. -/
+theorem block_transition_strict_descent
+    {S : ℕ → ℕ} {Source Target : ℕ → Prop}
+    (B : BlockTransition S Source Target)
+    (n : ℕ) (hn : Source n)
+    (hthreshold : B.offset / (1 - B.slope) < (n : ℚ)) :
+    B.run n < n := by
+  have hbound := B.value_bound n hn
+  have hstrict := strict_descent_of_affine
+    B.slope B.offset (n : ℚ)
+    B.slope_nonneg B.slope_lt_one B.offset_nonneg hthreshold
+  have hq : (B.run n : ℚ) < (n : ℚ) :=
+    lt_of_le_of_lt hbound hstrict
+  exact_mod_cast hq
+
+#print axioms block_transition_strict_descent
+
 end CollatzSyracuseAudit
