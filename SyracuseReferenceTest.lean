@@ -27,20 +27,8 @@ theorem syracuse_output_odd (n : ℕ) :
       (m / 2 ^ m.factorization 2) * 2 ^ m.factorization 2 = m :=
     Nat.div_mul_cancel hdvd
   have hnot : ¬ 2 ∣ m / 2 ^ m.factorization 2 := by
-    intro heven
-    obtain ⟨q, hq⟩ := heven
-    have hpow : 2 ^ (m.factorization 2 + 1) ∣ m := by
-      refine ⟨q, ?_⟩
-      calc
-        m = (m / 2 ^ m.factorization 2) * 2 ^ m.factorization 2 :=
-          hcancel.symm
-        _ = (2 * q) * 2 ^ m.factorization 2 := by rw [hq]
-        _ = q * 2 ^ (m.factorization 2 + 1) := by
-          rw [pow_succ]
-          exact Nat.mul_comm _ _
-    have hle :=
-      (Nat.prime_two.pow_dvd_iff_le_factorization hm).mp hpow
-    omega
+    simpa using (Nat.not_dvd_ordCompl (n := m) (p := 2)
+      Nat.prime_two hm)
   have hmod : (m / 2 ^ m.factorization 2) % 2 ≠ 0 := by
     intro hz
     apply hnot
