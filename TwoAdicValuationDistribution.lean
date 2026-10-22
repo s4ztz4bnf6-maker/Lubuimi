@@ -314,3 +314,33 @@ theorem v2_three_mul_add_one_eq_nine_iff_mod_ten_twenty_four_three_forty_one
       omega
 
 #print axioms v2_three_mul_add_one_eq_nine_iff_mod_ten_twenty_four_three_forty_one
+
+/-- Exact tenth valuation class: among odd inputs, v₂(3n+1)=10 precisely
+when n is 341 modulo 2048. The proof is a finite congruence certificate only;
+the general valuation-counting theorem and global descent remain open tasks. -/
+theorem v2_three_mul_add_one_eq_ten_iff_mod_two_thousand_forty_eight_three_forty_one
+    (n : ℕ) (hn : n % 2 = 1) :
+    v2 (3 * n + 1) = 10 ↔ n % 2048 = 341 := by
+  have hnum : 3 * n + 1 ≠ 0 := by omega
+  rw [v2_eq_iff_dvd_pow_not_next (3 * n + 1) 10 hnum]
+  norm_num
+  constructor
+  · rintro ⟨hdiv, hnot⟩
+    have hmod1024 : (3 * n + 1) % 1024 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp hdiv
+    have hmod2048 : (3 * n + 1) % 2048 ≠ 0 := by
+      intro hz
+      apply hnot
+      exact Nat.dvd_iff_mod_eq_zero.mpr hz
+    omega
+  · intro hmodn
+    constructor
+    · apply Nat.dvd_of_mod_eq_zero
+      omega
+    · intro hdiv
+      have hz : (3 * n + 1) % 2048 = 0 :=
+        Nat.dvd_iff_mod_eq_zero.mp hdiv
+      omega
+
+#print axioms v2_three_mul_add_one_eq_ten_iff_mod_two_thousand_forty_eight_three_forty_one
+
