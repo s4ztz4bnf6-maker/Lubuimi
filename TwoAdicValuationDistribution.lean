@@ -344,3 +344,33 @@ theorem v2_three_mul_add_one_eq_ten_iff_mod_two_thousand_forty_eight_three_forty
 
 #print axioms v2_three_mul_add_one_eq_ten_iff_mod_two_thousand_forty_eight_three_forty_one
 
+/-- Exact eleventh valuation class: among odd inputs, v₂(3n+1)=11
+precisely when n is 3413 modulo 4096. This finite class is a test instance
+for the general residue-counting theorem still to be formalized. -/
+theorem v2_three_mul_add_one_eq_eleven_iff_mod_four_thousand_ninety_six_three_thousand_four_hundred_thirteen
+    (n : ℕ) (hn : n % 2 = 1) :
+    v2 (3 * n + 1) = 11 ↔ n % 4096 = 3413 := by
+  have hnum : 3 * n + 1 ≠ 0 := by omega
+  rw [v2_eq_iff_dvd_pow_not_next (3 * n + 1) 11 hnum]
+  norm_num
+  constructor
+  · rintro ⟨hdiv, hnot⟩
+    have hmod2048 : (3 * n + 1) % 2048 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp hdiv
+    have hmod4096 : (3 * n + 1) % 4096 ≠ 0 := by
+      intro hz
+      apply hnot
+      exact Nat.dvd_iff_mod_eq_zero.mpr hz
+    omega
+  · intro hmodn
+    constructor
+    · apply Nat.dvd_of_mod_eq_zero
+      omega
+    · intro hdiv
+      have hz : (3 * n + 1) % 4096 = 0 :=
+        Nat.dvd_iff_mod_eq_zero.mp hdiv
+      omega
+
+#print axioms v2_three_mul_add_one_eq_eleven_iff_mod_four_thousand_ninety_six_three_thousand_four_hundred_thirteen
+
+
