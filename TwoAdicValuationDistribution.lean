@@ -374,3 +374,33 @@ theorem v2_three_mul_add_one_eq_eleven_iff_mod_four_thousand_ninety_six_three_th
 #print axioms v2_three_mul_add_one_eq_eleven_iff_mod_four_thousand_ninety_six_three_thousand_four_hundred_thirteen
 
 
+
+
+/-- Exact twelfth valuation class: among odd inputs, v₂(3n+1)=12
+precisely when n is 1365 modulo 8192. This supplies another regression
+instance for the general 2-adic residue-class theorem. -/
+theorem v2_three_mul_add_one_eq_twelve_iff_mod_eight_thousand_one_hundred_ninety_two_one_thousand_three_hundred_sixty_five
+    (n : ℕ) (hn : n % 2 = 1) :
+    v2 (3 * n + 1) = 12 ↔ n % 8192 = 1365 := by
+  have hnum : 3 * n + 1 ≠ 0 := by omega
+  rw [v2_eq_iff_dvd_pow_not_next (3 * n + 1) 12 hnum]
+  norm_num
+  constructor
+  · rintro ⟨hdiv, hnot⟩
+    have hmod4096 : (3 * n + 1) % 4096 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp hdiv
+    have hmod8192 : (3 * n + 1) % 8192 ≠ 0 := by
+      intro hz
+      apply hnot
+      exact Nat.dvd_iff_mod_eq_zero.mpr hz
+    omega
+  · intro hmodn
+    constructor
+    · apply Nat.dvd_of_mod_eq_zero
+      omega
+    · intro hdiv
+      have hz : (3 * n + 1) % 8192 = 0 :=
+        Nat.dvd_iff_mod_eq_zero.mp hdiv
+      omega
+
+#print axioms v2_three_mul_add_one_eq_twelve_iff_mod_eight_thousand_one_hundred_ninety_two_one_thousand_three_hundred_sixty_five
