@@ -201,4 +201,22 @@ theorem mod64_thirtyfive_second_numerator_even (m : ℕ) :
 #print axioms CollatzSyracuseAudit.mod64_thirtyfive_second_numerator_factor
 #print axioms CollatzSyracuseAudit.mod64_thirtyfive_second_numerator_even
 
+
+/-- Two accelerated steps strictly decrease every input in the residue
+class 3 modulo 32. This is a local descent theorem, not a global result. -/
+theorem two_step_descent_mod32_three (k : ℕ) :
+    syracuse (syracuse (32 * k + 3)) < 32 * k + 3 := by
+  have hbound := two_step_affine_bound_mod32_three k
+  have hq :
+      (syracuse (syracuse (32 * k + 3)) : ℚ) ≤ (9 * k + 1 : ℚ) := by
+    calc
+      (syracuse (syracuse (32 * k + 3)) : ℚ) ≤
+          (9 / 32 : ℚ) * (32 * k + 3) + 5 / 32 := hbound
+      _ = (9 * k + 1 : ℚ) := by push_cast; ring
+  have hn : syracuse (syracuse (32 * k + 3)) ≤ 9 * k + 1 := by
+    exact_mod_cast hq
+  omega
+
+#print axioms CollatzSyracuseAudit.two_step_descent_mod32_three
+
 end CollatzSyracuseAudit
