@@ -254,3 +254,33 @@ theorem v2_three_mul_add_one_eq_seven_iff_mod_two_fifty_six_two_thirteen
       omega
 
 #print axioms v2_three_mul_add_one_eq_seven_iff_mod_two_fifty_six_two_thirteen
+
+
+/-- Exact eighth valuation class: among odd inputs, v₂(3n+1)=8 precisely
+when n is 85 modulo 512. The congruence is the unique lift divisible by
+256 but not by 512. This remains a local arithmetic statement. -/
+theorem v2_three_mul_add_one_eq_eight_iff_mod_five_twelve_eighty_five
+    (n : ℕ) (hn : n % 2 = 1) :
+    v2 (3 * n + 1) = 8 ↔ n % 512 = 85 := by
+  have hnum : 3 * n + 1 ≠ 0 := by omega
+  rw [v2_eq_iff_dvd_pow_not_next (3 * n + 1) 8 hnum]
+  norm_num
+  constructor
+  · rintro ⟨hdiv, hnot⟩
+    have hmod256 : (3 * n + 1) % 256 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp hdiv
+    have hmod512 : (3 * n + 1) % 512 ≠ 0 := by
+      intro hz
+      apply hnot
+      exact Nat.dvd_iff_mod_eq_zero.mpr hz
+    omega
+  · intro hmodn
+    constructor
+    · apply Nat.dvd_of_mod_eq_zero
+      omega
+    · intro hdiv
+      have hz : (3 * n + 1) % 512 = 0 :=
+        Nat.dvd_iff_mod_eq_zero.mp hdiv
+      omega
+
+#print axioms v2_three_mul_add_one_eq_eight_iff_mod_five_twelve_eighty_five
