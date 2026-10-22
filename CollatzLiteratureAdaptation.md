@@ -76,12 +76,11 @@ A recent 2026 preprint by Mike Winkler, “Deterministic Structures in the Coeff
 
 ## Exact residue-count identity (derived, before Lean encoding)
 
-For every (1\le j<K), the condition (v_2(3n+1)=j) is equivalent to
-[
-3n+1\equiv 2^j\pmod {2^{j+1}}.
-]
-Because (3) is a unit modulo (2^{j+1}), this congruence has exactly one solution class (n_jpmod {2^{j+1}}). Since (2^j-1) is odd, that class is odd. It has exactly (2^{K-j-1}) lifts modulo (2^K), and every lift still has valuation exactly (j). Thus the count among all residue classes modulo (2^K) is (2^{K-j-1}), and these classes are all odd. Equivalently, the count among odd residue classes is the same, not half that number.
+For every integer pair with `1 <= j < K`, the condition `v2(3*n+1) = j` is equivalent to
+`3*n + 1 ≡ 2^j (mod 2^(j+1))`.
 
-This last point fixes a common counting ambiguity: the sample space matters. There are (2^{K-1}) odd classes modulo (2^K), so the conditional proportion among odd classes is (2^{-j}). The proof should formalize the congruence equivalence first, then the unique solution class and its lift count. It must not use floating-point probabilities or assume independence across successive iterates.
+Because 3 is invertible modulo `2^(j+1)`, this congruence has exactly one solution class modulo `2^(j+1)`. Since `2^j - 1` is odd, that class is odd. It has exactly `2^(K-j-1)` lifts modulo `2^K`, and every lift still has valuation exactly j. Thus the count among all residue classes modulo `2^K` is `2^(K-j-1)`, and these classes are all odd. Equivalently, the count among odd residue classes is the same, not half that number.
+
+There are `2^(K-1)` odd classes modulo `2^K`, so the conditional proportion among odd classes is `2^(-j)`. The proof should formalize the congruence equivalence first, then the unique solution class and its lift count. It must not use floating-point probabilities or assume independence across successive iterates.
 
 Status: this is a mathematical derivation and target specification, not yet a Lean theorem or a claimed build result.
