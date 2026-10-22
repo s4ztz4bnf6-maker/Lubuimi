@@ -8,6 +8,7 @@ on:
       - collatz/syracuse-quarter-bridge-2026-10-21
       - collatz/second-step-descent-mod-eight-zero-2026-10-21
       - collatz/affine-transition-design-2026-10-21
+      - collatz/v2-ordcompl-lemma-test-2026-10-22
   pull_request:
   workflow_dispatch:
 
