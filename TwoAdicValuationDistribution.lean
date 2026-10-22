@@ -134,4 +134,35 @@ theorem v2_three_mul_add_one_eq_three_iff_mod_sixteen_thirteen
 
 #print axioms v2_three_mul_add_one_eq_three_iff_mod_sixteen_thirteen
 
+
+
+/-- Exact fourth valuation class: v₂(3n+1)=4 precisely when n is 5
+modulo 32, for odd n. This is another local class, not a global descent
+result. -/
+theorem v2_three_mul_add_one_eq_four_iff_mod_thirty_two_five
+    (n : ℕ) (hn : n % 2 = 1) :
+    v2 (3 * n + 1) = 4 ↔ n % 32 = 5 := by
+  have hnum : 3 * n + 1 ≠ 0 := by omega
+  rw [v2_eq_iff_dvd_pow_not_next (3 * n + 1) 4 hnum]
+  norm_num
+  constructor
+  · rintro ⟨hdiv, hnot⟩
+    have hmod16 : (3 * n + 1) % 16 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp hdiv
+    have hmod32 : (3 * n + 1) % 32 ≠ 0 := by
+      intro hz
+      apply hnot
+      exact Nat.dvd_iff_mod_eq_zero.mpr hz
+    omega
+  · intro hmodn
+    constructor
+    · apply Nat.dvd_of_mod_eq_zero
+      omega
+    · intro hdiv
+      have hz : (3 * n + 1) % 32 = 0 :=
+        Nat.dvd_iff_mod_eq_zero.mp hdiv
+      omega
+
+#print axioms v2_three_mul_add_one_eq_four_iff_mod_thirty_two_five
+
 end CollatzSyracuseAudit
