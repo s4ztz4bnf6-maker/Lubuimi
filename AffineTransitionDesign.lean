@@ -336,6 +336,53 @@ theorem syracuse_affine_block_identity (n : ℕ) :
 #print axioms CollatzSyracuseAudit.syracuse_step_cancellation
 #print axioms CollatzSyracuseAudit.syracuse_affine_block_identity
 
+/-- Exact descent criterion for the actual accelerated Syracuse orbit.
+For a fixed start and block length, strict descent is equivalent to the
+affine numerator being strictly below the accumulated power-of-two scale.
+This is an equivalence, not a claim that such a block always exists. -/
+theorem syracuse_block_descent_iff (n k : ℕ) :
+    syracuseOrbit n k < n ↔
+      (3 : ℚ) ^ k * (n : ℚ) +
+          (affineConstantTerm
+            (fun i => v2 (3 * syracuseOrbit n i + 1)) k : ℚ) <
+        (2 : ℚ) ^ cumulativeExponent
+          (fun i => v2 (3 * syracuseOrbit n i + 1)) k * (n : ℚ) := by
+  have hid := syracuse_affine_block_identity n k
+  have hidq :
+      (2 : ℚ) ^ cumulativeExponent
+          (fun i => v2 (3 * syracuseOrbit n i + 1)) k *
+          (syracuseOrbit n k : ℚ) =
+        (3 : ℚ) ^ k * (n : ℚ) +
+          (affineConstantTerm
+            (fun i => v2 (3 * syracuseOrbit n i + 1)) k : ℚ) := by
+    exact_mod_cast hid
+  have hpow :
+      0 < (2 : ℚ) ^ cumulativeExponent
+        (fun i => v2 (3 * syracuseOrbit n i + 1)) k := by
+    positivity
+  constructor
+  · intro hdescent
+    have hdescentQ : (syracuseOrbit n k : ℚ) < (n : ℚ) := by
+      exact_mod_cast hdescent
+    have hmul := mul_lt_mul_of_pos_left hdescentQ hpow
+    rw [hidq] at hmul
+    exact hmul
+  · intro hthreshold
+    by_contra hnot
+    have hle : n ≤ syracuseOrbit n k := by omega
+    have hmul :
+        (2 : ℚ) ^ cumulativeExponent
+            (fun i => v2 (3 * syracuseOrbit n i + 1)) k * (n : ℚ) ≤
+          (2 : ℚ) ^ cumulativeExponent
+            (fun i => v2 (3 * syracuseOrbit n i + 1)) k *
+              (syracuseOrbit n k : ℚ) := by
+      exact mul_le_mul_of_nonneg_left (by exact_mod_cast hle) (le_of_lt hpow)
+    rw [hidq] at hmul
+    linarith
+
+#print axioms CollatzSyracuseAudit.syracuse_block_descent_iff
+
+
 /-- Exact affine identity plus a strict threshold inequality forces a strict
 descent of the actual trajectory value. This isolates the arithmetic step
 from the separate, difficult task of proving the threshold for every orbit. -/
