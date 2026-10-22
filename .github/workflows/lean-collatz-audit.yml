@@ -8,6 +8,7 @@ on:
       - collatz/syracuse-quarter-bridge-2026-10-21
       - collatz/second-step-descent-mod-eight-zero-2026-10-21
       - collatz/affine-transition-design-2026-10-21
+      - collatz/stopping-time-bridge-2026-10-22
   pull_request:
   workflow_dispatch:
 
@@ -68,6 +69,15 @@ jobs:
           set -o pipefail
           lake env lean AffineTransitionValuation.lean 2>&1 | tee /tmp/affine-transition-valuation-audit.log
           if grep -q 'sorryAx' /tmp/affine-transition-valuation-audit.log; then
+            echo "Forbidden sorryAx dependency detected"
+            exit 1
+          fi
+
+      - name: Compile and audit stopping-time bridge
+        run: |
+          set -o pipefail
+          lake env lean StoppingTimeBridge.lean 2>&1 | tee /tmp/stopping-time-bridge.log
+          if grep -q 'sorryAx' /tmp/stopping-time-bridge.log; then
             echo "Forbidden sorryAx dependency detected"
             exit 1
           fi
