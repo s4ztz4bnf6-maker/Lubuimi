@@ -12,9 +12,11 @@ theorem cocycleIter_lt_of_affine_bound (n k : ℕ)
       cocycleA n k * n + cocycleB n k < 2 ^ k * n) :
     cocycleIter n k < n := by
   have hmul : 2 ^ k * cocycleIter n k < 2 ^ k * n := by
-    rw [← cocycleIter_affine_identity n k]
-    exact hbound
-  exact (Nat.mul_lt_mul_left (2 ^ k)).mp hmul
+    calc
+      2 ^ k * cocycleIter n k = cocycleA n k * n + cocycleB n k :=
+        cocycleIter_affine_identity n k
+      _ < 2 ^ k * n := hbound
+  exact (Nat.mul_lt_mul_left (Nat.pow_pos (by omega))).mp hmul
 
 /-- The affine coefficient must be strictly below the denominator before
 the difference-bound method can certify descent. This packages the key
