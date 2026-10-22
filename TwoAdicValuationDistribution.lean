@@ -10,25 +10,24 @@ theorem v2_eq_iff_dvd_pow_not_next
     (n j : ℕ) (hn : n ≠ 0) :
     v2 n = j ↔ 2 ^ j ∣ n ∧ ¬ 2 ^ (j + 1) ∣ n := by
   unfold v2
-  have hpow := Nat.prime_two.pow_dvd_iff_le_factorization hn
+  have hpowj := Nat.prime_two.pow_dvd_iff_le_factorization (k := j) hn
+  have hpowNext := Nat.prime_two.pow_dvd_iff_le_factorization (k := j + 1) hn
   constructor
   · intro h
     constructor
-    · exact hpow.mpr (by omega)
+    · exact hpowj.mpr (by omega)
     · intro hnext
-      have hle := hpow.mp hnext
+      have hle := hpowNext.mp hnext
       omega
   · rintro ⟨hdiv, hnot⟩
-    have hj := hpow.mp hdiv
+    have hj := hpowj.mp hdiv
     have hnext : ¬ j + 1 ≤ n.factorization 2 := by
       intro hle
       apply hnot
-      exact hpow.mpr hle
+      exact hpowNext.mpr hle
     omega
 
 #print axioms v2_eq_iff_dvd_pow_not_next
-
-end CollatzSyracuseAudit
 
 
 /-- For odd n, the numerator 3n+1 is even, so its 2-adic valuation is
@@ -46,3 +45,5 @@ theorem one_le_v2_three_mul_add_one_of_odd
   exact hpow.mp hdiv
 
 #print axioms one_le_v2_three_mul_add_one_of_odd
+
+end CollatzSyracuseAudit
