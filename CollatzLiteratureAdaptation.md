@@ -98,3 +98,14 @@ The exact valuation characterization now compiles in the code module, but the di
 The key mathematical invariant is the congruence, not independence of successive valuations. In Lean, prefer Fin (2^K) with explicit membership predicates and Finset.card, or an explicit equivalence between the qualifying set and the finite lift interval. Avoid List.getD defaults, floating point, and a theorem whose sample space is left implicit.
 
 Literature connection: Terras' stopping-time method encodes finite parity itineraries by residue classes; Laarhoven–de Weger relate the finite Collatz graph modulo powers of two to a binary De Bruijn graph. The adaptation here is to prove the one-step valuation distribution exactly first, then build finite multi-step transitions as an explicit finite graph. This is a local distribution theorem only; it cannot alone imply global descent.
+
+
+## Cross-check against other Lean Collatz developments (2026-10-22)
+
+A useful audit warning from other public Lean Collatz work is that a finite parity itinerary is encoded by a residue class modulo a power of two, with exponent determined by the itinerary. It must not be silently replaced by a class modulo a power of three. Other formalization notes also distinguish the original Collatz map from the accelerated Syracuse map and warn that density hypotheses for one map do not automatically imply a result for the other.
+
+The blueprint for formalizing Tao's almost-all-orbits theorem is also useful for its explicit dependency graph. Its logarithmic-density conclusion is not a pointwise theorem for every starting value, so it cannot be imported as a universal descent argument.
+
+Implementation consequence: after the exact mod-four lemma, construct a finite transition table for parity/valuation itineraries modulo 2^K. Each transition must carry its precise modulus and map variant. Prove coverage and uniqueness before deriving any density or drift statement. This guards against switching between the original and accelerated maps mid-proof.
+
+These external formalization resources are audit references, not a proof of the global Collatz conjecture.
