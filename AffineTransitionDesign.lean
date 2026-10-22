@@ -573,4 +573,34 @@ theorem explicitAffineConstant_eq_affineConstantTerm (a : ℕ → ℕ) (k : ℕ)
   | succ k ih =>
       rw [explicitAffineConstant_succ, affineConstantTerm_succ, ih]
 
+
+/-- Every nonempty affine block has a strictly positive additive offset.
+This is the obstruction that a pure average-multiplier argument misses. -/
+theorem affineConstantTerm_pos_of_pos (a : ℕ → ℕ) {k : ℕ} (hk : 0 < k) :
+    0 < affineConstantTerm a k := by
+  cases k with
+  | zero => omega
+  | succ j =>
+      simp only [affineConstantTerm]
+      positivity
+
+/-- Necessary growth condition for a strict descent over a nonempty block:
+if the accumulated dyadic factor has not exceeded the ternary factor, then
+the affine offset forces the endpoint above the starting value. This is a
+one-way obstruction, not a claim that the converse growth condition suffices. -/
+theorem affine_factor_not_exceeded_forces_growth
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
+    (k : ℕ) (hk : 0 < k) (hn0 : 0 < n 0)
+    (hfactor : 2 ^ cumulativeExponent a k ≤ 3 ^ k) :
+    n 0 < n k := by
+  have hid := affine_iteration_identity a n hstep k
+  have hC := affineConstantTerm_pos_of_pos a hk
+  have hmul : 2 ^ cumulativeExponent a k * n 0 ≤ 3 ^ k * n 0 :=
+    Nat.mul_le_mul_right (n 0) hfactor
+  have hscaled : 2 ^ cumulativeExponent a k * n 0 <
+      2 ^ cumulativeExponent a k * n k := by
+    omega
+  exact (Nat.mul_lt_mul_left (2 ^ cumulativeExponent a k)).mp hscaled
+
 end CollatzSyracuseAudit
