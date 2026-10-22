@@ -299,6 +299,44 @@ theorem affine_iteration_identity
 
 #print axioms CollatzSyracuseAudit.affine_iteration_identity
 
+/-- Exact one-step cancellation for the actual accelerated Syracuse map.
+The denominator is precisely the full two-adic factor, so natural division
+loses no information. -/
+theorem syracuse_step_cancellation (n : ℕ) :
+    2 ^ v2 (3 * n + 1) * syracuse n = 3 * n + 1 := by
+  have hm : 3 * n + 1 ≠ 0 := by omega
+  have hdvd : 2 ^ v2 (3 * n + 1) ∣ 3 * n + 1 := by
+    exact (Nat.prime_two.pow_dvd_iff_le_factorization hm).2 le_rfl
+  dsimp [syracuse, v2]
+  calc
+    2 ^ (3 * n + 1).factorization 2 *
+        ((3 * n + 1) / 2 ^ (3 * n + 1).factorization 2) =
+        ((3 * n + 1) / 2 ^ (3 * n + 1).factorization 2) *
+          2 ^ (3 * n + 1).factorization 2 := Nat.mul_comm _ _
+    _ = 3 * n + 1 := Nat.div_mul_cancel hdvd
+
+/-- The canonical orbit used by the accelerated Syracuse map. -/
+def syracuseOrbit (n i : ℕ) : ℕ := (syracuse^[i]) n
+
+/-- The exact affine block identity for the actual Syracuse orbit, not just
+for an abstract sequence satisfying a recurrence. The exponent sequence is
+the genuine valuation v₂(3*nᵢ+1) at every orbit point. -/
+theorem syracuse_affine_block_identity (n : ℕ) :
+    ∀ k,
+      2 ^ cumulativeExponent (fun i => v2 (3 * syracuseOrbit n i + 1)) k *
+          syracuseOrbit n k =
+        3 ^ k * n +
+          affineConstantTerm (fun i => v2 (3 * syracuseOrbit n i + 1)) k := by
+  intro k
+  apply affine_iteration_identity
+  intro i
+  have hcancel := syracuse_step_cancellation (syracuseOrbit n i)
+  simpa [syracuseOrbit, Function.iterate_succ, Function.iterate_succ_apply,
+    Function.comp_def] using hcancel
+
+#print axioms CollatzSyracuseAudit.syracuse_step_cancellation
+#print axioms CollatzSyracuseAudit.syracuse_affine_block_identity
+
 /-- Exact affine identity plus a strict threshold inequality forces a strict
 descent of the actual trajectory value. This isolates the arithmetic step
 from the separate, difficult task of proving the threshold for every orbit. -/
