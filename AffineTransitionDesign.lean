@@ -173,9 +173,32 @@ def mod32ThreeTwoStep : BlockTransition
     convert two_step_affine_bound_mod32_three k using 1 <;>
       push_cast <;> ring
 
+
+/-- In the residue class n = 64*m+3, the parameter k in n=32*k+3
+is 2*m, so the second-step numerator 9*k+1 is odd. -/
+theorem mod64_three_second_numerator_odd (m : ℕ) :
+    (9 * (2 * m) + 1) % 2 = 1 := by
+  omega
+
+/-- In the residue class n = 64*m+35, the parameter k in n=32*k+3
+is 2*m+1, and the second-step numerator factors as 2*(9*m+5). -/
+theorem mod64_thirtyfive_second_numerator_factor (m : ℕ) :
+    9 * (2 * m + 1) + 1 = 2 * (9 * m + 5) := by
+  omega
+
+/-- Consequently the second-step numerator in the n = 64*m+35
+case is even; further valuation analysis is delegated to 9*m+5. -/
+theorem mod64_thirtyfive_second_numerator_even (m : ℕ) :
+    (9 * (2 * m + 1) + 1) % 2 = 0 := by
+  rw [mod64_thirtyfive_second_numerator_factor]
+  omega
+
 #print axioms CollatzSyracuseAudit.transition_compose
 #print axioms CollatzSyracuseAudit.strict_descent_of_affine
 #print axioms CollatzSyracuseAudit.two_step_affine_bound_mod32_three
 #print axioms CollatzSyracuseAudit.mod32ThreeTwoStep
+#print axioms CollatzSyracuseAudit.mod64_three_second_numerator_odd
+#print axioms CollatzSyracuseAudit.mod64_thirtyfive_second_numerator_factor
+#print axioms CollatzSyracuseAudit.mod64_thirtyfive_second_numerator_even
 
 end CollatzSyracuseAudit
