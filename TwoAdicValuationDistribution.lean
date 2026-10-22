@@ -165,4 +165,34 @@ theorem v2_three_mul_add_one_eq_four_iff_mod_thirty_two_five
 
 #print axioms v2_three_mul_add_one_eq_four_iff_mod_thirty_two_five
 
+
+
+/-- Exact fifth valuation class: for odd n, v₂(3n+1)=5 exactly when
+n is 53 modulo 64. This is still a local residue-class theorem. -/
+theorem v2_three_mul_add_one_eq_five_iff_mod_sixty_four_fifty_three
+    (n : ℕ) (hn : n % 2 = 1) :
+    v2 (3 * n + 1) = 5 ↔ n % 64 = 53 := by
+  have hnum : 3 * n + 1 ≠ 0 := by omega
+  rw [v2_eq_iff_dvd_pow_not_next (3 * n + 1) 5 hnum]
+  norm_num
+  constructor
+  · rintro ⟨hdiv, hnot⟩
+    have hmod32 : (3 * n + 1) % 32 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp hdiv
+    have hmod64 : (3 * n + 1) % 64 ≠ 0 := by
+      intro hz
+      apply hnot
+      exact Nat.dvd_iff_mod_eq_zero.mpr hz
+    omega
+  · intro hmodn
+    constructor
+    · apply Nat.dvd_of_mod_eq_zero
+      omega
+    · intro hdiv
+      have hz : (3 * n + 1) % 64 = 0 :=
+        Nat.dvd_iff_mod_eq_zero.mp hdiv
+      omega
+
+#print axioms v2_three_mul_add_one_eq_five_iff_mod_sixty_four_fifty_three
+
 end CollatzSyracuseAudit
