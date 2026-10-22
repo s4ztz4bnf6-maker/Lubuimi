@@ -607,6 +607,8 @@ theorem affine_factor_not_exceeded_forces_growth
 end CollatzSyracuseAudit
 
 
+namespace CollatzSyracuseAudit
+
 /-- Necessary valuation-growth threshold for any strict descent over a
 nonempty accelerated Syracuse block. If the endpoint is smaller than the
 start, the accumulated power of two must strictly exceed the corresponding
@@ -625,3 +627,5 @@ theorem exponent_exceeds_ternary_on_strict_descent
   omega
 
 #print axioms exponent_exceeds_ternary_on_strict_descent
+
+end CollatzSyracuseAudit
