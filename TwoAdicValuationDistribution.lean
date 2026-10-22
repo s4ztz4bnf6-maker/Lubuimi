@@ -73,4 +73,34 @@ theorem v2_three_mul_add_one_eq_one_iff_mod_four_three
 
 #print axioms v2_three_mul_add_one_eq_one_iff_mod_four_three
 
+
+/-- Exact second-step split: for odd inputs, valuation two occurs precisely
+in the residue class 1 mod 8. This is another finite local statement; it does
+not assert a global descent property. -/
+theorem v2_three_mul_add_one_eq_two_iff_mod_eight_one
+    (n : ℕ) (hn : n % 2 = 1) :
+    v2 (3 * n + 1) = 2 ↔ n % 8 = 1 := by
+  have hnum : 3 * n + 1 ≠ 0 := by omega
+  rw [v2_eq_iff_dvd_pow_not_next (3 * n + 1) 2 hnum]
+  norm_num
+  constructor
+  · rintro ⟨hdiv, hnot⟩
+    have hmod4 : (3 * n + 1) % 4 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp hdiv
+    have hmod8 : (3 * n + 1) % 8 ≠ 0 := by
+      intro hz
+      apply hnot
+      exact Nat.dvd_iff_mod_eq_zero.mpr hz
+    omega
+  · intro hmodn
+    constructor
+    · apply Nat.dvd_of_mod_eq_zero
+      omega
+    · intro hdiv
+      have hz : (3 * n + 1) % 8 = 0 :=
+        Nat.dvd_iff_mod_eq_zero.mp hdiv
+      omega
+
+#print axioms v2_three_mul_add_one_eq_two_iff_mod_eight_one
+
 end CollatzSyracuseAudit
