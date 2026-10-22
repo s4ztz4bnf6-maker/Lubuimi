@@ -538,4 +538,27 @@ theorem explicitAffineConstant_zero (a : ℕ → ℕ) :
     explicitAffineConstant a 0 = 0 := by
   simp [explicitAffineConstant]
 
+/-- One-step recurrence for the explicit affine sum. This is the bridge
+needed to identify it with the recursively defined affine constant. -/
+theorem explicitAffineConstant_succ (a : ℕ → ℕ) (k : ℕ) :
+    explicitAffineConstant a (k + 1) =
+      3 * explicitAffineConstant a k + 2 ^ cumulativeExponent a k := by
+  classical
+  unfold explicitAffineConstant
+  rw [Finset.sum_range_succ]
+  simp only [Nat.add_sub_cancel, Nat.sub_self, pow_zero, one_mul]
+  have hsum :
+      (∑ j ∈ Finset.range k,
+        3 ^ (k - j) * 2 ^ cumulativeExponent a j) =
+      3 * (∑ j ∈ Finset.range k,
+        3 ^ (k - 1 - j) * 2 ^ cumulativeExponent a j) := by
+    rw [Finset.mul_sum]
+    apply Finset.sum_congr rfl
+    intro j hj
+    have hjk : j < k := Finset.mem_range.mp hj
+    have hexp : k - j = (k - 1 - j) + 1 := by omega
+    rw [hexp, pow_succ]
+    ring
+  rw [hsum]
+
 end CollatzSyracuseAudit
