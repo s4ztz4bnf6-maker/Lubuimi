@@ -9,6 +9,7 @@ on:
       - collatz/second-step-descent-mod-eight-zero-2026-10-21
       - collatz/affine-transition-design-2026-10-21
       - collatz/stopping-time-bridge-2026-10-22
+      - collatz/parity-cocycle-research-2026-10-22
   pull_request:
   workflow_dispatch:
 
@@ -97,3 +98,9 @@ jobs:
           set -o pipefail
           lake env lean TwoAdicValuationDistribution.lean 2>&1 | tee /tmp/two-adic-valuation-distribution.log
           ! grep -q 'sorryAx' /tmp/two-adic-valuation-distribution.log
+
+      - name: Compile and audit parity-cocycle affine identity
+        run: |
+          set -o pipefail
+          lake env lean ParityCocycleResearch.lean 2>&1 | tee /tmp/parity-cocycle-research.log
+          ! grep -q 'sorryAx' /tmp/parity-cocycle-research.log
