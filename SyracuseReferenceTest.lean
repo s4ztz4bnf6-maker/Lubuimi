@@ -38,6 +38,7 @@ theorem syracuse_output_odd (n : ℕ) :
         _ = q * 2 ^ (m.factorization 2 + 1) := by
           rw [pow_succ]
           ring
+        _ = 2 ^ (m.factorization 2 + 1) * q := Nat.mul_comm _ _
     have hle :=
       (Nat.prime_two.pow_dvd_iff_le_factorization hm).mp hpow
     omega
