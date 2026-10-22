@@ -241,4 +241,417 @@ theorem two_step_descent_mod32_nineteen (k : ℕ) :
 
 #print axioms CollatzSyracuseAudit.two_step_descent_mod32_nineteen
 
+/-- Residue-class interface for the mod-32 class 3 descent certificate. -/
+theorem two_step_descent_mod32_three_of_residue (n : ℕ)
+    (hn : n % 32 = 3) :
+    syracuse (syracuse n) < n := by
+  have hdecomp : n = 32 * (n / 32) + 3 := by omega
+  rw [hdecomp]
+  exact two_step_descent_mod32_three (n / 32)
+
+/-- Residue-class interface for the mod-32 class 19 descent certificate. -/
+theorem two_step_descent_mod32_nineteen_of_residue (n : ℕ)
+    (hn : n % 32 = 19) :
+    syracuse (syracuse n) < n := by
+  have hdecomp : n = 32 * (n / 32) + 19 := by omega
+  rw [hdecomp]
+  exact two_step_descent_mod32_nineteen (n / 32)
+
+#print axioms CollatzSyracuseAudit.two_step_descent_mod32_three_of_residue
+#print axioms CollatzSyracuseAudit.two_step_descent_mod32_nineteen_of_residue
+
+
+
+/-!
+## Exact affine numerator identity for a valuation sequence
+
+For a trajectory satisfying
+  2^(a i) * n_(i+1) = 3*n_i + 1,
+the cumulative exponent A_k and affine constant C_k obey
+  2^A_k * n_k = 3^k*n_0 + C_k.
+This is an exact identity, independent of any density heuristic. It is the
+arithmetic bridge needed before comparing an iterate with its start value.
+-/
+
+/-- Sum of the first k two-adic exponents. -/
+def cumulativeExponent (a : ℕ → ℕ) : ℕ → ℕ
+  | 0 => 0
+  | k + 1 => cumulativeExponent a k + a k
+
+/-- Constant term in the exact affine numerator after k accelerated steps. -/
+def affineConstantTerm (a : ℕ → ℕ) : ℕ → ℕ
+  | 0 => 0
+  | k + 1 => 3 * affineConstantTerm a k + 2 ^ cumulativeExponent a k
+
+/-- One-step recurrence for the accumulated constant term. -/
+theorem affineConstantTerm_succ (a : ℕ → ℕ) (k : ℕ) :
+    affineConstantTerm a (k + 1) =
+      3 * affineConstantTerm a k + 2 ^ cumulativeExponent a k := rfl
+
+/-- Exact affine numerator identity for every finite trajectory whose
+valuation exponents are a. The hypothesis states the division step without
+using truncated natural division, so no divisibility information is lost. -/
+theorem affine_iteration_identity
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1) :
+    ∀ k, 2 ^ cumulativeExponent a k * n k =
+      3 ^ k * n 0 + affineConstantTerm a k := by
+  intro k
+  induction k with
+  | zero =>
+      simp [cumulativeExponent, affineConstantTerm]
+  | succ k ih =>
+      rw [cumulativeExponent, affineConstantTerm]
+      calc
+        2 ^ (cumulativeExponent a k + a k) * n (k + 1) =
+            2 ^ cumulativeExponent a k * (2 ^ a k * n (k + 1)) := by
+              rw [pow_add]
+              ring
+        _ = 2 ^ cumulativeExponent a k * (3 * n k + 1) := by rw [hstep k]
+        _ = 3 * (2 ^ cumulativeExponent a k * n k) +
+              2 ^ cumulativeExponent a k := by ring
+        _ = 3 * (3 ^ k * n 0 + affineConstantTerm a k) +
+              2 ^ cumulativeExponent a k := by rw [ih]
+        _ = 3 ^ (k + 1) * n 0 +
+              (3 * affineConstantTerm a k + 2 ^ cumulativeExponent a k) := by
+                rw [pow_succ]
+                ring
+
+#print axioms CollatzSyracuseAudit.affine_iteration_identity
+
+/-- Exact one-step cancellation for the actual accelerated Syracuse map.
+The denominator is precisely the full two-adic factor, so natural division
+loses no information. -/
+theorem syracuse_step_cancellation (n : ℕ) :
+    2 ^ v2 (3 * n + 1) * syracuse n = 3 * n + 1 := by
+  have hm : 3 * n + 1 ≠ 0 := by omega
+  have hdvd : 2 ^ v2 (3 * n + 1) ∣ 3 * n + 1 := by
+    exact (Nat.prime_two.pow_dvd_iff_le_factorization hm).2 le_rfl
+  dsimp [syracuse, v2]
+  calc
+    2 ^ (3 * n + 1).factorization 2 *
+        ((3 * n + 1) / 2 ^ (3 * n + 1).factorization 2) =
+        ((3 * n + 1) / 2 ^ (3 * n + 1).factorization 2) *
+          2 ^ (3 * n + 1).factorization 2 := Nat.mul_comm _ _
+    _ = 3 * n + 1 := Nat.div_mul_cancel hdvd
+
+/-- The canonical orbit used by the accelerated Syracuse map. -/
+def syracuseOrbit (n i : ℕ) : ℕ := (syracuse^[i]) n
+
+/-- The exact affine block identity for the actual Syracuse orbit, not just
+for an abstract sequence satisfying a recurrence. The exponent sequence is
+the genuine valuation v₂(3*nᵢ+1) at every orbit point. -/
+theorem syracuse_affine_block_identity (n : ℕ) :
+    ∀ k,
+      2 ^ cumulativeExponent (fun i => v2 (3 * syracuseOrbit n i + 1)) k *
+          syracuseOrbit n k =
+        3 ^ k * n +
+          affineConstantTerm (fun i => v2 (3 * syracuseOrbit n i + 1)) k := by
+  intro k
+  apply affine_iteration_identity
+  intro i
+  have hcancel := syracuse_step_cancellation (syracuseOrbit n i)
+  simpa [syracuseOrbit, Function.iterate_succ_apply'] using hcancel
+
+#print axioms CollatzSyracuseAudit.syracuse_step_cancellation
+#print axioms CollatzSyracuseAudit.syracuse_affine_block_identity
+
+/-- Exact descent criterion for the actual accelerated Syracuse orbit.
+For a fixed start and block length, strict descent is equivalent to the
+affine numerator being strictly below the accumulated power-of-two scale.
+This is an equivalence, not a claim that such a block always exists. -/
+theorem syracuse_block_descent_iff (n k : ℕ) :
+    syracuseOrbit n k < n ↔
+      (3 : ℚ) ^ k * (n : ℚ) +
+          (affineConstantTerm
+            (fun i => v2 (3 * syracuseOrbit n i + 1)) k : ℚ) <
+        (2 : ℚ) ^ cumulativeExponent
+          (fun i => v2 (3 * syracuseOrbit n i + 1)) k * (n : ℚ) := by
+  have hid := syracuse_affine_block_identity n k
+  have hidq :
+      (2 : ℚ) ^ cumulativeExponent
+          (fun i => v2 (3 * syracuseOrbit n i + 1)) k *
+          (syracuseOrbit n k : ℚ) =
+        (3 : ℚ) ^ k * (n : ℚ) +
+          (affineConstantTerm
+            (fun i => v2 (3 * syracuseOrbit n i + 1)) k : ℚ) := by
+    exact_mod_cast hid
+  have hpow :
+      0 < (2 : ℚ) ^ cumulativeExponent
+        (fun i => v2 (3 * syracuseOrbit n i + 1)) k := by
+    positivity
+  constructor
+  · intro hdescent
+    have hdescentQ : (syracuseOrbit n k : ℚ) < (n : ℚ) := by
+      exact_mod_cast hdescent
+    have hmul := mul_lt_mul_of_pos_left hdescentQ hpow
+    rw [hidq] at hmul
+    exact hmul
+  · intro hthreshold
+    by_contra hnot
+    have hle : n ≤ syracuseOrbit n k := by omega
+    have hmul :
+        (2 : ℚ) ^ cumulativeExponent
+            (fun i => v2 (3 * syracuseOrbit n i + 1)) k * (n : ℚ) ≤
+          (2 : ℚ) ^ cumulativeExponent
+            (fun i => v2 (3 * syracuseOrbit n i + 1)) k *
+              (syracuseOrbit n k : ℚ) := by
+      exact mul_le_mul_of_nonneg_left (by exact_mod_cast hle) (le_of_lt hpow)
+    rw [hidq] at hmul
+    linarith
+
+#print axioms CollatzSyracuseAudit.syracuse_block_descent_iff
+
+/-- Offset-margin form of the exact descent criterion. Once the accumulated
+dyadic factor exceeds the ternary factor, the remaining question is exactly
+whether the affine offset fits inside the available multiplicative margin.
+This reformulation is useful for residue-class certificates: the exponent
+test creates a positive margin, and the offset test decides descent. -/
+theorem syracuse_block_descent_iff_offset_margin (n k : ℕ)
+    (hfactor :
+      (3 : ℚ) ^ k <
+        (2 : ℚ) ^ cumulativeExponent
+          (fun i => v2 (3 * syracuseOrbit n i + 1)) k) :
+    syracuseOrbit n k < n ↔
+      (affineConstantTerm
+        (fun i => v2 (3 * syracuseOrbit n i + 1)) k : ℚ) <
+        ((2 : ℚ) ^ cumulativeExponent
+          (fun i => v2 (3 * syracuseOrbit n i + 1)) k -
+          (3 : ℚ) ^ k) * (n : ℚ) := by
+  rw [syracuse_block_descent_iff]
+  constructor
+  · intro h
+    nlinarith
+  · intro h
+    nlinarith
+
+#print axioms CollatzSyracuseAudit.syracuse_block_descent_iff_offset_margin
+
+
+
+/-- Exact affine identity plus a strict threshold inequality forces a strict
+descent of the actual trajectory value. This isolates the arithmetic step
+from the separate, difficult task of proving the threshold for every orbit. -/
+theorem affine_threshold_forces_descent
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
+    (k : ℕ)
+    (hthreshold :
+      (3 : ℚ) ^ k * (n 0 : ℚ) +
+          (affineConstantTerm a k : ℚ) <
+        (2 : ℚ) ^ cumulativeExponent a k * (n 0 : ℚ)) :
+    n k < n 0 := by
+  have hid := affine_iteration_identity a n hstep k
+  have hidq :
+      (2 : ℚ) ^ cumulativeExponent a k * (n k : ℚ) =
+        (3 : ℚ) ^ k * (n 0 : ℚ) +
+          (affineConstantTerm a k : ℚ) := by
+    exact_mod_cast hid
+  by_contra hnot
+  have hle : n 0 ≤ n k := by omega
+  have hpow : 0 < (2 : ℚ) ^ cumulativeExponent a k := by positivity
+  have hmul :
+      (2 : ℚ) ^ cumulativeExponent a k * (n 0 : ℚ) ≤
+        (2 : ℚ) ^ cumulativeExponent a k * (n k : ℚ) := by
+    exact mul_le_mul_of_nonneg_left (by exact_mod_cast hle) (le_of_lt hpow)
+  rw [hidq] at hmul
+  linarith
+
+#print axioms CollatzSyracuseAudit.affine_threshold_forces_descent
+
+
+/-- A block transition gives a genuine strict descent above its affine
+threshold. This packages the affine estimate into a reusable dynamical
+certificate; it does not assert that every odd input has such a block. -/
+theorem block_transition_strict_descent
+    {S : ℕ → ℕ} {Source Target : ℕ → Prop}
+    (B : BlockTransition S Source Target)
+    (n : ℕ) (hn : Source n)
+    (hthreshold : B.offset / (1 - B.slope) < (n : ℚ)) :
+    B.run n < n := by
+  have hbound := B.value_bound n hn
+  have hstrict := strict_descent_of_affine
+    B.slope B.offset (n : ℚ)
+    B.slope_nonneg B.slope_lt_one B.offset_nonneg hthreshold
+  have hq : (B.run n : ℚ) < (n : ℚ) :=
+    lt_of_le_of_lt hbound hstrict
+  exact_mod_cast hq
+
+#print axioms block_transition_strict_descent
+
+
+/-!
+## Strong-induction bridge (conditional)
+
+This theorem isolates the logically valid final step of a descent strategy.
+It does not establish the descent hypothesis for Syracuse; it proves that
+if every positive nonterminal input has some strictly smaller positive
+iterate, and the map preserves positivity, then every positive input reaches
+1. Thus a finite residue-class argument must genuinely establish descent for
+all relevant inputs before this induction bridge can be applied.
+-/
+
+/-- Iterates of a positivity-preserving map preserve positivity. -/
+theorem iterate_pos_of_pos
+    (S : ℕ → ℕ) (hpos : ∀ n, 0 < n → 0 < S n) :
+    ∀ k n, 0 < n → 0 < (S^[k]) n := by
+  intro k
+  induction k with
+  | zero =>
+      intro n hn
+      simpa using hn
+  | succ k ih =>
+      intro n hn
+      simpa [Function.iterate_succ_apply'] using
+        hpos ((S^[k]) n) (ih n hn)
+
+/-- If every positive input greater than one admits a positive iterate that
+is strictly smaller, and S preserves positivity, then every positive input
+eventually reaches 1. This is a conditional induction theorem, not a proof
+that the accelerated Syracuse map satisfies the descent premise. -/
+theorem reaches_one_of_strict_descent
+    (S : ℕ → ℕ)
+    (hpos : ∀ n, 0 < n → 0 < S n)
+    (hdesc : ∀ n, 1 < n → ∃ k, 0 < k ∧ (S^[k]) n < n) :
+    ∀ n, 0 < n → ∃ k, (S^[k]) n = 1 := by
+  intro n
+  induction n using Nat.strong_induction_on with
+  | h n ih =>
+      intro hn
+      by_cases hone : n = 1
+      · subst n
+        exact ⟨0, by simp⟩
+      · have hgt : 1 < n := by omega
+        obtain ⟨k, hk, hsmall⟩ := hdesc n hgt
+        have hsmall_pos : 0 < (S^[k]) n :=
+          iterate_pos_of_pos S hpos k n hn
+        obtain ⟨j, hj⟩ := ih ((S^[k]) n) hsmall hsmall_pos
+        refine ⟨k + j, ?_⟩
+        calc
+          (S^[k + j]) n = (S^[j + k]) n := by congr 1 <;> omega
+          _ = (S^[j]) ((S^[k]) n) :=
+            Function.iterate_add_apply S j k n
+          _ = 1 := hj
+
+/-- The accelerated Syracuse map is positive because every output is
+odd; this makes the abstract stopping-time bridge applicable to the concrete
+map without assuming any descent theorem. -/
+theorem syracuse_pos (n : ℕ) : 0 < syracuse n := by
+  have hodd := syracuse_output_odd n
+  omega
+
+/-- Conditional global termination statement specialized to the accelerated
+Syracuse map. The only unproved mathematical input needed to use this theorem
+for all positive starts is the strict-descent premise itself. -/
+theorem syracuse_reaches_one_of_strict_descent
+    (hdesc : ∀ n, 1 < n →
+      ∃ k, 0 < k ∧ (syracuse^[k]) n < n) :
+    ∀ n, 0 < n → ∃ k, (syracuse^[k]) n = 1 := by
+  exact reaches_one_of_strict_descent syracuse (fun n _hn => syracuse_pos n) hdesc
+
+#print axioms iterate_pos_of_pos
+#print axioms reaches_one_of_strict_descent
+#print axioms syracuse_pos
+#print axioms syracuse_reaches_one_of_strict_descent
+
+/-- Explicit finite-sum candidate for the affine constant term:
+C_k = sum_{j < k} 3^(k-1-j) * 2^(A_j). -/
+def explicitAffineConstant (a : ℕ → ℕ) (k : ℕ) : ℕ :=
+  ∑ j ∈ Finset.range k, 3 ^ (k - 1 - j) * 2 ^ cumulativeExponent a j
+
+/-- The explicit sum has the expected zero base case. -/
+theorem explicitAffineConstant_zero (a : ℕ → ℕ) :
+    explicitAffineConstant a 0 = 0 := by
+  simp [explicitAffineConstant]
+
+/-- One-step recurrence for the explicit affine sum. This is the bridge
+needed to identify it with the recursively defined affine constant. -/
+theorem explicitAffineConstant_succ (a : ℕ → ℕ) (k : ℕ) :
+    explicitAffineConstant a (k + 1) =
+      3 * explicitAffineConstant a k + 2 ^ cumulativeExponent a k := by
+  classical
+  unfold explicitAffineConstant
+  rw [Finset.sum_range_succ]
+  simp only [Nat.add_sub_cancel, Nat.sub_self, pow_zero, one_mul]
+  have hsum :
+      (∑ j ∈ Finset.range k,
+        3 ^ (k - j) * 2 ^ cumulativeExponent a j) =
+      3 * (∑ j ∈ Finset.range k,
+        3 ^ (k - 1 - j) * 2 ^ cumulativeExponent a j) := by
+    rw [Finset.mul_sum]
+    apply Finset.sum_congr rfl
+    intro j hj
+    have hjk : j < k := Finset.mem_range.mp hj
+    have hexp : k - j = (k - 1 - j) + 1 := by omega
+    rw [hexp, pow_succ]
+    ring
+  rw [hsum]
+
+
+/-- The explicit finite sum agrees with the recursively accumulated affine
+constant. This removes the need to treat the closed form and recurrence as
+independent objects. -/
+theorem explicitAffineConstant_eq_affineConstantTerm (a : ℕ → ℕ) (k : ℕ) :
+    explicitAffineConstant a k = affineConstantTerm a k := by
+  induction k with
+  | zero =>
+      simp [explicitAffineConstant, affineConstantTerm]
+  | succ k ih =>
+      rw [explicitAffineConstant_succ, affineConstantTerm_succ, ih]
+
+
+/-- Every nonempty affine block has a strictly positive additive offset.
+This is the obstruction that a pure average-multiplier argument misses. -/
+theorem affineConstantTerm_pos_of_pos (a : ℕ → ℕ) {k : ℕ} (hk : 0 < k) :
+    0 < affineConstantTerm a k := by
+  cases k with
+  | zero => omega
+  | succ j =>
+      simp only [affineConstantTerm]
+      positivity
+
+/-- Necessary growth condition for a strict descent over a nonempty block:
+if the accumulated dyadic factor has not exceeded the ternary factor, then
+the affine offset forces the endpoint above the starting value. This is a
+one-way obstruction, not a claim that the converse growth condition suffices. -/
+theorem affine_factor_not_exceeded_forces_growth
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
+    (k : ℕ) (hk : 0 < k) (hn0 : 0 < n 0)
+    (hfactor : 2 ^ cumulativeExponent a k ≤ 3 ^ k) :
+    n 0 < n k := by
+  have hid := affine_iteration_identity a n hstep k
+  have hC := affineConstantTerm_pos_of_pos a hk
+  have hmul : 2 ^ cumulativeExponent a k * n 0 ≤ 3 ^ k * n 0 :=
+    Nat.mul_le_mul_right (n 0) hfactor
+  have hscaled : 2 ^ cumulativeExponent a k * n 0 <
+      2 ^ cumulativeExponent a k * n k := by
+    omega
+  have hpow : 0 < 2 ^ cumulativeExponent a k := by positivity
+  exact (Nat.mul_lt_mul_left hpow).mp hscaled
+
+end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- Necessary valuation-growth threshold for any strict descent over a
+nonempty accelerated Syracuse block. If the endpoint is smaller than the
+start, the accumulated power of two must strictly exceed the corresponding
+power of three. This is only a necessary condition: it does not claim that
+the valuation inequality alone guarantees descent. -/
+theorem exponent_exceeds_ternary_on_strict_descent
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
+    (k : ℕ) (hk : 0 < k) (hn0 : 0 < n 0)
+    (hdesc : n k < n 0) :
+    3 ^ k < 2 ^ cumulativeExponent a k := by
+  by_contra h
+  have hfactor : 2 ^ cumulativeExponent a k ≤ 3 ^ k := by omega
+  have hgrowth := affine_factor_not_exceeded_forces_growth
+    a n hstep k hk hn0 hfactor
+  omega
+
+#print axioms exponent_exceeds_ternary_on_strict_descent
+
 end CollatzSyracuseAudit
