@@ -241,4 +241,60 @@ theorem two_step_descent_mod32_nineteen (k : ℕ) :
 
 #print axioms CollatzSyracuseAudit.two_step_descent_mod32_nineteen
 
+
+/-!
+## Exact affine numerator identity for a valuation sequence
+
+For a trajectory satisfying
+  2^(a i) * n_(i+1) = 3*n_i + 1,
+the cumulative exponent A_k and affine constant C_k obey
+  2^A_k * n_k = 3^k*n_0 + C_k.
+This is an exact identity, independent of any density heuristic. It is the
+arithmetic bridge needed before comparing an iterate with its start value.
+-/
+
+/-- Sum of the first k two-adic exponents. -/
+def cumulativeExponent (a : ℕ → ℕ) : ℕ → ℕ
+  | 0 => 0
+  | k + 1 => cumulativeExponent a k + a k
+
+/-- Constant term in the exact affine numerator after k accelerated steps. -/
+def affineConstantTerm (a : ℕ → ℕ) : ℕ → ℕ
+  | 0 => 0
+  | k + 1 => 3 * affineConstantTerm a k + 2 ^ cumulativeExponent a k
+
+/-- One-step recurrence for the accumulated constant term. -/
+theorem affineConstantTerm_succ (a : ℕ → ℕ) (k : ℕ) :
+    affineConstantTerm a (k + 1) =
+      3 * affineConstantTerm a k + 2 ^ cumulativeExponent a k := rfl
+
+/-- Exact affine numerator identity for every finite trajectory whose
+valuation exponents are a. The hypothesis states the division step without
+using truncated natural division, so no divisibility information is lost. -/
+theorem affine_iteration_identity
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1) :
+    ∀ k, 2 ^ cumulativeExponent a k * n k =
+      3 ^ k * n 0 + affineConstantTerm a k := by
+  intro k
+  induction k with
+  | zero =>
+      simp [cumulativeExponent, affineConstantTerm]
+  | succ k ih =>
+      rw [cumulativeExponent, affineConstantTerm, pow_succ]
+      calc
+        2 ^ cumulativeExponent a k * 2 ^ a k * n (k + 1) =
+            2 ^ cumulativeExponent a k * (2 ^ a k * n (k + 1)) := by ring
+        _ = 2 ^ cumulativeExponent a k * (3 * n k + 1) := by rw [hstep k]
+        _ = 3 * (2 ^ cumulativeExponent a k * n k) +
+              2 ^ cumulativeExponent a k := by ring
+        _ = 3 * (3 ^ k * n 0 + affineConstantTerm a k) +
+              2 ^ cumulativeExponent a k := by rw [ih]
+        _ = 3 ^ (k + 1) * n 0 +
+              (3 * affineConstantTerm a k + 2 ^ cumulativeExponent a k) := by
+                rw [pow_succ]
+                ring
+
+#print axioms CollatzSyracuseAudit.affine_iteration_identity
+
 end CollatzSyracuseAudit
