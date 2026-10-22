@@ -402,6 +402,32 @@ theorem syracuse_block_descent_iff (n k : ℕ) :
 
 #print axioms CollatzSyracuseAudit.syracuse_block_descent_iff
 
+/-- Offset-margin form of the exact descent criterion. Once the accumulated
+dyadic factor exceeds the ternary factor, the remaining question is exactly
+whether the affine offset fits inside the available multiplicative margin.
+This reformulation is useful for residue-class certificates: the exponent
+test creates a positive margin, and the offset test decides descent. -/
+theorem syracuse_block_descent_iff_offset_margin (n k : ℕ)
+    (hfactor :
+      (3 : ℚ) ^ k <
+        (2 : ℚ) ^ cumulativeExponent
+          (fun i => v2 (3 * syracuseOrbit n i + 1)) k) :
+    syracuseOrbit n k < n ↔
+      (affineConstantTerm
+        (fun i => v2 (3 * syracuseOrbit n i + 1)) k : ℚ) <
+        ((2 : ℚ) ^ cumulativeExponent
+          (fun i => v2 (3 * syracuseOrbit n i + 1)) k -
+          (3 : ℚ) ^ k) * (n : ℚ) := by
+  rw [syracuse_block_descent_iff]
+  constructor
+  · intro h
+    nlinarith
+  · intro h
+    nlinarith
+
+#print axioms CollatzSyracuseAudit.syracuse_block_descent_iff_offset_margin
+
+
 
 /-- Exact affine identity plus a strict threshold inequality forces a strict
 descent of the actual trajectory value. This isolates the arithmetic step
