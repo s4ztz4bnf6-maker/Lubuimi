@@ -601,6 +601,7 @@ theorem affine_factor_not_exceeded_forces_growth
   have hscaled : 2 ^ cumulativeExponent a k * n 0 <
       2 ^ cumulativeExponent a k * n k := by
     omega
-  exact (Nat.mul_lt_mul_left (2 ^ cumulativeExponent a k)).mp hscaled
+  have hpow : 0 < 2 ^ cumulativeExponent a k := by positivity
+  exact (Nat.mul_lt_mul_left hpow).mp hscaled
 
 end CollatzSyracuseAudit
