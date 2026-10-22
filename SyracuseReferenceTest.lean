@@ -33,7 +33,8 @@ theorem syracuse_output_odd (n : ℕ) :
     intro hz
     apply hnot
     exact Nat.dvd_iff_mod_eq_zero.mpr hz
-  have hlt := Nat.mod_lt (m / 2 ^ m.factorization 2) (by norm_num)
+  have hlt : (m / 2 ^ m.factorization 2) % 2 < 2 :=
+    Nat.mod_lt _ (by decide : 0 < 2)
   omega
 
 /-- If n is odd, then 3*n+1 is even. -/
