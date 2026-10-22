@@ -164,7 +164,7 @@ def mod32ThreeTwoStep : BlockTransition
   offset_nonneg := by norm_num
   target_correct := by
     intro n hn
-    exact syracuse_output_odd (syracuse (syracuse n))
+    exact syracuse_output_odd (syracuse n)
   value_bound := by
     intro n hn
     obtain ⟨k, rfl⟩ : ∃ k : ℕ, n = 32 * k + 3 := by
