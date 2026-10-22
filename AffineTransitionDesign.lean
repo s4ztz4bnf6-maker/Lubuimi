@@ -299,4 +299,34 @@ theorem affine_iteration_identity
 
 #print axioms CollatzSyracuseAudit.affine_iteration_identity
 
+/-- Exact affine identity plus a strict threshold inequality forces a strict
+descent of the actual trajectory value. This isolates the arithmetic step
+from the separate, difficult task of proving the threshold for every orbit. -/
+theorem affine_threshold_forces_descent
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
+    (k : ℕ)
+    (hthreshold :
+      (3 : ℚ) ^ k * (n 0 : ℚ) +
+          (affineConstantTerm a k : ℚ) <
+        (2 : ℚ) ^ cumulativeExponent a k * (n 0 : ℚ)) :
+    n k < n 0 := by
+  have hid := affine_iteration_identity a n hstep k
+  have hidq :
+      (2 : ℚ) ^ cumulativeExponent a k * (n k : ℚ) =
+        (3 : ℚ) ^ k * (n 0 : ℚ) +
+          (affineConstantTerm a k : ℚ) := by
+    exact_mod_cast hid
+  by_contra hnot
+  have hle : n 0 ≤ n k := by omega
+  have hpow : 0 < (2 : ℚ) ^ cumulativeExponent a k := by positivity
+  have hmul :
+      (2 : ℚ) ^ cumulativeExponent a k * (n 0 : ℚ) ≤
+        (2 : ℚ) ^ cumulativeExponent a k * (n k : ℚ) := by
+    exact mul_le_mul_of_nonneg_left (by exact_mod_cast hle) (le_of_lt hpow)
+  rw [hidq] at hmul
+  linarith
+
+#print axioms CollatzSyracuseAudit.affine_threshold_forces_descent
+
 end CollatzSyracuseAudit
