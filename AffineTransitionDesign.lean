@@ -667,7 +667,7 @@ theorem affine_offset_lower_bound (a : ℕ → ℕ) (k : ℕ) :
     3 ^ k ≤ affineConstantTerm a (k + 1) := by
   induction k with
   | zero =>
-      simp [affineConstantTerm]
+      simp [affineConstantTerm, cumulativeExponent]
   | succ k ih =>
       change 3 ^ (k + 1) ≤
         3 * affineConstantTerm a (k + 1) +
