@@ -47,3 +47,31 @@ theorem one_le_v2_three_mul_add_one_of_odd
 #print axioms one_le_v2_three_mul_add_one_of_odd
 
 end CollatzSyracuseAudit
+
+
+/-- Exact first-step split: among odd inputs, the accelerated Syracuse
+numerator 3*n+1 has valuation exactly one precisely in the residue class
+3 mod 4. This is a deterministic congruence statement, not a density claim. -/
+theorem v2_three_mul_add_one_eq_one_iff_mod_four_three
+    (n : ℕ) (hn : n % 2 = 1) :
+    v2 (3 * n + 1) = 1 ↔ n % 4 = 3 := by
+  have hnum : 3 * n + 1 ≠ 0 := by omega
+  rw [v2_eq_iff_dvd_pow_not_next (3 * n + 1) 1 hnum]
+  norm_num
+  constructor
+  · rintro ⟨hdiv, hnot⟩
+    have hmod2 : (3 * n + 1) % 2 = 0 := Nat.dvd_iff_mod_eq_zero.mp hdiv
+    have hmod4 : (3 * n + 1) % 4 ≠ 0 := by
+      intro hz
+      apply hnot
+      exact Nat.dvd_iff_mod_eq_zero.mpr hz
+    omega
+  · intro hmodn
+    constructor
+    · apply Nat.dvd_of_mod_eq_zero
+      omega
+    · intro hdiv
+      have hz : (3 * n + 1) % 4 = 0 := Nat.dvd_iff_mod_eq_zero.mp hdiv
+      omega
+
+#print axioms v2_three_mul_add_one_eq_one_iff_mod_four_three
