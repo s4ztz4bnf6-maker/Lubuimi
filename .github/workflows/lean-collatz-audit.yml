@@ -81,3 +81,8 @@ jobs:
             echo "Forbidden sorryAx dependency detected"
             exit 1
           fi
+
+      - name: Compile and audit strict Mod64 descent
+        run: |
+          lake env lean -o .lake/build/lib/lean/AffineTransitionDescent.olean AffineTransitionDescent.lean 2>&1 | tee /tmp/affine-transition-descent.log
+          ! grep -q 'sorryAx' /tmp/affine-transition-descent.log
