@@ -9,6 +9,7 @@ on:
       - collatz/second-step-descent-mod-eight-zero-2026-10-21
       - collatz/affine-transition-design-2026-10-21
       - collatz/stopping-time-bridge-2026-10-22
+      - collatz/offset-lower-bound-2026-10-23
   pull_request:
   workflow_dispatch:
 
@@ -99,3 +100,9 @@ jobs:
           set -o pipefail
           lake env lean TwoAdicValuationDistribution.lean 2>&1 | tee /tmp/two-adic-valuation-distribution.log
           ! grep -q 'sorryAx' /tmp/two-adic-valuation-distribution.log
+
+      - name: Compile and audit cumulative-valuation descent obstruction
+        run: |
+          set -o pipefail
+          lake env lean SyracuseOffsetObstruction.lean 2>&1 | tee /tmp/syracuse-offset-obstruction.log
+          ! grep -q 'sorryAx' /tmp/syracuse-offset-obstruction.log
