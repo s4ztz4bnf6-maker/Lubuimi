@@ -8,7 +8,8 @@ theorem v2_mul_32 (a : ℕ) (ha : a ≠ 0) :
   unfold v2
   rw [Nat.factorization_mul (by norm_num : 32 ≠ 0) ha]
   simp only [Finsupp.add_apply]
-  rw [show (32 : ℕ) = 2 ^ 5 by norm_num, padicValNat.prime_pow]
+  rw [show (32 : ℕ) = 2 ^ 5 by norm_num,
+    Nat.factorization_pow_self (by norm_num : Nat.Prime 2)]
 
 #print axioms CollatzSyracuseAudit.v2_mul_32
 
