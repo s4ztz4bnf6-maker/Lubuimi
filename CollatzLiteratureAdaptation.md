@@ -109,3 +109,54 @@ The blueprint for formalizing Tao's almost-all-orbits theorem is also useful for
 Implementation consequence: after the exact mod-four lemma, construct a finite transition table for parity/valuation itineraries modulo 2^K. Each transition must carry its precise modulus and map variant. Prove coverage and uniqueness before deriving any density or drift statement. This guards against switching between the original and accelerated maps mid-proof.
 
 These external formalization resources are audit references, not a proof of the global Collatz conjecture.
+
+
+## 2026-10-23 research extension: exact finite-word transition system
+
+### Motivation from the literature
+
+Terras-style parity-vector arguments encode finite trajectories by congruence classes; Tao's 2022 result goes beyond a naive average-multiplier heuristic by proving stabilization of first-passage statistics through 3-adic distribution and Fourier decay. Tao explicitly does not prove a universal bound for every orbit. The formal project must preserve this distinction: a finite-word count or a density estimate cannot by itself imply universal descent.
+
+### Proposed finite-state bridge
+
+For a word of accelerated valuations a = (a_0, ..., a_{k-1}), define
+\[
+A_j=\sum_{i<j}a_i,\qquad
+C_0=0,\quad C_{j+1}=3C_j+2^{A_j}.
+\]
+The exact numerator identity is
+\[
+2^{A_j}n_j=3^j n_0+C_j.
+\]
+For each prefix length j, a word is arithmetically admissible only if the divisibility conditions implied by
+\[
+2^{a_i}n_{i+1}=3n_i+1
+\]
+hold, including exactness of each valuation (the right side is divisible by 2^{a_i}, but not by 2^{a_i+1}). Therefore a raw list of nonnegative exponents is not a trajectory certificate.
+
+The next formal layer should define a prefix state containing:
+- the cumulative exponent A_j;
+- the affine offset C_j;
+- the residue class of the starting value modulo a sufficient power of two;
+- an exactness predicate for each valuation in the prefix.
+
+A transition appends one valuation only when its congruence/exactness predicate is satisfied. This supports a finite search for short counterexamples to proposed inequalities and a proof that the state transition preserves the exact affine identity.
+
+### New necessary filter
+
+For a strictly descending block of length k+1, the existing offset bound gives
+\[
+3^{k+1}n_0+3^k < 2^{A_{k+1}}n_0.
+\]
+This should be used as a pruning filter after arithmetic admissibility is checked, not as a substitute for that check. It is necessary but not sufficient.
+
+### Research boundary and alternative route
+
+Tao's method uses fine-scale mixing on a 3-adic cyclic group and a first-passage stabilization argument. Reproducing that machinery is substantially different from proving the elementary affine identities in Lean. A realistic alternative milestone is to formalize exact finite valuation-word counts and transition congruences first, then investigate whether a quantitative discrepancy statement can be proved for the finite state system. Any extrapolation from finite depth to all depths must be a separate theorem, not an informal limit argument.
+
+### Acceptance criteria
+
+1. A kernel-checked transition lemma preserves exact valuation and affine-state data.
+2. A finite enumerator reports an actual counterexample if a proposed universal finite-word inequality is false.
+3. The axiom report for each new theorem is recorded; no sorryAx is accepted.
+4. No finite-state or average-case result is described as a proof of global Collatz termination.
