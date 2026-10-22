@@ -733,3 +733,29 @@ theorem strict_descent_forces_scaled_margin_lower_bound
 #print axioms CollatzSyracuseAudit.strict_descent_forces_scaled_margin_lower_bound
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- A sharper uniform lower bound for the affine offset. The recurrence
+C_(k+1) = 3*C_k + 2^(A_k), with 2^(A_k) >= 1, implies
+2*C_k + 1 >= 3^k. Equivalently, C_k >= (3^k - 1)/2 in integer
+arithmetic. This strengthens the one-leading-term bound and quantifies the
+minimum additive cost of a block without making any assumption about the
+valuation word. -/
+theorem affine_offset_ge_geometric_sum (a : ℕ → ℕ) :
+    ∀ k, 3 ^ k ≤ 2 * affineConstantTerm a k + 1 := by
+  intro k
+  induction k with
+  | zero =>
+      simp [affineConstantTerm]
+  | succ k ih =>
+      rw [pow_succ]
+      rw [affineConstantTerm_succ]
+      have hmul := Nat.mul_le_mul_left 3 ih
+      have hpow : 1 ≤ 2 ^ cumulativeExponent a k := by positivity
+      nlinarith
+
+#print axioms CollatzSyracuseAudit.affine_offset_ge_geometric_sum
+
+end CollatzSyracuseAudit
