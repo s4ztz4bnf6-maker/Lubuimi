@@ -507,7 +507,25 @@ theorem reaches_one_of_strict_descent
             Function.iterate_add_apply S j k n
           _ = 1 := hj
 
+/-- The accelerated Syracuse map is positive because every output is
+odd; this makes the abstract stopping-time bridge applicable to the concrete
+map without assuming any descent theorem. -/
+theorem syracuse_pos (n : ℕ) : 0 < syracuse n := by
+  have hodd := syracuse_output_odd n
+  omega
+
+/-- Conditional global termination statement specialized to the accelerated
+Syracuse map. The only unproved mathematical input needed to use this theorem
+for all positive starts is the strict-descent premise itself. -/
+theorem syracuse_reaches_one_of_strict_descent
+    (hdesc : ∀ n, 1 < n →
+      ∃ k, 0 < k ∧ (syracuse^[k]) n < n) :
+    ∀ n, 0 < n → ∃ k, (syracuse^[k]) n = 1 := by
+  exact reaches_one_of_strict_descent syracuse syracuse_pos hdesc
+
 #print axioms iterate_pos_of_pos
 #print axioms reaches_one_of_strict_descent
+#print axioms syracuse_pos
+#print axioms syracuse_reaches_one_of_strict_descent
 
 end CollatzSyracuseAudit
