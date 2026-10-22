@@ -655,3 +655,31 @@ theorem exponent_exceeds_ternary_on_strict_descent
 #print axioms exponent_exceeds_ternary_on_strict_descent
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- Uniform lower bound on the affine offset: every nonempty block of length
+k+1 has C_(k+1) >= 3^k. The first summand in the explicit formula already
+forces this bound, independently of the valuation sequence. This gives a
+quantitative obstruction to descent beyond the mere positivity of C. -/
+theorem affine_offset_lower_bound (a : ℕ → ℕ) (k : ℕ) :
+    3 ^ k ≤ affineConstantTerm a (k + 1) := by
+  induction k with
+  | zero =>
+      simp [affineConstantTerm]
+  | succ k ih =>
+      change 3 ^ (k + 1) ≤
+        3 * affineConstantTerm a (k + 1) +
+          2 ^ cumulativeExponent a (k + 1)
+      calc
+        3 ^ (k + 1) = 3 * 3 ^ k := by rw [pow_succ]; ring
+        _ ≤ 3 * affineConstantTerm a (k + 1) :=
+          Nat.mul_le_mul_left 3 ih
+        _ ≤ 3 * affineConstantTerm a (k + 1) +
+            2 ^ cumulativeExponent a (k + 1) :=
+          Nat.le_add_right _ _
+
+#print axioms CollatzSyracuseAudit.affine_offset_lower_bound
+
+end CollatzSyracuseAudit
