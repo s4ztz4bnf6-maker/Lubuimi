@@ -84,3 +84,17 @@ Because 3 is invertible modulo `2^(j+1)`, this congruence has exactly one soluti
 There are `2^(K-1)` odd classes modulo `2^K`, so the conditional proportion among odd classes is `2^(-j)`. The proof should formalize the congruence equivalence first, then the unique solution class and its lift count. It must not use floating-point probabilities or assume independence across successive iterates.
 
 Status: this is a mathematical derivation and target specification, not yet a Lean theorem or a claimed build result.
+
+
+## Formalization plan refined after the successful valuation CI (2026-10-22)
+
+The exact valuation characterization now compiles in the code module, but the distribution count remains a separate theorem. To avoid a false counting argument, formalize it in four layers:
+
+1. Divisibility layer: reuse v2_eq_iff_dvd_pow_not_next; prove the equivalent modular statement using Nat.dvd_iff_mod_eq_zero.
+2. Congruence layer: for 1 <= j, multiplication by 3 is invertible modulo 2^(j+1). Prove uniqueness of the solution to 3*n + 1 ≡ 2^j (mod 2^(j+1)), rather than appealing to an informal probability argument.
+3. Lift layer: show that the unique class modulo 2^(j+1) has exactly 2^(K-j-1) representatives modulo 2^K, and that every representative retains exact valuation j.
+4. Sample-space layer: distinguish all residues modulo 2^K from odd residues. All qualifying residues are odd; the absolute count is 2^(K-j-1), the number of odd residues is 2^(K-1), and the conditional proportion is 2^(-j).
+
+The key mathematical invariant is the congruence, not independence of successive valuations. In Lean, prefer Fin (2^K) with explicit membership predicates and Finset.card, or an explicit equivalence between the qualifying set and the finite lift interval. Avoid List.getD defaults, floating point, and a theorem whose sample space is left implicit.
+
+Literature connection: Terras' stopping-time method encodes finite parity itineraries by residue classes; Laarhoven–de Weger relate the finite Collatz graph modulo powers of two to a binary De Bruijn graph. The adaptation here is to prove the one-step valuation distribution exactly first, then build finite multi-step transitions as an explicit finite graph. This is a local distribution theorem only; it cannot alone imply global descent.
