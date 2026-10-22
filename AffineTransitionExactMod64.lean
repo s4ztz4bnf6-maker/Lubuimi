@@ -34,6 +34,17 @@ theorem mod64_three_two_step_descent (m : ℕ) :
 
 #print axioms mod64_three_two_step_descent
 
+/-- Residue-class interface: any natural number congruent to 3 modulo 64
+strictly descends after two accelerated Syracuse steps. -/
+theorem mod64_three_two_step_descent_of_residue (n : ℕ)
+    (hn : n % 64 = 3) :
+    syracuse (syracuse n) < n := by
+  have hdecomp : n = 64 * (n / 64) + 3 := by omega
+  rw [hdecomp]
+  exact mod64_three_two_step_descent (n / 64)
+
+#print axioms mod64_three_two_step_descent_of_residue
+
 #print axioms CollatzSyracuseAudit.mod64_thirtyfive_second_numerator_factor32
 #print axioms CollatzSyracuseAudit.mod64_thirtyfive_first_step_exact
 
