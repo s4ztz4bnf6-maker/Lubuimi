@@ -304,12 +304,16 @@ theorem v2_three_mul_add_one_eq_nine_iff_mod_ten_twenty_four_three_forty_one
       exact Nat.dvd_iff_mod_eq_zero.mpr hz
     omega
   · intro hmodn
+    have hdecomp := Nat.mod_add_div n 1024
+    rw [hmodn] at hdecomp
     constructor
     · apply Nat.dvd_of_mod_eq_zero
+      rw [hdecomp]
       omega
     · intro hdiv
       have hz : (3 * n + 1) % 1024 = 0 :=
         Nat.dvd_iff_mod_eq_zero.mp hdiv
+      rw [hdecomp] at hz
       omega
 
 #print axioms v2_three_mul_add_one_eq_nine_iff_mod_ten_twenty_four_three_forty_one
