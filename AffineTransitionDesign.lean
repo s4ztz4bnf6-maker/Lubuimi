@@ -219,4 +219,26 @@ theorem two_step_descent_mod32_three (k : ℕ) :
 
 #print axioms CollatzSyracuseAudit.two_step_descent_mod32_three
 
+
+/-- Two accelerated steps strictly decrease every input in the residue
+class 19 modulo 32. The first step gives 48*k+29; the second has numerator
+8*(18*k+11), whose odd factor fixes the valuation at exactly three. -/
+theorem two_step_descent_mod32_nineteen (k : ℕ) :
+    syracuse (syracuse (32 * k + 19)) < 32 * k + 19 := by
+  have hfirst : syracuse (32 * k + 19) = 48 * k + 29 := by
+    calc
+      syracuse (32 * k + 19) =
+          syracuse (4 * (8 * k + 4) + 3) := by congr 1 <;> omega
+      _ = 6 * (8 * k + 4) + 5 :=
+        first_step_formula_mod_four_three (8 * k + 4)
+      _ = 48 * k + 29 := by omega
+  have hsecond : syracuse (48 * k + 29) = 18 * k + 11 := by
+    have heq : 48 * k + 29 = 6 * (8 * k + 4) + 5 := by omega
+    rw [heq]
+    exact second_step_formula_of_m_mod_eight_four k
+  rw [hfirst, hsecond]
+  omega
+
+#print axioms CollatzSyracuseAudit.two_step_descent_mod32_nineteen
+
 end CollatzSyracuseAudit
