@@ -40,7 +40,7 @@ theorem one_le_v2_three_mul_add_one_of_odd
   have hdiv : 2 ^ 1 ∣ 3 * n + 1 := by
     apply Nat.dvd_of_mod_eq_zero
     omega
-  have hpow := Nat.prime_two.pow_dvd_iff_le_factorization hnum
+  have hpow := Nat.prime_two.pow_dvd_iff_le_factorization (k := 1) hnum
   unfold v2
   exact hpow.mp hdiv
 
