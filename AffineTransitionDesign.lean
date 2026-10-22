@@ -753,7 +753,8 @@ theorem affine_offset_ge_geometric_sum (a : ℕ → ℕ) :
       rw [pow_succ]
       rw [affineConstantTerm_succ]
       have hmul := Nat.mul_le_mul_left 3 ih
-      have hpow : 1 ≤ 2 ^ cumulativeExponent a k := by positivity
+      have hpow_pos : 0 < 2 ^ cumulativeExponent a k := by positivity
+      have hpow : 1 ≤ 2 ^ cumulativeExponent a k := by omega
       nlinarith
 
 #print axioms CollatzSyracuseAudit.affine_offset_ge_geometric_sum
