@@ -103,4 +103,35 @@ theorem v2_three_mul_add_one_eq_two_iff_mod_eight_one
 
 #print axioms v2_three_mul_add_one_eq_two_iff_mod_eight_one
 
+
+
+/-- Exact third valuation class: for odd inputs, valuation three occurs
+precisely at the residue class 13 modulo 16. This is a local congruence
+statement, not a global Collatz descent theorem. -/
+theorem v2_three_mul_add_one_eq_three_iff_mod_sixteen_thirteen
+    (n : ℕ) (hn : n % 2 = 1) :
+    v2 (3 * n + 1) = 3 ↔ n % 16 = 13 := by
+  have hnum : 3 * n + 1 ≠ 0 := by omega
+  rw [v2_eq_iff_dvd_pow_not_next (3 * n + 1) 3 hnum]
+  norm_num
+  constructor
+  · rintro ⟨hdiv, hnot⟩
+    have hmod8 : (3 * n + 1) % 8 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp hdiv
+    have hmod16 : (3 * n + 1) % 16 ≠ 0 := by
+      intro hz
+      apply hnot
+      exact Nat.dvd_iff_mod_eq_zero.mpr hz
+    omega
+  · intro hmodn
+    constructor
+    · apply Nat.dvd_of_mod_eq_zero
+      omega
+    · intro hdiv
+      have hz : (3 * n + 1) % 16 = 0 :=
+        Nat.dvd_iff_mod_eq_zero.mp hdiv
+      omega
+
+#print axioms v2_three_mul_add_one_eq_three_iff_mod_sixteen_thirteen
+
 end CollatzSyracuseAudit
