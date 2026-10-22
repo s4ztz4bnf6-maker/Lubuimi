@@ -18,7 +18,8 @@ theorem mod64_thirtyfive_second_step_bound (m : ℕ) :
     rw [hval, pow_add]
     norm_num
   rw [syracuse, hnum, hpow]
-  exact Nat.mul_div_mul_left (9 * m + 5) (2 ^ v2 (9 * m + 5)) 32
+  rw [Nat.mul_div_mul_left (9 * m + 5) (2 ^ v2 (9 * m + 5)) (by norm_num)]
+  exact Nat.div_le_self _ _
 
 /-- Inputs congruent to 35 modulo 64 descend in two accelerated steps.
 This closes one additional residue class, but not all odd inputs. -/
