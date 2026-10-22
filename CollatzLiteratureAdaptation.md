@@ -55,3 +55,20 @@ An average or density statement does not establish that every starting value has
 - Terras 1976: https://doi.org/10.4064/aa-30-3-241-252
 - Tao 2022: https://doi.org/10.1017/fmp.2022.8
 - Open-access article page: https://www.cambridge.org/core/journals/forum-of-mathematics-pi/article/almost-all-orbits-of-the-collatz-map-attain-almost-bounded-values/1008CC2DF91AF87F66D190C5E01C907F
+
+
+## Additional structural analogue: finite Collatz graphs
+
+A peer-reviewed paper, “The Collatz conjecture and De Bruijn graphs” (Indagationes Mathematicae 24 (2013), 971–983; DOI https://doi.org/10.1016/j.indag.2013.03.003), studies the induced action on congruence classes modulo powers of two and identifies the resulting graphs with binary De Bruijn graphs. This suggests an alternative formal route complementary to counting one valuation at a time:
+
+- Define the transition relation on odd residue classes at fixed precision \(2^K\).
+- Prove the transition is well-defined at the chosen precision, or state explicitly when a higher precision is needed.
+- Count incoming/outgoing residue cylinders by finite graph combinatorics.
+- Treat valuation classes as labelled transitions, not independent random variables.
+
+This graph approach may scale better for finite valuation words because the word is a path in a finite state graph. It still yields only finite-precision statements unless a separate compactness/measure argument and, ultimately, a pointwise descent proof are supplied.
+
+A recent 2026 preprint by Mike Winkler, “Deterministic Structures in the Coefficient Stopping-Time Dynamics,” also studies exact residue classes and a rooted-tree recursion for coefficient stopping times. It is a preprint rather than a peer-reviewed result, so it is a useful candidate for comparison, not an authority to import as a theorem. The key caution in its abstract is directly relevant: coefficient stopping time is not assumed to equal classical stopping time.
+
+- De Bruijn graph paper: https://doi.org/10.1016/j.indag.2013.03.003
+- Winkler preprint: https://doi.org/10.13140/RG.2.2.20089.94563
