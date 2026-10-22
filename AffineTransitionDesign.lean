@@ -708,3 +708,28 @@ theorem strict_descent_requires_affine_margin
 #print axioms CollatzSyracuseAudit.strict_descent_requires_affine_margin
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- Combining the affine-margin condition with the uniform offset lower bound
+shows that a descending block of length k+1 must pay an additional
+3^k-sized margin beyond its leading 3^(k+1)*n₀ term. This is a quantitative
+necessary condition; it does not assert that the condition is sufficient. -/
+theorem strict_descent_forces_scaled_margin_lower_bound
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
+    (k : ℕ) (hdesc : n (k + 1) < n 0) :
+    3 ^ (k + 1) * n 0 + 3 ^ k <
+      2 ^ cumulativeExponent a (k + 1) * n 0 := by
+  have hmargin := strict_descent_requires_affine_margin a n hstep
+    (k + 1) hdesc
+  have hoffset := affine_offset_lower_bound a k
+  have hle : 3 ^ (k + 1) * n 0 + 3 ^ k ≤
+      3 ^ (k + 1) * n 0 + affineConstantTerm a (k + 1) :=
+    Nat.add_le_add_left hoffset _
+  exact lt_of_le_of_lt hle hmargin
+
+#print axioms CollatzSyracuseAudit.strict_descent_forces_scaled_margin_lower_bound
+
+end CollatzSyracuseAudit
