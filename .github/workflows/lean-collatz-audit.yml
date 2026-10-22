@@ -55,3 +55,11 @@ jobs:
             echo "Forbidden sorryAx dependency detected"
             exit 1
           fi
+      - name: Compile and audit exact Mod64 transitions
+        run: |
+          set -o pipefail
+          lake env lean AffineTransitionExactMod64.lean 2>&1 | tee /tmp/affine-exact-mod64-audit.log
+          if grep -q 'sorryAx' /tmp/affine-exact-mod64-audit.log; then
+            echo "Forbidden sorryAx dependency detected"
+            exit 1
+          fi
