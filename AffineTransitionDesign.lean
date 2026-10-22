@@ -683,3 +683,28 @@ theorem affine_offset_lower_bound (a : ℕ → ℕ) (k : ℕ) :
 #print axioms CollatzSyracuseAudit.affine_offset_lower_bound
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- Any strict descent over an exact accelerated block requires the full
+affine margin: the scaled endpoint must leave room not only for 3^k*n₀,
+but also for the positive additive offset C_k. This is an exact necessary
+condition derived from the trajectory identity, not a sufficient criterion
+for global Collatz descent. -/
+theorem strict_descent_requires_affine_margin
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
+    (k : ℕ) (hdesc : n k < n 0) :
+    3 ^ k * n 0 + affineConstantTerm a k <
+      2 ^ cumulativeExponent a k * n 0 := by
+  have hscale : 2 ^ cumulativeExponent a k * n k <
+      2 ^ cumulativeExponent a k * n 0 :=
+    Nat.mul_lt_mul_of_pos_left hdesc (by positivity)
+  have hid := affine_iteration_identity a n hstep k
+  rw [hid] at hscale
+  exact hscale
+
+#print axioms CollatzSyracuseAudit.strict_descent_requires_affine_margin
+
+end CollatzSyracuseAudit
