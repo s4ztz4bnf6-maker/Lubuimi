@@ -605,3 +605,23 @@ theorem affine_factor_not_exceeded_forces_growth
   exact (Nat.mul_lt_mul_left hpow).mp hscaled
 
 end CollatzSyracuseAudit
+
+
+/-- Necessary valuation-growth threshold for any strict descent over a
+nonempty accelerated Syracuse block. If the endpoint is smaller than the
+start, the accumulated power of two must strictly exceed the corresponding
+power of three. This is only a necessary condition: it does not claim that
+the valuation inequality alone guarantees descent. -/
+theorem exponent_exceeds_ternary_on_strict_descent
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
+    (k : ℕ) (hk : 0 < k) (hn0 : 0 < n 0)
+    (hdesc : n k < n 0) :
+    3 ^ k < 2 ^ cumulativeExponent a k := by
+  by_contra h
+  have hfactor : 2 ^ cumulativeExponent a k ≤ 3 ^ k := by omega
+  have hgrowth := affine_factor_not_exceeded_forces_growth
+    a n hstep k hk hn0 hfactor
+  omega
+
+#print axioms exponent_exceeds_ternary_on_strict_descent
