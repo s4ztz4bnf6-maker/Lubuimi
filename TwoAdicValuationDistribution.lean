@@ -302,6 +302,9 @@ theorem v2_three_mul_add_one_eq_nine_iff_mod_ten_twenty_four_eight_fifty_three
       intro hz
       apply hnot
       exact Nat.dvd_iff_mod_eq_zero.mpr hz
+    have hdecomp := Nat.mod_add_div n 1024
+    rw [← hdecomp] at hmod512 hmod1024
+    norm_num at hmod512 hmod1024
     omega
   · intro hmodn
     have hdecomp := Nat.mod_add_div n 1024
@@ -318,7 +321,7 @@ theorem v2_three_mul_add_one_eq_nine_iff_mod_ten_twenty_four_eight_fifty_three
       norm_num at hz
       omega
 
-#print axioms v2_three_mul_add_one_eq_nine_iff_mod_ten_twenty_four_three_forty_one
+#print axioms v2_three_mul_add_one_eq_nine_iff_mod_ten_twenty_four_eight_fifty_three
 
 /-- Exact tenth valuation class: among odd inputs, v₂(3n+1)=10 precisely
 when n is 341 modulo 2048. The proof is a finite congruence certificate only;
