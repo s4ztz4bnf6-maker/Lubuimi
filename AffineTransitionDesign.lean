@@ -561,4 +561,16 @@ theorem explicitAffineConstant_succ (a : ℕ → ℕ) (k : ℕ) :
     ring
   rw [hsum]
 
+
+/-- The explicit finite sum agrees with the recursively accumulated affine
+constant. This removes the need to treat the closed form and recurrence as
+independent objects. -/
+theorem explicitAffineConstant_eq_affineConstantTerm (a : ℕ → ℕ) (k : ℕ) :
+    explicitAffineConstant a k = affineConstantTerm a k := by
+  induction k with
+  | zero =>
+      simp [explicitAffineConstant, affineConstantTerm]
+  | succ k ih =>
+      rw [explicitAffineConstant_succ, affineConstantTerm_succ, ih]
+
 end CollatzSyracuseAudit
