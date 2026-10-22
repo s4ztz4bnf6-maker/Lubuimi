@@ -521,7 +521,7 @@ theorem syracuse_reaches_one_of_strict_descent
     (hdesc : ∀ n, 1 < n →
       ∃ k, 0 < k ∧ (syracuse^[k]) n < n) :
     ∀ n, 0 < n → ∃ k, (syracuse^[k]) n = 1 := by
-  exact reaches_one_of_strict_descent syracuse syracuse_pos hdesc
+  exact reaches_one_of_strict_descent syracuse (fun n _hn => syracuse_pos n) hdesc
 
 #print axioms iterate_pos_of_pos
 #print axioms reaches_one_of_strict_descent
