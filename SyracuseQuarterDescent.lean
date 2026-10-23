@@ -108,4 +108,24 @@ theorem two_stage_growth_of_mod_eight_three
 
 #print axioms CollatzSyracuseAudit.two_stage_growth_of_mod_eight_three
 
+/--
+For n = 7 mod 8, the first half-step remains 3 mod 4, so a second
+forced division by two is available. This gives an exact two-half-step
+formula; it is not the fully accelerated Syracuse map when more powers
+of two divide the numerator.
+-/
+theorem two_half_steps_formula_of_mod_eight_seven
+    (n : ℕ) (hn : n % 8 = 7) :
+    (3 * ((3 * n + 1) / 2) + 1) / 2 = (9 * n + 5) / 4 := by
+  omega
+
+/-- The two forced half-steps in the 7 mod 8 class increase n. -/
+theorem two_half_steps_growth_of_mod_eight_seven
+    (n : ℕ) (hn : n % 8 = 7) :
+    n < (3 * ((3 * n + 1) / 2) + 1) / 2 := by
+  omega
+
+#print axioms CollatzSyracuseAudit.two_half_steps_formula_of_mod_eight_seven
+#print axioms CollatzSyracuseAudit.two_half_steps_growth_of_mod_eight_seven
+
 end CollatzSyracuseAudit
