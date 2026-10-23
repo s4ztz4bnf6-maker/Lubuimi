@@ -1,32 +1,37 @@
 /-
-  Erdős-Selfridge Conjecture — Lean 4 Formalization (v17)
+  Erdős–Selfridge / BBMST Lean audit (v17)
 
-  DESIGN PRINCIPLE:
-    Axioms = BBMST published results ONLY (번역 오류 최소화).
-    Everything else — especially coset monotonicity — proved in Lean.
+  EPISTEMIC STATUS:
+    This file is a formalization audit, not an axiom-free proof of the
+    Erdős–Selfridge conjecture.
 
-  ┌─────────────────────────────────────────────────────────────────────┐
-  │ AXIOMS (2):                                                         │
-  │                                                                     │
-  │   1. sieve_criterion: BBMST Thm 3.1+3.2                           │
-  │      If sieveSum(actual block sizes) < 1 with valid params         │
-  │      (ca1 ≥ 1), covering is impossible.                            │
-  │                                                                     │
-  │   2. sf_sieve_lt_one: BBMST Thm 1.1 (computation)                 │
-  │      ∃ δ, ca1, ca3 with SF sieve sum < 1                          │
-  │      + LP structural properties (1≤ca1, ca1≤ca3, ca3-2ca1+1≥0).   │
-  │                                                                     │
-  │ PROVED IN LEAN (our contribution):                                  │
-  │   • updateFactor antitone in s, monotone in x                      │
-  │   • sieveProd antitone in s, monotone in x                         │
-  │   • sieveProd_diff_mono (KEY: cross-monotonicity by induction)     │
-  │   • M2 numerator antitone (via diff_mono, no coefficient expand)   │
-  │   • sieveSum antitone: nonSF sieve sum ≤ SF sieve sum             │
-  │   • Main theorem: erdos_selfridge                                   │
-  └─────────────────────────────────────────────────────────────────────┘
+  TWO ADMITTED PLACEHOLDERS:
+    • sieve_criterion skips the geometric/probabilistic interface and
+      asserts noncoverage directly for the repository's general CoveringSystem.
+    • sf_sieve_lt_one assumes a parameter/certificate existence statement for
+      every finite list of odd primes. That is not a faithful transcription
+      of the paper's finite certificate plus large-prime recurrence.
 
-  Author: Jinook Lee (이진욱), 2026-05-07
--/
+  PROVED LOCALLY IN LEAN:
+    • updateFactor and sieveProd monotonicity lemmas
+    • M2 numerator bounds and sieveSum antitonicity
+    • block-size comparison between square-free and nonsquare-free weights
+    • elementary min/max mass identity
+
+  SCOPE WARNING:
+    The paper's theorem concerns square-free moduli. The current CoveringSystem
+    structure does not impose square-freeness, and erdos_selfridge does not
+    assume it. The final theorem still depends on the two admitted placeholders;
+    its name must not be interpreted as a completed conjecture proof.
+
+  Next proof obligations:
+    1. Formalize the source's finite probability space and fiber-mass identity.
+    2. Prove the moment criterion with source-faithful hypotheses.
+    3. Reproduce the finite certificate and parameter range.
+    4. Prove the large-prime recurrence/tail termination.
+    5. Connect the geometric result to the correct square-free covering-system
+       statement, including the Chinese-remainder correspondence.
+-/ 
 import Mathlib.Tactic
 
 set_option autoImplicit false
