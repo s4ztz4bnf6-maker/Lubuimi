@@ -32,3 +32,7 @@ The research target is a theorem about these certified words that constrains the
 2. Inspect the transitive `#print axioms` output for the exact exported result.
 3. Test any proposed exponent/offset inequality against actual certified trajectories, not arbitrary sequences alone.
 4. Keep finite computational evidence separate from universal proof claims.
+
+## Kernel/toolchain robustness update
+
+Both project branches pin `leanprover/lean4:v4.34.1`. This is preferable to relying on a floating toolchain. A separate independent checker, `nanoda`, was reported to have accepted an invalid Collatz proof due to an unrelated checker bug; that is not evidence that Lean's main kernel accepted the proof. It is a reason to state precisely which kernel checked each result and not to treat independent checker agreement as infallible. See the Lean developer postmortem: https://leodemoura.github.io/blog/2026-8-1-postmortem-for-kernel-soundness-bug-14576/ .
