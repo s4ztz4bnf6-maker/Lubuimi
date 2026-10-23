@@ -487,6 +487,16 @@ noncomputable def nonsfBlockSizes {K : Nat} (cs : CoveringSystem K) : List ℚ :
 noncomputable def sfBlockSizes {K : Nat} (cs : CoveringSystem K) : List ℚ :=
   (extractPrimes cs).map (fun p => ((sfBlockSize p : Nat) : ℚ))
 
+/-- Algebraic core used when separating the smaller and larger fiber masses.
+This identity is elementary; it is not by itself the BBMST probabilistic lemma. -/
+theorem sum_min_max_identity (a b : ℚ) :
+    min a b + max a b = a + b := by
+  by_cases h : a ≤ b
+  · simp [min_eq_left h, max_eq_right h]
+  · have h' : b ≤ a := le_of_lt (lt_of_not_ge h)
+    rw [min_eq_right h', max_eq_left h']
+    ring
+
 -- ============================================================================
 -- §8. BBMST AXIOMS (exactly 2, translation-safe)
 -- ============================================================================
