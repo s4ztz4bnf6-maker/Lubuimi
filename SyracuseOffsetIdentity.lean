@@ -670,6 +670,22 @@ theorem exponent_five_forces_residue_fifty_three_mod_sixty_four
 
 #print axioms exponent_five_forces_residue_fifty_three_mod_sixty_four
 
+/--
+An exponent-six transition forces its odd starting input to 21 modulo
+128. This is the next level of the valuation-word admissibility sieve.
+-/
+theorem exponent_six_forces_residue_twenty_one_mod_one_twenty_eight
+    (n next : ℕ)
+    (hnext : next % 2 = 1)
+    (hstep : 64 * next = 3 * n + 1) :
+    n % 128 = 21 := by
+  have hmod : (64 * next) % 128 = (3 * n + 1) % 128 := by
+    rw [hstep]
+  omega
+
+#print axioms exponent_six_forces_residue_twenty_one_mod_one_twenty_eight
+
+
 
 
 /--
