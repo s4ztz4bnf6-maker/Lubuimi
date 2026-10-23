@@ -142,6 +142,28 @@ theorem two_half_steps_growth_of_mod_eight_seven
 #print axioms CollatzSyracuseAudit.two_half_steps_formula_of_mod_eight_seven
 #print axioms CollatzSyracuseAudit.two_half_steps_growth_of_mod_eight_seven
 
+
+/--
+A sharper local branch than the generic 1 mod 4 result: for n = 5 mod 8,
+the numerator 3*n+1 is divisible by 8, so removing at least three factors
+of two already gives a strict decrease. This is only a residue-class
+lemma; it does not assert that the quotient is odd or that the full
+2-adic valuation is exactly three.
+-/
+theorem eighth_step_descent_of_mod_eight_five
+    (n : ℕ) (hn : n % 8 = 5) (hn_two : 2 ≤ n) :
+    (3 * n + 1) / 8 < n := by
+  omega
+
+/-- Exact gap for the 5 mod 8 branch after division by eight. -/
+theorem eighth_step_exact_gap_of_mod_eight_five
+    (n : ℕ) (hn : n % 8 = 5) :
+    n - (3 * n + 1) / 8 = (5 * n - 1) / 8 := by
+  omega
+
+#print axioms eighth_step_descent_of_mod_eight_five
+#print axioms eighth_step_exact_gap_of_mod_eight_five
+
 end CollatzSyracuseAudit
 
 
