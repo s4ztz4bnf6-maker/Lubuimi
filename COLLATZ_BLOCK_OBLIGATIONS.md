@@ -31,3 +31,12 @@ A separate public conditional-cycle formalization at collatz-lab.org records an 
 ## Explicit non-claims
 
 This note does not claim a proof of the Collatz conjecture, a universal stopping-time bound, or a new theorem from the density literature. The new exponent inequalities are necessary conditions only; the unresolved task is to prove sufficient descent coverage for every orbit.
+
+
+## Kernel trust and independent rechecking (2026-10-23)
+
+The project is now pinned to Lean/Mathlib v4.34.0. This is a deliberate trust-boundary upgrade, not a mathematical strengthening: Lean's official v4.34.0 release notes describe fixes for three routes to an invalid proof of `False` and additional kernel hardening. See https://lean-lang.org/doc/reference/latest/releases/v4.34.0/ . Earlier releases, including the former v4.28.0 pin, predate these fixes.
+
+The workflow's explicit elan default toolchain was updated as well as `lean-toolchain` and `lakefile.lean`; all three must agree or CI may silently test a different toolchain than the project pin.
+
+Trust status remains conditional until the new CI jobs finish. A successful ordinary Lean build checks proof terms with the selected kernel, but does not by itself establish independent-kernel agreement. Before treating any result as a high-assurance certificate, re-run the relevant closure with a current independent checker (for example current `nanoda`) and preserve the checker version, commit SHA, command, and output. `#print axioms` is necessary for dependency auditing but is not a substitute for a sound kernel or independent recheck.
