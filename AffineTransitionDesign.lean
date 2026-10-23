@@ -1,4 +1,5 @@
 import SyracuseSecondStep
+import SyracuseValuationBudgetFilter
 
 /-!
 # Affine transition certificates for Syracuse-style dynamics
@@ -426,6 +427,33 @@ theorem syracuse_block_descent_iff_offset_margin (n k : ℕ)
     nlinarith
 
 #print axioms CollatzSyracuseAudit.syracuse_block_descent_iff_offset_margin
+
+
+/-- Kernel bridge from the executable offset-margin checker to an actual
+accelerated Syracuse orbit. The exponent sequence is the genuine valuation
+word v₂(3*nᵢ+1), and the affine identity is proved for that orbit above.
+This is a finite-prefix certificate only; it does not assert that every
+orbit admits an accepting prefix. -/
+theorem syracuse_block_descent_of_offset_check (n k : ℕ)
+    (hcheck :
+      SyracuseValuationBudgetFilter.offsetMarginCheck
+        (cumulativeExponent
+          (fun i => v2 (3 * syracuseOrbit n i + 1)) k)
+        k n
+        (affineConstantTerm
+          (fun i => v2 (3 * syracuseOrbit n i + 1)) k) = true) :
+    syracuseOrbit n k < n := by
+  exact SyracuseValuationBudgetFilter.certified_strict_descent
+    (cumulativeExponent
+      (fun i => v2 (3 * syracuseOrbit n i + 1)) k)
+    k n
+    (affineConstantTerm
+      (fun i => v2 (3 * syracuseOrbit n i + 1)) k)
+    (syracuseOrbit n k)
+    (syracuse_affine_block_identity n k)
+    hcheck
+
+#print axioms CollatzSyracuseAudit.syracuse_block_descent_of_offset_check
 
 
 
