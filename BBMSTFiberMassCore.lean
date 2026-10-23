@@ -62,7 +62,7 @@ theorem finite_mass_conservation {ι : Type*} [DecidableEq ι]
   intro i hi
   exact h i hi
 
-/-- Explicit dependency audit for the conservation identities. -/
+/- Explicit dependency audit for the conservation identities. -/
 #print axioms fiber_mass_split
 #print axioms fiber_mass_split_zero
 #print axioms fiber_mass_split_one
