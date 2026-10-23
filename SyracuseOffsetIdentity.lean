@@ -608,3 +608,40 @@ theorem descent_implies_power_growth_of_positive_offset
   exact (Nat.mul_lt_mul_right hn0).mp hmul
 
 #print axioms descent_implies_power_growth_of_positive_offset
+
+
+/--
+Every nonempty canonical offset is strictly positive, because its final
+recurrence step adds a positive power of two. This supplies the positivity
+hypothesis needed to apply the weaker descent threshold to an actual
+canonical block, without assuming the stronger geometric offset floor.
+-/
+theorem canonicalOffset_pos_of_pos_steps
+    (A : ℕ → ℕ) (j : ℕ) (hj : 0 < j) :
+    0 < canonicalOffset A j := by
+  cases j with
+  | zero => omega
+  | succ j =>
+      simp [canonicalOffset]
+      positivity
+
+/--
+For a nonempty canonical affine block, strict descent forces 3^j < 2^A.
+Unlike the earlier threshold theorem requiring 3^j ≤ C, this corollary uses
+only the recurrence-defined offset's positivity. It is still a necessary
+condition, not a proof that the block descends.
+-/
+theorem canonical_block_descent_implies_power_growth
+    (n0 nj A j : ℕ)
+    (hn0 : 0 < n0)
+    (hj : 0 < j)
+    (hidentity :
+      2 ^ A * nj = 3 ^ j * n0 + canonicalOffset A j)
+    (hdesc : nj < n0) :
+    3 ^ j < 2 ^ A := by
+  exact CollatzSyracuseAudit.descent_implies_power_growth_of_positive_offset
+    n0 nj A (canonicalOffset A j) j hn0
+    (canonicalOffset_pos_of_pos_steps A j hj) hidentity hdesc
+
+#print axioms canonicalOffset_pos_of_pos_steps
+#print axioms canonical_block_descent_implies_power_growth
