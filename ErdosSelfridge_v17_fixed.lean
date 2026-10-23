@@ -511,7 +511,7 @@ axiom sf_sieve_lt_one
       ∧ 1 ≤ ca1
       ∧ ca1 ≤ ca3
       ∧ 0 ≤ ca3 - 2 * ca1 + 1
-      ∧ ∀ i, i < δs.length → 0 < δs.getD i 0 ∧ δs.getD i 0 < 1
+      ∧ (∀ i, i < δs.length → 0 < δs.getD i 0 ∧ δs.getD i 0 < 1)
       ∧ δs.length = primes.length
 
 -- ============================================================================
