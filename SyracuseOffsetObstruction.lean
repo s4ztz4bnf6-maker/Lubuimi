@@ -30,8 +30,6 @@ theorem no_strict_descent_when_scale_le
 
 #print axioms no_strict_descent_when_scale_le
 
-end CollatzSyracuseAudit
-
 /-- Any strict descent at time k forces the cumulative 2-adic scale
 to exceed 3^k. This is a necessary certificate, not a sufficient condition
 for descent: the affine offset must still be controlled. -/
@@ -48,3 +46,5 @@ theorem strict_descent_forces_scale_gt
   omega
 
 #print axioms strict_descent_forces_scale_gt
+
+end CollatzSyracuseAudit
