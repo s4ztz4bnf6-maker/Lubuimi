@@ -183,3 +183,18 @@ theorem accelerated_step_descent_of_four_le_power
   nlinarith
 
 #print axioms accelerated_step_descent_of_four_le_power
+
+/--
+Sharp complementary case: if exactly one factor of two is removed,
+the quotient grows for every input greater than one. This explains why the
+two-adic valuation cannot be ignored in a descent argument.
+-/
+theorem accelerated_step_growth_of_exactly_one_factor
+    (n q : ℤ)
+    (hn : 1 < n)
+    (hstep : 3 * n + 1 = 2 * q) :
+    n < q := by
+  nlinarith
+
+#print axioms accelerated_step_growth_of_exactly_one_factor
+
