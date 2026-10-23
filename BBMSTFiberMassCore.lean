@@ -204,12 +204,18 @@ theorem finite_fiber_mass_parts_le_total
   constructor
   · apply Finset.sum_le_sum
     intro i hi
-    exact mul_le_of_le_one_left (hmass i hi) (ha0 i hi)
+    calc
+      alpha i * mass i ≤ 1 * mass i :=
+        mul_le_mul_of_nonneg_right (ha1 i hi) (hmass i hi)
+      _ = mass i := by ring
   · apply Finset.sum_le_sum
     intro i hi
     have hcomp0 : 0 ≤ 1 - alpha i := sub_nonneg.mpr (ha1 i hi)
     have hcomp1 : 1 - alpha i ≤ 1 := by linarith [ha0 i hi]
-    exact mul_le_of_le_one_left (hmass i hi) hcomp0 |>.trans_eq (by ring)
+    calc
+      (1 - alpha i) * mass i ≤ 1 * mass i :=
+        mul_le_mul_of_nonneg_right hcomp1 (hmass i hi)
+      _ = mass i := by ring
 
 
 /- Explicit dependency audit for the conservation identities. -/
