@@ -96,10 +96,11 @@ theorem half_step_mod_four_three_of_mod_eight_seven
 #print axioms CollatzSyracuseAudit.half_step_mod_four_three_of_mod_eight_seven
 
 /--
-For n = 3 mod 8, two forced odd steps (first the half-step, then
-the quarter-step available at the resulting 1 mod 4 value) still produce
-a value larger than n. This explicitly rules out treating that short
-transition as a descent argument.
+For n = 3 mod 8, a half-step followed by division of the next numerator
+by four gives an intermediate quotient larger than n. The quotient need
+not be odd: additional powers of two may still have to be removed before
+the accelerated Syracuse state is reached. This is therefore a local
+growth identity, not a claim about two complete accelerated odd steps.
 -/
 theorem two_stage_growth_of_mod_eight_three
     (n : ℕ) (hn : n % 8 = 3) :
@@ -107,6 +108,19 @@ theorem two_stage_growth_of_mod_eight_three
   omega
 
 #print axioms CollatzSyracuseAudit.two_stage_growth_of_mod_eight_three
+
+/--
+Exact offset for the intermediate quotient in the 3 mod 8 branch.
+The quotient exceeds n by exactly (n + 5) / 8. It is deliberately named
+an intermediate quotient because further powers of two may remain.
+-/
+theorem two_stage_exact_offset_of_mod_eight_three
+    (n : ℕ) (hn : n % 8 = 3) :
+    (3 * ((3 * n + 1) / 2) + 1) / 4 - n = (n + 5) / 8 := by
+  omega
+
+#print axioms CollatzSyracuseAudit.two_stage_exact_offset_of_mod_eight_three
+
 
 /--
 For n = 7 mod 8, the first half-step remains 3 mod 4, so a second
