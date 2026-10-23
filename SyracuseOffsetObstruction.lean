@@ -376,3 +376,40 @@ theorem even_quotient_iff_next_power_dvd
 #print axioms even_quotient_iff_next_power_dvd
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- Exact offset threshold for a fixed realized prefix. Once the scale
+difference is positive, descent occurs exactly when the accumulated affine
+offset is smaller than that difference times the initial state. This is
+still a fixed-prefix criterion, not a uniform bound over all prefixes. -/
+theorem strict_descent_iff_offset_below_scale_margin
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
+    (k : ℕ)
+    (hscale : 3 ^ k < 2 ^ cumulativeExponent a k) :
+    n k < n 0 ↔
+      affineConstantTerm a k <
+        (2 ^ cumulativeExponent a k - 3 ^ k) * n 0 := by
+  have hD :
+      3 ^ k + (2 ^ cumulativeExponent a k - 3 ^ k) =
+        2 ^ cumulativeExponent a k :=
+    Nat.add_sub_of_le (Nat.le_of_lt hscale)
+  have hscaleEq :
+      3 ^ k * n 0 +
+          (2 ^ cumulativeExponent a k - 3 ^ k) * n 0 =
+        2 ^ cumulativeExponent a k * n 0 := by
+    rw [← Nat.add_mul, hD]
+  rw [strict_descent_iff_affine_margin a n hstep k]
+  constructor
+  · intro hmargin
+    rw [← hscaleEq] at hmargin
+    omega
+  · intro hoffset
+    rw [hscaleEq]
+    omega
+
+#print axioms strict_descent_iff_offset_below_scale_margin
+
+end CollatzSyracuseAudit
