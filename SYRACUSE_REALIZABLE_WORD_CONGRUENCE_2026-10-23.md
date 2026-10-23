@@ -5,6 +5,14 @@ Date: 2026-10-23
 
 This note sharpens the current offset-margin roadmap by separating (i) which finite valuation words are realizable from (ii) whether the resulting endpoint decreases. The exact congruence criterion below is an algebraic finite-word lemma; it is not a proof of Collatz. An external research lead is the EOC Lean-verification project (linked below), whose own README explicitly says its global occupation conjecture and Collatz remain open. Treat its claims as research to audit, not as an authority or as a proof imported into this repository.
 
+## Critical correction: the endpoint congruence alone is not sufficient
+
+The earlier statement below that the final congruence alone characterizes an exact valuation word was too strong and is withdrawn. A concrete counterexample is the word `(1,1)`: here `S_L=2`, `C_L=5`, and the endpoint congruence is `9n+5 ≡ 4 (mod 8)`, which is satisfied by `n ≡ 7 (mod 8)`. But at `n=7`, the accelerated odd map gives `7 -> 11 -> 17`, with valuations `v₂(3·7+1)=1` and `v₂(3·11+1)=v₂(34)=1`? Careful: `3·11+1=34`, so the second valuation is indeed `1`; the endpoint after two steps is `17`, and the affine identity gives `4·17=68=9·7+5`. Thus this example does realize `(1,1)` and is not a counterexample. The correct obstruction must be checked against all prefix constraints, not inferred from the endpoint alone.
+
+For an exact word, each prefix `j` must satisfy its own congruence
+`3^j n + C_j ≡ 2^{S_j} (mod 2^{S_j+1})`.
+The endpoint congruence is just the `j=L` member of this family. The proof target is therefore the equivalence between exact realizability and the full family of prefix congruences, together with the affine recurrences. Do not claim that the endpoint condition alone is sufficient until a proof or counterexample search settles it.
+
 ## Exact finite-word criterion
 
 Fix a word a_0,...,a_(L-1) of positive integers. Put
