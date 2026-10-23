@@ -302,4 +302,26 @@ theorem finite_fiber_mass_ge_uniform_floor
 #print axioms finite_fiber_mass_parts_le_total
 #print axioms variable_alpha_fiber_conservation
 
+
+/-- Two-sided finite-fiber squeeze. If each local retained proportion lies
+between beta and gamma, then the total retained mass lies between the
+same constants times the total source mass. This is the exact interface
+needed before substituting source-derived bounds on geometric fibers. -/
+theorem finite_fiber_mass_squeeze
+    {ι : Type*} [DecidableEq ι] (s : Finset ι)
+    (mass alpha : ι → ℚ) (beta gamma : ℚ)
+    (hmass : ∀ i ∈ s, 0 ≤ mass i)
+    (hlower : ∀ i ∈ s, beta ≤ alpha i)
+    (hupper : ∀ i ∈ s, alpha i ≤ gamma) :
+    beta * (∑ i ∈ s, mass i) ≤
+        (∑ i ∈ s, alpha i * mass i) ∧
+      (∑ i ∈ s, alpha i * mass i) ≤
+        gamma * (∑ i ∈ s, mass i) := by
+  exact ⟨
+    finite_fiber_mass_ge_uniform_floor s mass alpha beta hmass hlower,
+    finite_fiber_mass_le_uniform_envelope s mass alpha gamma hmass hupper
+  ⟩
+
+#print axioms finite_fiber_mass_squeeze
+
 end BBMSTFiberMassCore
