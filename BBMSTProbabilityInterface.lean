@@ -67,3 +67,23 @@ theorem finite_incidence_fraction_mem_unit_interval
     sample incidences hinc hnonempty
 
 #print axioms finite_incidence_fraction_mem_unit_interval
+
+
+/--
+If the incidence set is a proper subset of a nonempty finite sample space,
+its normalized rational cardinality is strictly below one. This distinguishes
+a genuinely uncovered sample point from the merely non-strict [0,1] bound.
+-/
+theorem finite_proper_incidence_fraction_lt_one
+    {Ω : Type*} [DecidableEq Ω]
+    (sample incidences : Finset Ω)
+    (hproper : incidences ⊂ sample) (hnonempty : sample.Nonempty) :
+    (incidences.card : ℚ) / (sample.card : ℚ) < 1 := by
+  have hden : (0 : ℚ) < (sample.card : ℚ) := by
+    exact_mod_cast hnonempty.card_pos
+  have hnum : (incidences.card : ℚ) < (sample.card : ℚ) := by
+    exact_mod_cast Finset.card_lt_card hproper
+  apply (div_lt_iff₀ hden).2
+  nlinarith
+
+#print axioms finite_proper_incidence_fraction_lt_one
