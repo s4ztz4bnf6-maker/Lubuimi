@@ -435,9 +435,9 @@ theorem canonicalOffset_split
   | zero =>
       simp [canonicalOffset]
   | succ n ih =>
-      simp only [Nat.add_succ, canonicalOffset, ih, pow_succ]
-      simp [Nat.mul_add, Nat.add_mul, Nat.mul_assoc, Nat.add_assoc]
-      <;> omega
+      simp only [Nat.add_succ, canonicalOffset]
+      rw [ih, pow_succ]
+      ring
 
 #print axioms canonicalOffset_split
 
