@@ -36,17 +36,17 @@ summing both parts recovers the original total. No positivity assumption or
 division is needed, including at alpha = 0 and alpha = 1. -/
 theorem finite_fiber_mass_split {ι : Type*} [DecidableEq ι]
     (s : Finset ι) (mass : ι → ℚ) (alpha : ℚ) :
-    (∑ i in s, alpha * mass i) +
-      (∑ i in s, (1 - alpha) * mass i) =
-      ∑ i in s, mass i := by
+    (∑ i ∈ s, alpha * mass i) +
+      (∑ i ∈ s, (1 - alpha) * mass i) =
+      ∑ i ∈ s, mass i := by
   classical
   calc
-    (∑ i in s, alpha * mass i) +
-        (∑ i in s, (1 - alpha) * mass i)
-        = alpha * (∑ i in s, mass i) +
-            (1 - alpha) * (∑ i in s, mass i) := by
+    (∑ i ∈ s, alpha * mass i) +
+        (∑ i ∈ s, (1 - alpha) * mass i)
+        = alpha * (∑ i ∈ s, mass i) +
+            (1 - alpha) * (∑ i ∈ s, mass i) := by
               rw [← Finset.mul_sum, ← Finset.mul_sum]
-    _ = ∑ i in s, mass i := by ring
+    _ = ∑ i ∈ s, mass i := by ring
 
 /-- Explicit dependency audit for the conservation identities. -/
 #print axioms fiber_mass_split
