@@ -533,4 +533,24 @@ theorem zero_mass_fiber_weighted_sum_zero
 
 #print axioms zero_mass_fiber_weighted_sum_zero
 
+
+/--
+Concrete predicate split: a finite source set is partitioned by a predicate
+into removed and retained contributions. Unlike an abstract alpha-split,
+the two parts are determined pointwise by the actual predicate, and the
+identity holds without any denominator or positivity assumptions.
+-/
+theorem finite_predicate_mass_partition
+    {Ω : Type*} [DecidableEq Ω]
+    (s : Finset Ω) (mass : Ω → ℚ) (removed : Ω → Prop)
+    [DecidablePred removed] :
+    (∑ x ∈ s, (if removed x then mass x else 0)) +
+      (∑ x ∈ s, (if removed x then 0 else mass x)) =
+      ∑ x ∈ s, mass x := by
+  classical
+  rw [← Finset.sum_add_distrib]
+  apply Finset.sum_congr rfl
+  intro x hx
+  by_cases h : removed x <;> simp [h]
+
 end BBMSTFiberMassCore
