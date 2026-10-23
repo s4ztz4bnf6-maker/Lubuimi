@@ -102,3 +102,11 @@ theorem realized_exponent_forced
 #print axioms realized_exponent_forced
 
 end CollatzSyracuseAudit
+
+/-- The one-step valuation-one branch is the residue class 3 modulo 4.
+This is a finite congruence fact, not a statement about eventual descent. -/
+theorem numerator_mod_four_eq_two_iff_residue_three (n : ℕ) :
+    (3 * n + 1) % 4 = 2 ↔ n % 4 = 3 := by
+  omega
+
+#print axioms numerator_mod_four_eq_two_iff_residue_three
