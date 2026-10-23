@@ -210,12 +210,36 @@ theorem finite_fiber_mass_parts_le_total
       _ = mass i := by ring
   · apply Finset.sum_le_sum
     intro i hi
-    have hcomp0 : 0 ≤ 1 - alpha i := sub_nonneg.mpr (ha1 i hi)
     have hcomp1 : 1 - alpha i ≤ 1 := by linarith [ha0 i hi]
     calc
       (1 - alpha i) * mass i ≤ 1 * mass i :=
         mul_le_mul_of_nonneg_right hcomp1 (hmass i hi)
       _ = mass i := by ring
+
+
+/--
+A single packaged finite-fiber budget: each component is nonnegative, neither
+component exceeds the source total, and their sum is exactly the source total.
+This is a reusable algebraic interface for a later source-faithful geometric
+fiber model; it does not itself construct BBMST's probability spaces.
+-/
+theorem finite_fiber_mass_budget
+    {ι : Type*} [DecidableEq ι] (s : Finset ι)
+    (mass alpha : ι → ℚ)
+    (hmass : ∀ i ∈ s, 0 ≤ mass i)
+    (ha0 : ∀ i ∈ s, 0 ≤ alpha i)
+    (ha1 : ∀ i ∈ s, alpha i ≤ 1) :
+    (0 ≤ ∑ i ∈ s, alpha i * mass i) ∧
+    (∑ i ∈ s, alpha i * mass i ≤ ∑ i ∈ s, mass i) ∧
+    (0 ≤ ∑ i ∈ s, (1 - alpha i) * mass i) ∧
+    (∑ i ∈ s, (1 - alpha i) * mass i ≤ ∑ i ∈ s, mass i) ∧
+    ((∑ i ∈ s, alpha i * mass i) +
+      (∑ i ∈ s, (1 - alpha i) * mass i) = ∑ i ∈ s, mass i) := by
+  have hparts := finite_fiber_mass_partition s mass alpha hmass ha0 ha1
+  have hbounds := finite_fiber_mass_parts_le_total s mass alpha hmass ha0 ha1
+  exact ⟨hparts.1, hbounds.1, hparts.2.1, hbounds.2, hparts.2.2⟩
+
+#print axioms finite_fiber_mass_budget
 
 
 /- Explicit dependency audit for the conservation identities. -/
