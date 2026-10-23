@@ -260,12 +260,13 @@ theorem prefix_descent_or_offset_obstruction
     (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
     (k : ℕ)
     (hscale : 3 ^ k < 2 ^ cumulativeExponent a k) :
-    DescentPrefixCertificate a n ∨ NonDescentPrefixObstruction a n := by
+    (∃ C : DescentPrefixCertificate a n, C.k = k) ∨
+      (∃ O : NonDescentPrefixObstruction a n, O.k = k) := by
   by_cases hdesc : n k < n 0
   · exact Or.inl
-      { k := k
-        scale_gt := hscale
-        margin := (strict_descent_iff_affine_margin a n hstep k).1 hdesc }
+      ⟨{ k := k
+         scale_gt := hscale
+         margin := (strict_descent_iff_affine_margin a n hstep k).1 hdesc }, rfl⟩
   · have hnotmargin :
         ¬ (3 ^ k * n 0 + affineConstantTerm a k <
           2 ^ cumulativeExponent a k * n 0) := by
@@ -290,9 +291,9 @@ theorem prefix_descent_or_offset_obstruction
       rw [← hscaleEq] at hle
       omega
     exact Or.inr
-      { k := k
-        scale_gt := hscale
-        offset_bound := hoffset }
+      ⟨{ k := k
+         scale_gt := hscale
+         offset_bound := hoffset }, rfl⟩
 
 #print axioms prefix_descent_or_offset_obstruction
 
