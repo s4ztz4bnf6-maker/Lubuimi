@@ -1,0 +1,84 @@
+import SyracuseSecondStep
+
+/-!
+# Modulo-32 residue exhaustion for accelerated Syracuse
+
+This is a finite, kernel-checked classification of odd inputs at modulus 32.
+It records two proved descent sectors and leaves the remaining odd sectors
+explicitly open except for their exact first-step affine transition.
+It is not a global termination argument.
+-/
+
+namespace CollatzSyracuseAudit
+
+/-- Operational classification: proved descent, exact known transition, or
+critical (not in the odd-input domain of this accelerated map). -/
+inductive Residue32Class where
+  | strictDescent
+  | exactTransition
+  | critical
+  deriving DecidableEq, Repr
+
+/-- Classify the canonical representative r in Fin 32. Even residues are
+critical for this odd-input analysis; odd residues 1 mod 4 and the two
+proved two-step sectors 3 and 19 are descent sectors. Other odd residues
+3 mod 4 have the exact first-step formula but no descent claim here. -/
+def classifyResidue32 (r : Fin 32) : Residue32Class :=
+  if r.val % 2 = 0 then .critical
+  else if r.val % 4 = 1 then .strictDescent
+  else if r.val = 3 ∨ r.val = 19 then .strictDescent
+  else .exactTransition
+
+/-- Every canonical residue is assigned exactly one of the three labels. -/
+theorem residue32_classification_total (r : Fin 32) :
+    classifyResidue32 r = .strictDescent ∨
+    classifyResidue32 r = .exactTransition ∨
+    classifyResidue32 r = .critical := by
+  unfold classifyResidue32
+  split <;> simp_all
+  split <;> simp_all
+  split <;> simp_all
+
+/-- A residue 3 modulo 32 has a strict two-step descent. -/
+theorem two_step_descent_mod32_three (n : ℕ) (hmod : n % 32 = 3) :
+    syracuse (syracuse n) < n := by
+  have hn : n = 32 * (n / 32) + 3 := by omega
+  rw [hn]
+  have hshape : 32 * (n / 32) + 3 = 4 * (8 * (n / 32)) + 3 := by omega
+  rw [hshape]
+  exact second_step_descent_of_m_mod_eight_zero (n / 32)
+
+/-- A residue 19 modulo 32 has a strict two-step descent. -/
+theorem two_step_descent_mod32_nineteen (n : ℕ) (hmod : n % 32 = 19) :
+    syracuse (syracuse n) < n := by
+  have hn : n = 32 * (n / 32) + 19 := by omega
+  rw [hn]
+  have hshape :
+      32 * (n / 32) + 19 = 4 * (8 * (n / 32) + 4) + 3 := by omega
+  rw [hshape]
+  exact second_step_descent_of_m_mod_eight_four (n / 32)
+
+/-- Exhaustion of the odd inputs modulo 32 at the current proof frontier:
+either a one-step descent, a proved two-step descent, or an explicit
+remaining sector (residue 3 mod 4, excluding 3 and 19 mod 32). The final
+case is deliberately not claimed to descend. -/
+theorem odd_input_mod32_exhaustion
+    (n : ℕ) (hnodd : n % 2 = 1) (hnlarge : 2 ≤ n) :
+    syracuse n < n ∨
+      syracuse (syracuse n) < n ∨
+      (n % 4 = 3 ∧ n % 32 ≠ 3 ∧ n % 32 ≠ 19) := by
+  have hmod4 : n % 4 = 1 ∨ n % 4 = 3 := by omega
+  rcases hmod4 with h1 | h3
+  · exact Or.inl (syracuse_descent_mod_four_one n h1 hnlarge)
+  · by_cases hres3 : n % 32 = 3
+    · exact Or.inr (Or.inl (two_step_descent_mod32_three n hres3))
+    · by_cases hres19 : n % 32 = 19
+      · exact Or.inr (Or.inl (two_step_descent_mod32_nineteen n hres19))
+      · exact Or.inr (Or.inr ⟨h3, hres3, hres19⟩)
+
+#print axioms residue32_classification_total
+#print axioms two_step_descent_mod32_three
+#print axioms two_step_descent_mod32_nineteen
+#print axioms odd_input_mod32_exhaustion
+
+end CollatzSyracuseAudit
