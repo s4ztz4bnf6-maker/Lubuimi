@@ -58,15 +58,16 @@ theorem two_step_descent_mod32_nineteen (n : ℕ) (hmod : n % 32 = 19) :
   rw [hshape]
   exact second_step_descent_of_m_mod_eight_four (n / 32)
 
-/-- Exhaustion of the odd inputs modulo 32 at the current proof frontier:
+/-- Exhaustion of odd inputs modulo 32 at the current proof frontier:
 either a one-step descent, a proved two-step descent, or an explicit
-remaining sector (residue 3 mod 4, excluding 3 and 19 mod 32). The final
-case is deliberately not claimed to descend. -/
+remaining sector together with its exact affine first step. The final case
+is deliberately not claimed to descend. -/
 theorem odd_input_mod32_exhaustion
     (n : ℕ) (hnodd : n % 2 = 1) (hnlarge : 2 ≤ n) :
     syracuse n < n ∨
       syracuse (syracuse n) < n ∨
-      (n % 4 = 3 ∧ n % 32 ≠ 3 ∧ n % 32 ≠ 19) := by
+      (∃ m : ℕ, n = 4 * m + 3 ∧ syracuse n = 6 * m + 5 ∧
+        n % 32 ≠ 3 ∧ n % 32 ≠ 19) := by
   have hmod4 : n % 4 = 1 ∨ n % 4 = 3 := by omega
   rcases hmod4 with h1 | h3
   · exact Or.inl (syracuse_descent_mod_four_one n h1 hnlarge)
@@ -74,7 +75,12 @@ theorem odd_input_mod32_exhaustion
     · exact Or.inr (Or.inl (two_step_descent_mod32_three n hres3))
     · by_cases hres19 : n % 32 = 19
       · exact Or.inr (Or.inl (two_step_descent_mod32_nineteen n hres19))
-      · exact Or.inr (Or.inr ⟨h3, hres3, hres19⟩)
+      · apply Or.inr
+        apply Or.inr
+        refine ⟨n / 4, ?_, ?_, hres3, hres19⟩
+        · omega
+        · rw [show n = 4 * (n / 4) + 3 by omega]
+          exact first_step_formula_mod_four_three (n / 4)
 
 #print axioms residue32_classification_total
 #print axioms two_step_descent_mod32_three
