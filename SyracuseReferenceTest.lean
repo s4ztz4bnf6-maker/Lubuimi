@@ -75,9 +75,6 @@ theorem syracuse_descent_of_four_dvd
 
 #print axioms CollatzSyracuseAudit.syracuse_descent_of_four_dvd
 
-end CollatzSyracuseAudit
-
-namespace CollatzSyracuseAudit
 
 /--
 Residue-class corollary for the actual valuation-based Syracuse map:
@@ -93,5 +90,6 @@ theorem syracuse_descent_of_mod_four_one
   omega
 
 #print axioms syracuse_descent_of_mod_four_one
+
 
 end CollatzSyracuseAudit
