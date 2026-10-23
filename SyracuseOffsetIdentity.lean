@@ -189,4 +189,46 @@ theorem descent_implies_power_growth
 
 #print axioms CollatzSyracuseAudit.descent_implies_power_growth
 
+
+/--
+Arithmetic certificate for a block of accelerated odd Syracuse steps.
+The record isolates the exact affine identity and the geometric offset
+floor required by the descent-margin argument. It does not claim that an
+arbitrary tuple comes from a genuine orbit; that provenance must be proved
+when constructing a certificate from transitions.
+-/
+structure SyracuseBlockArithmeticCertificate where
+  start : ℕ
+  finish : ℕ
+  steps : ℕ
+  exponent : ℕ
+  offset : ℕ
+  affine_identity :
+    2 ^ exponent * finish = 3 ^ steps * start + offset
+  offset_floor :
+    3 ^ steps ≤ offset
+
+/-- A certified arithmetic block descends exactly when its strict offset
+margin holds. This exposes the remaining global obligation as data on each
+block rather than hiding it inside the affine identity. -/
+theorem SyracuseBlockArithmeticCertificate.descent_iff_margin
+    (b : SyracuseBlockArithmeticCertificate) :
+    b.finish < b.start ↔
+      3 ^ b.steps * b.start + b.offset <
+        2 ^ b.exponent * b.start := by
+  exact descent_iff_offset_margin b.start b.finish b.exponent
+    b.offset b.steps b.affine_identity
+
+/-- Any descending arithmetic block with positive starting value must
+remove enough powers of two to dominate its number of odd steps. -/
+theorem SyracuseBlockArithmeticCertificate.descent_implies_power_growth
+    (b : SyracuseBlockArithmeticCertificate)
+    (hstart : 0 < b.start) (hdesc : b.finish < b.start) :
+    3 ^ b.steps < 2 ^ b.exponent := by
+  exact descent_implies_power_growth b.start b.finish b.exponent
+    b.offset b.steps hstart b.affine_identity b.offset_floor hdesc
+
+#print axioms SyracuseBlockArithmeticCertificate.descent_iff_margin
+#print axioms SyracuseBlockArithmeticCertificate.descent_implies_power_growth
+
 end CollatzSyracuseAudit
