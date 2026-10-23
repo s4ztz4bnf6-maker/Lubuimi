@@ -379,12 +379,25 @@ theorem canonicalOffset_eq_weighted_sum
       simp [canonicalOffset]
   | succ n ih =>
       rw [canonicalOffset, Finset.sum_range_succ]
-      rw [← ih, ← Finset.mul_sum]
-      apply Finset.sum_congr rfl
-      intro j hj
-      have hjn : j < n := Finset.mem_range.mp hj
-      have hexp : n - j = (n - 1 - j) + 1 := by omega
-      rw [hexp, pow_succ]
+      simp only [Nat.succ_sub_one]
+      have hsum :
+          (∑ j ∈ Finset.range n, 3 ^ (n - j) * 2 ^ A j) =
+            3 * (∑ j ∈ Finset.range n, 3 ^ (n - 1 - j) * 2 ^ A j) := by
+        calc
+          (∑ j ∈ Finset.range n, 3 ^ (n - j) * 2 ^ A j) =
+              ∑ j ∈ Finset.range n, (3 * 3 ^ (n - 1 - j)) * 2 ^ A j := by
+                apply Finset.sum_congr rfl
+                intro j hj
+                have hjn : j < n := Finset.mem_range.mp hj
+                have hexp : n - j = (n - 1 - j) + 1 := by omega
+                rw [hexp, pow_succ]
+                ring
+          _ = 3 * (∑ j ∈ Finset.range n, 3 ^ (n - 1 - j) * 2 ^ A j) := by
+                rw [Finset.mul_sum]
+                simp_rw [mul_assoc]
+      rw [hsum]
+      simp only [Nat.sub_self, pow_zero, one_mul]
+      rw [← ih]
       ring
 
 #print axioms canonicalOffset_eq_weighted_sum
