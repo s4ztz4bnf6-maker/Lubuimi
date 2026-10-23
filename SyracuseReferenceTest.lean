@@ -102,6 +102,31 @@ theorem syracuse_mod_four_one_of_mod_sixteen_eleven
 
 #print axioms syracuse_mod_four_one_of_mod_sixteen_eleven
 
+
+/-- Complementary mod-16 branch: n = 7 (mod 16) maps to 3 (mod 8).
+This identifies a branch that does not immediately enter the mod-4
+descent class. -/
+theorem syracuse_mod_eight_three_of_mod_sixteen_seven
+    (n : ℕ) (hmod : n % 16 = 7) :
+    syracuse n % 8 = 3 := by
+  have hfour : n % 4 = 3 := by omega
+  rw [syracuse_eq_half_of_mod_four_three n hfour]
+  omega
+
+#print axioms syracuse_mod_eight_three_of_mod_sixteen_seven
+
+/-- Complementary mod-16 branch: n = 15 (mod 16) maps to 7 (mod 8).
+Like the 7-class transition, this branch requires a further argument
+and is not a descent result. -/
+theorem syracuse_mod_eight_seven_of_mod_sixteen_fifteen
+    (n : ℕ) (hmod : n % 16 = 15) :
+    syracuse n % 8 = 7 := by
+  have hfour : n % 4 = 3 := by omega
+  rw [syracuse_eq_half_of_mod_four_three n hfour]
+  omega
+
+#print axioms syracuse_mod_eight_seven_of_mod_sixteen_fifteen
+
 /-- In the n = 5 (mod 8) branch, the Syracuse numerator has at least
 three factors of 2. This isolates a stronger local descent case. -/
 theorem eight_dvd_three_mul_add_one_of_mod_eight_five
