@@ -77,6 +77,18 @@ theorem syracuse_grows_of_mod_four_three
 #print axioms syracuse_eq_half_of_mod_four_three
 #print axioms syracuse_grows_of_mod_four_three
 
+/-- For n = 3 (mod 16), the first Syracuse value is 5 (mod 8).
+This identifies a two-step branch where the second numerator has at
+least three factors of two. -/
+theorem syracuse_mod_eight_five_of_mod_sixteen_three
+    (n : ℕ) (hmod : n % 16 = 3) :
+    syracuse n % 8 = 5 := by
+  have hfour : n % 4 = 3 := by omega
+  rw [syracuse_eq_half_of_mod_four_three n hfour]
+  omega
+
+#print axioms syracuse_mod_eight_five_of_mod_sixteen_three
+
 /-- In the n = 5 (mod 8) branch, the Syracuse numerator has at least
 three factors of 2. This isolates a stronger local descent case. -/
 theorem eight_dvd_three_mul_add_one_of_mod_eight_five
