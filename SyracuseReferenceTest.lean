@@ -117,6 +117,34 @@ theorem pow_two_ge_four
     4 = 2 ^ 2 := by norm_num
     _ ≤ 2 ^ a := Nat.pow_le_pow_right (by omega) ha
 
+/-- A denominator at least eight yields the corresponding quotient bound. -/
+theorem div_pow_le_div_eight
+    (N a : ℕ) (ha : 8 ≤ 2 ^ a) :
+    N / 2 ^ a ≤ N / 8 := by
+  apply (Nat.le_div_iff_mul_le (by norm_num : 0 < 8)).2
+  calc
+    (N / 2 ^ a) * 8 ≤ (N / 2 ^ a) * 2 ^ a :=
+      Nat.mul_le_mul_left (N / 2 ^ a) ha
+    _ ≤ N := Nat.div_mul_le_self N (2 ^ a)
+
+/-- Quantitative form of the n = 5 (mod 8) result: the accelerated
+Syracuse value is at most one eighth of its numerator 3*n+1. -/
+theorem syracuse_le_eighth_numerator_of_mod_eight_five
+    (n : ℕ) (hmod : n % 8 = 5) :
+    syracuse n ≤ (3 * n + 1) / 8 := by
+  have hm : 3 * n + 1 ≠ 0 := by omega
+  have hv : 3 ≤ v2 (3 * n + 1) :=
+    three_le_v2_of_mod_eight_five n hmod
+  have hden : 8 ≤ 2 ^ v2 (3 * n + 1) := by
+    calc
+      8 = 2 ^ 3 := by norm_num
+      _ ≤ 2 ^ v2 (3 * n + 1) :=
+        Nat.pow_le_pow_right (by omega) hv
+  exact div_pow_le_div_eight (3 * n + 1) (v2 (3 * n + 1)) hden
+
+#print axioms div_pow_le_div_eight
+#print axioms syracuse_le_eighth_numerator_of_mod_eight_five
+
 /-- Natural-number division decreases when its positive divisor increases. -/
 theorem div_pow_le_div_four
     (N a : ℕ) (ha : 4 ≤ 2 ^ a) :
