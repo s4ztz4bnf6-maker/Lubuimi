@@ -236,8 +236,7 @@ n₀ ≤ floor(Cₖ / Dₖ) whenever Dₖ > 0. -/
 theorem nonDescentPrefixObstruction_floor_bound
     (a n : ℕ → ℕ)
     (O : NonDescentPrefixObstruction a n) :
-    n 0 ≤ affineConstantTerm a O.k /
-      (2 ^ cumulativeExponent a O.k - 3 ^ O.k) := by
+    n 0 ≤ affineConstantTerm a O.k / (2 ^ cumulativeExponent a O.k - 3 ^ O.k) := by
   have hD : 0 < 2 ^ cumulativeExponent a O.k - 3 ^ O.k :=
     Nat.sub_pos_of_lt O.scale_gt
   exact (mul_le_iff_le_div
