@@ -242,6 +242,22 @@ theorem syracuse_lt_self_of_mod_eight_five
 
 #print axioms syracuse_lt_self_of_mod_eight_five
 
+
+/-- Exact local dichotomy for the accelerated map on odd inputs above one.
+The residue classes modulo four are exhaustive: the 1-class strictly
+ descends, while the 3-class strictly grows. This rules out any attempted
+proof of universal one-step descent and makes the remaining multi-step
+obligation explicit. -/
+theorem syracuse_odd_branch_dichotomy
+    (n : ℕ) (hn : n % 2 = 1) (hn_two : 2 ≤ n) :
+    syracuse n < n ∨ n < syracuse n := by
+  have hres : n % 4 = 1 ∨ n % 4 = 3 := by omega
+  rcases hres with hone | hthree
+  · exact Or.inl (syracuse_descent_of_mod_four_one n hn hn_two hone)
+  · exact Or.inr (syracuse_grows_of_mod_four_three n hn_two hthree)
+
+#print axioms syracuse_odd_branch_dichotomy
+
 /-- Two-step strict descent on the n = 3 (mod 16) branch.
 The first step lands at 5 (mod 8), forcing at least three factors of
 two at the next numerator. The hypothesis n ≥ 6 makes the resulting
