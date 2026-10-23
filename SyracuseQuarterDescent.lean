@@ -59,4 +59,16 @@ theorem quarter_step_exact_gap
 
 #print axioms CollatzSyracuseAudit.quarter_step_exact_gap
 
+/--
+Exact growth margin in the residue class n = 3 mod 4 after one forced
+division by two. This complements `quarter_step_exact_gap` and quantifies
+the local growth that a multi-step argument must overcome.
+-/
+theorem half_step_exact_growth
+    (n : ℕ) (hn : n % 4 = 3) :
+    (3 * n + 1) / 2 - n = (n + 1) / 2 := by
+  omega
+
+#print axioms CollatzSyracuseAudit.half_step_exact_growth
+
 end CollatzSyracuseAudit
