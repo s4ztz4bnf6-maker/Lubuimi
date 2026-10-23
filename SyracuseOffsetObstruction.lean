@@ -210,3 +210,40 @@ theorem nonDescentPrefixObstruction_sound
 #print axioms nonDescentPrefixObstruction_sound
 
 end CollatzSyracuseAudit
+
+
+/-- Natural-number floor conversion for the dual certificate. For a positive
+denominator, the multiplicative obstruction D*n ≤ C is equivalent to the
+integer threshold n ≤ C / D. This keeps the division-free inequality as the
+kernel-facing core while exposing the familiar floor bound as a corollary. -/
+theorem mul_le_iff_le_div
+    (D n C : ℕ) (hD : 0 < D) :
+    D * n ≤ C ↔ n ≤ C / D := by
+  constructor
+  · intro h
+    apply (Nat.le_div_iff_mul_le hD).2
+    simpa [Nat.mul_comm] using h
+  · intro h
+    have hm := (Nat.le_div_iff_mul_le hD).1 h
+    simpa [Nat.mul_comm] using hm
+
+#print axioms mul_le_iff_le_div
+
+namespace CollatzSyracuseAudit
+
+/-- The obstruction certificate yields the exact floor threshold
+n₀ ≤ floor(Cₖ / Dₖ) whenever Dₖ > 0. -/
+theorem nonDescentPrefixObstruction_floor_bound
+    (a n : ℕ → ℕ)
+    (O : NonDescentPrefixObstruction a n) :
+    n 0 ≤ affineConstantTerm a O.k /
+      (2 ^ cumulativeExponent a O.k - 3 ^ O.k) := by
+  have hD : 0 < 2 ^ cumulativeExponent a O.k - 3 ^ O.k :=
+    Nat.sub_pos_of_lt O.scale_gt
+  exact (mul_le_iff_le_div
+    (2 ^ cumulativeExponent a O.k - 3 ^ O.k)
+    (n 0) (affineConstantTerm a O.k) hD).1 O.offset_bound
+
+#print axioms nonDescentPrefixObstruction_floor_bound
+
+end CollatzSyracuseAudit
