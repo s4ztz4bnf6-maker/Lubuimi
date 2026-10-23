@@ -648,7 +648,6 @@ theorem canonicalOffset_pos_of_pos_steps
   | zero => omega
   | succ j =>
       simp [canonicalOffset]
-      positivity
 
 /--
 For a nonempty canonical affine block, strict descent forces 3^j < 2^A.
