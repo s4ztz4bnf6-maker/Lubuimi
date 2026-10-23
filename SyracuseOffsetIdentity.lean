@@ -254,14 +254,17 @@ theorem offset_margin_iff_gap_product
     Nat.sub_add_cancel hgap
   have hmul :
       2 ^ A * n0 = (2 ^ A - 3 ^ j) * n0 + 3 ^ j * n0 := by
-    rw [← hdecomp, Nat.add_mul]
+    calc
+      2 ^ A * n0 = ((2 ^ A - 3 ^ j) + 3 ^ j) * n0 :=
+        congrArg (fun x : ℕ => x * n0) hdecomp.symm
+      _ = (2 ^ A - 3 ^ j) * n0 + 3 ^ j * n0 := Nat.add_mul _ _ _
   constructor
   · intro h
     rw [hmul] at h
     have h' : C + 3 ^ j * n0 <
         (2 ^ A - 3 ^ j) * n0 + 3 ^ j * n0 := by
       simpa [Nat.add_comm] using h
-    exact (Nat.add_lt_add_iff_right (3 ^ j * n0)).mp h'
+    omega
   · intro h
     have h' : C + 3 ^ j * n0 <
         (2 ^ A - 3 ^ j) * n0 + 3 ^ j * n0 :=
