@@ -503,7 +503,13 @@ axiom sieve_criterion
 
 /-- **Axiom 2: BBMST SF Sieve Computation.** (Thm 1.1)
 
-    For any set of odd primes, ∃ parameters with SF sieve sum < 1. -/
+    For any set of odd primes, ∃ parameters with SF sieve sum < 1.
+
+    AUDIT WARNING: the positivity and length-equality conjuncts below are
+    obligations of this admitted interface, not proved consequences. In
+    particular, `δs.length = primes.length` must be matched to the exact
+    BBMST parameter indexing before this axiom can be replaced by a theorem;
+    adding it here does not establish its source-faithfulness. -/
 axiom sf_sieve_lt_one
     (primes : List Nat) (h_primes : ∀ p ∈ primes, Nat.Prime p ∧ p % 2 = 1) :
     ∃ (δs : List ℚ) (ca1 ca3 : ℚ),
