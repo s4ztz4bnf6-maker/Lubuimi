@@ -336,4 +336,31 @@ theorem canonicalOffset_doubled_geometric_lower_bound
       rw [pow_succ]
       nlinarith
 
+
+/--
+The newest correction term is itself bounded by the full offset.
+This isolates the final summand in the affine correction recurrence; it is
+useful for local bounds but does not supply the upper bound needed for descent.
+-/
+theorem canonicalOffset_ge_last_weight
+    (A : ℕ → ℕ) (n : ℕ) :
+    2 ^ A n ≤ canonicalOffset A (n + 1) := by
+  simp [canonicalOffset]
+  omega
+
+/--
+Every canonical offset strictly increases with the number of certified steps.
+The increase comes from the positive new correction term, not from any
+assumption about the Syracuse orbit.
+-/
+theorem canonicalOffset_strict_mono_step
+    (A : ℕ → ℕ) (n : ℕ) :
+    canonicalOffset A n < canonicalOffset A (n + 1) := by
+  simp [canonicalOffset]
+  have hp : 0 < 2 ^ A n := Nat.pow_pos (by omega)
+  omega
+
+#print axioms canonicalOffset_ge_last_weight
+#print axioms canonicalOffset_strict_mono_step
+
 end CollatzSyracuseAudit
