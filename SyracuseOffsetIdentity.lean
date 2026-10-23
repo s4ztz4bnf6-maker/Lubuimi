@@ -114,6 +114,7 @@ theorem accumulated_exponent_ge_step_count
       simp [hA0]
   | succ j ih =>
       rw [hA j]
+      have haj : 1 ≤ a j := Nat.succ_le_iff.mpr (ha j)
       omega
 
 #print axioms accumulated_exponent_ge_step_count
@@ -549,7 +550,7 @@ theorem exponent_one_forces_residue_three
 #print axioms exponent_one_forces_residue_three
 
 
-end CollatzSyracuseAudit
+
 
 
 
@@ -622,8 +623,9 @@ theorem descent_implies_power_growth_of_positive_offset
     (hidentity : 2 ^ A * nj = 3 ^ j * n0 + C)
     (hdesc : nj < n0) :
     3 ^ j < 2 ^ A := by
+  have hpowpos : 0 < 2 ^ A := by positivity
   have hprod : 2 ^ A * nj < 2 ^ A * n0 :=
-    (Nat.mul_lt_mul_left (Nat.pow_pos (by omega : 0 < (2 : ℕ)) A)).mpr hdesc
+    (Nat.mul_lt_mul_left hpowpos).mpr hdesc
   have hmargin : 3 ^ j * n0 + C < 2 ^ A * n0 := by
     rw [← hidentity]
     exact hprod
@@ -682,3 +684,5 @@ theorem canonicalOffset_succ_mod_three
   simp [canonicalOffset, Nat.add_mod]
 
 #print axioms canonicalOffset_succ_mod_three
+
+end CollatzSyracuseAudit
