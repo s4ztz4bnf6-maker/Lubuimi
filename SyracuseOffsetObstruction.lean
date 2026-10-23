@@ -75,7 +75,7 @@ theorem strict_descent_iff_affine_margin
           2 ^ cumulativeExponent a k * n 0 := by
       rw [hid]
       exact hmargin
-    exact Nat.lt_of_mul_lt_mul_left hmul hscale
+    exact Nat.lt_of_mul_lt_mul_left hmul
 
 #print axioms strict_descent_iff_affine_margin
 
