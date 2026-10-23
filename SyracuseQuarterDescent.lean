@@ -71,16 +71,28 @@ theorem half_step_exact_growth
 
 #print axioms CollatzSyracuseAudit.half_step_exact_growth
 
-/--
-The pairwise squared-difference aggregate is nonnegative over the rationals.
-Combined with the pairwise square-difference identity, this yields a
-finite Cauchy-Schwarz-shaped inequality without introducing a probability measure.
--/
-theorem finite_pairwise_square_difference_nonneg
-    {α : Type*} [Fintype α] (f : α → ℚ) :
-    0 ≤ ∑ a : α, ∑ b : α, (f a - f b) ^ 2 := by
-  positivity
 
-#print axioms CollatzSyracuseAudit.finite_pairwise_square_difference_nonneg
+/--
+Refine the n = 3 mod 4 obstruction by one more binary digit: if n = 3
+mod 8, the forced half-step lands in the 1 mod 4 class. This is a
+transition-classification lemma, not a global descent claim.
+-/
+theorem half_step_mod_four_one_of_mod_eight_three
+    (n : ℕ) (hn : n % 8 = 3) :
+    ((3 * n + 1) / 2) % 4 = 1 := by
+  omega
+
+/--
+If n = 7 mod 8, the forced half-step remains in the 3 mod 4 class.
+Together with the previous theorem this isolates the two possible
+next residue classes after the forced half-step.
+-/
+theorem half_step_mod_four_three_of_mod_eight_seven
+    (n : ℕ) (hn : n % 8 = 7) :
+    ((3 * n + 1) / 2) % 4 = 3 := by
+  omega
+
+#print axioms CollatzSyracuseAudit.half_step_mod_four_one_of_mod_eight_three
+#print axioms CollatzSyracuseAudit.half_step_mod_four_three_of_mod_eight_seven
 
 end CollatzSyracuseAudit
