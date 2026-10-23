@@ -31,7 +31,7 @@ Do not hide a missing geometric implication inside a typeclass assumption or a h
 
 ## Strategic link to odd covering systems
 
-Published BBMST proves the square-free-moduli obstruction, not the unrestricted odd-moduli problem. Separate results constrain the prime support of any hypothetical odd distinct covering system (including a 2026 preprint claiming an seven-prime lower bound). Such results are possible reduction targets, but they are not substitutes for the source-faithful BBMST geometry and should be treated according to their publication/formal verification status.
+Published BBMST proves the square-free-moduli obstruction, not the unrestricted odd-moduli problem. Separate results constrain the prime support of any hypothetical odd distinct covering system (including later 2026 preprints claiming a nine-prime lower bound). Such results are possible reduction targets, but they are not substitutes for the source-faithful BBMST geometry and should be treated according to their publication/formal verification status.
 
 ## Falsification gates
 
