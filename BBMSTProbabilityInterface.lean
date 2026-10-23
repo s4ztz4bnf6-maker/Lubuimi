@@ -221,6 +221,29 @@ theorem predicate_incidence_deficit_lower_bound
 
 #print axioms predicate_incidence_deficit_lower_bound
 
+/--
+Every nonempty finite sample with at least one uncovered point has a
+strictly positive deficit, with the explicit finite-size lower bound
+1 / |sample|. This is a direct corollary of the cardinality certificate;
+it is deliberately not stated as a uniform-in-sample bound.
+-/
+theorem predicate_incidence_deficit_pos_of_uncovered
+    {Ω : Type*} [DecidableEq Ω]
+    (sample : Finset Ω) (covered : Ω → Prop) [DecidablePred covered]
+    (hnonempty : sample.Nonempty)
+    (huncovered : (sample.filter (fun x => ¬ covered x)).Nonempty) :
+    0 < 1 - ((sample.filter covered).card : ℚ) / (sample.card : ℚ) := by
+  have hbound := predicate_incidence_deficit_lower_bound
+    sample covered hnonempty 1 (by
+      exact Finset.card_pos.mpr huncovered |> Nat.one_le_iff_ne_zero.mpr)
+  have hden : (0 : ℚ) < (sample.card : ℚ) := by
+    exact_mod_cast hnonempty.card_pos
+  have hone : (0 : ℚ) < (1 : ℚ) / (sample.card : ℚ) :=
+    div_pos (by norm_num) hden
+  exact lt_of_lt_of_le hone hbound
+
+#print axioms predicate_incidence_deficit_pos_of_uncovered
+
 
 /--
 Strictly subunit predicate incidence is equivalent to the existence of an
