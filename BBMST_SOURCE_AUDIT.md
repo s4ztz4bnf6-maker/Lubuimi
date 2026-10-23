@@ -48,3 +48,11 @@ Thus the two admitted interfaces, as currently typed, jointly encode the unrestr
 4. Keep the unrestricted `erdos_selfridge` theorem marked as unproved until a separate argument handles arbitrary odd moduli.
 
 This is a verified audit of the current declarations, not a proof or disproof of the mathematical conjecture.
+
+## Further source check: the computational claim is not a universal prime-list theorem
+
+The published article and its supplemental-material record clarify a second mismatch in the current `sf_sieve_lt_one` interface. The paper's result is not a statement that **every** finite list of odd primes admits parameters making the repository's `sieveSum` less than one. The proof uses a specific finite initial parameter/certificate search and then a separate tail argument (Corollary 5.2), with an explicit threshold and recurrence. The supplemental material describes the LP search on the initial coordinates `3, 5, 7, 11`, checks the finite configurations, and optimizes the later `δ_k` values; it is not an arbitrary-list oracle.
+
+The paper's square-free theorem is obtained from a geometric theorem through a Chinese-remainder correspondence. That correspondence and the source's parameter family must be represented in Lean; they are absent from the current generic axiom signatures. Consequently, even restricting `CoveringSystem` to square-free moduli would not by itself validate the current `sf_sieve_lt_one` statement.
+
+**Concrete next milestone:** formalize the fixed finite certificate and its exact rational inequalities first, with the source's exact coordinate indexing. Then formalize the recurrence/tail bound as a separate lemma. Only after both are checked should the generic covering-system bridge be attempted. The unrestricted odd-moduli Erdős–Selfridge conjecture remains a separate open target.
