@@ -30,6 +30,30 @@ theorem fiber_mass_split_one (mass : ℚ) :
     (1 : ℚ) * mass + (1 - 1) * mass = mass := by
   ring
 
+/-- If alpha is a genuine proportion and mass is nonnegative,
+both parts of the algebraic split are nonnegative. This is the positivity
+obligation missing from mass conservation alone. -/
+theorem fiber_mass_parts_nonneg
+    (mass alpha : ℚ) (hmass : 0 ≤ mass)
+    (ha0 : 0 ≤ alpha) (ha1 : alpha ≤ 1) :
+    0 ≤ alpha * mass ∧ 0 ≤ (1 - alpha) * mass := by
+  constructor
+  · exact mul_nonneg ha0 hmass
+  · exact mul_nonneg (sub_nonneg.mpr ha1) hmass
+
+/-- A nonnegative finite collection of masses has nonnegative total mass. -/
+theorem finite_mass_sum_nonneg {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (mass : ι → ℚ)
+    (hmass : ∀ i ∈ s, 0 ≤ mass i) :
+    0 ≤ ∑ i ∈ s, mass i := by
+  classical
+  apply Finset.sum_nonneg
+  intro i hi
+  exact hmass i hi
+
+#print axioms fiber_mass_parts_nonneg
+#print axioms finite_mass_sum_nonneg
+
 /-- Finite weighted version of the split identity. Each point's mass
 is divided algebraically into an alpha-part and a complementary part, and
 summing both parts recovers the original total. No positivity assumption or
