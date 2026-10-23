@@ -37,5 +37,5 @@ jobs:
         run: lake env lean SyracuseReferenceTest.lean
       - name: Compile SyracuseQuarterDescent.lean
         run: lake env lean SyracuseQuarterDescent.lean
-      - name: Compile SyracuseOffsetIdentity.lean
+      - name: Compile and audit offset identity plus strict-margin consequence
         run: lake env lean SyracuseOffsetIdentity.lean
