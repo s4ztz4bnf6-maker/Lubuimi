@@ -25,6 +25,37 @@ theorem three_mul_add_one_mod_four_of_three
     (3 * n + 1) % 4 = 2 := by
   omega
 
+/-- Exact 2-adic valuation in the n = 3 (mod 4) branch:
+the numerator is divisible by 2 but not by 4, so its 2-adic
+valuation is exactly one. -/
+theorem v2_three_mul_add_one_eq_one_of_mod_four_three
+    (n : ℕ) (h : n % 4 = 3) :
+    v2 (3 * n + 1) = 1 := by
+  have hmod : (3 * n + 1) % 4 = 2 :=
+    three_mul_add_one_mod_four_of_three n h
+  have hm : 3 * n + 1 ≠ 0 := by omega
+  have htwo : 2 ∣ 3 * n + 1 := by
+    apply Nat.dvd_iff_mod_eq_zero.mpr
+    omega
+  have hfour : ¬ 4 ∣ 3 * n + 1 := by
+    intro hf
+    have hz : (3 * n + 1) % 4 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp hf
+    omega
+  have hpow : 2 ^ 1 ∣ 3 * n + 1 := by
+    simpa using htwo
+  have hlow : 1 ≤ v2 (3 * n + 1) :=
+    (Nat.prime_two.pow_dvd_iff_le_factorization hm).mp hpow
+  have hnot : ¬ 2 ≤ v2 (3 * n + 1) := by
+    intro hv
+    have hpow2 : 2 ^ 2 ∣ 3 * n + 1 :=
+      (Nat.prime_two.pow_dvd_iff_le_factorization hm).mpr hv
+    have hf : 4 ∣ 3 * n + 1 := by simpa using hpow2
+    exact hfour hf
+  omega
+
+#print axioms CollatzSyracuseAudit.v2_three_mul_add_one_eq_one_of_mod_four_three
+
 /-- In the n = 5 (mod 8) branch, the Syracuse numerator has at least
 three factors of 2. This isolates a stronger local descent case. -/
 theorem eight_dvd_three_mul_add_one_of_mod_eight_five
