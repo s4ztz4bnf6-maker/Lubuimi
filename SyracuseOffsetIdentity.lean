@@ -31,6 +31,30 @@ theorem offset_identity_of_certified_steps
               rw [pow_succ]
               ring
 
+
+/--
+The affine offset is at least geometric in the number of certified steps:
+C k ≥ 3^(k-1) for every k ≥ 1. This follows only from the offset recurrence
+and A j ≥ 0; it is not a Collatz termination result.
+-/
+theorem offset_geometric_lower_bound
+    (A C : ℕ → ℕ)
+    (hC0 : C 0 = 0)
+    (hC : ∀ j, C (j + 1) = 3 * C j + 2 ^ A j) :
+    ∀ j, 3 ^ j ≤ C (j + 1) := by
+  intro j
+  induction j with
+  | zero =>
+      rw [hC 0, hC0]
+      exact Nat.one_le_iff_ne_zero.mpr (by positivity)
+  | succ j ih =>
+      calc
+        3 ^ (j + 1) = 3 * 3 ^ j := by rw [pow_succ]
+        _ ≤ 3 * C (j + 1) := Nat.mul_le_mul_left 3 ih
+        _ ≤ C (j + 2) := by
+          rw [hC (j + 1)]
+          exact Nat.le_add_right _ _
+
 /--
 For odd-to-odd certified transitions, at least one factor of two is removed.
 This is a local consequence of parity, not a claim that the valuation is at
@@ -82,6 +106,7 @@ theorem descent_iff_offset_margin
     exact strict_descent_of_offset_margin n0 nj A C j hidentity hmargin
 
 #print axioms CollatzSyracuseAudit.offset_identity_of_certified_steps
+#print axioms CollatzSyracuseAudit.offset_geometric_lower_bound
 #print axioms CollatzSyracuseAudit.strict_descent_of_offset_margin
 #print axioms CollatzSyracuseAudit.descent_iff_offset_margin
 
