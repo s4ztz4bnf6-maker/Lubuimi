@@ -36,3 +36,7 @@ The research target is a theorem about these certified words that constrains the
 ## Kernel/toolchain robustness update
 
 Both project branches pin `leanprover/lean4:v4.34.1`. This is preferable to relying on a floating toolchain. A separate independent checker, `nanoda`, was reported to have accepted an invalid Collatz proof due to an unrelated checker bug; that is not evidence that Lean's main kernel accepted the proof. It is a reason to state precisely which kernel checked each result and not to treat independent checker agreement as infallible. See the Lean developer postmortem: https://leodemoura.github.io/blog/2026-8-1-postmortem-for-kernel-soundness-bug-14576/ .
+
+## New cross-kernel audit opportunity (Lean 4.35+)
+
+Lean 4.35.0 adds `lake check` and `lake check --paranoid`, which re-export a project and recheck it with the bundled official and independent kernels, including the consistency-proved con-leche kernel. Our project is currently pinned to 4.34.1, so this check is not available under the present pin. Next infrastructure step: add a separate, explicitly versioned 4.35.0+ audit job (without silently changing the main compilation toolchain), run `lake check --paranoid` after the ordinary build, and archive any checker disagreement. This is defense in depth, not a substitute for checking that theorem statements encode the intended mathematics. Official release notes: https://lean-lang.org/doc/reference/latest/releases/v4.35.0/ .
