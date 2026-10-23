@@ -48,3 +48,7 @@ Use the published 2021 article as canonical. The square-free-moduli theorem is a
 ## Kernel/toolchain robustness update
 
 Both project branches pin `leanprover/lean4:v4.34.1`. Keep this pin and the exact CI run attached to every claim. Independent checkers are useful as defense in depth, but they are not infallible: a reported bug in the separate `nanoda` checker accepted an invalid Collatz proof. This does not imply that Lean's main kernel accepted that proof. See the Lean developer postmortem: https://leodemoura.github.io/blog/2026-8-1-postmortem-for-kernel-soundness-bug-14576/ .
+
+## New cross-kernel audit opportunity (Lean 4.35+)
+
+Lean 4.35.0 introduces `lake check` and `lake check --paranoid`, enabling a project to be rechecked with bundled independent kernels, including con-leche, whose consistency proof is formalized. Both project branches currently pin 4.34.1. Next infrastructure step: add a separate, explicitly versioned 4.35.0+ audit job, preserving the existing pinned build and running `lake check --paranoid` after the normal compile. Treat agreement as defense in depth; source fidelity and the elimination of admitted sieve assumptions remain mathematical obligations. Official release notes: https://lean-lang.org/doc/reference/latest/releases/v4.35.0/ .
