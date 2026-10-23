@@ -363,4 +363,32 @@ theorem canonicalOffset_strict_mono_step
 #print axioms canonicalOffset_ge_last_weight
 #print axioms canonicalOffset_strict_mono_step
 
+
+/--
+Closed-form expansion of the canonical offset as a finite weighted sum.
+The coefficient of the j-th valuation weight is exactly 3^(n-1-j).
+This makes the accumulated correction term explicit and provides a direct
+interface for later estimates; it is not itself a descent theorem.
+-/
+theorem canonicalOffset_eq_weighted_sum
+    (A : ℕ → ℕ) :
+    ∀ n, canonicalOffset A n =
+      ∑ j ∈ Finset.range n, 3 ^ (n - 1 - j) * 2 ^ A j := by
+  intro n
+  induction n with
+  | zero =>
+      simp [canonicalOffset]
+  | succ n ih =>
+      rw [canonicalOffset, Finset.sum_range_succ]
+      rw [← ih, ← Finset.mul_sum]
+      congr 1
+      apply Finset.sum_congr rfl
+      intro j hj
+      have hjn : j < n := Finset.mem_range.mp hj
+      have hexp : n - j = (n - 1 - j) + 1 := by omega
+      rw [hexp, pow_succ]
+      ring
+
+#print axioms canonicalOffset_eq_weighted_sum
+
 end CollatzSyracuseAudit
