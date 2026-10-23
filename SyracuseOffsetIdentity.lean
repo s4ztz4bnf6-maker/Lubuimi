@@ -32,6 +32,23 @@ theorem offset_identity_of_certified_steps
               ring
 
 /--
+For odd-to-odd certified transitions, at least one factor of two is removed.
+This is a local consequence of parity, not a claim that the valuation is at
+least two or that every step decreases the odd iterate.
+-/
+theorem positive_exponent_of_odd_transition
+    (n next a : ℕ)
+    (hn : n % 2 = 1)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    0 < a := by
+  by_contra hnot
+  have ha : a = 0 := by omega
+  subst a
+  norm_num at hstep
+  omega
+
+/--
 A strict offset margin is sufficient for a genuine decrease of the iterate.
 This isolates the exact inequality still needed after the offset identity:
 the lemma does not assert that the margin holds for arbitrary trajectories.
