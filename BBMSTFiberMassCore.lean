@@ -568,4 +568,26 @@ theorem max_sub_le_sq_div
 
 #print axioms max_sub_le_sq_div
 
+/--
+A concrete covered-fraction bound derived from finite cardinalities, not
+postulated as an abstract real-valued parameter. If t is a subset of a
+nonempty finite coordinate set s, then its normalized cardinality lies
+in [0,1]. This is the elementary incidence-count interface needed before
+the geometric definition of BBMST's alpha_k can be substituted.
+-/
+theorem finite_card_ratio_mem_unit_interval
+    {Ω : Type*} [DecidableEq Ω]
+    (s t : Finset Ω) (hts : t ⊆ s) (hs : s.Nonempty) :
+    0 ≤ (t.card : ℚ) / (s.card : ℚ) ∧
+      (t.card : ℚ) / (s.card : ℚ) ≤ 1 := by
+  have hden : (0 : ℚ) < (s.card : ℚ) := by
+    exact_mod_cast hs.card_pos
+  have hnum : (t.card : ℚ) ≤ (s.card : ℚ) := by
+    exact_mod_cast Finset.card_le_card hts
+  constructor
+  · exact div_nonneg (by positivity) (le_of_lt hden)
+  · exact (div_le_one₀ hden).2 hnum
+
+#print axioms finite_card_ratio_mem_unit_interval
+
 end BBMSTFiberMassCore
