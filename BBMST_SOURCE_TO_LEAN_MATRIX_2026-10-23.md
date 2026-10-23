@@ -44,3 +44,7 @@ Use the published 2021 article as canonical. The square-free-moduli theorem is a
 - Every exported theorem's transitive axioms are audited.
 - Each source inequality is mapped to a Lean declaration with matching hypotheses.
 - `sf_sieve_lt_one` and `sieve_criterion` are derived rather than renamed or assumed.
+
+## Kernel/toolchain robustness update
+
+Both project branches pin `leanprover/lean4:v4.34.1`. Keep this pin and the exact CI run attached to every claim. Independent checkers are useful as defense in depth, but they are not infallible: a reported bug in the separate `nanoda` checker accepted an invalid Collatz proof. This does not imply that Lean's main kernel accepted that proof. See the Lean developer postmortem: https://leodemoura.github.io/blog/2026-8-1-postmortem-for-kernel-soundness-bug-14576/ .
