@@ -553,4 +553,19 @@ theorem finite_predicate_mass_partition
   intro x hx
   by_cases h : removed x <;> simp [h]
 
+/-- Scalar distortion inequality used in the BBMST measure update. The denominator is explicitly positive, so division by zero is excluded. -/
+theorem max_sub_le_sq_div
+    (a b : ℚ) (ha : 0 ≤ a) (hb : 0 < b) :
+    max (a - b) 0 ≤ a ^ 2 / (4 * b) := by
+  by_cases hab : a ≤ b
+  · rw [max_eq_right (sub_nonpos.mpr hab)]
+    positivity
+  · have hba : b < a := lt_of_not_ge hab
+    rw [max_eq_left (sub_nonneg.mpr (le_of_lt hba))]
+    have hden : 0 < (4 : ℚ) * b := by positivity
+    apply (le_div_iff₀ hden).2
+    nlinarith [sq_nonneg (a - 2 * b)]
+
+#print axioms max_sub_le_sq_div
+
 end BBMSTFiberMassCore
