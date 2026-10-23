@@ -653,6 +653,24 @@ theorem exponent_four_forces_residue_five_mod_thirty_two
 
 #print axioms exponent_four_forces_residue_five_mod_thirty_two
 
+/--
+An exponent-five transition forces its odd starting input to be 53 modulo
+64: if 32 * next = 3 * n + 1 and next is odd, then n ≡ 53 (mod 64).
+This extends the local admissibility sieve for realized valuation words;
+it is a necessary condition, not a global descent theorem.
+-/
+theorem exponent_five_forces_residue_fifty_three_mod_sixty_four
+    (n next : ℕ)
+    (hnext : next % 2 = 1)
+    (hstep : 32 * next = 3 * n + 1) :
+    n % 64 = 53 := by
+  have hmod : (32 * next) % 64 = (3 * n + 1) % 64 := by
+    rw [hstep]
+  omega
+
+#print axioms exponent_five_forces_residue_fifty_three_mod_sixty_four
+
+
 
 /--
 Any strict descent with a strictly positive affine offset forces the
