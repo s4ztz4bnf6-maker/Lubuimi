@@ -100,7 +100,7 @@ theorem finite_incidence_deficit_eq_complement_fraction
     (sample incidences : Finset Ω)
     (hinc : incidences ⊆ sample) (hnonempty : sample.Nonempty) :
     1 - (incidences.card : ℚ) / (sample.card : ℚ) =
-      ((sample \\ incidences).card : ℚ) / (sample.card : ℚ) := by
+      ((sample \ incidences).card : ℚ) / (sample.card : ℚ) := by
   have hle : incidences.card ≤ sample.card := Finset.card_le_card hinc
   have hden : (sample.card : ℚ) ≠ 0 := by
     exact_mod_cast hnonempty.card_pos.ne'
@@ -110,7 +110,7 @@ theorem finite_incidence_deficit_eq_complement_fraction
             (sample.card : ℚ) := by
               field_simp
               ring
-    _ = ((sample \\ incidences).card : ℚ) / (sample.card : ℚ) := by
+    _ = ((sample \ incidences).card : ℚ) / (sample.card : ℚ) := by
           rw [Finset.card_sdiff_of_subset hinc, Nat.cast_sub hle]
 
 #print axioms finite_incidence_deficit_eq_complement_fraction
