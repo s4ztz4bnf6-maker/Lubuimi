@@ -88,6 +88,27 @@ theorem two_le_v2_of_four_dvd
     simpa using hfour
   exact (Nat.prime_two.pow_dvd_iff_le_factorization hm).mp hpow
 
+/-- Divisibility by 8 forces at least three factors of 2 in the
+factorization. This is stronger than the mod-4 threshold used for descent. -/
+theorem three_le_v2_of_eight_dvd
+    (m : ℕ) (hm : m ≠ 0) (height : 8 ∣ m) :
+    3 ≤ v2 m := by
+  have hpow : 2 ^ 3 ∣ m := by
+    simpa using height
+  exact (Nat.prime_two.pow_dvd_iff_le_factorization hm).mp hpow
+
+/-- The n = 5 (mod 8) branch forces valuation at least three, not merely
+the two factors sufficient for strict descent. -/
+theorem three_le_v2_of_mod_eight_five
+    (n : ℕ) (hmod : n % 8 = 5) :
+    3 ≤ v2 (3 * n + 1) := by
+  have hm : 3 * n + 1 ≠ 0 := by omega
+  exact three_le_v2_of_eight_dvd (3 * n + 1) hm
+    (eight_dvd_three_mul_add_one_of_mod_eight_five n hmod)
+
+#print axioms three_le_v2_of_eight_dvd
+#print axioms three_le_v2_of_mod_eight_five
+
 /-- Monotonicity of the power of 2 gives the denominator bound. -/
 theorem pow_two_ge_four
     (a : ℕ) (ha : 2 ≤ a) :
