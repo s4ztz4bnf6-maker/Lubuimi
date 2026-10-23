@@ -469,4 +469,45 @@ theorem finite_fiber_weighted_partition_squeeze
 #print axioms finite_fiber_weighted_partition_squeeze
 
 
+
+/--
+If a finite sum of nonnegative rational masses is zero, every summand is
+zero. This is the key ratio-free fact for a zero-mass fiber: no conditional
+probability is defined and no division by zero is used.
+-/
+theorem zero_sum_nonneg_forces_terms_zero
+    {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (mass : ι → ℚ)
+    (hmass : ∀ i ∈ s, 0 ≤ mass i)
+    (hsum : (∑ i ∈ s, mass i) = 0) :
+    ∀ i ∈ s, mass i = 0 := by
+  intro i hi
+  have hle : mass i ≤ ∑ j ∈ s, mass j :=
+    Finset.single_le_sum (fun j hj => hmass j hj) hi
+  have hupper : mass i ≤ 0 := by simpa [hsum] using hle
+  exact le_antisymm hupper (hmass i hi)
+
+/--
+Zero total mass on a fiber forces every point mass in that fiber to vanish.
+The fiber is induced by an actual label map; its members are filtered from
+the original finite sample set rather than supplied as independent data.
+-/
+theorem zero_mass_fiber_forces_point_masses_zero
+    {Ω Ι : Type*} [DecidableEq Ω] [DecidableEq Ι]
+    (s : Finset Ω) (label : Ω → Ι) (mass : Ω → ℚ)
+    (hmass : ∀ x ∈ s, 0 ≤ mass x) (i : Ι)
+    (hzero : (∑ x ∈ s with label x = i, mass x) = 0) :
+    ∀ x ∈ s with label x = i, mass x = 0 := by
+  intro x hx
+  apply zero_sum_nonneg_forces_terms_zero
+    (s := s.filter (fun x => label x = i))
+    (mass := mass)
+  · intro y hy
+    exact hmass y (Finset.mem_filter.mp hy).1
+  · simpa using hzero
+  · exact hx
+
+#print axioms zero_sum_nonneg_forces_terms_zero
+#print axioms zero_mass_fiber_forces_point_masses_zero
+
 end BBMSTFiberMassCore
