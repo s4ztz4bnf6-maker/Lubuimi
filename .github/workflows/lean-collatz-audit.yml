@@ -39,3 +39,5 @@ jobs:
         run: lake env lean SyracuseQuarterDescent.lean
       - name: Compile and audit offset identity plus strict-margin consequence
         run: lake env lean SyracuseOffsetIdentity.lean
+      - name: Independent paranoid proof check
+        run: lake check --paranoid
