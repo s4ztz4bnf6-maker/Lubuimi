@@ -89,6 +89,19 @@ theorem syracuse_mod_eight_five_of_mod_sixteen_three
 
 #print axioms syracuse_mod_eight_five_of_mod_sixteen_three
 
+/-- From n = 11 (mod 16), one accelerated step lands in
+the residue class 1 (mod 4), which is a strict-descent class for odd
+inputs greater than one. This records the transition separately from
+the parity obligation needed to invoke the descent theorem. -/
+theorem syracuse_mod_four_one_of_mod_sixteen_eleven
+    (n : ℕ) (hmod : n % 16 = 11) :
+    syracuse n % 4 = 1 := by
+  have hfour : n % 4 = 3 := by omega
+  rw [syracuse_eq_half_of_mod_four_three n hfour]
+  omega
+
+#print axioms syracuse_mod_four_one_of_mod_sixteen_eleven
+
 /-- In the n = 5 (mod 8) branch, the Syracuse numerator has at least
 three factors of 2. This isolates a stronger local descent case. -/
 theorem eight_dvd_three_mul_add_one_of_mod_eight_five
