@@ -31,7 +31,7 @@ Do not hide a missing geometric implication inside a typeclass assumption or a h
 
 ## Strategic link to odd covering systems
 
-Published BBMST proves the square-free-moduli obstruction, not the unrestricted odd-moduli problem. Separate results constrain the prime support of any hypothetical odd distinct covering system (including a 2026 preprint claiming an eight-prime lower bound). Such results are possible reduction targets, but they are not substitutes for the source-faithful BBMST geometry and should be treated according to their publication/formal verification status.
+Published BBMST proves the square-free-moduli obstruction, not the unrestricted odd-moduli problem. Separate results constrain the prime support of any hypothetical odd distinct covering system (including a 2026 preprint claiming an seven-prime lower bound). Such results are possible reduction targets, but they are not substitutes for the source-faithful BBMST geometry and should be treated according to their publication/formal verification status.
 
 ## Falsification gates
 
@@ -40,3 +40,9 @@ The formalization is not ready to claim the BBMST result until:
 - the source-specific fiber/moment inequality is proved;
 - the final theorem uses only intended axioms (typically the standard Lean logical axioms);
 - all builds and theorem-level axiom reports pass.
+
+## Literature correction and complementary reduction target (checked 2026-10-23)
+
+A 1 September 2026 preprint by Michael Schroeder claims that any odd distinct covering system must have at least **seven** distinct prime divisors in its least common multiple, with no squarefreeness or prime-power-height restriction. This is a preprint claim, not an independently verified theorem in this repository. It is stronger in scope than the square-free BBMST result if its proof checks out, but it is not a solution to Erdős–Selfridge: systems supported on seven or more primes remain unexcluded by this bound alone.
+
+For our formalization, treat this as a separate proof route, not as a replacement for the source-faithful BBMST reconstruction. A useful next interface would encode the prime support of the LCM and a finite residual product of prime-power trees, then formalize each claimed rational charge as an exact inequality. The source's companion materials and proof dependencies must be independently audited before importing any conclusion. The previously stated eight-prime figure was incorrect and is corrected here.
