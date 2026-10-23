@@ -335,5 +335,8 @@ theorem syracuse_second_step_descent_of_mod_sixteen_eleven
 
 #print axioms CollatzSyracuseAudit.syracuse_second_step_descent_of_mod_sixteen_eleven
 
+#print axioms CollatzSyracuseAudit.syracuse_mod_eight_three_of_mod_sixteen_seven
+#print axioms CollatzSyracuseAudit.syracuse_mod_eight_seven_of_mod_sixteen_fifteen
+
 
 end CollatzSyracuseAudit
