@@ -53,8 +53,33 @@ theorem descent_iff_offset_below_scale_margin
       exact hoffset
     exact (Nat.mul_lt_mul_left hp).mp hmul
 
+/-- A finite, executable checker for the exact offset-margin inequality.
+This only checks the arithmetic certificate; it does not establish that
+the supplied affine identity corresponds to a genuine Syracuse orbit. -/
+def offsetMarginCheck (A j n₀ C : ℕ) : Bool :=
+  decide (3 ^ j * n₀ + C < 2 ^ A * n₀)
+
+/-- Soundness of the boolean offset-margin checker. -/
+theorem offsetMarginCheck_sound
+    (A j n₀ C : ℕ)
+    (hcheck : offsetMarginCheck A j n₀ C = true) :
+    3 ^ j * n₀ + C < 2 ^ A * n₀ := by
+  exact of_decide_eq_true hcheck
+
+/-- If an exact affine prefix identity is supplied and the finite checker
+accepts its offset margin, strict descent follows. -/
+theorem certified_strict_descent
+    (A j n₀ C nⱼ : ℕ)
+    (h_affine : 2 ^ A * nⱼ = 3 ^ j * n₀ + C)
+    (hcheck : offsetMarginCheck A j n₀ C = true) :
+    nⱼ < n₀ := by
+  exact (descent_iff_offset_below_scale_margin A j n₀ C nⱼ h_affine).2
+    (offsetMarginCheck_sound A j n₀ C hcheck)
+
 #print axioms descent_iff_offset_below_scale_margin
 #print axioms descent_requires_power_threshold
 #print axioms no_descent_below_power_threshold
+#print axioms offsetMarginCheck_sound
+#print axioms certified_strict_descent
 
 end SyracuseValuationBudgetFilter
