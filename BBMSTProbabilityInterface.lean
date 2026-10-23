@@ -48,3 +48,22 @@ theorem normalized_probability_weighted_fiber_squeeze
 #print axioms normalized_probability_weighted_fiber_squeeze
 
 end BBMSTProbabilityInterface
+
+
+/--
+A concrete finite-incidence fraction lies in [0,1] when the counted
+incidences form a subset of a nonempty finite sample space. This theorem
+connects an actual cardinality ratio to the abstract covered-fraction
+interface; it does not identify this ratio with BBMST's geometric alpha_k
+until the relevant sample space and incidence set are constructed.
+-/
+theorem finite_incidence_fraction_mem_unit_interval
+    {Ω : Type*} [DecidableEq Ω]
+    (sample incidences : Finset Ω)
+    (hinc : incidences ⊆ sample) (hnonempty : sample.Nonempty) :
+    0 ≤ (incidences.card : ℚ) / (sample.card : ℚ) ∧
+      (incidences.card : ℚ) / (sample.card : ℚ) ≤ 1 :=
+  BBMSTFiberMassCore.finite_card_ratio_mem_unit_interval
+    sample incidences hinc hnonempty
+
+#print axioms finite_incidence_fraction_mem_unit_interval
