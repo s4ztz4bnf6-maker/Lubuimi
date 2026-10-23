@@ -491,25 +491,29 @@ noncomputable def sfBlockSizes {K : Nat} (cs : CoveringSystem K) : List ℚ :=
 -- §8. BBMST AXIOMS (exactly 2, translation-safe)
 -- ============================================================================
 
-/-- **Axiom 1: BBMST Sieve Criterion.** (Thm 3.1 + 3.2)
+/-- **Unproved placeholder; not a faithful transcription of BBMST Theorem 3.1.**
 
-    If sieve sum computed with cs's actual block sizes < 1,
-    then the covering system does not cover ℤ. -/
+    The published Theorem 3.1 is a criterion for a finite hyperplane family
+    on a product probability space, with its first/second fiber moments bounded
+    using Theorem 3.2. This axiom skips that geometric/probabilistic interface
+    and asserts noncoverage directly for the repository's general CoveringSystem.
+    Its source-faithfulness is not established. -/
 axiom sieve_criterion
     {K : Nat} (cs : CoveringSystem K) (h_odd : CS_allOdd cs)
     (δs : List ℚ) (ca1 ca3 : ℚ)
     (hca1_ge : 1 ≤ ca1)
     (h_sum_lt : sieveSum ca1 ca3 (nonsfBlockSizes cs) δs < 1) : False
 
-/-- **Axiom 2: BBMST SF Sieve Computation.** (Thm 1.1)
+/-- **Unproved placeholder; not BBMST Theorem 1.1 or its finite certificate.**
 
-    For any set of odd primes, ∃ parameters with SF sieve sum < 1.
+    The published Theorem 1.1 is the square-free-moduli obstruction, obtained
+    through a Chinese-remainder correspondence with a geometric box theorem.
+    The proof uses a fixed initial certificate, a separately proved parameter
+    range, and a large-prime recurrence/tail argument. It does not assert that
+    every finite list of odd primes admits parameters for this generic sieveSum.
 
-    AUDIT WARNING: the positivity and length-equality conjuncts below are
-    obligations of this admitted interface, not proved consequences. In
-    particular, `δs.length = primes.length` must be matched to the exact
-    BBMST parameter indexing before this axiom can be replaced by a theorem;
-    adding it here does not establish its source-faithfulness. -/
+    AUDIT WARNING: positivity and length equality below are admitted assumptions.
+    They must not be treated as consequences of the paper. -/
 axiom sf_sieve_lt_one
     (primes : List Nat) (h_primes : ∀ p ∈ primes, Nat.Prime p ∧ p % 2 = 1) :
     ∃ (δs : List ℚ) (ca1 ca3 : ℚ),
