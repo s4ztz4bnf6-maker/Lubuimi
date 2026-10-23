@@ -1,4 +1,4 @@
-name: Syracuse Lean 4.28.0 smoke test
+name: Syracuse Lean 4.34.0 smoke test
 
 on:
   push:
