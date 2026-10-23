@@ -5,7 +5,7 @@ package «erdos-selfridge-audit» where
   -- Source-faithful audit project; keep dependencies pinned by lean-toolchain.
 
 require mathlib from git
-  "https://github.com/leanprover-community/mathlib4" @ "v4.34.0"
+  "https://github.com/leanprover-community/mathlib4" @ "v4.34.1"
 
 lean_lib ErdosSelfridgeAudit where
   globs := #[.one `ErdosSelfridge_v17_fixed]
