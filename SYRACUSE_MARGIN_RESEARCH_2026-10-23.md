@@ -40,3 +40,18 @@ Both project branches pin `leanprover/lean4:v4.34.1`. This is preferable to rely
 ## New cross-kernel audit opportunity (Lean 4.35+)
 
 Lean 4.35.0 adds `lake check` and `lake check --paranoid`, which re-export a project and recheck it with the bundled official and independent kernels, including the consistency-proved con-leche kernel. Our project is currently pinned to 4.34.1, so this check is not available under the present pin. Next infrastructure step: add a separate, explicitly versioned 4.35.0+ audit job (without silently changing the main compilation toolchain), run `lake check --paranoid` after the ordinary build, and archive any checker disagreement. This is defense in depth, not a substitute for checking that theorem statements encode the intended mathematics. Official release notes: https://lean-lang.org/doc/reference/latest/releases/v4.35.0/ .
+
+
+## New structural route: residue-class sieve for valuation words
+
+For a fixed finite exponent word and its accumulated exponent/offset `(A_N,C_N)`, every genuine block must satisfy
+`3^N * n_0 + C_N ≡ 0 (mod 2^A_N)`.
+Because `3^N` is odd, it is invertible modulo `2^A_N`; hence this *terminal divisibility condition alone* selects exactly one residue class for `n_0 mod 2^A_N` (including the trivial modulus `2^0=1)). This is a necessary filter, not a sufficient orbit certificate: it does not by itself guarantee positivity, oddness of all intermediate states, or exactness/maximality of each valuation.
+
+Research plan:
+1. Prove the residue-class uniqueness lemma in Lean using integer/modular arithmetic, with the `A_N=0` case explicit.
+2. For each prefix `j`, impose the corresponding divisibility and odd-quotient conditions, rather than testing only the terminal equation.
+3. Use the resulting finite residue filter to enumerate admissible words for bounded `A_N`; use enumeration only to falsify candidate universal inequalities or discover conjectures, never as a substitute for the infinite proof.
+4. Seek a theorem bounding the weighted offset `C_N = Σ_{j<N} 3^(N-1-j) 2^(A_j)` on *admissible* words. An upper bound strong enough to force the strict margin would advance descent; an explicit admissible word violating a proposed bound would refute that route.
+
+This is a new proof architecture proposal, not yet a Lean theorem or a global Collatz result.
