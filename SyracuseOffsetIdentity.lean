@@ -73,7 +73,7 @@ theorem offset_doubled_geometric_lower_bound
       simp [hC0]
   | succ j ih =>
       rw [hC j, pow_succ]
-      have hp : 1 ≤ 2 ^ A j := by positivity
+      have hp : 1 ≤ 2 ^ A j := Nat.one_le_pow _ _ (by omega)
       nlinarith
 
 #print axioms offset_doubled_geometric_lower_bound
@@ -279,8 +279,13 @@ theorem SyracuseBlockArithmeticCertificate.descent_implies_power_growth
     CollatzSyracuseAudit.descent_implies_doubled_exponent_threshold
       b.start b.finish b.exponent b.offset b.steps
       b.affine_identity b.offset_floor hdesc
-  have hmul : 3 ^ b.steps * b.start < 2 ^ b.exponent * b.start := by
+  have hpow : 1 ≤ 3 ^ b.steps := Nat.one_le_pow _ _ (by omega)
+  have hmul2 :
+      2 * (3 ^ b.steps * b.start) <
+        2 * (2 ^ b.exponent * b.start) := by
     omega
+  have hmul : 3 ^ b.steps * b.start < 2 ^ b.exponent * b.start :=
+    (Nat.mul_lt_mul_left (by omega : 0 < 2)).mp hmul2
   exact (Nat.mul_lt_mul_right hstart).mp hmul
 
 #print axioms SyracuseBlockArithmeticCertificate.descent_iff_margin
