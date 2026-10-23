@@ -151,12 +151,13 @@ theorem descent_implies_geometric_exponent_threshold
     3 ^ j * (n0 + 1) < 2 ^ A * n0 := by
   have hmargin : 3 ^ j * n0 + C < 2 ^ A * n0 := by
     have hprod : 2 ^ A * nj < 2 ^ A * n0 :=
-      Nat.mul_lt_mul_left (pow_pos (by norm_num : 0 < (2 : ℕ)) A) hdesc
+      (Nat.mul_lt_mul_left (pow_pos (by norm_num : 0 < (2 : ℕ)) A)).mpr hdesc
     rw [hidentity] at hprod
     exact hprod
   have hle : 3 ^ j * (n0 + 1) ≤ 3 ^ j * n0 + C := by
     calc
-      3 ^ j * (n0 + 1) = 3 ^ j * n0 + 3 ^ j := by omega
+      3 ^ j * (n0 + 1) = 3 ^ j * n0 + 3 ^ j := by
+        rw [Nat.mul_add, Nat.mul_one]
       _ ≤ 3 ^ j * n0 + C := Nat.add_le_add_left hoffset _
   exact lt_of_le_of_lt hle hmargin
 
