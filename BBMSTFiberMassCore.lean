@@ -264,6 +264,30 @@ theorem finite_fiber_mass_le_uniform_envelope
 #print axioms finite_fiber_mass_le_uniform_envelope
 
 
+/-- Uniform-floor bound: if every local retained proportion is at least
+`beta`, then the total retained mass is at least `beta` times the
+source mass. Together with `finite_fiber_mass_le_uniform_envelope`, this
+provides a two-sided squeeze whenever local proportions lie in a common
+interval. It remains an algebraic interface, not a construction of BBMST's
+geometric conditional probabilities. -/
+theorem finite_fiber_mass_ge_uniform_floor
+    {ι : Type*} [DecidableEq ι] (s : Finset ι)
+    (mass alpha : ι → ℚ) (beta : ℚ)
+    (hmass : ∀ i ∈ s, 0 ≤ mass i)
+    (halpha : ∀ i ∈ s, beta ≤ alpha i) :
+    beta * (∑ i ∈ s, mass i) ≤ (∑ i ∈ s, alpha i * mass i) := by
+  calc
+    beta * (∑ i ∈ s, mass i) =
+        ∑ i ∈ s, beta * mass i := by
+      rw [Finset.mul_sum]
+    _ ≤ ∑ i ∈ s, alpha i * mass i := by
+      apply Finset.sum_le_sum
+      intro i hi
+      exact mul_le_mul_of_nonneg_right (halpha i hi) (hmass i hi)
+
+#print axioms finite_fiber_mass_ge_uniform_floor
+
+
 /- Explicit dependency audit for the conservation identities. -/
 #print axioms fiber_mass_split
 #print axioms fiber_mass_split_zero
