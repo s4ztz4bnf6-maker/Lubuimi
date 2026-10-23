@@ -56,6 +56,29 @@ theorem offset_geometric_lower_bound
           exact Nat.le_add_right _ _
 
 /--
+A sharper lower bound for the affine offset follows by solving the
+recurrence inequality C (j+1) ≥ 3 * C j + 1. In closed form,
+2 * C j + 1 ≥ 3^j. This improves the coarse bound C (j+1) ≥ 3^j
+for later blocks, but remains an offset estimate rather than a termination
+proof.
+-/
+theorem offset_doubled_geometric_lower_bound
+    (A C : ℕ → ℕ)
+    (hC0 : C 0 = 0)
+    (hC : ∀ j, C (j + 1) = 3 * C j + 2 ^ A j) :
+    ∀ j, 3 ^ j ≤ 2 * C j + 1 := by
+  intro j
+  induction j with
+  | zero =>
+      simp [hC0]
+  | succ j ih =>
+      rw [hC j, pow_succ]
+      have hp : 1 ≤ 2 ^ A j := by positivity
+      nlinarith
+
+#print axioms offset_doubled_geometric_lower_bound
+
+/--
 For odd-to-odd certified transitions, at least one factor of two is removed.
 This is a local consequence of parity, not a claim that the valuation is at
 least two or that every step decreases the odd iterate.
