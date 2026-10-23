@@ -192,6 +192,25 @@ theorem syracuse_le_eighth_numerator_of_mod_eight_five
 #print axioms div_pow_le_div_eight
 #print axioms syracuse_le_eighth_numerator_of_mod_eight_five
 
+/-- Two-step strict descent on the n = 3 (mod 16) branch.
+The first step lands at 5 (mod 8), forcing at least three factors of
+two at the next numerator. The hypothesis n ≥ 6 makes the resulting
+bound (9*n+5)/16 strictly smaller than n. -/
+theorem syracuse_two_step_descent_of_mod_sixteen_three
+    (n : ℕ) (hn : 6 ≤ n) (hmod : n % 16 = 3) :
+    syracuse (syracuse n) < n := by
+  have hfour : n % 4 = 3 := by omega
+  have hfirst : syracuse n = (3 * n + 1) / 2 :=
+    syracuse_eq_half_of_mod_four_three n hfour
+  have hmid : syracuse n % 8 = 5 :=
+    syracuse_mod_eight_five_of_mod_sixteen_three n hmod
+  have hsecond :=
+    syracuse_le_eighth_numerator_of_mod_eight_five (syracuse n) hmid
+  rw [hfirst] at hsecond ⊢
+  omega
+
+#print axioms syracuse_two_step_descent_of_mod_sixteen_three
+
 /-- Natural-number division decreases when its positive divisor increases. -/
 theorem div_pow_le_div_four
     (N a : ℕ) (ha : 4 ≤ 2 ^ a) :
