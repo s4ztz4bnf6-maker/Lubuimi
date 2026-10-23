@@ -217,7 +217,7 @@ theorem predicate_incidence_deficit_lower_bound
   have hcount : (m : ℚ) ≤
       ((sample.filter (fun x => ¬ covered x)).card : ℚ) := by
     exact_mod_cast huncovered
-  apply (div_le_div_iff₀ hden).2
+  apply (div_le_div_iff₀ hden hden).2
   nlinarith
 
 #print axioms predicate_incidence_deficit_lower_bound
