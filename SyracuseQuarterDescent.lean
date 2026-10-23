@@ -302,3 +302,17 @@ theorem accelerated_step_growth_of_exactly_one_factor
 
 #print axioms accelerated_step_growth_of_exactly_one_factor
 
+
+
+/--
+Exact valuation-two branch: if an odd input is 1 modulo 8, then 3*n+1
+is divisible by 4 but not by 8, so the accelerated Syracuse quotient
+(3*n+1)/4 is odd. This identifies the exact valuation, rather than only
+a quotient that might still be even.
+-/
+theorem exact_two_factors_of_mod_eight_one
+    (n : ℕ) (hn : n % 8 = 1) :
+    (3 * n + 1) % 4 = 0 ∧ ((3 * n + 1) / 4) % 2 = 1 := by
+  constructor <;> omega
+
+#print axioms exact_two_factors_of_mod_eight_one
