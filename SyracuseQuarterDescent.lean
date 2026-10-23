@@ -191,6 +191,27 @@ theorem accelerated_descent_of_mod_sixteen_thirteen
 #print axioms accelerated_descent_of_mod_sixteen_thirteen
 
 
+/--
+Exact quotient formula on the valuation-three residue class. Writing
+n = 16k + 13 gives (3*n+1)/8 = 6k+5. Besides certifying oddness,
+this makes the local descent gap explicit: n - (3*n+1)/8 = 10k+8.
+-/
+theorem exact_quotient_formula_of_mod_sixteen_thirteen
+    (n : ℕ) (hn : n % 16 = 13) :
+    (3 * n + 1) / 8 = 6 * (n / 16) + 5 := by
+  omega
+
+/-- The exact positive gap in the same residue class. -/
+theorem exact_descent_gap_of_mod_sixteen_thirteen
+    (n : ℕ) (hn : n % 16 = 13) :
+    n - (3 * n + 1) / 8 = 10 * (n / 16) + 8 := by
+  rw [exact_quotient_formula_of_mod_sixteen_thirteen n hn]
+  omega
+
+#print axioms exact_quotient_formula_of_mod_sixteen_thirteen
+#print axioms exact_descent_gap_of_mod_sixteen_thirteen
+
+
 end CollatzSyracuseAudit
 
 
