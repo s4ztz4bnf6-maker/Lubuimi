@@ -18,7 +18,7 @@ theorem descent_requires_power_threshold
     rw [← h_affine]
     exact hmul
   have hweak : 3 ^ j * n₀ < 2 ^ A * n₀ := by omega
-  exact (Nat.mul_lt_mul_right hn₀).mp hweak
+  exact (Nat.mul_lt_mul_right n₀).mpr hweak
 
 /-- Contrapositive form: if the cumulative valuation budget does not
 beat the odd-growth factor, no strict descent can occur at this prefix. -/
