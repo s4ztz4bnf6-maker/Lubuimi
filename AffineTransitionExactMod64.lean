@@ -57,13 +57,13 @@ theorem mod32_three_two_step_descent (k : ℕ) :
     syracuse (syracuse (32 * k + 3)) < 32 * k + 3 := by
   have hb := two_step_affine_bound_mod32_three k
   have hq : (syracuse (syracuse (32 * k + 3)) : ℚ) ≤
-      (9 * k + 1 : ℚ) := by
+      ((9 * k + 1 : ℕ) : ℚ) := by
     calc
       (syracuse (syracuse (32 * k + 3)) : ℚ) ≤
           (9 / 32 : ℚ) * (32 * k + 3) + 5 / 32 := hb
       _ = (9 * k + 1 : ℚ) := by push_cast; ring
-  have hn : syracuse (syracuse (32 * k + 3)) ≤ 9 * k + 1 :=
-    Nat.cast_le.mp hq
+  have hn : syracuse (syracuse (32 * k + 3)) ≤ 9 * k + 1 := by
+    exact_mod_cast hq
   omega
 
 /-- Residue-class form of the modulo-32 descent result. -/
