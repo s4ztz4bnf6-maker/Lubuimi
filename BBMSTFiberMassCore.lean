@@ -159,6 +159,30 @@ theorem finite_variable_alpha_mass_conservation
   intro i hi
   ring
 
+
+/-- Integrated finite-fiber interface: under local probability bounds and
+nonnegative source masses, both pieces are nonnegative and their totals
+exactly conserve the source mass. This remains an algebraic core lemma;
+it does not assert that BBMST's geometric conditional proportions have
+already been constructed. -/
+theorem finite_fiber_mass_partition
+    {ι : Type*} [DecidableEq ι] (s : Finset ι)
+    (mass alpha : ι → ℚ)
+    (hmass : ∀ i ∈ s, 0 ≤ mass i)
+    (ha0 : ∀ i ∈ s, 0 ≤ alpha i)
+    (ha1 : ∀ i ∈ s, alpha i ≤ 1) :
+    (0 ≤ ∑ i ∈ s, alpha i * mass i) ∧
+    (0 ≤ ∑ i ∈ s, (1 - alpha i) * mass i) ∧
+    ((∑ i ∈ s, alpha i * mass i) +
+      (∑ i ∈ s, (1 - alpha i) * mass i) =
+      ∑ i ∈ s, mass i) := by
+  have hnonneg :=
+    finite_fiber_mass_parts_variable_alpha_nonneg s mass alpha
+      hmass ha0 ha1
+  have hconserve :=
+    finite_fiber_mass_split_variable_alpha s mass alpha
+  exact ⟨hnonneg.1, hnonneg.2, hconserve⟩
+
 /- Explicit dependency audit for the conservation identities. -/
 #print axioms fiber_mass_split
 #print axioms fiber_mass_split_zero
@@ -169,6 +193,7 @@ theorem finite_variable_alpha_mass_conservation
 #print axioms finite_fiber_mass_parts_variable_alpha_nonneg
 #print axioms finite_fiber_mass_split_variable_alpha
 #print axioms finite_variable_alpha_mass_conservation
+#print axioms finite_fiber_mass_partition
 #print axioms variable_alpha_fiber_conservation
 
 end BBMSTFiberMassCore
