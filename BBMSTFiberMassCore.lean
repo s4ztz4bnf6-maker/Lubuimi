@@ -48,9 +48,25 @@ theorem finite_fiber_mass_split {ι : Type*} [DecidableEq ι]
               rw [← Finset.mul_sum, ← Finset.mul_sum]
     _ = ∑ i ∈ s, mass i := by ring
 
+/-- General finite conservation theorem for an actual pointwise
+retained/removed decomposition. This is the reusable bridge from a
+pointwise fiber identity to total finite mass conservation. -/
+theorem finite_mass_conservation {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (retained removed total : ι → ℚ)
+    (h : ∀ i ∈ s, retained i + removed i = total i) :
+    (∑ i ∈ s, retained i) + (∑ i ∈ s, removed i) =
+      ∑ i ∈ s, total i := by
+  classical
+  rw [← Finset.sum_add_distrib]
+  apply Finset.sum_congr rfl
+  intro i hi
+  exact h i hi
+
 /-- Explicit dependency audit for the conservation identities. -/
 #print axioms fiber_mass_split
 #print axioms fiber_mass_split_zero
 #print axioms fiber_mass_split_one
+#print axioms finite_fiber_mass_split
+#print axioms finite_mass_conservation
 
 end BBMSTFiberMassCore
