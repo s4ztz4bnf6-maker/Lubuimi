@@ -180,7 +180,12 @@ theorem finite_fiber_mass_partition
     finite_fiber_mass_parts_variable_alpha_nonneg s mass alpha
       hmass ha0 ha1
   have hconserve :=
-    finite_fiber_mass_split_variable_alpha s mass alpha
+    finite_mass_conservation s
+      (fun i => alpha i * mass i)
+      (fun i => (1 - alpha i) * mass i)
+      mass (by
+        intro i hi
+        ring)
   exact ⟨hnonneg.1, hnonneg.2, hconserve⟩
 
 /- Explicit dependency audit for the conservation identities. -/
