@@ -583,3 +583,28 @@ theorem exponent_four_forces_residue_five_mod_thirty_two
   omega
 
 #print axioms exponent_four_forces_residue_five_mod_thirty_two
+
+
+/--
+Any strict descent with a strictly positive affine offset forces the
+multiplicative coefficient 2^A to exceed 3^j. Unlike the stronger
+geometric-offset threshold above, this implication needs only C > 0;
+it does not assume C ≥ 3^j. For nonempty canonical Syracuse blocks,
+positivity follows from the positive final correction term.
+-/
+theorem descent_implies_power_growth_of_positive_offset
+    (n0 nj A C j : ℕ)
+    (hn0 : 0 < n0)
+    (hC : 0 < C)
+    (hidentity : 2 ^ A * nj = 3 ^ j * n0 + C)
+    (hdesc : nj < n0) :
+    3 ^ j < 2 ^ A := by
+  have hprod : 2 ^ A * nj < 2 ^ A * n0 :=
+    (Nat.mul_lt_mul_left (Nat.pow_pos (by omega : 0 < (2 : ℕ)) A)).mpr hdesc
+  have hmargin : 3 ^ j * n0 + C < 2 ^ A * n0 := by
+    rw [← hidentity]
+    exact hprod
+  have hmul : 3 ^ j * n0 < 2 ^ A * n0 := by omega
+  exact (Nat.mul_lt_mul_right hn0).mp hmul
+
+#print axioms descent_implies_power_growth_of_positive_offset
