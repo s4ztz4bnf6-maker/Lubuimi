@@ -233,9 +233,12 @@ theorem predicate_incidence_deficit_pos_of_uncovered
     (hnonempty : sample.Nonempty)
     (huncovered : (sample.filter (fun x => ¬ covered x)).Nonempty) :
     0 < 1 - ((sample.filter covered).card : ℚ) / (sample.card : ℚ) := by
+  have hcard : 1 ≤ (sample.filter (fun x => ¬ covered x)).card := by
+    have hpos : 0 < (sample.filter (fun x => ¬ covered x)).card :=
+      Finset.card_pos.mpr huncovered
+    omega
   have hbound := predicate_incidence_deficit_lower_bound
-    sample covered hnonempty 1 (by
-      exact Finset.card_pos.mpr huncovered |> Nat.one_le_iff_ne_zero.mpr)
+    sample covered hnonempty 1 hcard
   have hden : (0 : ℚ) < (sample.card : ℚ) := by
     exact_mod_cast hnonempty.card_pos
   have hone : (0 : ℚ) < (1 : ℚ) / (sample.card : ℚ) :=
