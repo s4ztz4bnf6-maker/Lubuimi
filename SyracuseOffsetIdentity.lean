@@ -42,7 +42,8 @@ theorem strict_descent_of_offset_margin
     (hmargin : 3 ^ j * n0 + C < 2 ^ A * n0) :
     nj < n0 := by
   have hprod : 2 ^ A * nj < 2 ^ A * n0 := by
-    omega
+    rw [hidentity]
+    exact hmargin
   exact (Nat.mul_lt_mul_left (pow_pos (by norm_num : 0 < (2 : ℕ)) A)).mp hprod
 
 #print axioms CollatzSyracuseAudit.offset_identity_of_certified_steps
