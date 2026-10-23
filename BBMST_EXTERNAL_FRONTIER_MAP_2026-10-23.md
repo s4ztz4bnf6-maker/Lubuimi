@@ -36,3 +36,12 @@ Keep the lanes separate. A finite LCM cutoff does not prove a universal result, 
 A successful Lean build should be paired with an axiom audit and a modern Lean release. Lean 4.32.2 fixed a kernel soundness bug, and Lean 4.34.0 records further kernel hardening. For external proof packages, inspect their exact Lean version, import closure, hypotheses and theorem statement rather than relying on a clean-looking #print axioms line alone.
 - https://lean-lang.org/doc/reference/latest/releases/v4.32.2/
 - https://lean-lang.org/doc/reference/latest/releases/v4.34.0/
+
+
+## Update after frontier refresh (2026-10-23)
+
+The author's current research page now reports a September 2026 preprint claiming a lower bound of **nine distinct prime divisors** in any odd distinct covering system, improving the earlier seven- and eight-prime bounds. It allows arbitrary prime powers and is Lean-formalized according to the author. This is still a lower bound, not nonexistence; it does not settle Erdős–Selfridge. We have not independently audited the proof package or its exact theorem dependencies, so the result is recorded as an external claim, not imported as a premise.
+
+The newest local increment in `BBMSTProbabilityInterface.lean` is `finite_proper_incidence_fraction_lt_one`: proper incidence subset plus a nonempty finite sample gives strict ratio < 1. The next increment, `finite_incidence_deficit_eq_complement_fraction`, aims to identify the exact deficit `1 - |I|/|S|` with `|S \\ I|/|S|`. This is a useful exact bridge from a covered fraction to an uncovered set, but it remains a uniform finite-cardinality identity, not the BBMST geometric alpha_k estimate.
+
+The critical bottleneck is unchanged: define the source-faithful BBMST coordinate-box probability space and hyperplane incidences, then prove the geometric/fiber distortion or second-moment estimate without abstractly assuming the desired coverage bound. The nine-prime result can guide a separate rank/capacity search lane, but it cannot be treated as an axiom in the square-free proof lane.
