@@ -48,4 +48,15 @@ theorem half_step_growth_of_mod_four_three
 #print axioms CollatzSyracuseAudit.half_step_odd_of_mod_four_three
 #print axioms CollatzSyracuseAudit.half_step_growth_of_mod_four_three
 
+/--
+Exact integer descent margin for the quarter-step in the residue class
+n = 1 mod 4. The decrease is not merely positive: it is exactly (n-1)/4.
+-/
+theorem quarter_step_exact_gap
+    (n : ℕ) (hn : n % 4 = 1) :
+    n - (3 * n + 1) / 4 = (n - 1) / 4 := by
+  omega
+
+#print axioms CollatzSyracuseAudit.quarter_step_exact_gap
+
 end CollatzSyracuseAudit
