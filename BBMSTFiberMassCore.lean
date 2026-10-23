@@ -497,15 +497,14 @@ theorem zero_mass_fiber_forces_point_masses_zero
     (s : Finset Ω) (label : Ω → Ι) (mass : Ω → ℚ)
     (hmass : ∀ x ∈ s, 0 ≤ mass x) (i : Ι)
     (hzero : (∑ x ∈ s with label x = i, mass x) = 0) :
-    ∀ x ∈ s with label x = i, mass x = 0 := by
-  intro x hx
-  apply zero_sum_nonneg_forces_terms_zero
+    ∀ x ∈ s.filter (fun x => label x = i), mass x = 0 := by
+  exact zero_sum_nonneg_forces_terms_zero
     (s := s.filter (fun x => label x = i))
     (mass := mass)
-  · intro y hy
-    exact hmass y (Finset.mem_filter.mp hy).1
-  · simpa using hzero
-  · exact hx
+    (by
+      intro y hy
+      exact hmass y (Finset.mem_filter.mp hy).1)
+    (by simpa using hzero)
 
 #print axioms zero_sum_nonneg_forces_terms_zero
 #print axioms zero_mass_fiber_forces_point_masses_zero
