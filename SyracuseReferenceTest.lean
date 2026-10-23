@@ -77,6 +77,8 @@ theorem syracuse_descent_of_four_dvd
 
 end CollatzSyracuseAudit
 
+namespace CollatzSyracuseAudit
+
 /--
 Residue-class corollary for the actual valuation-based Syracuse map:
 every odd n > 1 with n = 1 (mod 4) strictly descends after removing
@@ -90,4 +92,6 @@ theorem syracuse_descent_of_mod_four_one
   apply syracuse_descent_of_four_dvd n hn hn_two
   omega
 
-#print axioms CollatzSyracuseAudit.syracuse_descent_of_mod_four_one
+#print axioms syracuse_descent_of_mod_four_one
+
+end CollatzSyracuseAudit
