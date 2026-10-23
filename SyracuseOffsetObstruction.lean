@@ -451,6 +451,36 @@ def DivisibilityCertifiedWord.toRealizedValuationWord
     transition := W.transition
     exact_valuation := fun i => W.exponent_is_v2 i }
 
+
+/-- Conversely, every genuinely realized valuation word supplies the exact
+divisibility and forbidden-next-power certificate. Together with
+`toRealizedValuationWord`, this makes the two finite encodings equivalent:
+neither admits a path whose exponents disagree with the actual states. -/
+def RealizedValuationWord.toDivisibilityCertifiedWord
+    {k : ℕ} (W : RealizedValuationWord k) : DivisibilityCertifiedWord k := by
+  refine
+    { state := W.state
+      exponent := W.exponent
+      transition := W.transition
+      exact_divisibility := ?_ }
+  intro i
+  have hnonzero : 3 * W.state i.castSucc + 1 ≠ 0 := by omega
+  have hv := (v2_eq_iff_pow_dvd_not_next_pow_dvd
+    (3 * W.state i.castSucc + 1) (W.exponent i) hnonzero).mp
+      (W.exact_valuation i).symm
+  exact hv
+
+/-- The round-trip back to a realized word preserves every state and exponent
+definitionally; the proof-relevant content is the exact valuation certificate. -/
+theorem RealizedValuationWord.toDivisibilityCertifiedWord_toRealized
+    {k : ℕ} (W : RealizedValuationWord k) :
+    (W.toDivisibilityCertifiedWord).toRealizedValuationWord = W := by
+  cases W
+  rfl
+
+#print axioms RealizedValuationWord.toDivisibilityCertifiedWord
+#print axioms RealizedValuationWord.toDivisibilityCertifiedWord_toRealized
+
 #print axioms DivisibilityCertifiedWord.exponent_is_v2
 #print axioms DivisibilityCertifiedWord.toRealizedValuationWord
 
