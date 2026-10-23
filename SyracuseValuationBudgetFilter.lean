@@ -11,14 +11,14 @@ theorem descent_requires_power_threshold
     (h_affine : 2 ^ A * nⱼ = 3 ^ j * n₀ + C)
     (h_descent : nⱼ < n₀) :
     3 ^ j < 2 ^ A := by
-  have hp : 0 < 2 ^ A := Nat.pow_pos (by omega : 0 < 2)
+  have hp : 0 < (2 : ℕ) ^ A := Nat.pow_pos (by decide)
   have hmul : 2 ^ A * nⱼ < 2 ^ A * n₀ :=
     Nat.mul_lt_mul_of_pos_left h_descent hp
   have hbound : 3 ^ j * n₀ + C < 2 ^ A * n₀ := by
     rw [← h_affine]
     exact hmul
   have hweak : 3 ^ j * n₀ < 2 ^ A * n₀ := by omega
-  exact (Nat.mul_lt_mul_right n₀).mpr hweak
+  exact (Nat.mul_lt_mul_right hn₀).mp hweak
 
 /-- Contrapositive form: if the cumulative valuation budget does not
 beat the odd-growth factor, no strict descent can occur at this prefix. -/
@@ -32,30 +32,28 @@ theorem no_descent_below_power_threshold
   have h := descent_requires_power_threshold A j n₀ C nⱼ hn₀ h_affine hdescent
   omega
 
-
 /-- Exact offset criterion: once the affine prefix identity is fixed,
 strict descent is equivalent to the accumulated offset staying below the
-available scale margin. This is stronger than the valuation-only necessary
-condition above and is suitable as a prefix-pruning certificate. -/
+available scale margin. -/
 theorem descent_iff_offset_below_scale_margin
     (A j n₀ C nⱼ : ℕ)
     (h_affine : 2 ^ A * nⱼ = 3 ^ j * n₀ + C) :
     nⱼ < n₀ ↔ 3 ^ j * n₀ + C < 2 ^ A * n₀ := by
   constructor
   · intro hdescent
-    have hp : 0 < 2 ^ A := Nat.pow_pos (by omega : 0 < 2)
+    have hp : 0 < (2 : ℕ) ^ A := Nat.pow_pos (by decide)
     have hmul : 2 ^ A * nⱼ < 2 ^ A * n₀ :=
       Nat.mul_lt_mul_of_pos_left hdescent hp
     rw [← h_affine]
     exact hmul
   · intro hoffset
+    have hp : 0 < (2 : ℕ) ^ A := Nat.pow_pos (by decide)
     have hmul : 2 ^ A * nⱼ < 2 ^ A * n₀ := by
       rw [h_affine]
       exact hoffset
-    exact (Nat.mul_lt_mul_left (2 ^ A)).mp hmul
+    exact (Nat.mul_lt_mul_left hp).mp hmul
 
 #print axioms descent_iff_offset_below_scale_margin
-
 #print axioms descent_requires_power_threshold
 #print axioms no_descent_below_power_threshold
 
