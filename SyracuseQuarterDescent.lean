@@ -164,6 +164,33 @@ theorem eighth_step_exact_gap_of_mod_eight_five
 #print axioms eighth_step_descent_of_mod_eight_five
 #print axioms eighth_step_exact_gap_of_mod_eight_five
 
+
+/--
+Exact valuation-three branch: for n = 13 mod 16, the numerator 3*n+1
+is divisible by 8 but not by 16. Therefore the fully accelerated odd
+Syracuse step is exactly (3*n+1)/8, rather than merely an intermediate
+quotient. This is a local transition certificate, not a global descent
+theorem for all odd inputs.
+-/
+theorem exact_three_factors_of_mod_sixteen_thirteen
+    (n : ℕ) (hn : n % 16 = 13) :
+    (3 * n + 1) % 8 = 0 ∧ (3 * n + 1) / 8 % 2 = 1 := by
+  constructor <;> omega
+
+/--
+The exact valuation-three branch is strictly descending for n > 1.
+Unlike the general 5 mod 8 lemma, the residue 13 mod 16 certifies that
+the quotient is odd and hence is the actual accelerated Syracuse state.
+-/
+theorem accelerated_descent_of_mod_sixteen_thirteen
+    (n : ℕ) (hn : n % 16 = 13) (hn_two : 2 ≤ n) :
+    (3 * n + 1) / 8 < n := by
+  omega
+
+#print axioms exact_three_factors_of_mod_sixteen_thirteen
+#print axioms accelerated_descent_of_mod_sixteen_thirteen
+
+
 end CollatzSyracuseAudit
 
 
