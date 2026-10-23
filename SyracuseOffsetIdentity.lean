@@ -31,6 +31,21 @@ theorem offset_identity_of_certified_steps
               rw [pow_succ]
               ring
 
+/--
+A strict offset margin is sufficient for a genuine decrease of the iterate.
+This isolates the exact inequality still needed after the offset identity:
+the lemma does not assert that the margin holds for arbitrary trajectories.
+-/
+theorem strict_descent_of_offset_margin
+    (n0 nj A C j : ℕ)
+    (hidentity : 2 ^ A * nj = 3 ^ j * n0 + C)
+    (hmargin : 3 ^ j * n0 + C < 2 ^ A * n0) :
+    nj < n0 := by
+  have hprod : 2 ^ A * nj < 2 ^ A * n0 := by
+    omega
+  exact (Nat.mul_lt_mul_left (pow_pos (by norm_num : 0 < (2 : ℕ)) A)).mp hprod
+
 #print axioms CollatzSyracuseAudit.offset_identity_of_certified_steps
+#print axioms CollatzSyracuseAudit.strict_descent_of_offset_margin
 
 end CollatzSyracuseAudit
