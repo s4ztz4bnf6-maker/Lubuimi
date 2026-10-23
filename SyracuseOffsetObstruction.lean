@@ -79,4 +79,26 @@ theorem strict_descent_iff_affine_margin
 
 #print axioms strict_descent_iff_affine_margin
 
+
+/-- A finite valuation word is realizable only when it is carried by an
+actual state sequence. The exact valuation field rules out symbolic
+"phantom paths": each exponent is the 2-adic valuation of the actual
+transition numerator, and the recurrence fixes the next state. -/
+structure RealizedValuationWord (k : ℕ) where
+  state : Fin (k + 1) → ℕ
+  exponent : Fin k → ℕ
+  transition : ∀ i : Fin k,
+    2 ^ exponent i * state i.succ = 3 * state i.castSucc + 1
+  exact_valuation : ∀ i : Fin k,
+    exponent i = v2 (3 * state i.castSucc + 1)
+
+/-- In a realized word, the exponent at each position is determined by the
+current state; it is not an independent symbolic choice. -/
+theorem realized_exponent_forced
+    {k : ℕ} (W : RealizedValuationWord k) (i : Fin k) :
+    W.exponent i = v2 (3 * W.state i.castSucc + 1) :=
+  W.exact_valuation i
+
+#print axioms realized_exponent_forced
+
 end CollatzSyracuseAudit
