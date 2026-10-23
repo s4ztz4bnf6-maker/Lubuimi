@@ -48,4 +48,30 @@ theorem mod64_three_two_step_descent_of_residue (n : ℕ)
 #print axioms CollatzSyracuseAudit.mod64_thirtyfive_second_numerator_factor32
 #print axioms CollatzSyracuseAudit.mod64_thirtyfive_first_step_exact
 
+
+/-- Every input congruent to 3 modulo 32 strictly descends after two
+accelerated Syracuse steps. This combines the exact affine block bound
+with the residue-class decomposition; it strictly generalizes the two
+modulo-64 cases proved above. -/
+theorem mod32_three_two_step_descent (k : ℕ) :
+    syracuse (syracuse (32 * k + 3)) < 32 * k + 3 := by
+  have hb := two_step_affine_bound_mod32_three k
+  have hq : (syracuse (syracuse (32 * k + 3)) : ℚ) ≤
+      (9 * k + 1 : ℚ) := by
+    calc
+      (syracuse (syracuse (32 * k + 3)) : ℚ) ≤
+          (9 / 32 : ℚ) * (32 * k + 3) + 5 / 32 := hb
+      _ = (9 * k + 1 : ℚ) := by push_cast; ring
+  have hn : syracuse (syracuse (32 * k + 3)) ≤ 9 * k + 1 :=
+    Nat.cast_le.mp (by exact_mod_cast hq)
+  omega
+
+/-- Residue-class form of the modulo-32 descent result. -/
+theorem mod32_three_two_step_descent_of_residue (n : ℕ)
+    (hn : n % 32 = 3) :
+    syracuse (syracuse n) < n := by
+  have hdecomp : n = 32 * (n / 32) + 3 := by omega
+  rw [hdecomp]
+  exact mod32_three_two_step_descent (n / 32)
+
 end CollatzSyracuseAudit
