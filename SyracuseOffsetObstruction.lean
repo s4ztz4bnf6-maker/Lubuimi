@@ -320,3 +320,26 @@ theorem affine_prefix_divisibility
 #print axioms affine_prefix_divisibility
 
 end CollatzSyracuseAudit
+
+namespace CollatzSyracuseAudit
+
+/-- If a prescribed power of two divides the accelerated numerator but the
+next power does not, the quotient is odd. This is the local exactness clause
+that rules out a larger 2-adic valuation at this step. -/
+theorem quotient_odd_of_exact_two_power
+    (a n q : ℕ)
+    (hstep : 2 ^ a * q = 3 * n + 1)
+    (hnot : ¬ 2 ^ (a + 1) ∣ 3 * n + 1) :
+    ¬ 2 ∣ q := by
+  intro heven
+  obtain ⟨m, hm⟩ := heven
+  apply hnot
+  refine ⟨m, ?_⟩
+  calc
+    3 * n + 1 = 2 ^ a * q := hstep.symm
+    _ = 2 ^ a * (2 * m) := by rw [hm]
+    _ = 2 ^ (a + 1) * m := by rw [pow_succ]; ring
+
+#print axioms quotient_odd_of_exact_two_power
+
+end CollatzSyracuseAudit
