@@ -212,6 +212,37 @@ theorem exact_descent_gap_of_mod_sixteen_thirteen
 #print axioms exact_descent_gap_of_mod_sixteen_thirteen
 
 
+/--
+Exact valuation-four residue class: if n ≡ 5 (mod 32), then 3*n+1
+is divisible by 16 but not by 32. Thus the fully accelerated Syracuse
+step is exactly (3*n+1)/16. This is a local certificate only.
+-/
+theorem exact_four_factors_of_mod_thirty_two_five
+    (n : ℕ) (hn : n % 32 = 5) :
+    (3 * n + 1) % 16 = 0 ∧ (3 * n + 1) / 16 % 2 = 1 := by
+  constructor <;> omega
+
+/--
+On n ≡ 5 (mod 32), the exact accelerated quotient is 6k+1 for
+k = n/32. The quotient is odd, so it is the actual Syracuse state.
+-/
+theorem exact_quotient_formula_of_mod_thirty_two_five
+    (n : ℕ) (hn : n % 32 = 5) :
+    (3 * n + 1) / 16 = 6 * (n / 32) + 1 := by
+  omega
+
+/-- Exact descent gap on the valuation-four residue class n ≡ 5 mod 32. -/
+theorem exact_descent_gap_of_mod_thirty_two_five
+    (n : ℕ) (hn : n % 32 = 5) :
+    n - (3 * n + 1) / 16 = 26 * (n / 32) + 4 := by
+  rw [exact_quotient_formula_of_mod_thirty_two_five n hn]
+  omega
+
+#print axioms exact_four_factors_of_mod_thirty_two_five
+#print axioms exact_quotient_formula_of_mod_thirty_two_five
+#print axioms exact_descent_gap_of_mod_thirty_two_five
+
+
 end CollatzSyracuseAudit
 
 
