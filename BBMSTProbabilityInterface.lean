@@ -114,3 +114,39 @@ theorem finite_incidence_deficit_eq_complement_fraction
           rw [Finset.card_sdiff_of_subset hinc, Nat.cast_sub hle]
 
 #print axioms finite_incidence_deficit_eq_complement_fraction
+
+
+/--
+For a nonempty finite uniform sample, the incidence fraction is strictly
+below one exactly when at least one sample point is uncovered. This makes
+the coverage interpretation of the normalized fraction bidirectional.
+-/
+theorem finite_incidence_fraction_lt_one_iff_complement_nonempty
+    {Ω : Type*} [DecidableEq Ω]
+    (sample incidences : Finset Ω)
+    (hinc : incidences ⊆ sample) (hnonempty : sample.Nonempty) :
+    (incidences.card : ℚ) / (sample.card : ℚ) < 1 ↔
+      (sample \\ incidences).Nonempty := by
+  have hden : (0 : ℚ) < (sample.card : ℚ) := by
+    exact_mod_cast hnonempty.card_pos
+  constructor
+  · intro hfrac
+    have hnum : (incidences.card : ℚ) < (sample.card : ℚ) :=
+      (div_lt_iff₀ hden).mp hfrac
+    have hcard : incidences.card < sample.card := by
+      exact_mod_cast hnum
+    have hdiff : 0 < (sample \\ incidences).card := by
+      rw [Finset.card_sdiff_of_subset hinc]
+      omega
+    exact Finset.card_pos.mp hdiff
+  · intro hcompl
+    have hdiff : 0 < (sample \\ incidences).card :=
+      Finset.card_pos.mpr hcompl
+    have hcard : incidences.card < sample.card := by
+      rw [Finset.card_sdiff_of_subset hinc] at hdiff
+      omega
+    have hnum : (incidences.card : ℚ) < (sample.card : ℚ) := by
+      exact_mod_cast hcard
+    exact (div_lt_iff₀ hden).2 hnum
+
+#print axioms finite_incidence_fraction_lt_one_iff_complement_nonempty
