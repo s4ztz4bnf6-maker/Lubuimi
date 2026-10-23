@@ -6,7 +6,11 @@ on:
       - collatz/compiler-audit-2026-10-19
       - collatz/quarter-descent-lemma-2026-10-20
       - collatz/offset-margin-roadmap-2026-10-23
+    paths-ignore:
+      - "**.md"
   pull_request:
+    paths-ignore:
+      - "**.md"
   workflow_dispatch:
 
 jobs:
