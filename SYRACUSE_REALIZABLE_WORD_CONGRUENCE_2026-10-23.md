@@ -5,13 +5,23 @@ Date: 2026-10-23
 
 This note sharpens the current offset-margin roadmap by separating (i) which finite valuation words are realizable from (ii) whether the resulting endpoint decreases. The exact congruence criterion below is an algebraic finite-word lemma; it is not a proof of Collatz. An external research lead is the EOC Lean-verification project (linked below), whose own README explicitly says its global occupation conjecture and Collatz remain open. Treat its claims as research to audit, not as an authority or as a proof imported into this repository.
 
-## Critical correction: the endpoint congruence alone is not sufficient
+## Prefix congruences: proof obligation and resolution
 
-The earlier statement below that the final congruence alone characterizes an exact valuation word was too strong and is withdrawn. A concrete counterexample is the word `(1,1)`: here `S_L=2`, `C_L=5`, and the endpoint congruence is `9n+5 ≡ 4 (mod 8)`, which is satisfied by `n ≡ 7 (mod 8)`. But at `n=7`, the accelerated odd map gives `7 -> 11 -> 17`, with valuations `v₂(3·7+1)=1` and `v₂(3·11+1)=v₂(34)=1`? Careful: `3·11+1=34`, so the second valuation is indeed `1`; the endpoint after two steps is `17`, and the affine identity gives `4·17=68=9·7+5`. Thus this example does realize `(1,1)` and is not a counterexample. The correct obstruction must be checked against all prefix constraints, not inferred from the endpoint alone.
+The endpoint congruence is in fact strong enough to imply every prefix congruence, but the implication must be proved explicitly. For each prefix define X_j = 3^j n + C_j. For j<L, the recurrence for C_L gives, modulo 2^(S_j+1),
 
-For an exact word, each prefix `j` must satisfy its own congruence
-`3^j n + C_j ≡ 2^{S_j} (mod 2^{S_j+1})`.
-The endpoint congruence is just the `j=L` member of this family. The proof target is therefore the equivalence between exact realizability and the full family of prefix congruences, together with the affine recurrences. Do not claim that the endpoint condition alone is sufficient until a proof or counterexample search settles it.
+    3^L n + C_L ≡ 3^(L-j) X_j + 3^(L-1-j) 2^S_j.
+
+The later correction terms vanish modulo 2^(S_j+1), and 2^S_L ≡ 0 modulo that modulus. Therefore the endpoint congruence implies
+
+    3 X_j + 2^S_j ≡ 0 (mod 2^(S_j+1)).
+
+Since 3 is invertible modulo every power of 2 and -3⁻¹·2^S_j ≡ 2^S_j (mod 2^(S_j+1)), this yields
+
+    X_j ≡ 2^S_j (mod 2^(S_j+1)).
+
+Conversely, the j=L prefix congruence is the endpoint congruence. This is the key finite arithmetic bridge to formalize in Lean; recurrence indexing and the j=L endpoint case must be handled separately.
+
+A sanity check for the word (1,1) gives C_2=5, so the condition is 9n+5 ≡ 4 (mod 8), i.e. n ≡ 7 (mod 8). Indeed 7 -> 11 -> 17 under the accelerated odd map, with exact valuations (1,1). This is a confirming example, not a counterexample.
 
 ## Exact finite-word criterion
 
