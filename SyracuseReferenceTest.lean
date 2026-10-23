@@ -151,4 +151,16 @@ theorem syracuse_descent_of_mod_four_one
 #print axioms syracuse_descent_of_mod_four_one
 
 
+/-- The n = 5 (mod 8) residue class gives a strict accelerated
+Syracuse descent, because its numerator is divisible by 8 (hence by 4).
+This links the finer mod-8 split to the actual valuation-based map. -/
+theorem syracuse_descent_of_mod_eight_five
+    (n : ℕ) (hn : n % 2 = 1) (hn_two : 2 ≤ n)
+    (hmod : n % 8 = 5) :
+    syracuse n < n := by
+  apply syracuse_descent_of_four_dvd n hn hn_two
+  apply Nat.dvd_trans (by norm_num : 4 ∣ 8)
+  exact (Nat.dvd_iff_mod_eq_zero.mpr (by omega : (3 * n + 1) % 8 = 0))
+
+
 end CollatzSyracuseAudit
