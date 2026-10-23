@@ -24,4 +24,28 @@ theorem quarter_descent_of_mod_four_one
 #print axioms CollatzSyracuseAudit.quarter_step_formula
 #print axioms CollatzSyracuseAudit.quarter_descent_of_mod_four_one
 
+/--
+In the complementary odd residue class n = 3 mod 4, the unaccelerated
+quotient after removing the single forced factor of two is odd.
+This records the exact parity obstruction to obtaining a quarter-step
+descent from this residue class.
+-/
+theorem half_step_odd_of_mod_four_three
+    (n : ℕ) (hn : n % 4 = 3) :
+    ((3 * n + 1) / 2) % 2 = 1 := by
+  omega
+
+/--
+The forced half-step in the residue class n = 3 mod 4 is increasing for
+n > 1. Thus a proof of global descent cannot rely on one-step monotonicity
+in every odd residue class.
+-/
+theorem half_step_growth_of_mod_four_three
+    (n : ℕ) (hn : n % 4 = 3) (hn_two : 2 ≤ n) :
+    n < (3 * n + 1) / 2 := by
+  omega
+
+#print axioms CollatzSyracuseAudit.half_step_odd_of_mod_four_three
+#print axioms CollatzSyracuseAudit.half_step_growth_of_mod_four_three
+
 end CollatzSyracuseAudit
