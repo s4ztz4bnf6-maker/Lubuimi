@@ -188,6 +188,33 @@ theorem descent_implies_geometric_exponent_threshold
 
 
 /--
+Correctly indexed offset threshold for an actual recurrence-generated block.
+The recurrence gives 3^j ≤ 2*C + 1 (not in general 3^j ≤ C); combining
+this sharper offset estimate with descent yields the displayed doubled
+inequality. This avoids silently assuming an offset floor that the recurrence
+does not guarantee.
+-/
+theorem descent_implies_doubled_exponent_threshold
+    (n0 nj A C j : ℕ)
+    (hidentity : 2 ^ A * nj = 3 ^ j * n0 + C)
+    (hoffset : 3 ^ j ≤ 2 * C + 1)
+    (hdesc : nj < n0) :
+    2 * (3 ^ j * n0) + 3 ^ j - 1 < 2 * (2 ^ A * n0) := by
+  have hmargin : 3 ^ j * n0 + C < 2 ^ A * n0 := by
+    have hprod : 2 ^ A * nj < 2 ^ A * n0 :=
+      (Nat.mul_lt_mul_left (pow_pos (by norm_num : 0 < (2 : ℕ)) A)).mpr hdesc
+    rw [hidentity] at hprod
+    exact hprod
+  have hle : 2 * (3 ^ j * n0) + 3 ^ j - 1 ≤
+      2 * (3 ^ j * n0 + C) := by
+    omega
+  have hdouble : 2 * (3 ^ j * n0 + C) < 2 * (2 ^ A * n0) := by
+    omega
+  exact lt_of_le_of_lt hle hdouble
+
+#print axioms descent_implies_doubled_exponent_threshold
+
+/--
 Any strict descent over a certified block with positive starting value
 requires the accumulated power of two to dominate the corresponding power
 of three. This is weaker than the full threshold above, but isolates the
@@ -229,7 +256,7 @@ structure SyracuseBlockArithmeticCertificate where
   affine_identity :
     2 ^ exponent * finish = 3 ^ steps * start + offset
   offset_floor :
-    3 ^ steps ≤ offset
+    3 ^ steps ≤ 2 * offset + 1
 
 /-- A certified arithmetic block descends exactly when its strict offset
 margin holds. This exposes the remaining global obligation as data on each
@@ -248,9 +275,13 @@ theorem SyracuseBlockArithmeticCertificate.descent_implies_power_growth
     (b : SyracuseBlockArithmeticCertificate)
     (hstart : 0 < b.start) (hdesc : b.finish < b.start) :
     3 ^ b.steps < 2 ^ b.exponent := by
-  exact CollatzSyracuseAudit.descent_implies_power_growth
-    b.start b.finish b.exponent b.offset b.steps hstart
-    b.affine_identity b.offset_floor hdesc
+  have hthreshold :=
+    CollatzSyracuseAudit.descent_implies_doubled_exponent_threshold
+      b.start b.finish b.exponent b.offset b.steps
+      b.affine_identity b.offset_floor hdesc
+  have hmul : 3 ^ b.steps * b.start < 2 ^ b.exponent * b.start := by
+    omega
+  exact (Nat.mul_lt_mul_right hstart).mp hmul
 
 #print axioms SyracuseBlockArithmeticCertificate.descent_iff_margin
 #print axioms SyracuseBlockArithmeticCertificate.descent_implies_power_growth
