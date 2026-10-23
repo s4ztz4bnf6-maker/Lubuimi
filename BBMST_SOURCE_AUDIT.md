@@ -80,7 +80,7 @@ theorem sum_min_max_identity (a b : ℚ) :
     min a b + max a b = a + b
 ```
 
-This is a small, source-independent algebraic lemma that can serve as a checked building block when a later formalization splits a total mass into smaller/larger contributions. It is **not** a formalization of BBMST Lemma 2.1, does not establish fiber mass conservation in the paper's probability space, and does not discharge either admitted axiom. The repository currently has no dedicated BBMST compile workflow, so this addition must be compiled in the pinned Lean/Mathlib environment before it is described as kernel-verified.
+This is a small, source-independent algebraic lemma that can serve as a checked building block when a later formalization splits a total mass into smaller/larger contributions. It is **not** a formalization of BBMST Lemma 2.1, does not establish fiber mass conservation in the paper's probability space, and does not discharge either admitted axiom. The repository now has a dedicated BBMST compile workflow. On commit `793f000501`, that workflow successfully compiled the file and Lean reported `sum_min_max_identity` depends only on `[propext, Classical.choice, Quot.sound]`. This verifies the lemma in the pinned Lean/Mathlib environment; it does not verify either admitted main-theorem placeholder.
 
 ## CI evidence and kernel dependency boundary (2026-10-23)
 
@@ -91,3 +91,13 @@ The first dedicated BBMST compile workflow completed successfully on commit `6d0
 ```
 
 This is positive evidence that the file compiles, but also direct evidence that the main theorem still depends on the two project placeholders. The later commit adds an explicit `#print axioms sum_min_max_identity` diagnostic and the header has been corrected to describe the file as an audit rather than a completed proof. Those later commits are being recompiled separately; do not treat the earlier green run as validation of later commits.
+
+## Verified local algebraic result and scope (2026-10-23, commit `793f000501`)
+
+The dedicated workflow successfully ran `lake env lean ErdosSelfridge_v17_fixed.lean`. Lean's diagnostic for the algebraic helper was:
+
+```text
+'sum_min_max_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
+
+These are Lean's standard foundational/classical axioms for this development, not the project's two admitted sieve placeholders. In contrast, the same compile printed `sf_sieve_lt_one` and `sieve_criterion` in the dependency list of `erdos_selfridge`. This is the exact current boundary between a checked local lemma and the unproved global bridge.
