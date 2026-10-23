@@ -528,3 +528,23 @@ theorem exponent_one_forces_residue_three
 
 end CollatzSyracuseAudit
 
+
+
+/--
+An exponent-two transition has a forced starting residue modulo eight:
+if 4 * next = 3 * n + 1 and next is odd, then n ≡ 1 (mod 8).
+This complements the exponent-one residue filter and constrains actual
+valuation words. It is a necessary local condition, not a global descent
+theorem.
+-/
+theorem exponent_two_forces_residue_one_mod_eight
+    (n next : ℕ)
+    (hnext : next % 2 = 1)
+    (hstep : 4 * next = 3 * n + 1) :
+    n % 8 = 1 := by
+  have hmod : (4 * next) % 8 = (3 * n + 1) % 8 := by
+    rw [hstep]
+  omega
+
+#print axioms exponent_two_forces_residue_one_mod_eight
+
