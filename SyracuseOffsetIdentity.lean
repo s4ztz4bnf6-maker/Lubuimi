@@ -120,14 +120,13 @@ theorem exponent_is_maximal_of_odd_quotient
   intro hdvd
   rcases hdvd with ⟨k, hk⟩
   have hEq : 2 ^ a * next = 2 ^ (a + 1) * k :=
-    hstep.trans hk.symm
-  have hcancel : next = 2 * k := by
-    apply Nat.mul_left_cancel
+    hstep.trans hk
+  have hEq' : 2 ^ a * next = 2 ^ a * (2 * k) := by
     calc
       2 ^ a * next = 2 ^ (a + 1) * k := hEq
-      _ = 2 ^ a * (2 * k) := by
-        rw [pow_succ]
-        ring
+      _ = (2 ^ a * 2) * k := by rw [pow_succ]
+      _ = 2 ^ a * (2 * k) := by ring
+  have hcancel : next = 2 * k := Nat.mul_left_cancel hEq'
   rw [hcancel] at hnext
   omega
 
