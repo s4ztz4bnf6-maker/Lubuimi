@@ -316,3 +316,27 @@ theorem exact_two_factors_of_mod_eight_one
   constructor <;> omega
 
 #print axioms exact_two_factors_of_mod_eight_one
+
+
+/--
+On the residue class n = 1 mod 8, the exact accelerated quotient has the
+closed form 6*(n/8)+1. This exposes the descent margin explicitly and
+does not rely on a heuristic average valuation.
+-/
+theorem exact_quotient_formula_of_mod_eight_one
+    (n : ℕ) (hn : n % 8 = 1) :
+    (3 * n + 1) / 4 = 6 * (n / 8) + 1 := by
+  omega
+
+/--
+For n = 1 mod 8 and n > 1, the exact valuation-two Syracuse step descends.
+The formula quantifies the gap as 2*(n/8), while the separate valuation
+certificate above ensures this quotient is odd and hence fully accelerated.
+-/
+theorem accelerated_descent_of_mod_eight_one
+    (n : ℕ) (hn : n % 8 = 1) (hn_two : 2 ≤ n) :
+    (3 * n + 1) / 4 < n := by
+  omega
+
+#print axioms exact_quotient_formula_of_mod_eight_one
+#print axioms accelerated_descent_of_mod_eight_one
