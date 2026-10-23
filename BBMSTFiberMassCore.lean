@@ -188,6 +188,30 @@ theorem finite_fiber_mass_partition
         ring)
   exact ⟨hnonneg.1, hnonneg.2, hconserve⟩
 
+
+/-- Each component of a variable-fiber split is bounded above by the
+original total mass, provided the source masses are nonnegative and every
+local fraction lies in [0,1]. Together with finite_fiber_mass_partition,
+this gives a two-sided mass budget for both components. -/
+theorem finite_fiber_mass_parts_le_total
+    {ι : Type*} [DecidableEq ι] (s : Finset ι)
+    (mass alpha : ι → ℚ)
+    (hmass : ∀ i ∈ s, 0 ≤ mass i)
+    (ha0 : ∀ i ∈ s, 0 ≤ alpha i)
+    (ha1 : ∀ i ∈ s, alpha i ≤ 1) :
+    (∑ i ∈ s, alpha i * mass i ≤ ∑ i ∈ s, mass i) ∧
+    (∑ i ∈ s, (1 - alpha i) * mass i ≤ ∑ i ∈ s, mass i) := by
+  constructor
+  · apply Finset.sum_le_sum
+    intro i hi
+    exact mul_le_of_le_one_left (hmass i hi) (ha0 i hi)
+  · apply Finset.sum_le_sum
+    intro i hi
+    have hcomp0 : 0 ≤ 1 - alpha i := sub_nonneg.mpr (ha1 i hi)
+    have hcomp1 : 1 - alpha i ≤ 1 := by linarith [ha0 i hi]
+    exact mul_le_of_le_one_left (hmass i hi) hcomp0 |>.trans_eq (by ring)
+
+
 /- Explicit dependency audit for the conservation identities. -/
 #print axioms fiber_mass_split
 #print axioms fiber_mass_split_zero
@@ -199,6 +223,7 @@ theorem finite_fiber_mass_partition
 #print axioms finite_fiber_mass_split_variable_alpha
 #print axioms finite_variable_alpha_mass_conservation
 #print axioms finite_fiber_mass_partition
+#print axioms finite_fiber_mass_parts_le_total
 #print axioms variable_alpha_fiber_conservation
 
 end BBMSTFiberMassCore
