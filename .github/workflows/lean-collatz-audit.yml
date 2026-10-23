@@ -10,6 +10,7 @@ on:
       - collatz/affine-transition-design-2026-10-21
       - collatz/stopping-time-bridge-2026-10-22
       - collatz/offset-lower-bound-2026-10-23
+      - research/realized-word-prefix-bridge-2026-10-23
   pull_request:
   workflow_dispatch:
 
@@ -100,6 +101,12 @@ jobs:
           set -o pipefail
           lake env lean TwoAdicValuationDistribution.lean 2>&1 | tee /tmp/two-adic-valuation-distribution.log
           ! grep -q 'sorryAx' /tmp/two-adic-valuation-distribution.log
+
+      - name: Compile and audit exact prefix affine bridge
+        run: |
+          set -o pipefail
+          lake env lean SyracuseExactPrefixBridge.lean 2>&1 | tee /tmp/syracuse-exact-prefix-bridge.log
+          ! grep -q 'sorryAx' /tmp/syracuse-exact-prefix-bridge.log
 
       - name: Compile and audit cumulative-valuation descent obstruction
         run: |
