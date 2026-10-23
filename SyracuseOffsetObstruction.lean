@@ -47,4 +47,36 @@ theorem strict_descent_forces_scale_gt
 
 #print axioms strict_descent_forces_scale_gt
 
+
+/-- Exact descent criterion with the additive affine residual exposed.
+Unlike the scale-only obstruction, this equivalence is both necessary and
+sufficient: the valuation scale and the accumulated offset must be compared
+together. -/
+theorem strict_descent_iff_affine_margin
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
+    (k : ℕ) :
+    n k < n 0 ↔
+      3 ^ k * n 0 + affineConstantTerm a k <
+        2 ^ cumulativeExponent a k * n 0 := by
+  have hid := affine_iteration_identity a n hstep k
+  have hscale : 0 < 2 ^ cumulativeExponent a k := by positivity
+  constructor
+  · intro hdesc
+    have hmul :
+        2 ^ cumulativeExponent a k * n k <
+          2 ^ cumulativeExponent a k * n 0 :=
+      Nat.mul_lt_mul_of_pos_left hdesc hscale
+    rw [hid] at hmul
+    exact hmul
+  · intro hmargin
+    have hmul :
+        2 ^ cumulativeExponent a k * n k <
+          2 ^ cumulativeExponent a k * n 0 := by
+      rw [hid]
+      exact hmargin
+    exact Nat.lt_of_mul_lt_mul_left hmul hscale
+
+#print axioms strict_descent_iff_affine_margin
+
 end CollatzSyracuseAudit
