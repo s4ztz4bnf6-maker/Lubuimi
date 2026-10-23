@@ -225,8 +225,9 @@ theorem SyracuseBlockArithmeticCertificate.descent_implies_power_growth
     (b : SyracuseBlockArithmeticCertificate)
     (hstart : 0 < b.start) (hdesc : b.finish < b.start) :
     3 ^ b.steps < 2 ^ b.exponent := by
-  exact descent_implies_power_growth b.start b.finish b.exponent
-    b.offset b.steps hstart b.affine_identity b.offset_floor hdesc
+  exact CollatzSyracuseAudit.descent_implies_power_growth
+    b.start b.finish b.exponent b.offset b.steps hstart
+    b.affine_identity b.offset_floor hdesc
 
 #print axioms SyracuseBlockArithmeticCertificate.descent_iff_margin
 #print axioms SyracuseBlockArithmeticCertificate.descent_implies_power_growth
