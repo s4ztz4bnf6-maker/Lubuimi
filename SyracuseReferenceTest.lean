@@ -25,6 +25,26 @@ theorem three_mul_add_one_mod_four_of_three
     (3 * n + 1) % 4 = 2 := by
   omega
 
+/-- In the n = 5 (mod 8) branch, the Syracuse numerator has at least
+three factors of 2. This isolates a stronger local descent case. -/
+theorem eight_dvd_three_mul_add_one_of_mod_eight_five
+    (n : ℕ) (h : n % 8 = 5) :
+    8 ∣ 3 * n + 1 := by
+  apply Nat.dvd_iff_mod_eq_zero.mpr
+  omega
+
+/-- In the n = 3 (mod 8) branch, the numerator is 2 modulo 8. -/
+theorem three_mul_add_one_mod_eight_of_mod_eight_three
+    (n : ℕ) (h : n % 8 = 3) :
+    (3 * n + 1) % 8 = 2 := by
+  omega
+
+/-- In the n = 7 (mod 8) branch, the numerator is 6 modulo 8. -/
+theorem three_mul_add_one_mod_eight_of_mod_eight_seven
+    (n : ℕ) (h : n % 8 = 7) :
+    (3 * n + 1) % 8 = 6 := by
+  omega
+
 /-- Smoke test: the factorization-based reference definition elaborates. -/
 example (n : ℕ) : syracuse n = (3 * n + 1) / 2 ^ v2 (3 * n + 1) := by
   rfl
