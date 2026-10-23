@@ -34,4 +34,6 @@ The existing BBMSTFiberMassCore.lean proves abstract finite mass conservation, p
 
 ## Primary next milestone
 
-The best next Lean theorem is the finite scalar bound max (a - b) 0 <= a^2 / (4*b) over rationals for 0 <= a and 0 < b, then a finite-fibre incidence-count identity. This is small enough to compile independently and directly used by Lemma 3.2; it is a real bridge but not, by itself, the theorem.
+The scalar inequality max (a - b) 0 <= a^2 / (4*b) over rationals for 0 <= a and 0 < b has now been added to BBMSTFiberMassCore.lean as max_sub_le_sq_div (commit 08e940e6d2647e7992a2018638cec01fe48b53ab). At the time of this note's update, the corresponding GitHub Actions compile was still running, so the proof is committed but CI success is not yet asserted.
+
+The next substantive Lean milestone is no longer another abstract mass-splitting lemma. It is the concrete incidence bridge: define a finite last-coordinate set S, a genuine predicate covered(x,y), and prove that the cardinality numerator card {y in S | covered(x,y)} lies between 0 and card S, with the exact sum/card identity that makes alpha(x) a real proportion. The subsequent hard gate is to derive the fiber normalization for the two-branch update without evaluating 0/0 at alpha=0 or dividing by 1-alpha at alpha=1. Only after that should the hyperplane pair-counting lemma and the second-moment estimate be attempted.
