@@ -511,7 +511,8 @@ axiom sf_sieve_lt_one
       ∧ 1 ≤ ca1
       ∧ ca1 ≤ ca3
       ∧ 0 ≤ ca3 - 2 * ca1 + 1
-      ∧ ∀ i, i < δs.length → 0 ≤ δs.getD i 0 ∧ δs.getD i 0 < 1
+      ∧ ∀ i, i < δs.length → 0 < δs.getD i 0 ∧ δs.getD i 0 < 1
+      ∧ δs.length = primes.length
 
 -- ============================================================================
 -- §9. SIEVE SUM MONOTONICITY (our main contribution)
@@ -772,7 +773,7 @@ theorem erdos_selfridge (K : Nat) (cs : CoveringSystem K) :
   intro h_odd
   let primes := extractPrimes cs
   have h_primes := extractPrimes_valid cs h_odd
-  obtain ⟨δs, ca1, ca3, h_sf_lt, hca1, hca13, hbase, hδ_valid⟩ :=
+  obtain ⟨δs, ca1, ca3, h_sf_lt, hca1, hca13, hbase, hδ_valid, _hδ_len⟩ :=
     sf_sieve_lt_one primes h_primes
   have hca1_pos : 0 < ca1 := by linarith
   have h_blocks_le := sf_le_nonsf_blocks cs h_odd
@@ -783,7 +784,7 @@ theorem erdos_selfridge (K : Nat) (cs : CoveringSystem K) :
     calc sieveSum ca1 ca3 (nonsfBlockSizes cs) δs
         ≤ sieveSum ca1 ca3 (sfBlockSizes cs) δs :=
           sieveSum_antitone (sfBlockSizes cs) (nonsfBlockSizes cs) δs ca1 ca3
-            h_blocks_len hδ (fun i hi => (hδ_valid i hi).1) h_blocks_pos h_blocks_le hca1_pos hca13 hbase
+            h_blocks_len hδ (fun i hi => le_of_lt (hδ_valid i hi).1) h_blocks_pos h_blocks_le hca1_pos hca13 hbase
       _ = sieveSum ca1 ca3 (primes.map (fun p => (p : ℚ) - 1)) δs := by
           rw [sfBlockSizes_eq_map cs h_primes]
       _ < 1 := h_sf_lt
