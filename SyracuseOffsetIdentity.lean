@@ -483,4 +483,6 @@ theorem terminal_divisibility_of_offset_identity
     2 ^ A ∣ 3 ^ j * n0 + C := by
   exact ⟨nj, hidentity.symm⟩
 
+#print axioms terminal_divisibility_of_offset_identity
+
 end CollatzSyracuseAudit
