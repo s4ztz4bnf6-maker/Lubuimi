@@ -110,3 +110,34 @@ theorem numerator_mod_four_eq_two_iff_residue_three (n : ℕ) :
   omega
 
 #print axioms numerator_mod_four_eq_two_iff_residue_three
+
+
+/-- General exact-valuation criterion: for a nonzero natural number, the
+2-adic exponent is exactly a iff the number is divisible by 2^a but not by
+2^(a+1). This packages the divisibility/nondivisibility induction step for
+finite valuation words without hard-coding exponents 1, 2, 3, or 4. -/
+theorem v2_eq_iff_pow_dvd_not_next_pow_dvd
+    (m a : ℕ) (hm : m ≠ 0) :
+    v2 m = a ↔ 2 ^ a ∣ m ∧ ¬ 2 ^ (a + 1) ∣ m := by
+  constructor
+  · intro hv
+    constructor
+    · have hle : a ≤ v2 m := by omega
+      have hpow : 2 ^ a ∣ m :=
+        (Nat.prime_two.pow_dvd_iff_le_factorization hm).mpr hle
+      exact hpow
+    · intro hnext
+      have hle : a + 1 ≤ v2 m :=
+        (Nat.prime_two.pow_dvd_iff_le_factorization hm).mp (by simpa using hnext)
+      omega
+  · rintro ⟨hpow, hnext⟩
+    have hge : a ≤ v2 m :=
+      (Nat.prime_two.pow_dvd_iff_le_factorization hm).mp hpow
+    have hnot : ¬ a + 1 ≤ v2 m := by
+      intro hle
+      have hdiv : 2 ^ (a + 1) ∣ m :=
+        (Nat.prime_two.pow_dvd_iff_le_factorization hm).mpr hle
+      exact hnext (by simpa using hdiv)
+    omega
+
+#print axioms v2_eq_iff_pow_dvd_not_next_pow_dvd
