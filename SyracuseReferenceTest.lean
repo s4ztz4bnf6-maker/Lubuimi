@@ -68,6 +68,20 @@ theorem syracuse_eq_half_of_mod_four_three
 /-- The n = 3 (mod 4) branch grows at its next accelerated step for n > 1.
 This is an explicit obstruction to any proof claiming one-step descent
 for every odd input. -/
+/-- Transition lemma: from n = 3 (mod 8), one accelerated step
+lands in the descending residue class 1 (mod 4). This is a residue
+transition, not a claim that the two-step value is already below n. -/
+theorem syracuse_mod_four_one_of_mod_eight_three
+    (n : ℕ) (hmod : n % 8 = 3) :
+    syracuse n % 4 = 1 := by
+  have hfour : n % 4 = 3 := by omega
+  rw [syracuse_eq_half_of_mod_four_three n hfour]
+  have hnum : (3 * n + 1) % 8 = 2 :=
+    three_mul_add_one_mod_eight_of_mod_eight_three n hmod
+  omega
+
+#print axioms syracuse_mod_four_one_of_mod_eight_three
+
 theorem syracuse_grows_of_mod_four_three
     (n : ℕ) (hn : 2 ≤ n) (hmod : n % 4 = 3) :
     n < syracuse n := by
@@ -90,20 +104,6 @@ theorem three_mul_add_one_mod_eight_of_mod_eight_three
     (n : ℕ) (h : n % 8 = 3) :
     (3 * n + 1) % 8 = 2 := by
   omega
-
-/-- Transition lemma: from n = 3 (mod 8), one accelerated step
-lands in the descending residue class 1 (mod 4). This is a residue
-transition, not a claim that the two-step value is already below n. -/
-theorem syracuse_mod_four_one_of_mod_eight_three
-    (n : ℕ) (hmod : n % 8 = 3) :
-    syracuse n % 4 = 1 := by
-  have hfour : n % 4 = 3 := by omega
-  rw [syracuse_eq_half_of_mod_four_three n hfour]
-  have hnum : (3 * n + 1) % 8 = 2 :=
-    three_mul_add_one_mod_eight_of_mod_eight_three n hmod
-  omega
-
-#print axioms syracuse_mod_four_one_of_mod_eight_three
 
 /-- In the n = 7 (mod 8) branch, the numerator is 6 modulo 8. -/
 theorem three_mul_add_one_mod_eight_of_mod_eight_seven
