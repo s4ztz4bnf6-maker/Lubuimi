@@ -377,10 +377,14 @@ theorem finite_fiber_weighted_partition_mass
     (∑ i ∈ s.image label,
       alpha i * (∑ x ∈ s with label x = i, mass x)) =
         ∑ i ∈ s.image label,
-          ∑ x ∈ s with label x = i, alpha i * mass x := by
+          ∑ x ∈ s with label x = i, alpha (label x) * mass x := by
             apply Finset.sum_congr rfl
             intro i hi
             rw [Finset.mul_sum]
+            apply Finset.sum_congr rfl
+            intro x hx
+            have hxi : label x = i := (Finset.mem_filter.mp hx).2
+            rw [hxi]
     _ = ∑ x ∈ s, alpha (label x) * mass x := by
           exact Finset.sum_fiberwise_of_maps_to (s := s)
             (fun x hx => Finset.mem_image_of_mem label hx)
