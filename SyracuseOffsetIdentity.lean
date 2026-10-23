@@ -444,7 +444,7 @@ theorem canonicalOffset_split
               2 ^ A (m + n) := by rw [ih]
         _ = 3 ^ (n + 1) * canonicalOffset A m +
               (3 * canonicalOffset (fun i => A (m + i)) n +
-                2 ^ A (m + n) := by
+                2 ^ A (m + n)) := by
               rw [pow_succ]
               ring
         _ = 3 ^ (n + 1) * canonicalOffset A m +
