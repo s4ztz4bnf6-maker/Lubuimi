@@ -71,4 +71,16 @@ theorem half_step_exact_growth
 
 #print axioms CollatzSyracuseAudit.half_step_exact_growth
 
+/--
+The pairwise squared-difference aggregate is nonnegative over the rationals.
+Combined with the pairwise square-difference identity, this yields a
+finite Cauchy-Schwarz-shaped inequality without introducing a probability measure.
+-/
+theorem finite_pairwise_square_difference_nonneg
+    {α : Type*} [Fintype α] (f : α → ℚ) :
+    0 ≤ ∑ a : α, ∑ b : α, (f a - f b) ^ 2 := by
+  positivity
+
+#print axioms CollatzSyracuseAudit.finite_pairwise_square_difference_nonneg
+
 end CollatzSyracuseAudit
