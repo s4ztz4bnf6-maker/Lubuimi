@@ -163,3 +163,23 @@ theorem accelerated_step_integer_balance
     _ = (3 - (2 : ℤ) ^ a) * n + 1 := by ring
 
 #print axioms CollatzSyracuseAudit.accelerated_step_integer_balance
+
+
+/--
+A complete accelerated step is strictly descending whenever at least two
+factors of two are removed, provided the input is greater than one.
+The explicit lower-bound hypothesis on the power isolates the arithmetic
+core from the valuation theorem that must establish it in applications.
+-/
+theorem accelerated_step_descent_of_four_le_power
+    (n q : ℤ) (a : ℕ)
+    (hn : 2 ≤ n) (hq : 0 ≤ q)
+    (hpow : 4 ≤ (2 : ℤ) ^ a)
+    (hstep : 3 * n + 1 = (2 : ℤ) ^ a * q) :
+    q < n := by
+  have hmul : 4 * q ≤ (2 : ℤ) ^ a * q :=
+    mul_le_mul_of_nonneg_right hpow hq
+  rw [hstep] at hmul
+  nlinarith
+
+#print axioms CollatzSyracuseAudit.accelerated_step_descent_of_four_le_power
