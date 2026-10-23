@@ -1,4 +1,4 @@
-import SyracuseOffsetIdentity
+import Mathlib
 
 namespace CollatzSyracuseAudit
 
@@ -8,8 +8,7 @@ The affine offset grows at least geometrically: if
 and C 0 = 0, then C k ≥ 3^(k-1) for every positive k.
 
 This is a necessary lower bound on the offset, not a descent theorem.
-In particular, it does not show that the offset margin is positive or
-negative for any given orbit.
+It does not establish the strict offset margin for any actual orbit.
 -/
 theorem offset_lower_bound_of_recurrence
     (A C : ℕ → ℕ)
@@ -27,18 +26,21 @@ theorem offset_lower_bound_of_recurrence
       by_cases hk0 : k = 0
       · subst k
         rw [hrec, hC0]
-        simp
-        exact le_of_lt (pow_pos (by norm_num : 0 < (2 : ℕ)) _)
+        simp only [Nat.succ_eq_add_one, Nat.add_sub_cancel_right, Nat.zero_add]
+        have hpos : 0 < 2 ^ A 0 := pow_pos (by norm_num : 0 < (2 : ℕ)) _
+        exact le_of_lt (by simpa using hpos)
       · have hkpos : 0 < k := Nat.pos_of_ne_zero hk0
         have hprev := ih hkpos
         rw [hrec]
         have hexp : Nat.succ k - 1 = k := by omega
         rw [hexp]
+        have hpow : 3 ^ k = 3 * 3 ^ (k - 1) := by
+          have hle : 1 ≤ k := Nat.succ_le_iff.mpr hkpos
+          have hsub : k - 1 + 1 = k := Nat.sub_add_cancel hle
+          rw [← hsub, pow_succ]
+          omega
         calc
-          3 ^ k = 3 * 3 ^ (k - 1) := by
-            rw [← pow_succ]
-            congr 1
-            omega
+          3 ^ k = 3 * 3 ^ (k - 1) := hpow
           _ ≤ 3 * C k := Nat.mul_le_mul_left 3 hprev
           _ ≤ 3 * C k + 2 ^ A k := Nat.le_add_right _ _
 
