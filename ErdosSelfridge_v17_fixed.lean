@@ -497,6 +497,8 @@ theorem sum_min_max_identity (a b : ℚ) :
     rw [min_eq_right h', max_eq_left h']
     ring
 
+#print axioms sum_min_max_identity
+
 -- ============================================================================
 -- §8. BBMST AXIOMS (exactly 2, translation-safe)
 -- ============================================================================
