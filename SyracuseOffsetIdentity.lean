@@ -105,9 +105,36 @@ theorem descent_iff_offset_margin
   · intro hmargin
     exact strict_descent_of_offset_margin n0 nj A C j hidentity hmargin
 
+
+/--
+An odd quotient certifies maximality of the removed power of two:
+if 2^a * next = 3*n+1 and next is odd, then the right-hand side
+is not divisible by 2^(a+1). This is the exactness condition missing
+from a merely scaled transition equation.
+-/
+theorem exponent_is_maximal_of_odd_quotient
+    (n next a : ℕ)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    ¬ 2 ^ (a + 1) ∣ 3 * n + 1 := by
+  intro hdvd
+  rcases hdvd with ⟨k, hk⟩
+  have hEq : 2 ^ a * next = 2 ^ (a + 1) * k :=
+    hstep.trans hk.symm
+  have hcancel : next = 2 * k := by
+    apply Nat.mul_left_cancel (a := 2 ^ a)
+    calc
+      2 ^ a * next = 2 ^ (a + 1) * k := hEq
+      _ = 2 ^ a * (2 * k) := by
+        rw [pow_succ]
+        ring
+  rw [hcancel] at hnext
+  omega
+
 #print axioms CollatzSyracuseAudit.offset_identity_of_certified_steps
 #print axioms CollatzSyracuseAudit.offset_geometric_lower_bound
 #print axioms CollatzSyracuseAudit.strict_descent_of_offset_margin
 #print axioms CollatzSyracuseAudit.descent_iff_offset_margin
+#print axioms CollatzSyracuseAudit.exponent_is_maximal_of_odd_quotient
 
 end CollatzSyracuseAudit
