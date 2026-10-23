@@ -108,8 +108,7 @@ theorem finite_incidence_deficit_eq_complement_fraction
     1 - (incidences.card : ℚ) / (sample.card : ℚ)
         = ((sample.card : ℚ) - (incidences.card : ℚ)) /
             (sample.card : ℚ) := by
-              field_simp
-              ring
+              field_simp <;> ring
     _ = ((Finset.sdiff sample incidences).card : ℚ) / (sample.card : ℚ) := by
           rw [Finset.card_sdiff_of_subset hinc, Nat.cast_sub hle]
 
