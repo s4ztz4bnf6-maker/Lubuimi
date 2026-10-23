@@ -142,5 +142,8 @@ theorem finite_fiber_mass_parts_variable_alpha_nonneg
 #print axioms fiber_mass_split_one
 #print axioms finite_fiber_mass_split
 #print axioms finite_mass_conservation
+#print axioms finite_fiber_mass_parts_nonneg
+#print axioms finite_fiber_mass_parts_variable_alpha_nonneg
+#print axioms finite_fiber_mass_split_variable_alpha
 
 end BBMSTFiberMassCore
