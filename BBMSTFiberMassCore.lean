@@ -358,4 +358,34 @@ theorem finite_fiber_partition_mass_nonneg
 #print axioms finite_fiber_partition_mass_conservation
 #print axioms finite_fiber_partition_mass_nonneg
 
+
+/-- Weighted fiber decomposition for a genuine label map. A coefficient is
+constant on each fiber, so multiplying each fiber's source mass by its
+label-dependent coefficient is exactly the same as weighting each source
+point by the coefficient of its own label and summing over the source set.
+This is the concrete bridge needed to transfer a conditional fiber bound
+into a global mass bound. -/
+theorem finite_fiber_weighted_partition_mass
+    {Ω Ι : Type*} [DecidableEq Ω] [DecidableEq Ι]
+    (s : Finset Ω) (label : Ω → Ι)
+    (mass : Ω → ℚ) (alpha : Ι → ℚ) :
+    (∑ i ∈ s.image label,
+      alpha i * (∑ x ∈ s with label x = i, mass x)) =
+      ∑ x ∈ s, alpha (label x) * mass x := by
+  classical
+  calc
+    (∑ i ∈ s.image label,
+      alpha i * (∑ x ∈ s with label x = i, mass x)) =
+        ∑ i ∈ s.image label,
+          ∑ x ∈ s with label x = i, alpha i * mass x := by
+            apply Finset.sum_congr rfl
+            intro i hi
+            rw [Finset.mul_sum]
+    _ = ∑ x ∈ s, alpha (label x) * mass x := by
+          exact Finset.sum_fiberwise_of_maps_to
+            (fun x hx => Finset.mem_image_of_mem label hx)
+            (fun x => alpha (label x) * mass x)
+
+#print axioms finite_fiber_weighted_partition_mass
+
 end BBMSTFiberMassCore
