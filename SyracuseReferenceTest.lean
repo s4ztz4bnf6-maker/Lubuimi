@@ -308,5 +308,7 @@ theorem syracuse_second_step_descent_of_mod_sixteen_eleven
   exact syracuse_descent_of_mod_four_one (syracuse n)
     (by omega) hmid_two htransition
 
+#print axioms CollatzSyracuseAudit.syracuse_second_step_descent_of_mod_sixteen_eleven
+
 
 end CollatzSyracuseAudit
