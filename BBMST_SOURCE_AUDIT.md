@@ -56,3 +56,17 @@ The published article and its supplemental-material record clarify a second mism
 The paper's square-free theorem is obtained from a geometric theorem through a Chinese-remainder correspondence. That correspondence and the source's parameter family must be represented in Lean; they are absent from the current generic axiom signatures. Consequently, even restricting `CoveringSystem` to square-free moduli would not by itself validate the current `sf_sieve_lt_one` statement.
 
 **Concrete next milestone:** formalize the fixed finite certificate and its exact rational inequalities first, with the source's exact coordinate indexing. Then formalize the recurrence/tail bound as a separate lemma. Only after both are checked should the generic covering-system bridge be attempted. The unrestricted odd-moduli Erdős–Selfridge conjecture remains a separate open target.
+
+## Source crosswalk added 2026-10-23
+
+A useful independent source map is now available in the open `plasma-ai/erdos` record:
+`library/covering_systems/balister_2021_erdos_selfridge_problem_square_free_moduli/`.
+It separates the published proof into explicit obligations: Lemma 2.1 (fiber measure preservation/distortion), Theorems 3.1–3.2 (moment criterion and moment bounds), Lemmas 5.3–5.4 (initial parameter/certificate), and Corollary 5.2 (large-prime recurrence and termination). Its finite checker uses exact integer/rational arithmetic for the retained certificates; the record explicitly does **not** claim those checks are Lean verification.
+
+This crosswalk sharpens the repository repair plan:
+
+- `sieve_criterion` is not a faithful statement of Theorem 3.1 by itself. The source theorem requires the geometric product-space setup, the evolving measures, and moment bounds from Theorem 3.2.
+- `sf_sieve_lt_one` is not Theorem 1.1. The published result uses the specific odd-prime box, an initial finite certificate, a parameter range, and a separately justified tail recurrence.
+- A faithful Lean port should start with the algebraic/fiber-mass core of Lemma 2.1 (including the `α=0` and `α=1` branches), then the moment inequalities, and only then the finite certificate and tail bound. It should not retain a universal prime-list axiom as a shortcut.
+
+Reference: https://github.com/plasma-ai/erdos/tree/main/library/covering_systems/balister_2021_erdos_selfridge_problem_square_free_moduli
