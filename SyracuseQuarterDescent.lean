@@ -143,3 +143,23 @@ theorem two_half_steps_growth_of_mod_eight_seven
 #print axioms CollatzSyracuseAudit.two_half_steps_growth_of_mod_eight_seven
 
 end CollatzSyracuseAudit
+
+
+/--
+Exact integer balance for a fully accelerated odd step.  If
+`3*n + 1 = 2^a*q`, then the signed change `q - n`
+satisfies this identity.  This is the algebraic core behind the logarithmic
+potential discussion, but by itself gives no lower bound on the cumulative
+exponents `a` and hence no global termination theorem.
+-/
+theorem accelerated_step_integer_balance
+    (n q : ℤ) (a : ℕ)
+    (hstep : 3 * n + 1 = (2 : ℤ) ^ a * q) :
+    (2 : ℤ) ^ a * (q - n) = (3 - (2 : ℤ) ^ a) * n + 1 := by
+  calc
+    (2 : ℤ) ^ a * (q - n)
+        = (2 : ℤ) ^ a * q - (2 : ℤ) ^ a * n := by ring
+    _ = (3 * n + 1) - (2 : ℤ) ^ a * n := by rw [hstep]
+    _ = (3 - (2 : ℤ) ^ a) * n + 1 := by ring
+
+#print axioms CollatzSyracuseAudit.accelerated_step_integer_balance
