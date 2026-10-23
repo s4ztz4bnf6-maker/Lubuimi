@@ -298,3 +298,25 @@ theorem prefix_descent_or_offset_obstruction
 #print axioms prefix_descent_or_offset_obstruction
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- Every realized finite valuation prefix satisfies the necessary
+2-adic divisibility condition for its affine numerator. This is the
+kernel-facing form of the valuation-cylinder congruence; it does not assert
+that an arbitrary residue-class representative realizes the prescribed
+exact valuations. -/
+theorem affine_prefix_divisibility
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
+    (k : ℕ) :
+    2 ^ cumulativeExponent a k ∣
+      3 ^ k * n 0 + affineConstantTerm a k := by
+  have hid := affine_iteration_identity a n hstep k
+  refine ⟨n k, ?_⟩
+  simpa [Nat.mul_comm] using hid.symm
+
+#print axioms affine_prefix_divisibility
+
+end CollatzSyracuseAudit
