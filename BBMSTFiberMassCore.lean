@@ -436,4 +436,33 @@ theorem finite_fiber_weighted_partition_lower_bound
 #print axioms finite_fiber_weighted_partition_upper_bound
 #print axioms finite_fiber_weighted_partition_lower_bound
 
+
+/-- Map-derived two-sided weighted-fiber squeeze. If every attained label's
+coefficient lies between beta and gamma on the source points, then the
+actual sum over fibers is bounded by beta and gamma times total source
+mass. This packages the partition identity and both monotone bounds into
+one interface for later geometric conditional-probability estimates. -/
+theorem finite_fiber_weighted_partition_squeeze
+    {Ω Ι : Type*} [DecidableEq Ω] [DecidableEq Ι]
+    (s : Finset Ω) (label : Ω → Ι)
+    (mass : Ω → ℚ) (alpha : Ι → ℚ) (beta gamma : ℚ)
+    (hmass : ∀ x ∈ s, 0 ≤ mass x)
+    (hlower : ∀ x ∈ s, beta ≤ alpha (label x))
+    (hupper : ∀ x ∈ s, alpha (label x) ≤ gamma) :
+    beta * (∑ x ∈ s, mass x) ≤
+        (∑ i ∈ s.image label,
+          alpha i * (∑ x ∈ s with label x = i, mass x)) ∧
+      (∑ i ∈ s.image label,
+          alpha i * (∑ x ∈ s with label x = i, mass x)) ≤
+        gamma * (∑ x ∈ s, mass x) := by
+  exact ⟨
+    finite_fiber_weighted_partition_lower_bound
+      s label mass alpha beta hmass hlower,
+    finite_fiber_weighted_partition_upper_bound
+      s label mass alpha gamma hmass hupper
+  ⟩
+
+#print axioms finite_fiber_weighted_partition_squeeze
+
+
 end BBMSTFiberMassCore
