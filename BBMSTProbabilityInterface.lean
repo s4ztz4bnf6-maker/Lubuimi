@@ -187,7 +187,7 @@ theorem predicate_incidence_deficit_eq_uncovered_fraction
   have hdef := finite_incidence_deficit_eq_complement_fraction
     sample (sample.filter covered) hinc hnonempty
   have hcompl :
-      Finset.sdiff sample (sample.filter covered) =
+      sample \ (sample.filter covered) =
         sample.filter (fun x => ¬ covered x) := by
     ext x
     simp
@@ -212,7 +212,7 @@ theorem predicate_incidence_fraction_lt_one_iff_uncovered
   have hiff := finite_incidence_fraction_lt_one_iff_complement_nonempty
     sample (sample.filter covered) hinc hnonempty
   have hcompl :
-      Finset.sdiff sample (sample.filter covered) =
+      sample \ (sample.filter covered) =
         sample.filter (fun x => ¬ covered x) := by
     ext x
     simp
