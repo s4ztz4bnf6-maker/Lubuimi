@@ -28,7 +28,7 @@ theorem offset_lower_bound_of_recurrence
         rw [hrec, hC0]
         simp only [Nat.succ_eq_add_one, Nat.add_sub_cancel_right, Nat.zero_add]
         have hpos : 0 < 2 ^ A 0 := pow_pos (by norm_num : 0 < (2 : ℕ)) _
-        exact le_of_lt (by simpa using hpos)
+        omega
       · have hkpos : 0 < k := Nat.pos_of_ne_zero hk0
         have hprev := ih hkpos
         rw [hrec]
@@ -38,7 +38,7 @@ theorem offset_lower_bound_of_recurrence
           have hle : 1 ≤ k := Nat.succ_le_iff.mpr hkpos
           have hsub : k - 1 + 1 = k := Nat.sub_add_cancel hle
           rw [← hsub, pow_succ]
-          omega
+          ring
         calc
           3 ^ k = 3 * 3 ^ (k - 1) := hpow
           _ ≤ 3 * C k := Nat.mul_le_mul_left 3 hprev
