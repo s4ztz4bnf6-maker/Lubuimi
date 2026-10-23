@@ -788,3 +788,15 @@ theorem erdos_selfridge (K : Nat) (cs : CoveringSystem K) :
           rw [sfBlockSizes_eq_map cs h_primes]
       _ < 1 := h_sf_lt
   exact sieve_criterion cs h_odd δs ca1 ca3 hca1 h_nonsf_lt
+
+
+/-
+  AXIOM AUDIT:
+  The theorem above is not an axiom-free kernel proof of the conjecture.
+  Lean's dependency report must continue to expose the two admitted BBMST
+  interfaces (`sieve_criterion` and `sf_sieve_lt_one`).
+  This diagnostic is intentionally kept in the source so CI logs make the
+  dependency boundary visible; replacing these axioms with proved statements
+  (or fully stated, source-faithful hypotheses) remains a separate obligation.
+-/
+#print axioms erdos_selfridge
