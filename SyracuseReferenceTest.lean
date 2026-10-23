@@ -291,4 +291,22 @@ theorem syracuse_descent_of_mod_eight_five
   exact (Nat.dvd_iff_mod_eq_zero.mpr (by omega : (3 * n + 1) % 8 = 0))
 
 
+/-- In the n = 11 (mod 16) branch, the first accelerated step lands in
+1 (mod 4), so the *following* step strictly decreases relative to the
+intermediate value. This does not assert that the two-step value is
+already below the original n. -/
+theorem syracuse_second_step_descent_of_mod_sixteen_eleven
+    (n : ℕ) (hn_two : 2 ≤ n) (hmod : n % 16 = 11) :
+    syracuse (syracuse n) < syracuse n := by
+  have htransition : syracuse n % 4 = 1 :=
+    syracuse_mod_four_one_of_mod_sixteen_eleven n hmod
+  have hmid_two : 2 ≤ syracuse n := by
+    have hfirst : syracuse n = (3 * n + 1) / 2 := by
+      rw [syracuse_eq_half_of_mod_four_three n (by omega)]
+    rw [hfirst]
+    omega
+  exact syracuse_descent_of_mod_four_one (syracuse n)
+    (by omega) hmid_two htransition
+
+
 end CollatzSyracuseAudit
