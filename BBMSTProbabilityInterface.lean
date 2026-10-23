@@ -190,7 +190,8 @@ theorem predicate_incidence_deficit_eq_uncovered_fraction
       sample \ (sample.filter covered) =
         sample.filter (fun x => ¬ covered x) := by
     ext x
-    simp
+    simp only [Finset.mem_sdiff, Finset.mem_filter]
+    tauto
   rw [hcompl] at hdef
   exact hdef
 
@@ -215,7 +216,8 @@ theorem predicate_incidence_fraction_lt_one_iff_uncovered
       sample \ (sample.filter covered) =
         sample.filter (fun x => ¬ covered x) := by
     ext x
-    simp
+    simp only [Finset.mem_sdiff, Finset.mem_filter]
+    tauto
   rw [hcompl] at hiff
   exact hiff
 
