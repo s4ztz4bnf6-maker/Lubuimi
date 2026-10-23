@@ -343,3 +343,36 @@ theorem quotient_odd_of_exact_two_power
 #print axioms quotient_odd_of_exact_two_power
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- The quotient in an exact one-step factorization is even exactly when
+the numerator admits one additional factor of two. This makes the local
+valuation-exactness condition an equivalence, not only a one-way obstruction. -/
+theorem even_quotient_iff_next_power_dvd
+    (a n q : ℕ)
+    (hstep : 2 ^ a * q = 3 * n + 1) :
+    2 ∣ q ↔ 2 ^ (a + 1) ∣ 3 * n + 1 := by
+  constructor
+  · intro heven
+    obtain ⟨m, hm⟩ := heven
+    refine ⟨m, ?_⟩
+    calc
+      3 * n + 1 = 2 ^ a * q := hstep.symm
+      _ = 2 ^ a * (2 * m) := by rw [hm]
+      _ = 2 ^ (a + 1) * m := by rw [pow_succ]; ring
+  · intro hdiv
+    obtain ⟨m, hm⟩ := hdiv
+    have hmul : 2 ^ a * q = 2 ^ a * (2 * m) := by
+      calc
+        2 ^ a * q = 3 * n + 1 := hstep
+        _ = 2 ^ (a + 1) * m := hm
+        _ = 2 ^ a * (2 * m) := by rw [pow_succ]; ring
+    have hq : q = 2 * m :=
+      Nat.eq_of_mul_eq_mul_left (by positivity : 0 < 2 ^ a) hmul
+    exact ⟨m, hq⟩
+
+#print axioms even_quotient_iff_next_power_dvd
+
+end CollatzSyracuseAudit
