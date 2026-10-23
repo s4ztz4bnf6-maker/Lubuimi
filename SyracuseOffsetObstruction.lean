@@ -47,7 +47,6 @@ theorem strict_descent_forces_scale_gt
 
 #print axioms strict_descent_forces_scale_gt
 
-
 /-- Exact descent criterion with the additive affine residual exposed.
 Unlike the scale-only obstruction, this equivalence is both necessary and
 sufficient: the valuation scale and the accumulated offset must be compared
@@ -78,7 +77,6 @@ theorem strict_descent_iff_affine_margin
     exact Nat.lt_of_mul_lt_mul_left hmul
 
 #print axioms strict_descent_iff_affine_margin
-
 
 /-- A finite valuation word is realizable only when it is carried by an
 actual state sequence. The exact valuation field rules out symbolic
@@ -111,33 +109,32 @@ theorem numerator_mod_four_eq_two_iff_residue_three (n : ℕ) :
 
 #print axioms numerator_mod_four_eq_two_iff_residue_three
 
-
 /-- General exact-valuation criterion: for a nonzero natural number, the
 2-adic exponent is exactly a iff the number is divisible by 2^a but not by
 2^(a+1). This packages the divisibility/nondivisibility induction step for
 finite valuation words without hard-coding exponents 1, 2, 3, or 4. -/
 theorem v2_eq_iff_pow_dvd_not_next_pow_dvd
     (m a : ℕ) (hm : m ≠ 0) :
-    v2 m = a ↔ 2 ^ a ∣ m ∧ ¬ 2 ^ (a + 1) ∣ m := by
+    CollatzSyracuseAudit.v2 m = a ↔
+      2 ^ a ∣ m ∧ ¬ 2 ^ (a + 1) ∣ m := by
+  unfold CollatzSyracuseAudit.v2
+  have hpow : Nat.factorization 2 m ≥ a ↔ 2 ^ a ∣ m := by
+    rw [Nat.prime_two.pow_dvd_iff_le_factorization hm]
+  have hnext :
+      Nat.factorization 2 m ≥ a + 1 ↔ 2 ^ (a + 1) ∣ m := by
+    rw [Nat.prime_two.pow_dvd_iff_le_factorization hm]
   constructor
   · intro hv
     constructor
-    · have hle : a ≤ v2 m := by omega
-      have hpow : 2 ^ a ∣ m :=
-        (Nat.prime_two.pow_dvd_iff_le_factorization hm).mpr hle
-      exact hpow
-    · intro hnext
-      have hle : a + 1 ≤ v2 m :=
-        (Nat.prime_two.pow_dvd_iff_le_factorization hm).mp (by simpa using hnext)
+    · exact (hpow).2 (by omega)
+    · intro hdiv
+      have hle := (hnext).2 hdiv
       omega
-  · rintro ⟨hpow, hnext⟩
-    have hge : a ≤ v2 m :=
-      (Nat.prime_two.pow_dvd_iff_le_factorization hm).mp hpow
-    have hnot : ¬ a + 1 ≤ v2 m := by
+  · rintro ⟨hdiv, hnot⟩
+    have hge := (hpow).1 hdiv
+    have hnotle : ¬ Nat.factorization 2 m ≥ a + 1 := by
       intro hle
-      have hdiv : 2 ^ (a + 1) ∣ m :=
-        (Nat.prime_two.pow_dvd_iff_le_factorization hm).mpr hle
-      exact hnext (by simpa using hdiv)
+      exact hnot ((hnext).1 hle)
     omega
 
 #print axioms v2_eq_iff_pow_dvd_not_next_pow_dvd
