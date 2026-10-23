@@ -324,4 +324,38 @@ theorem finite_fiber_mass_squeeze
 
 #print axioms finite_fiber_mass_squeeze
 
+
+/-- The fibers of a map partition a finite sample set: summing the source
+mass inside each fiber and then summing over the attained fiber labels
+recovers the original total mass. Unlike the abstract pointwise split
+lemmas above, this identity constructs the fibers from an actual map and
+uses the finite partition theorem. -/
+theorem finite_fiber_partition_mass_conservation
+    {Ω Ι : Type*} [DecidableEq Ω] [DecidableEq Ι]
+    (s : Finset Ω) (label : Ω → Ι) (mass : Ω → ℚ) :
+    (∑ i ∈ s.image label,
+      ∑ x ∈ s with label x = i, mass x) =
+      ∑ x ∈ s, mass x := by
+  classical
+  exact Finset.sum_fiberwise_of_maps_to
+    (fun x hx => Finset.mem_image_of_mem label hx) mass
+
+/-- If all point masses are nonnegative, every fiber mass in the concrete
+finite partition is nonnegative. This gives the positivity hypothesis
+needed by the weighted-envelope estimates without postulating fiber masses
+as unrelated data. -/
+theorem finite_fiber_partition_mass_nonneg
+    {Ω Ι : Type*} [DecidableEq Ω] [DecidableEq Ι]
+    (s : Finset Ω) (label : Ω → Ι) (mass : Ω → ℚ)
+    (hmass : ∀ x ∈ s, 0 ≤ mass x) :
+    ∀ i ∈ s.image label,
+      0 ≤ ∑ x ∈ s with label x = i, mass x := by
+  intro i hi
+  apply Finset.sum_nonneg
+  intro x hx
+  exact hmass x (Finset.mem_filter.mp hx).1
+
+#print axioms finite_fiber_partition_mass_conservation
+#print axioms finite_fiber_partition_mass_nonneg
+
 end BBMSTFiberMassCore
