@@ -470,4 +470,17 @@ theorem canonicalOffset_split
 
 #print axioms canonicalOffset_split
 
+
+/--
+Terminal divisibility filter for a certified Syracuse block. Any exact
+affine identity forces the offset-adjusted numerator to be divisible by
+the accumulated power of two. This is a necessary arithmetic filter for
+candidate exponent words, not a sufficient orbit-realizability criterion.
+-/
+theorem terminal_divisibility_of_offset_identity
+    (n0 nj A C j : ℕ)
+    (hidentity : 2 ^ A * nj = 3 ^ j * n0 + C) :
+    2 ^ A ∣ 3 ^ j * n0 + C := by
+  exact ⟨nj, by simpa [Nat.mul_comm] using hidentity⟩
+
 end CollatzSyracuseAudit
