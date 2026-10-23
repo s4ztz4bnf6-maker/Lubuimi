@@ -61,7 +61,7 @@ theorem mod32_three_two_step_descent (k : ℕ) :
     calc
       (syracuse (syracuse (32 * k + 3)) : ℚ) ≤
           (9 / 32 : ℚ) * (32 * k + 3) + 5 / 32 := hb
-      _ = (9 * k + 1 : ℚ) := by push_cast; ring
+      _ ≤ ((9 * k + 1 : ℕ) : ℚ) := le_of_eq (by push_cast; ring)
   have hn : syracuse (syracuse (32 * k + 3)) ≤ 9 * k + 1 :=
     Nat.cast_le.mp hq
   omega
