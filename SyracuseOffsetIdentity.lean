@@ -250,9 +250,9 @@ theorem offset_margin_iff_gap_product
     (n0 A C j : ℕ) (hgap : 3 ^ j ≤ 2 ^ A) :
     3 ^ j * n0 + C < 2 ^ A * n0 ↔
       C < (2 ^ A - 3 ^ j) * n0 := by
-  have hdecomp : 2 ^ A = (2 ^ A - 3 ^ j) + 3 ^ j :=
+  have hdecomp : (2 ^ A - 3 ^ j) + 3 ^ j = 2 ^ A :=
     Nat.sub_add_cancel hgap
-  rw [hdecomp, Nat.add_mul]
+  rw [← hdecomp, Nat.add_mul]
   omega
 
 #print axioms offset_margin_iff_gap_product
