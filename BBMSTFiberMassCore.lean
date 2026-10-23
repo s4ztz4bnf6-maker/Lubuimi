@@ -388,4 +388,52 @@ theorem finite_fiber_weighted_partition_mass
 
 #print axioms finite_fiber_weighted_partition_mass
 
+
+/-- Concrete weighted-fiber upper bound: when the label-dependent weight is
+at most beta on every source point and source masses are nonnegative, the
+weighted sum over fibers is at most beta times the original mass. This
+combines the map-derived fiber identity with a pointwise envelope, so the
+fiber masses are not arbitrary independent variables. -/
+theorem finite_fiber_weighted_partition_upper_bound
+    {Ω Ι : Type*} [DecidableEq Ω] [DecidableEq Ι]
+    (s : Finset Ω) (label : Ω → Ι)
+    (mass : Ω → ℚ) (alpha : Ι → ℚ) (beta : ℚ)
+    (hmass : ∀ x ∈ s, 0 ≤ mass x)
+    (halpha : ∀ x ∈ s, alpha (label x) ≤ beta) :
+    (∑ i ∈ s.image label,
+      alpha i * (∑ x ∈ s with label x = i, mass x)) ≤
+      beta * (∑ x ∈ s, mass x) := by
+  rw [finite_fiber_weighted_partition_mass]
+  calc
+    (∑ x ∈ s, alpha (label x) * mass x) ≤
+        ∑ x ∈ s, beta * mass x := by
+          apply Finset.sum_le_sum
+          intro x hx
+          exact mul_le_mul_of_nonneg_right (halpha x hx) (hmass x hx)
+    _ = beta * (∑ x ∈ s, mass x) := by
+          rw [Finset.mul_sum]
+
+/-- Concrete weighted-fiber lower bound, dual to the upper-envelope lemma. -/
+theorem finite_fiber_weighted_partition_lower_bound
+    {Ω Ι : Type*} [DecidableEq Ω] [DecidableEq Ι]
+    (s : Finset Ω) (label : Ω → Ι)
+    (mass : Ω → ℚ) (alpha : Ι → ℚ) (beta : ℚ)
+    (hmass : ∀ x ∈ s, 0 ≤ mass x)
+    (halpha : ∀ x ∈ s, beta ≤ alpha (label x)) :
+    beta * (∑ x ∈ s, mass x) ≤
+      (∑ i ∈ s.image label,
+        alpha i * (∑ x ∈ s with label x = i, mass x)) := by
+  rw [finite_fiber_weighted_partition_mass]
+  calc
+    beta * (∑ x ∈ s, mass x) =
+        ∑ x ∈ s, beta * mass x := by
+          rw [Finset.mul_sum]
+    _ ≤ ∑ x ∈ s, alpha (label x) * mass x := by
+          apply Finset.sum_le_sum
+          intro x hx
+          exact mul_le_mul_of_nonneg_right (halpha x hx) (hmass x hx)
+
+#print axioms finite_fiber_weighted_partition_upper_bound
+#print axioms finite_fiber_weighted_partition_lower_bound
+
 end BBMSTFiberMassCore
