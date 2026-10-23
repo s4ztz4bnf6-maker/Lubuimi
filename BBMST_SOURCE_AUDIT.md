@@ -101,3 +101,16 @@ The dedicated workflow successfully ran `lake env lean ErdosSelfridge_v17_fixed.
 ```
 
 These are Lean's standard foundational/classical axioms for this development, not the project's two admitted sieve placeholders. In contrast, the same compile printed `sf_sieve_lt_one` and `sieve_criterion` in the dependency list of `erdos_selfridge`. This is the exact current boundary between a checked local lemma and the unproved global bridge.
+
+
+## Finite mass-core progress (2026-10-23)
+
+The separate module `BBMSTFiberMassCore.lean` now contains:
+
+- `fiber_mass_split`, including the endpoint cases `alpha = 0` and `alpha = 1`, without division;
+- `finite_fiber_mass_split`, the corresponding rational identity summed over a finite index set;
+- `finite_mass_conservation`, which lifts a pointwise retained-plus-removed identity to a finite total-mass identity.
+
+These are deliberately algebraic lemmas. They do **not** yet encode the paper's probability measure, fiber map, conditional proportions, or distortion bounds, and they do not discharge either admitted sieve axiom. The next source-faithful step is to define the finite sample space and fibers explicitly, prove that the relevant fibers partition the sample space, and derive the paper's mass identities from those definitions rather than from a freely supplied pointwise hypothesis.
+
+CI must pass for the current module before these additions are treated as Lean-checked. Afterward, record the actual `#print axioms` output for `finite_fiber_mass_split` and `finite_mass_conservation`; the expected acceptable baseline is Lean's standard logical/classical axioms only, but that expectation is not a substitute for the recorded output.
