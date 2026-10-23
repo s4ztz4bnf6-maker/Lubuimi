@@ -76,3 +76,18 @@ theorem syracuse_descent_of_four_dvd
 #print axioms CollatzSyracuseAudit.syracuse_descent_of_four_dvd
 
 end CollatzSyracuseAudit
+
+/--
+Residue-class corollary for the actual valuation-based Syracuse map:
+every odd n > 1 with n = 1 (mod 4) strictly descends after removing
+all powers of two from 3*n+1. Unlike the quarter-step identity alone,
+this theorem connects the residue condition to the implemented map.
+-/
+theorem syracuse_descent_of_mod_four_one
+    (n : ℕ) (hn : n % 2 = 1) (hn_two : 2 ≤ n)
+    (hmod : n % 4 = 1) :
+    syracuse n < n := by
+  apply syracuse_descent_of_four_dvd n hn hn_two
+  omega
+
+#print axioms CollatzSyracuseAudit.syracuse_descent_of_mod_four_one
