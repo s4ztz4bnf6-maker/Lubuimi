@@ -95,6 +95,29 @@ theorem positive_exponent_of_odd_transition
   norm_num at hstep
   omega
 
+/-!
+The accumulated 2-adic exponent is at least the number of accelerated odd
+steps whenever every certified transition removes at least one factor of two.
+This is a rigorous baseline growth bound. Since 3^N grows faster than 2^N,
+the estimate alone is explicitly insufficient for the global descent margin.
+-/
+
+theorem accumulated_exponent_ge_step_count
+    (A a : ℕ → ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (ha : ∀ j, 0 < a j) :
+    ∀ j, j ≤ A j := by
+  intro j
+  induction j with
+  | zero =>
+      simp [hA0]
+  | succ j ih =>
+      rw [hA j]
+      omega
+
+#print axioms accumulated_exponent_ge_step_count
+
 /--
 A strict offset margin is sufficient for a genuine decrease of the iterate.
 This isolates the exact inequality still needed after the offset identity:
