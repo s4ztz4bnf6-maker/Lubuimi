@@ -51,3 +51,29 @@ The BBMST/Hough distortion method does not stop at a product-measure identity. I
 ## Status discipline
 
 A green CI run is evidence only for the steps actually completed. A Lean compilation is not automatically an axiom audit, and neither local descent certificates nor finite-product identities imply the global Erdős–Selfridge or Syracuse conjecture. Record separately: source change, compile status, #print axioms, and mathematical scope.
+
+
+## 2026-10-23 follow-up: research-derived alternative routes
+
+### Syracuse: what the strongest established result does and does not give us
+
+Tao's 2022 paper proves that almost every starting value (in logarithmic density) has an orbit reaching below any prescribed function tending to infinity. The proof route is not a uniform pointwise descent lemma: it uses stabilization of a first-passage random variable, 3-adic distribution, and Fourier decay for a skew random walk. Reference: https://www.cambridge.org/core/journals/forum-of-mathematics-pi/article/almost-all-orbits-of-the-collatz-map-attain-almost-bounded-values/1008CC2DF91AF87F66D190C5E01C907F
+
+This identifies the precise transfer gap for our deterministic certificates: an affine-prefix obstruction bounds a start value for one realized valuation word, but it does not control the distribution or coverage of all realized words. Proposed alternative architecture:
+1. Keep the current exact affine identity as a deterministic certificate layer.
+2. Add a finite-modulus/valuation-word layer recording which prefixes are genuinely realizable, rather than treating exponent words as independent symbols.
+3. Investigate whether a quantitative distribution statement over residue classes can bound the measure of starts that avoid all certified descent prefixes.
+4. Keep the exceptional set explicit. An almost-all result, even if formalized, is not the universal Collatz conjecture.
+
+The relevant frontier is not another local congruence lemma by itself. It is a coverage/transport theorem connecting exact finite prefixes to all starting values. Tao's Fourier/mixing machinery explains why this is difficult: local residue facts do not supply the high-frequency decay or first-passage stabilization needed for global statistical conclusions.
+
+### BBMST: translate distortion into a verifiable likelihood-ratio obligation
+
+The Hough/BBMST distortion method is designed to control how probability mass changes while avoiding progressions are exposed; it is not a consequence of product-measure normalization alone. The published overview explicitly presents distortion as a general method and reports the reduction of the minimum-modulus bound. References: https://doi.org/10.1007/s10474-020-01048-z and https://doi.org/10.1007/s00222-021-01087-5
+
+Our finite-product factorization and cylinder-mass identity should therefore be treated as the exact base case, not the main theorem. For a stage transition from measure mu_j to mu_(j+1), the proof obligation should be stated as a pointwise or conditional likelihood-ratio bound with explicit constants. Compose the bounds only after proving each stage constant from the actual BBMST geometry. If a useful pointwise bound fails, the alternative is to partition states into good/bad distortion classes and bound the total mass of the bad class; this is a research proposal, not an established theorem.
+
+### Current engineering consequence
+
+The generic dependent-Pi factorization now explicitly asks Lean for the Fintype instance on the Pi type. This fixes the elaboration boundary at the theorem signature, but does not certify that the theorem compiles. The CI and axiom audit remain the authority. The latest Syracuse change also corrected the floor-bound type to state n0 <= C_k / D_k as a single Nat inequality.
+
