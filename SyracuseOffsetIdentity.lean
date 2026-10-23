@@ -46,7 +46,26 @@ theorem strict_descent_of_offset_margin
     exact hmargin
   exact (Nat.mul_lt_mul_left (pow_pos (by norm_num : 0 < (2 : ℕ)) A)).mp hprod
 
+/--
+Under the exact offset identity, descent is equivalent to the strict margin.
+This is a characterization, not a proof that any given trajectory satisfies
+the margin.
+-/
+theorem descent_iff_offset_margin
+    (n0 nj A C j : ℕ)
+    (hidentity : 2 ^ A * nj = 3 ^ j * n0 + C) :
+    nj < n0 ↔ 3 ^ j * n0 + C < 2 ^ A * n0 := by
+  constructor
+  · intro hdesc
+    have hprod : 2 ^ A * nj < 2 ^ A * n0 :=
+      (Nat.mul_lt_mul_left (pow_pos (by norm_num : 0 < (2 : ℕ)) A)).mpr hdesc
+    rw [hidentity] at hprod
+    exact hprod
+  · intro hmargin
+    exact strict_descent_of_offset_margin n0 nj A C j hidentity hmargin
+
 #print axioms CollatzSyracuseAudit.offset_identity_of_certified_steps
 #print axioms CollatzSyracuseAudit.strict_descent_of_offset_margin
+#print axioms CollatzSyracuseAudit.descent_iff_offset_margin
 
 end CollatzSyracuseAudit
