@@ -279,7 +279,7 @@ theorem finite_fiber_mass_ge_uniform_floor
   calc
     beta * (∑ i ∈ s, mass i) =
         ∑ i ∈ s, beta * mass i := by
-      rw [Finset.mul_sum]
+      rw [← Finset.mul_sum]
     _ ≤ ∑ i ∈ s, alpha i * mass i := by
       apply Finset.sum_le_sum
       intro i hi
