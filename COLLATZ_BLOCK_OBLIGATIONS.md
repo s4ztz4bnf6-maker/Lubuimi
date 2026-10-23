@@ -40,3 +40,20 @@ The project is now pinned to Lean/Mathlib v4.34.1. This is a deliberate trust-bo
 The workflow's explicit elan default toolchain was updated as well as `lean-toolchain` and `lakefile.lean`; all three must agree or CI may silently test a different toolchain than the project pin.
 
 Trust status remains conditional until the new CI jobs finish. A successful ordinary Lean build checks proof terms with the selected kernel, but does not by itself establish independent-kernel agreement. Before treating any result as a high-assurance certificate, re-run the relevant closure with a current independent checker (for example current `nanoda`) and preserve the checker version, commit SHA, command, and output. `#print axioms` is necessary for dependency auditing but is not a substitute for a sound kernel or independent recheck.
+
+
+## External claim audit (2026-10-23)
+
+A broad source search found two relevant public Lean projects whose status must be distinguished carefully:
+
+- `AIDoctrine/CollatzLayerA` (README dated 2026-03-09) advertises a complete Collatz proof, but its own proof chain explicitly depends on two declared axioms: `base_case_109` (convergence for every positive input below (2^{109})) and `odd_steps_certificate` (a uniform contracting-segment assertion for every sufficiently large odd input in a specified residue class). These are not discharged by a successful compilation or by having zero `sorry`; they are mathematical obligations. The README itself says the cited exhaustive verification by Barina reached (2^{68}), not (2^{109}), and describes the second axiom as a structural certificate justified by several heuristic or statistical pathways. Until independently derived and verified, this is not an axiom-free proof of Collatz.
+- `innerlightr-wq/eoc-lean-verification` explicitly states that Collatz remains open. Its verified ShapeTail and valuation-word infrastructure is conditional in the remaining analytic chain on `PowerOfTwoDangerousWindowSparsity`; the repository does not claim this open hypothesis is proved.
+
+These projects are useful adversarial comparators, not imported proof premises. Their strongest useful methodological lesson is to isolate the global uniform-block statement as a named obligation. Our Syracuse block certificate does exactly that at the arithmetic interface, but we still need to prove that actual trajectories supply sufficient descent margins for all positive starts.
+
+References:
+- CollatzLayerA repository and its own axiom declarations: https://github.com/AIDoctrine/CollatzLayerA
+- EOC Lean verification and its explicit open arithmetic frontier: https://github.com/innerlightr-wq/eoc-lean-verification
+- Conditional cycle formalization, including its October 2026 erratum and explicit hypotheses: https://collatz-lab.org/papers/
+
+This is a source-status audit, not a counterexample to those projects' individual proved lemmas and not a proof of the Collatz conjecture.
