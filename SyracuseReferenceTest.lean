@@ -230,6 +230,18 @@ theorem syracuse_le_eighth_numerator_of_mod_eight_five
 #print axioms div_pow_le_div_eight
 #print axioms syracuse_le_eighth_numerator_of_mod_eight_five
 
+/-- Pointwise strict descent on the residue class n = 5 (mod 8).
+The valuation bound gives T(n) ≤ (3*n+1)/8, which is strictly below n
+for every positive n. This is a one-step result for this residue class,
+not a universal descent theorem. -/
+theorem syracuse_lt_self_of_mod_eight_five
+    (n : ℕ) (hn : 1 ≤ n) (hmod : n % 8 = 5) :
+    syracuse n < n := by
+  have hbound := syracuse_le_eighth_numerator_of_mod_eight_five n hmod
+  omega
+
+#print axioms syracuse_lt_self_of_mod_eight_five
+
 /-- Two-step strict descent on the n = 3 (mod 16) branch.
 The first step lands at 5 (mod 8), forcing at least three factors of
 two at the next numerator. The hypothesis n ≥ 6 makes the resulting
