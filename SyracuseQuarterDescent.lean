@@ -179,7 +179,10 @@ theorem accelerated_step_descent_of_four_le_power
     q < n := by
   have hmul : 4 * q ≤ (2 : ℤ) ^ a * q :=
     mul_le_mul_of_nonneg_right hpow hq
-  rw [hstep] at hmul
+  have hmul' : 4 * q ≤ 3 * n + 1 := by
+    calc
+      4 * q ≤ (2 : ℤ) ^ a * q := hmul
+      _ = 3 * n + 1 := by rw [← hstep]
   nlinarith
 
 #print axioms accelerated_step_descent_of_four_le_power
