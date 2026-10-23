@@ -136,6 +136,29 @@ theorem finite_fiber_mass_parts_variable_alpha_nonneg
     intro i hi
     exact mul_nonneg (sub_nonneg.mpr (ha1 i hi)) (hmass i hi)
 
+
+/-- The retained/removed conservation law is valid pointwise even when
+the retained fraction varies by fiber. This packages the split in the
+same form consumed by the general finite_mass_conservation theorem. -/
+theorem variable_alpha_fiber_conservation
+    (mass alpha : ℚ) :
+    alpha * mass + (1 - alpha) * mass = mass := by
+  ring
+
+/-- A finite family with varying local fractions conserves total mass.
+This is the direct retained-plus-removed interface for the fiber model. -/
+theorem finite_variable_alpha_mass_conservation
+    {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (mass alpha : ι → ℚ) :
+    (∑ i ∈ s, alpha i * mass i) +
+      (∑ i ∈ s, (1 - alpha i) * mass i) =
+      ∑ i ∈ s, mass i := by
+  classical
+  rw [← Finset.sum_add_distrib]
+  apply Finset.sum_congr rfl
+  intro i hi
+  ring
+
 /- Explicit dependency audit for the conservation identities. -/
 #print axioms fiber_mass_split
 #print axioms fiber_mass_split_zero
@@ -145,5 +168,7 @@ theorem finite_fiber_mass_parts_variable_alpha_nonneg
 #print axioms finite_fiber_mass_parts_nonneg
 #print axioms finite_fiber_mass_parts_variable_alpha_nonneg
 #print axioms finite_fiber_mass_split_variable_alpha
+#print axioms finite_variable_alpha_mass_conservation
+#print axioms variable_alpha_fiber_conservation
 
 end BBMSTFiberMassCore
