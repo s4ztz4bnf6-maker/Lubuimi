@@ -565,3 +565,21 @@ theorem exponent_three_forces_residue_thirteen_mod_sixteen
   omega
 
 #print axioms exponent_three_forces_residue_thirteen_mod_sixteen
+
+
+/--
+An exponent-four transition forces its starting odd input to be five
+modulo thirty-two: if 16 * next = 3 * n + 1 and next is odd, then
+n ≡ 5 (mod 32). This extends the exact local admissibility filters;
+it is not a global descent result.
+-/
+theorem exponent_four_forces_residue_five_mod_thirty_two
+    (n next : ℕ)
+    (hnext : next % 2 = 1)
+    (hstep : 16 * next = 3 * n + 1) :
+    n % 32 = 5 := by
+  have hmod : (16 * next) % 32 = (3 * n + 1) % 32 := by
+    rw [hstep]
+  omega
+
+#print axioms exponent_four_forces_residue_five_mod_thirty_two
