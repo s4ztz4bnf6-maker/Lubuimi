@@ -145,6 +145,6 @@ No axiom has been discharged by this roadmap. It records a source-matched implem
 
 ## Kernel trust hardening (2026-10-23)
 
-The formalization is now pinned to Lean/Mathlib v4.34.0. The official release notes report fixes for three soundness routes and additional defensive checks: https://lean-lang.org/doc/reference/latest/releases/v4.34.0/ . The previous v4.28.0 pin predates these fixes. The explicit elan default toolchain in the GitHub Actions workflow was updated together with `lean-toolchain` and `lakefile.lean` so CI uses the same patched version.
+The formalization is now pinned to Lean/Mathlib v4.34.1. Lean v4.34.0 fixed three kernel soundness routes; the v4.34.1 patch fixed additional runtime/reference-counting hazards and explicitly recommends upgrading from v4.34.0 or earlier: https://lean-lang.org/doc/reference/latest/releases/v4.34.1/ . The previous v4.28.0 pin predates these fixes. The explicit elan default toolchain in the GitHub Actions workflow was updated together with `lean-toolchain` and `lakefile.lean` so CI uses the same patched version.
 
 This is a proof-infrastructure hardening step, not a discharge of `sieve_criterion` or `sf_sieve_lt_one`. The new builds are not yet confirmed. Before any high-assurance claim, record a successful compile at the exact commit and independently recheck the relevant declaration closure with a current external checker (for example current `nanoda`). `#print axioms` remains necessary, but cannot alone rule out kernel implementation defects.
