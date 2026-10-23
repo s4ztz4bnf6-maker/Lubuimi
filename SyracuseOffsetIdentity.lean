@@ -162,4 +162,30 @@ theorem descent_implies_geometric_exponent_threshold
 
 #print axioms CollatzSyracuseAudit.descent_implies_geometric_exponent_threshold
 
+
+/--
+Any strict descent over a certified block with positive starting value
+requires the accumulated power of two to dominate the corresponding power
+of three. This is weaker than the full threshold above, but isolates the
+necessary exponential-growth comparison without logarithms or real analysis.
+-/
+theorem descent_implies_power_growth
+    (n0 nj A C j : ℕ)
+    (hn0 : 0 < n0)
+    (hidentity : 2 ^ A * nj = 3 ^ j * n0 + C)
+    (hoffset : 3 ^ j ≤ C)
+    (hdesc : nj < n0) :
+    3 ^ j < 2 ^ A := by
+  have hthreshold :=
+    descent_implies_geometric_exponent_threshold
+      n0 nj A C j hidentity hoffset hdesc
+  have hmul : 3 ^ j * n0 < 2 ^ A * n0 := by
+    calc
+      3 ^ j * n0 ≤ 3 ^ j * (n0 + 1) := by
+        exact Nat.mul_le_mul_left (3 ^ j) (Nat.le_succ n0)
+      _ < 2 ^ A * n0 := hthreshold
+  exact (Nat.mul_lt_mul_right hn0).mp hmul
+
+#print axioms CollatzSyracuseAudit.descent_implies_power_growth
+
 end CollatzSyracuseAudit
