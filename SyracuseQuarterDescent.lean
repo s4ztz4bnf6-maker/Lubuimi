@@ -162,7 +162,7 @@ theorem accelerated_step_integer_balance
     _ = (3 * n + 1) - (2 : ℤ) ^ a * n := by rw [hstep]
     _ = (3 - (2 : ℤ) ^ a) * n + 1 := by ring
 
-#print axioms CollatzSyracuseAudit.accelerated_step_integer_balance
+#print axioms accelerated_step_integer_balance
 
 
 /--
@@ -182,4 +182,4 @@ theorem accelerated_step_descent_of_four_le_power
   rw [hstep] at hmul
   nlinarith
 
-#print axioms CollatzSyracuseAudit.accelerated_step_descent_of_four_le_power
+#print axioms accelerated_step_descent_of_four_le_power
