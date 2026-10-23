@@ -380,7 +380,6 @@ theorem canonicalOffset_eq_weighted_sum
   | succ n ih =>
       rw [canonicalOffset, Finset.sum_range_succ]
       rw [← ih, ← Finset.mul_sum]
-      congr 1
       apply Finset.sum_congr rfl
       intro j hj
       have hjn : j < n := Finset.mem_range.mp hj
