@@ -420,7 +420,7 @@ accelerated-Syracuse transitions. Unlike an abstract arithmetic witness,
 this constructor fixes the finish, accumulated exponent, and offset to the
 same trajectory and its canonical recurrence.
 -/
-theorem SyracuseBlockArithmeticCertificate.of_certified_transitions
+def SyracuseBlockArithmeticCertificate.of_certified_transitions
     (n a A : ℕ → ℕ) (steps : ℕ)
     (hA0 : A 0 = 0)
     (hA : ∀ j, A (j + 1) = A j + a j)
