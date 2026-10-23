@@ -63,7 +63,7 @@ theorem mod32_three_two_step_descent (k : ℕ) :
           (9 / 32 : ℚ) * (32 * k + 3) + 5 / 32 := hb
       _ = (9 * k + 1 : ℚ) := by push_cast; ring
   have hn : syracuse (syracuse (32 * k + 3)) ≤ 9 * k + 1 :=
-    Nat.cast_le.mp (by exact_mod_cast hq)
+    Nat.cast_le.mp hq
   omega
 
 /-- Residue-class form of the modulo-32 descent result. -/
