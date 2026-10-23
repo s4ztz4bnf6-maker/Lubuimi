@@ -51,6 +51,23 @@ theorem finite_mass_sum_nonneg {ι : Type*} [DecidableEq ι]
   intro i hi
   exact hmass i hi
 
+/-- Summing the retained and removed parts separately preserves
+nonnegativity, provided every source mass is nonnegative and alpha is
+a genuine proportion. This lifts pointwise positivity to finite totals. -/
+theorem finite_fiber_mass_parts_nonneg {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (mass : ι → ℚ) (alpha : ℚ)
+    (hmass : ∀ i ∈ s, 0 ≤ mass i)
+    (ha0 : 0 ≤ alpha) (ha1 : alpha ≤ 1) :
+    0 ≤ ∑ i ∈ s, alpha * mass i ∧
+      0 ≤ ∑ i ∈ s, (1 - alpha) * mass i := by
+  constructor
+  · apply Finset.sum_nonneg
+    intro i hi
+    exact mul_nonneg ha0 (hmass i hi)
+  · apply Finset.sum_nonneg
+    intro i hi
+    exact mul_nonneg (sub_nonneg.mpr ha1) (hmass i hi)
+
 #print axioms fiber_mass_parts_nonneg
 #print axioms finite_mass_sum_nonneg
 
