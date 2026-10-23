@@ -26,7 +26,7 @@ theorem no_strict_descent_when_scale_le
         Nat.mul_le_mul_right (n 0) hscale
       _ ≤ 3 ^ k * n 0 + affineConstantTerm a k := by omega
       _ = 2 ^ cumulativeExponent a k * n k := hid.symm
-  exact (Nat.le_of_mul_le_mul_left hpow hmul)
+  exact (Nat.le_of_mul_le_mul_left hmul hpow)
 
 #print axioms no_strict_descent_when_scale_le
 
