@@ -49,7 +49,7 @@ theorem offset_geometric_lower_bound
       exact Nat.one_le_iff_ne_zero.mpr (by positivity)
   | succ j ih =>
       calc
-        3 ^ (j + 1) = 3 * 3 ^ j := by rw [pow_succ]
+        3 ^ (j + 1) = 3 * 3 ^ j := by rw [pow_succ, Nat.mul_comm]
         _ ≤ 3 * C (j + 1) := Nat.mul_le_mul_left 3 ih
         _ ≤ C (j + 2) := by
           rw [hC (j + 1)]
