@@ -435,9 +435,21 @@ theorem canonicalOffset_split
   | zero =>
       simp [canonicalOffset]
   | succ n ih =>
-      simp only [Nat.add_succ, canonicalOffset]
-      rw [ih, pow_succ]
-      ring
+      calc
+        canonicalOffset A (m + (n + 1)) =
+            3 * canonicalOffset A (m + n) + 2 ^ A (m + n) := by
+              rw [Nat.add_succ, canonicalOffset]
+        _ = 3 * (3 ^ n * canonicalOffset A m +
+              canonicalOffset (fun i => A (m + i)) n) +
+              2 ^ A (m + n) := by rw [ih]
+        _ = 3 ^ (n + 1) * canonicalOffset A m +
+              (3 * canonicalOffset (fun i => A (m + i)) n +
+                2 ^ A (m + n) := by
+              rw [pow_succ]
+              ring
+        _ = 3 ^ (n + 1) * canonicalOffset A m +
+              canonicalOffset (fun i => A (m + i)) (n + 1) := by
+              rw [canonicalOffset]
 
 #print axioms canonicalOffset_split
 
