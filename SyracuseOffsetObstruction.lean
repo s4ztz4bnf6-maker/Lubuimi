@@ -128,7 +128,7 @@ theorem v2_eq_iff_pow_dvd_not_next_pow_dvd
     constructor
     · exact hpow.mpr (by omega)
     · intro hdiv
-      have hle := hnext.mpr hdiv
+      have hle := hnext.mp hdiv
       omega
   · rintro ⟨hdiv, hnot⟩
     have hge := hpow.mp hdiv
