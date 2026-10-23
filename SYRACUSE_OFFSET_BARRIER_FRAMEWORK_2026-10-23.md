@@ -43,10 +43,10 @@ The usual coarse condition (2^A>3^N) only establishes (G>0). It does not compare
 
 For concatenated blocks with data ((N_1,A_1,C_1)) then ((N_2,A_2,C_2)), the affine maps compose as
 [
-3^{N_2}(3^{N_1}x+C_1)+C_2
-=3^{N_1+N_2}x+(3^{N_2}C_1+C_2),
+3^{N_2}(3^{N_1}x+C_1)+2^{A_1}C_2
+=3^{N_1+N_2}x+(3^{N_2}C_1+2^{A_1}C_2),
 ]
-while the power-of-two exponent accumulates. This gives an exact composition law for offsets. Any search or formalization must use the actual intermediate valuation word; arbitrary triples are not automatically realizable.
+while the power-of-two exponent accumulates. This gives the exact composition law for offsets, including the essential scale factor $2^{A_1}$ on the second block's local offset. Any search or formalization must use the actual intermediate valuation word; arbitrary triples are not automatically realizable.
 
 ## Lean formalization targets
 
