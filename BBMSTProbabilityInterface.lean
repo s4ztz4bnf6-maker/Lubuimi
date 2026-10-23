@@ -151,3 +151,21 @@ theorem finite_incidence_fraction_lt_one_iff_complement_nonempty
     nlinarith
 
 #print axioms finite_incidence_fraction_lt_one_iff_complement_nonempty
+
+
+/--
+Incidence fraction induced by an actual predicate, rather than supplied as
+an independent finite set. The filter is the concrete set of covered sample
+points, so its containment in the sample is structural.
+-/
+theorem predicate_incidence_fraction_mem_unit_interval
+    {Ω : Type*} [DecidableEq Ω]
+    (sample : Finset Ω) (covered : Ω → Prop) [DecidablePred covered]
+    (hnonempty : sample.Nonempty) :
+    0 ≤ ((sample.filter covered).card : ℚ) / (sample.card : ℚ) ∧
+      ((sample.filter covered).card : ℚ) / (sample.card : ℚ) ≤ 1 := by
+  have hinc : sample.filter covered ⊆ sample := Finset.filter_subset _ _
+  exact finite_incidence_fraction_mem_unit_interval
+    sample (sample.filter covered) hinc hnonempty
+
+#print axioms predicate_incidence_fraction_mem_unit_interval
