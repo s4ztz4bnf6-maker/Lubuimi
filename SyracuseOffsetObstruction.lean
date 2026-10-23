@@ -138,3 +138,75 @@ theorem v2_eq_iff_pow_dvd_not_next_pow_dvd
     omega
 
 #print axioms v2_eq_iff_pow_dvd_not_next_pow_dvd
+
+
+namespace CollatzSyracuseAudit
+
+/-- A local descent certificate records the exact prefix scale and affine
+margin. It certifies only the supplied realized trajectory, not global
+termination of every Syracuse orbit. -/
+structure DescentPrefixCertificate (a n : ℕ → ℕ) where
+  k : ℕ
+  scale_gt : 3 ^ k < 2 ^ cumulativeExponent a k
+  margin :
+    3 ^ k * n 0 + affineConstantTerm a k <
+      2 ^ cumulativeExponent a k * n 0
+
+/-- A descent-prefix certificate is sound for the exact transition sequence. -/
+theorem descentPrefixCertificate_sound
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
+    (C : DescentPrefixCertificate a n) :
+    n C.k < n 0 :=
+  (strict_descent_iff_affine_margin a n hstep C.k).2 C.margin
+
+#print axioms descentPrefixCertificate_sound
+
+/-- A dual obstruction records a positive scale difference but an offset
+large enough to prevent the strict affine margin at this prefix. The scale
+condition is essential: without it, the difference is not a positive
+descent denominator. -/
+structure NonDescentPrefixObstruction (a n : ℕ → ℕ) where
+  k : ℕ
+  scale_gt : 3 ^ k < 2 ^ cumulativeExponent a k
+  offset_bound :
+    (2 ^ cumulativeExponent a k - 3 ^ k) * n 0 ≤
+      affineConstantTerm a k
+
+/-- The obstruction certificate rules out strict descent at its recorded
+prefix. This is the exact multiplicative form of the floor-threshold
+obstruction, avoiding division in the kernel-facing certificate. -/
+theorem nonDescentPrefixObstruction_sound
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
+    (O : NonDescentPrefixObstruction a n) :
+    n 0 ≤ n O.k := by
+  have hscale := O.scale_gt
+  have hD :
+      3 ^ O.k + (2 ^ cumulativeExponent a O.k - 3 ^ O.k) =
+        2 ^ cumulativeExponent a O.k :=
+    Nat.add_sub_of_le (Nat.le_of_lt hscale)
+  have hsum :
+      3 ^ O.k * n 0 +
+          (2 ^ cumulativeExponent a O.k - 3 ^ O.k) * n 0 ≤
+        3 ^ O.k * n 0 + affineConstantTerm a O.k :=
+    Nat.add_le_add_left O.offset_bound (3 ^ O.k * n 0)
+  have hscaleEq :
+      3 ^ O.k * n 0 +
+          (2 ^ cumulativeExponent a O.k - 3 ^ O.k) * n 0 =
+        2 ^ cumulativeExponent a O.k * n 0 := by
+    rw [← Nat.add_mul, hD]
+  have hbound :
+      2 ^ cumulativeExponent a O.k * n 0 ≤
+        3 ^ O.k * n 0 + affineConstantTerm a O.k := by
+    rw [← hscaleEq]
+    exact hsum
+  by_contra hnot
+  have hdesc : n O.k < n 0 := by omega
+  have hmargin :=
+    (strict_descent_iff_affine_margin a n hstep O.k).1 hdesc
+  omega
+
+#print axioms nonDescentPrefixObstruction_sound
+
+end CollatzSyracuseAudit
