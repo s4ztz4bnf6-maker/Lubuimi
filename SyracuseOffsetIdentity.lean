@@ -126,7 +126,8 @@ theorem exponent_is_maximal_of_odd_quotient
       2 ^ a * next = 2 ^ (a + 1) * k := hEq
       _ = (2 ^ a * 2) * k := by rw [pow_succ]
       _ = 2 ^ a * (2 * k) := by ring
-  have hcancel : next = 2 * k := Nat.mul_left_cancel hEq'
+  have hcancel : next = 2 * k :=
+    Nat.mul_left_cancel (by positivity : 0 < 2 ^ a) hEq'
   rw [hcancel] at hnext
   omega
 
