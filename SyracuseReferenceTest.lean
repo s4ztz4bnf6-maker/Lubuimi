@@ -348,6 +348,30 @@ theorem syracuse_two_step_mod_four_one_of_mod_sixteen_seven
 
 #print axioms CollatzSyracuseAudit.syracuse_two_step_mod_four_one_of_mod_sixteen_seven
 
+/-- In the n = 7 (mod 16) branch, the third accelerated step descends
+strictly from the second iterate. This is a local descent only, not a
+claim that the third iterate is below the original n. -/
+theorem syracuse_third_step_descent_of_mod_sixteen_seven
+    (n : ℕ) (hmod : n % 16 = 7) :
+    syracuse (syracuse (syracuse n)) < syracuse (syracuse n) := by
+  have htransition :
+      syracuse (syracuse n) % 4 = 1 :=
+    syracuse_two_step_mod_four_one_of_mod_sixteen_seven n hmod
+  have hmid_two : 2 ≤ syracuse (syracuse n) := by
+    have hfirst : syracuse n = (3 * n + 1) / 2 := by
+      rw [syracuse_eq_half_of_mod_four_three n (by omega)]
+    have hsecond :
+        syracuse (syracuse n) = (3 * syracuse n + 1) / 2 := by
+      rw [syracuse_eq_half_of_mod_four_three (syracuse n) (by
+        have := syracuse_mod_eight_three_of_mod_sixteen_seven n hmod
+        omega)]
+    rw [hsecond, hfirst]
+    omega
+  exact syracuse_descent_of_mod_four_one (syracuse (syracuse n))
+    (by omega) hmid_two htransition
+
+#print axioms CollatzSyracuseAudit.syracuse_third_step_descent_of_mod_sixteen_seven
+
 #print axioms CollatzSyracuseAudit.syracuse_mod_eight_three_of_mod_sixteen_seven
 #print axioms CollatzSyracuseAudit.syracuse_mod_eight_seven_of_mod_sixteen_fifteen
 
