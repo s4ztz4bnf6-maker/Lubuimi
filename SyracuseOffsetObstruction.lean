@@ -118,10 +118,10 @@ theorem v2_eq_iff_pow_dvd_not_next_pow_dvd
     CollatzSyracuseAudit.v2 m = a ↔
       2 ^ a ∣ m ∧ ¬ 2 ^ (a + 1) ∣ m := by
   unfold CollatzSyracuseAudit.v2
-  have hpow : Nat.factorization 2 m ≥ a ↔ 2 ^ a ∣ m := by
+  have hpow : m.factorization 2 ≥ a ↔ 2 ^ a ∣ m := by
     rw [Nat.prime_two.pow_dvd_iff_le_factorization hm]
   have hnext :
-      Nat.factorization 2 m ≥ a + 1 ↔ 2 ^ (a + 1) ∣ m := by
+      m.factorization 2 ≥ a + 1 ↔ 2 ^ (a + 1) ∣ m := by
     rw [Nat.prime_two.pow_dvd_iff_le_factorization hm]
   constructor
   · intro hv
@@ -132,7 +132,7 @@ theorem v2_eq_iff_pow_dvd_not_next_pow_dvd
       omega
   · rintro ⟨hdiv, hnot⟩
     have hge := (hpow).1 hdiv
-    have hnotle : ¬ Nat.factorization 2 m ≥ a + 1 := by
+    have hnotle : ¬ m.factorization 2 ≥ a + 1 := by
       intro hle
       exact hnot ((hnext).1 hle)
     omega
