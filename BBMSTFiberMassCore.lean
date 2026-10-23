@@ -103,6 +103,39 @@ theorem finite_mass_conservation {ι : Type*} [DecidableEq ι]
   intro i hi
   exact h i hi
 
+
+/-- Fiber-dependent split: each point may have its own retained fraction.
+This avoids assuming a single global alpha when the original probability
+argument assigns different proportions to different fibers. -/
+theorem finite_fiber_mass_split_variable_alpha {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (mass alpha : ι → ℚ) :
+    (∑ i ∈ s, alpha i * mass i) +
+      (∑ i ∈ s, (1 - alpha i) * mass i) =
+      ∑ i ∈ s, mass i := by
+  classical
+  rw [← Finset.sum_add_distrib]
+  apply Finset.sum_congr rfl
+  intro i hi
+  ring
+
+/-- Fiber-dependent retained and removed parts are nonnegative when
+each local fraction lies in [0,1] and each source mass is nonnegative. -/
+theorem finite_fiber_mass_parts_variable_alpha_nonneg
+    {ι : Type*} [DecidableEq ι] (s : Finset ι)
+    (mass alpha : ι → ℚ)
+    (hmass : ∀ i ∈ s, 0 ≤ mass i)
+    (ha0 : ∀ i ∈ s, 0 ≤ alpha i)
+    (ha1 : ∀ i ∈ s, alpha i ≤ 1) :
+    0 ≤ ∑ i ∈ s, alpha i * mass i ∧
+      0 ≤ ∑ i ∈ s, (1 - alpha i) * mass i := by
+  constructor
+  · apply Finset.sum_nonneg
+    intro i hi
+    exact mul_nonneg (ha0 i hi) (hmass i hi)
+  · apply Finset.sum_nonneg
+    intro i hi
+    exact mul_nonneg (sub_nonneg.mpr (ha1 i hi)) (hmass i hi)
+
 /- Explicit dependency audit for the conservation identities. -/
 #print axioms fiber_mass_split
 #print axioms fiber_mass_split_zero
