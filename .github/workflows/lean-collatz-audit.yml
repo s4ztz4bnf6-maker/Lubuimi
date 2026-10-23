@@ -113,3 +113,9 @@ jobs:
           set -o pipefail
           lake env lean SyracuseOffsetObstruction.lean 2>&1 | tee /tmp/syracuse-offset-obstruction.log
           ! grep -q 'sorryAx' /tmp/syracuse-offset-obstruction.log
+
+      - name: Compile and audit exact valuation budget filter
+        run: |
+          set -o pipefail
+          lake env lean SyracuseValuationBudgetFilter.lean 2>&1 | tee /tmp/syracuse-valuation-budget-filter.log
+          ! grep -q 'sorryAx' /tmp/syracuse-valuation-budget-filter.log
