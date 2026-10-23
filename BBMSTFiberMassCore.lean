@@ -382,7 +382,7 @@ theorem finite_fiber_weighted_partition_mass
             intro i hi
             rw [Finset.mul_sum]
     _ = ∑ x ∈ s, alpha (label x) * mass x := by
-          exact Finset.sum_fiberwise_of_maps_to
+          exact Finset.sum_fiberwise_of_maps_to (s := s)
             (fun x hx => Finset.mem_image_of_mem label hx)
             (fun x => alpha (label x) * mass x)
 
