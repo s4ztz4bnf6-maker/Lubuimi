@@ -70,3 +70,14 @@ This crosswalk sharpens the repository repair plan:
 - A faithful Lean port should start with the algebraic/fiber-mass core of Lemma 2.1 (including the `α=0` and `α=1` branches), then the moment inequalities, and only then the finite certificate and tail bound. It should not retain a universal prime-list axiom as a shortcut.
 
 Reference: https://github.com/plasma-ai/erdos/tree/main/library/covering_systems/balister_2021_erdos_selfridge_problem_square_free_moduli
+
+## Formal micro-milestone: min/max mass identity (2026-10-23)
+
+The Lean source now includes `sum_min_max_identity`:
+
+```lean
+theorem sum_min_max_identity (a b : ℚ) :
+    min a b + max a b = a + b
+```
+
+This is a small, source-independent algebraic lemma that can serve as a checked building block when a later formalization splits a total mass into smaller/larger contributions. It is **not** a formalization of BBMST Lemma 2.1, does not establish fiber mass conservation in the paper's probability space, and does not discharge either admitted axiom. The repository currently has no dedicated BBMST compile workflow, so this addition must be compiled in the pinned Lean/Mathlib environment before it is described as kernel-verified.
