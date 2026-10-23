@@ -246,3 +246,54 @@ theorem nonDescentPrefixObstruction_floor_bound
 #print axioms nonDescentPrefixObstruction_floor_bound
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- Prefix dichotomy: once the affine scale is large enough for descent to
+be possible, every exact transition prefix either carries a descent
+certificate or carries the complementary additive-offset obstruction.
+This is a finite-prefix exhaustiveness result, not a global termination
+theorem. -/
+theorem prefix_descent_or_offset_obstruction
+    (a n : ℕ → ℕ)
+    (hstep : ∀ i, 2 ^ (a i) * n (i + 1) = 3 * n i + 1)
+    (k : ℕ)
+    (hscale : 3 ^ k < 2 ^ cumulativeExponent a k) :
+    DescentPrefixCertificate a n ∨ NonDescentPrefixObstruction a n := by
+  by_cases hdesc : n k < n 0
+  · exact Or.inl
+      { k := k
+        scale_gt := hscale
+        margin := (strict_descent_iff_affine_margin a n hstep k).1 hdesc }
+  · have hnotmargin :
+        ¬ (3 ^ k * n 0 + affineConstantTerm a k <
+          2 ^ cumulativeExponent a k * n 0) := by
+      intro hmargin
+      exact hdesc ((strict_descent_iff_affine_margin a n hstep k).2 hmargin)
+    have hD :
+        3 ^ k + (2 ^ cumulativeExponent a k - 3 ^ k) =
+          2 ^ cumulativeExponent a k :=
+      Nat.add_sub_of_le (Nat.le_of_lt hscale)
+    have hscaleEq :
+        3 ^ k * n 0 +
+            (2 ^ cumulativeExponent a k - 3 ^ k) * n 0 =
+          2 ^ cumulativeExponent a k * n 0 := by
+      rw [← Nat.add_mul, hD]
+    have hoffset :
+        (2 ^ cumulativeExponent a k - 3 ^ k) * n 0 ≤
+          affineConstantTerm a k := by
+      have hle :
+          2 ^ cumulativeExponent a k * n 0 ≤
+            3 ^ k * n 0 + affineConstantTerm a k := by
+        omega
+      rw [← hscaleEq] at hle
+      omega
+    exact Or.inr
+      { k := k
+        scale_gt := hscale
+        offset_bound := hoffset }
+
+#print axioms prefix_descent_or_offset_obstruction
+
+end CollatzSyracuseAudit
