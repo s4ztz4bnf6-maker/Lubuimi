@@ -17,6 +17,14 @@ theorem three_mul_add_one_even
     (3 * n + 1) % 2 = 0 := by
   omega
 
+/-- Complementary residue calculation: the n = 3 (mod 4) branch leaves
+exactly one factor of 2 at the first Syracuse numerator level. This is a
+modular fact only; the exact valuation statement is a separate obligation. -/
+theorem three_mul_add_one_mod_four_of_three
+    (n : ℕ) (h : n % 4 = 3) :
+    (3 * n + 1) % 4 = 2 := by
+  omega
+
 /-- Smoke test: the factorization-based reference definition elaborates. -/
 example (n : ℕ) : syracuse n = (3 * n + 1) / 2 ^ v2 (3 * n + 1) := by
   rfl
