@@ -87,3 +87,30 @@ theorem finite_proper_incidence_fraction_lt_one
   nlinarith
 
 #print axioms finite_proper_incidence_fraction_lt_one
+
+
+/--
+Exact uncovered-mass identity for a finite uniform sample: the deficit
+from full incidence coverage is exactly the normalized size of the
+complement. This is the concrete bridge needed before a geometric
+BBMST alpha_k estimate can be interpreted as a coverage bound.
+-/
+theorem finite_incidence_deficit_eq_complement_fraction
+    {Ω : Type*} [DecidableEq Ω]
+    (sample incidences : Finset Ω)
+    (hinc : incidences ⊆ sample) (hnonempty : sample.Nonempty) :
+    1 - (incidences.card : ℚ) / (sample.card : ℚ) =
+      ((sample \\ incidences).card : ℚ) / (sample.card : ℚ) := by
+  have hle : incidences.card ≤ sample.card := Finset.card_le_card hinc
+  have hden : (sample.card : ℚ) ≠ 0 := by
+    exact_mod_cast hnonempty.card_pos.ne'
+  calc
+    1 - (incidences.card : ℚ) / (sample.card : ℚ)
+        = ((sample.card : ℚ) - (incidences.card : ℚ)) /
+            (sample.card : ℚ) := by
+              field_simp
+              ring
+    _ = ((sample \\ incidences).card : ℚ) / (sample.card : ℚ) := by
+          rw [Finset.card_sdiff_of_subset hinc, Nat.cast_sub hle]
+
+#print axioms finite_incidence_deficit_eq_complement_fraction
