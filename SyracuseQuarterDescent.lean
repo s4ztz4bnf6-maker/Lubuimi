@@ -95,4 +95,17 @@ theorem half_step_mod_four_three_of_mod_eight_seven
 #print axioms CollatzSyracuseAudit.half_step_mod_four_one_of_mod_eight_three
 #print axioms CollatzSyracuseAudit.half_step_mod_four_three_of_mod_eight_seven
 
+/--
+For n = 3 mod 8, two forced odd steps (first the half-step, then
+the quarter-step available at the resulting 1 mod 4 value) still produce
+a value larger than n. This explicitly rules out treating that short
+transition as a descent argument.
+-/
+theorem two_stage_growth_of_mod_eight_three
+    (n : ℕ) (hn : n % 8 = 3) :
+    n < (3 * ((3 * n + 1) / 2) + 1) / 4 := by
+  omega
+
+#print axioms CollatzSyracuseAudit.two_stage_growth_of_mod_eight_three
+
 end CollatzSyracuseAudit
