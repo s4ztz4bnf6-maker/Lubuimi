@@ -5,6 +5,7 @@ on:
     branches:
       - collatz/compiler-audit-2026-10-19
       - collatz/quarter-descent-lemma-2026-10-20
+      - collatz/offset-margin-roadmap-2026-10-23
   pull_request:
   workflow_dispatch:
 
@@ -36,3 +37,5 @@ jobs:
         run: lake env lean SyracuseReferenceTest.lean
       - name: Compile SyracuseQuarterDescent.lean
         run: lake env lean SyracuseQuarterDescent.lean
+      - name: Compile SyracuseOffsetIdentity.lean
+        run: lake env lean SyracuseOffsetIdentity.lean
