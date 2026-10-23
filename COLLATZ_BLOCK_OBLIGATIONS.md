@@ -35,7 +35,7 @@ This note does not claim a proof of the Collatz conjecture, a universal stopping
 
 ## Kernel trust and independent rechecking (2026-10-23)
 
-The project is now pinned to Lean/Mathlib v4.34.0. This is a deliberate trust-boundary upgrade, not a mathematical strengthening: Lean's official v4.34.0 release notes describe fixes for three routes to an invalid proof of `False` and additional kernel hardening. See https://lean-lang.org/doc/reference/latest/releases/v4.34.0/ . Earlier releases, including the former v4.28.0 pin, predate these fixes.
+The project is now pinned to Lean/Mathlib v4.34.1. This is a deliberate trust-boundary upgrade, not a mathematical strengthening: Lean's official v4.34.1 release notes describe fixes for three routes to an invalid proof of `False` and additional kernel hardening. See https://lean-lang.org/doc/reference/latest/releases/v4.34.1/ . Earlier releases, including the former v4.28.0 pin, predate these fixes.
 
 The workflow's explicit elan default toolchain was updated as well as `lean-toolchain` and `lakefile.lean`; all three must agree or CI may silently test a different toolchain than the project pin.
 
