@@ -197,6 +197,31 @@ theorem predicate_incidence_deficit_eq_uncovered_fraction
 
 #print axioms predicate_incidence_deficit_eq_uncovered_fraction
 
+/--
+Quantitative finite-sample deficit certificate: if at least m sample
+points fail the coverage predicate, then the uncovered fraction is at least
+m / |sample|. This is a concrete lower bound, but it is not uniform in
+the sample size and therefore does not by itself supply BBMST's geometric
+incidence estimate.
+-/
+theorem predicate_incidence_deficit_lower_bound
+    {Ω : Type*} [DecidableEq Ω]
+    (sample : Finset Ω) (covered : Ω → Prop) [DecidablePred covered]
+    (hnonempty : sample.Nonempty) (m : ℕ)
+    (huncovered : m ≤ (sample.filter (fun x => ¬ covered x)).card) :
+    (m : ℚ) / (sample.card : ℚ) ≤
+      1 - ((sample.filter covered).card : ℚ) / (sample.card : ℚ) := by
+  rw [predicate_incidence_deficit_eq_uncovered_fraction sample covered hnonempty]
+  have hden : (0 : ℚ) < (sample.card : ℚ) := by
+    exact_mod_cast hnonempty.card_pos
+  have hcount : (m : ℚ) ≤
+      ((sample.filter (fun x => ¬ covered x)).card : ℚ) := by
+    exact_mod_cast huncovered
+  apply (div_le_div_iff₀ hden).2
+  nlinarith
+
+#print axioms predicate_incidence_deficit_lower_bound
+
 
 /--
 Strictly subunit predicate incidence is equivalent to the existence of an
