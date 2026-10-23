@@ -490,4 +490,4 @@ theorem predicate_incidence_deficit_ge_epsilon_iff_uncovered_mass
   rw [predicate_incidence_deficit_eq_uncovered_fraction sample covered hnonempty]
   have hden : (0 : ℚ) < (sample.card : ℚ) := by
     exact_mod_cast hnonempty.card_pos
-  exact (le_div_iff₀ hden).symm
+  exact le_div_iff₀ hden
