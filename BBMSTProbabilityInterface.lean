@@ -131,8 +131,9 @@ theorem finite_incidence_fraction_lt_one_iff_complement_nonempty
     exact_mod_cast hnonempty.card_pos
   constructor
   · intro hfrac
-    have hnum : (incidences.card : ℚ) < (sample.card : ℚ) :=
-      (div_lt_iff₀ hden).mp hfrac
+    have hnum : (incidences.card : ℚ) < (sample.card : ℚ) := by
+      have h := (div_lt_iff₀ hden).mp hfrac
+      nlinarith
     have hcard : incidences.card < sample.card := by
       exact_mod_cast hnum
     have hdiff : 0 < (sample \ incidences).card := by
@@ -147,6 +148,7 @@ theorem finite_incidence_fraction_lt_one_iff_complement_nonempty
       omega
     have hnum : (incidences.card : ℚ) < (sample.card : ℚ) := by
       exact_mod_cast hcard
-    exact (div_lt_iff₀ hden).2 hnum
+    apply (div_lt_iff₀ hden).2
+    nlinarith
 
 #print axioms finite_incidence_fraction_lt_one_iff_complement_nonempty
