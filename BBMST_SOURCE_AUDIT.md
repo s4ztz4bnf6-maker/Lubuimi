@@ -81,3 +81,13 @@ theorem sum_min_max_identity (a b : ℚ) :
 ```
 
 This is a small, source-independent algebraic lemma that can serve as a checked building block when a later formalization splits a total mass into smaller/larger contributions. It is **not** a formalization of BBMST Lemma 2.1, does not establish fiber mass conservation in the paper's probability space, and does not discharge either admitted axiom. The repository currently has no dedicated BBMST compile workflow, so this addition must be compiled in the pinned Lean/Mathlib environment before it is described as kernel-verified.
+
+## CI evidence and kernel dependency boundary (2026-10-23)
+
+The first dedicated BBMST compile workflow completed successfully on commit `6d02552fcf` (run `39992100767`). The command `lake env lean ErdosSelfridge_v17_fixed.lean` completed with warnings only. Crucially, Lean printed the dependency list for the main theorem:
+
+```text
+'erdos_selfridge' depends on axioms: [propext, sf_sieve_lt_one, sieve_criterion, Classical.choice, Quot.sound]
+```
+
+This is positive evidence that the file compiles, but also direct evidence that the main theorem still depends on the two project placeholders. The later commit adds an explicit `#print axioms sum_min_max_identity` diagnostic and the header has been corrected to describe the file as an audit rather than a completed proof. Those later commits are being recompiled separately; do not treat the earlier green run as validation of later commits.
