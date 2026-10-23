@@ -137,4 +137,29 @@ theorem exponent_is_maximal_of_odd_quotient
 #print axioms CollatzSyracuseAudit.descent_iff_offset_margin
 #print axioms CollatzSyracuseAudit.exponent_is_maximal_of_odd_quotient
 
+/--
+Necessary exponent threshold for any certified strict descent: combining
+the affine offset identity with C ≥ 3^j, descent forces
+3^j * (n0 + 1) < 2^A * n0. This sharpens the open margin obligation
+without claiming the threshold holds on arbitrary trajectories.
+-/
+theorem descent_implies_geometric_exponent_threshold
+    (n0 nj A C j : ℕ)
+    (hidentity : 2 ^ A * nj = 3 ^ j * n0 + C)
+    (hoffset : 3 ^ j ≤ C)
+    (hdesc : nj < n0) :
+    3 ^ j * (n0 + 1) < 2 ^ A * n0 := by
+  have hmargin : 3 ^ j * n0 + C < 2 ^ A * n0 := by
+    have hprod : 2 ^ A * nj < 2 ^ A * n0 :=
+      Nat.mul_lt_mul_left (pow_pos (by norm_num : 0 < (2 : ℕ)) A) hdesc
+    rw [hidentity] at hprod
+    exact hprod
+  have hle : 3 ^ j * (n0 + 1) ≤ 3 ^ j * n0 + C := by
+    calc
+      3 ^ j * (n0 + 1) = 3 ^ j * n0 + 3 ^ j := by omega
+      _ ≤ 3 ^ j * n0 + C := Nat.add_le_add_left hoffset _
+  exact lt_of_le_of_lt hle hmargin
+
+#print axioms CollatzSyracuseAudit.descent_implies_geometric_exponent_threshold
+
 end CollatzSyracuseAudit
