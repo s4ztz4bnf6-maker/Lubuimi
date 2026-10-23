@@ -241,6 +241,28 @@ theorem finite_fiber_mass_budget
 
 #print axioms finite_fiber_mass_budget
 
+/-- Uniform-envelope bound: if every local retained proportion is at most
+`beta`, then the total retained mass is at most `beta` times the total
+source mass. This is a useful interface for later distortion estimates;
+it remains an algebraic statement and does not construct BBMST's geometric
+conditional probabilities. -/
+theorem finite_fiber_mass_le_uniform_envelope
+    {ι : Type*} [DecidableEq ι] (s : Finset ι)
+    (mass alpha : ι → ℚ) (beta : ℚ)
+    (hmass : ∀ i ∈ s, 0 ≤ mass i)
+    (halpha : ∀ i ∈ s, alpha i ≤ beta) :
+    (∑ i ∈ s, alpha i * mass i) ≤ beta * (∑ i ∈ s, mass i) := by
+  calc
+    (∑ i ∈ s, alpha i * mass i) ≤
+        ∑ i ∈ s, beta * mass i := by
+      apply Finset.sum_le_sum
+      intro i hi
+      exact mul_le_mul_of_nonneg_right (halpha i hi) (hmass i hi)
+    _ = beta * (∑ i ∈ s, mass i) := by
+      rw [Finset.mul_sum]
+
+#print axioms finite_fiber_mass_le_uniform_envelope
+
 
 /- Explicit dependency audit for the conservation identities. -/
 #print axioms fiber_mass_split
