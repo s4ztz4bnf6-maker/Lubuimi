@@ -11,18 +11,12 @@ It is not a global termination argument.
 
 namespace CollatzSyracuseAudit
 
-/-- Operational classification: proved descent, exact known transition, or
-critical (not in the odd-input domain of this accelerated map). -/
 inductive Residue32Class where
   | strictDescent
   | exactTransition
   | critical
   deriving DecidableEq, Repr
 
-/-- Classify the canonical representative r in Fin 32. Even residues are
-critical for this odd-input analysis; odd residues 1 mod 4 and the two
-proved two-step sectors 3 and 19 are descent sectors. Other odd residues
-3 mod 4 have the exact first-step formula but no descent claim here. -/
 def classifyResidue32 (r : Fin 32) : Residue32Class :=
   if r.val % 2 = 0 then .critical
   else if r.val % 4 = 1 then .strictDescent
@@ -35,9 +29,15 @@ theorem residue32_classification_total (r : Fin 32) :
     classifyResidue32 r = .exactTransition ∨
     classifyResidue32 r = .critical := by
   unfold classifyResidue32
-  split <;> simp_all
-  split <;> simp_all
-  split <;> simp_all
+  by_cases h2 : r.val % 2 = 0
+  · simp [h2]
+  · by_cases h4 : r.val % 4 = 1
+    · simp [h2, h4]
+    · by_cases h3 : r.val = 3
+      · simp [h2, h4, h3]
+      · by_cases h19 : r.val = 19
+        · simp [h2, h4, h3, h19]
+        · simp [h2, h4, h3, h19]
 
 /-- A residue 3 modulo 32 has a strict two-step descent. -/
 theorem two_step_descent_mod32_three (n : ℕ) (hmod : n % 32 = 3) :
