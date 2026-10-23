@@ -508,5 +508,23 @@ theorem terminal_divisibility_of_offset_identity
 
 #print axioms terminal_divisibility_of_offset_identity
 
+
+/--
+An exponent-one transition has a forced starting residue: if
+2 * next = 3 * n + 1 and next is odd, then n is 3 modulo 4.
+This is a necessary local admissibility condition on valuation words.
+-/
+theorem exponent_one_forces_residue_three
+    (n next : ℕ)
+    (hnext : next % 2 = 1)
+    (hstep : 2 * next = 3 * n + 1) :
+    n % 4 = 3 := by
+  have hmod : (2 * next) % 4 = (3 * n + 1) % 4 := by
+    rw [hstep]
+  omega
+
+#print axioms exponent_one_forces_residue_three
+
+
 end CollatzSyracuseAudit
 
