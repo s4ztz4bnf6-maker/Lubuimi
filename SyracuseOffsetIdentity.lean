@@ -398,7 +398,6 @@ theorem canonicalOffset_eq_weighted_sum
       rw [hsum]
       simp only [Nat.sub_self, pow_zero, one_mul]
       rw [← ih]
-      ring
 
 #print axioms canonicalOffset_eq_weighted_sum
 
