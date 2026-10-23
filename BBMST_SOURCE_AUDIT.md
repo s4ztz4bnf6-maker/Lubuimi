@@ -114,3 +114,30 @@ The separate module `BBMSTFiberMassCore.lean` now contains:
 These are deliberately algebraic lemmas. They do **not** yet encode the paper's probability measure, fiber map, conditional proportions, or distortion bounds, and they do not discharge either admitted sieve axiom. The next source-faithful step is to define the finite sample space and fibers explicitly, prove that the relevant fibers partition the sample space, and derive the paper's mass identities from those definitions rather than from a freely supplied pointwise hypothesis.
 
 CI must pass for the current module before these additions are treated as Lean-checked. Afterward, record the actual `#print axioms` output for `finite_fiber_mass_split` and `finite_mass_conservation`; the expected acceptable baseline is Lean's standard logical/classical axioms only, but that expectation is not a substitute for the recorded output.
+
+
+## Research-grounded implementation order (2026-10-23)
+
+Primary source: Balister, Bollobás, Morris, Sahasrabudhe and Tiba, *The Erdős–Selfridge problem with square-free moduli*, Algebra & Number Theory 15 (2021), 609–626, DOI 10.2140/ant.2021.15.609. The publisher/preprint and supplemental-material pages are linked in the project review.
+
+The supplemental materials describe a specific finite initial distribution on `[3] × [5] × [7] × [11]`, checked by linear-programming code, subsequent optimized parameters `δ_k` for `k = 6,...,21`, and a separate tail estimate in Corollary 5.2. This is not a universal theorem about every finite list of odd primes. The external code is evidence for reconstructing a certificate, not itself a Lean kernel proof.
+
+### Smallest defensible milestones
+
+1. **Exact certificate data:** add a Lean data file containing only the finite rational/integer certificate actually supported by the supplement. Freeze its coordinate order, denominator conventions, and strict/non-strict inequalities.
+2. **Kernel-check the finite inequalities:** prove the listed inequalities using `norm_num` or exact rational arithmetic. Do not use an unverified floating-point LP output as a proof term.
+3. **Separate the tail recurrence:** formalize the recurrence and termination estimate used for large primes as a distinct theorem with every numeric threshold explicit.
+4. **Model the geometric side:** formalize the finite coordinate box, hyperplanes/fixed sets, the changing measures `P_k`, and the source's fiber proportions. The current `finite_fiber_mass_budget` is only an algebraic helper and must not stand in for the source's moment bounds.
+5. **Prove the bridge:** formalize the Chinese-remainder correspondence and the exact square-free hypotheses before invoking the geometric obstruction.
+6. **Only then replace admitted interfaces:** remove `sf_sieve_lt_one` and `sieve_criterion` only when their full proof obligations are discharged. Do not weaken their names while leaving the same unsupported universal claim.
+
+### Audit warning
+
+The paper's square-free theorem does not prove the unrestricted Erdős–Selfridge conjecture for arbitrary distinct odd moduli. The current `CoveringSystem` interface does not enforce square-freeness, so the global theorem and its admitted declarations remain stronger than the source-supported result. This is a formal interface mismatch, not a cosmetic documentation issue.
+
+References:
+- Publisher/preprint: https://arxiv.org/abs/1901.11465
+- Supplemental finite-certificate material: https://people.maths.ox.ac.uk/balister/Erdos-Selfridge.html
+- Published article DOI: https://doi.org/10.2140/ant.2021.15.609
+
+No axiom has been discharged by this roadmap. It records a source-matched implementation order and the exact boundaries of the existing algebraic result.
