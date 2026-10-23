@@ -413,3 +413,45 @@ theorem strict_descent_iff_offset_below_scale_margin
 #print axioms strict_descent_iff_offset_below_scale_margin
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- A finite word certificate stores the exact divisibility and
+nondivisibility clauses for every prescribed exponent. Unlike
+RealizedValuationWord, it does not assume the valuation equation directly. -/
+structure DivisibilityCertifiedWord (k : ℕ) where
+  state : Fin (k + 1) → ℕ
+  exponent : Fin k → ℕ
+  transition : ∀ i : Fin k,
+    2 ^ exponent i * state i.succ = 3 * state i.castSucc + 1
+  exact_divisibility : ∀ i : Fin k,
+    2 ^ exponent i ∣ 3 * state i.castSucc + 1 ∧
+      ¬ 2 ^ (exponent i + 1) ∣ 3 * state i.castSucc + 1
+
+/-- The divisibility and forbidden-next-power clauses force the exponent
+to equal the exact 2-adic valuation at each realized state. -/
+theorem DivisibilityCertifiedWord.exponent_is_v2
+    {k : ℕ} (W : DivisibilityCertifiedWord k) (i : Fin k) :
+    W.exponent i = v2 (3 * W.state i.castSucc + 1) := by
+  have hnonzero : 3 * W.state i.castSucc + 1 ≠ 0 := by omega
+  have hv :=
+    (v2_eq_iff_pow_dvd_not_next_pow_dvd
+      (3 * W.state i.castSucc + 1) (W.exponent i) hnonzero).2
+      (W.exact_divisibility i)
+  exact hv.symm
+
+/-- Turn the finite divisibility certificate into a genuinely realized
+valuation word. This closes the local gap between exact power-of-two
+predicates and the valuation field, but does not prove global termination. -/
+def DivisibilityCertifiedWord.toRealizedValuationWord
+    {k : ℕ} (W : DivisibilityCertifiedWord k) : RealizedValuationWord k :=
+  { state := W.state
+    exponent := W.exponent
+    transition := W.transition
+    exact_valuation := fun i => W.exponent_is_v2 i }
+
+#print axioms DivisibilityCertifiedWord.exponent_is_v2
+#print axioms DivisibilityCertifiedWord.toRealizedValuationWord
+
+end CollatzSyracuseAudit
