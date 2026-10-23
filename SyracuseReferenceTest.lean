@@ -335,6 +335,19 @@ theorem syracuse_second_step_descent_of_mod_sixteen_eleven
 
 #print axioms CollatzSyracuseAudit.syracuse_second_step_descent_of_mod_sixteen_eleven
 
+/-- A three-stage residue chain for the n = 7 (mod 16) branch:
+after two accelerated steps, the value is in 1 (mod 4), a known descent
+class. This is a residue classification only; it does not compare the
+third iterate with the original input. -/
+theorem syracuse_two_step_mod_four_one_of_mod_sixteen_seven
+    (n : ℕ) (hmod : n % 16 = 7) :
+    syracuse (syracuse n) % 4 = 1 := by
+  have hfirst : syracuse n % 8 = 3 :=
+    syracuse_mod_eight_three_of_mod_sixteen_seven n hmod
+  exact syracuse_mod_four_one_of_mod_eight_three (syracuse n) hfirst
+
+#print axioms CollatzSyracuseAudit.syracuse_two_step_mod_four_one_of_mod_sixteen_seven
+
 #print axioms CollatzSyracuseAudit.syracuse_mod_eight_three_of_mod_sixteen_seven
 #print axioms CollatzSyracuseAudit.syracuse_mod_eight_seven_of_mod_sixteen_fifteen
 
