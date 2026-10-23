@@ -415,6 +415,32 @@ theorem canonicalOffset_doubled_geometric_lower_bound
 
 
 /--
+Construct a block certificate from an actual sequence of certified
+accelerated-Syracuse transitions. Unlike an abstract arithmetic witness,
+this constructor fixes the finish, accumulated exponent, and offset to the
+same trajectory and its canonical recurrence.
+-/
+theorem SyracuseBlockArithmeticCertificate.of_certified_transitions
+    (n a A : ℕ → ℕ) (steps : ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1) :
+    SyracuseBlockArithmeticCertificate := by
+  refine
+    { start := n 0
+      finish := n steps
+      steps := steps
+      exponent := A steps
+      offset := canonicalOffset A steps
+      affine_identity := ?_
+      offset_floor := ?_ }
+  · exact canonical_offset_identity_of_certified_steps n a A hA0 hA hstep steps
+  · exact canonicalOffset_doubled_geometric_lower_bound A steps
+
+#print axioms SyracuseBlockArithmeticCertificate.of_certified_transitions
+
+
+/--
 The newest correction term is itself bounded by the full offset.
 This isolates the final summand in the affine correction recurrence; it is
 useful for local bounds but does not supply the upper bound needed for descent.
