@@ -548,3 +548,20 @@ theorem exponent_two_forces_residue_one_mod_eight
 
 #print axioms exponent_two_forces_residue_one_mod_eight
 
+
+
+/--
+An exponent-three transition has a forced starting residue modulo sixteen:
+if 8 * next = 3 * n + 1 and next is odd, then n ≡ 13 (mod 16).
+This is another necessary local filter on a realizable valuation word.
+-/
+theorem exponent_three_forces_residue_thirteen_mod_sixteen
+    (n next : ℕ)
+    (hnext : next % 2 = 1)
+    (hstep : 8 * next = 3 * n + 1) :
+    n % 16 = 13 := by
+  have hmod : (8 * next) % 16 = (3 * n + 1) % 16 := by
+    rw [hstep]
+  omega
+
+#print axioms exponent_three_forces_residue_thirteen_mod_sixteen
