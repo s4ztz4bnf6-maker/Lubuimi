@@ -590,4 +590,23 @@ theorem finite_card_ratio_mem_unit_interval
 
 #print axioms finite_card_ratio_mem_unit_interval
 
+
+/--
+A strictly positive point mass forces strictly positive total mass.
+This is the denominator-safety direction complementary to
+zero_sum_nonneg_forces_terms_zero: a fiber containing a positive-mass point
+cannot be a zero-mass fiber.
+-/
+theorem positive_point_mass_forces_positive_total
+    {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (mass : ι → ℚ)
+    (hmass : ∀ i ∈ s, 0 ≤ mass i)
+    (i : ι) (hi : i ∈ s) (hpos : 0 < mass i) :
+    0 < ∑ j ∈ s, mass j := by
+  have hle : mass i ≤ ∑ j ∈ s, mass j :=
+    Finset.single_le_sum (fun j hj => hmass j hj) hi
+  exact lt_of_lt_of_le hpos hle
+
+#print axioms positive_point_mass_forces_positive_total
+
 end BBMSTFiberMassCore
