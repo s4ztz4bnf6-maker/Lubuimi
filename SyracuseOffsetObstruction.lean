@@ -134,7 +134,7 @@ theorem v2_eq_iff_pow_dvd_not_next_pow_dvd
     have hge := hpow.mp hdiv
     have hnotle : ¬ a + 1 ≤ m.factorization 2 := by
       intro hle
-      exact hnot (hnext.mp hle)
+      exact hnot (hnext.mpr hle)
     omega
 
 #print axioms v2_eq_iff_pow_dvd_not_next_pow_dvd
