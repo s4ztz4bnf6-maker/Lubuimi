@@ -509,4 +509,28 @@ theorem zero_mass_fiber_forces_point_masses_zero
 #print axioms zero_sum_nonneg_forces_terms_zero
 #print axioms zero_mass_fiber_forces_point_masses_zero
 
+
+/--
+A zero-mass fiber contributes zero to every pointwise weighted sum.
+This lets later conditional-measure arguments handle the zero-denominator
+case without defining a ratio or dividing by the fiber mass.
+-/
+theorem zero_mass_fiber_weighted_sum_zero
+    {Ω Ι : Type*} [DecidableEq Ω] [DecidableEq Ι]
+    (s : Finset Ω) (label : Ω → Ι) (mass weight : Ω → ℚ)
+    (hmass : ∀ x ∈ s, 0 ≤ mass x) (i : Ι)
+    (hzero : (∑ x ∈ s with label x = i, mass x) = 0) :
+    (∑ x ∈ s with label x = i, weight x * mass x) = 0 := by
+  have hpoint := zero_mass_fiber_forces_point_masses_zero
+    s label mass hmass i hzero
+  apply Finset.sum_eq_zero
+  intro x hx
+  have hx' : x ∈ s.filter (fun y => label y = i) := by
+    simp only [Finset.mem_filter]
+    exact ⟨(Finset.mem_filter.mp hx).1, (Finset.mem_filter.mp hx).2⟩
+  rw [hpoint x hx']
+  ring
+
+#print axioms zero_mass_fiber_weighted_sum_zero
+
 end BBMSTFiberMassCore
