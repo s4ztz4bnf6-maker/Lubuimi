@@ -645,3 +645,17 @@ theorem canonical_block_descent_implies_power_growth
 
 #print axioms canonicalOffset_pos_of_pos_steps
 #print axioms canonical_block_descent_implies_power_growth
+
+
+/--
+Exact residue law for the canonical affine offset: modulo three, the
+newest correction term determines the whole next offset because all earlier
+terms are multiples of three. This is a consistency filter on exponent words,
+not a sufficient criterion for orbit realizability.
+-/
+theorem canonicalOffset_succ_mod_three
+    (A : ℕ → ℕ) (n : ℕ) :
+    canonicalOffset A (n + 1) % 3 = (2 ^ A n) % 3 := by
+  simp [canonicalOffset, Nat.add_mod]
+
+#print axioms canonicalOffset_succ_mod_three
