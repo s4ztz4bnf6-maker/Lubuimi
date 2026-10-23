@@ -346,7 +346,6 @@ theorem canonicalOffset_ge_last_weight
     (A : ℕ → ℕ) (n : ℕ) :
     2 ^ A n ≤ canonicalOffset A (n + 1) := by
   simp [canonicalOffset]
-  omega
 
 /--
 Every canonical offset strictly increases with the number of certified steps.
