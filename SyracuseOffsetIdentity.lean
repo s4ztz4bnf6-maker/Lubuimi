@@ -481,6 +481,6 @@ theorem terminal_divisibility_of_offset_identity
     (n0 nj A C j : ℕ)
     (hidentity : 2 ^ A * nj = 3 ^ j * n0 + C) :
     2 ^ A ∣ 3 ^ j * n0 + C := by
-  exact ⟨nj, by simpa [Nat.mul_comm] using hidentity⟩
+  exact ⟨nj, hidentity.symm⟩
 
 end CollatzSyracuseAudit
