@@ -56,6 +56,27 @@ theorem v2_three_mul_add_one_eq_one_of_mod_four_three
 
 #print axioms CollatzSyracuseAudit.v2_three_mul_add_one_eq_one_of_mod_four_three
 
+/-- Exact formula in the complementary n = 3 (mod 4) branch:
+only one factor of two is removed by the accelerated map. -/
+theorem syracuse_eq_half_of_mod_four_three
+    (n : ℕ) (hmod : n % 4 = 3) :
+    syracuse n = (3 * n + 1) / 2 := by
+  dsimp [syracuse]
+  rw [v2_three_mul_add_one_eq_one_of_mod_four_three n hmod]
+  norm_num
+
+/-- The n = 3 (mod 4) branch grows at its next accelerated step for n > 1.
+This is an explicit obstruction to any proof claiming one-step descent
+for every odd input. -/
+theorem syracuse_grows_of_mod_four_three
+    (n : ℕ) (hn : 2 ≤ n) (hmod : n % 4 = 3) :
+    n < syracuse n := by
+  rw [syracuse_eq_half_of_mod_four_three n hmod]
+  omega
+
+#print axioms syracuse_eq_half_of_mod_four_three
+#print axioms syracuse_grows_of_mod_four_three
+
 /-- In the n = 5 (mod 8) branch, the Syracuse numerator has at least
 three factors of 2. This isolates a stronger local descent case. -/
 theorem eight_dvd_three_mul_add_one_of_mod_eight_five
