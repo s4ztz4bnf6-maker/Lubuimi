@@ -169,3 +169,55 @@ theorem predicate_incidence_fraction_mem_unit_interval
     sample (sample.filter covered) hinc hnonempty
 
 #print axioms predicate_incidence_fraction_mem_unit_interval
+
+/--
+Exact deficit identity for an actual coverage predicate: the fraction of
+sample points not satisfying the predicate is exactly the complement of its
+incidence fraction. Both sides are induced by the same predicate, not by
+independently supplied incidence data.
+-/
+theorem predicate_incidence_deficit_eq_uncovered_fraction
+    {Ω : Type*} [DecidableEq Ω]
+    (sample : Finset Ω) (covered : Ω → Prop) [DecidablePred covered]
+    (hnonempty : sample.Nonempty) :
+    1 - ((sample.filter covered).card : ℚ) / (sample.card : ℚ) =
+      ((sample.filter (fun x => ¬ covered x)).card : ℚ) /
+        (sample.card : ℚ) := by
+  have hinc : sample.filter covered ⊆ sample := Finset.filter_subset _ _
+  have hdef := finite_incidence_deficit_eq_complement_fraction
+    sample (sample.filter covered) hinc hnonempty
+  have hcompl :
+      Finset.sdiff sample (sample.filter covered) =
+        sample.filter (fun x => ¬ covered x) := by
+    ext x
+    simp
+  rw [hcompl] at hdef
+  exact hdef
+
+#print axioms predicate_incidence_deficit_eq_uncovered_fraction
+
+
+/--
+Strictly subunit predicate incidence is equivalent to the existence of an
+uncovered sample point. This is a logical equivalence, not a positive
+quantitative lower bound on the uncovered fraction.
+-/
+theorem predicate_incidence_fraction_lt_one_iff_uncovered
+    {Ω : Type*} [DecidableEq Ω]
+    (sample : Finset Ω) (covered : Ω → Prop) [DecidablePred covered]
+    (hnonempty : sample.Nonempty) :
+    ((sample.filter covered).card : ℚ) / (sample.card : ℚ) < 1 ↔
+      (sample.filter (fun x => ¬ covered x)).Nonempty := by
+  have hinc : sample.filter covered ⊆ sample := Finset.filter_subset _ _
+  have hiff := finite_incidence_fraction_lt_one_iff_complement_nonempty
+    sample (sample.filter covered) hinc hnonempty
+  have hcompl :
+      Finset.sdiff sample (sample.filter covered) =
+        sample.filter (fun x => ¬ covered x) := by
+    ext x
+    simp
+  rw [hcompl] at hiff
+  exact hiff
+
+#print axioms predicate_incidence_fraction_lt_one_iff_uncovered
+
