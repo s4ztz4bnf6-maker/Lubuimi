@@ -241,6 +241,23 @@ theorem descent_implies_power_growth
 
 
 /--
+Exact gap form of the offset barrier. When the accumulated power of two is
+at least the corresponding power of three, strict descent is equivalent to
+the additive offset being smaller than the gap times the starting value.
+This exposes the precise integer inequality behind the floor threshold.
+-/
+theorem offset_margin_iff_gap_product
+    (n0 A C j : ℕ) (hgap : 3 ^ j ≤ 2 ^ A) :
+    3 ^ j * n0 + C < 2 ^ A * n0 ↔
+      C < (2 ^ A - 3 ^ j) * n0 := by
+  have hdecomp : 2 ^ A = (2 ^ A - 3 ^ j) + 3 ^ j :=
+    Nat.sub_add_cancel hgap
+  rw [hdecomp, Nat.add_mul]
+  omega
+
+#print axioms offset_margin_iff_gap_product
+
+/--
 Arithmetic certificate for a block of accelerated odd Syracuse steps.
 The record isolates the exact affine identity and the geometric offset
 floor required by the descent-margin argument. It does not claim that an
