@@ -308,6 +308,15 @@ theorem div_pow_le_div_sixteen (N a : ℕ) (ha : 16 ≤ 2 ^ a) :
       Nat.mul_le_mul_left (N / 2 ^ a) ha
     _ ≤ N := Nat.div_mul_le_self N (2 ^ a)
 
+ /-- In the adjacent residue class m = 8*k+4, two accelerated
+Syracuse steps from 4*m+3 also strictly descend. The second step is exact:
+T(T(32*k+19)) = 18*k+11 < 32*k+19. -/
+theorem second_step_descent_of_m_mod_eight_four (k : ℕ) :
+    syracuse (syracuse (4 * (8 * k + 4) + 3)) < 4 * (8 * k + 4) + 3 := by
+  rw [first_step_formula_mod_four_three]
+  rw [second_step_formula_of_m_mod_eight_four]
+  omega
+
 /-- For m = 8*k, two accelerated Syracuse steps from 4*m+3
 strictly descend below the original input. The second numerator is
 16*(9*k+1), so its normalized value is at most 9*k+1. -/
