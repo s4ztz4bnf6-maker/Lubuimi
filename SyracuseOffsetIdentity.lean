@@ -1697,9 +1697,6 @@ theorem two_exponent_one_steps_can_be_followed_by_exponent_two :
 #print axioms two_exponent_one_steps_can_be_followed_by_exponent_two
 
 
-end CollatzSyracuseAudit
-
-
 /-!
 ## Parameterized exact-residue constraint
 
@@ -1726,3 +1723,6 @@ theorem exact_exponent_residue
     Nat.mul_assoc]
 
 #print axioms exact_exponent_residue
+
+
+end CollatzSyracuseAudit
