@@ -1,0 +1,29 @@
+name: Syracuse residue-class formal audit
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  compile-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean and Mathlib cache
+        uses: leanprover/lean-action@v1
+        with:
+          build: true
+          use-mathlib-cache: true
+      - name: Compile exact residue-class module
+        run: lake env lean AffineTransitionExactMod64.lean
+      - name: Reject sorryAx in the residue-class axiom report
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean AffineTransitionExactMod64.lean 2>&1 | tee /tmp/syracuse-axioms.txt
+          if grep -q 'sorryAx' /tmp/syracuse-axioms.txt; then
+            echo 'Unexpected sorryAx dependency in the residue-class audit.'
+            exit 1
+          fi
