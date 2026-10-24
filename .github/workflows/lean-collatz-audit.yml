@@ -47,3 +47,5 @@ jobs:
         run: lake env lean SyracuseOffsetClosedForm.lean
       - name: Compile and audit stronger offset lower bound
         run: lake env lean SyracuseOffsetLowerBound.lean
+      - name: Compile and audit exact valuation-one block margin
+        run: lake env lean SyracuseMarginBlock.lean
