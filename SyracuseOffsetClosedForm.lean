@@ -57,6 +57,25 @@ theorem offset_eq_closed_form
   | succ j ih =>
       rw [hC j, offsetClosedForm_succ, ih]
 
+/--
+Exact arithmetic reduction for a prescribed exponent prefix.
+
+The affine prefix value is below the scaled starting value precisely when
+its offset is smaller than the difference of the two scaled coefficients.
+The domination hypothesis is essential for interpreting the natural-number
+subtraction as a nonnegative margin. This is an algebraic reduction only:
+it does not establish that the actual Syracuse exponent word satisfies the
+resulting inequality.
+-/
+theorem affine_prefix_descent_iff_product_margin
+    (n A C j : ℕ)
+    (hdom : 3 ^ j ≤ 2 ^ A) :
+    3 ^ j * n + C < 2 ^ A * n ↔
+      C < 2 ^ A * n - 3 ^ j * n := by
+  have hprod : 3 ^ j * n ≤ 2 ^ A * n :=
+    Nat.mul_le_mul_right n hdom
+  omega
+
 #print axioms offsetClosedForm_succ
 #print axioms offset_eq_closed_form
 
