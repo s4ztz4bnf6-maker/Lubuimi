@@ -65,3 +65,25 @@ theorem three_valuation_one_iff_mod_sixteen_fifteen
     omega
 
 #print axioms three_valuation_one_iff_mod_sixteen_fifteen
+
+
+/--
+Four consecutive accelerated valuation-one steps are characterized by
+n = 31 (mod 32). This extends the exact finite-prefix residue classification
+by one step; it does not imply that such a block repeats or that an orbit
+eventually descends.
+-/
+theorem four_valuation_one_iff_mod_thirty_two_thirty_one
+    (n : ℕ) :
+    ((3 * n + 1) % 4 = 2 ∧
+      (3 * ((3 * n + 1) / 2) + 1) % 4 = 2 ∧
+      (3 * ((3 * ((3 * n + 1) / 2) + 1) / 2) + 1) % 4 = 2 ∧
+      (3 * ((3 * ((3 * ((3 * n + 1) / 2) + 1) / 2) + 1) / 2) + 1) % 4 = 2)
+      ↔ n % 32 = 31 := by
+  constructor
+  · intro h
+    omega
+  · intro hn
+    omega
+
+#print axioms four_valuation_one_iff_mod_thirty_two_thirty_one
