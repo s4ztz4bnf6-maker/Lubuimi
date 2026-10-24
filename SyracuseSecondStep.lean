@@ -366,4 +366,10 @@ theorem second_step_descent_of_m_mod_eight_zero (k : ℕ) :
 #print axioms CollatzSyracuseAudit.second_numerator_divisible_by_thirty_two_of_m_mod_sixteen_eight
 #print axioms CollatzSyracuseAudit.even_m_second_step_reduction
 
+/-- Since 9 ≡ 1 (mod 4) and 8 ≡ 0 (mod 4), the factor 9*m+8
+is divisible by four exactly when m is divisible by four. -/
+theorem divisible_four_iff_nine_m_add_eight (m : ℕ) :
+    4 ∣ 9 * m + 8 ↔ 4 ∣ m := by
+  omega
+
 end CollatzSyracuseAudit

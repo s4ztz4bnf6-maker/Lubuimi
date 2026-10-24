@@ -7,4 +7,6 @@ package «collatz-audit» where
 require mathlib from git "https://github.com/leanprover-community/mathlib4.git" @ "v4.28.0"
 
 lean_lib CollatzAudit where
-  roots := #[`IterationLemmas, `ThresholdLemmas, `SyracuseQuarterDescent]
+  roots := #[`IterationLemmas, `ThresholdLemmas, `SyracuseQuarterDescent,
+    `SyracuseReferenceTest, `SyracuseSecondStep, `AffineTransitionDesign,
+    `AffineTransitionValuation, `AffineTransitionExactMod64]
