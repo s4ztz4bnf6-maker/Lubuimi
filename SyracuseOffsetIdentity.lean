@@ -1305,3 +1305,27 @@ theorem exponent_one_block_bounds_length_by_start_shift
 #print axioms exponent_one_block_bounds_length_by_start_shift
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Quantitative form of the exponent-one obstruction: if a block of N
+exponent-one transitions ends at an odd iterate, then the shifted start
+n₀ + 1 is at least 2^(N+1). This converts the divisibility invariant into
+an explicit size bound. It bounds a single uninterrupted valuation-one
+block; it does not bound arbitrary trajectories or prove global descent.
+-/
+theorem exponent_one_block_length_power_bound
+    (n : ℕ → ℕ)
+    (hstep : ∀ j, 2 * n (j + 1) = 3 * n j + 1)
+    (N : ℕ)
+    (hterminal : n N % 2 = 1) :
+    2 ^ (N + 1) ≤ n 0 + 1 := by
+  have hdiv :=
+    exponent_one_block_bounds_length_by_start_shift n hstep N hterminal
+  exact Nat.le_of_dvd (by omega : 0 < n 0 + 1) hdiv
+
+#print axioms exponent_one_block_length_power_bound
+
+end CollatzSyracuseAudit
