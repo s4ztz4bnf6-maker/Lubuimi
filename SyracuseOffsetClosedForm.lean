@@ -43,7 +43,6 @@ theorem offsetClosedForm_succ (A : ℕ → ℕ) (j : ℕ) :
             rw [Finset.mul_sum]
   simp only [Nat.add_sub_cancel_right, Nat.sub_self, pow_zero, one_mul]
   rw [hsum]
-  ring
 
 /-- The recursively accumulated offset equals its closed form at every prefix. -/
 theorem offset_eq_closed_form
