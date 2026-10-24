@@ -781,4 +781,26 @@ theorem exponent_seven_forces_residue_two_hundred_thirteen_mod_two_hundred_fifty
 
 #print axioms exponent_seven_forces_residue_two_hundred_thirteen_mod_two_hundred_fifty_six
 
+
+
+/--
+Sharper canonical-offset floor from the exact transition constraint A j ≥ j:
+3^n ≤ C_n + 2^n, equivalently 3^n - 2^n ≤ C_n when the subtraction is
+nonnegative. The induction uses the actual recurrence and the accumulated
+valuation lower bound; it does not assume descent or any global orbit claim.
+-/
+theorem canonicalOffset_plus_two_pow_lower_bound
+    (A : ℕ → ℕ)
+    (hA : ∀ j, j ≤ A j) :
+    ∀ n, 3 ^ n ≤ canonicalOffset A n + 2 ^ n := by
+  intro n
+  induction n with
+  | zero =>
+      simp [canonicalOffset]
+  | succ n ih =>
+      simp only [canonicalOffset]
+      rw [pow_succ]
+      have hpow : 2 ^ n ≤ 2 ^ A n := Nat.pow_le_pow_right (by omega) (hA n)
+      nlinarith [ih]
+
 end CollatzSyracuseAudit
