@@ -36,6 +36,21 @@ theorem mod64_thirtyfive_two_step_exact (m : ℕ) :
 
 #print axioms CollatzSyracuseAudit.mod64_thirtyfive_two_step_exact
 
+/--
+Every input 64*m+35 strictly descends after two accelerated Syracuse steps.
+The exact formula reduces the output to the odd part of 9*m+5, which is at
+most 9*m+5 < 64*m+35. This closes this entire residue class locally.
+-/
+theorem mod64_thirtyfive_two_step_descent (m : ℕ) :
+    syracuse (syracuse (64 * m + 35)) < 64 * m + 35 := by
+  rw [mod64_thirtyfive_two_step_exact]
+  have hquot :
+      (9 * m + 5) / 2 ^ v2 (9 * m + 5) ≤ 9 * m + 5 :=
+    Nat.div_le_self _ _
+  omega
+
+#print axioms CollatzSyracuseAudit.mod64_thirtyfive_two_step_descent
+
 /-- The second-step numerator for inputs congruent to 35 modulo 64
 is 32 times the residual factor 9*m+5. -/
 theorem mod64_thirtyfive_second_numerator_factor32 (m : ℕ) :
