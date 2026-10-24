@@ -1846,3 +1846,44 @@ theorem certified_block_descent_of_exponents_ge_two
 #print axioms certified_block_descent_of_exponents_ge_two
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Mixed-word descent criterion: unlike the exponent-at-least-two corollary,
+this theorem permits valuation-one steps. The only analytic obligation is
+the exact terminal signed-margin inequality; all orbit arithmetic remains
+anchored to the canonical affine offset. This is a sufficient conditional
+criterion, not a proof that every orbit attains positive margin.
+-/
+theorem certified_block_descent_of_positive_signed_margin
+    (n0 nj : ℕ) (A : ℕ → ℕ) (j : ℕ)
+    (hn0 : 1 < n0)
+    (hj : 0 < j)
+    (hidentity :
+      2 ^ A j * nj = 3 ^ j * n0 + canonicalOffset A j)
+    (hmargin : 0 < signedOffsetMargin A j) :
+    nj < n0 := by
+  have hbound := (signedOffsetMargin_pos_iff A j).1 hmargin
+  have hCpos : 0 < canonicalOffset A j :=
+    canonicalOffset_pos_of_pos_steps A j hj
+  have hCmul :
+      canonicalOffset A j < canonicalOffset A j * n0 := by
+    nlinarith [hCpos, hn0]
+  have hstrict :
+      3 ^ j * n0 + canonicalOffset A j < 2 ^ A j * n0 := by
+    calc
+      3 ^ j * n0 + canonicalOffset A j
+          < 3 ^ j * n0 + canonicalOffset A j * n0 :=
+            Nat.add_lt_add_left hCmul _
+      _ = (3 ^ j + canonicalOffset A j) * n0 := by
+            rw [Nat.add_mul]
+      _ ≤ 2 ^ A j * n0 :=
+            Nat.mul_le_mul_right n0 (Nat.le_of_lt hbound)
+  exact strict_descent_of_offset_margin n0 nj (A j)
+    (canonicalOffset A j) j hidentity hstrict
+
+#print axioms certified_block_descent_of_positive_signed_margin
+
+end CollatzSyracuseAudit
