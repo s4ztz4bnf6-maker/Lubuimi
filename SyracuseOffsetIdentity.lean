@@ -933,7 +933,7 @@ theorem signedOffsetMargin_pos_iff
     0 < signedOffsetMargin A j ↔
       canonicalOffset A j + 3 ^ j < 2 ^ A j := by
   simp only [signedOffsetMargin]
-  push_cast
+  norm_cast
   omega
 
 #print axioms signedOffsetMargin_pos_iff
