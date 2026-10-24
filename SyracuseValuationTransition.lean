@@ -133,3 +133,25 @@ theorem two_step_affine_identity
     _ = p * q * z := by ring
 
 #print axioms two_step_affine_identity
+
+
+/--
+Exact three-step affine recurrence. The identity is obtained by eliminating
+both intermediate states from the three equations `3*xᵢ + 1 = pᵢ*xᵢ₊₁`.
+It is a finite algebraic invariant, not a descent or realizability theorem.
+-/
+theorem three_step_affine_identity
+    (x₀ x₁ x₂ x₃ p₀ p₁ p₂ : ℕ)
+    (h₀ : 3 * x₀ + 1 = p₀ * x₁)
+    (h₁ : 3 * x₁ + 1 = p₁ * x₂)
+    (h₂ : 3 * x₂ + 1 = p₂ * x₃) :
+    27 * x₀ + 9 + 3 * p₀ + p₀ * p₁ = p₀ * p₁ * p₂ * x₃ := by
+  calc
+    27 * x₀ + 9 + 3 * p₀ + p₀ * p₁
+        = 3 * (9 * x₀ + 3 + p₀) + p₀ * p₁ := by ring
+    _ = 3 * (p₀ * p₁ * x₂) + p₀ * p₁ := by rw [two_step_affine_identity x₀ x₁ x₂ p₀ p₁ h₀ h₁]
+    _ = p₀ * p₁ * (3 * x₂ + 1) := by ring
+    _ = p₀ * p₁ * (p₂ * x₃) := by rw [h₂]
+    _ = p₀ * p₁ * p₂ * x₃ := by ring
+
+#print axioms three_step_affine_identity
