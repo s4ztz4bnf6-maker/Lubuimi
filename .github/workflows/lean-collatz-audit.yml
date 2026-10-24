@@ -55,3 +55,11 @@ jobs:
         run: lake env lean SyracuseOffsetLowerBound.lean
       - name: Compile and audit exact valuation-one block margin
         run: lake env lean SyracuseMarginBlock.lean
+      - name: Compile and audit exact valuation-one to valuation-two transition
+        run: |
+          set -o pipefail
+          lake env lean SyracuseValuationTransition.lean 2>&1 | tee /tmp/syracuse-transition-axioms.log
+          if grep -q 'sorryAx' /tmp/syracuse-transition-axioms.log; then
+            echo "Forbidden sorryAx found in exact Syracuse valuation transition."
+            exit 1
+          fi
