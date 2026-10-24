@@ -933,8 +933,19 @@ theorem signedOffsetMargin_pos_iff
     0 < signedOffsetMargin A j ↔
       canonicalOffset A j + 3 ^ j < 2 ^ A j := by
   simp only [signedOffsetMargin]
-  norm_cast
-  omega
+  constructor
+  · intro h
+    have hInt :
+        (canonicalOffset A j : ℤ) + (3 : ℤ) ^ j <
+          (2 : ℤ) ^ A j := by
+      omega
+    exact_mod_cast hInt
+  · intro h
+    have hInt :
+        (canonicalOffset A j : ℤ) + (3 : ℤ) ^ j <
+          (2 : ℤ) ^ A j := by
+      exact_mod_cast h
+    omega
 
 #print axioms signedOffsetMargin_pos_iff
 
