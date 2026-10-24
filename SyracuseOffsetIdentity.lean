@@ -1791,3 +1791,58 @@ theorem terminal_offset_residue
 #print axioms terminal_offset_residue
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-!
+## Conditional descent theorem for blocks without valuation-one steps
+
+The established upper bound on the canonical offset says
+C_j + 3^j ≤ 2^(A_j) when every accelerated exponent is at least two.
+Combined with C_j > 0, this yields strict descent for every starting value
+n₀ > 1 satisfying the exact affine orbit identity, even when the offset
+bound itself is an equality. The remaining global obstruction is precisely
+that actual Syracuse trajectories can contain valuation-one steps.
+-/
+
+/-- If every step in a nonempty certified block removes at least two powers
+of two, then every starting value n₀ > 1 satisfying the exact affine identity
+strictly descends over that block. This is conditional on the exponent word;
+it is not a universal Collatz termination theorem. -/
+theorem certified_block_descent_of_exponents_ge_two
+    (n0 nj : ℕ) (A a : ℕ → ℕ) (j : ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ k, A (k + 1) = A k + a k)
+    (ha : ∀ k, 2 ≤ a k)
+    (hn0 : 1 < n0)
+    (hj : 0 < j)
+    (hidentity :
+      2 ^ A j * nj = 3 ^ j * n0 + canonicalOffset A j) :
+    nj < n0 := by
+  have hbound :=
+    canonicalOffset_plus_three_pow_le_accumulated_power A a hA0 hA ha j
+  have hCpos : 0 < canonicalOffset A j :=
+    canonicalOffset_pos_of_pos_steps A j hj
+  have hbound' :
+      3 ^ j + canonicalOffset A j ≤ 2 ^ A j := by
+    omega
+  have hCmul :
+      canonicalOffset A j < canonicalOffset A j * n0 := by
+    nlinarith [hCpos, hn0]
+  have hmargin :
+      3 ^ j * n0 + canonicalOffset A j < 2 ^ A j * n0 := by
+    calc
+      3 ^ j * n0 + canonicalOffset A j
+          < 3 ^ j * n0 + canonicalOffset A j * n0 :=
+            Nat.add_lt_add_left hCmul _
+      _ = (3 ^ j + canonicalOffset A j) * n0 := by
+            rw [Nat.add_mul]
+      _ ≤ 2 ^ A j * n0 :=
+            Nat.mul_le_mul_right n0 hbound'
+  exact strict_descent_of_offset_margin n0 nj (A j)
+    (canonicalOffset A j) j hidentity hmargin
+
+#print axioms certified_block_descent_of_exponents_ge_two
+
+end CollatzSyracuseAudit
