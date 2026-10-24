@@ -806,12 +806,12 @@ theorem canonicalOffset_plus_two_pow_lower_bound
           _ ≤ 2 ^ n * 2 ^ (A n - n) :=
             Nat.mul_le_mul_left _ (Nat.one_le_pow _ _ (by omega))
       have h2succ : 2 ^ (n + 1) = 2 * 2 ^ n := by
-        rw [pow_succ]
-        norm_num
+        rw [pow_succ, Nat.mul_comm]
       calc
-        3 ^ (n + 1) ≤ 3 * (canonicalOffset A n + 2 ^ n) := by
-          rw [pow_succ]
-          exact Nat.mul_le_mul_left 3 ih
+        3 ^ (n + 1) = 3 * 3 ^ n := by
+          rw [pow_succ, Nat.mul_comm]
+        _ ≤ 3 * (canonicalOffset A n + 2 ^ n) :=
+          Nat.mul_le_mul_left 3 ih
         _ = 3 * canonicalOffset A n + 3 * 2 ^ n := by ring
         _ ≤ 3 * canonicalOffset A n + 2 ^ A n + 2 ^ (n + 1) := by
           rw [h2succ]
