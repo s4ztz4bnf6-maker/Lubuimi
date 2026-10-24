@@ -155,3 +155,29 @@ theorem three_step_affine_identity
     _ = p₀ * p₁ * p₂ * x₃ := by ring
 
 #print axioms three_step_affine_identity
+
+
+/--
+Exact four-step affine recurrence, obtained by eliminating three intermediate
+states. This extends the finite algebraic invariant by one step; it does not
+assert that the multipliers are exact powers of two or imply global descent.
+-/
+theorem four_step_affine_identity
+    (x₀ x₁ x₂ x₃ x₄ p₀ p₁ p₂ p₃ : ℕ)
+    (h₀ : 3 * x₀ + 1 = p₀ * x₁)
+    (h₁ : 3 * x₁ + 1 = p₁ * x₂)
+    (h₂ : 3 * x₂ + 1 = p₂ * x₃)
+    (h₃ : 3 * x₃ + 1 = p₃ * x₄) :
+    81 * x₀ + 27 + 9 * p₀ + 3 * p₀ * p₁ + p₀ * p₁ * p₂ =
+      p₀ * p₁ * p₂ * p₃ * x₄ := by
+  calc
+    81 * x₀ + 27 + 9 * p₀ + 3 * p₀ * p₁ + p₀ * p₁ * p₂
+        = 3 * (27 * x₀ + 9 + 3 * p₀ + p₀ * p₁) +
+          p₀ * p₁ * p₂ := by ring
+    _ = 3 * (p₀ * p₁ * p₂ * x₃) + p₀ * p₁ * p₂ := by
+      rw [three_step_affine_identity x₀ x₁ x₂ x₃ p₀ p₁ p₂ h₀ h₁ h₂]
+    _ = p₀ * p₁ * p₂ * (3 * x₃ + 1) := by ring
+    _ = p₀ * p₁ * p₂ * (p₃ * x₄) := by rw [h₃]
+    _ = p₀ * p₁ * p₂ * p₃ * x₄ := by ring
+
+#print axioms four_step_affine_identity
