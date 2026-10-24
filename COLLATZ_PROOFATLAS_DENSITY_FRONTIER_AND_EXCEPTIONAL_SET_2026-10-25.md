@@ -58,3 +58,21 @@ At the latest check it was still in progress during toolchain installation;
 the new four-step theorem must therefore be treated as awaiting CI confirmation.
 The prior run 40142262056 completed successfully for the preceding commit and
 does not certify this new theorem.
+
+
+## Five-step affine extension
+
+A further exact instance, `five_step_affine_identity`, was added to
+`SyracuseValuationTransition.lean` at commit
+`b2e05980cd32171697441ff41f67dd223b730807`:
+[
+243x_0+81+27p_0+9p_0p_1+3p_0p_1p_2+p_0p_1p_2p_3
+=p_0p_1p_2p_3p_4x_5.
+]
+It follows by applying the four-step identity and the fifth transition.
+The associated CI run is
+https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/40142758719
+and was still in progress at the last check. As with the shorter instances,
+this is a finite algebraic identity only. The next mathematically meaningful
+step is a single induction theorem for arbitrary length, rather than adding
+unboundedly many isolated cases.
