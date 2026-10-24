@@ -78,4 +78,31 @@ theorem mod64_thirtyfive_first_step_exact (m : ℕ) :
 #print axioms CollatzSyracuseAudit.mod64_thirtyfive_second_numerator_factor32
 #print axioms CollatzSyracuseAudit.mod64_thirtyfive_first_step_exact
 
+
+/--
+Quantitative form of the 35 mod 64 descent: the two-step output lies at
+least 55*m+30 below the input. This margin is obtained from the exact
+formula, not from finite testing.
+-/
+theorem mod64_thirtyfive_two_step_descent_margin (m : ℕ) :
+    syracuse (syracuse (64 * m + 35)) + (55 * m + 30) ≤
+      64 * m + 35 := by
+  rw [mod64_thirtyfive_two_step_exact]
+  have hquot :
+      (9 * m + 5) / 2 ^ v2 (9 * m + 5) ≤ 9 * m + 5 :=
+    Nat.div_le_self _ _
+  omega
+
+#print axioms CollatzSyracuseAudit.mod64_thirtyfive_two_step_descent_margin
+
+/-- The quantitative descent margin for arbitrary inputs in residue 35 mod 64. -/
+theorem mod64_thirtyfive_two_step_descent_margin_of_residue (n : ℕ)
+    (hn : n % 64 = 35) :
+    syracuse (syracuse n) + (55 * (n / 64) + 30) ≤ n := by
+  have hdecomp : n = 64 * (n / 64) + 35 := by omega
+  rw [hdecomp]
+  exact mod64_thirtyfive_two_step_descent_margin (n / 64)
+
+#print axioms CollatzSyracuseAudit.mod64_thirtyfive_two_step_descent_margin_of_residue
+
 end CollatzSyracuseAudit
