@@ -1866,6 +1866,8 @@ theorem certified_block_descent_of_positive_signed_margin
     (hmargin : 0 < signedOffsetMargin A j) :
     nj < n0 := by
   have hbound := (signedOffsetMargin_pos_iff A j).1 hmargin
+  have hbound' : 3 ^ j + canonicalOffset A j < 2 ^ A j := by
+    omega
   have hCpos : 0 < canonicalOffset A j :=
     canonicalOffset_pos_of_pos_steps A j hj
   have hCmul :
@@ -1880,7 +1882,7 @@ theorem certified_block_descent_of_positive_signed_margin
       _ = (3 ^ j + canonicalOffset A j) * n0 := by
             rw [Nat.add_mul]
       _ ≤ 2 ^ A j * n0 :=
-            Nat.mul_le_mul_right n0 (Nat.le_of_lt hbound)
+            Nat.mul_le_mul_right n0 (Nat.le_of_lt hbound')
   exact strict_descent_of_offset_margin n0 nj (A j)
     (canonicalOffset A j) j hidentity hstrict
 
