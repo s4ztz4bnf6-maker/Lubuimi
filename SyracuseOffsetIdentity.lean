@@ -925,4 +925,58 @@ theorem signedOffsetMargin_succ
 
 #print axioms signedOffsetMargin_succ
 
+/-- Positivity of the signed margin is exactly the strict natural-number
+inequality needed to dominate the canonical affine offset and the geometric
+term. -/
+theorem signedOffsetMargin_pos_iff
+    (A : ℕ → ℕ) (j : ℕ) :
+    0 < signedOffsetMargin A j ↔
+      canonicalOffset A j + 3 ^ j < 2 ^ A j := by
+  simp only [signedOffsetMargin]
+  push_cast
+  omega
+
+#print axioms signedOffsetMargin_pos_iff
+
+/--
+A positive signed margin certifies strict descent for every positive starting
+value compatible with the canonical affine identity. This converts the margin
+from a bookkeeping quantity into a genuine sufficient block criterion. It
+does not prove that every actual Syracuse orbit has a positive-margin block.
+-/
+theorem signed_margin_positive_implies_block_descent
+    (n0 nj : ℕ) (A : ℕ → ℕ) (j : ℕ)
+    (hn0 : 0 < n0)
+    (hidentity :
+      2 ^ A j * nj = 3 ^ j * n0 + canonicalOffset A j)
+    (hD : 0 < signedOffsetMargin A j) :
+    nj < n0 := by
+  have hmargin :=
+    (signedOffsetMargin_pos_iff A j).mp hD
+  have hn0' : 1 ≤ n0 := hn0
+  have hC : canonicalOffset A j ≤ canonicalOffset A j * n0 := by
+    calc
+      canonicalOffset A j = canonicalOffset A j * 1 := by simp
+      _ ≤ canonicalOffset A j * n0 :=
+        Nat.mul_le_mul_left _ hn0'
+  have hpow : 3 ^ j + canonicalOffset A j < 2 ^ A j := by omega
+  have hscaled :
+      (3 ^ j + canonicalOffset A j) * n0 <
+        2 ^ A j * n0 :=
+    (Nat.mul_lt_mul_right hn0).mpr hpow
+  have hneeded :
+      3 ^ j * n0 + canonicalOffset A j <
+        2 ^ A j * n0 := by
+    calc
+      3 ^ j * n0 + canonicalOffset A j
+          ≤ 3 ^ j * n0 + canonicalOffset A j * n0 :=
+            Nat.add_le_add_left hC _
+      _ = (3 ^ j + canonicalOffset A j) * n0 := by
+            rw [Nat.add_mul]
+      _ < 2 ^ A j * n0 := hscaled
+  exact strict_descent_of_offset_margin n0 nj (A j)
+    (canonicalOffset A j) j hidentity hneeded
+
+#print axioms signed_margin_positive_implies_block_descent
+
 end CollatzSyracuseAudit
