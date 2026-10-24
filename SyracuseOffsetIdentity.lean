@@ -1512,3 +1512,109 @@ theorem affineOffsetTail_eq_scaled_canonicalOffset
       ring
 
 #print axioms affineOffsetTail_eq_scaled_canonicalOffset
+
+namespace CollatzSyracuseAudit
+
+/-!
+## A sufficient positive-margin criterion for mixed valuation words
+
+The previous audit proved that a positive margin requires some exponent at
+least three. The converse is false if exponent-one steps are allowed, because
+they contribute negative corrections. The two lemmas below isolate a useful
+sufficient condition: if every exponent in a block is at least two and at
+least one is at least three, then the block has strictly positive margin.
+This is an exact conditional result, not a claim that all Syracuse blocks
+satisfy the hypotheses.
+-/
+
+/-- Exponent values at least two make every prefix margin nonnegative. -/
+theorem signedOffsetMargin_nonneg_of_exponents_ge_two
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j) :
+    ∀ N, (∀ j, j < N → 2 ≤ a j) →
+      0 ≤ signedOffsetMargin A N := by
+  intro N
+  induction N with
+  | zero =>
+      intro _
+      simp [signedOffsetMargin, canonicalOffset]
+  | succ N ih =>
+      intro ha
+      have hprev : 0 ≤ signedOffsetMargin A N := by
+        apply ih
+        intro j hj
+        exact ha j (Nat.lt_trans hj (Nat.lt_succ_self N))
+      rw [signedOffsetMargin_succ A a hA N]
+      have hpowNat : 2 ^ 2 ≤ 2 ^ a N :=
+        Nat.pow_le_pow_right (by norm_num : 1 ≤ (2 : ℕ))
+          (ha N (Nat.lt_succ_self N))
+      have hpow : (4 : ℤ) ≤ (2 : ℤ) ^ a N := by
+        exact_mod_cast hpowNat
+      have hbase : 0 ≤ (2 : ℤ) ^ A N :=
+        le_of_lt (pow_pos (by norm_num : (0 : ℤ) < 2) _)
+      have hcorr :
+          0 ≤ ((2 : ℤ) ^ a N - 4) * (2 : ℤ) ^ A N :=
+        mul_nonneg (by linarith) hbase
+      nlinarith
+
+/--
+If all exponents are at least two and at least one is at least three, the
+signed margin at the end of the block is strictly positive. The proof keeps
+the negative exponent-one correction out of the hypotheses rather than
+pretending that a single large exponent dominates arbitrary earlier losses.
+-/
+theorem signedOffsetMargin_pos_of_ge_two_with_large_exponent
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j) :
+    ∀ N, (∀ j, j < N → 2 ≤ a j) →
+      (∃ j, j < N ∧ 3 ≤ a j) →
+        0 < signedOffsetMargin A N := by
+  intro N
+  induction N with
+  | zero =>
+      intro _ hex
+      rcases hex with ⟨j, hj, _⟩
+      omega
+  | succ N ih =>
+      intro ha hex
+      rcases hex with ⟨j, hj, hlarge⟩
+      by_cases hjN : j < N
+      · have hprev : 0 < signedOffsetMargin A N := by
+          apply ih
+          · intro i hi
+            exact ha i (Nat.lt_trans hi (Nat.lt_succ_self N))
+          · exact ⟨j, hjN, hlarge⟩
+        rw [signedOffsetMargin_succ A a hA N]
+        have hpowNat : 2 ^ 2 ≤ 2 ^ a N :=
+          Nat.pow_le_pow_right (by norm_num : 1 ≤ (2 : ℕ))
+            (ha N (Nat.lt_succ_self N))
+        have hpow : (4 : ℤ) ≤ (2 : ℤ) ^ a N := by
+          exact_mod_cast hpowNat
+        have hbase : 0 ≤ (2 : ℤ) ^ A N :=
+          le_of_lt (pow_pos (by norm_num : (0 : ℤ) < 2) _)
+        have hcorr :
+            0 ≤ ((2 : ℤ) ^ a N - 4) * (2 : ℤ) ^ A N :=
+          mul_nonneg (by linarith) hbase
+        nlinarith
+      · have hjEq : j = N := by omega
+        subst j
+        rw [signedOffsetMargin_succ A a hA N]
+        have hpowNat : 2 ^ 2 < 2 ^ a N := by
+          exact Nat.pow_lt_pow_right (by norm_num : 1 < (2 : ℕ)) hlarge
+        have hpow : (4 : ℤ) < (2 : ℤ) ^ a N := by
+          exact_mod_cast hpowNat
+        have hbase : 0 < (2 : ℤ) ^ A N :=
+          pow_pos (by norm_num : (0 : ℤ) < 2) _
+        have hcorr :
+            0 < ((2 : ℤ) ^ a N - 4) * (2 : ℤ) ^ A N :=
+          mul_pos (by linarith) hbase
+        have hprev :
+            0 ≤ signedOffsetMargin A N :=
+          signedOffsetMargin_nonneg_of_exponents_ge_two A a hA N
+            (fun i hi => ha i (Nat.lt_trans hi (Nat.lt_succ_self N)))
+        nlinarith
+
+#print axioms signedOffsetMargin_nonneg_of_exponents_ge_two
+#print axioms signedOffsetMargin_pos_of_ge_two_with_large_exponent
+
+end CollatzSyracuseAudit
