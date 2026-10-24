@@ -6,6 +6,7 @@ on:
       - collatz/compiler-audit-2026-10-19
       - collatz/quarter-descent-lemma-2026-10-20
       - collatz/offset-margin-roadmap-2026-10-23
+      - collatz/lean-435-recheck-2026-10-24
     paths-ignore:
       - "**.md"
   pull_request:
@@ -16,13 +17,13 @@ on:
 jobs:
   compile-drafts:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
-      - name: Install Lean and generate lake manifest
+      - name: Install Lean 4.35.0 and generate lake manifest
         run: |
           curl --fail --location --retry 3 --max-time 60 https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
-          sh elan-init.sh -y --default-toolchain leanprover/lean4:v4.34.1
+          sh elan-init.sh -y --default-toolchain leanprover/lean4:v4.35.0
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
           export PATH="$HOME/.elan/bin:$PATH"
           lake update
@@ -45,3 +46,5 @@ jobs:
         run: lake env lean SyracuseOffsetIdentity.lean
       - name: Compile and audit stronger offset lower bound
         run: lake env lean SyracuseOffsetLowerBound.lean
+      - name: Export and independently recheck project declarations
+        run: lake check
