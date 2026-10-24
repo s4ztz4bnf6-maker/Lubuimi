@@ -1760,36 +1760,3 @@ theorem signedOffsetMargin_succ_exp_ge_three
 end CollatzSyracuseAudit
 
 
-namespace CollatzSyracuseAudit
-
-/--
-Uniform exact-valuation residue filter. If the quotient after removing
- a powers of two is odd, then 3*n+1 has remainder exactly 2^a modulo
-2^(a+1). This packages the finite residue lemmas for exponents 1 through 7
-into one theorem and gives a general admissibility filter on exponent words.
--/
-theorem odd_quotient_forces_exact_residue_mod_power
-    (n next a : ℕ)
-    (hnext : next % 2 = 1)
-    (hstep : 2 ^ a * next = 3 * n + 1) :
-    (3 * n + 1) % 2 ^ (a + 1) = 2 ^ a := by
-  have hnext_eq : next = 2 * (next / 2) + 1 := by
-    have hdiv := Nat.mod_add_div next 2
-    omega
-  have hdecomp :
-      3 * n + 1 = 2 ^ (a + 1) * (next / 2) + 2 ^ a := by
-    calc
-      3 * n + 1 = 2 ^ a * next := hstep.symm
-      _ = 2 ^ a * (2 * (next / 2) + 1) := by rw [hnext_eq]
-      _ = 2 ^ (a + 1) * (next / 2) + 2 ^ a := by
-        rw [pow_succ]
-        ring
-  rw [hdecomp, Nat.add_mod]
-  simp [Nat.mod_eq_of_lt (by
-    have hp : 0 < (2 : ℕ) ^ a := by positivity
-    rw [pow_succ]
-    nlinarith)]
-
-#print axioms odd_quotient_forces_exact_residue_mod_power
-
-end CollatzSyracuseAudit
