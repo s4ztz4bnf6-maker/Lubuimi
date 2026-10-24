@@ -41,7 +41,7 @@ theorem offsetClosedForm_succ (A : ℕ → ℕ) (j : ℕ) :
                 ring
       _ = 3 * (∑ i ∈ Finset.range j, 3 ^ (j - (i + 1)) * 2 ^ (A i)) := by
             rw [Finset.mul_sum]
-  simp only [Nat.add_sub_cancel_right, Nat.sub_self, pow_zero, one_mul]
+  simp only [Nat.sub_self, pow_zero, one_mul]
   rw [hsum]
 
 /-- The recursively accumulated offset equals its closed form at every prefix. -/
