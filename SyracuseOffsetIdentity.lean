@@ -1170,3 +1170,27 @@ theorem valuation_one_implies_residue_three_mod_four
 #print axioms valuation_one_implies_residue_three_mod_four
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Realizability filter for valuation-two transitions: if the current and next
+odd iterates satisfy the exact certified transition with removed exponent two,
+then the current iterate is 1 modulo 8. This is a necessary local congruence,
+not a global descent theorem.
+-/
+theorem valuation_two_implies_residue_one_mod_eight
+    (n next a : ℕ)
+    (hn : n % 2 = 1)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1)
+    (ha : a = 2) :
+    n % 8 = 1 := by
+  subst a
+  norm_num at hstep
+  omega
+
+#print axioms valuation_two_implies_residue_one_mod_eight
+
+end CollatzSyracuseAudit
