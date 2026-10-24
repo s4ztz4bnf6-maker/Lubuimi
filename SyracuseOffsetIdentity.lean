@@ -1981,8 +1981,8 @@ theorem signed_margin_after_run_of_ones
       rw [signedOffsetMargin_succ A a hA (m + r), hlast, hAexp, ih honePrev]
       rw [pow_add]
       simp only [pow_one]
-      rw [show (3 : ℤ) ^ (r + 1) = 3 * (3 : ℤ) ^ r by rw [pow_succ]]
-      rw [show (2 : ℤ) ^ (r + 1) = 2 * (2 : ℤ) ^ r by rw [pow_succ]]
+      rw [show (3 : ℤ) ^ (r + 1) = 3 * (3 : ℤ) ^ r by rw [pow_succ]; ring]
+      rw [show (2 : ℤ) ^ (r + 1) = 2 * (2 : ℤ) ^ r by rw [pow_succ]; ring]
       ring
 
 #print axioms cumulative_exponent_add_of_ones
