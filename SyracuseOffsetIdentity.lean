@@ -1383,9 +1383,8 @@ theorem every_prefix_satisfies_affine_divisibility
   have hidentity :=
     offset_identity_of_certified_steps n a A C hA0 hC0 hA hC hstep j
   refine ⟨n j, ?_⟩
-  calc
-    3 ^ j * n 0 + C j = 2 ^ (A j) * n j := hidentity.symm
-    _ = n j * 2 ^ (A j) := Nat.mul_comm _ _
+  exact hidentity.symm
+
 
 #print axioms every_prefix_satisfies_affine_divisibility
 
