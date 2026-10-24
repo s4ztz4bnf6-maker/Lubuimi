@@ -1719,8 +1719,11 @@ theorem exact_exponent_residue
       2 ^ a * (2 * k + 1) = (2 ^ a * 2) * k + 2 ^ a := by
     ring
   rw [hfactor]
-  simp [Nat.add_mul_mod_self_left, Nat.mul_comm, Nat.mul_left_comm,
-    Nat.mul_assoc]
+  rw [Nat.add_comm ((2 ^ a * 2) * k) (2 ^ a)]
+  rw [Nat.add_mul_mod_self_left]
+  have hlt : 2 ^ a < 2 ^ a * 2 := by
+    nlinarith [Nat.one_le_pow a 2 (by norm_num)]
+  exact Nat.mod_eq_of_lt hlt
 
 #print axioms exact_exponent_residue
 
