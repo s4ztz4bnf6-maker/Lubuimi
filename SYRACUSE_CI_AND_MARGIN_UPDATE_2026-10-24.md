@@ -63,3 +63,10 @@ No global Collatz proof or counterexample is claimed.
 ## Exploratory finite search — not a theorem
 
 A local Python sweep over odd starts 3 through 19,999 (9,999 starting values), following the exact accelerated Syracuse map and updating the integer offset recurrence, found a positive signed margin for every tested start within the first 76 odd steps. The largest first-positive-margin index in this range was 76, at start 16,063; the endpoint at that index was 173. This is consistent with the margin criterion and is a useful regression-test range, but it is only finite exploratory evidence: it neither proves a logarithmic bound nor extends to all positive integers. The next useful artifact is to reproduce the sweep as a checkable finite certificate and use it to test any proposed block inequality against actual valuation words.
+
+
+## New necessary-condition lemma under CI review
+
+Commit `5e8330f70c2e90ef61ac43794d8853b87119d4ce` adds `positive_margin_requires_exponent_at_least_three`. Under the explicit assumptions that the initial signed margin is nonpositive, all exponents in the block are positive, and the final margin is positive, the theorem concludes that at least one exponent in the block is at least three. This follows by contradiction from the existing theorem that exponents 1 and 2 preserve nonpositivity. The positivity premise is explicit; it is not silently inferred from an arbitrary exponent sequence. GitHub Actions run `40119401593` is still in progress, so this new lemma is not yet CI-confirmed.
+
+This yields a sharper search rule: a candidate block that begins at nonpositive margin and later reaches positive margin must contain a valuation at least three. Such a step is necessary, not sufficient; the positive correction must still outweigh all earlier negative contributions in the exact weighted-sum formula.
