@@ -1696,4 +1696,35 @@ theorem two_exponent_one_steps_can_be_followed_by_exponent_two :
 
 #print axioms two_exponent_one_steps_can_be_followed_by_exponent_two
 
+/--
+Exact multiplicative identity for a block in which every accelerated-odd
+transition removes exactly one factor of two. It is a necessary arithmetic
+constraint on realizable all-one exponent blocks, not a uniform bound on
+their length and not a termination theorem.
+-/
+theorem pure_one_block_offset_identity
+    (n : ℕ → ℕ)
+    (hstep : ∀ j, 2 * n (j + 1) = 3 * n j + 1) :
+    ∀ j, 2 ^ j * (n j + 1) = 3 ^ j * (n 0 + 1) := by
+  intro j
+  induction j with
+  | zero =>
+      simp
+  | succ j ih =>
+      calc
+        2 ^ (j + 1) * (n (j + 1) + 1)
+            = 2 ^ j * (2 * (n (j + 1) + 1)) := by
+                rw [pow_succ]
+                ring
+        _ = 2 ^ j * (3 * (n j + 1)) := by
+              rw [hstep j]
+              ring
+        _ = 3 * (2 ^ j * (n j + 1)) := by ring
+        _ = 3 * (3 ^ j * (n 0 + 1)) := by rw [ih]
+        _ = 3 ^ (j + 1) * (n 0 + 1) := by
+              rw [pow_succ]
+              ring
+
+#print axioms pure_one_block_offset_identity
+
 end CollatzSyracuseAudit
