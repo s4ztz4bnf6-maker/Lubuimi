@@ -1070,3 +1070,36 @@ theorem signedOffsetMargin_succ_exp_two
 #print axioms signedOffsetMargin_succ_exp_two
 
 end CollatzSyracuseAudit
+
+
+/--
+A nonpositive margin becomes strictly negative after a step with valuation
+one. Thus a valuation-one step cannot create a positive-margin descent block
+from a nonpositive margin.
+-/
+theorem signedOffsetMargin_nonpos_succ_exp_one
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (n : ℕ) (ha : a n = 1)
+    (hD : signedOffsetMargin A n ≤ 0) :
+    signedOffsetMargin A (n + 1) < 0 := by
+  rw [signedOffsetMargin_succ_exp_one A a hA n ha]
+  have hpow : 0 < (2 : ℤ) ^ A n :=
+    pow_pos (by norm_num : (0 : ℤ) < 2) _
+  nlinarith
+
+/--
+A valuation-two step preserves the sign of the margin exactly: in particular,
+it preserves nonpositivity and cannot create a positive-margin block.
+-/
+theorem signedOffsetMargin_nonpos_succ_exp_two
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (n : ℕ) (ha : a n = 2)
+    (hD : signedOffsetMargin A n ≤ 0) :
+    signedOffsetMargin A (n + 1) ≤ 0 := by
+  rw [signedOffsetMargin_succ_exp_two A a hA n ha]
+  nlinarith
+
+#print axioms signedOffsetMargin_nonpos_succ_exp_one
+#print axioms signedOffsetMargin_nonpos_succ_exp_two
