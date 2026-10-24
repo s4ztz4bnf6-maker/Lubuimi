@@ -1229,3 +1229,27 @@ theorem exponent_one_block_scaled_identity
 #print axioms exponent_one_block_scaled_identity
 
 end CollatzSyracuseAudit
+
+
+
+namespace CollatzSyracuseAudit
+
+/--
+A direct divisibility consequence of the exponent-one block identity:
+the initial shifted value is multiplied by 3^N to a multiple of 2^N.
+The stronger cancellation of the odd factor 3^N, and the extra factor
+from oddness of the terminal iterate, are deliberately separate obligations.
+-/
+theorem pow_two_dvd_pow_three_mul_shifted_start
+    (n : ℕ → ℕ)
+    (hstep : ∀ j, 2 * n (j + 1) = 3 * n j + 1)
+    (N : ℕ) :
+    2 ^ N ∣ 3 ^ N * (n 0 + 1) := by
+  have hscaled := exponent_one_block_scaled_identity n hstep N
+  refine ⟨n N + 1, ?_⟩
+  rw [← hscaled]
+  ring
+
+#print axioms pow_two_dvd_pow_three_mul_shifted_start
+
+end CollatzSyracuseAudit
