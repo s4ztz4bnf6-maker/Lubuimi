@@ -20,7 +20,11 @@ not a global descent claim.
 theorem mod64_thirtyfive_two_step_exact (m : ℕ) :
     syracuse (syracuse (64 * m + 35)) =
       (9 * m + 5) / 2 ^ v2 (9 * m + 5) := by
-  rw [mod64_thirtyfive_first_step_exact]
+  have hfirst : syracuse (64 * m + 35) = 96 * m + 53 := by
+    have hinput : 64 * m + 35 = 4 * (16 * m + 8) + 3 := by omega
+    rw [hinput, first_step_formula_mod_four_three]
+    omega
+  rw [hfirst]
   have hfactor : 3 * (96 * m + 53) + 1 = 32 * (9 * m + 5) := by omega
   have hnonzero : 9 * m + 5 ≠ 0 := by omega
   have hval : v2 (3 * (96 * m + 53) + 1) =
