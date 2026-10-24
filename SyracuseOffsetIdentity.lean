@@ -1247,8 +1247,7 @@ theorem pow_two_dvd_pow_three_mul_shifted_start
     2 ^ N ∣ 3 ^ N * (n 0 + 1) := by
   have hscaled := exponent_one_block_scaled_identity n hstep N
   refine ⟨n N + 1, ?_⟩
-  rw [← hscaled]
-  ring
+  exact hscaled
 
 #print axioms pow_two_dvd_pow_three_mul_shifted_start
 
