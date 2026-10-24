@@ -1124,6 +1124,10 @@ theorem signedOffsetMargin_nonpos_of_exponents_le_two
   | zero =>
       simpa using hD0
   | succ N ih =>
+      have hDprev : signedOffsetMargin A N ≤ 0 := by
+        apply ih
+        intro j hj
+        exact ha j (Nat.lt_trans hj (Nat.lt_succ_self N))
       have hstep : 1 ≤ a N ∧ a N ≤ 2 :=
         ha N (Nat.lt_succ_self N)
       rw [signedOffsetMargin_succ A a hA N]
@@ -1136,7 +1140,7 @@ theorem signedOffsetMargin_nonpos_of_exponents_le_two
           le_of_lt (pow_pos (by norm_num : (0 : ℤ) < 2) _)
         exact mul_nonpos_of_nonpos_of_nonneg hexp hpow
       have hmul : 3 * signedOffsetMargin A N ≤ 0 := by
-        nlinarith [ih]
+        nlinarith [hDprev]
       exact add_nonpos hmul hcorr
 
 #print axioms signedOffsetMargin_nonpos_of_exponents_le_two
