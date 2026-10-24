@@ -20,7 +20,7 @@ so n_j = 3^j(n₀+1)/2^j−1.
 
 If n₀ ≡ −1 (mod 2^{k+1}), then for every j<k, the integer 3^j(n₀+1)/2^j is divisible by 2^{k+1−j}, hence by four. Thus n_j ≡ −1 (mod 4), and 3n_j+1 ≡ 2 (mod 4), forcing valuation exactly one. This proves the construction inductively.
 
-Conversely, suppose the first k valuations are one. The affine identity at each prefix implies n_j ≡ 3 (mod 4). The recurrence n_{j+1}=(3n_j+1)/2 and the exact congruence at the next step lift the required condition one binary digit at a time: among the two lifts of the admissible starting residue modulo 2^{j+1} to modulo 2^{j+2}, exactly the lift −1 modulo 2^{j+2} gives one more valuation-one step. Hence n₀ ≡ −1 (mod 2^{k+1}).
+Conversely, suppose the first k valuations are one. For each j<k the affine identity gives 2^j(n_j+1)=3^j(n₀+1). Since n_j ≡ 3 (mod 4), the left side is divisible by 2^{j+2}. Hence 2^{j+2} divides 3^j(n₀+1). As 3^j is odd, it is invertible modulo every power of two, so 2^{j+2} divides n₀+1. Taking j=k−1 yields n₀ ≡ −1 (mod 2^{k+1}). This proves the converse directly from the affine identity, without an informal lift-counting step.
 
 ## Scope and audit boundary
 
