@@ -991,3 +991,47 @@ theorem signed_margin_positive_implies_block_descent
 #print axioms signed_margin_positive_implies_block_descent
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- Weighted-sum expansion of the exact signed-margin recurrence. -/
+theorem signedOffsetMargin_eq_weighted_sum
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (N : ℕ) :
+    signedOffsetMargin A N =
+      (3 : ℤ) ^ N * signedOffsetMargin A 0 +
+        ∑ j ∈ Finset.range N,
+          (3 : ℤ) ^ (N - (j + 1)) *
+            ((2 : ℤ) ^ a j - 4) * (2 : ℤ) ^ A j := by
+  induction N with
+  | zero =>
+      simp
+  | succ N ih =>
+      rw [signedOffsetMargin_succ A a hA N, ih, pow_succ]
+      simp only [Finset.sum_range_succ]
+      have hexp : ∀ j ∈ Finset.range N,
+          (N + 1) - (j + 1) = (N - (j + 1)) + 1 := by
+        intro j hj
+        have hjlt : j < N := Finset.mem_range.mp hj
+        omega
+      have hsum :
+          (∑ j ∈ Finset.range N,
+              (3 : ℤ) ^ ((N + 1) - (j + 1)) *
+                ((2 : ℤ) ^ a j - 4) * (2 : ℤ) ^ A j) =
+          3 * (∑ j ∈ Finset.range N,
+              (3 : ℤ) ^ (N - (j + 1)) *
+                ((2 : ℤ) ^ a j - 4) * (2 : ℤ) ^ A j) := by
+        rw [Finset.mul_sum]
+        apply Finset.sum_congr rfl
+        intro j hj
+        rw [hexp j hj, pow_succ]
+        ring
+      rw [hsum]
+      simp
+      ring
+
+#print axioms signedOffsetMargin_eq_weighted_sum
+
+end CollatzSyracuseAudit
