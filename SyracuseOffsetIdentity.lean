@@ -1989,3 +1989,45 @@ theorem signed_margin_after_run_of_ones
 #print axioms signed_margin_after_run_of_ones
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Threshold form of the valuation-one block identity: if the incoming signed
+margin does not exceed the exact accumulated loss after scaling by 3^r, then
+the margin at the end of the run is nonpositive. This is a necessary warning
+criterion, not a claim that a run of ones must occur in every orbit.
+-/
+theorem signed_margin_nonpositive_after_run_of_ones
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (m r : ℕ)
+    (hone : ∀ i, i < r → a (m + i) = 1)
+    (hthreshold :
+      (3 : ℤ) ^ r * signedOffsetMargin A m ≤
+        2 * (2 : ℤ) ^ A m * ((3 : ℤ) ^ r - (2 : ℤ) ^ r)) :
+    signedOffsetMargin A (m + r) ≤ 0 := by
+  rw [signed_margin_after_run_of_ones A a hA m r hone]
+  omega
+
+/--
+Conversely, exceeding the exact block-loss threshold guarantees that the
+signed margin remains positive at the end of a valuation-one run.
+-/
+theorem signed_margin_positive_after_run_of_ones
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (m r : ℕ)
+    (hone : ∀ i, i < r → a (m + i) = 1)
+    (hthreshold :
+      2 * (2 : ℤ) ^ A m * ((3 : ℤ) ^ r - (2 : ℤ) ^ r) <
+        (3 : ℤ) ^ r * signedOffsetMargin A m) :
+    0 < signedOffsetMargin A (m + r) := by
+  rw [signed_margin_after_run_of_ones A a hA m r hone]
+  omega
+
+#print axioms signed_margin_nonpositive_after_run_of_ones
+#print axioms signed_margin_positive_after_run_of_ones
+
+end CollatzSyracuseAudit
