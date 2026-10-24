@@ -1730,3 +1730,31 @@ theorem exact_exponent_residue
 
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Quantitative gain from a valuation of at least three: the signed margin
+exceeds three times its previous value by at least four times the current
+power-of-two scale. This is stronger than mere positivity of the correction
+and can be summed over a mixed exponent block.
+-/
+theorem signedOffsetMargin_succ_exp_ge_three
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (n : ℕ) (ha : 3 ≤ a n) :
+    3 * signedOffsetMargin A n +
+        4 * (2 : ℤ) ^ A n ≤ signedOffsetMargin A (n + 1) := by
+  rw [signedOffsetMargin_succ A a hA n]
+  have hpowNat : 2 ^ 3 ≤ 2 ^ a n :=
+    Nat.pow_le_pow_right (by norm_num : 1 ≤ (2 : ℕ)) ha
+  have hpow : (8 : ℤ) ≤ (2 : ℤ) ^ a n := by
+    exact_mod_cast hpowNat
+  have hbase : 0 < (2 : ℤ) ^ A n :=
+    pow_pos (by norm_num : (0 : ℤ) < 2) _
+  nlinarith
+
+#print axioms signedOffsetMargin_succ_exp_ge_three
+
+end CollatzSyracuseAudit
