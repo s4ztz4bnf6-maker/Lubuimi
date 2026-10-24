@@ -1682,4 +1682,18 @@ theorem signedOffsetMargin_pos_iff_block_correction
 #print axioms signedOffsetMargin_nonneg_of_exponents_ge_two
 #print axioms signedOffsetMargin_pos_of_ge_two_with_large_exponent
 
+/--
+Concrete obstruction to the proposed suffix rule: two consecutive exponent-one
+steps can be followed by exponent two, not necessarily exponent at least three.
+The odd successors make each displayed exponent exact.
+-/
+theorem two_exponent_one_steps_can_be_followed_by_exponent_two :
+    2 * 11 = 3 * 7 + 1 ∧
+    2 * 17 = 3 * 11 + 1 ∧
+    4 * 13 = 3 * 17 + 1 ∧
+    11 % 2 = 1 ∧ 17 % 2 = 1 ∧ 13 % 2 = 1 := by
+  norm_num
+
+#print axioms two_exponent_one_steps_can_be_followed_by_exponent_two
+
 end CollatzSyracuseAudit
