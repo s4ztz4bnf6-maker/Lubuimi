@@ -1481,10 +1481,9 @@ theorem exponent_block_composition
 Canonical affine offset for a relative exponent schedule.  The exponent at
 position n is the sum of the first n entries of the schedule.
 -/
-def canonicalOffset (a : ℕ → ℕ) : ℕ → ℕ
+def canonicalOffset (B : ℕ → ℕ) : ℕ → ℕ
   | 0 => 0
-  | n + 1 => 3 * canonicalOffset a n +
-      2 ^ (∑ j ∈ Finset.range n, a j)
+  | n + 1 => 3 * canonicalOffset B n + 2 ^ B n
 
 /--
 The absolute-exponent tail offset factors into the starting power of two
