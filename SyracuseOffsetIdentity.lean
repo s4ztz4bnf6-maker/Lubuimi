@@ -893,6 +893,8 @@ theorem canonicalOffset_plus_three_pow_le_accumulated_power
 end CollatzSyracuseAudit
 
 
+namespace CollatzSyracuseAudit
+
 /-!
 ## Signed offset-margin recurrence
 
@@ -922,3 +924,5 @@ theorem signedOffsetMargin_succ
   ring
 
 #print axioms signedOffsetMargin_succ
+
+end CollatzSyracuseAudit
