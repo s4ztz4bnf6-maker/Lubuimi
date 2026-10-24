@@ -1275,10 +1275,10 @@ theorem exponent_one_block_terminal_odd_extra_divisibility
   rcases hdiv with ⟨k, hk⟩
   refine ⟨k, ?_⟩
   calc
-    3 ^ N * (n 0 + 1) = 2 ^ N * (n N + 1) := hscaled.symm
-    _ = 2 ^ (N + 1) * k := by
-      rw [pow_succ, ← hk]
+    2 ^ (N + 1) * k = 2 ^ N * (n N + 1) := by
+      rw [pow_succ, hk]
       ring
+    _ = 3 ^ N * (n 0 + 1) := hscaled
 
 #print axioms exponent_one_block_terminal_odd_extra_divisibility
 
@@ -1297,8 +1297,9 @@ theorem exponent_one_block_bounds_length_by_start_shift
     2 ^ (N + 1) ∣ n 0 + 1 := by
   have hdiv :=
     exponent_one_block_terminal_odd_extra_divisibility n hstep N hterminal
-  have hcop : (2 ^ (N + 1)).Coprime (3 ^ N) :=
-    Nat.Coprime.pow (by norm_num : Nat.Coprime 2 3) (N + 1) N
+  have hcop : (2 ^ (N + 1)).Coprime (3 ^ N) := by
+    apply Nat.Coprime.pow_left (N + 1)
+    exact Nat.Coprime.pow_right N (by norm_num : Nat.Coprime 2 3)
   exact Nat.Coprime.dvd_of_dvd_mul_left hcop hdiv
 
 #print axioms exponent_one_block_bounds_length_by_start_shift
