@@ -1,4 +1,5 @@
 import AffineTransitionDesign
+import AffineTransitionValuation
 
 namespace CollatzSyracuseAudit
 
@@ -8,6 +9,32 @@ theorem mod64_three_two_step_exact (m : ℕ) :
   have hinput : 64 * m + 3 = 4 * (16 * m) + 3 := by omega
   rw [hinput, first_step_formula_mod_four_three (16 * m)]
   exact second_step_formula_of_m_mod_sixteen_zero m
+
+/--
+Exact accelerated two-step formula on the residue class 35 modulo 64.
+The first step is 96*m+53; the next numerator is 32*(9*m+5).
+The valuation-scaling lemma removes the fixed factor 32 exactly, leaving
+the Syracuse normalization of 9*m+5. This is a local identity only.
+-/
+theorem mod64_thirtyfive_two_step_exact (m : ℕ) :
+    syracuse (syracuse (64 * m + 35)) =
+      (9 * m + 5) / 2 ^ v2 (9 * m + 5) := by
+  have hfirst : syracuse (64 * m + 35) = 96 * m + 53 := by
+    have hinput : 64 * m + 35 = 4 * (16 * m + 8) + 3 := by omega
+    rw [hinput, first_step_formula_mod_four_three]
+    omega
+  rw [hfirst]
+  have hfactor : 3 * (96 * m + 53) + 1 = 32 * (9 * m + 5) := by omega
+  have hnonzero : 9 * m + 5 ≠ 0 := by omega
+  have hval : v2 (3 * (96 * m + 53) + 1) =
+      5 + v2 (9 * m + 5) := by
+    rw [hfactor]
+    exact v2_mul_32 (9 * m + 5) hnonzero
+  dsimp [syracuse]
+  rw [hfactor, hval, pow_add]
+  norm_num [Nat.mul_div_mul_left]
+
+#print axioms CollatzSyracuseAudit.mod64_thirtyfive_two_step_exact
 
 /-- The second-step numerator for inputs congruent to 35 modulo 64
 is 32 times the residual factor 9*m+5. -/
