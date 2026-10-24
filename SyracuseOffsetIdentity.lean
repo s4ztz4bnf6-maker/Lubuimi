@@ -1714,7 +1714,7 @@ theorem exact_exponent_residue
   obtain ⟨k, hk⟩ : ∃ k, next = 2 * k + 1 := by
     refine ⟨next / 2, ?_⟩
     omega
-  rw [hstep, hk, pow_succ]
+  rw [← hstep, hk, pow_succ]
   have hfactor :
       2 ^ a * (2 * k + 1) = (2 ^ a * 2) * k + 2 ^ a := by
     ring
