@@ -1889,3 +1889,35 @@ theorem certified_block_descent_of_positive_signed_margin
 #print axioms certified_block_descent_of_positive_signed_margin
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+A necessary power-growth barrier that does not assume any lower bound on the
+canonical offset: if the accumulated power of two is no larger than 3^j,
+then an exact certified j-step affine block cannot descend. This is the
+contrapositive obstruction behind the usual requirement 3^j < 2^(A j), but
+it is proved directly from the exact identity rather than from an offset-floor
+estimate.
+-/
+theorem certified_block_nondecrease_when_two_power_le_three_power
+    (n0 nj : ℕ) (A : ℕ → ℕ) (j : ℕ)
+    (hidentity :
+      2 ^ A j * nj = 3 ^ j * n0 + canonicalOffset A j)
+    (hpower : 2 ^ A j ≤ 3 ^ j) :
+    n0 ≤ nj := by
+  by_contra hnot
+  have hdesc : nj < n0 := by omega
+  have hprod : 2 ^ A j * nj < 2 ^ A j * n0 :=
+    Nat.mul_lt_mul_of_pos_left hdesc (by positivity)
+  have hscale : 2 ^ A j * n0 ≤ 3 ^ j * n0 :=
+    Nat.mul_le_mul_right n0 hpower
+  have hoffset : 3 ^ j * n0 ≤ 3 ^ j * n0 + canonicalOffset A j :=
+    Nat.le_add_right _ _
+  rw [hidentity] at hprod
+  omega
+
+#print axioms certified_block_nondecrease_when_two_power_le_three_power
+
+end CollatzSyracuseAudit
