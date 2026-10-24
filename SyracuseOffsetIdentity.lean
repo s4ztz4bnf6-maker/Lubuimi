@@ -763,4 +763,22 @@ theorem canonicalOffset_succ_mod_three
 
 #print axioms canonicalOffset_succ_mod_three
 
+
+/--
+Exponent-seven admissibility filter: if an accelerated odd transition removes
+exactly seven powers of two, then its odd input lies in the residue class
+213 modulo 256. This is a necessary local constraint on a valuation word,
+not a global descent statement.
+-/
+theorem exponent_seven_forces_residue_two_hundred_thirteen_mod_two_hundred_fifty_six
+    (n next : ℕ)
+    (hnext : next % 2 = 1)
+    (hstep : 128 * next = 3 * n + 1) :
+    n % 256 = 213 := by
+  have hmod : (128 * next) % 256 = (3 * n + 1) % 256 := by
+    rw [hstep]
+  omega
+
+#print axioms exponent_seven_forces_residue_two_hundred_thirteen_mod_two_hundred_fifty_six
+
 end CollatzSyracuseAudit
