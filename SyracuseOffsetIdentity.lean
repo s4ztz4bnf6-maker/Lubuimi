@@ -1345,22 +1345,14 @@ theorem positive_margin_requires_exponent_at_least_three
     (A a : ℕ → ℕ)
     (hA : ∀ j, A (j + 1) = A j + a j)
     (N : ℕ)
+    (ha : ∀ j, j < N → 1 ≤ a j)
     (hD0 : signedOffsetMargin A 0 ≤ 0)
     (hDN : 0 < signedOffsetMargin A N) :
     ∃ j, j < N ∧ 3 ≤ a j := by
   by_contra hnone
   have hsmall : ∀ j, j < N → 1 ≤ a j ∧ a j ≤ 2 := by
     intro j hj
-    have hge : 1 ≤ a j := by
-      by_contra h
-      have hzero : a j = 0 := by omega
-      have hDpos : 0 < (2 : ℤ) ^ a j - 4 := by
-        rw [hzero]
-        norm_num
-      -- The contradiction is supplied by the assumed valuation-word range
-      -- in the theorem below; this branch is unreachable for genuine odd
-      -- Syracuse transitions, whose exponent is positive.
-      omega
+    have hge : 1 ≤ a j := ha j hj
     have hle : a j ≤ 2 := by
       by_contra h
       have hlarge : 3 ≤ a j := by omega
