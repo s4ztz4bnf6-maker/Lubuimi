@@ -1619,6 +1619,44 @@ theorem signedOffsetMargin_pos_of_ge_two_with_large_exponent
             (fun i hi => ha i (Nat.lt_trans hi (Nat.lt_succ_self N)))
         nlinarith
 
+/--
+Recursive weighted correction for a block beginning at index m. Each new
+one-step correction is added after multiplying the previous accumulated
+correction by three. This definition deliberately allows mixed valuation
+words, including exponent-one steps with negative corrections.
+-/
+def signedOffsetBlockCorrection (A a : ℕ → ℕ) (m : ℕ) : ℕ → ℤ
+  | 0 => 0
+  | r + 1 =>
+      3 * signedOffsetBlockCorrection A a m r +
+        ((2 : ℤ) ^ a (m + r) - 4) * (2 : ℤ) ^ A (m + r)
+
+/--
+Exact block decomposition of the signed margin, starting at an arbitrary
+index. Unlike the positivity lemmas above, this identity makes no lower-bound
+assumption on the exponents: all negative and positive corrections are kept.
+It is the algebraic interface needed to formulate a genuine mixed-block
+balance criterion.
+-/
+theorem signedOffsetMargin_block_decomposition
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (m r : ℕ) :
+    signedOffsetMargin A (m + r) =
+      (3 : ℤ) ^ r * signedOffsetMargin A m +
+        signedOffsetBlockCorrection A a m r := by
+  induction r with
+  | zero =>
+      simp [signedOffsetBlockCorrection]
+  | succ r ih =>
+      rw [show m + (r + 1) = (m + r) + 1 by omega]
+      rw [signedOffsetMargin_succ A a hA (m + r)]
+      rw [ih]
+      simp [signedOffsetBlockCorrection, pow_succ]
+      ring
+
+#print axioms signedOffsetMargin_block_decomposition
+
 #print axioms signedOffsetMargin_nonneg_of_exponents_ge_two
 #print axioms signedOffsetMargin_pos_of_ge_two_with_large_exponent
 
