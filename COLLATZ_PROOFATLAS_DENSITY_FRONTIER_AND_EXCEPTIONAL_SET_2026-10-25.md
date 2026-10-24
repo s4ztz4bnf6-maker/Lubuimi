@@ -38,3 +38,23 @@ Concrete obligations:
 The latest known run for commit `0e76c7333be5afa4dc81af352464c02798133049` is GitHub Actions run 40142262056, still `in_progress` at the Mathlib dependency/cache step when checked on 2026-10-25. The three-step identity is committed, but that latest run is not yet a successful compile certificate.
 
 Run: https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/40142262056
+
+
+## New finite algebraic extension (2026-10-25)
+
+The Lean source now also contains `four_step_affine_identity`, committed as
+`750307106e369358ecdf259b0cbd6f9420f22cb7`. From
+`3*xᵢ + 1 = pᵢ*xᵢ₊₁` for four transitions it proves
+[
+81x_0+27+9p_0+3p_0p_1+p_0p_1p_2=p_0p_1p_2p_3x_4.
+]
+The proof eliminates the intermediate states by a ring identity and the
+already stated three-step identity. This is an exact finite affine invariant,
+not a valuation-realizability or descent theorem.
+
+The GitHub Actions run for this commit is
+https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/40142627092 .
+At the latest check it was still in progress during toolchain installation;
+the new four-step theorem must therefore be treated as awaiting CI confirmation.
+The prior run 40142262056 completed successfully for the preceding commit and
+does not certify this new theorem.
