@@ -1282,4 +1282,25 @@ theorem exponent_one_block_terminal_odd_extra_divisibility
 
 #print axioms exponent_one_block_terminal_odd_extra_divisibility
 
+/--
+Cancellation of the odd multiplier in the previous obstruction: a block of
+N exponent-one transitions ending at an odd value forces
+2^(N+1) ∣ n₀+1. Thus a long uninterrupted exponent-one block is bounded by
+the 2-adic valuation of its shifted starting value. This is a local block
+obstruction, not a global Collatz termination theorem.
+-/
+theorem exponent_one_block_bounds_length_by_start_shift
+    (n : ℕ → ℕ)
+    (hstep : ∀ j, 2 * n (j + 1) = 3 * n j + 1)
+    (N : ℕ)
+    (hterminal : n N % 2 = 1) :
+    2 ^ (N + 1) ∣ n 0 + 1 := by
+  have hdiv :=
+    exponent_one_block_terminal_odd_extra_divisibility n hstep N hterminal
+  have hcop : (2 ^ (N + 1)).Coprime (3 ^ N) :=
+    Nat.Coprime.pow (by norm_num : Nat.Coprime 2 3) (N + 1) N
+  exact Nat.Coprime.dvd_of_dvd_mul_left hcop hdiv
+
+#print axioms exponent_one_block_bounds_length_by_start_shift
+
 end CollatzSyracuseAudit
