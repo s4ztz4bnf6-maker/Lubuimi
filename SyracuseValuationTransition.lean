@@ -89,6 +89,8 @@ theorem four_valuation_one_iff_mod_thirty_two_thirty_one
 #print axioms four_valuation_one_iff_mod_thirty_two_thirty_one
 
 
+set_option maxHeartbeats 1000000
+
 /--
 Five consecutive accelerated valuation-one steps are characterized by
 n = 63 (mod 64). This is the next finite-cylinder case in the exact
