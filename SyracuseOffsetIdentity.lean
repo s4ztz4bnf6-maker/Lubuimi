@@ -1364,4 +1364,29 @@ theorem positive_margin_requires_exponent_at_least_three
 
 #print axioms positive_margin_requires_exponent_at_least_three
 
+/--
+Every prefix of a certified Syracuse word satisfies its affine divisibility
+constraint. The result is stated as natural-number divisibility, so it avoids
+relying on a informal congruence convention. The identity is only as strong
+as the supplied transition certificate; this theorem does not construct an
+orbit from an arbitrary exponent word.
+-/
+theorem every_prefix_satisfies_affine_divisibility
+    (n a A C : ℕ → ℕ)
+    (hA0 : A 0 = 0)
+    (hC0 : C 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (hC : ∀ j, C (j + 1) = 3 * C j + 2 ^ A j)
+    (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1) :
+    ∀ j, 2 ^ (A j) ∣ 3 ^ j * n 0 + C j := by
+  intro j
+  have hidentity :=
+    offset_identity_of_certified_steps n a A C hA0 hC0 hA hC hstep j
+  refine ⟨n j, ?_⟩
+  calc
+    3 ^ j * n 0 + C j = 2 ^ (A j) * n j := hidentity.symm
+    _ = n j * 2 ^ (A j) := Nat.mul_comm _ _
+
+#print axioms every_prefix_satisfies_affine_divisibility
+
 end CollatzSyracuseAudit
