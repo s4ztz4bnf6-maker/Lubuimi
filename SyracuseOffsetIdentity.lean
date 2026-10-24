@@ -891,3 +891,34 @@ theorem canonicalOffset_plus_three_pow_le_accumulated_power
 #print axioms canonicalOffset_plus_three_pow_le_accumulated_power
 
 end CollatzSyracuseAudit
+
+
+/-!
+## Signed offset-margin recurrence
+
+The signed margin measures the gap between the accumulated power of two and
+the canonical affine offset plus the geometric term. Its exact recurrence
+isolates the contribution of each valuation exponent; exponent one contributes
+a negative term, exponent two contributes zero, and larger exponents contribute
+a positive term. This is an identity, not a claim that arbitrary mixed words
+eventually descend.
+-/
+
+/-- Signed descent margin associated with the canonical offset. -/
+def signedOffsetMargin (A : ℕ → ℕ) (n : ℕ) : ℤ :=
+  (2 : ℤ) ^ A n - (canonicalOffset A n : ℤ) - (3 : ℤ) ^ n
+
+/-- Exact one-step recurrence for the signed offset margin. -/
+theorem signedOffsetMargin_succ
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (n : ℕ) :
+    signedOffsetMargin A (n + 1) =
+      3 * signedOffsetMargin A n +
+        ((2 : ℤ) ^ a n - 4) * (2 : ℤ) ^ A n := by
+  simp only [signedOffsetMargin, canonicalOffset, hA n]
+  push_cast
+  rw [pow_add]
+  ring
+
+#print axioms signedOffsetMargin_succ
