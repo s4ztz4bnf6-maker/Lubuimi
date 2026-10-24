@@ -44,3 +44,24 @@ theorem two_valuation_one_iff_mod_eight_seven
 #print axioms two_valuation_one_iff_mod_eight_seven
 
 end CollatzSyracuseAudit
+
+
+/--
+Three consecutive accelerated valuation-one steps are characterized by the
+single starting residue n = 15 (mod 16). The three modular conditions encode
+v₂(3 n_j + 1) = 1 at each of the first three odd Syracuse states. This is
+a finite-prefix classification, not a claim about eventual descent.
+-/
+theorem three_valuation_one_iff_mod_sixteen_fifteen
+    (n : ℕ) :
+    ((3 * n + 1) % 4 = 2 ∧
+      (3 * ((3 * n + 1) / 2) + 1) % 4 = 2 ∧
+      (3 * ((3 * ((3 * n + 1) / 2) + 1) / 2) + 1) % 4 = 2)
+      ↔ n % 16 = 15 := by
+  constructor
+  · intro h
+    omega
+  · intro hn
+    omega
+
+#print axioms three_valuation_one_iff_mod_sixteen_fifteen
