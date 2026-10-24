@@ -87,3 +87,25 @@ theorem four_valuation_one_iff_mod_thirty_two_thirty_one
     omega
 
 #print axioms four_valuation_one_iff_mod_thirty_two_thirty_one
+
+
+/--
+Five consecutive accelerated valuation-one steps are characterized by
+n = 63 (mod 64). This is the next finite-cylinder case in the exact
+initial-run pattern; it is not a global Collatz descent result.
+-/
+theorem five_valuation_one_iff_mod_sixty_four_sixty_three
+    (n : ℕ) :
+    ((3 * n + 1) % 4 = 2 ∧
+      (3 * ((3 * n + 1) / 2) + 1) % 4 = 2 ∧
+      (3 * ((3 * ((3 * n + 1) / 2) + 1) / 2) + 1) % 4 = 2 ∧
+      (3 * ((3 * ((3 * ((3 * n + 1) / 2) + 1) / 2) + 1) / 2) + 1) % 4 = 2 ∧
+      (3 * ((3 * ((3 * ((3 * ((3 * n + 1) / 2) + 1) / 2) + 1) / 2) + 1) / 2) + 1) % 4 = 2)
+      ↔ n % 64 = 63 := by
+  constructor
+  · intro h
+    omega
+  · intro hn
+    omega
+
+#print axioms five_valuation_one_iff_mod_sixty_four_sixty_three
