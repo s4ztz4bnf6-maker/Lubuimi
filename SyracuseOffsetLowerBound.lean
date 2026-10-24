@@ -27,6 +27,22 @@ theorem canonical_offset_plus_power_ge_power
         Nat.pow_le_pow_right (by omega : 1 ≤ (2 : ℕ)) (hA n)
       nlinarith [ih, hpow]
 
+/--
+Sharpness calibration: when every cumulative exponent is exactly its index,
+the lower-bound inequality is an equality. Thus the hypothesis A n ≥ n alone
+cannot yield a strictly stronger universal lower bound for this offset model.
+-/
+theorem canonical_offset_is_sharp
+    : ∀ n, offsetLowerBoundModel (fun j => j) n + 2 ^ n = 3 ^ n := by
+  intro n
+  induction n with
+  | zero =>
+      simp [offsetLowerBoundModel]
+  | succ n ih =>
+      simp only [offsetLowerBoundModel, pow_succ]
+      nlinarith [ih]
+
 #print axioms canonical_offset_plus_power_ge_power
+#print axioms canonical_offset_is_sharp
 
 end CollatzSyracuseAudit
