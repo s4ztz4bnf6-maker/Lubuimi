@@ -1657,6 +1657,28 @@ theorem signedOffsetMargin_block_decomposition
 
 #print axioms signedOffsetMargin_block_decomposition
 
+/--
+Exact mixed-block balance criterion: the terminal margin is positive
+precisely when the block's weighted correction exceeds the negative of the
+amplified starting margin. This statement permits exponent-one steps and
+does not assume the conclusion from a valuation lower bound.
+-/
+theorem signedOffsetMargin_pos_iff_block_correction
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (m r : ℕ) :
+    0 < signedOffsetMargin A (m + r) ↔
+      -((3 : ℤ) ^ r * signedOffsetMargin A m) <
+        signedOffsetBlockCorrection A a m r := by
+  rw [signedOffsetMargin_block_decomposition A a hA m r]
+  constructor
+  · intro h
+    linarith
+  · intro h
+    linarith
+
+#print axioms signedOffsetMargin_pos_iff_block_correction
+
 #print axioms signedOffsetMargin_nonneg_of_exponents_ge_two
 #print axioms signedOffsetMargin_pos_of_ge_two_with_large_exponent
 
