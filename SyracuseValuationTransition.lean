@@ -211,3 +211,53 @@ theorem five_step_affine_identity
     _ = p₀ * p₁ * p₂ * p₃ * p₄ * x₅ := by ring
 
 #print axioms five_step_affine_identity
+
+
+namespace CollatzSyracuseAudit
+
+/-- Product of the first k transition multipliers. -/
+def transitionPrefixProduct (p : ℕ → ℕ) : ℕ → ℕ
+  | 0 => 1
+  | k + 1 => transitionPrefixProduct p k * p k
+
+/-- Affine correction accumulated over the first k transitions.
+It obeys S(0)=0 and S(k+1)=3*S(k)+P(k), where P(k) is the
+product of the first k multipliers. -/
+def transitionAffineOffset (p : ℕ → ℕ) : ℕ → ℕ
+  | 0 => 0
+  | k + 1 => 3 * transitionAffineOffset p k + transitionPrefixProduct p k
+
+/--
+General finite affine identity for an arbitrary number of transitions.
+If 3*x_i + 1 = p_i*x_(i+1) at every step, then
+3^k*x_0 + S_k = P_k*x_k, where P_k is the multiplier prefix product
+and S_(k+1)=3*S_k+P_k. This is an algebraic identity only: it does not
+assert that the multipliers are exact powers of two or prove descent.
+-/
+theorem general_finite_affine_identity
+    (x p : ℕ → ℕ)
+    (htrans : ∀ i, 3 * x i + 1 = p i * x (i + 1))
+    (k : ℕ) :
+    3 ^ k * x 0 + transitionAffineOffset p k =
+      transitionPrefixProduct p k * x k := by
+  induction k with
+  | zero =>
+      simp [transitionAffineOffset, transitionPrefixProduct]
+  | succ k ih =>
+      rw [pow_succ, transitionAffineOffset, transitionPrefixProduct]
+      calc
+        3 ^ k * 3 * x 0 +
+            (3 * transitionAffineOffset p k +
+              transitionPrefixProduct p k) =
+            3 * (3 ^ k * x 0 + transitionAffineOffset p k) +
+              transitionPrefixProduct p k := by ring
+        _ = 3 * (transitionPrefixProduct p k * x k) +
+              transitionPrefixProduct p k := by rw [ih]
+        _ = transitionPrefixProduct p k * (3 * x k + 1) := by ring
+        _ = transitionPrefixProduct p k * (p k * x (k + 1)) := by
+              rw [htrans k]
+        _ = (transitionPrefixProduct p k * p k) * x (k + 1) := by ring
+
+#print axioms general_finite_affine_identity
+
+end CollatzSyracuseAudit
