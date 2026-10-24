@@ -111,3 +111,25 @@ theorem five_valuation_one_iff_mod_sixty_four_sixty_three
     omega
 
 #print axioms five_valuation_one_iff_mod_sixty_four_sixty_three
+
+
+/--
+Exact two-step affine identity underlying a prescribed pair of Syracuse
+valuation steps. If p and q are the corresponding powers of two and
+3*x + 1 = p*y, 3*y + 1 = q*z, then eliminating y gives
+9*x + 3 + p = p*q*z. This is an algebraic invariant only; valuation
+exactness and a global descent conclusion require additional hypotheses.
+-/
+theorem two_step_affine_identity
+    (x y z p q : ℕ)
+    (h₁ : 3 * x + 1 = p * y)
+    (h₂ : 3 * y + 1 = q * z) :
+    9 * x + 3 + p = p * q * z := by
+  calc
+    9 * x + 3 + p = 3 * (3 * x + 1) + p := by ring
+    _ = 3 * (p * y) + p := by rw [h₁]
+    _ = p * (3 * y + 1) := by ring
+    _ = p * (q * z) := congrArg (fun t : ℕ => p * t) h₂
+    _ = p * q * z := by ring
+
+#print axioms two_step_affine_identity
