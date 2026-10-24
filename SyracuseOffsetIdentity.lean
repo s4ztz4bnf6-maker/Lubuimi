@@ -837,4 +837,55 @@ theorem exponent_seven_family_exact_transition_and_descent (k : ℕ) :
 
 #print axioms exponent_seven_family_exact_transition_and_descent
 
+
+
+/-!
+## Conditional quantitative offset control
+
+If every certified odd transition removes at least two factors of two, the
+canonical offset plus the geometric term is bounded by the accumulated
+power of two. This is a genuine upper bound complementary to the previously
+proved lower bounds. It applies only to blocks whose every exponent is at
+least two; transitions with exponent one remain the global obstruction.
+-/
+
+/-- If each transition exponent is at least two, then
+canonicalOffset A n + 3^n ≤ 2^(A n). The proof uses the actual accumulated
+exponent recurrence, not an independently chosen offset. -/
+theorem canonicalOffset_plus_three_pow_le_accumulated_power
+    (A a : ℕ → ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (ha : ∀ j, 2 ≤ a j) :
+    ∀ n, canonicalOffset A n + 3 ^ n ≤ 2 ^ A n := by
+  intro n
+  induction n with
+  | zero =>
+      simp [canonicalOffset, hA0]
+  | succ n ih =>
+      have hfactor : 4 ≤ 2 ^ a n := by
+        calc
+          4 = 2 ^ 2 := by norm_num
+          _ ≤ 2 ^ a n := Nat.pow_le_pow_right (by norm_num : 1 ≤ (2 : ℕ)) (ha n)
+      have hscaled :
+          3 * canonicalOffset A n + 3 * 3 ^ n ≤ 3 * 2 ^ A n :=
+        Nat.mul_le_mul_left 3 ih
+      have hfour :
+          3 * 2 ^ A n + 2 ^ A n ≤ 2 ^ A n * 2 ^ a n := by
+        calc
+          3 * 2 ^ A n + 2 ^ A n = 4 * 2 ^ A n := by ring
+          _ ≤ 2 ^ A n * 2 ^ a n :=
+            Nat.mul_le_mul_left (2 ^ A n) hfactor
+      calc
+        canonicalOffset A (n + 1) + 3 ^ (n + 1)
+            = 3 * canonicalOffset A n + 2 ^ A n + 3 * 3 ^ n := by
+                simp [canonicalOffset, pow_succ, Nat.mul_comm]
+        _ = 3 * canonicalOffset A n + 3 * 3 ^ n + 2 ^ A n := by omega
+        _ ≤ 3 * 2 ^ A n + 2 ^ A n := by omega
+        _ ≤ 2 ^ A n * 2 ^ a n := hfour
+        _ = 2 ^ (A n + a n) := by rw [pow_add]
+        _ = 2 ^ A (n + 1) := by rw [hA n]
+
+#print axioms canonicalOffset_plus_three_pow_le_accumulated_power
+
 end CollatzSyracuseAudit
