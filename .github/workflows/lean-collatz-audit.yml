@@ -1,0 +1,101 @@
+name: Collatz draft Lean compile audit
+
+on:
+  push:
+    branches:
+      - collatz/compiler-audit-2026-10-19
+      - collatz/quarter-descent-lemma-2026-10-20
+      - collatz/syracuse-quarter-bridge-2026-10-21
+      - collatz/second-step-descent-mod-eight-zero-2026-10-21
+      - collatz/affine-transition-design-2026-10-21
+      - collatz/stopping-time-bridge-2026-10-22
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  compile-drafts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean and generate lake manifest
+        run: |
+          curl --fail --location --retry 3 --max-time 60 https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
+          sh elan-init.sh -y --default-toolchain leanprover/lean4:v4.28.0
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+      - name: Install dependencies and restore Mathlib cache
+        uses: leanprover/lean-action@v1
+        with:
+          build: false
+          use-mathlib-cache: true
+      - name: Build all Lean library modules
+        run: lake build CollatzAudit
+      - name: Compile IterationLemmas.lean
+        run: lake env lean IterationLemmas.lean
+      - name: Compile ThresholdLemmas.lean
+        run: lake env lean ThresholdLemmas.lean
+      - name: Compile SyracuseQuarterDescent.lean
+        run: lake env lean SyracuseQuarterDescent.lean -o .lake/build/lib/lean/SyracuseQuarterDescent.olean
+      - name: Compile SyracuseReferenceTest.lean
+        run: lake env lean SyracuseReferenceTest.lean -o .lake/build/lib/lean/SyracuseReferenceTest.olean
+      - name: Compile and audit SyracuseSecondStep.lean
+        run: |
+          set -o pipefail
+          lake env lean SyracuseSecondStep.lean -o .lake/build/lib/lean/SyracuseSecondStep.olean 2>&1 | tee /tmp/syracuse-second-step-audit.log
+          if grep -q 'sorryAx' /tmp/syracuse-second-step-audit.log; then
+            echo "Forbidden sorryAx dependency detected"
+            exit 1
+          fi
+      - name: Compile and audit AffineTransitionDesign.lean
+        run: |
+          set -o pipefail
+          lake env lean AffineTransitionDesign.lean -o .lake/build/lib/lean/AffineTransitionDesign.olean 2>&1 | tee /tmp/affine-transition-audit.log
+          if grep -q 'sorryAx' /tmp/affine-transition-audit.log; then
+            echo "Forbidden sorryAx dependency detected"
+            exit 1
+          fi
+      - name: Compile and audit exact Mod64 transitions
+        run: |
+          set -o pipefail
+          lake env lean AffineTransitionExactMod64.lean -o .lake/build/lib/lean/AffineTransitionExactMod64.olean 2>&1 | tee /tmp/affine-exact-mod64-audit.log
+          if grep -q 'sorryAx' /tmp/affine-exact-mod64-audit.log; then
+            echo "Forbidden sorryAx dependency detected"
+            exit 1
+          fi
+      - name: Compile and audit isolated valuation lemma
+        run: |
+          set -o pipefail
+          lake env lean AffineTransitionValuation.lean -o .lake/build/lib/lean/AffineTransitionValuation.olean 2>&1 | tee /tmp/affine-transition-valuation-audit.log
+          if grep -q 'sorryAx' /tmp/affine-transition-valuation-audit.log; then
+            echo "Forbidden sorryAx dependency detected"
+            exit 1
+          fi
+
+      - name: Compile and audit stopping-time bridge
+        run: |
+          set -o pipefail
+          lake env lean StoppingTimeBridge.lean 2>&1 | tee /tmp/stopping-time-bridge.log
+          if grep -q 'sorryAx' /tmp/stopping-time-bridge.log; then
+            echo "Forbidden sorryAx dependency detected"
+            exit 1
+          fi
+
+      - name: Compile and audit strict Mod64 descent
+        run: |
+          set -o pipefail
+          lake env lean -o .lake/build/lib/lean/AffineTransitionDescent.olean AffineTransitionDescent.lean 2>&1 | tee /tmp/affine-transition-descent.log
+          ! grep -q 'sorryAx' /tmp/affine-transition-descent.log
+
+      - name: Compile and audit Mod64 residue 35 descent
+        run: |
+          set -o pipefail
+          lake env lean -o .lake/build/lib/lean/AffineTransitionMod64ThirtyFive.olean AffineTransitionMod64ThirtyFive.lean 2>&1 | tee /tmp/mod64-thirtyfive.log
+          ! grep -q 'sorryAx' /tmp/mod64-thirtyfive.log
+
+      - name: Compile and audit exact valuation characterization
+        run: |
+          set -o pipefail
+          lake env lean TwoAdicValuationDistribution.lean 2>&1 | tee /tmp/two-adic-valuation-distribution.log
+          ! grep -q 'sorryAx' /tmp/two-adic-valuation-distribution.log
