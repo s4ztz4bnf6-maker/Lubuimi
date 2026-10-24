@@ -22,12 +22,21 @@ theorem exact_quotient_formula_of_mod_two_hundred_fifty_six_two_hundred_thirteen
   omega
 
 /--
-The valuation-seven branch is strictly descending for n > 1, with an
-explicit gap of 250*(n/256)+208.
+The residue condition itself implies n ≥ 213, so no separate lower-bound
+hypothesis is needed for strict descent on this branch.
+-/
+theorem residue_two_hundred_thirteen_implies_lower_bound
+    (n : ℕ) (hn : n % 256 = 213) : 213 ≤ n := by
+  omega
+
+/--
+The exact valuation-seven branch is strictly descending without any
+additional size hypothesis.
 -/
 theorem accelerated_descent_of_mod_two_hundred_fifty_six_two_hundred_thirteen
-    (n : ℕ) (hn : n % 256 = 213) (hn_two : 2 ≤ n) :
+    (n : ℕ) (hn : n % 256 = 213) :
     (3 * n + 1) / 128 < n := by
+  rw [exact_quotient_formula_of_mod_two_hundred_fifty_six_two_hundred_thirteen n hn]
   omega
 
 /--
@@ -41,6 +50,7 @@ theorem exact_descent_gap_of_mod_two_hundred_fifty_six_two_hundred_thirteen
 
 #print axioms CollatzSyracuseAudit.exact_seven_factors_of_mod_two_hundred_fifty_six_two_hundred_thirteen
 #print axioms CollatzSyracuseAudit.exact_quotient_formula_of_mod_two_hundred_fifty_six_two_hundred_thirteen
+#print axioms CollatzSyracuseAudit.residue_two_hundred_thirteen_implies_lower_bound
 #print axioms CollatzSyracuseAudit.accelerated_descent_of_mod_two_hundred_fifty_six_two_hundred_thirteen
 #print axioms CollatzSyracuseAudit.exact_descent_gap_of_mod_two_hundred_fifty_six_two_hundred_thirteen
 
