@@ -1135,7 +1135,9 @@ theorem signedOffsetMargin_nonpos_of_exponents_le_two
         have hpow : 0 ≤ (2 : ℤ) ^ A N :=
           le_of_lt (pow_pos (by norm_num : (0 : ℤ) < 2) _)
         exact mul_nonpos_of_nonpos_of_nonneg hexp hpow
-      nlinarith
+      have hmul : 3 * signedOffsetMargin A N ≤ 0 := by
+        nlinarith [ih]
+      exact add_nonpos hmul hcorr
 
 #print axioms signedOffsetMargin_nonpos_of_exponents_le_two
 
