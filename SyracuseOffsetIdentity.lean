@@ -1140,3 +1140,27 @@ theorem signedOffsetMargin_nonpos_of_exponents_le_two
 #print axioms signedOffsetMargin_nonpos_of_exponents_le_two
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Realizability filter for valuation-one transitions: if the current and next
+odd iterates satisfy the exact certified transition with removed exponent one,
+then the current iterate is 3 modulo 4. This excludes arbitrary valuation words
+that do not arise from an actual Syracuse transition.
+-/
+theorem valuation_one_implies_residue_three_mod_four
+    (n next a : ℕ)
+    (hn : n % 2 = 1)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1)
+    (ha : a = 1) :
+    n % 4 = 3 := by
+  subst a
+  norm_num at hstep
+  omega
+
+#print axioms valuation_one_implies_residue_three_mod_four
+
+end CollatzSyracuseAudit
