@@ -1194,3 +1194,38 @@ theorem valuation_two_implies_residue_one_mod_eight
 #print axioms valuation_two_implies_residue_one_mod_eight
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Exact scaling identity for a block whose certified accelerated exponents
+are all one. Each transition satisfies 2*n_(j+1)=3*n_j+1, hence after
+adding one, 2*(n_(j+1)+1)=3*(n_j+1). Iteration gives the integer identity
+2^N*(n_N+1)=3^N*(n_0+1). This is an exact local block invariant, not a
+global Collatz termination result.
+-/
+theorem exponent_one_block_scaled_identity
+    (n : ℕ → ℕ)
+    (hstep : ∀ j, 2 * n (j + 1) = 3 * n j + 1) :
+    ∀ N, 2 ^ N * (n N + 1) = 3 ^ N * (n 0 + 1) := by
+  intro N
+  induction N with
+  | zero =>
+      simp
+  | succ N ih =>
+      have hshift : 2 * (n (N + 1) + 1) = 3 * (n N + 1) := by
+        nlinarith [hstep N]
+      calc
+        2 ^ (N + 1) * (n (N + 1) + 1)
+            = 2 ^ N * (2 * (n (N + 1) + 1)) := by
+                rw [pow_succ]
+                ring
+        _ = 2 ^ N * (3 * (n N + 1)) := by rw [hshift]
+        _ = 3 ^ (N + 1) * (n 0 + 1) := by
+              rw [pow_succ]
+              nlinarith [ih]
+
+#print axioms exponent_one_block_scaled_identity
+
+end CollatzSyracuseAudit
