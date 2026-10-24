@@ -96,3 +96,8 @@ Concrete counterexample: (n_0=7=2^3-1) gives
 Indeed, (3\cdot7+1=22=2\cdot11), (3\cdot11+1=34=2\cdot17), and (3\cdot17+1=52=4\cdot13). Thus after a run of two ones, the next exponent is exactly (2), not at least (3).
 
 This invalidates the proposed deterministic implication “maximal exponent-one run (Rightarrow) next exponent (a_k\geq3)”. The valid conclusion is only that the next exponent is at least (2), since (n_k=2\cdot3^kq-1\equiv1\pmod4) and hence (3n_k+1\equiv0\pmod4). Even this single forced exponent (2) contributes zero to the margin recurrence, so it does not by itself compensate for the accumulated negative contributions. The global argument must use a longer, quantitatively controlled suffix or a different invariant.
+
+
+## CI status update — 2026-10-24
+
+Workflow run [40125303822](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/40125303822) completed successfully. It compiled the library modules, `IterationLemmas.lean`, `ThresholdLemmas.lean`, `SyracuseReferenceTest.lean`, `SyracuseQuarterDescent.lean`, the offset-identity/strict-margin audit, and the stronger offset lower-bound audit. This confirms compilation for the checked targets in this commit; it does not by itself certify axiom-freedom unless the recorded `#print axioms` outputs are inspected, and it does not prove global Collatz convergence.
