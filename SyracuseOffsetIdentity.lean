@@ -1247,7 +1247,7 @@ theorem pow_two_dvd_pow_three_mul_shifted_start
     2 ^ N ∣ 3 ^ N * (n 0 + 1) := by
   have hscaled := exponent_one_block_scaled_identity n hstep N
   refine ⟨n N + 1, ?_⟩
-  exact hscaled
+  exact hscaled.symm
 
 #print axioms pow_two_dvd_pow_three_mul_shifted_start
 
@@ -1275,11 +1275,10 @@ theorem exponent_one_block_terminal_odd_extra_divisibility
   rcases hdiv with ⟨k, hk⟩
   refine ⟨k, ?_⟩
   calc
-    2 ^ (N + 1) * k = 2 ^ N * (2 * k) := by
-      rw [pow_succ]
+    3 ^ N * (n 0 + 1) = 2 ^ N * (n N + 1) := hscaled.symm
+    _ = 2 ^ (N + 1) * k := by
+      rw [pow_succ, ← hk]
       ring
-    _ = 2 ^ N * (n N + 1) := by rw [← hk]
-    _ = 3 ^ N * (n 0 + 1) := hscaled
 
 #print axioms exponent_one_block_terminal_odd_extra_divisibility
 
