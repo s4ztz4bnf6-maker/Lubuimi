@@ -800,7 +800,13 @@ theorem canonicalOffset_plus_two_pow_lower_bound
   | succ n ih =>
       simp only [canonicalOffset]
       rw [pow_succ]
-      have hpow : 2 ^ n ≤ 2 ^ A n := Nat.pow_le_pow_right (by omega) (hA n)
+      have hAeq : n + (A n - n) = A n := Nat.add_sub_of_le (hA n)
+      have hpow : 2 ^ n ≤ 2 ^ A n := by
+        rw [← hAeq, pow_add]
+        calc
+          2 ^ n = 2 ^ n * 1 := by simp
+          _ ≤ 2 ^ n * 2 ^ (A n - n) :=
+            Nat.mul_le_mul_left _ (Nat.one_le_pow _ _ (by omega))
       nlinarith [ih]
 
 end CollatzSyracuseAudit
