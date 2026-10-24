@@ -1103,3 +1103,36 @@ theorem signedOffsetMargin_nonpos_succ_exp_two
 
 #print axioms signedOffsetMargin_nonpos_succ_exp_one
 #print axioms signedOffsetMargin_nonpos_succ_exp_two
+
+
+/--
+Sequence-level obstruction: if every valuation in the first N accelerated
+steps is either one or two, a nonpositive initial signed margin stays
+nonpositive throughout the block. Therefore a positive-margin descent block
+cannot be obtained from such a valuation word when it starts nonpositive.
+-/
+theorem signedOffsetMargin_nonpos_of_exponents_le_two
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (N : ℕ)
+    (ha : ∀ j, j < N → 1 ≤ a j ∧ a j ≤ 2)
+    (hD0 : signedOffsetMargin A 0 ≤ 0) :
+    signedOffsetMargin A N ≤ 0 := by
+  induction N with
+  | zero =>
+      simpa using hD0
+  | succ N ih =>
+      have hstep : 1 ≤ a N ∧ a N ≤ 2 :=
+        ha N (Nat.lt_succ_self N)
+      rw [signedOffsetMargin_succ A a hA N]
+      have hcorr :
+          ((2 : ℤ) ^ a N - 4) * (2 : ℤ) ^ A N ≤ 0 := by
+        have hexp : (2 : ℤ) ^ a N - 4 ≤ 0 := by
+          rcases hstep with ⟨hlo, hhi⟩
+          interval_cases a N <;> norm_num
+        have hpow : 0 ≤ (2 : ℤ) ^ A N :=
+          le_of_lt (pow_pos (by norm_num : (0 : ℤ) < 2) _)
+        exact mul_nonpos_of_nonpos_of_nonneg hexp hpow
+      nlinarith
+
+#print axioms signedOffsetMargin_nonpos_of_exponents_le_two
