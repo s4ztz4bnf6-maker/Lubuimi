@@ -63,3 +63,14 @@ Audit at minimum:
 - No claim that all exponent words with (a_j \ge 2) occur, or that exponent-one runs are globally bounded, is made.
 - A local descent lemma is not a global termination proof.
 - A passing CI run is evidence for compilation and the recorded axiom trace only, not a proof beyond the checked theorem statements.
+
+
+## Important obstruction: exponent-one runs are not uniformly forbidden
+
+The tempting claim that sufficiently large starting values structurally forbid long runs of (a_j=1) is too strong. In fact, for any finite (k\ge1), take (n_0=2^{k+1}q-1) with (q\ge1). For (0\le j<k), the repeated exponent-one recurrence gives
+[
+n_j+1=\frac{3^j(n_0+1)}{2^j}=3^j2^{k+1-j}q,
+]
+which is divisible by (4). Hence (n_j\equiv3\pmod4), so (v_2(3n_j+1)=1) at each of the first (k) steps. Thus arbitrarily long *finite* runs of exponent one occur for suitable, arbitrarily large starting values. This rules out a uniform run-length cutoff.
+
+What remains useful is a start-dependent bound: a run of length (k) forces (2^{k+1}\mid n_0+1), hence (2^{k+1}\le n_0+1), so (k\le \lfloor\log_2(n_0+1)\rfloor-1). The bound grows with the starting value and by itself does not control the cumulative negative margin tightly enough for global descent. Any Lean theorem should state this dependence explicitly rather than claim a fixed bound.
