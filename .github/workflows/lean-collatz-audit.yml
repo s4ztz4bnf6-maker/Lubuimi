@@ -43,5 +43,7 @@ jobs:
         run: lake env lean SyracuseQuarterDescent.lean
       - name: Compile and audit offset identity plus strict-margin consequence
         run: lake env lean SyracuseOffsetIdentity.lean
+      - name: Compile exact closed-form offset theorem
+        run: lake env lean SyracuseOffsetClosedForm.lean
       - name: Compile and audit stronger offset lower bound
         run: lake env lean SyracuseOffsetLowerBound.lean
