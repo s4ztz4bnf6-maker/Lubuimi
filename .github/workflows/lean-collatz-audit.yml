@@ -42,7 +42,13 @@ jobs:
       - name: Compile SyracuseQuarterDescent.lean
         run: lake env lean SyracuseQuarterDescent.lean
       - name: Compile and audit offset identity plus strict-margin consequence
-        run: lake env lean SyracuseOffsetIdentity.lean
+        run: |
+          set -o pipefail
+          lake env lean SyracuseOffsetIdentity.lean 2>&1 | tee /tmp/syracuse-offset-axioms.log
+          if grep -q 'sorryAx' /tmp/syracuse-offset-axioms.log; then
+            echo "Forbidden sorryAx found in transitive Syracuse offset theorem axioms."
+            exit 1
+          fi
       - name: Compile exact closed-form offset theorem
         run: lake env lean SyracuseOffsetClosedForm.lean
       - name: Compile and audit stronger offset lower bound
