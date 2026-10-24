@@ -868,14 +868,16 @@ theorem canonicalOffset_plus_three_pow_le_accumulated_power
           4 = 2 ^ 2 := by norm_num
           _ ≤ 2 ^ a n := Nat.pow_le_pow_right (by norm_num : 1 ≤ (2 : ℕ)) (ha n)
       have hscaled :
-          3 * canonicalOffset A n + 3 * 3 ^ n ≤ 3 * 2 ^ A n :=
-        Nat.mul_le_mul_left 3 ih
+          3 * canonicalOffset A n + 3 * 3 ^ n ≤ 3 * 2 ^ A n := by
+        have h := Nat.mul_le_mul_left 3 ih
+        simpa [Nat.mul_add] using h
       have hfour :
           3 * 2 ^ A n + 2 ^ A n ≤ 2 ^ A n * 2 ^ a n := by
         calc
           3 * 2 ^ A n + 2 ^ A n = 4 * 2 ^ A n := by ring
-          _ ≤ 2 ^ A n * 2 ^ a n :=
-            Nat.mul_le_mul_left (2 ^ A n) hfactor
+          _ ≤ 2 ^ A n * 2 ^ a n := by
+            have h := Nat.mul_le_mul_left (2 ^ A n) hfactor
+            simpa [Nat.mul_comm] using h
       calc
         canonicalOffset A (n + 1) + 3 ^ (n + 1)
             = 3 * canonicalOffset A n + 2 ^ A n + 3 * 3 ^ n := by
