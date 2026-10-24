@@ -1051,6 +1051,7 @@ theorem signedOffsetMargin_succ_exp_one
       3 * signedOffsetMargin A n - 2 * (2 : ℤ) ^ A n := by
   rw [signedOffsetMargin_succ A a hA n, ha]
   norm_num
+  ring
 
 /--
 Exact neutral correction when the next odd-to-odd step removes two factors
@@ -1071,6 +1072,8 @@ theorem signedOffsetMargin_succ_exp_two
 
 end CollatzSyracuseAudit
 
+
+namespace CollatzSyracuseAudit
 
 /--
 A nonpositive margin becomes strictly negative after a step with valuation
@@ -1136,3 +1139,5 @@ theorem signedOffsetMargin_nonpos_of_exponents_le_two
       nlinarith
 
 #print axioms signedOffsetMargin_nonpos_of_exponents_le_two
+
+end CollatzSyracuseAudit
