@@ -181,3 +181,33 @@ theorem four_step_affine_identity
     _ = p₀ * p₁ * p₂ * p₃ * x₄ := by ring
 
 #print axioms four_step_affine_identity
+
+
+/--
+Exact five-step affine recurrence. This is a further finite instance of the
+closed-form pattern; it is not a substitute for the general induction theorem.
+-/
+theorem five_step_affine_identity
+    (x₀ x₁ x₂ x₃ x₄ x₅ p₀ p₁ p₂ p₃ p₄ : ℕ)
+    (h₀ : 3 * x₀ + 1 = p₀ * x₁)
+    (h₁ : 3 * x₁ + 1 = p₁ * x₂)
+    (h₂ : 3 * x₂ + 1 = p₂ * x₃)
+    (h₃ : 3 * x₃ + 1 = p₃ * x₄)
+    (h₄ : 3 * x₄ + 1 = p₄ * x₅) :
+    243 * x₀ + 81 + 27 * p₀ + 9 * p₀ * p₁ +
+        3 * p₀ * p₁ * p₂ + p₀ * p₁ * p₂ * p₃ =
+      p₀ * p₁ * p₂ * p₃ * p₄ * x₅ := by
+  calc
+    243 * x₀ + 81 + 27 * p₀ + 9 * p₀ * p₁ +
+        3 * p₀ * p₁ * p₂ + p₀ * p₁ * p₂ * p₃
+        = 3 * (81 * x₀ + 27 + 9 * p₀ + 3 * p₀ * p₁ +
+          p₀ * p₁ * p₂) + p₀ * p₁ * p₂ * p₃ := by ring
+    _ = 3 * (p₀ * p₁ * p₂ * p₃ * x₄) +
+        p₀ * p₁ * p₂ * p₃ := by
+      rw [four_step_affine_identity x₀ x₁ x₂ x₃ x₄ p₀ p₁ p₂ p₃
+        h₀ h₁ h₂ h₃]
+    _ = p₀ * p₁ * p₂ * p₃ * (3 * x₄ + 1) := by ring
+    _ = p₀ * p₁ * p₂ * p₃ * (p₄ * x₅) := by rw [h₄]
+    _ = p₀ * p₁ * p₂ * p₃ * p₄ * x₅ := by ring
+
+#print axioms five_step_affine_identity
