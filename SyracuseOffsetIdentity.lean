@@ -1921,3 +1921,71 @@ theorem certified_block_nondecrease_when_two_power_le_three_power
 #print axioms certified_block_nondecrease_when_two_power_le_three_power
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+On a block whose valuations are all exactly one, the cumulative exponent
+increases by the block length. This indexing lemma is kept separate so the
+weighted signed-margin identity below cannot silently treat a local run as
+a global orbit property.
+-/
+theorem cumulative_exponent_add_of_ones
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (m r : ℕ)
+    (hone : ∀ i, i < r → a (m + i) = 1) :
+    A (m + r) = A m + r := by
+  induction r with
+  | zero =>
+      simp
+  | succ r ih =>
+      have honePrev : ∀ i, i < r → a (m + i) = 1 := by
+        intro i hi
+        exact hone i (by omega)
+      have hprev := ih honePrev
+      have hlast := hone r (by omega)
+      calc
+        A (m + (r + 1)) = A ((m + r) + 1) := by congr 1 <;> omega
+        _ = A (m + r) + a (m + r) := hA (m + r)
+        _ = (A m + r) + 1 := by rw [hprev, hlast]
+        _ = A m + (r + 1) := by omega
+
+/--
+Exact signed-margin evolution across a run of exponent-one steps. Each such
+step contributes a negative correction; after r consecutive steps the total
+loss is exactly 2·2^(A m)·(3^r − 2^r), amplified from the start of the run.
+This is a block identity, not a claim that every trajectory has a positive
+margin after such a run.
+-/
+theorem signed_margin_after_run_of_ones
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (m r : ℕ)
+    (hone : ∀ i, i < r → a (m + i) = 1) :
+    signedOffsetMargin A (m + r) =
+      (3 : ℤ) ^ r * signedOffsetMargin A m -
+        2 * (2 : ℤ) ^ A m *
+          ((3 : ℤ) ^ r - (2 : ℤ) ^ r) := by
+  induction r with
+  | zero =>
+      simp
+  | succ r ih =>
+      have honePrev : ∀ i, i < r → a (m + i) = 1 := by
+        intro i hi
+        exact hone i (by omega)
+      have hlast : a (m + r) = 1 := hone r (by omega)
+      have hAexp := cumulative_exponent_add_of_ones A a hA m r honePrev
+      rw [show m + (r + 1) = (m + r) + 1 by omega]
+      rw [signedOffsetMargin_succ A a hA (m + r), hlast, hAexp, ih honePrev]
+      rw [pow_add]
+      simp only [pow_one]
+      rw [show (3 : ℤ) ^ (r + 1) = 3 * (3 : ℤ) ^ r by rw [pow_succ]]
+      rw [show (2 : ℤ) ^ (r + 1) = 2 * (2 : ℤ) ^ r by rw [pow_succ]]
+      ring
+
+#print axioms cumulative_exponent_add_of_ones
+#print axioms signed_margin_after_run_of_ones
+
+end CollatzSyracuseAudit
