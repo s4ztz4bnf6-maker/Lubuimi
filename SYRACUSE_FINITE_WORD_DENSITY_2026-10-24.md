@@ -39,3 +39,22 @@ This makes the usual heuristic precise at finite depth. It is still not a global
 
 ## Falsification guard
 Never infer from the exact finite-dimensional law that exponent sequences along every single orbit behave independently, or that almost-sure statements imply termination for every integer. These are different quantifiers.
+
+
+## Refinement: exact conditional child-cylinder law
+
+The finite-prefix law can be stated locally at every node of the valuation-word tree, not only from the root. Suppose a fixed exact prefix has accumulated exponent A and its starting integers form one residue class modulo 2^(A+1). Appending an exponent b >= 1 imposes one exact child residue class modulo 2^(A+b+1). The child class lies inside the parent class, and its relative density inside that arithmetic progression is exactly
+
+  2^(A+1) / 2^(A+b+1) = 2^(-b).
+
+For each fixed parent, the children indexed by b >= 1 are pairwise disjoint and their relative densities sum to
+
+  sum_(b >= 1) 2^(-b) = 1.
+
+Thus the finite-cylinder tree is locally mass-conserving at every depth. This is stronger in organization than a root-only product-density statement: it identifies the exact conditional extension law at each finite prefix and gives a recursive invariant for a formal proof.
+
+The quantifiers still matter. The statement says that every finite parent cylinder is partitioned, in natural-density terms, by its finite child cylinders. It does not assert that a particular orbit samples the children with those frequencies, nor does it control the size of the canonical offset along every individual branch. A hypothetical exceptional infinite branch can have zero density without contradicting any of these identities.
+
+## Formalization target sharpened
+
+The next Lean theorem should avoid starting with a global natural-density API. First formalize the finite modular statement: if r is the unique exact-prefix residue modulo 2^(A+1), then each exponent b gives a unique child residue modulo 2^(A+b+1) reducing to r modulo 2^(A+1). Next prove the ratio of class counts in a complete period, then pass to natural density. Keep the local extension theorem separate from the universal-descent theorem.
