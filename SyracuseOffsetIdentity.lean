@@ -1035,3 +1035,38 @@ theorem signedOffsetMargin_eq_weighted_sum
 #print axioms signedOffsetMargin_eq_weighted_sum
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Exact negative correction when the next odd-to-odd step removes one factor
+of two. This makes the locally adverse case explicit in the margin recurrence.
+-/
+theorem signedOffsetMargin_succ_exp_one
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (n : ℕ) (ha : a n = 1) :
+    signedOffsetMargin A (n + 1) =
+      3 * signedOffsetMargin A n - 2 * (2 : ℤ) ^ A n := by
+  rw [signedOffsetMargin_succ A a hA n, ha]
+  norm_num
+
+/--
+Exact neutral correction when the next odd-to-odd step removes two factors
+of two. The margin is simply tripled, so this step cannot turn a nonpositive
+margin positive.
+-/
+theorem signedOffsetMargin_succ_exp_two
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (n : ℕ) (ha : a n = 2) :
+    signedOffsetMargin A (n + 1) =
+      3 * signedOffsetMargin A n := by
+  rw [signedOffsetMargin_succ A a hA n, ha]
+  norm_num
+
+#print axioms signedOffsetMargin_succ_exp_one
+#print axioms signedOffsetMargin_succ_exp_two
+
+end CollatzSyracuseAudit
