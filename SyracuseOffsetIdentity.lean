@@ -1760,3 +1760,34 @@ theorem signedOffsetMargin_succ_exp_ge_three
 end CollatzSyracuseAudit
 
 
+
+
+namespace CollatzSyracuseAudit
+
+/--
+A terminal odd quotient converts the affine offset identity into the exact
+terminal residue constraint. This is the finite-word version of the
+one-step exact-exponent residue lemma: the argument uses the full accumulated
+exponent A, not a single transition exponent.
+-/
+theorem terminal_offset_residue
+    (A N n₀ nN C : ℕ)
+    (hodd : nN % 2 = 1)
+    (hoffset : 2 ^ A * nN = 3 ^ N * n₀ + C) :
+    (3 ^ N * n₀ + C) % 2 ^ (A + 1) = 2 ^ A := by
+  obtain ⟨k, hk⟩ : ∃ k, nN = 2 * k + 1 := by
+    refine ⟨nN / 2, ?_⟩
+    omega
+  rw [← hoffset, hk, pow_succ]
+  have hfactor : 2 ^ A * (2 * k + 1) = (2 ^ A * 2) * k + 2 ^ A := by
+    ring
+  rw [hfactor]
+  rw [Nat.add_comm ((2 ^ A * 2) * k) (2 ^ A)]
+  rw [Nat.add_mul_mod_self_left]
+  have hlt : 2 ^ A < 2 ^ A * 2 := by
+    nlinarith [Nat.one_le_pow A 2 (by norm_num)]
+  exact Nat.mod_eq_of_lt hlt
+
+#print axioms terminal_offset_residue
+
+end CollatzSyracuseAudit
