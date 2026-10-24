@@ -1253,3 +1253,35 @@ theorem pow_two_dvd_pow_three_mul_shifted_start
 #print axioms pow_two_dvd_pow_three_mul_shifted_start
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+If every accelerated transition in a block has exponent one and the terminal
+iterate is odd, the shifted initial value has one more factor of two than the
+block length: 2^(N+1) divides 3^N * (n₀+1). This is an exact arithmetic
+obstruction on long runs of exponent-one steps, not a global termination
+claim. Cancellation of the odd factor 3^N is a separate next step.
+-/
+theorem exponent_one_block_terminal_odd_extra_divisibility
+    (n : ℕ → ℕ)
+    (hstep : ∀ j, 2 * n (j + 1) = 3 * n j + 1)
+    (N : ℕ)
+    (hterminal : n N % 2 = 1) :
+    2 ^ (N + 1) ∣ 3 ^ N * (n 0 + 1) := by
+  have hscaled := exponent_one_block_scaled_identity n hstep N
+  have hmod : (n N + 1) % 2 = 0 := by omega
+  have hdiv : 2 ∣ n N + 1 := Nat.dvd_of_mod_eq_zero hmod
+  rcases hdiv with ⟨k, hk⟩
+  refine ⟨k, ?_⟩
+  calc
+    2 ^ (N + 1) * k = 2 ^ N * (2 * k) := by
+      rw [pow_succ]
+      ring
+    _ = 2 ^ N * (n N + 1) := by rw [← hk]
+    _ = 3 ^ N * (n 0 + 1) := hscaled
+
+#print axioms exponent_one_block_terminal_odd_extra_divisibility
+
+end CollatzSyracuseAudit
