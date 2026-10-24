@@ -1275,10 +1275,10 @@ theorem exponent_one_block_terminal_odd_extra_divisibility
   rcases hdiv with ⟨k, hk⟩
   refine ⟨k, ?_⟩
   calc
-    2 ^ (N + 1) * k = 2 ^ N * (n N + 1) := by
+    3 ^ N * (n 0 + 1) = 2 ^ N * (n N + 1) := hscaled.symm
+    _ = 2 ^ (N + 1) * k := by
       rw [pow_succ, hk]
       ring
-    _ = 3 ^ N * (n 0 + 1) := hscaled
 
 #print axioms exponent_one_block_terminal_odd_extra_divisibility
 
