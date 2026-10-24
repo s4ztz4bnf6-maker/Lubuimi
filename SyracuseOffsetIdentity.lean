@@ -1050,8 +1050,7 @@ theorem signedOffsetMargin_succ_exp_one
     signedOffsetMargin A (n + 1) =
       3 * signedOffsetMargin A n - 2 * (2 : ℤ) ^ A n := by
   rw [signedOffsetMargin_succ A a hA n, ha]
-  norm_num
-  ring
+  norm_num <;> ring
 
 /--
 Exact neutral correction when the next odd-to-odd step removes two factors
