@@ -31,7 +31,7 @@ theorem mod64_thirtyfive_two_step_exact (m : ℕ) :
     rw [hfactor]
     exact v2_mul_32 (9 * m + 5) hnonzero
   dsimp [syracuse]
-  rw [hfactor, hval, pow_add]
+  rw [hval, hfactor, pow_add]
   norm_num [Nat.mul_div_mul_left]
 
 #print axioms CollatzSyracuseAudit.mod64_thirtyfive_two_step_exact
