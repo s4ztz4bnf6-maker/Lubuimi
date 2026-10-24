@@ -1389,3 +1389,29 @@ theorem every_prefix_satisfies_affine_divisibility
 #print axioms every_prefix_satisfies_affine_divisibility
 
 end CollatzSyracuseAudit
+
+
+/--
+Exact composition law for signed offset margins, formalized over integers so
+negative margins are not truncated by natural-number subtraction.
+
+The hypotheses isolate the two affine block-composition identities:
+the accumulated exponent adds, and the affine offset composes as
+C_(m+n) = 3^n * C_m + 2^A_m * C_tail.
+This is an algebraic theorem; it does not assert that a block word is an
+actual Syracuse orbit or that its margin is positive.
+-/
+theorem signed_margin_composition
+    (m n A₀ A₁ A₂ C₀ C₁ C₂ : ℕ)
+    (hA : A₂ = A₀ + A₁)
+    (hC : C₂ = 3 ^ n * C₀ + 2 ^ A₀ * C₁) :
+    (2 : ℤ) ^ A₂ - (C₂ : ℤ) - (3 : ℤ) ^ (m + n)
+      =
+    (3 : ℤ) ^ n * ((2 : ℤ) ^ A₀ - (C₀ : ℤ) - (3 : ℤ) ^ m)
+      + (2 : ℤ) ^ A₀ * ((2 : ℤ) ^ A₁ - (C₁ : ℤ) - (3 : ℤ) ^ n) := by
+  rw [hA, hC]
+  push_cast
+  rw [pow_add, pow_add]
+  ring
+
+#print axioms signed_margin_composition
