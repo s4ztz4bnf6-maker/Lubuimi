@@ -58,3 +58,8 @@ D_{j+1}=3D_j+(2^{a_j}-4)2^{A_j}.
 4. Formalize any proposed inequality as a theorem from genuine transition hypotheses, and run `#print axioms` on the exported result.
 
 No global Collatz proof or counterexample is claimed.
+
+
+## Exploratory finite search — not a theorem
+
+A local Python sweep over odd starts 3 through 19,999 (9,999 starting values), following the exact accelerated Syracuse map and updating the integer offset recurrence, found a positive signed margin for every tested start within the first 76 odd steps. The largest first-positive-margin index in this range was 76, at start 16,063; the endpoint at that index was 173. This is consistent with the margin criterion and is a useful regression-test range, but it is only finite exploratory evidence: it neither proves a logarithmic bound nor extends to all positive integers. The next useful artifact is to reproduce the sweep as a checkable finite certificate and use it to test any proposed block inequality against actual valuation words.
