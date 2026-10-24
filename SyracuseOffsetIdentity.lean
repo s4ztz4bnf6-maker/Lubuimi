@@ -1415,3 +1415,38 @@ theorem signed_margin_composition
   ring
 
 #print axioms signed_margin_composition
+
+
+/--
+The offset accumulated by a tail block, measured from the exponent schedule
+of that block. This recursive definition is chosen so the composition law
+follows directly from the affine offset recurrence, without assuming a
+pre-packaged block identity.
+-/
+def affineOffsetTail (A : ℕ → ℕ) (m : ℕ) : ℕ → ℕ
+  | 0 => 0
+  | n + 1 => 3 * affineOffsetTail A m n + 2 ^ A (m + n)
+
+/--
+Derive the block composition law for the affine offset from its one-step
+recurrence. Unlike signed_margin_composition, this theorem does not assume
+the block-composition equation for the offset: it constructs the tail offset
+recursively and proves the equation by induction on the tail length.
+-/
+theorem affine_offset_block_composition
+    (A C : ℕ → ℕ)
+    (hC : ∀ j, C (j + 1) = 3 * C j + 2 ^ A j)
+    (m : ℕ) :
+    ∀ n, C (m + n) = 3 ^ n * C m + affineOffsetTail A m n := by
+  intro n
+  induction n with
+  | zero =>
+      simp [affineOffsetTail]
+  | succ n ih =>
+      change C ((m + n) + 1) =
+        3 ^ (n + 1) * C m +
+          (3 * affineOffsetTail A m n + 2 ^ A (m + n))
+      rw [hC (m + n), ih, pow_succ]
+      ring
+
+#print axioms affine_offset_block_composition
