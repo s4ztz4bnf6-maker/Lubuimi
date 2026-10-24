@@ -1537,7 +1537,12 @@ theorem signedOffsetMargin_nonneg_of_exponents_ge_two
   induction N with
   | zero =>
       intro _
+      have hpowPos : 0 < 2 ^ A 0 := by positivity
+      have hpowNat : 1 ≤ 2 ^ A 0 := by omega
+      have hpowInt : (1 : ℤ) ≤ (2 : ℤ) ^ A 0 := by
+        exact_mod_cast hpowNat
       simp [signedOffsetMargin, canonicalOffset]
+      linarith
   | succ N ih =>
       intro ha
       have hprev : 0 ≤ signedOffsetMargin A N := by
