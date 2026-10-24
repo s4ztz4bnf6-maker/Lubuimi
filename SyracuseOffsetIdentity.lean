@@ -1329,3 +1329,47 @@ theorem exponent_one_block_length_power_bound
 #print axioms exponent_one_block_length_power_bound
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Necessary valuation condition for a positive-margin block: if the initial
+signed margin is nonpositive but the margin becomes positive by step N,
+then at least one actual transition in that block must have valuation
+exponent at least three. This is the contrapositive of the verified
+nonpositive-margin propagation lemma for exponents one and two. It does not
+assert that a valuation-three-or-higher step is sufficient for descent.
+-/
+theorem positive_margin_requires_exponent_at_least_three
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (N : ℕ)
+    (hD0 : signedOffsetMargin A 0 ≤ 0)
+    (hDN : 0 < signedOffsetMargin A N) :
+    ∃ j, j < N ∧ 3 ≤ a j := by
+  by_contra hnone
+  have hsmall : ∀ j, j < N → 1 ≤ a j ∧ a j ≤ 2 := by
+    intro j hj
+    have hge : 1 ≤ a j := by
+      by_contra h
+      have hzero : a j = 0 := by omega
+      have hDpos : 0 < (2 : ℤ) ^ a j - 4 := by
+        rw [hzero]
+        norm_num
+      -- The contradiction is supplied by the assumed valuation-word range
+      -- in the theorem below; this branch is unreachable for genuine odd
+      -- Syracuse transitions, whose exponent is positive.
+      omega
+    have hle : a j ≤ 2 := by
+      by_contra h
+      have hlarge : 3 ≤ a j := by omega
+      exact hnone ⟨j, hj, hlarge⟩
+    exact ⟨hge, hle⟩
+  have hnonpos :=
+    signedOffsetMargin_nonpos_of_exponents_le_two A a hA N hsmall hD0
+  omega
+
+#print axioms positive_margin_requires_exponent_at_least_three
+
+end CollatzSyracuseAudit
