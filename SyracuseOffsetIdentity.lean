@@ -1698,3 +1698,31 @@ theorem two_exponent_one_steps_can_be_followed_by_exponent_two :
 
 
 end CollatzSyracuseAudit
+
+
+/-!
+## Parameterized exact-residue constraint
+
+An exact accelerated step does more than certify divisibility by 2^a:
+because its quotient is odd, the residue modulo 2^(a+1) is exactly 2^a.
+This packages all fixed-exponent residue tests into one reusable statement.
+-/
+
+/-- Exact valuation forces a unique residue of `3*n + 1` modulo `2^(a+1)`. -/
+theorem exact_exponent_residue
+    (n next a : ℕ)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    (3 * n + 1) % 2 ^ (a + 1) = 2 ^ a := by
+  obtain ⟨k, hk⟩ : ∃ k, next = 2 * k + 1 := by
+    refine ⟨next / 2, ?_⟩
+    omega
+  rw [hstep, hk, pow_succ]
+  have hfactor :
+      2 ^ a * (2 * k + 1) = (2 ^ a * 2) * k + 2 ^ a := by
+    ring
+  rw [hfactor]
+  simp [Nat.add_mul_mod_self_left, Nat.mul_comm, Nat.mul_left_comm,
+    Nat.mul_assoc]
+
+#print axioms exact_exponent_residue
