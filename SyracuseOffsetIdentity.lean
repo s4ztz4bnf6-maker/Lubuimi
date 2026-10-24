@@ -1717,8 +1717,11 @@ theorem pure_one_block_offset_identity
                 rw [pow_succ]
                 ring
         _ = 2 ^ j * (3 * (n j + 1)) := by
-              rw [hstep j]
-              ring
+              congr 1
+              calc
+                2 * (n (j + 1) + 1) = 2 * n (j + 1) + 2 := by omega
+                _ = (3 * n j + 1) + 2 := by rw [hstep j]
+                _ = 3 * (n j + 1) := by omega
         _ = 3 * (2 ^ j * (n j + 1)) := by ring
         _ = 3 * (3 ^ j * (n 0 + 1)) := by rw [ih]
         _ = 3 ^ (j + 1) * (n 0 + 1) := by
