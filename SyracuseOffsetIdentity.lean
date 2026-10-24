@@ -1450,3 +1450,27 @@ theorem affine_offset_block_composition
       ring
 
 #print axioms affine_offset_block_composition
+
+
+
+/--
+The accumulated exponent over a block is the initial exponent plus the sum
+of the one-step exponents in that block. This is derived from the recurrence
+A_(j+1) = A_j + a_j rather than assumed as a block-composition hypothesis.
+It is the exponent-side companion to affine_offset_block_composition.
+-/
+theorem exponent_block_composition
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (m : ℕ) :
+    ∀ n, A (m + n) = A m + ∑ j ∈ Finset.range n, a (m + j) := by
+  intro n
+  induction n with
+  | zero =>
+      simp
+  | succ n ih =>
+      have hindex : m + (n + 1) = (m + n) + 1 := by omega
+      rw [hindex, hA (m + n), ih, Finset.sum_range_succ]
+      omega
+
+#print axioms exponent_block_composition
