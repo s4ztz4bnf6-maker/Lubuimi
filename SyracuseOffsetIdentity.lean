@@ -819,4 +819,22 @@ theorem canonicalOffset_plus_two_pow_lower_bound
         _ = canonicalOffset A (n + 1) + 2 ^ (n + 1) := by
           simp only [canonicalOffset]
 
+
+/--
+Exact exponent-seven transition family. For every k, the odd input
+n = 256*k + 213 satisfies 3*n + 1 = 2^7*(6*k+5), with odd successor
+6*k+5, so the accelerated Syracuse step is exactly 6*k+5 and is strictly
+smaller than n. This is a genuine infinite local family, not a global
+termination argument.
+-/
+theorem exponent_seven_family_exact_transition_and_descent (k : ℕ) :
+    128 * (6 * k + 5) = 3 * (256 * k + 213) + 1 ∧
+    (6 * k + 5) % 2 = 1 ∧
+    6 * k + 5 < 256 * k + 213 := by
+  constructor
+  · omega
+  constructor <;> omega
+
+#print axioms exponent_seven_family_exact_transition_and_descent
+
 end CollatzSyracuseAudit
