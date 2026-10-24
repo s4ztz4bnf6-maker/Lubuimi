@@ -74,3 +74,25 @@ n_j+1=\frac{3^j(n_0+1)}{2^j}=3^j2^{k+1-j}q,
 which is divisible by (4). Hence (n_j\equiv3\pmod4), so (v_2(3n_j+1)=1) at each of the first (k) steps. Thus arbitrarily long *finite* runs of exponent one occur for suitable, arbitrarily large starting values. This rules out a uniform run-length cutoff.
 
 What remains useful is a start-dependent bound: a run of length (k) forces (2^{k+1}\mid n_0+1), hence (2^{k+1}\le n_0+1), so (k\le \lfloor\log_2(n_0+1)\rfloor-1). The bound grows with the starting value and by itself does not control the cumulative negative margin tightly enough for global descent. Any Lean theorem should state this dependence explicitly rather than claim a fixed bound.
+
+
+## Counterexample to a proposed forced large exponent after an exponent-one run
+
+A run of (k) exponent-one steps does **not** force the next exponent to be at least (3). From the exact recurrence above,
+[
+n_k+1=2cdot 3^k q,qquad n_k=2cdot3^kq-1,
+]
+so
+[
+3n_k+1=2(3^{k+1}q-1).
+]
+The valuation of this expression depends on the residue of (3^{k+1}q) modulo higher powers of two; it is not uniformly at least (3).
+
+Concrete counterexample: (n_0=7=2^3-1) gives
+[
+7\xrightarrow{a_0=1}11\xrightarrow{a_1=1}17
+\xrightarrow{a_2=2}13.
+]
+Indeed, (3\cdot7+1=22=2\cdot11), (3\cdot11+1=34=2\cdot17), and (3\cdot17+1=52=4\cdot13). Thus after a run of two ones, the next exponent is exactly (2), not at least (3).
+
+This invalidates the proposed deterministic implication “maximal exponent-one run (Rightarrow) next exponent (a_k\geq3)”. The valid conclusion is only that the next exponent is at least (2), since (n_k=2\cdot3^kq-1\equiv1\pmod4) and hence (3n_k+1\equiv0\pmod4). Even this single forced exponent (2) contributes zero to the margin recurrence, so it does not by itself compensate for the accumulated negative contributions. The global argument must use a longer, quantitatively controlled suffix or a different invariant.
