@@ -610,3 +610,19 @@ theorem positive_point_mass_forces_positive_total
 #print axioms positive_point_mass_forces_positive_total
 
 end BBMSTFiberMassCore
+
+/--
+A concrete obstruction to any BBMST argument that uses only the mean of the
+fiber proportions: equal weights on proportions 0 and 1 have mean 1/2 but
+zero interior mass sum alpha*(1-alpha). Thus a positive lower bound on
+interior mass cannot follow from the mean alone; a variance/geometric input
+is indispensable.
+-/
+theorem two_point_mean_does_not_force_positive_interior_mass :
+    ((1 / 2 : ℚ) + 1 / 2 = 1) ∧
+    ((1 / 2 : ℚ) * 0 + (1 / 2) * 1 = 1 / 2) ∧
+    ((1 / 2 : ℚ) * (0 : ℚ) * (1 - 0) +
+      (1 / 2 : ℚ) * (1 : ℚ) * (1 - 1) = 0) := by
+  norm_num
+
+#print axioms two_point_mean_does_not_force_positive_interior_mass
