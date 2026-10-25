@@ -23,8 +23,8 @@ theorem quotient_not_divisible_by_two_of_exact_power
   refine ⟨k, ?_⟩
   rw [pow_succ]
   calc
-    2 ^ q * 2 * k = 2 ^ q * (2 * k) := by ring
-    _ = 2 ^ q * (x / 2 ^ q) := by rw [hk]
-    _ = x := hrec
+    x = 2 ^ q * (x / 2 ^ q) := hrec.symm
+    _ = 2 ^ q * (2 * k) := by rw [hk]
+    _ = 2 ^ q * 2 * k := by ring
 
 end SyracuseAudit
