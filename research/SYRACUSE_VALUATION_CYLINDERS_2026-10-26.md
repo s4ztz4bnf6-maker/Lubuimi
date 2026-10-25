@@ -52,3 +52,24 @@ The accelerated map is not globally continuous on all of Z₂ under the usual 2-
 - Verified finite computation range (not a universal proof): https://pcbarina.fit.vutbr.cz/
 
 Acceptance rule: this note is a proof target and representation change, not a compiled theorem. Mark it formalized only after a successful pinned-toolchain build and source/axiom audit.
+
+## Sharpened constructive recursion (2026-10-26 follow-up)
+
+The cylinder proof can be made constructive without searching among all residues. Let
+\(B_j=\sum_{i=j}^{N-1}a_i\), so \(B_N=0\). Start with the terminal odd-state class
+\(r_N=1\pmod {2}\). Given the unique suffix class
+\(r_{j+1}\pmod {2^{B_{j+1}+1}}\), define
+\[
+ r_j\equiv 3^{-1}(2^{a_j}r_{j+1}-1)
+ \pmod {2^{a_j+B_{j+1}+1}}
+ =\pmod {2^{B_j+1}}.
+\]
+Here \(3^{-1}\) is the inverse of 3 modulo the displayed power of 2; it exists because 3 is odd. This is well-defined on residue classes: changing the representative of \(r_{j+1}\) by a multiple of \(2^{B_{j+1}+1}\) changes \(2^{a_j}r_{j+1}\) by a multiple of \(2^{B_j+1}\). It is unique because multiplication by 3 is a bijection modulo every power of 2.
+
+The defining congruence gives
+\[
+ 3r_j+1\equiv 2^{a_j}r_{j+1}\pmod {2^{B_j+1}}.
+\]
+Since \(r_{j+1}\) is odd, the right side is divisible by \(2^{a_j}\) but not by \(2^{a_j+1}\). Thus the valuation at step \(j\) is exactly \(a_j\), while the quotient lies in the prescribed suffix class. Induction proves both realizability and uniqueness of the cylinder class. This recursion is the key Lean target: it reduces the global finite-word statement to modular-inverse and congruence lemmas, without division by 2 in a quotient ring.
+
+Important boundary: the congruence argument certifies the finite valuation word for positive starting values in the class; it gives no bound forcing the terminal value below the initial value. The descent problem remains genuinely separate.
