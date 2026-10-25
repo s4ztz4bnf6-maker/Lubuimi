@@ -23,13 +23,13 @@ theorem mod64_thirtyfive_second_step_bound (m : ℕ) :
 
 /-- Inputs congruent to 35 modulo 64 descend in two accelerated steps.
 This closes one additional residue class, but not all odd inputs. -/
-theorem mod64_thirtyfive_two_step_descent (m : ℕ) :
+theorem mod64_thirtyfive_two_step_descent_via_bound (m : ℕ) :
     syracuse (syracuse (64 * m + 35)) < 64 * m + 35 := by
   rw [mod64_thirtyfive_first_step_exact]
   have hbound := mod64_thirtyfive_second_step_bound m
   omega
 
 #print axioms mod64_thirtyfive_second_step_bound
-#print axioms mod64_thirtyfive_two_step_descent
+#print axioms mod64_thirtyfive_two_step_descent_via_bound
 
 end CollatzSyracuseAudit
