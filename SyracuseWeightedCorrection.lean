@@ -292,11 +292,13 @@ theorem valuation_three_iff_residue_thirteen_mod_sixteen
       omega
     have hnotfour : ¬ 4 ≤ a := by
       intro ha4
-      have hdiv : 16 ∣ 3 * n + 1 := by
-        refine ⟨2 ^ (a - 4) * next, ?_⟩
-        have hexp : a = 4 + (a - 4) := by omega
-        rw [← hstep, hexp, pow_add]
-        ring
+      have hpowdiv : 16 ∣ 2 ^ a := by
+        refine ⟨2 ^ (a - 4), ?_⟩
+        have hexp : 4 + (a - 4) = a := by omega
+        rw [show (16 : ℕ) = 2 ^ 4 by norm_num, ← hexp, pow_add]
+      have hdiv : 16 ∣ 2 ^ a * next :=
+        dvd_mul_of_dvd_left hpowdiv next
+      rw [hstep] at hdiv
       exact hnotdiv hdiv
     omega
 
