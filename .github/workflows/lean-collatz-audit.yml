@@ -7,6 +7,7 @@ on:
       - collatz/quarter-descent-lemma-2026-10-20
       - collatz/offset-margin-roadmap-2026-10-23
       - collatz/lean-435-recheck-2026-10-24
+      - collatz/weighted-correction-expansion-2026-10-25
     paths-ignore:
       - "**.md"
   pull_request:
@@ -42,10 +43,14 @@ jobs:
         run: lake env lean SyracuseReferenceTest.lean
       - name: Compile SyracuseQuarterDescent.lean
         run: lake env lean SyracuseQuarterDescent.lean
-      - name: Compile and audit offset identity plus strict-margin consequence
-        run: lake env lean SyracuseOffsetIdentity.lean
+      - name: Compile and export offset identity plus strict-margin consequence
+        run: |
+          mkdir -p .lake/build/lib/lean
+          lake env lean -o .lake/build/lib/lean/SyracuseOffsetIdentity.olean SyracuseOffsetIdentity.lean
       - name: Compile and audit stronger offset lower bound
         run: lake env lean SyracuseOffsetLowerBound.lean
+      - name: Compile weighted correction expansion and local sign classification
+        run: lake env lean SyracuseWeightedCorrection.lean
       - name: Install sandbox dependency for independent recheck
         run: sudo apt-get update && sudo apt-get install -y bubblewrap
       - name: Export and independently recheck project declarations
