@@ -35,3 +35,7 @@ jobs:
         run: lake build BBMSTFiberMassCore BBMSTProbabilityInterface
       - name: Compile strict interior-mass witness theorem
         run: lake env lean BBMSTStrictInteriorMass.lean
+      - name: Build and compile proper finite-fiber interior bridge
+        run: |
+          lake build BBMSTProperFiberInterior
+          lake env lean BBMSTProperFiberInterior.lean
