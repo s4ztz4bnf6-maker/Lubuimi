@@ -393,11 +393,24 @@ assert a globally convergent orbit.
 -/
 theorem exponent_one_run_closed_form_transition
     (r i : ℕ) (hi : i < r) :
-    (2 : ℤ) * ((3 : ℤ) ^ (i + 1) * 2 ^ (r - i) - 1) =
-      3 * ((3 : ℤ) ^ i * 2 ^ (r + 1 - i) - 1) + 1 := by
-  have hexp : r + 1 - i = (r - i) + 1 := by omega
-  rw [hexp, pow_succ, pow_succ]
-  ring
+    2 * (3 ^ (i + 1) * 2 ^ (r + 1 - (i + 1)) - 1) =
+      3 * (3 ^ i * 2 ^ (r + 1 - i) - 1) + 1 := by
+  have hexp0 : r + 1 - i = (r - i) + 1 := by omega
+  have hexp1 : r + 1 - (i + 1) = r - i := by omega
+  rw [hexp0, hexp1]
+  have hpow3 : 3 ^ (i + 1) = 3 ^ i * 3 := by rw [pow_succ]
+  have hpow2 : 2 ^ ((r - i) + 1) = 2 ^ (r - i) * 2 := by rw [pow_succ]
+  rw [hpow3, hpow2]
+  let z : ℕ := 3 ^ i * 2 ^ (r - i)
+  have hleft : 3 ^ i * 3 * (2 ^ (r - i) * 2) = 6 * z := by
+    dsimp [z]
+    ring
+  have hright : 3 ^ i * (2 ^ (r - i) * 2) = 2 * z := by
+    dsimp [z]
+    ring
+  rw [hleft, hright]
+  have hz : 0 < z := by positivity
+  omega
 
 #print axioms exponent_one_run_closed_form_transition
 
