@@ -78,3 +78,28 @@ Relevant references:
 - Lean FRO, *Postmortem for Kernel Soundness Bug #14576*: https://leodemoura.github.io/blog/2026-8-1-postmortem-for-kernel-soundness-bug-14576/
 - Lean FRO, *Postmortem for the Kernel Soundness Bug Hunt*: https://leodemoura.github.io/blog/2026-8-24-postmortem-for-the-kernel-soundness-bug-hunt/
 - Lean 4.32.2 release note (kernel fix): https://lean-lang.org/doc/reference/latest/releases/v4.32.2/
+
+
+## 6. Precise p-adic obstruction and the replacement target
+
+The four-pillar proposal needs one distinction that matters mathematically:
+
+- The ordinary one-step Collatz map \(F:\mathbb Z_2\to\mathbb Z_2\), defined by \(F(x)=x/2\) on even inputs and \(F(x)=(3x+1)/2\) on odd inputs, is continuous: the even and odd classes are clopen, and each branch is continuous on its own domain.
+- Continuity plus compactness does **not** imply convergence to one global sink. In fact \(0\) is a fixed point of this 2-adic map and \(1\leftrightarrow2\) is a two-cycle. These are not counterexamples to the positive-integer conjecture; they refute the proposed topological inference from compactness to a unique attractor on all of \(\mathbb Z_2\).
+- The accelerated odd map \(T(n)=(3n+1)/2^{v_2(3n+1)}\) is more delicate. It has no continuous extension to all of \(\mathbb Z_2\) agreeing with every positive odd integer transition. For even \(k\to\infty\), \(x_k=(2^k-1)/3\) is odd and \(T(x_k)=1\); for odd \(k\to\infty\), \(y_k=(5\cdot2^k-1)/3\) is odd and \(T(y_k)=5\). Both sequences converge 2-adically to \(-1/3\), so a continuous extension would have to send the same limit point to both 1 and 5.
+
+Thus the p-adic route cannot simply smooth the accelerated map and appeal to compactness. A viable use of \(\mathbb Z_2\) would need a proved arithmetic bridge from the integer-realizable valuation words to ordinary-order descent.
+
+### Finite-transition certificate to formalize next
+
+For a certified odd transition word \(a_0,\ldots,a_{r-1}\), define \(A_0=0\), \(A_{i+1}=A_i+a_i\), \(C_0=0\), and \(C_{i+1}=3C_i+2^{A_i}\). Each transition must carry the exact equation \(2^{a_i}n_{i+1}=3n_i+1\), rather than merely asserting a list of exponents. The block identity is
+\[
+2^{A_r}n_r=3^r n_0+C_r.
+\]
+A strictly descending block therefore needs both:
+\[
+2^{A_r}>3^r
+\quad\text{and}\quad
+C_r<(2^{A_r}-3^r)n_0.
+\]
+The first is the multiplicative budget already isolated in the Lean draft. The second is the actual additive-margin obligation. The next useful formal result is an exact theorem deriving both from a certified finite transition object, together with a counterexample test showing that the multiplicative budget alone does not imply descent. A global Collatz proof would still need to show that every positive odd start admits some such certified block.
