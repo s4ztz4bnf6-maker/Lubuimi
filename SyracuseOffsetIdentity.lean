@@ -2077,6 +2077,11 @@ theorem signedOffsetMargin_pos_succ_of_positive_correction
     0 < signedOffsetMargin A (n + 1) := by
   rw [signedOffsetMargin_succ A a hA n]
   have hscale : 0 ≤ 3 * signedOffsetMargin A n := by omega
+  have hpow : 0 < (2 : ℤ) ^ A n :=
+    pow_pos (by norm_num : (0 : ℤ) < 2) _
+  have hterm :
+      0 < ((2 : ℤ) ^ a n - 4) * (2 : ℤ) ^ A n :=
+    mul_pos hcorr hpow
   nlinarith
 
 #print axioms signedOffsetMargin_pos_succ_of_positive_correction
