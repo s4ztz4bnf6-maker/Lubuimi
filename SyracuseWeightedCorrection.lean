@@ -68,10 +68,17 @@ theorem signedCorrectionTerm_sign
         0 < signedCorrectionTerm A a m j) := by
   constructor
   · intro ha
-    simp [signedCorrectionTerm, ha]
+    unfold signedCorrectionTerm
+    rw [ha]
+    have hpos : 0 < (2 : ℤ) ^ A (m + j) :=
+      pow_pos (by norm_num : (0 : ℤ) < 2) _
+    norm_num
+    nlinarith
   constructor
   · intro ha
-    simp [signedCorrectionTerm, ha]
+    unfold signedCorrectionTerm
+    rw [ha]
+    norm_num
   · intro ha
     unfold signedCorrectionTerm
     have hpowNat : 2 ^ 2 < 2 ^ a (m + j) :=
