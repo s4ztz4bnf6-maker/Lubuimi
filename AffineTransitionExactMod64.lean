@@ -10,6 +10,21 @@ theorem mod64_three_two_step_exact (m : ℕ) :
   rw [hinput, first_step_formula_mod_four_three (16 * m)]
   exact second_step_formula_of_m_mod_sixteen_zero m
 
+/-! A second explicit residue class with strict two-step descent. -/
+
+/-- Inputs congruent to 35 modulo 64 strictly descend after two accelerated
+Syracuse steps. The exact formula reduces the output to a quotient bounded
+by its numerator, which is strictly below the original input. -/
+theorem mod64_thirtyfive_two_step_descent (m : ℕ) :
+    syracuse (syracuse (64 * m + 35)) < 64 * m + 35 := by
+  rw [mod64_thirtyfive_two_step_exact]
+  calc
+    (9 * m + 5) / 2 ^ v2 (9 * m + 5) ≤ 9 * m + 5 :=
+      Nat.div_le_self _ _
+    _ < 64 * m + 35 := by omega
+
+#print axioms mod64_thirtyfive_two_step_descent
+
 /--
 Exact accelerated two-step formula on the residue class 35 modulo 64.
 The first step is 96*m+53; the next numerator is 32*(9*m+5).
