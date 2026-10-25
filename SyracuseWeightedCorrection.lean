@@ -442,4 +442,50 @@ theorem valuation_three_iff_residue_thirteen_mod_sixteen
 
 #print axioms valuation_three_iff_residue_thirteen_mod_sixteen
 
+
+/--
+Exact valuation-four classification at modulus 32. For an odd-to-odd
+accelerated transition, the exponent is exactly four precisely when the
+current state is 5 modulo 32. This refines the positive-correction branch
+without asserting any frequency estimate along an orbit.
+-/
+theorem valuation_four_iff_residue_five_mod_thirty_two
+    (n next a : ℕ)
+    (hn : n % 2 = 1)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    a = 4 ↔ n % 32 = 5 := by
+  constructor
+  · intro ha
+    subst a
+    omega
+  · intro hmod
+    have ha_pos : 0 < a :=
+      positive_exponent_of_odd_transition n next a hn hnext hstep
+    have ha_ge_three : 3 ≤ a :=
+      (valuation_at_least_three_iff_residue_five_mod_eight
+        n next a hn hnext hstep).2 (by omega)
+    have hnot_ge_five : ¬ 5 ≤ a := by
+      intro hge
+      have hexp : a = 5 + (a - 5) := by omega
+      have hfactor : 2 ^ a = 32 * 2 ^ (a - 5) := by
+        rw [hexp, pow_add]
+        norm_num
+      have hdiv : 32 ∣ 3 * n + 1 := by
+        refine ⟨2 ^ (a - 5) * next, ?_⟩
+        rw [← hstep, hfactor]
+        ring
+      have hzero : (3 * n + 1) % 32 = 0 :=
+        Nat.dvd_iff_mod_eq_zero.mp hdiv
+      omega
+    have hnot_three : a ≠ 3 := by
+      intro ha
+      have hres :=
+        (valuation_three_iff_residue_thirteen_mod_sixteen
+          n next a hn hnext hstep).mp ha
+      omega
+    omega
+
+#print axioms valuation_four_iff_residue_five_mod_thirty_two
+
 end CollatzSyracuseAudit
