@@ -2268,3 +2268,41 @@ theorem strict_descent_of_positive_offset_budget
 #print axioms strict_descent_of_positive_offset_budget
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Exact signed-margin evolution across a block of valuation-two steps.
+Unlike a valuation-one block, this block has no additive loss or gain:
+it only multiplies the incoming margin by 3^r. Thus valuation-two steps
+cannot repair a nonpositive margin; they merely preserve its sign while
+amplifying its magnitude. This is an exact block law, not a claim that
+every orbit contains such blocks or that the margin is globally positive.
+-/
+theorem signed_margin_after_run_of_twos
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (m r : ℕ)
+    (htwo : ∀ i, i < r → a (m + i) = 2) :
+    signedOffsetMargin A (m + r) =
+      (3 : ℤ) ^ r * signedOffsetMargin A m := by
+  induction r with
+  | zero =>
+      simp
+  | succ r ih =>
+      have htwoPrev : ∀ i, i < r → a (m + i) = 2 := by
+        intro i hi
+        exact htwo i (by omega)
+      have hlast : a (m + r) = 2 := htwo r (by omega)
+      rw [show m + (r + 1) = (m + r) + 1 by omega]
+      rw [signedOffsetMargin_succ_exp_two A a hA (m + r) hlast,
+        ih htwoPrev]
+      rw [show (3 : ℤ) ^ (r + 1) = 3 * (3 : ℤ) ^ r by
+        rw [pow_succ]
+        ring]
+      ring
+
+#print axioms signed_margin_after_run_of_twos
+
+end CollatzSyracuseAudit
