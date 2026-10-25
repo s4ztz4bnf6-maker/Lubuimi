@@ -667,8 +667,15 @@ theorem finite_weighted_variance_identity
               have hcross :
                   (∑ i ∈ s, 2 * μ * (w i * a i)) =
                     2 * μ * (∑ i ∈ s, w i * a i) := by
-                simp_rw [mul_assoc]
-                rw [← Finset.mul_sum]
+                calc
+                  (∑ i ∈ s, 2 * μ * (w i * a i)) =
+                      (∑ i ∈ s, (2 * μ) * (w i * a i)) := by
+                        apply Finset.sum_congr rfl
+                        intro i hi
+                        ring
+                  _ = (2 * μ) * (∑ i ∈ s, w i * a i) := by
+                        rw [← Finset.mul_sum]
+                  _ = 2 * μ * (∑ i ∈ s, w i * a i) := by ring
               have hsquare :
                   (∑ i ∈ s, w i * μ ^ 2) =
                     μ ^ 2 * (∑ i ∈ s, w i) := by
