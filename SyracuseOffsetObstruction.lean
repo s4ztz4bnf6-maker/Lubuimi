@@ -407,8 +407,8 @@ theorem strict_descent_iff_offset_below_scale_margin
     rw [← hscaleEq] at hmargin
     omega
   · intro hoffset
-    rw [hscaleEq]
-    omega
+    rw [← hscaleEq]
+    exact Nat.add_lt_add_left hoffset (3 ^ k * n 0)
 
 #print axioms strict_descent_iff_offset_below_scale_margin
 
