@@ -487,7 +487,7 @@ theorem predicate_incidence_deficit_eq_uncovered_fraction
   have hcard :
       (sample.filter covered).card +
           (sample.filter (fun x => ¬ covered x)).card = sample.card := by
-    exact Finset.card_filter_add_card_filter_neg_eq_card sample covered
+    exact Finset.card_filter_add_card_filter_not (s := sample) covered
   have hnum :
       ((sample.filter covered).card : ℚ) +
           ((sample.filter (fun x => ¬ covered x)).card : ℚ) =
