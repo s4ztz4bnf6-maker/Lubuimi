@@ -2032,31 +2032,3 @@ theorem signed_margin_positive_after_run_of_ones
 
 end CollatzSyracuseAudit
 
-
-/-!
-## Signed offset margin: exact one-step cocycle
-
-Natural-number subtraction truncates and obscures the sign of the descent
-obstruction. The integer-valued margin below retains that sign. This is a
-local algebraic identity only; it does not assert that the margin is positive
-along every Syracuse trajectory.
--/
-
-/-- Integer-valued signed margin for the affine offset identity. -/
-def signedOffsetMargin (A C : ℕ → ℕ) (j : ℕ) : ℤ :=
-  (2 : ℤ) ^ A j - (3 : ℤ) ^ j - (C j : ℤ)
-
-/-- Exact one-step cocycle for the signed offset margin. -/
-theorem signed_offset_margin_cocycle
-    (a A C : ℕ → ℕ)
-    (hA : ∀ j, A (j + 1) = A j + a j)
-    (hC : ∀ j, C (j + 1) = 3 * C j + 2 ^ A j) :
-    ∀ j, signedOffsetMargin A C (j + 1) =
-      3 * signedOffsetMargin A C j +
-        (2 : ℤ) ^ A j * ((2 : ℤ) ^ a j - 4) := by
-  intro j
-  simp only [signedOffsetMargin, hA j, hC j, pow_add, pow_succ]
-  push_cast
-  ring
-
-#print axioms signed_offset_margin_cocycle
