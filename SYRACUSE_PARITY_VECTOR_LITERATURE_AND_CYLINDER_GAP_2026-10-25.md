@@ -38,3 +38,28 @@ the a_j=1 contribution is negative, a_j=2 is neutral, and a_j>=3 is positive. Cy
 ## Status
 
 Literature-guided research note only. No new Lean theorem or global Collatz result is claimed.
+
+
+## New exact reduction: valuation words as nested 2-adic cylinders (2026-10-25)
+
+Fix a proposed finite valuation word a_0,...,a_{k-1}, set A_0=0,
+A_{j+1}=A_j+a_j and C_0=0, C_{j+1}=3 C_j+2^{A_j}. Iterating the affine
+recurrence gives
+2^{A_j} n_j = 3^j n_0 + C_j.
+
+For an exact word, each intermediate n_j must be odd. Therefore the
+necessary congruence at each j is
+3^j n_0 + C_j ≡ 2^{A_j} (mod 2^{A_j+1}).
+Conversely, if these congruences hold for j=0,...,k, the affine recurrence
+defines integral n_j and the oddness of n_{j+1} forces
+v_2(3 n_j+1)=a_j at every transition. Thus the word's cylinder is the
+intersection of a nested family of congruence conditions; it is empty if
+the conditions are incompatible and otherwise is one odd residue class
+modulo 2^{A_k+1}. Among odd residue classes modulo 2^{A_k+1}, its relative
+density is exactly 2^{-A_k}.
+
+This is an exact finite arithmetic reduction, not a global descent argument.
+A Lean formalization should prove (i) the affine identity by induction,
+(ii) equivalence between exact valuations and the odd-numerator congruences,
+and (iii) uniqueness/nesting of the cylinder residue. It must not infer
+that density-zero exceptional paths contain no positive integers.
