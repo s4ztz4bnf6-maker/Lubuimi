@@ -401,4 +401,45 @@ theorem exponent_one_run_closed_form_transition
 
 #print axioms exponent_one_run_closed_form_transition
 
+
+/--
+Exact exponent-three classification at the next residue resolution:
+for an odd-to-odd accelerated transition, valuation exactly three occurs
+precisely at n = 13 mod 16. The residue class n = 5 mod 16 instead forces
+valuation at least four. This refines the positive-correction branch without
+making any assumption about global residue frequencies.
+-/
+theorem valuation_three_iff_residue_thirteen_mod_sixteen
+    (n next a : ℕ)
+    (hn : n % 2 = 1)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    a = 3 ↔ n % 16 = 13 := by
+  constructor
+  · intro ha
+    subst a
+    omega
+  · intro hmod
+    have ha_pos : 0 < a :=
+      positive_exponent_of_odd_transition n next a hn hnext hstep
+    have ha_ge_three : 3 ≤ a :=
+      (valuation_at_least_three_iff_residue_five_mod_eight
+        n next a hn hnext hstep).2 (by omega)
+    have hnot_ge_four : ¬ 4 ≤ a := by
+      intro hge
+      have hexp : a = 4 + (a - 4) := by omega
+      have hfactor : 2 ^ a = 16 * 2 ^ (a - 4) := by
+        rw [hexp, pow_add]
+        norm_num
+      have hdiv : 16 ∣ 3 * n + 1 := by
+        refine ⟨2 ^ (a - 4) * next, ?_⟩
+        rw [← hstep, hfactor]
+        ring
+      have hzero : (3 * n + 1) % 16 = 0 :=
+        Nat.dvd_iff_mod_eq_zero.mp hdiv
+      omega
+    omega
+
+#print axioms valuation_three_iff_residue_thirteen_mod_sixteen
+
 end CollatzSyracuseAudit
