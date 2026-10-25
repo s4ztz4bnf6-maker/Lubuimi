@@ -647,41 +647,43 @@ theorem finite_weighted_variance_identity
   have hmean : (∑ i ∈ s, w i * a i) = μ := rfl
   have hvariance :
       (∑ i ∈ s, w i * (a i - μ) ^ 2) =
-        (∑ i ∈ s, w i * (a i) ^ 2) - μ ^ 2 := by
+        (∑ i ∈ s, w i * (a i) ^ 2) -
+          2 * μ * (∑ i ∈ s, w i * a i) +
+          μ ^ 2 * (∑ i ∈ s, w i) := by
     calc
-      (∑ i ∈ s, w i * (a i - μ) ^ 2)
-          = (∑ i ∈ s, (w i * (a i) ^ 2 - 2 * μ * (w i * a i) +
-              w i * μ ^ 2)) := by
-                apply Finset.sum_congr rfl
-                intro i hi
-                ring
+      (∑ i ∈ s, w i * (a i - μ) ^ 2) =
+          (∑ i ∈ s, (w i * (a i) ^ 2 -
+            2 * μ * (w i * a i) + w i * μ ^ 2)) := by
+              apply Finset.sum_congr rfl
+              intro i hi
+              ring
+      _ = (∑ i ∈ s, w i * (a i) ^ 2) -
+            (∑ i ∈ s, 2 * μ * (w i * a i)) +
+            (∑ i ∈ s, w i * μ ^ 2) := by
+              simp only [Finset.sum_add_distrib, Finset.sum_sub_distrib]
       _ = (∑ i ∈ s, w i * (a i) ^ 2) -
             2 * μ * (∑ i ∈ s, w i * a i) +
             μ ^ 2 * (∑ i ∈ s, w i) := by
-              simp_rw [Finset.sum_add_distrib, Finset.sum_sub_distrib]
               simp_rw [← Finset.mul_sum]
               ring
-      _ = (∑ i ∈ s, w i * (a i) ^ 2) - μ ^ 2 := by
-              rw [hw, hmean]
-              dsimp [μ]
-              ring
   calc
-    (∑ i ∈ s, w i * a i * (1 - a i))
-        = μ - (∑ i ∈ s, w i * (a i) ^ 2) := by
+    (∑ i ∈ s, w i * a i * (1 - a i)) =
+        (∑ i ∈ s, w i * a i) -
+          (∑ i ∈ s, w i * (a i) ^ 2) := by
             rw [← Finset.sum_sub_distrib]
-            simp_rw [mul_sub]
-            simp_rw [Finset.sum_sub_distrib]
+            apply Finset.sum_congr rfl
+            intro i hi
+            ring
+    _ = μ * (1 - μ) -
+          (∑ i ∈ s, w i * (a i - μ) ^ 2) := by
+            rw [hmean, hvariance, hw, hmean]
             dsimp [μ]
             ring
-    _ = μ * (1 - μ) - (∑ i ∈ s, w i * (a i - μ) ^ 2) := by
-          rw [hvariance]
-          rw [hw]
-          dsimp [μ]
-          ring
     _ = (∑ i ∈ s, w i * a i) *
           (1 - (∑ i ∈ s, w i * a i)) -
-        (∑ i ∈ s, w i * (a i - (∑ j ∈ s, w j * a j)) ^ 2) := by
-          dsimp [μ]
+        (∑ i ∈ s, w i * (a i -
+          (∑ j ∈ s, w j * a j)) ^ 2) := by
+            rfl
 
 #print axioms finite_weighted_variance_identity
 
