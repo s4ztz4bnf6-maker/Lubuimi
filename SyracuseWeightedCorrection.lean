@@ -350,4 +350,32 @@ theorem exponent_one_transition_implies_mod_four_three
 
 #print axioms exponent_one_transition_implies_mod_four_three
 
+
+/--
+For the explicit exponent-one candidate family, every proper-prefix
+closed-form state has residue 3 modulo 4:
+n_i = 3^i * 2^(r+1-i) - 1, whenever i < r.
+This isolates the modular obstruction behind arbitrarily long initial
+runs of valuation-one steps. It is a residue lemma; the full orbit-family
+construction is documented separately and must not be confused with a
+global Collatz conclusion.
+-/
+theorem exponent_one_run_closed_form_residue
+    (r i : ℕ) (hi : i < r) :
+    (3 ^ i * 2 ^ (r + 1 - i) - 1) % 4 = 3 := by
+  have hexp : 2 ≤ r + 1 - i := by omega
+  have hdecomp : r + 1 - i = 2 + (r + 1 - i - 2) := by omega
+  have hpow : 2 ^ (r + 1 - i) = 4 * 2 ^ (r + 1 - i - 2) := by
+    rw [hdecomp, pow_add]
+    norm_num
+  have hdiv : 4 ∣ 3 ^ i * 2 ^ (r + 1 - i) := by
+    refine ⟨3 ^ i * 2 ^ (r + 1 - i - 2), ?_⟩
+    rw [hpow]
+    ring
+  have hmod : (3 ^ i * 2 ^ (r + 1 - i)) % 4 = 0 :=
+    Nat.dvd_iff_mod_eq_zero.mp hdiv
+  omega
+
+#print axioms exponent_one_run_closed_form_residue
+
 end CollatzSyracuseAudit
