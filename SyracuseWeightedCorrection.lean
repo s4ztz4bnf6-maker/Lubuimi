@@ -633,3 +633,22 @@ theorem three_valuation_one_steps_force_residue_fifteen_mod_sixteen
   omega
 
 #print axioms three_valuation_one_steps_force_residue_fifteen_mod_sixteen
+
+
+/--
+Exact transition law for the explicit long valuation-one family. For every
+nonterminal index, the next closed-form state satisfies 2*n_(i+1)=3*n_i+1.
+Combined with the parity and mod-four lemmas above, this certifies the
+arithmetic transition for each finite step of the family; it does not claim
+that the family is one infinite orbit.
+-/
+theorem exponent_one_run_closed_form_transition
+    (r i : ℕ) (hi : i < r) :
+    2 * (3 ^ (i + 1) * 2 ^ (r + 1 - (i + 1)) - 1) =
+      3 * (3 ^ i * 2 ^ (r + 1 - i) - 1) + 1 := by
+  have hexp0 : r + 1 - i = (r - i) + 1 := by omega
+  have hexp1 : r + 1 - (i + 1) = r - i := by omega
+  rw [hexp0, hexp1, pow_succ, pow_succ]
+  ring
+
+#print axioms exponent_one_run_closed_form_transition
