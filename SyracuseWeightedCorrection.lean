@@ -552,3 +552,26 @@ theorem exponent_one_run_closed_form_odd
   omega
 
 #print axioms exponent_one_run_closed_form_odd
+
+
+/--
+Before the terminal state, every member of the explicit exponent-one family
+lies in the residue class 3 modulo 4. This is the local residue condition
+needed to certify that the next odd transition has exact 2-adic valuation 1.
+-/
+theorem exponent_one_run_closed_form_mod_four
+    (r i : ℕ) (hi : i < r) :
+    (3 ^ i * 2 ^ (r + 1 - i) - 1) % 4 = 3 := by
+  have hexp : 2 ≤ r + 1 - i := by omega
+  have hpow : 4 ∣ 2 ^ (r + 1 - i) := by
+    have h := Nat.pow_dvd_pow 2 hexp
+    norm_num at h ⊢
+    exact h
+  have hdiv : 4 ∣ 3 ^ i * 2 ^ (r + 1 - i) := dvd_mul_of_dvd_right hpow (3 ^ i)
+  have hmod :
+      (3 ^ i * 2 ^ (r + 1 - i)) % 4 = 0 :=
+    Nat.dvd_iff_mod_eq_zero.mp hdiv
+  have hpos : 0 < 3 ^ i * 2 ^ (r + 1 - i) := by positivity
+  omega
+
+#print axioms exponent_one_run_closed_form_mod_four
