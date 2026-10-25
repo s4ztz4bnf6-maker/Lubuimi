@@ -53,6 +53,17 @@ theorem mod64_thirtyfive_two_step_descent (m : ℕ) :
 
 #print axioms mod64_thirtyfive_two_step_descent
 
+/-- Residue-class interface: every natural number congruent to 35 modulo 64
+strictly descends after two accelerated Syracuse steps. -/
+theorem mod64_thirtyfive_two_step_descent_of_residue (n : ℕ)
+    (hn : n % 64 = 35) :
+    syracuse (syracuse n) < n := by
+  have hdecomp : n = 64 * (n / 64) + 35 := by omega
+  rw [hdecomp]
+  exact mod64_thirtyfive_two_step_descent (n / 64)
+
+#print axioms mod64_thirtyfive_two_step_descent_of_residue
+
 /-- The second-step numerator for inputs congruent to 35 modulo 64
 is 32 times the residual factor 9*m+5. -/
 theorem mod64_thirtyfive_second_numerator_factor32 (m : ℕ) :
