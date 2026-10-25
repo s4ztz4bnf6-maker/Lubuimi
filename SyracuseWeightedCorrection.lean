@@ -369,8 +369,9 @@ theorem exponent_one_run_closed_form_residue
   have hdiv : 4 ∣ 3 ^ i * 2 ^ (r + 1 - i) := by
     rcases hpowdiv with ⟨k, hk⟩
     refine ⟨3 ^ i * k, ?_⟩
-    rw [hk]
-    norm_num [pow_succ, mul_assoc, mul_left_comm, mul_comm]
+    calc
+      3 ^ i * 2 ^ (r + 1 - i) = 3 ^ i * (2 ^ 2 * k) := by rw [hk]
+      _ = 4 * (3 ^ i * k) := by norm_num [pow_succ]; ring
   have hmod : (3 ^ i * 2 ^ (r + 1 - i)) % 4 = 0 :=
     Nat.dvd_iff_mod_eq_zero.mp hdiv
   omega
