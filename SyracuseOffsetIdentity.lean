@@ -2098,7 +2098,7 @@ theorem positive_correction_of_exponent_ge_three
     (a : ℕ) (ha : 3 ≤ a) :
     0 < (2 : ℤ) ^ a - 4 := by
   have hp : (2 : ℤ) ^ 3 ≤ (2 : ℤ) ^ a := by
-    exact_mod_cast (Nat.pow_le_pow_right (by omega : 2 ≤ 2) ha)
+    exact_mod_cast (Nat.pow_le_pow_right (by norm_num : 0 < 2) ha)
   norm_num at hp ⊢
   omega
 
