@@ -646,6 +646,25 @@ theorem three_valuation_one_steps_force_residue_fifteen_mod_sixteen
   omega
 
 #print axioms three_valuation_one_steps_force_residue_fifteen_mod_sixteen
+/--
+Four consecutive exact valuation-one transitions force the initial state to
+31 modulo 32. This is a stronger finite congruence obstruction, not a bound
+on the length of a valuation-one run.
+-/
+theorem four_valuation_one_steps_force_residue_thirty_one_mod_thirty_two
+    (n n1 n2 n3 n4 : ℕ)
+    (hn : n % 2 = 1) (hn1 : n1 % 2 = 1)
+    (hn2 : n2 % 2 = 1) (hn3 : n3 % 2 = 1)
+    (hn4 : n4 % 2 = 1)
+    (hstep0 : 2 * n1 = 3 * n + 1)
+    (hstep1 : 2 * n2 = 3 * n1 + 1)
+    (hstep2 : 2 * n3 = 3 * n2 + 1)
+    (hstep3 : 2 * n4 = 3 * n3 + 1) :
+    n % 32 = 31 := by
+  omega
+
+#print axioms four_valuation_one_steps_force_residue_thirty_one_mod_thirty_two
+
 
 
 /--
