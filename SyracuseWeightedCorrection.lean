@@ -212,4 +212,46 @@ theorem valuation_at_least_three_iff_residue_five_mod_eight
 
 #print axioms valuation_at_least_three_iff_residue_five_mod_eight
 
+
+/--
+Complete mod-8 partition of the local correction regimes for an odd-to-odd
+accelerated Syracuse transition. The four odd residue classes are separated
+into valuation-one negative correction (3 or 7 mod 8), valuation-two zero
+correction (1 mod 8), and valuation-at-least-three positive correction
+(5 mod 8). This is a complete local partition, not a global orbit estimate.
+-/
+theorem complete_odd_residue_correction_partition
+    (n next a : ℕ)
+    (hn : n % 2 = 1)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    (a = 1 ∧ n % 8 = 3) ∨
+    (a = 2 ∧ n % 8 = 1) ∨
+    (3 ≤ a ∧ n % 8 = 5) ∨
+    (a = 1 ∧ n % 8 = 7) := by
+  have hres : n % 8 = 1 ∨ n % 8 = 3 ∨ n % 8 = 5 ∨ n % 8 = 7 := by
+    omega
+  rcases hres with h1 | h3 | h5 | h7
+  · right
+    left
+    exact ⟨(valuation_two_iff_residue_one_mod_eight
+      n next a hn hnext hstep).mpr h1, h1⟩
+  · left
+    have hmod4 : n % 4 = 3 := by omega
+    exact ⟨(valuation_one_iff_residue_three_mod_four
+      n next a hn hnext hstep).mpr hmod4, h3⟩
+  · right
+    right
+    left
+    exact ⟨(valuation_at_least_three_iff_residue_five_mod_eight
+      n next a hn hnext hstep).mpr h5, h5⟩
+  · right
+    right
+    right
+    have hmod4 : n % 4 = 3 := by omega
+    exact ⟨(valuation_one_iff_residue_three_mod_four
+      n next a hn hnext hstep).mpr hmod4, h7⟩
+
+#print axioms complete_odd_residue_correction_partition
+
 end CollatzSyracuseAudit
