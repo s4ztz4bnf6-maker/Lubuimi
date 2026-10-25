@@ -597,7 +597,7 @@ theorem valuation_one_run_continues_iff_residue_seven_mod_eight
     rw [ha] at hstep
     norm_num at hstep
     omega
-  rw [(valuation_one_iff_residue_three_mod_four
+  rw [(CollatzSyracuseAudit.valuation_one_iff_residue_three_mod_four
     next nextNext b hnext hnextNext hstepNext)]
   exact hnext_mod_four
 
