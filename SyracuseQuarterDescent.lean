@@ -243,6 +243,35 @@ theorem exact_descent_gap_of_mod_thirty_two_five
 #print axioms exact_descent_gap_of_mod_thirty_two_five
 
 
+/--
+Exact valuation-six branch: if n ≡ 21 (mod 128), then 3*n+1 is
+divisible by 64 but not by 128. The accelerated quotient is therefore
+exactly (3*n+1)/64 = 6*(n/128)+1. This extends the finite residue
+ledger, but does not imply that every orbit visits this branch.
+-/
+theorem exact_six_factors_of_mod_128_twenty_one
+    (n : ℕ) (hn : n % 128 = 21) :
+    (3 * n + 1) % 64 = 0 ∧ ((3 * n + 1) / 64) % 2 = 1 := by
+  constructor <;> omega
+
+/-- Closed form of the fully accelerated quotient on n ≡ 21 (mod 128). -/
+theorem exact_quotient_formula_of_mod_128_twenty_one
+    (n : ℕ) (hn : n % 128 = 21) :
+    (3 * n + 1) / 64 = 6 * (n / 128) + 1 := by
+  omega
+
+/-- Exact descent gap on the valuation-six residue class n ≡ 21 mod 128. -/
+theorem exact_descent_gap_of_mod_128_twenty_one
+    (n : ℕ) (hn : n % 128 = 21) :
+    n - (3 * n + 1) / 64 = 122 * (n / 128) + 20 := by
+  rw [exact_quotient_formula_of_mod_128_twenty_one n hn]
+  omega
+
+#print axioms exact_six_factors_of_mod_128_twenty_one
+#print axioms exact_quotient_formula_of_mod_128_twenty_one
+#print axioms exact_descent_gap_of_mod_128_twenty_one
+
+
 end CollatzSyracuseAudit
 
 
