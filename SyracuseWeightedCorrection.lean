@@ -127,4 +127,89 @@ theorem valuation_one_iff_residue_three_mod_four
 
 #print axioms valuation_one_iff_residue_three_mod_four
 
+
+/--
+Exact residue classification for valuation two. For an odd-to-odd
+accelerated transition, the local correction vanishes precisely when the
+current state is 1 modulo 8.
+-/
+theorem valuation_two_iff_residue_one_mod_eight
+    (n next a : ℕ)
+    (hn : n % 2 = 1)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    a = 2 ↔ n % 8 = 1 := by
+  constructor
+  · intro ha
+    subst a
+    omega
+  · intro hmod
+    have ha_pos : 0 < a :=
+      positive_exponent_of_odd_transition n next a hn hnext hstep
+    have hnot_ge_three : ¬ 3 ≤ a := by
+      intro hge
+      have hexp : a = 3 + (a - 3) := by omega
+      have hfactor : 2 ^ a = 8 * 2 ^ (a - 3) := by
+        rw [hexp, pow_add]
+        norm_num
+      have hdiv : 8 ∣ 3 * n + 1 := by
+        refine ⟨2 ^ (a - 3) * next, ?_⟩
+        rw [← hstep, hfactor]
+        ring
+      have hzero : (3 * n + 1) % 8 = 0 :=
+        Nat.dvd_iff_mod_eq_zero.mp hdiv
+      omega
+    have hne : a ≠ 1 := by
+      intro ha
+      have hres :=
+        (valuation_one_iff_residue_three_mod_four
+          n next a hn hnext hstep).mp ha
+      omega
+    omega
+
+#print axioms valuation_two_iff_residue_one_mod_eight
+
+/--
+Exact residue classification for positive local correction. Valuation at
+least three is equivalent to residue 5 modulo 8 for an odd-to-odd
+accelerated transition. This remains a local statement; it gives no global
+frequency bound for positive versus negative corrections.
+-/
+theorem valuation_at_least_three_iff_residue_five_mod_eight
+    (n next a : ℕ)
+    (hn : n % 2 = 1)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    3 ≤ a ↔ n % 8 = 5 := by
+  constructor
+  · intro hge
+    have hexp : a = 3 + (a - 3) := by omega
+    have hfactor : 2 ^ a = 8 * 2 ^ (a - 3) := by
+      rw [hexp, pow_add]
+      norm_num
+    have hdiv : 8 ∣ 3 * n + 1 := by
+      refine ⟨2 ^ (a - 3) * next, ?_⟩
+      rw [← hstep, hfactor]
+      ring
+    have hzero : (3 * n + 1) % 8 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp hdiv
+    omega
+  · intro hmod
+    have ha_pos : 0 < a :=
+      positive_exponent_of_odd_transition n next a hn hnext hstep
+    by_contra hnot
+    have hlt : a < 3 := by omega
+    have hcases : a = 1 ∨ a = 2 := by omega
+    rcases hcases with ha | ha
+    · have hres :=
+        (valuation_one_iff_residue_three_mod_four
+          n next a hn hnext hstep).mp ha
+      omega
+    · have hres :=
+        (valuation_two_iff_residue_one_mod_eight
+          n next a hn hnext hstep).mp ha
+      omega
+
+#print axioms valuation_at_least_three_iff_residue_five_mod_eight
+
 end CollatzSyracuseAudit
