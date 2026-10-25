@@ -280,15 +280,15 @@ theorem accelerated_step_descent_iff
 
 
 /--
-If the current and next Syracuse states are positive odd integers and the
-valuation is at least three, the accelerated transition strictly descends.
-This is a local corollary of the exact transition equation, not a statement
-about how often such valuations occur.
+If the current Syracuse state is positive and the transition exponent
+is at least three, the next state is strictly smaller. Oddness of the next
+state is not needed for this inequality. This is a local corollary of the
+exact transition equation, not a statement about how often such exponents
+occur.
 -/
 theorem accelerated_step_descent_for_large_exponent
     (n next a : ℕ)
     (hn : 0 < n)
-    (hnext : next % 2 = 1)
     (ha : 3 ≤ a)
     (hstep : 2 ^ a * next = 3 * n + 1) :
     next < n := by
