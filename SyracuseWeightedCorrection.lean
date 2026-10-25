@@ -301,9 +301,9 @@ theorem accelerated_step_descent_for_large_exponent
     calc
       8 * next ≤ 2 ^ a * next := Nat.mul_le_mul_right next hpow
       _ = 3 * n + 1 := hstep
-  have hsmall : 3 * n + 1 < 8 * n := by omega
+  have hsmall : 3 * n + 1 < 8 * n := by nlinarith [hn]
   have hlt : 8 * next < 8 * n := lt_of_le_of_lt hbound hsmall
-  omega
+  exact (Nat.mul_lt_mul_left (by norm_num : 0 < 8)).1 hlt
 
 #print axioms accelerated_step_descent_for_large_exponent
 
