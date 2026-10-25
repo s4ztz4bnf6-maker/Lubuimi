@@ -261,6 +261,20 @@ theorem two_step_descent_mod32_nineteen_of_residue (n : ℕ)
 #print axioms CollatzSyracuseAudit.two_step_descent_mod32_nineteen_of_residue
 
 
+/-- Combined two-cylinder descent certificate modulo 32. Either residue
+class 3 or 19 guarantees strict descent after two accelerated steps. This
+covers four residue classes modulo 64 (3, 19, 35, 51) with one reusable
+interface; it still leaves other odd residue classes untreated. -/
+theorem two_step_descent_mod32_three_or_nineteen_of_residue (n : ℕ)
+    (hn : n % 32 = 3 ∨ n % 32 = 19) :
+    syracuse (syracuse n) < n := by
+  rcases hn with h3 | h19
+  · exact two_step_descent_mod32_three_of_residue n h3
+  · exact two_step_descent_mod32_nineteen_of_residue n h19
+
+#print axioms two_step_descent_mod32_three_or_nineteen_of_residue
+
+
 
 /-!
 ## Exact affine numerator identity for a valuation sequence
