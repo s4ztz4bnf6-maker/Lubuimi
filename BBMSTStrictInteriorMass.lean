@@ -101,3 +101,59 @@ theorem weighted_interior_mass_positive_iff
 #print axioms weighted_interior_mass_positive_iff
 
 end BBMSTStrictInteriorMass
+
+
+namespace BBMSTStrictInteriorMass
+
+/--
+Quantitative interior-fiber bound. If one fiber has mass at least δ and
+its conditional proportion is at least δ away from both endpoints 0 and 1,
+then the weighted Bernoulli term is at least δ^3. This is the quantitative
+form needed when the source proof requires an explicit margin rather than
+mere strict positivity. The geometric hypothesis producing such a fiber
+remains separate.
+-/
+theorem weighted_interior_mass_ge_delta_cube
+    {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (mass alpha : ι → ℚ) (δ : ℚ)
+    (hδ : 0 < δ)
+    (hmass : ∀ i ∈ s, 0 ≤ mass i)
+    (ha0 : ∀ i ∈ s, 0 ≤ alpha i)
+    (ha1 : ∀ i ∈ s, alpha i ≤ 1)
+    (hwitness : ∃ i ∈ s,
+      δ ≤ mass i ∧ δ ≤ alpha i ∧ alpha i ≤ 1 - δ) :
+    δ ^ 3 ≤ ∑ i ∈ s, alpha i * (1 - alpha i) * mass i := by
+  obtain ⟨i, hi, hmassδ, halphaδ, halphaUpper⟩ := hwitness
+  have hδ0 : 0 ≤ δ := le_of_lt hδ
+  have hδComplement : δ ≤ 1 - alpha i := by linarith
+  have hprod : δ * δ ≤ alpha i * (1 - alpha i) :=
+    mul_le_mul halphaδ hδComplement hδ0 (ha0 i hi)
+  have hmassTerm :
+      δ ^ 2 * δ ≤ δ ^ 2 * mass i :=
+    mul_le_mul_of_nonneg_left hmassδ (sq_nonneg δ)
+  have hprodTerm :
+      δ ^ 2 * mass i ≤ (alpha i * (1 - alpha i)) * mass i :=
+    mul_le_mul_of_nonneg_right hprod (hmass i hi)
+  have hterm :
+      δ ^ 3 ≤ alpha i * (1 - alpha i) * mass i := by
+    calc
+      δ ^ 3 = δ ^ 2 * δ := by ring
+      _ ≤ δ ^ 2 * mass i := hmassTerm
+      _ ≤ (alpha i * (1 - alpha i)) * mass i := hprodTerm
+      _ = alpha i * (1 - alpha i) * mass i := by ring
+  let f : ι → ℚ := fun j => alpha j * (1 - alpha j) * mass j
+  have hnonneg : ∀ j ∈ s, 0 ≤ f j := by
+    intro j hj
+    dsimp [f]
+    exact mul_nonneg
+      (mul_nonneg (ha0 j hj) (sub_nonneg.mpr (ha1 j hj)))
+      (hmass j hj)
+  have hle : f i ≤ ∑ j ∈ s, f j :=
+    Finset.single_le_sum (fun j hj => hnonneg j hj) hi
+  have hbound : δ ^ 3 ≤ ∑ j ∈ s, f j :=
+    le_trans hterm hle
+  simpa [f] using hbound
+
+#print axioms weighted_interior_mass_ge_delta_cube
+
+end BBMSTStrictInteriorMass
