@@ -364,10 +364,11 @@ theorem exponent_one_run_closed_form_residue
     (r i : ℕ) (hi : i < r) :
     (3 ^ i * 2 ^ (r + 1 - i) - 1) % 4 = 3 := by
   have hexp : 2 ≤ r + 1 - i := by omega
-  have hdecomp : r + 1 - i = 2 + (r + 1 - i - 2) := by omega
+  have hdecomp : (r + 1 - i - 2) + 2 = r + 1 - i :=
+    Nat.sub_add_cancel hexp
   have hpow : 2 ^ (r + 1 - i) = 4 * 2 ^ (r + 1 - i - 2) := by
-    rw [hdecomp, pow_add]
-    norm_num
+    rw [← hdecomp, pow_add]
+    norm_num [pow_add, mul_comm, mul_left_comm, mul_assoc]
   have hdiv : 4 ∣ 3 ^ i * 2 ^ (r + 1 - i) := by
     refine ⟨3 ^ i * 2 ^ (r + 1 - i - 2), ?_⟩
     rw [hpow]
