@@ -1835,7 +1835,7 @@ theorem exact_exponent_residue_iff_odd_quotient (n a : ℕ) :
       ∃ next : ℕ, next % 2 = 1 ∧ 2 ^ a * next = 3 * n + 1 := by
   constructor
   · intro hres
-    let q := (3 * n + 1) / 2 ^ (a + 1)
+    let q := (3 * n + 1) / (2 ^ a * 2)
     have hdecomp :
         (3 * n + 1) % 2 ^ (a + 1) +
             2 ^ (a + 1) * ((3 * n + 1) / 2 ^ (a + 1)) =
@@ -1846,11 +1846,10 @@ theorem exact_exponent_residue_iff_odd_quotient (n a : ℕ) :
     · simp
     · change 2 ^ a * (2 * q + 1) = 3 * n + 1
       have hfactor :
-          2 ^ a * (2 * q + 1) = 2 ^ a + 2 ^ (a + 1) * q := by
-        rw [pow_succ]
+          2 ^ a * (2 * q + 1) = 2 ^ a + (2 ^ a * 2) * q := by
         ring
       rw [hfactor]
-      simpa [q] using hdecomp
+      simpa [q, pow_succ] using hdecomp
   · rintro ⟨next, hodd, hstep⟩
     exact exact_exponent_residue n next a hodd hstep
 
