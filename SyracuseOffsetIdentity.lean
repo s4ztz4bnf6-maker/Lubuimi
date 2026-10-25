@@ -2193,3 +2193,54 @@ theorem correction_sign_trichotomy (a : ℕ) (ha : 1 ≤ a) :
 #print axioms correction_sign_trichotomy
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+General offset-budget descent lemma. If the canonical affine offset C fits
+within the one-step exponential budget C + 3^j ≤ 2^A, if the exponential
+gap is strict, and if the initial odd value exceeds one, then the certified
+j-step block strictly descends. This isolates the exact inequality needed
+to turn a valuation-growth estimate into an orbit descent; it does not assume
+that the budget holds for arbitrary Syracuse trajectories.
+-/
+theorem strict_descent_of_offset_budget
+    (n0 nj A C j : ℕ)
+    (hidentity : 2 ^ A * nj = 3 ^ j * n0 + C)
+    (hbudget : C + 3 ^ j ≤ 2 ^ A)
+    (hpow : 3 ^ j < 2 ^ A)
+    (hn0 : 1 < n0) :
+    nj < n0 := by
+  let p : ℕ := 3 ^ j
+  let q : ℕ := 2 ^ A
+  have hbudget' : C + p ≤ q := by
+    simpa [p, q] using hbudget
+  have hpow' : p < q := by
+    simpa [p, q] using hpow
+  have hpos : 0 < n0 - 1 := by omega
+  have hmul : p * (n0 - 1) < q * (n0 - 1) :=
+    Nat.mul_lt_mul_of_pos_right hpow' hpos
+  have hsum : C + p * (n0 - 1) < q + q * (n0 - 1) := by
+    calc
+      C + p * (n0 - 1) ≤ q + p * (n0 - 1) :=
+        Nat.add_le_add_right hbudget' _
+      _ < q + q * (n0 - 1) :=
+        Nat.add_lt_add_left hmul q
+  have hn0eq : n0 = (n0 - 1) + 1 := by omega
+  have hmargin : p * n0 + C < q * n0 := by
+    rw [hn0eq]
+    nlinarith [hsum]
+  have hprod : q * nj < q * n0 := by
+    calc
+      q * nj = p * n0 + C := by
+        simpa [p, q] using hidentity
+      _ < q * n0 := hmargin
+  have hqpos : 0 < q := by positivity
+  have hcancel : nj < n0 :=
+    (Nat.mul_lt_mul_left hqpos).mp hprod
+  exact hcancel
+
+#print axioms strict_descent_of_offset_budget
+
+end CollatzSyracuseAudit
