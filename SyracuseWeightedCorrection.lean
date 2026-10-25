@@ -307,4 +307,31 @@ theorem accelerated_step_descent_for_large_exponent
 
 #print axioms accelerated_step_descent_for_large_exponent
 
+
+/--
+Any accelerated odd step with exponent at least two strictly decreases a
+positive odd state greater than one. This strengthens the exponent-at-least-
+three result and isolates the only locally increasing odd transitions:
+those with exponent one (equivalently, current state 3 modulo 4).
+-/ 
+theorem accelerated_step_descent_for_exponent_at_least_two
+    (n next a : ℕ)
+    (hn : 1 < n)
+    (ha : 2 ≤ a)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    next < n := by
+  have hpow : 4 ≤ 2 ^ a := by
+    calc
+      4 = 2 ^ 2 := by norm_num
+      _ ≤ 2 ^ a := Nat.pow_le_pow_right (by norm_num : 1 ≤ (2 : ℕ)) ha
+  have hbound : 4 * next ≤ 3 * n + 1 := by
+    calc
+      4 * next ≤ 2 ^ a * next := Nat.mul_le_mul_right next hpow
+      _ = 3 * n + 1 := hstep
+  have hsmall : 3 * n + 1 < 4 * n := by omega
+  have hlt : 4 * next < 4 * n := lt_of_le_of_lt hbound hsmall
+  exact (Nat.mul_lt_mul_left (by norm_num : 0 < 4)).1 hlt
+
+#print axioms accelerated_step_descent_for_exponent_at_least_two
+
 end CollatzSyracuseAudit
