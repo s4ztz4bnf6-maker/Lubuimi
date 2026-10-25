@@ -2244,3 +2244,26 @@ theorem strict_descent_of_offset_budget
 #print axioms strict_descent_of_offset_budget
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+A positive canonical offset makes the strict exponential-gap hypothesis
+redundant: the offset budget itself forces 3^j < 2^A. This packages the
+descent criterion with fewer independent assumptions.
+-/
+theorem strict_descent_of_positive_offset_budget
+    (n0 nj A C j : ℕ)
+    (hidentity : 2 ^ A * nj = 3 ^ j * n0 + C)
+    (hbudget : C + 3 ^ j ≤ 2 ^ A)
+    (hC : 0 < C)
+    (hn0 : 1 < n0) :
+    nj < n0 := by
+  have hpow : 3 ^ j < 2 ^ A := by omega
+  exact strict_descent_of_offset_budget n0 nj A C j
+    hidentity hbudget hpow hn0
+
+#print axioms strict_descent_of_positive_offset_budget
+
+end CollatzSyracuseAudit
