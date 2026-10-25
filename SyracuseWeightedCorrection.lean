@@ -665,6 +665,30 @@ theorem four_valuation_one_steps_force_residue_thirty_one_mod_thirty_two
 
 #print axioms four_valuation_one_steps_force_residue_thirty_one_mod_thirty_two
 
+/--
+Five consecutive exact valuation-one transitions force the initial state to
+63 modulo 64. The proof reuses the four-step theorem on the tail and lifts
+the residue through the first exact transition.
+-/
+theorem five_valuation_one_steps_force_residue_sixty_three_mod_sixty_four
+    (n n1 n2 n3 n4 n5 : ℕ)
+    (hn : n % 2 = 1) (hn1 : n1 % 2 = 1)
+    (hn2 : n2 % 2 = 1) (hn3 : n3 % 2 = 1)
+    (hn4 : n4 % 2 = 1) (hn5 : n5 % 2 = 1)
+    (hstep0 : 2 * n1 = 3 * n + 1)
+    (hstep1 : 2 * n2 = 3 * n1 + 1)
+    (hstep2 : 2 * n3 = 3 * n2 + 1)
+    (hstep3 : 2 * n4 = 3 * n3 + 1)
+    (hstep4 : 2 * n5 = 3 * n4 + 1) :
+    n % 64 = 63 := by
+  have htail :=
+    four_valuation_one_steps_force_residue_thirty_one_mod_thirty_two
+      n1 n2 n3 n4 n5 hn1 hn2 hn3 hn4 hn5 hstep1 hstep2 hstep3 hstep4
+  omega
+
+#print axioms five_valuation_one_steps_force_residue_sixty_three_mod_sixty_four
+
+
 
 
 /--
