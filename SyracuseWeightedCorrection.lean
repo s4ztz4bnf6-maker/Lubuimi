@@ -489,3 +489,38 @@ theorem valuation_four_iff_residue_five_mod_thirty_two
 #print axioms valuation_four_iff_residue_five_mod_thirty_two
 
 end CollatzSyracuseAudit
+
+/--
+Orbit-level local obstruction lemma: for a positive odd state n > 1, an
+odd-to-odd accelerated transition that does not decrease must have valuation
+exactly one, hence starts in the residue class 3 modulo 4.
+
+This is a sharp local classification, not a global frequency bound: it says
+where every potentially non-decreasing step must occur, but does not prove
+that such steps cannot recur often enough to prevent eventual descent.
+-/
+theorem nondecreasing_transition_forces_exponent_one
+    (n next a : ℕ)
+    (hn : 1 < n)
+    (hnodd : n % 2 = 1)
+    (hnextodd : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1)
+    (hnondecrease : n ≤ next) :
+    a = 1 ∧ n % 4 = 3 := by
+  have ha_pos : 0 < a :=
+    positive_exponent_of_odd_transition n next a hnodd hnextodd hstep
+  have ha_lt_two : a < 2 := by
+    by_contra hnot
+    have ha_ge_two : 2 ≤ a := by omega
+    have hdec :=
+      accelerated_step_descent_for_exponent_at_least_two
+        n next a hn ha_ge_two hstep
+    omega
+  have ha : a = 1 := by omega
+  have hstep' : 2 * next = 3 * n + 1 := by
+    simpa [ha] using hstep
+  exact ⟨ha,
+    exponent_one_transition_implies_mod_four_three
+      n next hnodd hnextodd hstep'⟩
+
+#print axioms nondecreasing_transition_forces_exponent_one
