@@ -701,3 +701,23 @@ theorem finite_weighted_variance_nonneg
   exact mul_nonneg (hw_nonneg i hi) (sq_nonneg _)
 
 #print axioms finite_weighted_variance_nonneg
+
+
+/--
+Strict positivity of the weighted interior mass is equivalent to the strict
+variance bound. This isolates the exact non-algebraic obligation needed by
+the BBMST moment route; normalization alone does not prove either side.
+-/
+theorem finite_weighted_interior_mass_pos_iff_variance_bound
+    {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (w a : ι → ℚ)
+    (hw : (∑ i ∈ s, w i) = 1) :
+    0 < (∑ i ∈ s, w i * a i * (1 - a i)) ↔
+      (∑ i ∈ s, w i * a i) *
+        (1 - (∑ i ∈ s, w i * a i)) >
+      (∑ i ∈ s, w i *
+        (a i - (∑ j ∈ s, w j * a j)) ^ 2) := by
+  rw [finite_weighted_variance_identity s w a hw]
+  constructor <;> intro h <;> linarith
+
+#print axioms finite_weighted_interior_mass_pos_iff_variance_bound
