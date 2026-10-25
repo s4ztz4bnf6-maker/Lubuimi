@@ -2154,3 +2154,42 @@ theorem correction_negative_iff_exponent_one (a : ℕ) (ha : 1 ≤ a) :
 #print axioms correction_negative_iff_exponent_one
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- Complete sign classification for positive valuation exponents:
+the correction is positive exactly from exponent three onward. -/
+theorem correction_positive_iff_exponent_ge_three (a : ℕ) (ha : 1 ≤ a) :
+    0 < (2 : ℤ) ^ a - 4 ↔ 3 ≤ a := by
+  constructor
+  · intro hpos
+    by_contra hlt
+    have ha_le : a ≤ 2 := by omega
+    interval_cases a <;> norm_num at *
+  · intro ha3
+    exact positive_correction_of_exponent_ge_three a ha3
+
+/-- Complete trichotomy for every positive valuation exponent. -/
+theorem correction_sign_trichotomy (a : ℕ) (ha : 1 ≤ a) :
+    ((2 : ℤ) ^ a - 4 < 0 ∧ a = 1) ∨
+    ((2 : ℤ) ^ a - 4 = 0 ∧ a = 2) ∨
+    (0 < (2 : ℤ) ^ a - 4 ∧ 3 ≤ a) := by
+  by_cases h1 : a = 1
+  · left
+    subst a
+    norm_num
+  · by_cases h2 : a = 2
+    · right
+      left
+      subst a
+      norm_num
+    · right
+      right
+      have ha3 : 3 ≤ a := by omega
+      exact ⟨positive_correction_of_exponent_ge_three a ha3, ha3⟩
+
+#print axioms correction_positive_iff_exponent_ge_three
+#print axioms correction_sign_trichotomy
+
+end CollatzSyracuseAudit
