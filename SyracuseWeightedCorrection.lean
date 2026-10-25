@@ -602,3 +602,34 @@ theorem valuation_one_run_continues_iff_residue_seven_mod_eight
   exact hnext_mod_four
 
 #print axioms valuation_one_run_continues_iff_residue_seven_mod_eight
+
+
+/--
+Three consecutive exact valuation-one transitions force the initial state
+to be 15 modulo 16. This sharpens the two-step residue constraint and shows
+that each additional valuation-one step imposes a finer 2-adic congruence.
+It is a necessary local condition, not a global bound on run lengths.
+-/
+theorem three_valuation_one_steps_force_residue_fifteen_mod_sixteen
+    (n n1 n2 n3 : ℕ)
+    (hn : n % 2 = 1) (hn1 : n1 % 2 = 1)
+    (hn2 : n2 % 2 = 1) (hn3 : n3 % 2 = 1)
+    (hstep0 : 2 * n1 = 3 * n + 1)
+    (hstep1 : 2 * n2 = 3 * n1 + 1)
+    (hstep2 : 2 * n3 = 3 * n2 + 1) :
+    n % 16 = 15 := by
+  have hfirst :
+      (2 : ℕ) ^ 1 * n1 = 3 * n + 1 := by simpa using hstep0
+  have hsecond :
+      (2 : ℕ) ^ 1 * n2 = 3 * n1 + 1 := by simpa using hstep1
+  have hthird :
+      (2 : ℕ) ^ 1 * n3 = 3 * n2 + 1 := by simpa using hstep2
+  have hpair0 :=
+    (valuation_one_run_continues_iff_residue_seven_mod_eight
+      n n1 n2 1 1 hn hn1 hn2 hfirst hsecond rfl).mp rfl
+  have hpair1 :=
+    (valuation_one_run_continues_iff_residue_seven_mod_eight
+      n1 n2 n3 1 1 hn1 hn2 hn3 hsecond hthird rfl).mp rfl
+  omega
+
+#print axioms three_valuation_one_steps_force_residue_fifteen_mod_sixteen
