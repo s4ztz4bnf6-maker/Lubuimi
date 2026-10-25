@@ -575,3 +575,30 @@ theorem exponent_one_run_closed_form_mod_four
   omega
 
 #print axioms exponent_one_run_closed_form_mod_four
+
+
+/--
+A valuation-one step can be followed by another valuation-one step exactly
+when the current odd state is 7 modulo 8. Indeed, for 2*next = 3*n+1,
+the condition next = 3 (mod 4) is equivalent to n = 7 (mod 8), and the
+next step has exponent one exactly when next = 3 (mod 4).
+This is a local transition constraint, not a bound on the length of such runs.
+-/
+theorem valuation_one_run_continues_iff_residue_seven_mod_eight
+    (n next nextNext a b : ℕ)
+    (hn : n % 2 = 1)
+    (hnext : next % 2 = 1)
+    (hnextNext : nextNext % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1)
+    (hstepNext : 2 ^ b * nextNext = 3 * next + 1)
+    (ha : a = 1) :
+    b = 1 ↔ n % 8 = 7 := by
+  have hnext_mod_four : next % 4 = 3 ↔ n % 8 = 7 := by
+    rw [ha] at hstep
+    norm_num at hstep
+    omega
+  rw [(valuation_one_iff_residue_three_mod_four
+    next nextNext b hnext hnextNext hstepNext)]
+  exact hnext_mod_four
+
+#print axioms valuation_one_run_continues_iff_residue_seven_mod_eight
