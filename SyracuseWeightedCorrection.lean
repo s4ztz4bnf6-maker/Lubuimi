@@ -684,6 +684,10 @@ theorem five_valuation_one_steps_force_residue_sixty_three_mod_sixty_four
   have htail :=
     four_valuation_one_steps_force_residue_thirty_one_mod_thirty_two
       n1 n2 n3 n4 n5 hn1 hn2 hn3 hn4 hn5 hstep1 hstep2 hstep3 hstep4
+  have hn1repr : n1 % 32 + 32 * (n1 / 32) = n1 :=
+    Nat.mod_add_div n1 32
+  have hnrepr : n % 64 + 64 * (n / 64) = n :=
+    Nat.mod_add_div n 64
   omega
 
 #print axioms five_valuation_one_steps_force_residue_sixty_three_mod_sixty_four
