@@ -524,3 +524,31 @@ theorem nondecreasing_transition_forces_exponent_one
       n next hnodd hnextodd hstep'⟩
 
 #print axioms nondecreasing_transition_forces_exponent_one
+
+
+/--
+Every state in the explicit long exponent-one candidate family is odd,
+including the terminal state. This supplies the parity premise for turning
+the already-proved affine transition into an exact odd-to-odd Syracuse step.
+For i < r, the existing mod-four lemma strengthens this to valuation exactly
+one. This is a finite-family construction, not a global-orbit claim.
+-/
+theorem exponent_one_run_closed_form_odd
+    (r i : ℕ) (hi : i ≤ r) :
+    (3 ^ i * 2 ^ (r + 1 - i) - 1) % 2 = 1 := by
+  have hexp : 1 ≤ r + 1 - i := by omega
+  have hpowdiv : 2 ∣ 2 ^ (r + 1 - i) := by
+    have h := Nat.pow_dvd_pow 2 hexp
+    simpa using h
+  have hdiv : 2 ∣ 3 ^ i * 2 ^ (r + 1 - i) := by
+    rcases hpowdiv with ⟨k, hk⟩
+    refine ⟨3 ^ i * k, ?_⟩
+    rw [hk]
+    ring
+  have hmod :
+      (3 ^ i * 2 ^ (r + 1 - i)) % 2 = 0 :=
+    Nat.dvd_iff_mod_eq_zero.mp hdiv
+  have hpos : 0 < 3 ^ i * 2 ^ (r + 1 - i) := by positivity
+  omega
+
+#print axioms exponent_one_run_closed_form_odd
