@@ -2118,3 +2118,39 @@ theorem signedOffsetMargin_pos_succ_of_exponent_ge_three
 #print axioms signedOffsetMargin_pos_succ_of_exponent_ge_three
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- Exponent one contributes the exact negative correction -2 to the
+signed-margin recurrence. This isolates the exceptional valuation case. -/
+theorem correction_eq_neg_two_of_exponent_one :
+    (2 : ℤ) ^ (1 : ℕ) - 4 = -2 := by
+  norm_num
+
+/-- Exponent two contributes no correction to the signed margin. -/
+theorem correction_eq_zero_of_exponent_two :
+    (2 : ℤ) ^ (2 : ℕ) - 4 = 0 := by
+  norm_num
+
+/-- The local correction is negative exactly in the exponent-one case,
+provided the valuation exponent is positive. -/
+theorem correction_negative_iff_exponent_one (a : ℕ) (ha : 1 ≤ a) :
+    (2 : ℤ) ^ a - 4 < 0 ↔ a = 1 := by
+  constructor
+  · intro hneg
+    by_contra hne
+    have ha2 : 2 ≤ a := by omega
+    have hp : (2 : ℤ) ^ 2 ≤ (2 : ℤ) ^ a := by
+      exact_mod_cast (Nat.pow_le_pow_right (by norm_num : 0 < 2) ha2)
+    norm_num at hp
+    omega
+  · intro ha1
+    subst a
+    norm_num
+
+#print axioms correction_eq_neg_two_of_exponent_one
+#print axioms correction_eq_zero_of_exponent_two
+#print axioms correction_negative_iff_exponent_one
+
+end CollatzSyracuseAudit
