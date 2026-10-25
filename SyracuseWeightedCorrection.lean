@@ -508,19 +508,19 @@ theorem nondecreasing_transition_forces_exponent_one
     (hnondecrease : n ≤ next) :
     a = 1 ∧ n % 4 = 3 := by
   have ha_pos : 0 < a :=
-    positive_exponent_of_odd_transition n next a hnodd hnextodd hstep
+    CollatzSyracuseAudit.positive_exponent_of_odd_transition n next a hnodd hnextodd hstep
   have ha_lt_two : a < 2 := by
     by_contra hnot
     have ha_ge_two : 2 ≤ a := by omega
     have hdec :=
-      accelerated_step_descent_for_exponent_at_least_two
+      CollatzSyracuseAudit.accelerated_step_descent_for_exponent_at_least_two
         n next a hn ha_ge_two hstep
     omega
   have ha : a = 1 := by omega
   have hstep' : 2 * next = 3 * n + 1 := by
     simpa [ha] using hstep
   exact ⟨ha,
-    exponent_one_transition_implies_mod_four_three
+    CollatzSyracuseAudit.exponent_one_transition_implies_mod_four_three
       n next hnodd hnextodd hstep'⟩
 
 #print axioms nondecreasing_transition_forces_exponent_one
