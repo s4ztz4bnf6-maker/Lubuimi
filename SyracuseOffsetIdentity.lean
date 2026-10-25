@@ -2057,3 +2057,28 @@ theorem signed_margin_positive_after_run_of_ones_iff
 #print axioms signed_margin_positive_after_run_of_ones_iff
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Sign-preservation lemma for a favorable signed-margin correction. If the
+incoming margin is nonnegative and the exact one-step correction is positive,
+the next margin is strictly positive. This separates the elementary order
+argument from the arithmetic task of proving that a realized valuation gives
+a positive correction.
+-/
+theorem signedOffsetMargin_pos_succ_of_positive_correction
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (n : ℕ)
+    (hD : 0 ≤ signedOffsetMargin A n)
+    (hcorr : 0 < (2 : ℤ) ^ a n - 4) :
+    0 < signedOffsetMargin A (n + 1) := by
+  rw [signedOffsetMargin_succ A a hA n]
+  have hscale : 0 ≤ 3 * signedOffsetMargin A n := by omega
+  nlinarith
+
+#print axioms signedOffsetMargin_pos_succ_of_positive_correction
+
+end CollatzSyracuseAudit
