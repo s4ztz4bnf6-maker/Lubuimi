@@ -2032,3 +2032,28 @@ theorem signed_margin_positive_after_run_of_ones
 
 end CollatzSyracuseAudit
 
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Exact threshold equivalence for a block of valuation-one steps. Positivity of
+the terminal signed margin is equivalent to the incoming margin, amplified
+by 3^r, strictly exceeding the exact accumulated loss. This packages the two
+directional threshold lemmas into one iff; it makes no claim that an orbit
+must satisfy this inequality.
+-/
+theorem signed_margin_positive_after_run_of_ones_iff
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (m r : ℕ)
+    (hone : ∀ i, i < r → a (m + i) = 1) :
+    (0 < signedOffsetMargin A (m + r)) ↔
+      2 * (2 : ℤ) ^ A m * ((3 : ℤ) ^ r - (2 : ℤ) ^ r) <
+        (3 : ℤ) ^ r * signedOffsetMargin A m := by
+  rw [signed_margin_after_run_of_ones A a hA m r hone]
+  omega
+
+#print axioms signed_margin_positive_after_run_of_ones_iff
+
+end CollatzSyracuseAudit
