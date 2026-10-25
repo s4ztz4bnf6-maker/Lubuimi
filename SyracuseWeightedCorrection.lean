@@ -378,4 +378,23 @@ theorem exponent_one_run_closed_form_residue
 
 #print axioms exponent_one_run_closed_form_residue
 
+
+/--
+Exact affine transition identity for the proposed exponent-one run.
+For every proper-prefix index i < r, the closed-form candidates satisfy
+2*n_(i+1) = 3*n_i + 1 when written over the integers. Combined with the
+mod-4 residue lemma above and oddness of the next candidate, this is the
+algebraic core of a long valuation-one run. This identity alone does not
+assert a globally convergent orbit.
+-/
+theorem exponent_one_run_closed_form_transition
+    (r i : ℕ) (hi : i < r) :
+    (2 : ℤ) * ((3 : ℤ) ^ (i + 1) * 2 ^ (r - i) - 1) =
+      3 * ((3 : ℤ) ^ i * 2 ^ (r + 1 - i) - 1) + 1 := by
+  have hexp : r + 1 - i = (r - i) + 1 := by omega
+  rw [hexp, pow_succ, pow_succ]
+  ring
+
+#print axioms exponent_one_run_closed_form_transition
+
 end CollatzSyracuseAudit
