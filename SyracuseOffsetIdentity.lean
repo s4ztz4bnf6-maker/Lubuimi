@@ -1820,3 +1820,40 @@ theorem no_descent_if_cumulative_exponent_le_steps
 #print axioms no_descent_if_cumulative_exponent_le_steps
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Exact-residue characterization of an accelerated step. The congruence
+(3*n+1) mod 2^(a+1) = 2^a is equivalent to writing 3*n+1 as 2^a times
+an odd quotient. This is an exact arithmetic interface, not a claim that
+the exponents along an orbit are independent.
+-/
+theorem exact_exponent_residue_iff_odd_quotient (n a : ℕ) :
+    (3 * n + 1) % 2 ^ (a + 1) = 2 ^ a ↔
+      ∃ next : ℕ, next % 2 = 1 ∧ 2 ^ a * next = 3 * n + 1 := by
+  constructor
+  · intro hres
+    let q := (3 * n + 1) / 2 ^ (a + 1)
+    have hdecomp :
+        (3 * n + 1) % 2 ^ (a + 1) +
+            2 ^ (a + 1) * ((3 * n + 1) / 2 ^ (a + 1)) =
+          3 * n + 1 := Nat.mod_add_div _ _
+    rw [hres, pow_succ] at hdecomp
+    refine ⟨2 * q + 1, ?_⟩
+    constructor
+    · simp
+    · change 2 ^ a * (2 * q + 1) = 3 * n + 1
+      have hfactor :
+          2 ^ a * (2 * q + 1) = 2 ^ a + 2 ^ (a + 1) * q := by
+        rw [pow_succ]
+        ring
+      rw [hfactor]
+      simpa [q] using hdecomp
+  · rintro ⟨next, hodd, hstep⟩
+    exact exact_exponent_residue n next a hodd hstep
+
+#print axioms exact_exponent_residue_iff_odd_quotient
+
+end CollatzSyracuseAudit
