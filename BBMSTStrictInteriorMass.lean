@@ -126,8 +126,10 @@ theorem weighted_interior_mass_ge_delta_cube
   obtain ⟨i, hi, hmassδ, halphaδ, halphaUpper⟩ := hwitness
   have hδ0 : 0 ≤ δ := le_of_lt hδ
   have hδComplement : δ ≤ 1 - alpha i := by linarith
-  have hprod : δ * δ ≤ alpha i * (1 - alpha i) :=
+  have hprod_mul : δ * δ ≤ alpha i * (1 - alpha i) :=
     mul_le_mul halphaδ hδComplement hδ0 (ha0 i hi)
+  have hprod : δ ^ 2 ≤ alpha i * (1 - alpha i) := by
+    simpa [pow_two] using hprod_mul
   have hmassTerm :
       δ ^ 2 * δ ≤ δ ^ 2 * mass i :=
     mul_le_mul_of_nonneg_left hmassδ (sq_nonneg δ)
