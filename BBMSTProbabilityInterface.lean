@@ -474,6 +474,31 @@ end CollatzSyracuseAudit
 
 
 /--
+The incidence complement is exactly the uncovered fraction. This is a finite
+counting identity, not a quantitative lower bound on the uncovered mass.
+-/ 
+theorem predicate_incidence_deficit_eq_uncovered_fraction
+    {Ω : Type*} [DecidableEq Ω]
+    (sample : Finset Ω) (covered : Ω → Prop) [DecidablePred covered]
+    (hnonempty : sample.Nonempty) :
+    1 - ((sample.filter covered).card : ℚ) / (sample.card : ℚ) =
+      ((sample.filter (fun x => ¬ covered x)).card : ℚ) /
+        (sample.card : ℚ) := by
+  have hcard :
+      (sample.filter covered).card +
+          (sample.filter (fun x => ¬ covered x)).card = sample.card := by
+    exact Finset.card_filter_add_card_filter_neg sample covered
+  have hnum :
+      ((sample.filter covered).card : ℚ) +
+          ((sample.filter (fun x => ¬ covered x)).card : ℚ) =
+        (sample.card : ℚ) := by
+    exact_mod_cast hcard
+  have hden : (sample.card : ℚ) ≠ 0 := by
+    exact_mod_cast (Nat.ne_of_gt hnonempty.card_pos)
+  field_simp
+  nlinarith [hnum]
+
+/--
 A uniform deficit threshold is equivalent to a linear-size uncovered set.
 For a finite uniform sample, demanding deficit at least epsilon is exactly
 demanding at least epsilon times the sample cardinality uncovered. This
