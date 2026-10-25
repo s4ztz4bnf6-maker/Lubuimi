@@ -255,3 +255,51 @@ theorem complete_odd_residue_correction_partition
 #print axioms complete_odd_residue_correction_partition
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+The exact valuation-three stratum is the single odd residue class 13 modulo
+16. This refines the existing mod-8 statement (valuation at least three iff
+the input is 5 mod 8) by separating valuation exactly three from valuations
+four and above. It is a local arithmetic classification, not a global
+frequency estimate for Syracuse orbits.
+-/
+theorem valuation_three_iff_residue_thirteen_mod_sixteen
+    (n next a : ℕ)
+    (hn : n % 2 = 1)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    a = 3 ↔ n % 16 = 13 := by
+  constructor
+  · intro ha
+    subst a
+    have hres := exact_exponent_residue n next 3 hnext hstep
+    have hres' : (3 * n + 1) % 16 = 8 := by
+      simpa using hres
+    omega
+  · intro hmod
+    have hmod8 : n % 8 = 5 := by omega
+    have hge : 3 ≤ a :=
+      (valuation_at_least_three_iff_residue_five_mod_eight
+        n next a hn hnext hstep).2 hmod8
+    have hrem : (3 * n + 1) % 16 = 8 := by omega
+    have hnotdiv : ¬ 16 ∣ 3 * n + 1 := by
+      intro hd
+      have hz : (3 * n + 1) % 16 = 0 :=
+        Nat.dvd_iff_mod_eq_zero.mp hd
+      omega
+    have hnotfour : ¬ 4 ≤ a := by
+      intro ha4
+      have hdiv : 16 ∣ 3 * n + 1 := by
+        refine ⟨2 ^ (a - 4) * next, ?_⟩
+        have hexp : a = 4 + (a - 4) := by omega
+        rw [← hstep, hexp, pow_add]
+        ring
+      exact hnotdiv hdiv
+    omega
+
+#print axioms valuation_three_iff_residue_thirteen_mod_sixteen
+
+end CollatzSyracuseAudit
