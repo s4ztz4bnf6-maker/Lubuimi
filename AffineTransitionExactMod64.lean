@@ -117,4 +117,75 @@ theorem mod64_three_or_thirtyfive_two_step_descent_of_residue (n : ℕ)
 
 #print axioms mod64_three_or_thirtyfive_two_step_descent_of_residue
 
+
+/-- Exact two-step formula on the residue class 5 modulo 32. The first
+step removes the fixed factor 16; the second removes the fixed factor 2,
+leaving the normalized residual factor 9*m+2. -/
+theorem mod32_five_two_step_exact (m : ℕ) :
+    syracuse (syracuse (32 * m + 5)) =
+      (9 * m + 2) / 2 ^ v2 (9 * m + 2) := by
+  have hfirst_num : 3 * (32 * m + 5) + 1 = 16 * (6 * m + 1) := by omega
+  have hfirst16 : 16 ∣ 3 * (32 * m + 5) + 1 := by
+    rw [hfirst_num]
+    exact ⟨6 * m + 1, rfl⟩
+  have hfirst32 : ¬ 32 ∣ 3 * (32 * m + 5) + 1 := by
+    rw [hfirst_num]
+    intro h
+    obtain ⟨q, hq⟩ := h
+    omega
+  have hfirst_val : v2 (3 * (32 * m + 5) + 1) = 4 :=
+    v2_eq_four_of_sixteen_not_thirty_two _ (by omega) hfirst16 hfirst32
+  have hfirst : syracuse (32 * m + 5) = 6 * m + 1 := by
+    dsimp [syracuse]
+    rw [hfirst_val, hfirst_num]
+    norm_num
+  rw [hfirst]
+  have hsecond_num : 3 * (6 * m + 1) + 1 = 2 * (9 * m + 2) := by omega
+  have hnonzero : 9 * m + 2 ≠ 0 := by omega
+  have hsecond_val : v2 (3 * (6 * m + 1) + 1) =
+      1 + v2 (9 * m + 2) := by
+    rw [hsecond_num]
+    exact v2_mul_pow_two (9 * m + 2) 1 hnonzero
+  dsimp [syracuse]
+  rw [hsecond_num, hsecond_val, pow_succ]
+  norm_num [Nat.mul_div_mul_left]
+
+#print axioms mod32_five_two_step_exact
+
+/-- Inputs congruent to 5 modulo 32 strictly descend after two accelerated
+steps: the exact output is at most 9*m+2, below 32*m+5. -/
+theorem mod32_five_two_step_descent (m : ℕ) :
+    syracuse (syracuse (32 * m + 5)) < 32 * m + 5 := by
+  rw [mod32_five_two_step_exact]
+  calc
+    (9 * m + 2) / 2 ^ v2 (9 * m + 2) ≤ 9 * m + 2 :=
+      Nat.div_le_self _ _
+    _ < 32 * m + 5 := by omega
+
+#print axioms mod32_five_two_step_descent
+
+/-- Residue-class interface for descent on the class 5 modulo 32. -/
+theorem mod32_five_two_step_descent_of_residue (n : ℕ)
+    (hn : n % 32 = 5) :
+    syracuse (syracuse n) < n := by
+  have hdecomp : n = 32 * (n / 32) + 5 := by omega
+  rw [hdecomp]
+  exact mod32_five_two_step_descent (n / 32)
+
+#print axioms mod32_five_two_step_descent_of_residue
+
+/-- Three explicit odd residue classes modulo 32 guarantee strict descent
+after two accelerated steps: 3, 5, and 19. This is a finite local
+certificate, not a proof that every trajectory reaches these classes. -/
+theorem two_step_descent_three_residue_classes_mod32 (n : ℕ)
+    (hn : n % 32 = 3 ∨ n % 32 = 5 ∨ n % 32 = 19) :
+    syracuse (syracuse n) < n := by
+  rcases hn with h3 | hrest
+  · exact two_step_descent_mod32_three_of_residue n h3
+  rcases hrest with h5 | h19
+  · exact mod32_five_two_step_descent_of_residue n h5
+  · exact two_step_descent_mod32_nineteen_of_residue n h19
+
+#print axioms two_step_descent_three_residue_classes_mod32
+
 end CollatzSyracuseAudit
