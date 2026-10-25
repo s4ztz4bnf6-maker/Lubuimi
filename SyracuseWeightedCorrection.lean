@@ -89,4 +89,42 @@ theorem signedCorrectionTerm_sign
 
 #print axioms signedCorrectionTerm_sign
 
+
+/--
+For an exact odd-to-odd accelerated Syracuse transition, the negative
+valuation-one correction occurs exactly in the residue class 3 modulo 4.
+Conversely, residue class 1 modulo 4 forces valuation at least two. This
+turns the sign split in `signedCorrectionTerm_sign` into an arithmetic
+residue-class test; it is still only a local classification, not a global
+frequency estimate.
+-/
+theorem valuation_one_iff_residue_three_mod_four
+    (n next a : ℕ)
+    (hn : n % 2 = 1)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    a = 1 ↔ n % 4 = 3 := by
+  constructor
+  · intro ha
+    subst a
+    omega
+  · intro hmod
+    have ha_pos : 0 < a :=
+      positive_exponent_of_odd_transition n next a hn hnext hstep
+    by_contra hne
+    have ha_ge_two : 2 ≤ a := by omega
+    have hexp : a = 2 + (a - 2) := by omega
+    have hfactor : 2 ^ a = 4 * 2 ^ (a - 2) := by
+      rw [hexp, pow_add]
+      norm_num
+    have hfour : 4 ∣ 3 * n + 1 := by
+      refine ⟨2 ^ (a - 2) * next, ?_⟩
+      rw [← hstep, hfactor]
+      ring
+    have hzero : (3 * n + 1) % 4 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp hfour
+    omega
+
+#print axioms valuation_one_iff_residue_three_mod_four
+
 end CollatzSyracuseAudit
