@@ -1856,3 +1856,29 @@ theorem exact_exponent_residue_iff_odd_quotient (n a : ℕ) :
 #print axioms exact_exponent_residue_iff_odd_quotient
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Closed form for the canonical affine offset when every accelerated exponent
+is exactly one. In that case A j = j and C k = 3^k - 2^k, so the exact orbit
+identity becomes 2^k * n_k = 3^k * (n_0 + 1) - 2^k. This records why
+arbitrarily long valuation-one blocks can grow and why no fixed-length
+argument based only on the existence of a block can guarantee descent.
+-/
+theorem canonicalOffset_all_one_exponents (k : ℕ) :
+    canonicalOffset (fun j => j) k = 3 ^ k - 2 ^ k := by
+  induction k with
+  | zero =>
+      simp [canonicalOffset]
+  | succ k ih =>
+      have hpow : 2 ^ k ≤ 3 ^ k :=
+        Nat.pow_le_pow_left (by omega : 2 ≤ 3) k
+      simp only [canonicalOffset]
+      rw [ih, pow_succ, pow_succ]
+      omega
+
+#print axioms canonicalOffset_all_one_exponents
+
+end CollatzSyracuseAudit
