@@ -2221,10 +2221,11 @@ theorem strict_descent_of_offset_budget
   have hpos : 0 < n0 - 1 := by omega
   have hmul : p * (n0 - 1) < q * (n0 - 1) :=
     Nat.mul_lt_mul_of_pos_right hpow' hpos
+  have hCbound : C ≤ q := le_trans (Nat.le_add_right C p) hbudget'
   have hsum : C + p * (n0 - 1) < q + q * (n0 - 1) := by
     calc
       C + p * (n0 - 1) ≤ q + p * (n0 - 1) :=
-        Nat.add_le_add_right hbudget' _
+        Nat.add_le_add_right hCbound _
       _ < q + q * (n0 - 1) :=
         Nat.add_lt_add_left hmul q
   have hn0eq : n0 = (n0 - 1) + 1 := by omega
