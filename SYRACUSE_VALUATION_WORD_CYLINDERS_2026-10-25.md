@@ -59,3 +59,28 @@ Keep separate: (i) exact theorem statement, (ii) kernel-check evidence, (iii) so
 6. Run the pinned build, transitive axiom audit, and statement-fidelity review before upgrading evidence status.
 
 The global Collatz conjecture remains open in this project. Compactness of \(\mathbb Z_2\), a mean multiplier, a density-one theorem, or a local positive correction does not imply that every orbit reaches 1.
+
+
+## Strengthened cylinder lemma: exact finite-word realizability
+
+An independent research note on accelerated Collatz itineraries records the following precise statement, which is a strong candidate for our next formal theorem: for every finite word of positive exponents
+\[
+\mathbf a=(a_0,\ldots,a_{m-1}),\qquad K=\sum_{j<m}a_j,
+\]
+there is exactly one odd residue class modulo \(2^{K+1}\) whose positive odd representatives realize that exact valuation prefix. Thus every finite positive exponent word has a positive integer realizer; finite-word realizability is not the obstacle. The difficult issue is controlling infinite trajectories or obtaining a uniform global bound.
+
+Proof sketch for the modular induction: the empty prefix is the odd class modulo 2. Suppose a prefix of total exponent K has affine numerator
+\[
+2^K n_m=3^m n_0+C_m.
+\]
+Appending exponent b requires the exact congruence
+\[
+3n_m+1\equiv 2^b\pmod{2^{b+1}},
+\]
+equivalently
+\[
+3(3^m n_0+C_m)+2^K\equiv 2^{K+b}\pmod{2^{K+b+1}}.
+\]
+The coefficient \(3^{m+1}\) of \(n_0\) is odd and hence invertible modulo \(2^{K+b+1}\). This gives one residue class modulo the new power of two. The proof must also show that this class reduces to the previous cylinder, thereby preserving the whole prefix. Positive representatives exist by adding multiples of the modulus.
+
+This is a mathematical proof sketch, not yet a theorem added to our Lean project. The independent itinerary note is at https://github.com/sneakyweasel/btlab/blob/main/docs/collatz_itinerary_compatibility.md. The next implementation should formalize the congruence induction and prove prefix nesting before connecting cylinders to any global descent claim.
