@@ -75,3 +75,26 @@ Algebraic geometry or a continuous embedding should be pursued only when a concr
 ## Acceptance gates for this update
 
 No global conjecture is claimed solved. Progress is accepted only when the exact theorem statement, source mapping, pinned commit/toolchain, CI status, and transitive axiom output are recorded together. The next productive unit is a kernel-checked local theorem that closes one named obligation without adding a new assumption.
+
+
+## 5. Literature update: AI mathematics, evidence, and partial Collatz results
+
+### What the supplied sources contribute
+
+- Quanta's 3 August 2026 account of the Erdős unit-distance counterexample describes a useful discovery pattern: challenge a plausible conjecture, transfer methods from a distant area (here algebraic number theory and higher-dimensional lattice structure), and then have mathematicians simplify and strengthen the proof. It also documents a false "solved" claim for Erdős 333 that was already solved in 1977. Therefore literature triage is a required proof step, not administrative overhead. Source: https://www.quantamagazine.org/why-the-legendary-erdos-problems-are-falling-to-ai-20260803/
+- The MAA account reports that the unit-distance counterexample's exponent was substantially improved by human mathematicians after the AI discovery. The lesson for both tracks is to separate discovery, optimization, formal checking, and source-faithful exposition. Source: https://maa.org/math-values/ai-solves-an-80-year-old-erdos-problem/
+- ProofAtlas now lists multiple Collatz results with distinct scopes: a positive-density set of starts reaches 1 within an explicit logarithmic number of ordinary steps; a separate natural-density-one result gives logarithmic-time descent; and predecessor-count lower bounds improve from exponent 0.84 to 0.90. The site labels some outcomes accepted and Lean-checked, while others remain candidates with acceptance review open. These are substantial partial/density results, not a proof that every positive integer reaches 1. We should inspect each exact Lean statement and dependency closure before using any result as a lemma. Source: https://www.proofatlas.ai/
+- Thomas Hales's guest post on Tao's blog documents the 2026 Lean soundness-bug incidents, including an illicit Collatz disproof accepted by a defective checker, and emphasizes statement fidelity, human audit, independent implementations, and pinned toolchains. Cross-kernel agreement is risk reduction, not an absolute guarantee. Source: https://terrytao.wordpress.com/2026/10/09/what-mathematicians-should-know-about-the-lean-theorem-proverquestions-of-reliability-and-ai/
+- Tao's 20 October experimental challenge models a productive collaboration pattern: expose the exact claim, cite inherited analytic inputs, publish code and verification outputs, and invite adversarial scrutiny without pretending that formalization replaces mathematical exposition. Source: https://terrytao.wordpress.com/2026/10/20/an-experimental-ai-math-challenge-using-tenth-discriminant-bounds-to-explore-arguments-ruling-out-siegel-zeroes/
+
+### Consequences for the two active projects
+
+**Syracuse / Collatz.** Add a related-work ledger with one row per external theorem: exact statement, iterate convention (ordinary vs accelerated odd steps), density notion, quantitative clock, Lean commit, transitive axioms, and acceptance status. A density theorem must not be converted into universal termination. The current affine-offset equivalence is a finite-prefix criterion; its next mathematical bottleneck remains a non-circular bound on the offset for *realizable* valuation words, or a structural argument excluding all infinite non-descending paths.
+
+**Erdős–Selfridge / BBMST.** Treat the unit-distance counterexample as evidence that unusual algebraic embeddings can be productive, not as a ready-made method for the covering-system problem. Any such transfer must produce a concrete map/invariant that preserves the covering-system hypotheses. The immediate blocker remains source-faithful finite product geometry and the actual hyperplane/fiber moment estimate; scalar normalization and generic finite-sum identities alone do not establish the square-free-moduli theorem.
+
+### Evidence status update
+
+The Collatz offset-margin CI failure exposed a genuine proof-script issue: the reverse implication tried to rewrite a target containing the accumulated offset as though it contained the scale-difference product. The proof has now been changed to use the exact scale identity and monotonicity of addition. The new CI run is pending; do not call this lemma verified until that run completes and its axiom output is checked.
+
+The BBMST scalar weighted-gap PR has a successful CI run under its existing pinned toolchain. The separate Lean 4.35.0 migration compiles the preceding Lean targets, but its final `lake check` step fails because Bubblewrap cannot create the UID map in the hosted runner (`bwrap: setting up uid map: Permission denied`). This is an environment/sandbox failure, not evidence that the theorem is false or that the independent recheck passed. Keep the migration PR open until the recheck is made reproducible or the trust limitation is explicitly resolved.
