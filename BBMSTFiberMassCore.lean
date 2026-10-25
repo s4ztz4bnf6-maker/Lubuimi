@@ -626,3 +626,61 @@ theorem two_point_mean_does_not_force_positive_interior_mass :
   norm_num
 
 #print axioms two_point_mean_does_not_force_positive_interior_mass
+
+
+/--
+Finite weighted variance identity over rational proportions. If the weights
+sum to one, then the weighted interior mass is mean*(1-mean) minus the
+weighted variance. This is an algebraic identity only; it does not assert
+that the variance is small enough to make the interior mass positive.
+-/
+theorem finite_weighted_variance_identity
+    {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (w a : ι → ℚ)
+    (hw : (∑ i ∈ s, w i) = 1) :
+    (∑ i ∈ s, w i * a i * (1 - a i)) =
+      (∑ i ∈ s, w i * a i) *
+        (1 - (∑ i ∈ s, w i * a i)) -
+      (∑ i ∈ s, w i * (a i - (∑ j ∈ s, w j * a j)) ^ 2) := by
+  classical
+  let μ : ℚ := ∑ i ∈ s, w i * a i
+  have hmean : (∑ i ∈ s, w i * a i) = μ := rfl
+  have hvariance :
+      (∑ i ∈ s, w i * (a i - μ) ^ 2) =
+        (∑ i ∈ s, w i * (a i) ^ 2) - μ ^ 2 := by
+    calc
+      (∑ i ∈ s, w i * (a i - μ) ^ 2)
+          = (∑ i ∈ s, (w i * (a i) ^ 2 - 2 * μ * (w i * a i) +
+              w i * μ ^ 2)) := by
+                apply Finset.sum_congr rfl
+                intro i hi
+                ring
+      _ = (∑ i ∈ s, w i * (a i) ^ 2) -
+            2 * μ * (∑ i ∈ s, w i * a i) +
+            μ ^ 2 * (∑ i ∈ s, w i) := by
+              simp_rw [Finset.sum_add_distrib, Finset.sum_sub_distrib]
+              simp_rw [← Finset.mul_sum]
+              ring
+      _ = (∑ i ∈ s, w i * (a i) ^ 2) - μ ^ 2 := by
+              rw [hw, hmean]
+              dsimp [μ]
+              ring
+  calc
+    (∑ i ∈ s, w i * a i * (1 - a i))
+        = μ - (∑ i ∈ s, w i * (a i) ^ 2) := by
+            rw [← Finset.sum_sub_distrib]
+            simp_rw [mul_sub]
+            simp_rw [Finset.sum_sub_distrib]
+            dsimp [μ]
+            ring
+    _ = μ * (1 - μ) - (∑ i ∈ s, w i * (a i - μ) ^ 2) := by
+          rw [hvariance]
+          rw [hw]
+          dsimp [μ]
+          ring
+    _ = (∑ i ∈ s, w i * a i) *
+          (1 - (∑ i ∈ s, w i * a i)) -
+        (∑ i ∈ s, w i * (a i - (∑ j ∈ s, w j * a j)) ^ 2) := by
+          dsimp [μ]
+
+#print axioms finite_weighted_variance_identity
