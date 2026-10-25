@@ -688,7 +688,6 @@ theorem finite_weighted_variance_identity
                   _ = μ ^ 2 * (∑ i ∈ s, w i) := by
                         rw [← Finset.mul_sum]
               rw [hcross, hsquare, hw, hmean]
-              ring_nf
   calc
     (∑ i ∈ s, w i * a i * (1 - a i)) =
         (∑ i ∈ s, w i * a i) -
