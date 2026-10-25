@@ -2306,3 +2306,49 @@ theorem signed_margin_after_run_of_twos
 #print axioms signed_margin_after_run_of_twos
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Finite weighted expansion of the signed-margin cocycle. This is an exact
+algebraic identity for every exponent sequence satisfying the cumulative
+exponent recurrence; it does not assume that the sequence is realizable by a
+Syracuse orbit and does not assert positivity of the margin.
+The summand at index j is weighted by the number of later steps.
+-/
+theorem signed_margin_weighted_sum_expansion
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (N : ℕ) :
+    signedOffsetMargin A N =
+      (3 : ℤ) ^ N * signedOffsetMargin A 0 +
+        ∑ j ∈ Finset.range N,
+          (3 : ℤ) ^ (N - (j + 1)) *
+            (2 : ℤ) ^ A j * ((2 : ℤ) ^ a j - 4) := by
+  induction N with
+  | zero =>
+      simp
+  | succ N ih =>
+      rw [signedOffsetMargin_succ A a hA N, ih]
+      rw [Finset.sum_range_succ]
+      have hsum :
+          (∑ j ∈ Finset.range N,
+            (3 : ℤ) ^ ((N + 1) - (j + 1)) *
+              (2 : ℤ) ^ A j * ((2 : ℤ) ^ a j - 4)) =
+          3 * (∑ j ∈ Finset.range N,
+            (3 : ℤ) ^ (N - (j + 1)) *
+              (2 : ℤ) ^ A j * ((2 : ℤ) ^ a j - 4)) := by
+        rw [Finset.mul_sum]
+        apply Finset.sum_congr rfl
+        intro j hj
+        have hj' : j < N := Finset.mem_range.mp hj
+        have hexp : (N + 1) - (j + 1) = (N - (j + 1)) + 1 := by omega
+        rw [hexp, pow_succ]
+        ring
+      rw [hsum, pow_succ]
+      ring
+
+#print axioms signed_margin_weighted_sum_expansion
+
+end CollatzSyracuseAudit
