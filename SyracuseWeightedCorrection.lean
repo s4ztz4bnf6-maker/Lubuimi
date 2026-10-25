@@ -278,4 +278,35 @@ theorem accelerated_step_descent_iff
 
 #print axioms accelerated_step_descent_iff
 
+
+/--
+If the current and next Syracuse states are positive odd integers and the
+valuation is at least three, the accelerated transition strictly descends.
+This is a local corollary of the exact transition equation, not a statement
+about how often such valuations occur.
+-/
+theorem accelerated_step_descent_for_large_exponent
+    (n next a : ℕ)
+    (hn : 0 < n)
+    (hnext : next % 2 = 1)
+    (ha : 3 ≤ a)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    next < n := by
+  have hpow : 8 ≤ 2 ^ a := by
+    by_cases h : a = 3
+    · subst a
+      norm_num
+    · have hlt : 3 < a := by omega
+      have hltpow : 2 ^ 3 < 2 ^ a :=
+        Nat.pow_lt_pow_right (by norm_num : 1 < (2 : ℕ)) hlt
+      omega
+  have hbound : 8 * next ≤ 3 * n + 1 := by
+    calc
+      8 * next ≤ 2 ^ a * next := Nat.mul_le_mul_right next hpow
+      _ = 3 * n + 1 := hstep
+  have hnext_pos : 0 < next := by omega
+  nlinarith
+
+#print axioms accelerated_step_descent_for_large_exponent
+
 end CollatzSyracuseAudit
