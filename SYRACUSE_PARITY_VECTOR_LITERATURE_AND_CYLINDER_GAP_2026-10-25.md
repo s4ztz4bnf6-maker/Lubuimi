@@ -63,3 +63,25 @@ A Lean formalization should prove (i) the affine identity by induction,
 (ii) equivalence between exact valuations and the odd-numerator congruences,
 and (iii) uniqueness/nesting of the cylinder residue. It must not infer
 that density-zero exceptional paths contain no positive integers.
+
+
+## Topological audit: why compactness does not yield a global sink (2026-10-25)
+
+Let x_*=-1/3 in Z_2. On odd x≠x_*, the accelerated map
+T(x)=(3x+1)/2^{v_2(3x+1)} is defined by valuation strata. Each fixed-valuation
+stratum is a clopen residue-class difference, and T is continuous on that
+stratum. But there is no continuous extension to x_*.
+
+Indeed, for every odd 2-adic u and every k≥1, x_k=x_*+2^k u tends to x_*,
+while 3x_k+1=3·2^k u, so v_2(3x_k+1)=k and T(x_k)=3u. Choosing two distinct
+odd u,v gives two constant output subsequences 3u and 3v, hence no unique
+limit at x_*. This is a concrete obstruction to the naive plan of treating
+the accelerated map as a globally continuous self-map of compact Z_2.
+
+Research consequence: use a stratified / inducing formulation, with valuation
+cylinders as clopen branches and an explicit treatment of the singular point,
+rather than assuming a global continuous flow. Even a valid extension or
+compact dynamical model would not by itself imply that every positive integer
+converges to 1; the embedding and the desired orbit property must be proved.
+This is a mathematical observation, not a Lean-checked theorem in the current
+branch.
