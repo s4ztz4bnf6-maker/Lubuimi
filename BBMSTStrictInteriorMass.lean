@@ -159,3 +159,64 @@ theorem weighted_interior_mass_ge_delta_cube
 #print axioms weighted_interior_mass_ge_delta_cube
 
 end BBMSTStrictInteriorMass
+
+
+namespace BBMSTStrictInteriorMass
+
+/--
+Sharper quantitative interior-mass bound. On the interval δ ≤ α ≤ 1−δ,
+the exact factorization
+  α(1−α) − δ(1−δ) = (α−δ)(1−α−δ)
+shows α(1−α) ≥ δ(1−δ). Thus a fiber of mass at least δ contributes
+at least δ²(1−δ), improving the coarser δ³ bound whenever 0 < δ < 1/2.
+The geometric obligation to produce this fiber is unchanged.
+-/
+theorem weighted_interior_mass_ge_delta_sq_one_sub_delta
+    {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (mass alpha : ι → ℚ) (δ : ℚ)
+    (hδ : 0 < δ)
+    (hmass : ∀ i ∈ s, 0 ≤ mass i)
+    (ha0 : ∀ i ∈ s, 0 ≤ alpha i)
+    (ha1 : ∀ i ∈ s, alpha i ≤ 1)
+    (hwitness : ∃ i ∈ s,
+      δ ≤ mass i ∧ δ ≤ alpha i ∧ alpha i ≤ 1 - δ) :
+    δ ^ 2 * (1 - δ) ≤
+      ∑ i ∈ s, alpha i * (1 - alpha i) * mass i := by
+  obtain ⟨i, hi, hmassδ, halphaδ, halphaUpper⟩ := hwitness
+  have hproduct : δ * (1 - δ) ≤ alpha i * (1 - alpha i) := by
+    have hleft : 0 ≤ alpha i - δ := sub_nonneg.mpr halphaδ
+    have hright : 0 ≤ 1 - alpha i - δ := by linarith
+    nlinarith [mul_nonneg hleft hright]
+  have hproduct_nonneg : 0 ≤ alpha i * (1 - alpha i) :=
+    mul_nonneg (ha0 i hi) (sub_nonneg.mpr (ha1 i hi))
+  have hterm1 :
+      δ * (δ * (1 - δ)) ≤ δ * (alpha i * (1 - alpha i)) :=
+    mul_le_mul_of_nonneg_left hproduct (le_of_lt hδ)
+  have hterm2 :
+      δ * (alpha i * (1 - alpha i)) ≤
+        mass i * (alpha i * (1 - alpha i)) :=
+    mul_le_mul_of_nonneg_right hmassδ hproduct_nonneg
+  have hterm :
+      δ ^ 2 * (1 - δ) ≤ alpha i * (1 - alpha i) * mass i := by
+    calc
+      δ ^ 2 * (1 - δ) = δ * (δ * (1 - δ)) := by ring
+      _ ≤ δ * (alpha i * (1 - alpha i)) := hterm1
+      _ ≤ mass i * (alpha i * (1 - alpha i)) := hterm2
+      _ = alpha i * (1 - alpha i) * mass i := by ring
+  let f : ι → ℚ := fun j => alpha j * (1 - alpha j) * mass j
+  have hnonneg : ∀ j ∈ s, 0 ≤ f j := by
+    intro j hj
+    dsimp [f]
+    exact mul_nonneg
+      (mul_nonneg (ha0 j hj) (sub_nonneg.mpr (ha1 j hj)))
+      (hmass j hj)
+  have hle : f i ≤ ∑ j ∈ s, f j :=
+    Finset.single_le_sum (fun j hj => hnonneg j hj) hi
+  have hbound :
+      δ ^ 2 * (1 - δ) ≤ ∑ j ∈ s, f j :=
+    le_trans hterm hle
+  simpa [f] using hbound
+
+#print axioms weighted_interior_mass_ge_delta_sq_one_sub_delta
+
+end BBMSTStrictInteriorMass
