@@ -2087,3 +2087,34 @@ theorem signedOffsetMargin_pos_succ_of_positive_correction
 #print axioms signedOffsetMargin_pos_succ_of_positive_correction
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- Any valuation exponent at least three gives a strictly positive local
+correction in the signed-margin recurrence. This is an arithmetic fact only;
+it does not assert that such exponents occur often enough along every orbit. -/
+theorem positive_correction_of_exponent_ge_three
+    (a : ℕ) (ha : 3 ≤ a) :
+    0 < (2 : ℤ) ^ a - 4 := by
+  have hp : (2 : ℤ) ^ 3 ≤ (2 : ℤ) ^ a := by
+    exact_mod_cast (Nat.pow_le_pow_right (by omega : 2 ≤ 2) ha)
+  norm_num at hp ⊢
+  omega
+
+/-- Explicit valuation-to-margin bridge: a nonnegative incoming margin stays
+strictly positive after any step whose certified exponent is at least three. -/
+theorem signedOffsetMargin_pos_succ_of_exponent_ge_three
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (n : ℕ)
+    (hD : 0 ≤ signedOffsetMargin A n)
+    (ha : 3 ≤ a n) :
+    0 < signedOffsetMargin A (n + 1) :=
+  signedOffsetMargin_pos_succ_of_positive_correction A a hA n hD
+    (positive_correction_of_exponent_ge_three (a n) ha)
+
+#print axioms positive_correction_of_exponent_ge_three
+#print axioms signedOffsetMargin_pos_succ_of_exponent_ge_three
+
+end CollatzSyracuseAudit
