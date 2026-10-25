@@ -103,4 +103,18 @@ theorem mod64_three_two_step_descent_of_residue (n : ℕ)
 #print axioms CollatzSyracuseAudit.mod64_thirtyfive_second_numerator_factor32
 #print axioms CollatzSyracuseAudit.mod64_thirtyfive_first_step_exact
 
+
+/-- Combined finite residue certificate: inputs congruent to either 3 or 35
+modulo 64 strictly descend after two accelerated Syracuse steps. This joins
+two exact cylinders into one reusable local criterion; it is not a global
+descent theorem because most residue classes are not covered. -/
+theorem mod64_three_or_thirtyfive_two_step_descent_of_residue (n : ℕ)
+    (hn : n % 64 = 3 ∨ n % 64 = 35) :
+    syracuse (syracuse n) < n := by
+  rcases hn with h3 | h35
+  · exact mod64_three_two_step_descent_of_residue n h3
+  · exact mod64_thirtyfive_two_step_descent_of_residue n h35
+
+#print axioms mod64_three_or_thirtyfive_two_step_descent_of_residue
+
 end CollatzSyracuseAudit
