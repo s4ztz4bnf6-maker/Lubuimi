@@ -28,6 +28,32 @@ Equivalently, since Y_j is positive, the exact valuation condition can be writte
 ]
 This is the useful finite arithmetic criterion: it checks the actual valuation at every step, not merely a divisibility condition. It also forces the next quotient n_{j+1} to be odd. A Lean development should first formalize this criterion for finite words and prove both directions against the recursive Syracuse transition.
 
+## 1A. Stronger equivalent test: one terminal congruence
+
+The step-by-step valuation test above can be compressed to a single congruence. Let
+\[
+S=A_N=\sum_{j<N}a_j,\qquad
+C_N=\sum_{j=0}^{N-1}3^{N-1-j}2^{A_j},\qquad
+X_N=3^N n_0+C_N.
+\]
+For a positive odd start and a finite word of positive exponents, the word is realized exactly if and only if
+\[
+X_N\equiv 2^S\pmod {2^{S+1}}.
+\]
+Equivalently, the terminal affine numerator has exact 2-adic valuation S. This is stronger as a *formalization interface* than checking each intermediate valuation independently: one terminal arithmetic certificate characterizes the whole finite word.
+
+Why the compression is valid: for each prefix length j, expand the terminal numerator into the prefix numerator plus the suffix contribution,
+\[
+X_N=3^{N-j}X_j+2^{A_j}R_j,
+\]
+where the suffix coefficient R_j is odd. If the terminal congruence holds, reduce modulo 2^{A_j+1}. Since the remaining exponent sum S-A_j is positive whenever j<N, the terminal target is 0 modulo 2^{A_j+1}; the oddness of 3^{N-j} and R_j then forces
+\[
+X_j\equiv 2^{A_j}\pmod {2^{A_j+1}}.
+\]
+Thus every prefix has exactly the prescribed accumulated valuation, not merely the final one. Conversely, if every step has the prescribed exact exponent, the block identity gives X_N=2^S n_N with n_N odd, which is precisely the terminal congruence.
+
+This should be formalized as a separate Lean theorem after the recurrence identities are packaged into a finite-word structure. It is a finite arithmetic characterization only; it does not show that the exponent sums grow fast enough to force descent, and it does not prove the universal conjecture.
+
 ## 2. Important correction: no growing forced exponent after a long run of ones
 
 Do **not** assert a local theorem of the form “after k consecutive exponents equal to 1, the next exponent must be at least Ψ(k), where Ψ(k) grows.” That assertion is false.
