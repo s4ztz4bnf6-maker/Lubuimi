@@ -684,3 +684,20 @@ theorem finite_weighted_variance_identity
           dsimp [μ]
 
 #print axioms finite_weighted_variance_identity
+
+
+/--
+Nonnegativity of the weighted variance follows from pointwise nonnegative
+weights. This is a separate obligation from the algebraic variance identity:
+normalization alone does not imply nonnegativity.
+-/
+theorem finite_weighted_variance_nonneg
+    {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (w a : ι → ℚ)
+    (hw_nonneg : ∀ i ∈ s, 0 ≤ w i) :
+    0 ≤ ∑ i ∈ s, w i * (a i - (∑ j ∈ s, w j * a j)) ^ 2 := by
+  apply Finset.sum_nonneg
+  intro i hi
+  exact mul_nonneg (hw_nonneg i hi) (sq_nonneg _)
+
+#print axioms finite_weighted_variance_nonneg
