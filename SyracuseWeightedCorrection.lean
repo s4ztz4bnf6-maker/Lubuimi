@@ -254,4 +254,28 @@ theorem complete_odd_residue_correction_partition
 
 #print axioms complete_odd_residue_correction_partition
 
+
+/--
+Exact descent criterion for one accelerated Syracuse transition.
+This isolates the order-theoretic condition from any global orbit argument:
+the next odd state is smaller exactly when 3*n+1 is smaller than 2^a*n.
+No residue-frequency or global-convergence claim is included.
+-/
+theorem accelerated_step_descent_iff
+    (n next a : ℕ)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    next < n ↔ 3 * n + 1 < 2 ^ a * n := by
+  have ha : 0 < 2 ^ a := by positivity
+  constructor
+  · intro h
+    have hmul : 2 ^ a * next < 2 ^ a * n :=
+      (Nat.mul_lt_mul_left ha).2 h
+    simpa [hstep] using hmul
+  · intro h
+    have hmul : 2 ^ a * next < 2 ^ a * n := by
+      simpa [hstep] using h
+    exact (Nat.mul_lt_mul_left ha).1 hmul
+
+#print axioms accelerated_step_descent_iff
+
 end CollatzSyracuseAudit
