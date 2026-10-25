@@ -2347,7 +2347,8 @@ theorem signed_margin_weighted_sum_expansion
         rw [hexp, pow_succ]
         ring
       rw [hsum, pow_succ]
-      ring
+      simp
+      ring_nf
 
 #print axioms signed_margin_weighted_sum_expansion
 
