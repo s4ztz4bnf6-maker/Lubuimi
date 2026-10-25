@@ -71,7 +71,7 @@ theorem strict_descent_forces_multiplicative_budget
     omega
   have hmul : 3 ^ r * n₀ < 2 ^ A * n₀ :=
     lt_of_le_of_lt hlower hstep
-  exact (Nat.mul_lt_mul_right n₀).mp hmul
+  exact (Nat.mul_lt_mul_right hn₀).mp hmul
 
 /-- Re-express the necessary block budget in terms of valuation excess E,
 where A = r + E. This is an exact natural-number inequality; no logarithmic
