@@ -24,7 +24,14 @@ Strict descent is equivalent to
 n_r<n_0 iff 3^r n_0+C_r<2^{A_r}n_0.
 The identity is formalizable from certified transitions; the difficult global obligation is to prove this margin on a sequence of blocks for every relevant trajectory.
 
-A sufficient bound should be derived for C_r relative to 2^{A_r}; do not infer descent merely from A_r>r, because the offset term C_r remains.
+The recurrence gives an exact normalized-offset bound. Since each future valuation is at least one, A_j <= A_r-(r-j). Hence
+C_r/2^{A_r} = sum_{j<r} 3^{r-1-j} 2^{A_j-A_r}
+<= sum_{k=0}^{r-1} 3^k/2^{k+1} = (3/2)^r-1.
+If A_r >= lambda*r with log_2(3)<lambda<2, put q=3/(2^lambda)<1. Then
+n_r/n_0 <= q^r + ((3/2)^r-1)/n_0.
+Thus the explicit sufficient condition
+n_0 > ((3/2)^r-1)/(1-q^r)
+implies n_r<n_0. This is a valid block descent criterion under the stated exponent budget. It is not universal: for fixed r the threshold grows with r, and the density estimate does not guarantee that every orbit supplies a block satisfying the budget at a useful scale.
 
 ## 4. Formal next steps
 1. Formalize exact cylinder classification for finite valuation words, including necessity and sufficiency.
