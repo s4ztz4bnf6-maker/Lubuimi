@@ -334,4 +334,20 @@ theorem accelerated_step_descent_for_exponent_at_least_two
 
 #print axioms accelerated_step_descent_for_exponent_at_least_two
 
+
+/--
+If an odd Syracuse state takes an exponent-one step and the next state is
+also odd, then the current state is 3 modulo 4. This makes the locally
+non-decreasing branch explicit at the residue-class level.
+-/ 
+theorem exponent_one_transition_implies_mod_four_three
+    (n next : ℕ)
+    (hn : n % 2 = 1)
+    (hnext : next % 2 = 1)
+    (hstep : 2 * next = 3 * n + 1) :
+    n % 4 = 3 := by
+  omega
+
+#print axioms exponent_one_transition_implies_mod_four_three
+
 end CollatzSyracuseAudit
