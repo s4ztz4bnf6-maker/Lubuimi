@@ -59,3 +59,16 @@ Formalize in Lean, in this order:
 5. only then, a measure-preservation statement and the geometric distribution of valuations.
 
 The genuine arithmetic obstacle remains: obtain a deterministic constraint that distinguishes exponent sequences of positive-integer orbits from arbitrary 2-adic sequences strongly enough to prove descent or exclude nontrivial cycles. Do not replace that obligation with negative average drift.
+
+
+## 5. Measure-preservation check (mathematical derivation)
+
+On the branch with exponent a, write x = r_a + 2^(a+1)z, where r_a is its unique odd residue. Then
+\[
+T(x)=\frac{3r_a+1}{2^a}+6z.
+\]
+The constant term is odd and multiplication by 3 is a unit in \(\mathbb Z_2\), so as z ranges with Haar measure, this expression is Haar-uniform on the odd 2-adic integers. Thus each branch, conditional on its exponent, maps normalized branch measure to normalized Haar measure on the odd domain. Since branch a has weight 2^(-a) and these weights sum to one, the accelerated map preserves the normalized Haar measure on odd 2-adic integers.
+
+Consequently, under Haar-random initial data, successive exponent labels are independent with distribution \(\Pr(a=j)=2^{-j}\): after any specified finite prefix, the image again has normalized Haar distribution. The strong law then gives average exponent 2 almost surely and negative asymptotic logarithmic multiplier \(\log(3/4)\) in the idealized multiplicative model.
+
+This remains an almost-sure 2-adic statement. It does not imply that every positive integer orbit descends, and the additive +1 term and the natural-integer embedding must be handled for a universal theorem.
