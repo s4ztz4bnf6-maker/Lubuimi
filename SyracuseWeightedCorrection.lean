@@ -374,7 +374,8 @@ theorem exponent_one_run_closed_form_residue
       _ = 4 * (3 ^ i * k) := by norm_num [pow_succ]; ring
   have hmod : (3 ^ i * 2 ^ (r + 1 - i)) % 4 = 0 :=
     Nat.dvd_iff_mod_eq_zero.mp hdiv
-  omega
+  rw [Nat.sub_mod, hmod]
+  norm_num
 
 #print axioms exponent_one_run_closed_form_residue
 
