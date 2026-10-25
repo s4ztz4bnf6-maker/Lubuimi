@@ -402,7 +402,7 @@ theorem exponent_one_run_closed_form_transition
   have hpow2 : 2 ^ ((r - i) + 1) = 2 ^ (r - i) * 2 := by rw [pow_succ]
   rw [hpow3, hpow2]
   let z : ℕ := 3 ^ i * 2 ^ (r - i)
-  have hleft : 3 ^ i * 3 * (2 ^ (r - i) * 2) = 6 * z := by
+  have hleft : 3 ^ i * 3 * 2 ^ (r - i) = 3 * z := by
     dsimp [z]
     ring
   have hright : 3 ^ i * (2 ^ (r - i) * 2) = 2 * z := by
