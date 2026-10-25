@@ -1790,4 +1790,33 @@ theorem terminal_offset_residue
 
 #print axioms terminal_offset_residue
 
+/--
+Necessary obstruction to descent: if the accumulated exponent A is no larger
+than the number k of accelerated odd steps, the exact affine identity forces
+the terminal iterate to be at least the initial iterate. Since the certified
+odd-step model already gives A ≥ k, this isolates the equality case A = k:
+a trajectory with exponent one at every step cannot descend. This is a
+finite-prefix obstruction only, not a global Collatz theorem.
+-/
+theorem no_descent_if_cumulative_exponent_le_steps
+    (n₀ nₖ A C k : ℕ)
+    (hn₀ : 0 < n₀)
+    (hA : A ≤ k)
+    (hoffset : 2 ^ A * nₖ = 3 ^ k * n₀ + C) :
+    n₀ ≤ nₖ := by
+  by_contra hnot
+  have hlt : nₖ < n₀ := by omega
+  have hprod : 2 ^ A * nₖ < 2 ^ A * n₀ :=
+    Nat.mul_lt_mul_of_pos_left hlt (pow_pos (by omega : 0 < (2 : ℕ)) A)
+  have hpow₂ : 2 ^ A ≤ 2 ^ k :=
+    Nat.pow_le_pow_right (by omega : 1 ≤ (2 : ℕ)) hA
+  have hpow₃ : 2 ^ k ≤ 3 ^ k :=
+    Nat.pow_le_pow_left (by omega : 2 ≤ 3) k
+  have hscale : 2 ^ A * n₀ ≤ 3 ^ k * n₀ :=
+    Nat.mul_le_mul_right n₀ (le_trans hpow₂ hpow₃)
+  rw [hoffset] at hprod
+  omega
+
+#print axioms no_descent_if_cumulative_exponent_le_steps
+
 end CollatzSyracuseAudit
