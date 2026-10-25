@@ -721,3 +721,35 @@ theorem finite_weighted_interior_mass_pos_iff_variance_bound
   constructor <;> intro h <;> linarith
 
 #print axioms finite_weighted_interior_mass_pos_iff_variance_bound
+
+
+/--
+A direct sufficient condition for positive weighted interior mass: all
+weights are nonnegative, all proportions lie in [0,1], and at least one
+positive-weight point has a proportion strictly between 0 and 1.
+This avoids the variance reformulation when the geometric argument can
+directly exhibit one interior fiber of positive mass.
+-/
+theorem finite_weighted_interior_mass_pos_of_interior_point
+    {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (w a : ι → ℚ)
+    (hw : ∀ i ∈ s, 0 ≤ w i)
+    (ha0 : ∀ i ∈ s, 0 ≤ a i)
+    (ha1 : ∀ i ∈ s, a i ≤ 1)
+    (i : ι) (hi : i ∈ s)
+    (hwi : 0 < w i) (hai0 : 0 < a i) (hai1 : a i < 1) :
+    0 < ∑ j ∈ s, w j * a j * (1 - a j) := by
+  have hterm_nonneg : ∀ j ∈ s, 0 ≤ w j * a j * (1 - a j) := by
+    intro j hj
+    exact mul_nonneg
+      (mul_nonneg (hw j hj) (ha0 j hj))
+      (sub_nonneg.mpr (ha1 j hj))
+  have hterm_pos : 0 < w i * a i * (1 - a i) :=
+    mul_pos (mul_pos hwi hai0) (sub_pos.mpr hai1)
+  have hle :
+      w i * a i * (1 - a i) ≤
+        ∑ j ∈ s, w j * a j * (1 - a j) :=
+    Finset.single_le_sum hterm_nonneg hi
+  exact lt_of_lt_of_le hterm_pos hle
+
+#print axioms finite_weighted_interior_mass_pos_of_interior_point
