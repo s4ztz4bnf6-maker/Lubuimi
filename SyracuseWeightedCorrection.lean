@@ -402,7 +402,7 @@ theorem exponent_one_run_closed_form_transition
   have hpow2 : 2 ^ ((r - i) + 1) = 2 ^ (r - i) * 2 := by rw [pow_succ]
   rw [hpow3, hpow2]
   let z : ℕ := 3 ^ i * 2 ^ (r - i)
-  have hleft : 3 ^ i * 3 * 2 ^ (r - i) = 3 * z := by
+  have hleft : 3 ^ i * 3 * (2 ^ (r - i) * 2) = 6 * z := by
     dsimp [z]
     ring
   have hright : 3 ^ i * (2 ^ (r - i) * 2) = 2 * z := by
@@ -670,6 +670,7 @@ Five consecutive exact valuation-one transitions force the initial state to
 63 modulo 64. The proof reuses the four-step theorem on the tail and lifts
 the residue through the first exact transition.
 -/
+set_option maxHeartbeats 0 in
 theorem five_valuation_one_steps_force_residue_sixty_three_mod_sixty_four
     (n n1 n2 n3 n4 n5 : ℕ)
     (hn : n % 2 = 1) (hn1 : n1 % 2 = 1)
