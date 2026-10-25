@@ -1,6 +1,6 @@
 import SyracuseOffsetIdentity
 
-/-!
+/-
 # Weighted expansion of the Syracuse block correction
 
 The signed margin recurrence has a local correction
@@ -52,6 +52,7 @@ theorem signedOffsetBlockCorrection_eq_weighted_sum
         rw [hpow, pow_succ]
         ring
       rw [hsum]
+      rfl
 
 #print axioms signedOffsetBlockCorrection_eq_weighted_sum
 
@@ -73,7 +74,6 @@ theorem signedCorrectionTerm_sign
     have hpos : 0 < (2 : ℤ) ^ A (m + j) :=
       pow_pos (by norm_num : (0 : ℤ) < 2) _
     norm_num
-    nlinarith
   constructor
   · intro ha
     unfold signedCorrectionTerm
