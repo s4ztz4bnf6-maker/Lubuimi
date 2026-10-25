@@ -293,13 +293,10 @@ theorem accelerated_step_descent_for_large_exponent
     (hstep : 2 ^ a * next = 3 * n + 1) :
     next < n := by
   have hpow : 8 ≤ 2 ^ a := by
-    by_cases h : a = 3
-    · subst a
-      norm_num
-    · have hlt : 3 < a := by omega
-      have hltpow : 2 ^ 3 < 2 ^ a :=
-        Nat.pow_lt_pow_right (by norm_num : 1 < (2 : ℕ)) hlt
-      omega
+    have hpow' : 2 ^ 3 ≤ 2 ^ a :=
+      Nat.pow_le_pow_right (by norm_num : 1 ≤ (2 : ℕ)) ha
+    norm_num at hpow'
+    exact hpow'
   have hbound : 8 * next ≤ 3 * n + 1 := by
     calc
       8 * next ≤ 2 ^ a * next := Nat.mul_le_mul_right next hpow
