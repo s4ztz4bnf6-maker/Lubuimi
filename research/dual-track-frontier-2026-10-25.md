@@ -50,9 +50,19 @@ The following residue facts are elementary and should be treated as local transi
 
 This exposes the real bottleneck: prove that the expanding 3 mod 4 transitions cannot persist in a way that defeats later powers-of-two removal. Merely embedding the map in ℤ₂ does not imply convergence to a global sink; the usual 2-adic extension is continuous for the non-accelerated parity map, but 2-adic closeness does not encode ordinary-size descent on positive integers.
 
-### A sharper proof target: realized parity-word cocycle
+### Exact affine cocycle for a realized orbit segment
 
-For an odd orbit segment of length k, let a_j = v₂(3 n_j + 1) and A_k = sum of a_j for j<k. Iterating the exact affine recurrence gives n_k = (3^k n_0 + C_k) / 2^(A_k), where C_k is the positive integer offset obtained by composing the affine maps (it depends on the realized valuation word). This is an identity, not an estimate. The useful global descent condition is 3^k n_0 + C_k < 2^(A_k) n_0, or equivalently n_k < n_0; estimates must control the offset as well as the average valuation.
+For an actual odd orbit segment n₀,n₁,…,nₖ, let aⱼ = v₂(3nⱼ+1), A₀ = 0, and Aₖ = Σ_{j<k} aⱼ. Define C₀ = 0 and recursively
+
+Cₖ₊₁ = 3 Cₖ + 2^{Aₖ}.
+
+Then the exact identity is
+
+nₖ = (3^k n₀ + Cₖ) / 2^{Aₖ}.
+
+Proof sketch: the k=0 case is immediate. If the identity holds at k, then nₖ₊₁ = (3nₖ+1)/2^{aₖ}; substituting and multiplying numerator and denominator by the appropriate power gives numerator 3^{k+1}n₀ + 3Cₖ + 2^{Aₖ}, which is the stated recurrence, with Aₖ₊₁=Aₖ+aₖ. This identity is valid for the realized valuation word; it does not say every abstract word of exponents is realizable.
+
+The useful global descent condition is 3^k n₀ + Cₖ < 2^{Aₖ} n₀, equivalently nₖ < n₀. Any estimate must control Cₖ as well as the total valuation Aₖ. Average-valuation heuristics alone do not close this inequality for every starting integer.
 
 Research task: formalize the affine composition for finite realized valuation words, prove the identity by induction, then search for a uniform block condition that forces descent. Do not replace the realized word by arbitrary exponents without proving that the word is admissible for an orbit.
 
