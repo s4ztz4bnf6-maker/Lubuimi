@@ -46,6 +46,8 @@ jobs:
         run: lake env lean SyracuseOffsetIdentity.lean
       - name: Compile and audit stronger offset lower bound
         run: lake env lean SyracuseOffsetLowerBound.lean
+      - name: Compile exact accelerated two-step identity
+        run: lake env lean SyracuseBlockIdentity.lean
       - name: Install sandbox dependency for independent recheck
         run: sudo apt-get update && sudo apt-get install -y bubblewrap
       - name: Export and independently recheck project declarations
