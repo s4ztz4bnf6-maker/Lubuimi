@@ -54,8 +54,6 @@ theorem all_suffix_inequalities_iff_record_time
 #print axioms valuationSurplus_increment
 #print axioms all_suffix_inequalities_iff_record_time
 
-end SyracuseAudit
-
 
 /-- The surplus rises at a step exactly when the valuation is at least two.
 This isolates the local source of a possible record-time certificate; it
