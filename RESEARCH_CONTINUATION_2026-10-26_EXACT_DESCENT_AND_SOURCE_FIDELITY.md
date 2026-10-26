@@ -111,3 +111,32 @@ Sources:
 This improves the research map: the “counterexample implies positive-density exceptions” bridge is no longer our open lemma target; it is an external formal result to import only after checking exact source, versions, axioms, and statement fidelity. The remaining statistical route is still blocked at the unconditional upper-density-one convergence premise. The known 145-step Syracuse / 436-step ordinary Collatz results concern descent below growing thresholds, not convergence to 1, and cannot fill that gap.
 
 Verification boundary: ProofAtlas reports successful builds and lists its exact claims, but its own reproduction notes say some compiled dependencies were reused and the result is not an independent LeanChecker run. Do not present it as independently audited by this repository.
+
+
+## 7. BBMST source audit refinement: exact finite-stage semantics
+
+The original paper's actual authors are **Paul Balister, Béla Bollobás, Robert Morris, Julian Sahasrabudhe, and Marius Tiba**, “The Erdős–Selfridge problem with square-free moduli,” Algebra & Number Theory 15 (2021), 609–??, DOI 10.2140/ant.2021.15.609. The acronym is formed from those surnames; do not expand it as a different author list.
+
+Source PDF: https://par.nsf.gov/servlets/purl/10300177
+
+The source defines, for (Q_k=Q_{k-1}\times S_k), the fibre (F_x=\{(x,y):y\in S_k\}), the new removed set (B_k=\bigcup_{F\in N_k}A_F), and
+`alpha_k(x) = |{y in S_k : (x,y) in B_k}| / |S_k|`.
+This is a uniform *fibre-cardinality proportion*, not an arbitrary real-valued parameter and not necessarily a proper-subset witness for every x.
+
+The stage measure is defined pointwise, with the source's two cases:
+- on (B_k), multiply the previous uniform-fibre measure by `max(0, (alpha_k(x)-delta_k)/(alpha_k(x)*(1-delta_k)) )`;
+- outside (B_k), multiply by `min(1/(1-alpha_k(x)), 1/(1-delta_k))`.
+
+This exact formula has edge cases: when alpha is zero the removed branch must be handled without evaluating a division by zero; when alpha is one, the complement is empty and the outside branch is never queried on that fibre. A faithful Lean implementation should encode these cases explicitly (e.g. by piecewise definitions and proof obligations), not silently rely on rational division conventions.
+
+Lemma 2.1's actual obligations are:
+(4) preservation of mass for every (Q_{k-1})-measurable set;
+(5) (P_k(S)\le P_{k-1}(S)/(1-\delta_k)) for every set S;
+(6) (P_k(S)\le P_{k-1}(S)) whenever (S\subseteq B_k).
+The paper then uses (P_n(B_k)=P_k(B_k)) for the stage-measurable (B_k), and the sum of the stage removed masses to show that a total below 1 implies the uncovered set is nonempty. These implications should be formalized before proving the moment bounds.
+
+A crucial correction to the local-witness route: the paper's principal bound in Theorem 3.1 is the sum of `min(M_k^(1), M_k^(2)/(4*delta_k*(1-delta_k)))`, where (M_k^{(1)}=E_{k-1}[alpha_k]) and (M_k^{(2)}=E_{k-1}[alpha_k^2]). A positive local `alpha*(1-alpha)*mass` term is not by itself the required global bound. The proof must connect the exact pointwise update to these first and second moments and then to the source's summation criterion.
+
+The source's hyperplane mapping is also explicit: a progression (a+d\mathbb Z), with square-free modulus (d=\prod_{i\in I}p_i), maps to the coordinate hyperplane fixing (x_i=a\bmod p_i) for (i\in I), leaving other coordinates unrestricted. Distinct square-free moduli correspond to distinct fixed-coordinate sets, hence nonparallel hyperplanes. The theorem is stated for finite covering systems with distinct square-free moduli greater than 1.
+
+This section records source-derived obligations; it does not claim these stage-measure formulas have been fully formalized in this repository or that a new Lean build was run.
