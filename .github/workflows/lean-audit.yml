@@ -1,0 +1,30 @@
+name: Syracuse Lean audit
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean and resolve dependencies
+        run: |
+          curl --fail --location --retry 3 --max-time 60 https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
+          sh elan-init.sh -y --default-toolchain leanprover/lean4:v4.34.1
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+      - name: Compile the declared Lean library
+        run: lake build SyracuseAudit
+      - name: Compile standalone record-time module
+        run: lake env lean SyracuseRecordTime.lean
+      - name: Compile deterministic exceptional-orbit obstruction
+        run: lake env lean SyracuseExceptionalOrbitObstruction.lean
+      - name: Compile exact density arithmetic lemmas
+        run: lake env lean SyracuseDensityArithmetic.lean
+      - name: Run explicit axiom report for affine theorems
+        run: lake env lean SyracuseAxiomAudit.lean
