@@ -36,3 +36,5 @@ jobs:
         run: lake env lean SyracuseReferenceTest.lean
       - name: Compile SyracuseQuarterDescent.lean
         run: lake env lean SyracuseQuarterDescent.lean
+      - name: Compile exact finite-block identity
+        run: lake env lean SyracuseBlockDescent.lean
