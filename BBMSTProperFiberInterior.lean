@@ -51,3 +51,56 @@ theorem finite_proper_fiber_gives_positive_interior_term
 #print axioms finite_proper_fiber_gives_positive_interior_term
 
 end BBMSTProperFiberInterior
+
+
+/--
+Quantitative finite-cardinality strengthening: a nonempty proper subset of
+a fiber of size q has proportion alpha with both alpha and 1-alpha at least
+1/q. Consequently alpha*(1-alpha) is at least 1/q^2. This is a uniform
+geometric contribution bound before multiplying by the fiber's probability
+mass; it does not supply a lower bound on that probability mass.
+-/
+theorem finite_proper_fiber_card_ratio_quadratic_floor
+    {Ω : Type*} [DecidableEq Ω]
+    (s t : Finset Ω)
+    (hts : t ⊂ s)
+    (ht : t.Nonempty)
+    (hs : s.Nonempty) :
+    1 / (s.card : ℚ) ^ 2 ≤
+      ((t.card : ℚ) / (s.card : ℚ)) *
+        (1 - (t.card : ℚ) / (s.card : ℚ)) := by
+  have hq : (0 : ℚ) < (s.card : ℚ) := by
+    exact_mod_cast hs.card_pos
+  have hq1 : (1 : ℚ) ≤ (s.card : ℚ) := by
+    have hn : 1 ≤ s.card := Nat.one_le_iff_ne_zero.mpr
+      (Finset.card_ne_zero.mpr hs)
+    exact_mod_cast hn
+  have ht1 : (1 : ℚ) ≤ (t.card : ℚ) := by
+    have hn : 1 ≤ t.card := Nat.one_le_iff_ne_zero.mpr
+      (Finset.card_ne_zero.mpr ht)
+    exact_mod_cast hn
+  have hcard : t.card < s.card := Finset.card_lt_card hts
+  have hremNat : t.card + 1 ≤ s.card := Nat.succ_le_iff.mpr hcard
+  have hrem : (t.card : ℚ) + 1 ≤ (s.card : ℚ) := by
+    exact_mod_cast hremNat
+  have hratio : 1 / (s.card : ℚ) ≤ (t.card : ℚ) / (s.card : ℚ) := by
+    exact (div_le_div_iff_of_pos_right hq).2 (by linarith)
+  have hcomplement :
+      1 / (s.card : ℚ) ≤
+        1 - (t.card : ℚ) / (s.card : ℚ) := by
+    have hdiv : (t.card : ℚ) / (s.card : ℚ) ≤
+        1 - 1 / (s.card : ℚ) := by
+      rw [div_le_iff₀ hq]
+      nlinarith
+    linarith
+  have hfloor : 0 ≤ 1 / (s.card : ℚ) := by positivity
+  calc
+    1 / (s.card : ℚ) ^ 2 =
+        (1 / (s.card : ℚ)) * (1 / (s.card : ℚ)) := by
+          field_simp
+    _ ≤ ((t.card : ℚ) / (s.card : ℚ)) *
+          (1 - (t.card : ℚ) / (s.card : ℚ)) :=
+      mul_le_mul hratio hcomplement hfloor
+        (div_nonneg (by positivity) (le_of_lt hq))
+
+#print axioms finite_proper_fiber_card_ratio_quadratic_floor
