@@ -23,3 +23,7 @@ lean_lib BBMSTProperFiberInterior where
 
 lean_lib BBMSTScalarMoment where
   globs := #[.one `BBMSTScalarMoment]
+
+-- Explicit CI root imports the scalar theorem module and emits axiom reports.
+lean_lib BBMSTScalarMomentAudit where
+  globs := #[.one `BBMSTScalarMomentAudit]
