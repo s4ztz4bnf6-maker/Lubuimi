@@ -46,3 +46,19 @@ Do not introduce global descent as an axiom.
 
 ## Verdict
 Established algebraically: the finite block identity and exact strict descent criterion. Not established: a uniform margin for all odd starts, global coverage of valuation-cylinder branches, or universal convergence. The key separation is between the integer descent inequality and the global branch-coverage theorem; both remain necessary.
+
+## 8. Exact realized counterexample to the average-only descent criterion
+
+A finite exact-integer search found a realized block starting at n_0=165 for which the average valuation exceeds log_2(3), yet the block does not descend. The 17 exponents are
+
+(4,1,1,1,1,2,2,1,2,1,1,2,1,1,1,2,3).
+
+Their sum is A=27, N=17, and
+A/N = 27/17 = 1.588235... > log_2(3) = 1.584962....
+
+The actual endpoint is n_17=167, so it has increased rather than decreased. The exact correction is C=1,106,233,681, whereas
+(2^A-3^N)n_0 = 837,798,225.
+Thus the exact descent inequality fails by
+(2^A-3^N)n_0-C = -268,435,456.
+
+This is a concrete realized counterexample to the *claim that average valuation alone guarantees descent on every finite block*. It is not a counterexample to Collatz. It demonstrates why the additive correction and actual start value cannot be dropped from the proof obligation. The values were calculated with exact integer arithmetic; no Lean proof or formal build is claimed.
