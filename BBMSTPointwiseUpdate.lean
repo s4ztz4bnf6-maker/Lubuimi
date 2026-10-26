@@ -93,6 +93,23 @@ theorem uncoveredMultiplier_le_inv_delta (α δ : ℚ) :
     uncoveredMultiplier α δ ≤ 1 / (1 - δ) := by
   exact min_le_right _ _
 
+
+/-- With positive removed fraction, the covered multiplier lies strictly
+below the reciprocal covered mass. The strictness uses both δ > 0 and
+α < 1; it is stronger than the crude admissibility envelope above. -/
+theorem coveredMultiplier_lt_inv
+    (α δ : ℚ) (hα0 : 0 < α) (hα1 : α < 1)
+    (hδ0 : 0 < δ) (hδ1 : δ < 1) :
+    coveredMultiplier α δ < 1 / α := by
+  have hinv : 0 < (1 : ℚ) / α := div_pos one_pos hα0
+  have hden : 0 < α * (1 - δ) := mul_pos hα0 (by linarith)
+  have hratio : (α - δ) / (α * (1 - δ)) < 1 / α := by
+    rw [div_lt_div_iff₀ hden hα0]
+    nlinarith
+  exact max_lt hinv hratio
+
+#print axioms coveredMultiplier_lt_inv
+
 #print axioms coveredMultiplier_le_inv
 #print axioms uncoveredMultiplier_le_inv_alpha
 #print axioms uncoveredMultiplier_le_inv_delta
