@@ -115,6 +115,35 @@ theorem block_descends_iff
     rw [hidentity] at hmul
     omega
 
+
+/--
+A correction-term upper bound can be plugged directly into the exact descent
+criterion. This lemma isolates the global arithmetic obligation: prove a
+useful bound for `blockCorrection as` and then prove the displayed strict
+inequality for the starting state.
+-/
+theorem block_descends_of_correction_bound
+    {as : List ℕ} {start finish : ℕ}
+    (h : RealizesBlock as start finish)
+    (hCorrection :
+      blockCorrection as ≤
+        2 ^ (as.sum - as.length) *
+          (3 ^ as.length - 2 ^ as.length))
+    (hThreshold :
+      3 ^ as.length * start +
+          2 ^ (as.sum - as.length) *
+            (3 ^ as.length - 2 ^ as.length) <
+        2 ^ as.sum * start) :
+    finish < start := by
+  apply (block_descends_iff h).2
+  calc
+    3 ^ as.length * start + blockCorrection as ≤
+        3 ^ as.length * start +
+          2 ^ (as.sum - as.length) *
+            (3 ^ as.length - 2 ^ as.length) := by
+              exact Nat.add_le_add_left hCorrection _
+    _ < 2 ^ as.sum * start := hThreshold
+
 /-- The correction recurrence agrees with the chronological block split. -/
 theorem blockCorrection_cons (a : ℕ) (as : List ℕ) :
     blockCorrection (a :: as) =
