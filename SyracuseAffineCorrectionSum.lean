@@ -52,7 +52,7 @@ theorem nat_descent_iff_correction_bound
     omega
   · intro hbound
     have hstrict : q * n₀ + C < p * n₀ := by
-      rw [← hsub] at hbound
+      rw [hsub] at hbound
       omega
     rw [← hidentity] at hstrict
     exact (Nat.mul_lt_mul_left hp).mpr hstrict
