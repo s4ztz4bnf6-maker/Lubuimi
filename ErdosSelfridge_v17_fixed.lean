@@ -6,9 +6,9 @@
     Erdős–Selfridge conjecture.
 
   TWO ADMITTED PLACEHOLDERS:
-    • sieve_criterion skips the geometric/probabilistic interface and
+    • admitted_sieve_criterion skips the geometric/probabilistic interface and
       asserts noncoverage directly for the repository's general CoveringSystem.
-    • sf_sieve_lt_one assumes a parameter/certificate existence statement for
+    • admitted_sf_sieve_certificate_exists assumes a parameter/certificate existence statement for
       every finite list of odd primes. That is not a faithful transcription
       of the paper's finite certificate plus large-prime recurrence.
 
@@ -788,7 +788,7 @@ theorem blocks_length_eq {K : Nat} (cs : CoveringSystem K) :
     (sfBlockSizes cs).length = (nonsfBlockSizes cs).length := by
   simp [sfBlockSizes, nonsfBlockSizes]
 
-/-- sfBlockSizes equals the map used in sf_sieve_lt_one. -/
+/-- sfBlockSizes equals the map used in admitted_sf_sieve_certificate_exists. -/
 private theorem sfBlockSizes_eq_map {K : Nat} (cs : CoveringSystem K)
     (h_valid : ∀ p ∈ extractPrimes cs, Nat.Prime p ∧ p % 2 = 1) :
     sfBlockSizes cs = (extractPrimes cs).map (fun p => ((p : ℚ) - 1)) := by
