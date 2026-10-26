@@ -53,3 +53,34 @@ This is directly relevant as a proof-engineering model: isolate the exact residu
 
 The contemporary literature continues to distinguish density results from the pointwise conjecture. In particular, newer natural-density descent claims remain statistical statements and cannot alone eliminate every exceptional integer:
 https://mathdb.com/p/405266/syracuse-conjecture-collatz-conjecture
+
+
+## New exact decomposition: normalized correction term
+
+Normalize the affine identity by the terminal power of two:
+\[
+n_N=\frac{3^N n_0}{2^{A_N}}+
+\sum_{j=0}^{N-1}\frac{3^{N-1-j}}{2^{A_N-A_j}}.
+\]
+Since every accelerated odd step has \(a_i=v_2(3n_i+1)\ge1\), we have \(A_N-A_j\ge N-j\). Therefore the correction term has the unconditional envelope
+\[
+0<\sum_{j<N}\frac{3^{N-1-j}}{2^{A_N-A_j}}
+\le \sum_{k=1}^{N}\frac{3^{k-1}}{2^k}
+=\left(\frac32\right)^N-1.
+\]
+This is exact elementary bookkeeping, valid for every actual odd orbit and every finite horizon. It isolates the two contributions to \(n_N\): the seed multiplier \(3^N/2^{A_N}\) and the positive affine correction.
+
+A consequent **sufficient, not necessary** descent test is
+\[
+\frac{3^N n_0}{2^{A_N}}+\left(\frac32\right)^N-1<n_0.
+\]
+The exact certificate using the actual correction term remains sharper. The envelope does not settle the conjecture: when valuation growth is weak it is too large, and when valuation growth is strong the exact correction term may still need to be tracked. Its value is that it gives a simple independent lemma to formalize before attempting any moving-anchor argument.
+
+Potential Lean lemma sequence:
+1. valuation is at least one for every positive odd input;
+2. every suffix valuation sum is at least its length;
+3. normalize the affine identity by dividing by the terminal power of two;
+4. prove the normalized correction is bounded by the geometric sum;
+5. derive descent from the normalized envelope, with strict inequalities and positive denominators explicit.
+
+No universal orbit claim follows from these finite-horizon estimates alone.
