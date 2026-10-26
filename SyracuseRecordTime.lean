@@ -122,6 +122,8 @@ theorem record_time_surplus_iff_exponent_threshold
 
 #print axioms record_time_surplus_nonneg
 #print axioms record_time_surplus_iff_exponent_threshold
+#print axioms valuationSurplus_increment_pos_iff
+#print axioms valuationSurplus_increment_le_neg_four
 
 #print axioms valuationSurplus_eq_sum_local_drift
 
