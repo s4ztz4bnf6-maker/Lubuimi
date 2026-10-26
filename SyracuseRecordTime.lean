@@ -55,3 +55,24 @@ theorem all_suffix_inequalities_iff_record_time
 #print axioms all_suffix_inequalities_iff_record_time
 
 end SyracuseAudit
+
+
+/-- The surplus rises at a step exactly when the valuation is at least two.
+This isolates the local source of a possible record-time certificate; it
+does not assert that such record times occur with the frequency needed for
+global descent. -/
+theorem valuationSurplus_increment_pos_iff
+    (a : Nat → Nat) (k : Nat) :
+    0 < valuationSurplus a (k + 1) - valuationSurplus a k ↔
+      2 ≤ a k := by
+  rw [valuationSurplus_increment]
+  omega
+
+/-- A step with valuation zero or one strictly decreases the surplus by at
+least four; this is the complementary local drift statement. -/
+theorem valuationSurplus_increment_le_neg_four
+    (a : Nat → Nat) (k : Nat) (ha : a k ≤ 1) :
+    valuationSurplus a (k + 1) - valuationSurplus a k ≤ -4 := by
+  rw [valuationSurplus_increment]
+  have ha' : (a k : ℤ) ≤ 1 := by exact_mod_cast ha
+  linarith
