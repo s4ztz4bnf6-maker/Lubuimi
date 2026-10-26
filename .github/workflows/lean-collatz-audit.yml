@@ -38,3 +38,6 @@ jobs:
         run: lake env lean SyracuseQuarterDescent.lean
       - name: Compile exact finite-block identity
         run: lake env lean SyracuseBlockDescent.lean
+
+      - name: Compile correction-term lower bound audit lemma
+        run: lake env lean SyracuseCorrectionBounds.lean
