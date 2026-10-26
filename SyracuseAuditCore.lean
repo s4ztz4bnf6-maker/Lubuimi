@@ -27,4 +27,25 @@ theorem quotient_not_divisible_by_two_of_exact_power
     _ = 2 ^ q * (2 * k) := by rw [hk]
     _ = 2 ^ q * 2 * k := by ring
 
+/--
+Exactness is already forced when a prescribed transition has an odd
+quotient: if 2^a*m = 3*n+1 and m is odd, then 2^(a+1) cannot divide
+3*n+1. Thus a transition certificate need not carry this non-divisibility
+as an independent field; it can be derived from the equality and oddness.
+-/
+theorem no_next_power_divides_of_odd_quotient
+    (n m a : ℕ) (hm : Odd m)
+    (hstep : 2 ^ a * m = 3 * n + 1) :
+    ¬ 2 ^ (a + 1) ∣ 3 * n + 1 := by
+  rintro ⟨k, hk⟩
+  rcases hm with ⟨j, hj⟩
+  have hmul : 2 ^ a * m = 2 ^ a * (2 * k) := by
+    calc
+      2 ^ a * m = 3 * n + 1 := hstep
+      _ = 2 ^ (a + 1) * k := hk
+      _ = 2 ^ a * (2 * k) := by rw [pow_succ]; ring
+  have hmeq : m = 2 * k := Nat.mul_left_cancel hmul
+  rw [hj] at hmeq
+  omega
+
 end SyracuseAudit
