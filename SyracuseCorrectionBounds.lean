@@ -9,7 +9,6 @@ theorem blockCorrection_lower_bound (as : List ℕ) (hne : as ≠ []) :
   | nil => contradiction
   | cons a as =>
       simp [blockCorrection]
-      exact Nat.le_add_right _ _
 
 #print axioms blockCorrection_lower_bound
 
