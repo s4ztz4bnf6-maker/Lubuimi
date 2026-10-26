@@ -30,3 +30,7 @@ lean_lib BBMSTInteriorBand where
 -- Explicit CI root imports the scalar theorem module and emits axiom reports.
 lean_lib BBMSTScalarMomentAudit where
   globs := #[.one `BBMSTScalarMomentAudit]
+
+-- Source-faithful pointwise update multipliers and normalization lemma.
+lean_lib BBMSTPointwiseUpdate where
+  globs := #[.one `BBMSTPointwiseUpdate]
