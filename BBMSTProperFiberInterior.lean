@@ -90,8 +90,14 @@ theorem finite_proper_fiber_card_ratio_quadratic_floor
         1 - (t.card : ℚ) / (s.card : ℚ) := by
     have hdiv : (t.card : ℚ) / (s.card : ℚ) ≤
         1 - 1 / (s.card : ℚ) := by
-      rw [div_le_iff₀ hq]
-      nlinarith
+      apply (div_le_iff₀ hq).2
+      have hright :
+          (1 - 1 / (s.card : ℚ)) * (s.card : ℚ) =
+            (s.card : ℚ) - 1 := by
+        field_simp
+        ring
+      rw [hright]
+      linarith
     linarith
   have hfloor : 0 ≤ 1 / (s.card : ℚ) := by positivity
   calc
