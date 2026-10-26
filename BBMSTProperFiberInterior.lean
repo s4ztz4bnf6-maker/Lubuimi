@@ -142,3 +142,41 @@ theorem finite_proper_fiber_mass_contribution_lower_bound
           (1 - (t.card : ℚ) / (s.card : ℚ)) * mass := by ring
 
 #print axioms finite_proper_fiber_mass_contribution_lower_bound
+
+
+/--
+Sharp integer-cardinality floor: among nonempty proper subsets of a fiber
+of size q, alpha*(1-alpha) is minimized when the subset has size 1 or q-1,
+so the lower bound is (q-1)/q^2 (stronger than 1/q^2). This remains only a
+finite combinatorial estimate; it does not establish existence or positive
+mass of a source-geometric fiber.
+-/
+theorem finite_proper_fiber_card_ratio_sharp_floor
+    {Ω : Type*} [DecidableEq Ω]
+    (s t : Finset Ω)
+    (hts : t ⊂ s)
+    (ht : t.Nonempty)
+    (hs : s.Nonempty) :
+    ((s.card : ℚ) - 1) / (s.card : ℚ) ^ 2 ≤
+      ((t.card : ℚ) / (s.card : ℚ)) *
+        (1 - (t.card : ℚ) / (s.card : ℚ)) := by
+  have hq : (0 : ℚ) < (s.card : ℚ) := by
+    exact_mod_cast hs.card_pos
+  have hk : (1 : ℚ) ≤ (t.card : ℚ) := by
+    have hn : 1 ≤ t.card := Nat.one_le_iff_ne_zero.mpr
+      (Finset.card_ne_zero.mpr ht)
+    exact_mod_cast hn
+  have hcard : t.card < s.card := Finset.card_lt_card hts
+  have hqk : (1 : ℚ) ≤ (s.card : ℚ) - (t.card : ℚ) := by
+    have hn : t.card + 1 ≤ s.card := Nat.succ_le_iff.mpr hcard
+    exact_mod_cast (by omega : 1 ≤ s.card - t.card)
+  have hprod :
+      (s.card : ℚ) - 1 ≤
+        (t.card : ℚ) * ((s.card : ℚ) - (t.card : ℚ)) := by
+    nlinarith [mul_nonneg (sub_nonneg.mpr hk)
+      (sub_nonneg.mpr hqk)]
+  have hq2 : (0 : ℚ) < (s.card : ℚ) ^ 2 := pow_pos hq 2
+  rw [div_le_div_iff₀ hq2 hq2]
+  field_simp
+  nlinarith
+#print axioms finite_proper_fiber_card_ratio_sharp_floor
