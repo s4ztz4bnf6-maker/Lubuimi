@@ -17,18 +17,21 @@ In particular E[A_k]=2k and Var(A_k)=2k.
 For t<0, Markov's inequality applied to exp(t A_k) gives, for c in (1,2),
 P(A_k <= c k) <= exp(-k I(c)),
 where
-I(c) = c log(c/2) + (2-c) log(2-c).
+I(c) = c log(2(c-1)/c) - log(c-1)
+     = c log(2) + (c-1) log(c-1) - c log(c).
 To verify the formula, the moment generating function is
 E[exp(t X)] = exp(t)/(2-exp(t)).
-The optimizing parameter solves c = 2/(2-exp(t)), so exp(t)=2-2/c. Substitution yields the stated rate I(c)>0 for c<2. For nonintegral ck, replace the event by A_k <= floor(ck); the displayed bound remains valid because floor(ck)<=ck and t<0.
+The optimizing parameter solves c = 2/(2-exp(t)), so exp(t)=2-2/c. At this parameter, E[exp(t X)]=c-1 and
+I(c)=c t - log E[exp(t X)].
+For 1<c<2, I(c)>0; it tends to log(2) as c approaches 1 and to 0 as c approaches 2. For nonintegral ck, the event A_k <= floor(ck) is a subset of A_k <= ck, so the same bound applies.
 
-For the descent threshold c=log(3)/log(2) (about 1.585), I(c)>0. Thus the probability that the total valuation sum falls below the first-order threshold needed to offset 3^k decays exponentially in k, at the symbolic/Haar level.
+For the first-order threshold c=log(3)/log(2) (about 1.585), I(c)>0. Thus the probability that the total valuation sum falls below this threshold decays exponentially in k at the symbolic/Haar level.
 
 ## Critical limitation
 
 The accelerated orbit identity is
-n_k/n_0 = 3^k / 2^{A_k} + (correction terms)/2^{A_k}n_0,
-or equivalently the affine recurrence recorded in the main cylinder note. The positive correction terms and the distinction between Haar-almost-every 2-adic start and each natural-number start remain essential. An exponentially small measure of low-valuation words does not prove that every integer orbit descends, nor does it automatically control correlations between the valuation word and the real size of an orbit. No Collatz solution is claimed.
+2^(A_k) n_k = 3^k n_0 + C_k,
+where C_k is the positive affine correction term defined by the recurrence in the main cylinder note. The positive correction and the distinction between Haar-almost-every 2-adic start and each natural-number start remain essential. An exponentially small measure of low-valuation words does not prove that every integer orbit descends, nor does it automatically control correlations between the valuation word and the real size of an orbit. No Collatz solution is claimed.
 
 ## Formalization target
 
