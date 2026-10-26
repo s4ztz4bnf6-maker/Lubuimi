@@ -58,6 +58,31 @@ theorem exact_block_identity
                 _ = 3 ^ as.length * 3 * n +
                       (3 ^ as.length + 2 ^ a * blockCorrection as) := by ring
 
+/**
+Exact descent criterion with no subtraction or division: the endpoint is
+smaller precisely when the correction-adjusted affine expression lies below
+the scaled initial value.
+*/
+theorem block_descends_iff
+    {as : List ℕ} {start finish : ℕ}
+    (h : RealizesBlock as start finish) :
+    finish < start ↔
+      3 ^ as.length * start + blockCorrection as < 2 ^ as.sum * start := by
+  have hidentity := exact_block_identity h
+  have hscale : 0 < 2 ^ as.sum := by positivity
+  constructor
+  · intro hlt
+    have hmul := Nat.mul_lt_mul_of_pos_left hlt hscale
+    rw [hidentity] at hmul
+    exact hmul
+  · intro hlt
+    by_contra hnot
+    have hle : start ≤ finish := Nat.le_of_not_gt hnot
+    have hmul : 2 ^ as.sum * start ≤ 2 ^ as.sum * finish :=
+      Nat.mul_le_mul_left (2 ^ as.sum) hle
+    rw [hidentity] at hmul
+    omega
+
 /-- The correction recurrence agrees with the chronological block split. -/
 theorem blockCorrection_cons (a : ℕ) (as : List ℕ) :
     blockCorrection (a :: as) =
