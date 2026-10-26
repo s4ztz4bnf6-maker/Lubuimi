@@ -69,13 +69,47 @@ theorem removedMass_le_min_of_moments
   exact BBMSTScalarMoment.weighted_removedFraction_sum_min
     w alpha delta hw ha0 ha1 hd0 hd1
 
-/-- Under nonnegative normalized weights, the first and second weighted
-moments are expectations over the finite fiber index set. -/
-theorem probability_weights_normalized
+ /-- Under nonnegative normalized weights and genuine proportions,
+the first weighted moment lies in [0,1]. -/
+theorem firstMoment_mem_unit_interval
     {ι : Type*} [Fintype ι]
-    (w : ι → ℚ) (hw : ∀ i, 0 ≤ w i)
+    (w alpha : ι → ℚ)
+    (hw : ∀ i, 0 ≤ w i)
+    (ha0 : ∀ i, 0 ≤ alpha i)
+    (ha1 : ∀ i, alpha i ≤ 1)
     (hnorm : totalWeight w = 1) :
-    totalWeight w = 1 := hnorm
+    0 ≤ firstMoment w alpha ∧ firstMoment w alpha ≤ 1 := by
+  constructor
+  · unfold firstMoment
+    apply Finset.sum_nonneg
+    intro i hi
+    exact mul_nonneg (hw i) (ha0 i)
+  · calc
+      firstMoment w alpha ≤ totalWeight w := by
+        unfold firstMoment totalWeight
+        apply Finset.sum_le_sum
+        intro i hi
+        calc
+          w i * alpha i ≤ w i * 1 :=
+            mul_le_mul_of_nonneg_left (ha1 i) (hw i)
+          _ = w i := by ring
+      _ = 1 := hnorm
+
+/-- For proportions in [0,1], the second weighted moment is no larger than
+the first, provided the weights are nonnegative. -/
+theorem secondMoment_le_firstMoment
+    {ι : Type*} [Fintype ι]
+    (w alpha : ι → ℚ)
+    (hw : ∀ i, 0 ≤ w i)
+    (ha0 : ∀ i, 0 ≤ alpha i)
+    (ha1 : ∀ i, alpha i ≤ 1) :
+    secondMoment w alpha ≤ firstMoment w alpha := by
+  unfold secondMoment firstMoment
+  apply Finset.sum_le_sum
+  intro i hi
+  have hαsq : alpha i ^ 2 ≤ alpha i := by
+    nlinarith [mul_nonneg (ha0 i) (sub_nonneg.mpr (ha1 i))]
+  exact mul_le_mul_of_nonneg_left hαsq (hw i)
 
 #print axioms removedMass_le_first_and_scaled_second
 #print axioms removedMass_le_min_of_moments
