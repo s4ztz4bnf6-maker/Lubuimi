@@ -49,3 +49,5 @@ jobs:
         run: |
           lake build BBMSTPointwiseUpdate
           lake env lean BBMSTPointwiseUpdate.lean
+      - name: Compile weighted fiber normalization bridge
+        run: lake env lean BBMSTWeightedFiberNormalization.lean
