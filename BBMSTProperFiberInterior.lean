@@ -175,8 +175,7 @@ theorem finite_proper_fiber_card_ratio_sharp_floor
         (t.card : ℚ) * ((s.card : ℚ) - (t.card : ℚ)) := by
     nlinarith [mul_nonneg (sub_nonneg.mpr hk)
       (sub_nonneg.mpr hqk)]
-  have hq2 : (0 : ℚ) < (s.card : ℚ) ^ 2 := pow_pos hq 2
-  rw [div_le_div_iff₀ hq2 hq2]
+  have hq2 : (s.card : ℚ) ≠ 0 := ne_of_gt hq
   field_simp
-  nlinarith
+  nlinarith [hprod]
 #print axioms finite_proper_fiber_card_ratio_sharp_floor
