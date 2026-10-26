@@ -28,13 +28,13 @@ theorem valuationSurplus_ge_length_sub_five_low_count
         linarith
       rw [hstep]
       simp only [lowValuationCount]
+      push_cast
       by_cases hlow : a N ≤ 1
       · have hone : a N = 1 := by omega
-        rw [if_pos hlow, hone]
-        have hcast : (1 : ℤ) = 1 := rfl
+        simp [hlow, hone]
         linarith
-      · rw [if_neg hlow]
-        have hlarge : 2 ≤ a N := by omega
+      · have hlarge : 2 ≤ a N := by omega
+        simp [hlow]
         have hinc : 1 ≤ 5 * (a N : ℤ) - 9 := by omega
         linarith
 
@@ -50,31 +50,21 @@ theorem negative_surplus_forces_many_valuation_one_steps
   omega
 
 
-/-- If an accelerated odd Syracuse step has valuation exactly one, its next
-odd value is 1 modulo 4. Consequently the next numerator is divisible by 4,
-so two valuation-one steps cannot be consecutive. This is an orbit constraint,
-not a claim about arbitrary independent valuation words. -/
-theorem valuation_one_step_forces_next_div_four
-    (n m : ℕ) (hn : n % 2 = 1) (hm : m % 2 = 1)
+/-- If the current odd input is 3 modulo 8, then after one exact
+halving the next numerator is divisible by four. The stronger statement
+without this modulo-eight hypothesis is false: 7 -> 11 -> 17 has two
+consecutive exact halvings. -/
+theorem valuation_one_step_forces_next_div_four_of_mod_eight
+    (n m : ℕ) (hn8 : n % 8 = 3) (hm : m % 2 = 1)
     (hstep : 3 * n + 1 = 2 * m) :
     (3 * m + 1) % 4 = 0 := by
   omega
 
-/-- Two successive odd-to-odd Syracuse steps cannot both divide the
-numerator by exactly two: the first step forces the next numerator to be
-0 modulo 4, whereas a second exact halving with odd output would make it
-2 modulo 4. -/
-theorem no_consecutive_exact_halving_steps
-    (n0 n1 n2 : ℕ)
-    (hn0 : n0 % 2 = 1) (hn1 : n1 % 2 = 1)
-    (hn2 : n2 % 2 = 1)
-    (hstep0 : 3 * n0 + 1 = 2 * n1)
-    (hstep1 : 3 * n1 + 1 = 2 * n2) :
-    False := by
-  have hmod0 := valuation_one_step_forces_next_div_four
-    n0 n1 hn0 hn1 hstep0
-  omega
-
+/-- A concrete counterexample to the false claim that exact-halving steps
+cannot be consecutive: both 7 -> 11 and 11 -> 17 are exact halvings. -/
+theorem two_consecutive_exact_halving_steps_exist :
+    3 * 7 + 1 = 2 * 11 ∧ 3 * 11 + 1 = 2 * 17 := by
+  norm_num
 
 #print axioms valuationSurplus_ge_length_sub_five_low_count
 #print axioms negative_surplus_forces_many_valuation_one_steps
