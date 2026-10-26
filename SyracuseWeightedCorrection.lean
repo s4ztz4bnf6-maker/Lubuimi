@@ -717,3 +717,22 @@ theorem exponent_one_run_closed_form_transition
   omega
 
 #print axioms exponent_one_run_closed_form_transition
+
+
+/-- The residue class 7 mod 8 forces a negative local correction.
+This is a source-level bridge from a concrete residue certificate to the
+signed correction term; it remains local and makes no frequency claim. -/
+theorem signedCorrectionTerm_negative_of_residue_seven_mod_eight
+    (A a : ℕ → ℕ) (m j n next : ℕ)
+    (hn : n % 2 = 1)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a (m + j) * next = 3 * n + 1)
+    (hres : n % 8 = 7) :
+    signedCorrectionTerm A a m j < 0 := by
+  have hmod4 : n % 4 = 3 := by omega
+  have ha : a (m + j) = 1 :=
+    (valuation_one_iff_residue_three_mod_four
+      n next (a (m + j)) hn hnext hstep).mpr hmod4
+  exact (signedCorrectionTerm_sign A a m j).1 ha
+
+#print axioms signedCorrectionTerm_negative_of_residue_seven_mod_eight
