@@ -91,13 +91,11 @@ theorem finite_proper_fiber_card_ratio_quadratic_floor
     have hdiv : (t.card : ℚ) / (s.card : ℚ) ≤
         1 - 1 / (s.card : ℚ) := by
       apply (div_le_iff₀ hq).2
-      have hright :
-          (1 - 1 / (s.card : ℚ)) * (s.card : ℚ) =
-            (s.card : ℚ) - 1 := by
-        field_simp
-      calc
-        (t.card : ℚ) ≤ (s.card : ℚ) - 1 := by linarith
-        _ = (1 - 1 / (s.card : ℚ)) * (s.card : ℚ) := hright.symm
+      have hcardle : (t.card : ℚ) ≤ (s.card : ℚ) - 1 := by
+        linarith
+      rw [show (1 - 1 / (s.card : ℚ)) * (s.card : ℚ) =
+          (s.card : ℚ) - 1 by field_simp]
+      exact hcardle
     linarith
   have hfloor : 0 ≤ 1 / (s.card : ℚ) := by positivity
   have hratio_nonneg :
