@@ -15,9 +15,9 @@ C_N/2^(A_N)
  = Σ_{i=1}^N 3^(i-1)/2^(A_N-A_(N-i))
  <= Σ_{i=1}^N 3^(i-1)/q^i
  = (1-(3/q)^N)/(q-3)
- = 2(1-(15/17)^N).
+ = (5/2)(1-(15/17)^N).
 Also 3^N/2^(A_N) <= (15/17)^N. Therefore
 n_0(1-3^N/2^(A_N)) >= n_0(1-(15/17)^N).
-For n_0>=3 and N>=1 this is at least 3(1-(15/17)^N), strictly greater than C_N/2^(A_N), which is at most 2(1-(15/17)^N). Consequently C_N < (2^(A_N)-3^N)n_0, and n_N<n_0.
+For n_0>=3 and N>=1 this is at least 3(1-(15/17)^N), strictly greater than C_N/2^(A_N), which is at most (5/2)(1-(15/17)^N). Consequently C_N < (2^(A_N)-3^N)n_0, and n_N<n_0.
 
 The unresolved condition is the existence of such a suffix-certified block for every odd n_0>1. The valuation word must come from the actual Syracuse orbit; arbitrary exponent sequences cannot be assumed realizable. Thus this is a conditional certificate theorem, not a global proof.
