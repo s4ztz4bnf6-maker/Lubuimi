@@ -189,3 +189,25 @@ Tao/Hales source: https://terrytao.wordpress.com/2026/10/09/what-mathematicians-
 is a useful algebraic sublemma, but it cannot replace the source's `min(M1, M2/(4 delta (1-delta)))` term or its accumulated bound.
 
 The four pillars are used as complementary methods, not as a promise that a breakthrough follows: abstract structure proposes lemmas; p-adic/continuous models generate hypotheses; Lean checks exact formal claims; experiments search finite cases and counterexamples. No pillar permits an invalid inference from “almost all” to “all”.
+
+
+## 11. Additional ProofAtlas result located 2026-10-26: explicit positive-density logarithmic-time convergence
+
+A fresh cross-check of the current ProofAtlas index surfaced a distinct result that should sit beside, not be conflated with, the 145/436-step descent-below-growing-threshold theorem:
+
+- “Explicit Positive-Density Collatz Convergence in Logarithmic Time,” manuscript v2.1, states that there are fixed explicit constants c > 0 and X₀ such that for every X ≥ X₀ at least cX positive starts n < X reach 1 within 10.46 ln n ordinary Collatz steps.
+- The public theorem-specific source page records four declarations, a 386-file first-party Lean closure, toolchain/source pins, and recorded build/axiom evidence. It says pinned Mathlib caches were reused; this is not an all-dependency cold rebuild or an independent LeanChecker replay.
+- This is stronger than merely descending below a threshold for the guaranteed positive-density subset, because the conclusion is actual arrival at 1 for that subset. It is still only a fixed positive lower-density guarantee, not density-one convergence, and does not imply every orbit reaches 1.
+- It does not conflict with the conditional positive-lower-density theorem for nonconvergent starts: a positive-density subset of convergent starts and (if a counterexample exists) a positive-lower-density subset of nonconvergent starts can coexist.
+
+Operational change: prioritize obtaining and auditing this exact source package before designing another duplicate density theorem. Extract the explicit c and X₀ from the pinned source, check the step-count convention at n=1 and for small n where ln n is zero or small, confirm whether the proposition uses a natural-number bound rounded/floored in the formal statement, and compare its Reaches and counting definitions against the companion predecessor package. Do not infer a numerical c or X₀ from the headline alone.
+
+Source: https://www.proofatlas.ai/formalizations/positive-density-log-time-collatz/
+Artifact/source overview: https://www.proofatlas.ai/sources/positive-density-log-time-collatz/
+Index cross-check: https://www.proofatlas.ai/
+
+## 12. Updated cross-project priority
+
+1. **Collatz:** audit the explicit positive-density/log-time package and the predecessor-density companion as one semantic family, while preserving their separate exact theorem scopes. The highest-value remaining global target is still an unconditional argument that upgrades positive-density convergence to density-one convergence or otherwise proves every start reaches 1. No amount of finite-prefix affine algebra alone supplies that upgrade.
+2. **BBMST:** do not let the newly found Collatz result distract from the main outstanding proof engineering. Continue with the paper's exact stage measure and Lemma 2.1, not a stand-alone positivity or conservation lemma. The formal interface must encode the two-branch update and explicitly prove the endpoint behavior before the global moment sum is attempted.
+3. **Joint audit:** every imported result gets a theorem-specific evidence sheet: source hash, toolchain, theorem root, all local dependency pins, standard axiom profile, unfinished-proof scan, exact definitions and quantifiers, and independent-review status. Label build evidence precisely; “checked with pinned cached dependencies” is not the same claim as “independently checked from a cold source build.”
