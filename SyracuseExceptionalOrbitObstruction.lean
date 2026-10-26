@@ -50,6 +50,16 @@ theorem negative_surplus_forces_many_valuation_one_steps
   omega
 
 
+/-- If an accelerated odd Syracuse step has valuation exactly one, its next
+odd value is 1 modulo 4. Consequently the next numerator is divisible by 4,
+so two valuation-one steps cannot be consecutive. This is an orbit constraint,
+not a claim about arbitrary independent valuation words. -/
+theorem valuation_one_step_forces_next_div_four
+    (n m : ℕ) (hn : n % 2 = 1) (hm : m % 2 = 1)
+    (hstep : 3 * n + 1 = 2 * m) :
+    (3 * m + 1) % 4 = 0 := by
+  omega
+
 /-- Two successive odd-to-odd Syracuse steps cannot both divide the
 numerator by exactly two: the first step forces the next numerator to be
 0 modulo 4, whereas a second exact halving with odd output would make it
@@ -65,15 +75,6 @@ theorem no_consecutive_exact_halving_steps
     n0 n1 hn0 hn1 hstep0
   omega
 
-/-- If an accelerated odd Syracuse step has valuation exactly one, its next
-odd value is 1 modulo 4. Consequently the next numerator is divisible by 4,
-so two valuation-one steps cannot be consecutive. This is an orbit constraint,
-not a claim about arbitrary independent valuation words. -/
-theorem valuation_one_step_forces_next_div_four
-    (n m : ℕ) (hn : n % 2 = 1) (hm : m % 2 = 1)
-    (hstep : 3 * n + 1 = 2 * m) :
-    (3 * m + 1) % 4 = 0 := by
-  omega
 
 #print axioms valuationSurplus_ge_length_sub_five_low_count
 #print axioms negative_surplus_forces_many_valuation_one_steps
