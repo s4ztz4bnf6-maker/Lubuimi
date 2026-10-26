@@ -42,3 +42,14 @@ Research targets:
 3. Replace the surplus certificate by a descent inequality directly implied by the affine recurrence and integrality.
 
 These are targets, not results. The density-one statement cannot eliminate a nonempty zero-density exceptional set. No universal Collatz theorem is claimed here.
+
+
+## Additional literature check: conditional Lean results are not the missing theorem
+
+A June 2026 preprint, *A Machine-Verified Conditional Theory of the Collatz Conjecture* (Jungwon Park), reports a Lean-checked affine-growth envelope and a conditional exclusion of divergent anchor orbits, while explicitly retaining measure-theoretic and cycle-arithmetic hypotheses. It also states an unconditional density-one theorem, but does not claim the full Collatz conjecture:
+https://www.researchgate.net/publication/405718077_A_Machine-Verified_Conditional_Theory_of_the_Collatz_Conjecture
+
+This is directly relevant as a proof-engineering model: isolate the exact residual hypothesis instead of hiding it inside a theorem statement. It does not discharge our universal threshold-crossing target. Before reusing any lemma, compare its precise map normalization, threshold, and assumptions with this repository's accelerated odd map and the certificate (S_N=5A_N-9N).
+
+The contemporary literature continues to distinguish density results from the pointwise conjecture. In particular, newer natural-density descent claims remain statistical statements and cannot alone eliminate every exceptional integer:
+https://mathdb.com/p/405266/syracuse-conjecture-collatz-conjecture
