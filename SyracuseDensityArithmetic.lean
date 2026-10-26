@@ -56,10 +56,9 @@ theorem no_threshold_crossing_gives_bad_prefix
     (hnever : ∀ N, 1 ≤ N → ¬ 5 * A N ≥ 9 * N) :
     ∀ N, 1 ≤ N → A N ≤ (9 * N - 1) / 5 := by
   intro N hN
-  apply bad_surplus_forces_valuation_sum_bound
   have hnot := hnever N hN
   have hlt : 5 * A N < 9 * N := by omega
-  exact hlt
+  exact bad_surplus_forces_valuation_sum_bound (A N) N hlt
 
 #print axioms bad_surplus_forces_valuation_sum_bound
 #print axioms no_threshold_crossing_gives_bad_prefix
