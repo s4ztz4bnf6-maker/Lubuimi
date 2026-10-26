@@ -20,12 +20,12 @@ Since 2 == -1 (mod 3), this condition is equivalent to
     y == (-1)^a (mod 3).
 
 Proof:
-- If the congruence holds, x is an integer. Its numerator is odd, and division by the odd number 3 leaves an odd integer.
+- If the congruence holds, x is an integer. Its numerator is odd, and because x is an integer, the odd numerator 3x = 2^a y - 1 forces x to be odd.
 - Positivity follows from 2^a y - 1 > 0.
 - Direct substitution gives 3x + 1 = 2^a y. Because y is odd, v_2(3x+1) = a, so the accelerated map sends x to y.
 - Conversely, any predecessor with exact valuation a satisfies 3x+1 = 2^a y and therefore the stated congruence.
 
-Thus a target y congruent to 1 mod 3 has exactly the even exponents a >= 2 as admissible inverse labels, while y congruent to 2 mod 3 has exactly the odd exponents a >= 1. This is an infinite family of exact inverse branches, not evidence that a forward orbit converges.
+The residue class y == 0 (mod 3) has no inverse branch: 2^a y cannot be congruent to 1 modulo 3. For y == 1 (mod 3), precisely the even exponents a >= 2 are admissible; for y == 2 (mod 3), precisely the odd exponents a >= 1 are admissible. In particular, every actual odd-to-odd Syracuse output is nonzero modulo 3. This is an infinite family of exact inverse branches on the admissible residue classes, not evidence that a forward orbit converges.
 
 ## 2. Why this is a useful change of coordinates
 
