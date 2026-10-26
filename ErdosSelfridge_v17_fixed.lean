@@ -822,7 +822,7 @@ theorem erdos_selfridge_conditional_on_admitted_sieve_interfaces
       _ < 1 := h_sf_lt
   have h_sf_len : (sfBlockSizes cs).length = primes.length := by
     rw [sfBlockSizes_eq_map cs h_primes]
-    simp
+    simp [primes]
   have hδ_len_nonsf : δs.length = (nonsfBlockSizes cs).length := by
     omega
   exact admitted_sieve_criterion cs h_odd δs ca1 ca3 hca1 hca13 hbase
