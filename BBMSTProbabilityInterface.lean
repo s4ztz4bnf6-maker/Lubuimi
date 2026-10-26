@@ -111,6 +111,8 @@ theorem secondMoment_le_firstMoment
     nlinarith [mul_nonneg (ha0 i) (sub_nonneg.mpr (ha1 i))]
   exact mul_le_mul_of_nonneg_left hαsq (hw i)
 
+#print axioms firstMoment_mem_unit_interval
+#print axioms secondMoment_le_firstMoment
 #print axioms removedMass_le_first_and_scaled_second
 #print axioms removedMass_le_min_of_moments
 
