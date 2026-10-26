@@ -31,6 +31,19 @@ Since 2^A is invertible modulo 3^N, the word determines one residue class for n_
 
 This cross-modulus constraint is exact and potentially useful for ruling out proposed finite valuation patterns or cycles. It does not by itself rule out every infinite positive orbit; no universal contradiction or descent bound has been obtained from it.
 
+## Exact cycle obstruction from the same identity
+If the valuation word belongs to a positive odd Syracuse cycle of length N, then n_N=n₀. The affine identity therefore gives
+
+    (2^A−3^N)n₀ = Σ_{j=0}^{N−1}3^(N−1−j)2^(p_j) =: C.
+
+Every term in C is positive, so C>0. Since n₀>0, a necessary condition for such a cycle is
+
+    2^A > 3^N, equivalently A/N > log₂(3).
+
+This is an exact obstruction, not a sufficient condition: satisfying the inequality does not produce a cycle. For a specified valuation word, there is a stronger finite test: calculate C and D=2^A−3^N, require D>0 and D∣C, and then test n₀=C/D against the exact valuation word and all intermediate positivity/oddness conditions. Divisibility alone is necessary but is not sufficient to certify the word, since the reconstructed orbit must realize each asserted valuation.
+
+The threshold A/N>log₂(3) is a familiar necessary cycle condition; the value here is its direct integration with the corrected word-dependent integer C. This creates a sound cycle-filtering stage before any expensive search or Lean proof. It does not exclude all possible cycles, and it does not prove that every orbit reaches 1.
+
 ## What this gives
 - Every finite valuation word determines a composition of inverse branches on odd 2-adics.
 - The corresponding 2-adic cylinder has contraction factor 2^(−Σaᵢ).
