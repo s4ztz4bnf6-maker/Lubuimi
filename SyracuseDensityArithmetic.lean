@@ -38,4 +38,29 @@ theorem coordinate_lt_threshold
       (fun j hj => Nat.zero_le (a j)) (Finset.mem_univ i)
   omega
 
+
+/-- Exact integer form of a bad-prefix restriction: if the surplus
+5*A - 9*N is negative, then A is at most floor((9*N-1)/5).
+This is the deterministic constraint to combine with the affine orbit
+identity; it is not by itself a contradiction. -/
+theorem bad_surplus_forces_valuation_sum_bound
+    (A N : ℕ) (hbad : 5 * A < 9 * N) :
+    A ≤ (9 * N - 1) / 5 := by
+  omega
+
+/-- Contrapositive bookkeeping for the universal threshold target: failure
+of crossing at every positive time gives the strict bad-prefix inequality
+at every positive horizon. -/
+theorem no_threshold_crossing_gives_bad_prefix
+    (A : ℕ → ℕ)
+    (hnever : ∀ N, 1 ≤ N → ¬ 5 * A N ≥ 9 * N) :
+    ∀ N, 1 ≤ N → A N ≤ (9 * N - 1) / 5 := by
+  intro N hN
+  apply bad_surplus_forces_valuation_sum_bound
+  have hlt : 5 * A N < 9 * N := by omega
+  exact hlt
+
+#print axioms bad_surplus_forces_valuation_sum_bound
+#print axioms no_threshold_crossing_gives_bad_prefix
+
 end SyracuseDensityArithmetic
