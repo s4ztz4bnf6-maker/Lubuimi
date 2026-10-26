@@ -29,9 +29,10 @@ theorem valuationSurplus_ge_length_sub_five_low_count
       rw [hstep]
       simp only [lowValuationCount]
       push_cast
+      have hpos := ha N
       by_cases hlow : a N ≤ 1
       · have hone : a N = 1 := by omega
-        simp [hlow, hone]
+        simp [hone]
         linarith
       · have hlarge : 2 ≤ a N := by omega
         simp [hlow]
