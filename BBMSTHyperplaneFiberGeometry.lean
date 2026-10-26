@@ -90,4 +90,37 @@ theorem hyperplane_last_fiber_card_le_one
 
 #print axioms hyperplane_last_fiber_card_le_one
 
+
+/-- If a finite union of last-coordinate hyperplane fibers is nonempty but
+has fewer points than the full coordinate set, its exact relative size is
+strictly between zero and one. Combined with a positive prefix mass, this is
+the local geometric witness needed for positive interior mass. -/
+theorem nonempty_small_hyperplane_union_has_strict_interior_fraction
+    {α ι : Type*} [DecidableEq α] [DecidableEq ι]
+    (S H : Finset α) (I : Finset ι)
+    (fiber : ι → Finset α)
+    (hcard : ∀ i ∈ I, (fiber i).card ≤ 1)
+    (hsmall : (I.card : ℕ) < S.card)
+    (hne : (I.biUnion fiber).Nonempty) :
+    0 < ((I.biUnion fiber).card : ℚ) / (S.card : ℚ) ∧
+      ((I.biUnion fiber).card : ℚ) / (S.card : ℚ) < 1 := by
+  have hSNat : 0 < S.card :=
+    lt_of_le_of_lt (Nat.zero_le I.card) hsmall
+  have hS : (0 : ℚ) < (S.card : ℚ) := by exact_mod_cast hSNat
+  have hnumNat : 0 < (I.biUnion fiber).card :=
+    Finset.card_pos.mpr hne
+  have hnum : (0 : ℚ) < ((I.biUnion fiber).card : ℚ) := by
+    exact_mod_cast hnumNat
+  have hunion : (I.biUnion fiber).card ≤ I.card :=
+    finite_union_card_le_sum I fiber hcard
+  have hstrictNat : (I.biUnion fiber).card < S.card :=
+    Nat.lt_of_le_of_lt hunion hsmall
+  have hstrict : ((I.biUnion fiber).card : ℚ) < (S.card : ℚ) := by
+    exact_mod_cast hstrictNat
+  constructor
+  · exact div_pos hnum hS
+  · exact (div_lt_one₀ hS).2 hstrict
+
+#print axioms nonempty_small_hyperplane_union_has_strict_interior_fraction
+
 end BBMSTHyperplaneFiberGeometry
