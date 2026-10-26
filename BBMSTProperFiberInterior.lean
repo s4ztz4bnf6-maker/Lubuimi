@@ -104,3 +104,32 @@ theorem finite_proper_fiber_card_ratio_quadratic_floor
         (div_nonneg (by positivity) (le_of_lt hq))
 
 #print axioms finite_proper_fiber_card_ratio_quadratic_floor
+
+
+/--
+Quantitative mass contribution of a proper finite fiber: if its probability
+mass is m>0 and its coordinate fiber has q points, its contribution to the
+weighted interior sum is at least m/q². This isolates both the combinatorial
+factor and the still-separate need for a lower bound on m.
+-/
+theorem finite_proper_fiber_mass_contribution_lower_bound
+    {Ω : Type*} [DecidableEq Ω]
+    (s t : Finset Ω) (mass : ℚ)
+    (hts : t ⊂ s) (ht : t.Nonempty) (hs : s.Nonempty)
+    (hmass : 0 < mass) :
+    mass / (s.card : ℚ) ^ 2 ≤
+      ((t.card : ℚ) / (s.card : ℚ)) *
+        (1 - (t.card : ℚ) / (s.card : ℚ)) * mass := by
+  have hfloor := finite_proper_fiber_card_ratio_quadratic_floor s t hts ht hs
+  have hmass0 : 0 ≤ mass := le_of_lt hmass
+  calc
+    mass / (s.card : ℚ) ^ 2 =
+        mass * (1 / (s.card : ℚ) ^ 2) := by ring
+    _ ≤ mass *
+        (((t.card : ℚ) / (s.card : ℚ)) *
+          (1 - (t.card : ℚ) / (s.card : ℚ))) :=
+      mul_le_mul_of_nonneg_left hfloor hmass0
+    _ = ((t.card : ℚ) / (s.card : ℚ)) *
+          (1 - (t.card : ℚ) / (s.card : ℚ)) * mass := by ring
+
+#print axioms finite_proper_fiber_mass_contribution_lower_bound
