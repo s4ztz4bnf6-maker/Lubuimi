@@ -40,6 +40,10 @@ This gives a state-dependent obstruction to long runs of the worst local valuati
 
 The useful next question is whether this exact congruence constraint can be combined with the affine correction sum or a different descent potential to produce a global, state-sensitive inequality. Any such argument must account for the changing value (x_i), not treat valuation-one steps as independent random events.
 
-## Formalization status
+## Formalization status (updated 2026-10-26)
 
-This note is a proved paper argument, not yet a Lean theorem. The existing Lean affine identities and valuation-surplus estimates remain separately CI-checked; they do not formalize this lemma. A follow-up Lean target should prove the recurrence identity and the coprime-divisibility step, then check the sharp examples with exact arithmetic.
+The full divisibility statement above is still a paper proof, not yet a Lean theorem. A key algebraic sublemma is now formalized in `SyracuseAffineCore.lean` as `SyracuseAudit.constant_valuation_one_identity`:
+
+`2^k * n k + 2^k = 3^k * (n 0 + 1)`
+
+under the recurrence `2 * n (i + 1) = 3 * n i + 1`. CI run [40374070669](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/40374070669) passed on commit `0e1e90b19f2c26db0da86ac436a7020d75865d4e`. Its transitive `#print axioms` output for this theorem is exactly `[propext]`; no `sorryAx` or project-admitted premise was reported. This formalizes the affine identity, not the final divisibility inference. The remaining Lean target is to combine oddness of `n k` with coprimality of `3^k` and `2^(k+1)` to prove `2^(k+1) ∣ n 0 + 1`, then verify the sharp examples with exact arithmetic.
