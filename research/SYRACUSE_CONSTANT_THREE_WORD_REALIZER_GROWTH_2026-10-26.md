@@ -48,7 +48,7 @@ The unique residue is odd. The exact-cylinder backward argument then gives the p
 
 ## Independent exact regression
 
-A local Python check passed 4,925 assertions:
+A local Python check passed 15,075 assertions (600 constant-word checks plus 2,187 and 12,288 assertions from the two length-six word families):
 - the closed form and modular inverse for all (N=1,ldots,100);
 - direct terminal-congruence checks for all length-six words with exponents in ({1,2,3}) and in ({1,2,3,4});
 - positivity and oddness of the computed least representatives.
