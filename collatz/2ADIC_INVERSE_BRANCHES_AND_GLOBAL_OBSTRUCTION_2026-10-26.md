@@ -118,3 +118,12 @@ The accelerated Collatz map D(n)=n/2 for even n and (3n+1)/2 for odd n differs f
 - Run #print axioms on each exported theorem.
 - Verify exact source statement and Lean/Mathlib pin.
 - Regression tests are diagnostic only; they are not substitutes for the universal theorem.
+
+
+## Finite diagnostic tests run on 2026-10-26 (not formal proof)
+A local exact-integer Python diagnostic was run over every odd start n₀<2000 and the first eight odd-only Syracuse steps (1,000 starting values, 8,000 orbit prefixes). At each prefix it checked:
+- the corrected affine identity exactly;
+- the terminal congruence modulo 3^N;
+- the bound C ≤ 2^(A−N)(3^N−2^N).
+
+All 8,000 checks passed. This validates the implementation of these identities on the tested range only; it is not a proof of the identities for all N and does not establish global descent. The induction proof above remains the mathematical proof obligation, and the test is only a regression diagnostic.
