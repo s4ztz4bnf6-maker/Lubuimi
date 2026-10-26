@@ -51,3 +51,5 @@ jobs:
           lake env lean BBMSTPointwiseUpdate.lean
       - name: Compile weighted fiber normalization bridge
         run: lake env lean BBMSTWeightedFiberNormalization.lean
+      - name: Compile source-multiplier weighted mass conservation
+        run: lake env lean BBMSTSourceWeightedMassConservation.lean
