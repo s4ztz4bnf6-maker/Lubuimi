@@ -53,8 +53,9 @@ theorem removedFraction_bounds (α δ : ℚ)
 theorem removedFraction_zero (δ : ℚ) (hδ0 : 0 ≤ δ) (hδ1 : δ < 1) :
     removedFraction 0 δ = 0 := by
   have hden : 0 < 1 - δ := by linarith
+  have hnum : 0 - δ ≤ 0 := by linarith [hδ0]
   have hquot : (0 - δ) / (1 - δ) ≤ 0 :=
-    div_nonpos_of_nonpos_of_nonneg (by linarith) (le_of_lt hden)
+    div_nonpos_of_nonpos_of_nonneg hnum (le_of_lt hden)
   unfold removedFraction
   rw [max_eq_left hquot]
 
