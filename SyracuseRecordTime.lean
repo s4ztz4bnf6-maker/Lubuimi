@@ -95,6 +95,34 @@ theorem valuationSurplus_eq_sum_local_drift
         _ = ∑ k ∈ Finset.range (N + 1), (5 * (a k : ℤ) - 9) := by
               rw [Finset.sum_range_succ]
 
+
+/-- Every weak record of the surplus sequence is nonnegative, because the
+initial surplus is zero. Thus a suffix-certificate endpoint automatically
+has cumulative valuation at least 9N/5. -/
+theorem record_time_surplus_nonneg
+    (a : Nat → Nat) (N : Nat)
+    (hrecord : ∀ j, j < N → valuationSurplus a N ≥ valuationSurplus a j) :
+    0 ≤ valuationSurplus a N := by
+  by_cases hN : N = 0
+  · subst N
+    simp [valuationSurplus, prefixExponentSum]
+  · have hNpos : 0 < N := Nat.pos_of_ne_zero hN
+    have hstart : valuationSurplus a 0 = 0 := by
+      simp [valuationSurplus, prefixExponentSum]
+    have hle := hrecord 0 hNpos
+    linarith
+
+/-- The record-time nonnegativity condition is exactly the global prefix
+valuation surplus inequality 5 A_N ≥ 9N. -/
+theorem record_time_surplus_iff_exponent_threshold
+    (a : Nat → Nat) (N : Nat) :
+    0 ≤ valuationSurplus a N ↔
+      9 * (N : ℤ) ≤ 5 * (prefixExponentSum a N : ℤ) := by
+  simp [valuationSurplus]
+
+#print axioms record_time_surplus_nonneg
+#print axioms record_time_surplus_iff_exponent_threshold
+
 #print axioms valuationSurplus_eq_sum_local_drift
 
 end SyracuseAudit
