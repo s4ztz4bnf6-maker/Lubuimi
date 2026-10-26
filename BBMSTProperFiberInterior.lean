@@ -169,7 +169,9 @@ theorem finite_proper_fiber_card_ratio_sharp_floor
   have hcard : t.card < s.card := Finset.card_lt_card hts
   have hqk : (1 : ℚ) ≤ (s.card : ℚ) - (t.card : ℚ) := by
     have hn : t.card + 1 ≤ s.card := Nat.succ_le_iff.mpr hcard
-    exact_mod_cast (by omega : 1 ≤ s.card - t.card)
+    have hnQ : (t.card : ℚ) + 1 ≤ (s.card : ℚ) := by
+      exact_mod_cast hn
+    linarith
   have hprod :
       (s.card : ℚ) - 1 ≤
         (t.card : ℚ) * ((s.card : ℚ) - (t.card : ℚ)) := by
