@@ -142,5 +142,7 @@ theorem coveredMultiplier_lt_inv
 #print axioms coveredMultiplier_nonneg
 #print axioms uncoveredMultiplier_pos
 #print axioms pointwise_update_normalized
+#print axioms zero_fraction_weighted_update
+#print axioms full_fraction_weighted_update
 
 end BBMSTPointwiseUpdate
