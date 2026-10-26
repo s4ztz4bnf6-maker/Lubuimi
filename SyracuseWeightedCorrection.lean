@@ -728,11 +728,11 @@ theorem signedCorrectionTerm_negative_of_residue_seven_mod_eight
     (hnext : next % 2 = 1)
     (hstep : 2 ^ a (m + j) * next = 3 * n + 1)
     (hres : n % 8 = 7) :
-    signedCorrectionTerm A a m j < 0 := by
+    CollatzSyracuseAudit.signedCorrectionTerm A a m j < 0 := by
   have hmod4 : n % 4 = 3 := by omega
   have ha : a (m + j) = 1 :=
-    (valuation_one_iff_residue_three_mod_four
+    (CollatzSyracuseAudit.valuation_one_iff_residue_three_mod_four
       n next (a (m + j)) hn hnext hstep).mpr hmod4
-  exact (signedCorrectionTerm_sign A a m j).1 ha
+  exact (CollatzSyracuseAudit.signedCorrectionTerm_sign A a m j).1 ha
 
 #print axioms signedCorrectionTerm_negative_of_residue_seven_mod_eight
