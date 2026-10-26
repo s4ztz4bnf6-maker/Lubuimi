@@ -31,6 +31,34 @@ theorem affineCompositionRhs_closed_form (a n : Nat → Nat) :
       rw [ih]
       ring
 
+
+/-- Exact descent criterion for an affine block, separated from the
+Syracuse-specific powers. The hypothesis q ≤ p is essential because Nat
+subtraction is truncated. -/
+theorem nat_descent_iff_correction_bound
+    (p q n₀ nN C : ℕ)
+    (hp : 0 < p) (hqp : q ≤ p)
+    (hidentity : p * nN = q * n₀ + C) :
+    nN < n₀ ↔ C < (p - q) * n₀ := by
+  have hmul : q * n₀ ≤ p * n₀ := Nat.mul_le_mul_right n₀ hqp
+  have hsub : (p - q) * n₀ = p * n₀ - q * n₀ := by
+    rw [Nat.sub_mul]
+  constructor
+  · intro hdesc
+    have hstrict : p * nN < p * n₀ :=
+      Nat.mul_lt_mul_of_pos_left hdesc hp
+    rw [hidentity] at hstrict
+    rw [hsub]
+    omega
+  · intro hbound
+    have hstrict : q * n₀ + C < p * n₀ := by
+      rw [← hsub] at hbound
+      omega
+    rw [← hidentity] at hstrict
+    exact (Nat.mul_lt_mul_left hp).mp hstrict
+
+#print axioms nat_descent_iff_correction_bound
+
 #print axioms affineCompositionRhs_closed_form
 
 end SyracuseAudit
