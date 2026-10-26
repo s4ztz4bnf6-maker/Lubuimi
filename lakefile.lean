@@ -20,3 +20,6 @@ lean_lib BBMSTProbabilityInterface where
 
 lean_lib BBMSTProperFiberInterior where
   globs := #[.one `BBMSTProperFiberInterior]
+
+lean_lib BBMSTScalarMoment where
+  globs := #[.one `BBMSTScalarMoment]
