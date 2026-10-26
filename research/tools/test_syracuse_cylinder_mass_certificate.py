@@ -14,18 +14,14 @@ class CylinderMassCertificateTests(unittest.TestCase):
             self.assertTrue(cert["mass_identity_verified"])
             self.assertEqual(tail_mass(1, cutoff), Fraction(1, 1 << cutoff))
 
-    def test_tail_formula_matches_direct_sum(self):
+    def test_tail_closed_form(self):
         for length in range(1, 8):
             for cutoff in range(0, 40):
-                direct = sum(
-                    (word_mass(length, total) for total in range(cutoff + 1, 300)),
-                    Fraction(0, 1),
-                )
-                # For these ranges, the omitted tail beyond total=299 is negligible
-                # but not zero; instead compare via the exact finite cumulative identity.
                 if cutoff >= length:
-                    formula = Fraction(sum(comb(cutoff, j) for j in range(length)),
-                                        1 << cutoff)
+                    formula = Fraction(
+                        sum(comb(cutoff, j) for j in range(length)),
+                        1 << cutoff,
+                    )
                     self.assertEqual(tail_mass(length, cutoff), formula)
                 else:
                     self.assertEqual(tail_mass(length, cutoff), Fraction(1, 1))
@@ -37,6 +33,15 @@ class CylinderMassCertificateTests(unittest.TestCase):
                     cumulative_mass(length, cutoff) + tail_mass(length, cutoff),
                     Fraction(1, 1),
                 )
+
+    def test_mass_for_total_matches_composition_count(self):
+        for length in range(1, 8):
+            for total in range(1, 40):
+                expected = (
+                    Fraction(comb(total - 1, length - 1), 1 << total)
+                    if total >= length else Fraction(0, 1)
+                )
+                self.assertEqual(word_mass(length, total), expected)
 
     def test_invalid_inputs(self):
         for args in [(0, 3), (-1, 3), (True, 3), (2, -1), (2, True)]:
