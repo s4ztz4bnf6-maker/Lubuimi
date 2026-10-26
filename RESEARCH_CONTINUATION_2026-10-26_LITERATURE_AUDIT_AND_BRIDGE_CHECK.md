@@ -98,3 +98,24 @@ A successful build certifies the formal statement under the kernel's foundations
 4. Search for a uniform block theorem or well-founded potential; do not infer it from average drift, compactness or almost-all results.
 
 No global solution is claimed by this note. Its contribution is to replace unproved proposed bridges with exact, auditable obligations and preserve the valid local work.
+
+
+## 5. Additional current benchmark: checked Collatz density results
+
+The current ProofAtlas catalog records a Lean-checked formalization of Tao's almost-bounded theorem and a separate accepted result, *Natural-Density Collatz Descent in Logarithmic Time*. The latter states that density-one many odd starts descend within at most 145 Syracuse steps times log N, and density-one many positive starts descend within at most 436 raw Collatz steps times log N. The page records a passed build, no unfinished proof steps, and an accepted formalization; its explicit boundary says that a density-zero exceptional set may remain and that this is not universal convergence or arrival at 1.
+
+Sources:
+- Tao formalization and exact scope: https://www.proofatlas.ai/formalizations/tao-almost-bounded-orbits/
+- Natural-density logarithmic-time result and scope: https://www.proofatlas.ai/formalizations/natural-density-log-time-collatz/
+- ProofAtlas formalization catalog: https://www.proofatlas.ai/formalizations/
+- OpenAI's October 2026 mathematics release, including Lean artifacts and research details: https://openai.com/index/sharing-ai-progress-in-mathematics/
+- Research-method context: Quanta's August 2026 survey of AI-assisted Erdős work: https://www.quantamagazine.org/why-the-legendary-erdos-problems-are-falling-to-ai-20260803/
+- Formal reliability context: Hales/Tao, October 9, 2026: https://terrytao.wordpress.com/2026/10/09/what-mathematicians-should-know-about-the-lean-theorem-proverquestions-of-reliability-and-ai/
+
+### Consequence for our Syracuse project
+
+These public results should be treated as strong comparison theorems and potential sources of reusable ideas, not as proof of the universal conjecture. They show that a quantitative phase-gap / mixing / bad-set architecture can yield much more than a qualitative average-drift heuristic. The universal gap remains exactly the exceptional set: density one, even with an explicit logarithmic descent clock, does not imply that every individual odd start descends. A next research task is to inspect the checked phase-gap and descent interfaces, determine whether any exact finite-block lemma can be reused in our smaller affine framework, and then isolate what extra deterministic invariant would eliminate all exceptional starts. No such invariant has been established here.
+
+### Consequence for BBMST and audit methodology
+
+The public AI-mathematics releases support a workflow of pinned sources, explicit theorem statements, formal artifacts, and external review; they do not justify assuming that a promising new name or analogy constitutes a theorem. In our BBMST branch, the highest-value reuse remains source-faithful formalization of the finite-product hyperplane model and its actual probability/mass argument. The unproved “transversal positivity” proposal must stay a conjectural route until its definitions and implication are proved.
