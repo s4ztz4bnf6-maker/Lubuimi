@@ -35,6 +35,8 @@ jobs:
         run: lake build BBMSTFiberMassCore BBMSTProbabilityInterface
       - name: Compile strict interior-mass witness theorem
         run: lake env lean BBMSTStrictInteriorMass.lean
+      - name: Compile finite hyperplane-fiber geometry lemmas
+        run: lake env lean BBMSTHyperplaneFiberGeometry.lean
       - name: Build and compile quantitative interior-band bound
         run: |
           lake build BBMSTInteriorBand
