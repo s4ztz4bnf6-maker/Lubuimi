@@ -34,7 +34,6 @@ theorem three_step_affine_identity
   calc
     2 ^ (a + b + c) * w = (2 ^ a * 2 ^ b * 2 ^ c) * w := by
       rw [pow_add, pow_add]
-      ring
     _ = (2 ^ a * 2 ^ b) * (2 ^ c * w) := by ring
     _ = (2 ^ a * 2 ^ b) * (3 * z + 1) := by rw [h₃]
     _ = 3 * ((2 ^ a * 2 ^ b) * z) + 2 ^ (a + b) := by
@@ -64,7 +63,6 @@ theorem four_step_affine_identity
     2 ^ (a + b + c + d) * v =
         (2 ^ a * 2 ^ b * 2 ^ c * 2 ^ d) * v := by
       rw [pow_add, pow_add, pow_add]
-      ring
     _ = (2 ^ a * 2 ^ b * 2 ^ c) * (2 ^ d * v) := by ring
     _ = (2 ^ a * 2 ^ b * 2 ^ c) * (3 * w + 1) := by rw [h₄]
     _ = 3 * ((2 ^ a * 2 ^ b * 2 ^ c) * w) + 2 ^ (a + b + c) := by
