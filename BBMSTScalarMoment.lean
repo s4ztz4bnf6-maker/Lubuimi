@@ -50,7 +50,7 @@ theorem removedFraction_bounds (α δ : ℚ)
       nlinarith
 
 /-- At α = 0 the removed mass fraction is exactly zero. -/
-theorem removedFraction_zero (δ : ℚ) (hδ1 : δ < 1) :
+theorem removedFraction_zero (δ : ℚ) (hδ0 : 0 ≤ δ) (hδ1 : δ < 1) :
     removedFraction 0 δ = 0 := by
   have hden : 0 < 1 - δ := by linarith
   have hquot : (0 - δ) / (1 - δ) ≤ 0 :=
