@@ -164,5 +164,6 @@ theorem constant_valuation_one_identity
                 rw [pow_succ]
                 ring
 
+#print axioms constant_valuation_one_identity
 
 end SyracuseAudit
