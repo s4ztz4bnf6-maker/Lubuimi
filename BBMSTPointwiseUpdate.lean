@@ -69,6 +69,30 @@ theorem pointwise_update_normalized
     ring
 
 
+ /-- Endpoint audit: when the covered fraction is zero, the covered
+component is empty and the source update leaves the uncovered component
+with multiplier one. This theorem records the weighted algebra only; the
+empty covered component is not assigned a conditional probability. -/
+theorem zero_fraction_weighted_update
+    (δ : ℚ) (hδ0 : 0 < δ) (hδ1 : δ < 1) :
+    (0 : ℚ) * coveredMultiplier 0 δ +
+      (1 - 0) * uncoveredMultiplier 0 δ = 1 := by
+  have hden : 0 < 1 - δ := by linarith
+  have hrecip : 1 ≤ (1 : ℚ) / (1 - δ) := by
+    rw [le_div_iff₀ hden]
+    nlinarith
+  simp [coveredMultiplier, uncoveredMultiplier, hrecip]
+
+/-- Endpoint audit: when the covered fraction is one, the uncovered
+component is empty. Again, the zero-weight term is bookkeeping, not a
+conditional probability on an empty set. -/
+theorem full_fraction_weighted_update
+    (δ : ℚ) (hδ0 : 0 < δ) (hδ1 : δ < 1) :
+    (1 : ℚ) * coveredMultiplier 1 δ +
+      (1 - 1) * uncoveredMultiplier 1 δ = 1 := by
+  have hden : 1 - δ ≠ 0 := by linarith
+  simp [coveredMultiplier, uncoveredMultiplier, hden]
+
 /-- The covered multiplier is bounded by the reciprocal covered mass.
 This is the sharp elementary envelope needed when bounding pointwise
 distortion by the fiber mass. -/
