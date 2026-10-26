@@ -62,10 +62,11 @@ def fixesCompatiblePoint {n : ℕ} {α : Type*}
     | some a => v i = a
 
 /-- Fiber of a fixed-coordinate hyperplane above a prefix x. -/
-def hyperplaneLastFiber {n : ℕ} {α : Type*} [DecidableEq α]
+noncomputable def hyperplaneLastFiber {n : ℕ} {α : Type*} [DecidableEq α]
     (S : Finset α) (h : (Fin n ⊕ Unit) → Option α)
-    (x : Fin n → α) : Finset α :=
-  S.filter (fun y =>
+    (x : Fin n → α) : Finset α := by
+  classical
+  exact S.filter (fun y =>
     fixesCompatiblePoint h (Sum.elim x (fun _ : Unit => y)))
 
 /-- If the hyperplane fixes the last coordinate, then over any prefix its
@@ -78,6 +79,7 @@ theorem hyperplane_last_fiber_card_le_one
     (x : Fin n → α) (a : α)
     (hlast : h (Sum.inr ()) = some a) :
     (hyperplaneLastFiber S h x).card ≤ 1 := by
+  classical
   apply Finset.card_le_one.mpr
   intro y hy z hz
   have hyMem := (Finset.mem_filter.mp hy).2
