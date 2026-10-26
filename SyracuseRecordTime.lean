@@ -54,7 +54,6 @@ theorem all_suffix_inequalities_iff_record_time
 #print axioms valuationSurplus_increment
 #print axioms all_suffix_inequalities_iff_record_time
 
-
 /-- The surplus rises at a step exactly when the valuation is at least two.
 This isolates the local source of a possible record-time certificate; it
 does not assert that such record times occur with the frequency needed for
@@ -75,7 +74,6 @@ theorem valuationSurplus_increment_le_neg_four
   have ha' : (a k : ℤ) ≤ 1 := by exact_mod_cast ha
   linarith
 
-
 /-- Exact cumulative drift identity: the surplus at time N is the sum of
 all local increments. This makes the record-time criterion a finite
 prefix-sum constraint on the valuations, not merely a one-step observation. -/
@@ -90,11 +88,13 @@ theorem valuationSurplus_eq_sum_local_drift
       calc
         valuationSurplus a (N + 1) =
             valuationSurplus a N + (5 * (a N : ℤ) - 9) := by
-              rw [valuationSurplus_increment]
-              ring
+              have hinc := valuationSurplus_increment a N
+              linarith
         _ = (∑ k ∈ Finset.range N, (5 * (a k : ℤ) - 9)) +
               (5 * (a N : ℤ) - 9) := by rw [ih]
         _ = ∑ k ∈ Finset.range (N + 1), (5 * (a k : ℤ) - 9) := by
               rw [Finset.sum_range_succ]
 
 #print axioms valuationSurplus_eq_sum_local_drift
+
+end SyracuseAudit
