@@ -123,7 +123,6 @@ theorem blockCorrection_pos_of_nonempty (as : List ℕ) (hne : as ≠ []) :
   | nil => contradiction
   | cons a as =>
       simp [blockCorrection]
-      positivity
 
 /--
 Exact descent criterion with no subtraction or division: the endpoint is
