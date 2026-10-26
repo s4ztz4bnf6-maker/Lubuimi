@@ -67,3 +67,20 @@ ProofAtlas records a checked logarithmic-time power-saving descent theorem:
 https://www.proofatlas.ai/formalizations/terras-log-time-power-saving/
 
 Its stated conclusion bounds the proportion of starts below N that fail to descend within a logarithmic number of accelerated steps by 10^7 N^(-1/100), for N >= 15552. It does not prove that every orbit descends or reaches 1. The proposed bridge should reuse compatible definitions where possible, not restate that result as a new theorem.
+
+
+## Update 2026-10-26: direct comparison with a pinned existing Lean source
+
+The pinned source was fetched and inspected, not merely discovered by search:
+https://github.com/neljaouh/uniform-syracuse-atoms-lean/blob/17e43a340f22ccc0cbd7063a0862a93f72373979/Erdos1135/Terras/Parity/Residue.lean
+
+Relevant declarations in that file include:
+- `same_parityPrefix_iff_modEq_pow_two`: parity prefixes of length k agree iff the starts are congruent modulo 2^k.
+- `unique_residue_for_word`: each parity word determines exactly one residue class modulo 2^k.
+- `accelerated_iterate_add_two_pow_mul_of_prefix`: the accelerated iterate has an affine tail formula on a fixed prefix class.
+
+This reduces the residue-class part of the project: we should not duplicate it. The remaining precise bridge is to define the expansion W of an exact valuation word, prove by induction that its parity-prefix predicate is equivalent to the valuation predicate, and then invoke the existing unique-residue theorem at k=A_N+1. The target theorem should be stated for the ordinary map convention used by that repository; the accelerated map there is the one-step map (even n -> n/2, odd n -> (3n+1)/2), not the odd-only Syracuse map T. Keep these two maps explicitly distinct.
+
+A caveat from the source inspection: its residue theorem is general over natural starts, while our valuation statement concerns positive odd starts and exact 2-adic valuations. The bridge must carry the oddness and positivity hypotheses explicitly. No import or Lean build was run here, and no proof of the bridge has yet been added.
+
+This is a reduction of proof obligations, not a new theorem result. The residue-class bijection is prior work.
