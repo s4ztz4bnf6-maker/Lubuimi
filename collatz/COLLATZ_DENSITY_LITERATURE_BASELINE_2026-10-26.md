@@ -26,20 +26,43 @@ The following public pages report formalized results, with their own stated veri
 
 These are literature baselines to inspect and pin, not results independently rechecked in this note. Before importing any theorem into our project, archive the exact Lean declaration, source revision, Lean/mathlib versions, dependency closure, build/check evidence, and an independent statement-fidelity comparison.
 
+## New leads on valuation cylinders and pointwise descent
+The 2026 literature search surfaced several very recent papers/preprints that use vocabulary close to our current program. They are leads for an audit, not accepted theorems in this repository:
+
+- Seyma Yaman Kayadibi, *Canonical Shells and Valuation-Cylinder Covers for Delayed First Descent in Accelerated Odd Collatz Dynamics* (SSRN, July 2026), DOI 10.2139/ssrn.7564459. Its abstract describes exact residue cylinders, canonical size shells, and a finite audit up to 10^7. Crucially, it says universal closure of the cylinder trees is equivalent to universal first descent; that equivalence reformulates the open global step rather than proving its unbounded closure. This is directly relevant to how we should state our own stopping point.
+- Miguel Cerdá Bennassar, *Structural reduction of the Collatz conjecture: segments, portals and 2-adic survival sets*, Zenodo preprint series, including version 1.2 of Part VI (DOI 10.5281/zenodo.18879225). The record claims a reduction to a remaining question about mixed orbit classes and unbounded growth. It is a preprint, not an established resolution; the exact reduction and its assumptions must be checked line by line before reuse.
+- Other 2026 SSRN papers claim exact valuation residual bounds and cylinder-counting results. They should be evaluated by extracting the precise theorem, checking every quantifier, and looking for whether the claimed global conclusion is only equivalent to the Collatz conjecture or is actually proved.
+
+Audit protocol for these leads:
+1. Download and pin the exact version; do not cite an abstract as proof.
+2. Identify the exact map (raw, accelerated, or odd-only), state space, and time convention.
+3. Re-derive the finite affine identity independently and test the first nontrivial lengths N=1,2.
+4. Separate finite shell coverage from a theorem that closes all shells uniformly for unbounded N.
+5. Search for the exact pointwise quantifier: does the result prove a descent block for every n>1, or only for almost all n, a positive-density set, or a bounded range?
+6. If the last step is merely shown equivalent to universal descent, record it as the remaining open obligation, not as a solution.
+
 ## Quantifier and density audit
 Do not conflate:
 - positive lower natural density of starts reaching 1;
 - natural-density-one descent within a specified time bound;
 - logarithmic-density-one orbit minima below a diverging threshold;
 - a power-saving upper bound on a finite-scale exceptional fraction;
+- a finite verification through a cutoff;
 - every positive integer eventually reaching 1.
 
-The first four can hold while a zero-density exceptional set remains. Universal Collatz requires eliminating every possible exceptional positive integer, not merely showing that the exceptional set has density zero. A quantitative density bound may shrink the exceptional set at finite scales, but unless it gives a pointwise bound for every input, it still leaves the universal problem open.
+The first five can hold while a zero-density exceptional set remains. Universal Collatz requires eliminating every possible exceptional positive integer, not merely showing that the exceptional set has density zero. A quantitative density bound may shrink the exceptional set at finite scales, but unless it gives a pointwise bound for every input, it still leaves the universal problem open.
 
-## New integration target
-The valuation-word congruence and cycle filter in the companion note should be tested against these density results as a separate structural layer. They may constrain finite valuation patterns or periodic orbits; they do not currently close the exceptional-set gap. The exact cycle condition derived from the affine identity is:
-`(2^A-3^N)n_0 = C > 0`, hence `2^A>3^N`, with `C = Σ_{j=0}^{N-1} 3^{N-1-j}2^{p_j}`.
-For a proposed word, also require `(2^A-3^N) | C` and verify every actual valuation. This is a finite necessary-condition filter, not a sufficient cycle construction and not a global descent proof. The companion note now includes the regression vector for the known cycle n=1 and an exact finite-word reconstruction algorithm; that is a code-validation aid, not evidence against nontrivial cycles.
+## New integration target: exact drift with additive correction
+The companion note now records the exact identity for a realized word a₀,…,a_{N−1}, A=Σaᵢ, pⱼ=Σ_{i<j}aᵢ and C=Σ3^(N−1−j)2^(pⱼ):
+
+    n_N = (3^N n₀ + C)/2^A
+    log(n_N/n₀) = N log 3 − A log 2 + log(1 + C/(3^N n₀)).
+
+Thus a block descends in ordinary size exactly when
+`A log 2 > N log 3 + log(1+C/(3^N n₀))`.
+The positive additive correction is why the average valuation condition `A/N>log₂(3)` alone does not prove descent. From aᵢ≥1 we also have the exact bound `C ≤ 2^(A−N)(3^N−2^N)`, but it still depends on A and n₀ and does not supply the missing uniform pointwise inequality. The next proof target is to control this correction and the cumulative valuation excess for every orbit that has not descended, not merely for a density-one family.
+
+The exact cycle condition is `(2^A-3^N)n₀ = C > 0`, hence `2^A>3^N`. For a proposed word, also require `(2^A-3^N) | C` and verify every actual valuation. This is a finite necessary-condition filter, not a sufficient cycle construction and not a global descent proof.
 
 ## Formal reliability update
 The Lean FRO's August 2026 kernel-bug postmortems document more than one layer of failure: a genuine official-kernel soundness bug accepted a bogus Collatz disproof, and an independent checker had an unrelated bug that allowed that particular forged proof to pass. Later kernel-bug-hunt reporting says further kernel/runtime issues were found and describes plans for exported-proof rechecking and multiple checker backends. Therefore:
