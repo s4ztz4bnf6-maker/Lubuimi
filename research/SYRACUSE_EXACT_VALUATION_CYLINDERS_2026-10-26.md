@@ -51,23 +51,29 @@ This is a finite-cylinder classification for prescribed positive exponent words.
 
 ## 6. Executable finite certificate added (2026-10-26)
 
-The accompanying script `research/tools/syracuse_valuation_cylinder_certificate.py` computes the unique residue class using modular inversion and checks direct orbit realizations for several lifts. Regression tests are in `research/tools/test_syracuse_valuation_cylinder_certificate.py`.
+The accompanying script research/tools/syracuse_valuation_cylinder_certificate.py computes the unique residue class using modular inversion and checks direct orbit realizations for several lifts. Regression tests are in research/tools/test_syracuse_valuation_cylinder_certificate.py.
 
 For the word (1,4), the tool returns the class n_0 = 3 (mod 64), whose first representative gives 3 -> 5 -> 1. A local independent check exercised 119 positive words with total exponent at most 7 (under a maximum word length of 5), checking three lifts per word; all matched their prescribed valuation words.
 
 This is a concrete implementation check, not Lean verification. The general theorem above still requires formalization and a full project build. The tool itself does not establish an Archimedean descent bound: each cylinder contains arbitrarily large starts, and the residue-class structure is 2-adic rather than a monotonicity theorem over the positive integers.
 
-## 7. New structural observation: cylinder measure is exact, descent is a separate observable
+## 7. Exact cylinder measure and new tail formula
 
-For a fixed word a=(a_0,...,a_(N-1)), the class is one residue modulo 2^(A_N+1). Among all integers its natural density is 2^(-(A_N+1)); conditioned on an odd starting integer, its relative density is exactly 2^(-A_N). This follows directly because the odd integers occupy one of two residue classes modulo 2, and the cylinder is a single odd class modulo 2^(A_N+1).
+For a fixed word a=(a_0,...,a_(N-1)), the class is one residue modulo 2^(A+1). Its natural density among integers is 2^(-(A+1)); conditioned on an odd starting integer, its relative measure is exactly 2^(-A). For fixed length N, there are binomial(A-1,N-1) positive words whose exponent sum is A. Thus the distribution of the total valuation A under normalized Haar measure on odd 2-adic starts is exactly
 
-Consequently, for fixed length N the cylinders indexed by all positive words of length N have total conditional 2-adic measure
-sum_{a_0,...,a_(N-1)>=1} 2^(-sum a_i) = (sum_{a>=1}2^(-a))^N = 1.
-This is a partition-of-mass identity, not a descent theorem. It formalizes the valuation process as a probability-preserving symbolic coding under normalized Haar measure on odd 2-adic integers. The key missing estimate is a joint bound linking this cylinder measure to the real-valued endpoint n_N/n_0; Haar measure does not control the least positive representative in the required way.
+P(A=a) = binomial(a-1,N-1) / 2^a, for a >= N.
 
-A candidate next lemma is therefore deliberately modest: formalize the exact cylinder measure and the mass identity first, then separately seek an inequality on the affine correction term
-sum_{j<N} log(1+1/(3 n_j)).
-Any argument that treats the valuation digits as independent for a fixed deterministic integer orbit must prove that dependence claim; the geometric Haar distribution alone is insufficient.
+Summing over all words gives the mass identity
+sum_{a_0,...,a_(N-1)>=1} 2^(-sum a_i)
+= (sum_{a>=1}2^(-a))^N = 1.
+
+A further exact tail identity follows for any integer M >= N:
+P(A > M) = 2^(-M) sum_{j=0}^{N-1} binomial(M,j).
+For M<N the tail is 1. Equivalently, the total mass of words whose valuation sum exceeds M is an explicit rational number, not a simulation estimate.
+
+The tool research/tools/syracuse_cylinder_mass_certificate.py computes this mass and tail with exact integer/rational arithmetic; regression tests are in research/tools/test_syracuse_cylinder_mass_certificate.py. An independent arithmetic check covered N=1,...,9 and M=0,...,49 (450 mass-conservation pairs), plus 273 word-mass cases; every identity held exactly.
+
+This quantifies how much 2-adic symbolic mass lies beyond a chosen valuation-sum cutoff. It still does not bound the least positive integer in a cylinder or the real-valued endpoint n_N/n_0. The key unsolved bridge remains a uniform archimedean estimate; Haar measure cannot be treated as a deterministic-orbit descent proof.
 
 ## 8. Literature/reliability audit (2026-10-26)
 
