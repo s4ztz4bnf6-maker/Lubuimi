@@ -7,7 +7,7 @@
 
   TWO ADMITTED PLACEHOLDERS:
     • admitted_sieve_criterion skips the geometric/probabilistic interface and
-      asserts noncoverage directly for the repository's general CoveringSystem.
+      asserts noncoverage directly for square-free CoveringSystem inputs.
     • admitted_sf_sieve_certificate_exists assumes a parameter/certificate existence statement for
       every finite list of odd primes. That is not a faithful transcription
       of the paper's finite certificate plus large-prime recurrence.
@@ -516,8 +516,8 @@ theorem sum_min_max_identity (a b : ℚ) :
     and asserts noncoverage directly for the repository's general CoveringSystem.
     Its source-faithfulness is not established. -/
 axiom admitted_sieve_criterion
-    {K : Nat} (cs : CoveringSystem K) (h_odd : CS_allOdd cs)
-    (δs : List ℚ) (ca1 ca3 : ℚ)
+    {K : Nat} (cs : CoveringSystem K) (h_sf : CS_squarefree cs)
+    (h_odd : CS_allOdd cs) (δs : List ℚ) (ca1 ca3 : ℚ)
     (hca1_ge : 1 ≤ ca1)
     (hca13 : ca1 ≤ ca3)
     (hbase : 0 ≤ ca3 - 2 * ca1 + 1)
@@ -800,7 +800,7 @@ private theorem sfBlockSizes_eq_map {K : Nat} (cs : CoveringSystem K)
 
 /-- Conditional derivation only: depends transitively on the two admitted sieve interfaces above. This is not an axiom-free proof of the Erdős–Selfridge conjecture. -/
 theorem erdos_selfridge_conditional_on_admitted_sieve_interfaces
-    (K : Nat) (cs : CoveringSystem K) :
+    (K : Nat) (cs : CoveringSystem K) (h_sf : CS_squarefree cs) :
     ¬CS_allOdd cs := by
   intro h_odd
   let primes := extractPrimes cs
@@ -825,7 +825,7 @@ theorem erdos_selfridge_conditional_on_admitted_sieve_interfaces
     simp [primes]
   have hδ_len_nonsf : δs.length = (nonsfBlockSizes cs).length := by
     omega
-  exact admitted_sieve_criterion cs h_odd δs ca1 ca3 hca1 hca13 hbase
+  exact admitted_sieve_criterion cs h_sf h_odd δs ca1 ca3 hca1 hca13 hbase
     hδ_valid hδ_len_nonsf h_nonsf_lt
 
 
