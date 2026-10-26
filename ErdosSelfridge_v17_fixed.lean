@@ -515,10 +515,14 @@ theorem sum_min_max_identity (a b : ℚ) :
     using Theorem 3.2. This axiom skips that geometric/probabilistic interface
     and asserts noncoverage directly for the repository's general CoveringSystem.
     Its source-faithfulness is not established. -/
-axiom sieve_criterion
+axiom admitted_sieve_criterion
     {K : Nat} (cs : CoveringSystem K) (h_odd : CS_allOdd cs)
     (δs : List ℚ) (ca1 ca3 : ℚ)
     (hca1_ge : 1 ≤ ca1)
+    (hca13 : ca1 ≤ ca3)
+    (hbase : 0 ≤ ca3 - 2 * ca1 + 1)
+    (hδ_valid : ∀ i, i < δs.length → 0 < δs.getD i 0 ∧ δs.getD i 0 < 1)
+    (hδ_len : δs.length = (nonsfBlockSizes cs).length)
     (h_sum_lt : sieveSum ca1 ca3 (nonsfBlockSizes cs) δs < 1) : False
 
 /-- **Unproved placeholder; not BBMST Theorem 1.1 or its finite certificate.**
@@ -531,7 +535,7 @@ axiom sieve_criterion
 
     AUDIT WARNING: positivity and length equality below are admitted assumptions.
     They must not be treated as consequences of the paper. -/
-axiom sf_sieve_lt_one
+axiom admitted_sf_sieve_certificate_exists
     (primes : List Nat) (h_primes : ∀ p ∈ primes, Nat.Prime p ∧ p % 2 = 1) :
     ∃ (δs : List ℚ) (ca1 ca3 : ℚ),
       sieveSum ca1 ca3 (primes.map (fun p => (p : ℚ) - 1)) δs < 1
@@ -802,7 +806,7 @@ theorem erdos_selfridge_conditional_on_admitted_sieve_interfaces
   let primes := extractPrimes cs
   have h_primes := extractPrimes_valid cs h_odd
   obtain ⟨δs, ca1, ca3, h_sf_lt, hca1, hca13, hbase, hδ_valid, _hδ_len⟩ :=
-    sf_sieve_lt_one primes h_primes
+    admitted_sf_sieve_certificate_exists primes h_primes
   have hca1_pos : 0 < ca1 := by linarith
   have h_blocks_le := sf_le_nonsf_blocks cs h_odd
   have h_blocks_pos := sfBlockSizes_pos cs h_odd
@@ -816,14 +820,20 @@ theorem erdos_selfridge_conditional_on_admitted_sieve_interfaces
       _ = sieveSum ca1 ca3 (primes.map (fun p => (p : ℚ) - 1)) δs := by
           rw [sfBlockSizes_eq_map cs h_primes]
       _ < 1 := h_sf_lt
-  exact sieve_criterion cs h_odd δs ca1 ca3 hca1 h_nonsf_lt
+  have h_sf_len : (sfBlockSizes cs).length = primes.length := by
+    rw [sfBlockSizes_eq_map cs h_primes]
+    simp
+  have hδ_len_nonsf : δs.length = (nonsfBlockSizes cs).length := by
+    omega
+  exact admitted_sieve_criterion cs h_odd δs ca1 ca3 hca1 hca13 hbase
+    hδ_valid hδ_len_nonsf h_nonsf_lt
 
 
 /-
   AXIOM AUDIT:
   The theorem above is not an axiom-free kernel proof of the conjecture.
   Lean's dependency report must continue to expose the two admitted BBMST
-  interfaces (`sieve_criterion` and `sf_sieve_lt_one`).
+  interfaces (`admitted_sieve_criterion` and `admitted_sf_sieve_certificate_exists`).
   This diagnostic is intentionally kept in the source so CI logs make the
   dependency boundary visible; replacing these axioms with proved statements
   (or fully stated, source-faithful hypotheses) remains a separate obligation.
