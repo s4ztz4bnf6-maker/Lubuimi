@@ -97,7 +97,7 @@ strictly between zero and one. Combined with a positive prefix mass, this is
 the local geometric witness needed for positive interior mass. -/
 theorem nonempty_small_hyperplane_union_has_strict_interior_fraction
     {α ι : Type*} [DecidableEq α] [DecidableEq ι]
-    (S H : Finset α) (I : Finset ι)
+    (S : Finset α) (I : Finset ι)
     (fiber : ι → Finset α)
     (hcard : ∀ i ∈ I, (fiber i).card ≤ 1)
     (hsmall : (I.card : ℕ) < S.card)
