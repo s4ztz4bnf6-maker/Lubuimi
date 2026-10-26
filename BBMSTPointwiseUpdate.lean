@@ -7,9 +7,9 @@ set_option autoImplicit false
 
 This module formalizes the source's two distinct pointwise multipliers.
 It proves their weighted normalization for a genuine interior fiber
-(0 < alpha < 1, 0 < delta < 1). It does not yet construct the evolving
-probability measure or prove the full finite-set distortion statements
-of Lemma 2.1.
+(0 < alpha < 1, 0 < delta < 1), plus basic admissibility bounds. It does not
+yet construct the evolving probability measure or prove the full finite-set
+distortion statements of Lemma 2.1.
 -/
 
 namespace BBMSTPointwiseUpdate
@@ -21,6 +21,19 @@ noncomputable def coveredMultiplier (α δ : ℚ) : ℚ :=
 /-- Multiplier on points outside the removed/covered part of a fiber. -/
 noncomputable def uncoveredMultiplier (α δ : ℚ) : ℚ :=
   min (1 / (1 - α)) (1 / (1 - δ))
+
+/-- The covered multiplier is always nonnegative. -/
+theorem coveredMultiplier_nonneg (α δ : ℚ) :
+    0 ≤ coveredMultiplier α δ := by
+  exact le_max_left 0 ((α - δ) / (α * (1 - δ)))
+
+/-- On an interior fiber, the uncovered multiplier is strictly positive. -/
+theorem uncoveredMultiplier_pos
+    (α δ : ℚ) (hα1 : α < 1) (hδ1 : δ < 1) :
+    0 < uncoveredMultiplier α δ := by
+  have hα : 0 < (1 : ℚ) / (1 - α) := div_pos one_pos (by linarith)
+  have hδ : 0 < (1 : ℚ) / (1 - δ) := div_pos one_pos (by linarith)
+  exact lt_min hα hδ
 
 /-- The two source multipliers conserve the total mass of an interior fiber:
 the covered fraction is weighted by the first multiplier and its complement
@@ -55,6 +68,8 @@ theorem pointwise_update_normalized
     field_simp
     ring
 
+#print axioms coveredMultiplier_nonneg
+#print axioms uncoveredMultiplier_pos
 #print axioms pointwise_update_normalized
 
 end BBMSTPointwiseUpdate
