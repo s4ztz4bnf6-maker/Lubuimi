@@ -1876,3 +1876,32 @@ theorem block_descent_iff_offset_bound
 #print axioms block_descent_iff_offset_bound
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Sharper necessary condition for descent. Since the affine correction C is
+nonnegative, a descending certified block must satisfy 3^N < 2^A.
+This is stronger than the coarse condition A > N, because it compares the
+actual powers rather than only their exponents.
+-/
+theorem descent_requires_power_dominance
+    (n₀ nN A N C : ℕ)
+    (hn₀ : 0 < n₀)
+    (hoffset : 2 ^ A * nN = 3 ^ N * n₀ + C) :
+    nN < n₀ → 3 ^ N < 2 ^ A := by
+  intro hdesc
+  have hmul : 2 ^ A * nN < 2 ^ A * n₀ :=
+    Nat.mul_lt_mul_of_pos_left hdesc
+      (pow_pos (by norm_num : 0 < (2 : ℕ)) A)
+  rw [hoffset] at hmul
+  by_contra hnot
+  have hpow : 2 ^ A ≤ 3 ^ N := by omega
+  have hscale : 2 ^ A * n₀ ≤ 3 ^ N * n₀ :=
+    Nat.mul_le_mul_right n₀ hpow
+  omega
+
+#print axioms descent_requires_power_dominance
+
+end CollatzSyracuseAudit
