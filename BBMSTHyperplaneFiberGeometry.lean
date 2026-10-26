@@ -50,4 +50,44 @@ theorem finite_union_card_le_sum
       exact hcard i hi
     _ = H.card := by simp
 
+
+/-- A finite-coordinate hyperplane description: `none` means the coordinate
+is free and `some a` means it is fixed to a. The final coordinate is
+represented by the right summand of `Fin n ⊕ Unit`. -/
+def fixesCompatiblePoint {n : ℕ} {α : Type*}
+    (h : (Fin n ⊕ Unit) → Option α)
+    (v : (Fin n ⊕ Unit) → α) : Prop :=
+  ∀ i, match h i with
+    | none => True
+    | some a => v i = a
+
+/-- Fiber of a fixed-coordinate hyperplane above a prefix x. -/
+def hyperplaneLastFiber {n : ℕ} {α : Type*} [DecidableEq α]
+    (S : Finset α) (h : (Fin n ⊕ Unit) → Option α)
+    (x : Fin n → α) : Finset α :=
+  S.filter (fun y =>
+    fixesCompatiblePoint h (Sum.elim x (fun _ : Unit => y)))
+
+/-- If the hyperplane fixes the last coordinate, then over any prefix its
+last-coordinate fiber has at most one element. This now expresses the
+geometric statement through explicit coordinate-fixing data, rather than
+assuming a precomputed singleton fiber. -/
+theorem hyperplane_last_fiber_card_le_one
+    {n : ℕ} {α : Type*} [DecidableEq α]
+    (S : Finset α) (h : (Fin n ⊕ Unit) → Option α)
+    (x : Fin n → α) (a : α)
+    (hlast : h (Sum.inr ()) = some a) :
+    (hyperplaneLastFiber S h x).card ≤ 1 := by
+  apply Finset.card_le_one.mpr
+  intro y hy z hz
+  have hyMem := (Finset.mem_filter.mp hy).2
+  have hzMem := (Finset.mem_filter.mp hz).2
+  have hyFix : y = a := by
+    simpa [fixesCompatiblePoint, hlast] using hyMem (Sum.inr ())
+  have hzFix : z = a := by
+    simpa [fixesCompatiblePoint, hlast] using hzMem (Sum.inr ())
+  exact hyFix.trans hzFix.symm
+
+#print axioms hyperplane_last_fiber_card_le_one
+
 end BBMSTHyperplaneFiberGeometry
