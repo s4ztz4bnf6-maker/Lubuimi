@@ -79,9 +79,7 @@ theorem zero_fraction_weighted_update
       (1 - 0) * uncoveredMultiplier 0 δ = 1 := by
   have hden : 0 < 1 - δ := by linarith
   have hrecip : 1 ≤ (1 : ℚ) / (1 - δ) := by
-    have hden_le : 1 - δ ≤ 1 := by linarith
-    rw [div_eq_mul_inv]
-    field_simp
+    apply (le_div_iff₀ hden).2
     nlinarith
   simp [coveredMultiplier, uncoveredMultiplier, hrecip]
 
