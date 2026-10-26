@@ -794,8 +794,9 @@ private theorem sfBlockSizes_eq_map {K : Nat} (cs : CoveringSystem K)
   intro p hp
   simp [Nat.cast_sub (Nat.Prime.one_le (h_valid p hp).1)]
 
-/-- **THE ERDŐS-SELFRIDGE CONJECTURE.** -/
-theorem erdos_selfridge (K : Nat) (cs : CoveringSystem K) :
+/-- Conditional derivation only: depends transitively on the two admitted sieve interfaces above. This is not an axiom-free proof of the Erdős–Selfridge conjecture. -/
+theorem erdos_selfridge_conditional_on_admitted_sieve_interfaces
+    (K : Nat) (cs : CoveringSystem K) :
     ¬CS_allOdd cs := by
   intro h_odd
   let primes := extractPrimes cs
@@ -827,4 +828,4 @@ theorem erdos_selfridge (K : Nat) (cs : CoveringSystem K) :
   dependency boundary visible; replacing these axioms with proved statements
   (or fully stated, source-faithful hypotheses) remains a separate obligation.
 -/
-#print axioms erdos_selfridge
+#print axioms erdos_selfridge_conditional_on_admitted_sieve_interfaces
