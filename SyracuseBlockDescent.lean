@@ -24,7 +24,7 @@ inductive RealizesBlock : List ℕ → ℕ → ℕ → Prop where
       (hrest : RealizesBlock as mid finish) :
       RealizesBlock (a :: as) n finish
 
-/-!
+/-
 The stricter relation below models actual odd-only Syracuse blocks: every
 state is odd and every exponent is positive. The equation
 2^a * next = 3 * current + 1 together with odd(next) makes a the exact
@@ -115,6 +115,24 @@ theorem block_descends_iff
     rw [hidentity] at hmul
     omega
 
+/--
+A descent block must have enough powers of two to outweigh the factor 3 per
+step. This is a necessary condition only; it does not assert that the
+condition is sufficient or that such blocks exist from every starting value.
+-/
+theorem block_descends_requires_power_gap
+    {as : List ℕ} {start finish : ℕ}
+    (h : RealizesBlock as start finish)
+    (hstart : 0 < start)
+    (hdesc : finish < start) :
+    3 ^ as.length < 2 ^ as.sum := by
+  have hid := exact_block_identity h
+  have hscale : 0 < 2 ^ as.sum := by positivity
+  have hmul : 2 ^ as.sum * finish < 2 ^ as.sum * start :=
+    Nat.mul_lt_mul_of_pos_left hdesc hscale
+  rw [hid] at hmul
+  have hbase : 3 ^ as.length * start < 2 ^ as.sum * start := by omega
+  exact (Nat.mul_lt_mul_right hstart).mp hbase
 
 /--
 A correction-term upper bound can be plugged directly into the exact descent
@@ -152,6 +170,7 @@ theorem blockCorrection_cons (a : ℕ) (as : List ℕ) :
 #print axioms exact_block_identity
 #print axioms exact_odd_block_identity
 #print axioms block_descends_iff
+#print axioms block_descends_requires_power_gap
 #print axioms blockCorrection_cons
 
 end CollatzSyracuseAudit
