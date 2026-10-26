@@ -160,6 +160,7 @@ theorem source_update_fiber_normalization
     simp only [coveredUpdateMultiplier, uncoveredUpdateMultiplier,
       max_eq_left hcovered, min_eq_left hunc]
     field_simp
+    <;> ring
   · have hcut' : δ < α := lt_of_not_ge hcut
     have hcovered : 0 ≤ (α - δ) / (α * (1 - δ)) :=
       div_nonneg (by linarith) (le_of_lt hαden)
@@ -167,7 +168,7 @@ theorem source_update_fiber_normalization
       apply (div_le_div_iff₀ hδden hαcomp).2
       nlinarith
     simp only [coveredUpdateMultiplier, uncoveredUpdateMultiplier,
-      max_eq_right hcovered, min_eq_left hunc]
+      max_eq_right hcovered, min_eq_right hunc]
     field_simp
     <;> ring
 
