@@ -95,7 +95,6 @@ theorem finite_proper_fiber_card_ratio_quadratic_floor
           (1 - 1 / (s.card : ℚ)) * (s.card : ℚ) =
             (s.card : ℚ) - 1 := by
         field_simp
-        ring
       calc
         (t.card : ℚ) ≤ (s.card : ℚ) - 1 := by linarith
         _ = (1 - 1 / (s.card : ℚ)) * (s.card : ℚ) := hright.symm
