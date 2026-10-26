@@ -1,0 +1,65 @@
+name: Collatz draft Lean compile audit
+
+on:
+  push:
+    branches:
+      - collatz/compiler-audit-2026-10-19
+      - collatz/quarter-descent-lemma-2026-10-20
+      - collatz/offset-margin-roadmap-2026-10-23
+    paths-ignore:
+      - "**.md"
+  pull_request:
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+
+jobs:
+  compile-drafts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean and generate lake manifest
+        run: |
+          curl --fail --location --retry 3 --max-time 60 https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
+          sh elan-init.sh -y --default-toolchain leanprover/lean4:v4.34.1
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+      - name: Install dependencies and restore Mathlib cache
+        uses: leanprover/lean-action@v1
+        with:
+          build: false
+          use-mathlib-cache: true
+      - name: Build Lean library modules
+        run: lake build CollatzAudit
+      - name: Compile IterationLemmas.lean
+        run: lake env lean IterationLemmas.lean
+      - name: Compile ThresholdLemmas.lean
+        run: lake env lean ThresholdLemmas.lean
+      - name: Compile SyracuseReferenceTest.lean
+        run: lake env lean SyracuseReferenceTest.lean
+      - name: Compile SyracuseQuarterDescent.lean
+        run: lake env lean SyracuseQuarterDescent.lean
+      - name: Compile and audit offset identity plus strict-margin consequence
+        run: |
+          set -o pipefail
+          lake env lean SyracuseOffsetIdentity.lean 2>&1 | tee /tmp/syracuse-offset-axioms.log
+          if grep -q 'sorryAx' /tmp/syracuse-offset-axioms.log; then
+            echo "Forbidden sorryAx found in transitive Syracuse offset theorem axioms."
+            exit 1
+          fi
+      - name: Compile exact closed-form offset theorem
+        run: lake env lean SyracuseOffsetClosedForm.lean
+      - name: Compile and audit stronger offset lower bound
+        run: lake env lean SyracuseOffsetLowerBound.lean
+      - name: Compile and audit exact valuation-one block margin
+        run: lake env lean SyracuseMarginBlock.lean
+      - name: Compile and audit exact valuation-one to valuation-two transition
+        run: |
+          set -o pipefail
+          lake env lean SyracuseValuationTransition.lean 2>&1 | tee /tmp/syracuse-transition-axioms.log
+          if grep -q 'sorryAx' /tmp/syracuse-transition-axioms.log; then
+            echo "Forbidden sorryAx found in exact Syracuse valuation transition."
+            exit 1
+          fi

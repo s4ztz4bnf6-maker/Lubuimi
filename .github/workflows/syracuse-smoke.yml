@@ -1,0 +1,25 @@
+name: Syracuse Lean 4.34.0 smoke test
+
+on:
+  push:
+    branches:
+      - audit/syracuse-reference-lean428-2026-10-20
+  pull_request:
+    branches:
+      - collatz/compiler-audit-2026-10-19
+
+jobs:
+  compile-syracuse-reference:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve Lean and Mathlib dependencies
+        run: lake update
+      - name: Restore Mathlib cache
+        run: lake exe cache get
+      - name: Compile isolated Syracuse test
+        run: lake env lean SyracuseReferenceTest.lean
