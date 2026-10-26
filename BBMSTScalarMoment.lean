@@ -172,3 +172,30 @@ theorem source_update_fiber_normalization
     <;> ring
 
 #print axioms source_update_fiber_normalization
+
+
+/-- On a nondegenerate fiber, the covered-part multiplier never increases
+pointwise mass. This is the local contraction inequality used when a set is
+contained in the newly covered region. -/
+theorem coveredUpdateMultiplier_le_one
+    (α δ : ℚ) (hα0 : 0 < α) (hα1 : α ≤ 1)
+    (hδ0 : 0 < δ) (hδ1 : δ < 1) :
+    coveredUpdateMultiplier α δ ≤ 1 := by
+  have hden : 0 < α * (1 - δ) := by positivity
+  have hquot : (α - δ) / (α * (1 - δ)) ≤ 1 := by
+    apply (div_le_iff₀ hden).2
+    nlinarith
+  unfold coveredUpdateMultiplier
+  exact max_le (by norm_num) hquot
+
+/-- The uncovered-part multiplier is bounded by the global distortion
+factor 1/(1-δ). This is the pointwise estimate needed before summing over
+fibers to obtain the global measure-distortion inequality. -/
+theorem uncoveredUpdateMultiplier_le_global_factor
+    (α δ : ℚ) (hα1 : α < 1) (hδ1 : δ < 1) :
+    uncoveredUpdateMultiplier α δ ≤ 1 / (1 - δ) := by
+  unfold uncoveredUpdateMultiplier
+  exact min_le_right _ _
+
+#print axioms coveredUpdateMultiplier_le_one
+#print axioms uncoveredUpdateMultiplier_le_global_factor
