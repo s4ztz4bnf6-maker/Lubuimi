@@ -31,7 +31,7 @@ def totalWeight {ι : Type*} [Fintype ι] (w : ι → ℚ) : ℚ :=
 
 /-- The weighted removed fraction, before the source-specific identification
 of the weights with the BBMST previous-stage measure. -/
-def removedMassBounded {ι : Type*} [Fintype ι]
+noncomputable def removedMassBounded {ι : Type*} [Fintype ι]
     (w alpha : ι → ℚ) (delta : ℚ) : ℚ :=
   ∑ i, w i * BBMSTScalarMoment.removedFraction (alpha i) delta
 
