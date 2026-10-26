@@ -31,10 +31,11 @@ theorem three_step_affine_identity
     (h₂ : 2 ^ b * z = 3 * y + 1)
     (h₃ : 2 ^ c * w = 3 * z + 1) :
     2 ^ (a + b + c) * w = 27 * x + 9 + 3 * 2 ^ a + 2 ^ (a + b) := by
-  rw [pow_add, pow_add]
   calc
-    (2 ^ a * 2 ^ b * 2 ^ c) * w =
-        (2 ^ a * 2 ^ b) * (2 ^ c * w) := by ring
+    2 ^ (a + b + c) * w = (2 ^ a * 2 ^ b * 2 ^ c) * w := by
+      rw [pow_add, pow_add]
+      ring
+    _ = (2 ^ a * 2 ^ b) * (2 ^ c * w) := by ring
     _ = (2 ^ a * 2 ^ b) * (3 * z + 1) := by rw [h₃]
     _ = 3 * ((2 ^ a * 2 ^ b) * z) + 2 ^ (a + b) := by
       rw [← pow_add]
@@ -59,10 +60,12 @@ theorem four_step_affine_identity
     (h₄ : 2 ^ d * v = 3 * w + 1) :
     2 ^ (a + b + c + d) * v =
       81 * x + 27 + 9 * 2 ^ a + 3 * 2 ^ (a + b) + 2 ^ (a + b + c) := by
-  rw [pow_add, pow_add, pow_add]
   calc
-    (2 ^ a * 2 ^ b * 2 ^ c * 2 ^ d) * v =
-        (2 ^ a * 2 ^ b * 2 ^ c) * (2 ^ d * v) := by ring
+    2 ^ (a + b + c + d) * v =
+        (2 ^ a * 2 ^ b * 2 ^ c * 2 ^ d) * v := by
+      rw [pow_add, pow_add, pow_add]
+      ring
+    _ = (2 ^ a * 2 ^ b * 2 ^ c) * (2 ^ d * v) := by ring
     _ = (2 ^ a * 2 ^ b * 2 ^ c) * (3 * w + 1) := by rw [h₄]
     _ = 3 * ((2 ^ a * 2 ^ b * 2 ^ c) * w) + 2 ^ (a + b + c) := by
       rw [← pow_add, ← pow_add]
