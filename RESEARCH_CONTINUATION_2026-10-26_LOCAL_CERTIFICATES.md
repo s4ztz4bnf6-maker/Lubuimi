@@ -1,6 +1,6 @@
 # Research continuation — 2026-10-26: exact local certificates and the global gap
 
-This is a proof-obligation document, not a Lean source file and not a claim of a new global theorem. The repository currently contains research notes rather than a checked Lean project, so no compilation result is claimed.
+This is a proof-obligation document, not a Lean source file and not a claim of a new global theorem. The default `main` branch contains research notes rather than a Lean project; separate working branches do contain Lean source and a pinned toolchain. This document commit did not run a build, so no compilation result is claimed.
 
 ## A. Syracuse: exact mod-4 split
 
