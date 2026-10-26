@@ -8,40 +8,41 @@ This note isolates a precise obstruction to the slogan “embed Collatz in Z_2 a
 \[
 T(n)=\frac{3n+1}{2^{v_2(3n+1)}}
 \]
-is locally described by valuation cylinders, but its natural extension to odd 2-adic inputs is not continuous at \(x_*=-1/3\in\mathbb Z_2\). This is an exact topological obstruction, not a refutation of Collatz and not a proof that every alternative compactification fails.
+has a singular point for its natural 2-adic extension at \(x_*=-1/3\in\mathbb Z_2\). An explicit sequence of **positive odd integers** approaching this point has accelerated images that do not converge. Thus the positive-integer accelerated map cannot have a continuous extension to all of \(\mathbb Z_2\) agreeing with its values on positive odd integers. This is a topological obstruction to one naive route, not a refutation of Collatz.
 
-## Exact witness sequence
+## Exact positive-integer witness sequence
 
-For each integer \(k\geq 1\), choose \(c_k\in\{-1,1\}\) with \(c_k\equiv 2^k\pmod 3\), and define
+For each integer \(k\geq1\), choose \(c_k\in\{-1,1\}\) with \(c_k\equiv2^k\pmod3\), so \(c_k=1\) for even k and \(c_k=-1\) for odd k. Put
 \[
-x_k=\frac{2^k c_k-1}{3}\in\mathbb Z.
+x_k=\frac{2^k c_k-1}{3},\qquad n_k=x_k+2^{k+1}.
 \]
-Since \(2^k c_k\equiv1\pmod3\), the numerator is divisible by 3. Since \(2^k c_k-1\) is odd and 3 is odd, \(x_k\) is odd. Moreover
+The integer \(x_k\) is well-defined and odd. The integer \(n_k\) is also odd and is positive for every \(k\geq1\). Direct calculation gives
 \[
-3x_k+1=2^k c_k,
-\qquad v_2(3x_k+1)=k,
-\qquad T(x_k)=c_k.
+3n_k+1=2^k(c_k+6).
 \]
-Also
+Since \(c_k+6\in\{5,7\}\) is odd,
 \[
-x_k-(-1/3)=2^k c_k/3,
+v_2(3n_k+1)=k,\qquad T(n_k)=c_k+6
+=\begin{cases}7,&k\text{ even},\\5,&k\text{ odd}.\end{cases}
 \]
-so \(x_k\to -1/3\) in the 2-adic metric because \(|x_k+1/3|_2=2^{-k}\to0\).
-
-The congruence condition forces \(c_k=1\) for even k and \(c_k=-1\) for odd k. Thus \(T(x_k)\) alternates between \(1\) and \(-1\). These do not converge in \(\mathbb Z_2\), since \(|1-(-1)|_2=|2|_2=1/2\) is fixed and nonzero. Therefore no continuous extension agreeing with this accelerated formula on all odd integers can be continuous at \(-1/3\).
+Furthermore
+\[
+n_k-(-1/3)=2^k(c_k+6)/3,
+\]
+so \(|n_k+1/3|_2=2^{-k}\to0\). Hence \(n_k\to-1/3\) in \(\mathbb Z_2\), while \(T(n_k)\) alternates between 7 and 5. Since \(|7-5|_2=|2|_2=1/2\), the output sequence is not Cauchy and therefore does not converge. This contradicts continuity at \(-1/3\) of any extension agreeing with T on all positive odd integers.
 
 ## What this does and does not show
 
-- It rules out a naive global-continuity argument for the accelerated map on the full odd 2-adic domain.
+- It rules out a naive global-continuity argument for the accelerated map on the full 2-adic domain.
 - It does not rule out a piecewise/cylinder dynamical system, a desingularized state space carrying extra valuation data, or a different compactification.
 - Compactness alone never implies convergence of every orbit to a common sink. A valid route still needs a Lyapunov/recurrence theorem that transfers back to positive integers and handles the singular point and its orbit-preimages.
-- The ordinary 2-adic extension of the unaccelerated map (even/odd Collatz map) has its own continuity properties and is not interchangeable with the accelerated map. Statements must specify which map and domain are used.
+- The ordinary 2-adic extension of the unaccelerated map (even/odd Collatz map) has different continuity properties and is not interchangeable with the accelerated map. Statements must specify which map and domain are used.
 
 ## Research consequence: replace “smooth the map” with a singular-cylinder model
 
 The next formal target should not be global continuity. Use a state space whose ordinary states are valuation cylinders
 \[
-C_k=\{x\in\mathbb Z_2: v_2(3x+1)=k\},
+C_k=\{x\in\mathbb Z_2:v_2(3x+1)=k\},
 \]
 together with an explicit singular state \(x_*=-1/3\) and a transition rule that records the valuation before dividing. The key questions are:
 
@@ -54,16 +55,16 @@ A proposed theorem must state its domain, treatment of \(x_*\), topology, and in
 
 ## Reproducibility status
 
-The witness above is an elementary exact derivation. This note is not a Lean compilation report, does not claim a new solution of Collatz, and does not independently reproduce the EOC repository's computational scan. The EOC source identifies the arithmetic hypothesis PowerOfTwoDangerousWindowSparsity as open and explicitly says its Collatz conjecture remains open: https://github.com/innerlightr-wq/eoc-lean-verification
+The witness above is an elementary exact derivation, not a Lean compilation report. It does not solve Collatz and does not independently reproduce the EOC repository's computational scan. The EOC source identifies the arithmetic hypothesis PowerOfTwoDangerousWindowSparsity as open and explicitly says its Collatz conjecture remains open: https://github.com/innerlightr-wq/eoc-lean-verification
 
 ## Formalization checklist
 
 A Lean file for this checkpoint should separately prove:
 - the congruence choice \(c_k\equiv2^k\pmod3\) for \(c_k\in\{-1,1\}\);
-- integrality and oddness of \(x_k\);
-- \(3x_k+1=2^kc_k\) and the exact valuation;
-- 2-adic convergence \(x_k\to-1/3\);
-- nonconvergence of the alternating output subsequences;
-- the contradiction to continuity of any extension agreeing with \(T\) on these inputs.
+- integrality, positivity, and oddness of \(n_k\);
+- \(3n_k+1=2^k(c_k+6)\) and the exact valuation;
+- 2-adic convergence \(n_k\to-1/3\);
+- nonconvergence of the outputs alternating between 7 and 5;
+- the contradiction to continuity of any extension agreeing with T on positive odd inputs.
 
-The last item should be stated against a precisely defined 2-adic domain and metric; do not silently treat the natural-number domain as if it were open in \(\mathbb Z_2\).
+The continuity claim must be stated against a precisely defined 2-adic domain and metric; do not silently treat the natural-number domain as if it were open in \(\mathbb Z_2\).
