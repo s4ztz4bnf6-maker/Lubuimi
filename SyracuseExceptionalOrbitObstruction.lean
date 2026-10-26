@@ -14,7 +14,7 @@ the number of valuation-one steps. A valuation-one step contributes -4 to
 the surplus; every valuation at least two contributes at least +1. -/
 theorem valuationSurplus_ge_length_sub_five_low_count
     (a : Nat → Nat) (ha : ∀ k, 1 ≤ a k) :
-    ∀ N, (N : ℤ) - 5 * (lowValuationCount a N : ℤ) ≤
+    ∀ N : ℕ, (N : ℤ) - 5 * (lowValuationCount a N : ℤ) ≤
       valuationSurplus a N := by
   intro N
   induction N with
@@ -47,6 +47,16 @@ theorem negative_surplus_forces_many_valuation_one_steps
     (N : ℤ) < 5 * (lowValuationCount a N : ℤ) := by
   have hbound :=
     valuationSurplus_ge_length_sub_five_low_count a ha N
+  omega
+
+/-- If an accelerated odd Syracuse step has valuation exactly one, its next
+odd value is 1 modulo 4. Consequently the next numerator is divisible by 4,
+so two valuation-one steps cannot be consecutive. This is an orbit constraint,
+not a claim about arbitrary independent valuation words. -/
+theorem valuation_one_step_forces_next_div_four
+    (n m : ℕ) (hn : n % 2 = 1) (hm : m % 2 = 1)
+    (hstep : 3 * n + 1 = 2 * m) :
+    (3 * m + 1) % 4 = 0 := by
   omega
 
 #print axioms valuationSurplus_ge_length_sub_five_low_count
