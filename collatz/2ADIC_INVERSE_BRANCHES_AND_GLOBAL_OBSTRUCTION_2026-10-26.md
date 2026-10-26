@@ -12,25 +12,29 @@ Define T_a:U_a→Z₂^odd by T_a(x)=(3x+1)/2^a. This is well-defined and continu
 
 For y,z∈Z₂^odd, S_a(y)−S_a(z)=(2^a/3)(y−z), so |S_a(y)−S_a(z)|₂=2^(−a)|y−z|₂. Thus each inverse branch is a strict 2-adic contraction. This is an exact theorem from the metric and algebra, not a numerical observation.
 
-## New exact affine formula for a finite valuation word
-Fix positive integers a₀,…,a_{N−1}, let A=Σᵢ aᵢ, and suppose an integer orbit follows exactly these valuations: n_{i+1}=(3n_i+1)/2^{aᵢ}, for 0≤i<N. Define prefix sums p₀=0 and p_j=Σ_{i<j}aᵢ. Iterating the inverse relation n_i=(2^{aᵢ}n_{i+1}−1)/3 gives the identity
+## Corrected exact affine formula for a finite valuation word
+Fix positive integers a₀,…,a_{N−1}, let A=Σᵢ aᵢ, and suppose an integer orbit follows exactly these valuations: n_{i+1}=(3n_i+1)/2^{aᵢ}, for 0≤i<N. Define prefix sums p₀=0 and p_j=Σ_{i<j}aᵢ. Then the correct identity is
 
-    3^N n₀ = 2^A n_N − Σ_{j=0}^{N−1} 3^j 2^{p_j}.
+    3^N n₀ = 2^A n_N − Σ_{j=0}^{N−1} 3^(N−1−j) 2^(p_j).
 
-Proof is by induction on N: the case N=0 is immediate; applying the one-step inverse to the length-N identity multiplies the terminal term by 2^{a₀}, subtracts the appropriate factor, and yields the displayed prefix sum. A Lean proof should state the induction invariant with the prefix sums explicit, avoiding any informal simplification of exponents.
+The power of 3 is in reverse order. This indexing is essential: for N=2 the subtracted sum must be 3+2^a₀, not 1+3·2^a₀.
 
-Consequently every such valuation word forces the terminal congruence
+Proof by induction: N=1 is 3n₀=2^(a₀)n₁−1. For the induction step, use 3n₀=2^(a₀)n₁−1 and apply the length-(N−1) identity to the orbit starting at n₁. Multiplication by 2^(a₀) shifts every prefix exponent by a₀; the extra −3^(N−1) term supplies the first term in the reversed-power sum. Equivalently, this can be proved by expanding the recurrence 3n_i=2^(a_i)n_{i+1}−1 and collecting each constant term.
 
-    2^A n_N ≡ Σ_{j=0}^{N−1}3^j 2^{p_j} (mod 3^N).
+Consequently,
 
-Since 2^A is invertible modulo 3^N, the word determines one residue class for n_N modulo 3^N. This is an arithmetic constraint complementary to the 2-adic cylinder modulus: valuation data controls a residue class at a power of 2 on the starting side and a residue class at a power of 3 on the terminal side.
+    2^A n_N ≡ Σ_{j=0}^{N−1}3^(N−1−j) 2^(p_j) (mod 3^N).
+
+Since 2^A is invertible modulo 3^N, the word determines one residue class for n_N modulo 3^N. This arithmetic constraint complements the 2-adic cylinder modulus: valuation data controls a residue class at a power of 2 on the starting side and a residue class at a power of 3 on the terminal side.
+
+**Audit correction:** an earlier version of this note incorrectly used 3^j instead of 3^(N−1−j). The N=2 hand-check exposes the error. The formula and all dependent congruences have been corrected here. This is exactly why recurrence-level boundary cases must be checked before a formalization is treated as evidence.
 
 This cross-modulus constraint is exact and potentially useful for ruling out proposed finite valuation patterns or cycles. It does not by itself rule out every infinite positive orbit; no universal contradiction or descent bound has been obtained from it.
 
 ## What this gives
-- Every finite valuation word determines a composition S_{a₀}∘…∘S_{a_{N−1}} on odd 2-adics.
+- Every finite valuation word determines a composition of inverse branches on odd 2-adics.
 - The corresponding 2-adic cylinder has contraction factor 2^(−Σaᵢ).
-- The same word imposes the explicit 3^N terminal congruence above.
+- The same word imposes the explicit corrected 3^N terminal congruence above.
 - These two moduli provide independent formal invariants for future cylinder-intersection and cycle-exclusion work.
 
 ## What it does NOT give
@@ -42,10 +46,10 @@ The exact missing bridge would need an additional arithmetic theorem linking the
 Formalize in order:
 1. U_a as a congruence class and prove the valuation characterization.
 2. Define S_a on odd 2-adics and prove T_a(S_a y)=y and S_a(T_a x)=x.
-3. Prove the exact distance identity dist(S_a y,S_a z)= (2:ℝ)⁻¹^a * dist y z after fixing the Mathlib metric convention, or prove it directly with 2-adic norms.
-4. Prove the finite affine iterate identity by induction on N.
-5. Derive the terminal congruence modulo 3^N and explicitly prove invertibility of 2^A modulo 3^N.
-6. Derive cylinder modulus 2^(Σaᵢ), carefully distinguishing residue-class depth from the ordinary-time parity prefix length.
+3. Prove the exact distance identity for 2-adic norms.
+4. Prove the corrected finite affine iterate identity by induction on N, testing N=0, 1, 2 explicitly.
+5. Derive the corrected terminal congruence modulo 3^N and explicitly prove invertibility of 2^A modulo 3^N.
+6. Derive cylinder modulus 2^(Σaᵢ), carefully distinguishing residue-class depth from ordinary-time parity-prefix length.
 7. Keep the global Archimedean descent theorem as a separate target; do not infer it from contraction.
 
 ## Source-faithful bridge
