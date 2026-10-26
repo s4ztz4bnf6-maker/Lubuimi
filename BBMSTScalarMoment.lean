@@ -91,6 +91,25 @@ theorem weighted_removedFraction_bounds {ι : Type*} [Fintype ι]
     intro i hi
     exact mul_le_mul_of_nonneg_left (hpoint i).2 (hw i)
 
+
+/-- The weighted removed mass is bounded by the minimum of the first and
+second weighted moments. This is the exact scalar-to-moment interface needed
+before identifying these sums with the BBMST quantities Mₖ⁽¹⁾ and Mₖ⁽²⁾. -/
+theorem weighted_removedFraction_sum_min {ι : Type*} [Fintype ι]
+    (w α : ι → ℚ) (δ : ℚ)
+    (hw : ∀ i, 0 ≤ w i)
+    (hα0 : ∀ i, 0 ≤ α i)
+    (hα1 : ∀ i, α i ≤ 1)
+    (hδ0 : 0 < δ) (hδ1 : δ < 1) :
+    (∑ i, w i * removedFraction (α i) δ) ≤
+      min (∑ i, w i * α i)
+        (∑ i, w i * ((α i) ^ 2 / (4 * δ * (1 - δ)))) := by
+  rcases weighted_removedFraction_bounds w α δ hw hα0 hα1 hδ0 hδ1 with
+    ⟨hfirst, hsecond⟩
+  exact le_min hfirst hsecond
+
+#print axioms weighted_removedFraction_sum_min
+
 #print axioms weighted_removedFraction_bounds
 
 #print axioms removedFraction_bounds
