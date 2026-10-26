@@ -23,19 +23,19 @@ Since T^L(n) is odd, the right-hand side has exact 2-adic valuation K_L.
 ## Proof of (ii) => (i): induction on L
 For L=1 this is the definition of v_2(3n+1).
 
-For L>1, write a_1=a and let b=(a_2,...,a_L) be the tail word. By expanding the sum in F_a,
+For L>1, write a=a_1 and let b=(a_2,...,a_L) be the tail word. Define its constant term
+G_b=3^(L-2)+3^(L-3)2^(a_2)+...+2^(a_2+...+a_{L-1}),
+so F_b(m)=3^(L-1)m+G_b. The number G_b is odd: its first term is odd and every later term is even. Direct expansion gives the exact integer identity
 
-F_a(n)=3^(L-1)(3n+1)+2^a F_b(T(n))
+F_a(n)=3^(L-1)(3n+1)+2^a G_b.
 
-as a formal identity whenever T(n) is defined; equivalently, before division, the tail expression can be written using the integer numerator 3n+1. More directly, set
-G_b(n)=3^(L-2)+3^(L-3)2^(a_2)+...+2^(a_2+...+a_{L-1}),
-which is odd. Then
-F_a(n)=3^(L-1)(3n+1)+2^a G_b,
-where G_b is the tail constant term, and the tail affine expression is F_b(m)=3^(L-1)m+G_b.
+Assume v_2(F_a(n))=K_L>a. The second summand has exact valuation a. Since the sum has valuation strictly greater than a, the first summand must also have valuation exactly a: if its valuation were smaller, it would determine the valuation of the sum; if larger, the second summand would determine it. Thus v_2(3n+1)=a, and T(n)=(3n+1)/2^a is a positive odd integer.
 
-Assume v_2(F_a(n))=K_L>a. Since G_b is odd, the second summand has exact valuation a. For the sum to have valuation strictly greater than a, the first summand must also have exact valuation a; otherwise the two summands have different valuations and their sum has the smaller valuation. Hence v_2(3n+1)=a, so T(n) is an odd integer. Dividing the identity by 2^a yields
-F_a(n)/2^a=3^(L-1)T(n)+G_b=F_b(T(n)),
-so v_2(F_b(T(n)))=K_L-a=sum_{i=2}^L a_i. By induction, the tail valuations of T(n) are exactly a_2,...,a_L. Together with the first valuation a_1=a, this proves (i).
+Now divide the displayed identity by 2^a. Using 3n+1=2^a T(n), obtain
+
+F_a(n)/2^a=3^(L-1)T(n)+G_b=F_b(T(n)).
+
+Therefore v_2(F_b(T(n)))=K_L-a=sum_{i=2}^L a_i. By induction, the first L-1 valuations of T(n) are exactly a_2,...,a_L. Together with the first valuation a_1=a, this proves (i).
 
 ## Proof of (ii) <=> (iii)
 For an integer z and nonnegative K, v_2(z)=K iff z is divisible by 2^K but not by 2^(K+1), equivalently z ≡ 2^K mod 2^(K+1).
@@ -47,4 +47,4 @@ F_a(n) has coefficient 3^L on n. Since 3^L is invertible modulo 2^(K_L+1), the c
 A single residue class modulo 2^(K_L+1) has Haar measure 2^-(K_L+1) in Z_2. Conditioning on odd inputs, which have measure 1/2, gives cylinder probability 2^-K_L=product_i 2^-a_i.
 
 ## Scope and verification status
-This proves a finite-word arithmetic statement on paper, subject to checking the displayed decomposition and domain conventions in a formal development. It does not prove that all positive integer Syracuse orbits converge. No Lean compilation or computational regression is claimed for this file.
+This is a paper proof of a finite-word arithmetic statement, with the domain and decomposition made explicit. It is not yet a Lean-checked theorem, and no computational regression is claimed for this revision. It does not prove that all positive integer Syracuse orbits converge.
