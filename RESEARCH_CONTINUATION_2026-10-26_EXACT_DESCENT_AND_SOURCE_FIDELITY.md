@@ -90,3 +90,24 @@ A successful build alone does not prove source fidelity. A zero-measure exceptio
 - OpenAI bulk release context: https://en.wikipedia.org/wiki/OpenAI_bulk_release_of_mathematical_papers
 
 These are leads and methodological context, not proof dependencies. Any claimed AI discovery must still be tied to a stable theorem statement, exact source, artifact, build, and independent review.
+
+
+## 6. Correction and new formal result discovered 2026-10-26
+
+The earlier section “Collatz density bridge: quantifier audit” described the implication from a counterexample to positive lower density as not yet established. That is now superseded by the published ProofAtlas companion theorem discovered in the latest literature check.
+
+ProofAtlas records three Lean-checked declarations in the “Positive Lower Density of Collatz Predecessors” release:
+- `CollatzPredecessorDensity.predecessors_positive_lower_density`
+- `CollatzPredecessorDensity.nonconvergence_positive_lower_density_of_counterexample`
+- `CollatzPredecessorDensity.universal_reaches_one_of_arbitrarily_dense_convergence`
+
+The second declaration formalizes: if some positive integer never reaches 1 under the ordinary Collatz map, then the set of positive starts that never reaches 1 has positive lower natural density. The third proves that if convergence to 1 has upper natural density one (stated as arbitrarily dense large cutoffs), then every positive integer reaches 1. Crucially, that density-one premise is not proved. These are published ProofAtlas claims; this project has not independently rebuilt their source or audited its imported dependencies.
+
+Sources:
+- https://www.proofatlas.ai/proofs/artifact.collatz.nonconvergence_positive_lower_density.v001.html
+- https://www.proofatlas.ai/proofs/artifact.collatz.universal_reaches_one_of_arbitrarily_dense_convergence.v001.html
+- https://www.proofatlas.ai/formalizations/positive-lower-density-collatz-predecessors/
+
+This improves the research map: the “counterexample implies positive-density exceptions” bridge is no longer our open lemma target; it is an external formal result to import only after checking exact source, versions, axioms, and statement fidelity. The remaining statistical route is still blocked at the unconditional upper-density-one convergence premise. The known 145-step Syracuse / 436-step ordinary Collatz results concern descent below growing thresholds, not convergence to 1, and cannot fill that gap.
+
+Verification boundary: ProofAtlas reports successful builds and lists its exact claims, but its own reproduction notes say some compiled dependencies were reused and the result is not an independent LeanChecker run. Do not present it as independently audited by this repository.
