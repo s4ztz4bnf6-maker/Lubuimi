@@ -1842,3 +1842,37 @@ theorem prefix_residue_cylinder_sound
 #print axioms prefix_residue_cylinder_sound
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/--
+Exact endpoint criterion for a certified block: once the affine offset
+identity is known, descent is equivalent to the accumulated correction being
+small enough relative to the initial value. This isolates the global
+obligation without hiding it inside a heuristic average.
+-/
+theorem block_descent_iff_offset_bound
+    (n₀ nN A N C : ℕ)
+    (hoffset : 2 ^ A * nN = 3 ^ N * n₀ + C) :
+    nN < n₀ ↔ 3 ^ N * n₀ + C < 2 ^ A * n₀ := by
+  constructor
+  · intro hlt
+    have hmul : 2 ^ A * nN < 2 ^ A * n₀ :=
+      Nat.mul_lt_mul_of_pos_left hlt
+        (pow_pos (by norm_num : 0 < (2 : ℕ)) A)
+    rw [hoffset] at hmul
+    exact hmul
+  · intro hbound
+    have hmul : 2 ^ A * nN < 2 ^ A * n₀ := by
+      rw [hoffset]
+      exact hbound
+    by_contra hnot
+    have hle : n₀ ≤ nN := by omega
+    have hreverse : 2 ^ A * n₀ ≤ 2 ^ A * nN :=
+      Nat.mul_le_mul_left (2 ^ A) hle
+    omega
+
+#print axioms block_descent_iff_offset_bound
+
+end CollatzSyracuseAudit
