@@ -1,27 +1,39 @@
-# Syracuse valuation-cylinder transition: exact arithmetic criterion
+# Syracuse transition congruence: a stronger exact reduction
 
-Status: mathematical derivation; not yet Lean-kernel checked.
+Status: elementary mathematical derivation, independently checked by modular arithmetic examples for 1 ≤ k,j ≤ 7; not yet Lean-kernel checked.
 
-Let n be positive and odd, and suppose v₂(3n+1)=k, with k ≥ 1. Define the accelerated next state m=(3n+1)/2^k, which is odd.
+Let k,j ≥ 1. The transition condition is
 
-For any j ≥ 1, the next state lies in valuation cylinder j exactly when v₂(3m+1)=j, equivalently 3m+1 ≡ 2^j (mod 2^(j+1)).
+  9n + 3 + 2^k ≡ 2^(k+j) (mod 2^(k+j+1)).                 (★)
 
-Substituting m=(3n+1)/2^k and multiplying the congruence by 2^k gives the equivalent criterion
+## Stronger observation
 
-  9n + 3 + 2^k ≡ 2^(k+j) (mod 2^(k+j+1)).
+Condition (★) already forces n to be odd and v₂(3n+1)=k. Thus the separate first-cylinder condition is redundant.
 
-Proof: because 2^k divides 3n+1, the identity 2^k(3m+1)=3(3n+1)+2^k=9n+3+2^k is exact. Multiplication by 2^k sends congruence modulo 2^(j+1) to congruence modulo 2^(k+j+1) without loss, since both sides are multiplied by the same power of two.
+Proof of oddness: reducing (★) modulo 2 gives n+1 ≡ 0 (mod 2), since 2^k and 2^(k+j) are even and 9n+3 has the parity of n+1.
 
-## Consequence
+Proof of the valuation: reduce (★) modulo 2^(k+1). Since j ≥ 1, both 2^(k+j) and the modulus 2^(k+j+1) vanish modulo 2^(k+1), so
 
-For a prescribed adjacent valuation pair (k,j), the transition is an explicit congruence condition on the original odd input n. Since 9 is invertible modulo 2^(k+j+1), the second congruence alone specifies one residue class modulo 2^(k+j+1). It must still be intersected with the first-cylinder condition 3n+1 ≡ 2^k (mod 2^(k+1)); the two conditions together characterize the allowed transition inputs.
+  9n + 3 ≡ -2^k (mod 2^(k+1)).
 
-This gives a finite modular graph for any bounded set of valuation labels. It is an exact representation of local transitions, not a proof that all abstract paths are realizable, that every orbit descends, or that the Collatz conjecture is true.
+Equivalently, 3(3n+1) ≡ -2^k (mod 2^(k+1)). Multiplication by 3 is invertible modulo 2^(k+1), and its inverse is odd. Hence 3n+1 is divisible by 2^k but not by 2^(k+1), which proves v₂(3n+1)=k.
 
-## Lean targets
+Conversely, if n is odd, v₂(3n+1)=k, and v₂(3T(n)+1)=j, the exact identity 2^k(3T(n)+1)=9n+3+2^k yields (★).
 
-1. Prove a division/congruence equivalence from 2^k ∣ 3*n+1.
-2. Formalize the displayed exact identity.
-3. Prove the forward and reverse transition criterion.
-4. Build finite residue-class transition tables for bounded labels and compare them with orbit enumeration.
-5. Search for a global inequality invariant that survives all realizable transitions; finite tables alone cannot certify an unbounded theorem.
+## Unique residue-class transition
+
+Because 9 is invertible modulo 2^(k+j+1), (★) has exactly one residue class n modulo 2^(k+j+1). The preceding argument shows every representative of that class is odd and has starting valuation k; the congruence itself also enforces the next valuation j.
+
+Therefore every ordered pair of positive valuation labels (k,j) is represented by exactly one residue class modulo 2^(k+j+1). This is a local transition-class theorem, not a claim that arbitrary infinite valuation sequences are globally realizable or that Syracuse trajectories descend.
+
+## Finite checks
+
+A direct modular enumeration for all 1 ≤ k,j ≤ 7 found one class for every pair, consistent with the proof above. Enumeration is only a sanity check; the argument is the modular proof.
+
+## Formalization targets
+
+1. Prove that 9 is a unit modulo every power of 2.
+2. Prove the congruence (★) is equivalent to the two-step valuation condition.
+3. Prove the congruence forces oddness and the starting valuation k.
+4. Formalize uniqueness of the residue class.
+5. Use these classes to search for a genuine global invariant; the transition graph alone does not supply one.
