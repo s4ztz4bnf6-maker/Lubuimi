@@ -84,4 +84,50 @@ theorem four_step_affine_identity
     _ = 81 * x + 27 + 9 * 2 ^ a + 3 * 2 ^ (a + b) +
         2 ^ (a + b + c) := by ring
 
+
+
+/--
+Prefix sums of a prescribed valuation word.  This definition is deliberately
+independent of any claim that the word is realizable by a Syracuse orbit.
+-/
+def prefixExponentSum (a : Nat → Nat) : Nat → Nat
+  | 0 => 0
+  | k + 1 => prefixExponentSum a k + a k
+
+/--
+Recursive closed-form accumulator for composing the affine step equations.
+Its successor rule is C_(k+1) = 3 C_k + 2^(A_k).
+-/
+def affineCompositionRhs (a n : Nat → Nat) : Nat → Nat
+  | 0 => n 0
+  | k + 1 => 3 * affineCompositionRhs a n k + 2 ^ prefixExponentSum a k
+
+/--
+General finite-prefix affine identity.  If each prescribed step satisfies
+2^(a k) * n(k+1) = 3*n(k)+1, then the accumulated exponent gives the
+corresponding affine composition.  This theorem is conditional algebra only:
+it does not establish exact 2-adic valuations, realizability of arbitrary
+words, or global Collatz convergence.
+-/
+theorem finite_prefix_affine_identity
+    (a n : Nat → Nat)
+    (hstep : ∀ k, 2 ^ a k * n (k + 1) = 3 * n k + 1) :
+    ∀ N, 2 ^ prefixExponentSum a N * n N = affineCompositionRhs a n N := by
+  intro N
+  induction N with
+  | zero =>
+      simp [prefixExponentSum, affineCompositionRhs]
+  | succ k ih =>
+      change 2 ^ (prefixExponentSum a k + a k) * n (k + 1) =
+        3 * affineCompositionRhs a n k + 2 ^ prefixExponentSum a k
+      rw [pow_add]
+      calc
+        (2 ^ prefixExponentSum a k * 2 ^ a k) * n (k + 1) =
+            2 ^ prefixExponentSum a k * (2 ^ a k * n (k + 1)) := by ring
+        _ = 2 ^ prefixExponentSum a k * (3 * n k + 1) := by rw [hstep k]
+        _ = 3 * (2 ^ prefixExponentSum a k * n k) +
+            2 ^ prefixExponentSum a k := by ring
+        _ = 3 * affineCompositionRhs a n k +
+            2 ^ prefixExponentSum a k := by rw [ih]
+
 end SyracuseAudit
