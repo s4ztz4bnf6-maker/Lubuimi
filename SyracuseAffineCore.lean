@@ -131,4 +131,38 @@ theorem finite_prefix_affine_identity
         _ = 3 * affineCompositionRhs a n k +
             2 ^ prefixExponentSum a k := by rw [ih]
 
+
+/--
+Exact closed-form identity for a run of valuation-one Syracuse steps.
+If every step is the unaccelerated odd recurrence
+  2 * n (i+1) = 3 * n i + 1,
+then 2^k * (n k + 1) = 3^k * (n 0 + 1).
+This is an algebraic invariant; parity is not needed for the identity itself.
+When all states are odd, the extra factor of two in n k + 1 yields the
+state-dependent divisibility obstruction recorded in the companion research
+note. This lemma alone is not a global descent or convergence result.
+-/
+theorem constant_valuation_one_identity
+    (n : Nat → Nat)
+    (hstep : ∀ i, 2 * n (i + 1) = 3 * n i + 1) :
+    ∀ k, 2 ^ k * n k + 2 ^ k = 3 ^ k * (n 0 + 1) := by
+  intro k
+  induction k with
+  | zero =>
+      simp
+  | succ k ih =>
+      calc
+        2 ^ (k + 1) * n (k + 1) + 2 ^ (k + 1)
+            = 2 ^ k * (2 * n (k + 1)) + 2 ^ k * 2 := by
+                rw [pow_succ]
+                ring
+        _ = 2 ^ k * (3 * n k + 1) + 2 ^ k * 2 := by
+                rw [hstep k]
+        _ = 3 * (2 ^ k * n k + 2 ^ k) := by ring
+        _ = 3 * (3 ^ k * (n 0 + 1)) := by rw [ih]
+        _ = 3 ^ (k + 1) * (n 0 + 1) := by
+                rw [pow_succ]
+                ring
+
+
 end SyracuseAudit
