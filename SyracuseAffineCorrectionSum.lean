@@ -94,4 +94,32 @@ theorem suffix_certificate_constant :
     17 ^ 5 < 2 ^ 9 * 5 ^ 5 := by
   norm_num
 
+
+/--
+Necessary obstruction for a descending block: the affine correction already
+contains the final positive summand 2^(A_N). Therefore any strict descent
+over N+1 odd steps forces this single summand to fit below the full
+multiplicative gap. This is only a necessary condition, not a descent proof.
+-/
+theorem affineCorrectionSum_ge_last_power
+    (a : Nat → Nat) (N : Nat) :
+    2 ^ prefixExponentSum a N ≤ affineCorrectionSum a (N + 1) := by
+  simp [affineCorrectionSum]
+  omega
+
+theorem descent_requires_last_power_bound
+    (a n : Nat → Nat)
+    (hstep : ∀ k, 2 ^ a k * n (k + 1) = 3 * n k + 1)
+    (N : Nat)
+    (hqp : 3 ^ (N + 1) ≤ 2 ^ prefixExponentSum a (N + 1))
+    (hdesc : n (N + 1) < n 0) :
+    2 ^ prefixExponentSum a N <
+      (2 ^ prefixExponentSum a (N + 1) - 3 ^ (N + 1)) * n 0 := by
+  have hbound :=
+    (finite_prefix_descent_iff_correction_bound a n hstep (N + 1) hqp).mp hdesc
+  exact lt_of_le_of_lt (affineCorrectionSum_ge_last_power a N) hbound
+
+#print axioms affineCorrectionSum_ge_last_power
+#print axioms descent_requires_last_power_bound
+
 end SyracuseAudit
