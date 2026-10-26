@@ -1820,3 +1820,25 @@ theorem no_descent_if_cumulative_exponent_le_steps
 #print axioms no_descent_if_cumulative_exponent_le_steps
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- Every certified odd-to-odd prefix obeys its own exact 2-adic residue constraint. -/
+theorem prefix_residue_cylinder_sound
+    (n a A : ℕ → ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1)
+    (hodd : ∀ j, n j % 2 = 1) :
+    ∀ j, (3 ^ j * n 0 + canonicalOffset A j) % 2 ^ (A j + 1)
+      = 2 ^ A j := by
+  intro j
+  apply terminal_offset_residue (A j) j (n 0) (n j)
+    (canonicalOffset A j) (hodd j)
+  exact canonical_offset_identity_of_certified_steps
+    n a A hA0 hA hstep j
+
+#print axioms prefix_residue_cylinder_sound
+
+end CollatzSyracuseAudit
