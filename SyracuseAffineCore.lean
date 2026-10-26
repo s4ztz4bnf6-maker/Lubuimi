@@ -85,9 +85,7 @@ theorem four_step_affine_identity
     _ = 27 * (3 * x + 1) + 9 * 2 ^ a + 3 * 2 ^ (a + b) +
         2 ^ (a + b + c) := by rw [h₁]
     _ = 81 * x + 27 + 9 * 2 ^ a + 3 * 2 ^ (a + b) +
-        2 ^ (a + b + c) := by
-      rw [pow_add, pow_add]
-      ring
+        2 ^ (a + b + c) := by ring
 
 
 
