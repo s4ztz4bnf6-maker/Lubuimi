@@ -118,3 +118,57 @@ theorem weighted_removedFraction_sum_min {ι : Type*} [Fintype ι]
 #print axioms removedFraction_one
 
 end BBMSTScalarMoment
+
+
+/-!
+## Source-update normalization audit
+
+The paper's local update has two different multipliers, one on the covered
+part of a fiber and one on its complement. The following scalar identity
+checks that their weighted average is one on a nondegenerate fiber. The
+endpoint cases are handled separately in the actual finite-space proof,
+because the corresponding part of the fiber is empty.
+-/
+
+/-- Covered-part multiplier in the BBMST update, on a nondegenerate fiber. -/
+noncomputable def coveredUpdateMultiplier (α δ : ℚ) : ℚ :=
+  max 0 ((α - δ) / (α * (1 - δ)))
+
+/-- Uncovered-part multiplier in the BBMST update, on a nondegenerate fiber. -/
+noncomputable def uncoveredUpdateMultiplier (α δ : ℚ) : ℚ :=
+  min (1 / (1 - α)) (1 / (1 - δ))
+
+/-- The source update preserves the total mass of each nondegenerate fiber:
+the covered proportion times its multiplier plus the complementary
+proportion times its multiplier equals one. This is scalar normalization,
+not yet the full Lemma 2.1 measure-preservation theorem. -/
+theorem source_update_fiber_normalization
+    (α δ : ℚ) (hα0 : 0 < α) (hα1 : α < 1)
+    (hδ0 : 0 < δ) (hδ1 : δ < 1) :
+    α * coveredUpdateMultiplier α δ +
+      (1 - α) * uncoveredUpdateMultiplier α δ = 1 := by
+  have hαden : 0 < α * (1 - δ) := by positivity
+  have hδden : 0 < 1 - δ := by linarith
+  have hαcomp : 0 < 1 - α := by linarith
+  by_cases hcut : α ≤ δ
+  · have hcovered : (α - δ) / (α * (1 - δ)) ≤ 0 :=
+      div_nonpos_of_nonpos_of_nonneg (by linarith)
+        (le_of_lt hαden)
+    have hunc : 1 / (1 - α) ≤ 1 / (1 - δ) := by
+      apply (div_le_div_iff₀ hαcomp hδden).2
+      nlinarith
+    simp only [coveredUpdateMultiplier, uncoveredUpdateMultiplier,
+      max_eq_left hcovered, min_eq_left hunc]
+    field_simp
+  · have hcut' : δ < α := lt_of_not_ge hcut
+    have hcovered : 0 ≤ (α - δ) / (α * (1 - δ)) :=
+      div_nonneg (by linarith) (le_of_lt hαden)
+    have hunc : 1 / (1 - δ) ≤ 1 / (1 - α) := by
+      apply (div_le_div_iff₀ hδden hαcomp).2
+      nlinarith
+    simp only [coveredUpdateMultiplier, uncoveredUpdateMultiplier,
+      max_eq_right hcovered, min_eq_left hunc]
+    field_simp
+    <;> ring
+
+#print axioms source_update_fiber_normalization
