@@ -45,4 +45,43 @@ theorem three_step_affine_identity
     _ = 3 * (3 * (3 * x + 1) + 2 ^ a) + 2 ^ (a + b) := by rw [h₁]
     _ = 27 * x + 9 + 3 * 2 ^ a + 2 ^ (a + b) := by ring
 
+
+/--
+Four prescribed odd Syracuse steps eliminate all intermediate states.
+This remains a conditional affine identity: it does not establish
+realizability of an arbitrary valuation word or global Collatz convergence.
+-/
+theorem four_step_affine_identity
+    (x y z w v a b c d : ℕ)
+    (h₁ : 2 ^ a * y = 3 * x + 1)
+    (h₂ : 2 ^ b * z = 3 * y + 1)
+    (h₃ : 2 ^ c * w = 3 * z + 1)
+    (h₄ : 2 ^ d * v = 3 * w + 1) :
+    2 ^ (a + b + c + d) * v =
+      81 * x + 27 + 9 * 2 ^ a + 3 * 2 ^ (a + b) + 2 ^ (a + b + c) := by
+  rw [pow_add, pow_add, pow_add]
+  calc
+    (2 ^ a * 2 ^ b * 2 ^ c * 2 ^ d) * v =
+        (2 ^ a * 2 ^ b * 2 ^ c) * (2 ^ d * v) := by ring
+    _ = (2 ^ a * 2 ^ b * 2 ^ c) * (3 * w + 1) := by rw [h₄]
+    _ = 3 * ((2 ^ a * 2 ^ b * 2 ^ c) * w) + 2 ^ (a + b + c) := by
+      rw [← pow_add, ← pow_add]
+      ring
+    _ = 3 * ((2 ^ a * 2 ^ b) * (2 ^ c * w)) + 2 ^ (a + b + c) := by ring
+    _ = 3 * ((2 ^ a * 2 ^ b) * (3 * z + 1)) + 2 ^ (a + b + c) := by rw [h₃]
+    _ = 9 * ((2 ^ a * 2 ^ b) * z) + 3 * 2 ^ (a + b) +
+        2 ^ (a + b + c) := by
+      rw [← pow_add]
+      ring
+    _ = 9 * (2 ^ a * (2 ^ b * z)) + 3 * 2 ^ (a + b) +
+        2 ^ (a + b + c) := by ring
+    _ = 9 * (2 ^ a * (3 * y + 1)) + 3 * 2 ^ (a + b) +
+        2 ^ (a + b + c) := by rw [h₂]
+    _ = 27 * (2 ^ a * y) + 9 * 2 ^ a + 3 * 2 ^ (a + b) +
+        2 ^ (a + b + c) := by ring
+    _ = 27 * (3 * x + 1) + 9 * 2 ^ a + 3 * 2 ^ (a + b) +
+        2 ^ (a + b + c) := by rw [h₁]
+    _ = 81 * x + 27 + 9 * 2 ^ a + 3 * 2 ^ (a + b) +
+        2 ^ (a + b + c) := by ring
+
 end SyracuseAudit
