@@ -40,7 +40,7 @@ theorem interior_band_weighted_mass_lower_bound
       ≤
       ∑ i ∈ s.filter (fun i => δ ≤ alpha i ∧ alpha i ≤ 1 - δ),
         alpha i * (1 - alpha i) * mass i := by
-  rw [← Finset.mul_sum]
+  rw [Finset.mul_sum]
   apply Finset.sum_le_sum
   intro i hi
   have his : i ∈ s := (Finset.mem_filter.mp hi).1
