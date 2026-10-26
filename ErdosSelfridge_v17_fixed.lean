@@ -19,10 +19,11 @@
     • elementary min/max mass identity
 
   SCOPE WARNING:
-    The paper's theorem concerns square-free moduli. The current CoveringSystem
-    structure does not impose square-freeness, and erdos_selfridge does not
-    assume it. The final theorem still depends on the two admitted placeholders;
-    its name must not be interpreted as a completed conjecture proof.
+    The paper's theorem concerns square-free moduli. CoveringSystem itself
+    does not impose square-freeness, so the conditional theorem now takes
+    CS_squarefree explicitly. It still depends on two admitted placeholders;
+    it is not an axiom-free proof of the square-free theorem or the general
+    Erdős–Selfridge conjecture.
 
   Next proof obligations:
     1. Formalize the source's finite probability space and fiber-mass identity.
