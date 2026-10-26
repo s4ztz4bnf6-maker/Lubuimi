@@ -29,11 +29,7 @@ actual filtered finite index set. -/
 theorem interior_band_weighted_mass_lower_bound
     {ι : Type*} [DecidableEq ι]
     (s : Finset ι) (mass alpha : ι → ℚ) (δ : ℚ)
-    (hδ : 0 ≤ δ)
-    (hδhalf : δ ≤ 1 / 2)
-    (hmass : ∀ i ∈ s, 0 ≤ mass i)
-    (halpha0 : ∀ i ∈ s, 0 ≤ alpha i)
-    (halpha1 : ∀ i ∈ s, alpha i ≤ 1) :
+    (hmass : ∀ i ∈ s, 0 ≤ mass i) :
     δ * (1 - δ) *
         (∑ i ∈ s.filter (fun i => δ ≤ alpha i ∧ alpha i ≤ 1 - δ),
           mass i)
