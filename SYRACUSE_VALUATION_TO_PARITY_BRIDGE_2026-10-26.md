@@ -1,7 +1,7 @@
 # Syracuse bridge: exact valuation cylinders to ordinary parity prefixes
 
 Date: 2026-10-26
-Status: proof design and exact statement correspondence; NOT Lean-compiled. No global Collatz result claimed.
+Status: proof design plus finite regression evidence; NOT Lean-compiled. No global Collatz result claimed.
 
 ## Definitions
 
@@ -11,7 +11,7 @@ T(n)=\frac{3n+1}{2^{v_2(3n+1)}}.
 \]
 Write n_{j+1}=T(n_j), a_j=v_2(3n_j+1)>=1, and A_N=sum_{j<N} a_j.
 
-Let the ordinary Collatz map be C(m)=m/2 for even m and C(m)=(3m+1)/2 for odd m.
+Let the ordinary Collatz map be C(m)=m/2 for even m and (3m+1)/2 for odd m.
 
 ## Bridge theorem target
 
@@ -29,11 +29,24 @@ If a_j=v_2(3n_j+1), then 3n_j+1=2^{a_j}n_{j+1} with n_{j+1} odd. The ordinary ma
 
 Examples: valuation 1 expands to 11; valuation 2 expands to 101; valuation 3 expands to 1001.
 
+## Finite regression check (exploratory, not proof)
+
+An independent exact-integer enumeration checked every valuation word of lengths 1 through 4 with entries in {1,2,3,4} and total valuation A_N <= 9: 180 words. For each word, all odd representatives modulo 2^(A_N+1) were tested. The set matching the exact valuation word agreed with the set matching the expanded ordinary parity prefix in every case; each set contained exactly one odd residue representative. Failures: 0.
+
+This is finite regression evidence only. It is not Lean-compiled, does not establish the theorem for all words, and does not establish universal Collatz descent.
+
+## Existing formalization discovered
+
+A public Lean source already formalizes parity-prefix/residue-class machinery for the ordinary accelerated map:
+https://github.com/neljaouh/uniform-syracuse-atoms-lean/blob/17e43a340f22ccc0cbd7063a0862a93f72373979/Erdos1135/Terras/Parity/Residue.lean
+
+The source includes same_parityPrefix_one_iff_modEq_two, parityPrefix_eq_of_modEq_twoPow, and an affine-iterate lemma. This makes exact source comparison feasible and further rules out claiming parity-word residue coding itself as new. The prospective contribution is a checked translation from exact valuation words to the existing parity-prefix convention, including endpoint and modulus.
+
 ## Important precision about the residue class
 
-A parity prefix of length L for the ordinary Collatz map is determined by a residue class modulo 2^L, subject to the precise convention for whether the initial state and terminal state are included. Here L=A_N+1. The proof must establish the convention and residue modulus in Lean, not rely on visual agreement between bit strings.
+The public formalization uses the standard Collatz map C(m)=m/2 for even m and (3m+1)/2 for odd m; a length-k parity prefix is tied to congruence modulo 2^k. For the valuation word, the proposed prefix length is A_N+1 because it records all A_N ordinary-step parities plus the terminal odd state n_N. The proof must establish that this convention yields exactly the same residue class modulo 2^(A_N+1), not merely equal cardinalities.
 
-The existing exact-cylinder derivation says the valuation word selects one residue class modulo 2^(A_N+1), intersected with positive odd integers, with relative density 2^(-A_N) among odd starts. The bridge theorem should identify this class with the class defined by W. It should not merely assert equal cardinalities.
+The valuation-cylinder derivation predicts one residue class modulo 2^(A_N+1), intersected with positive odd integers, with relative density 2^(-A_N) among odd starts.
 
 ## Formal proof obligations
 
@@ -42,15 +55,15 @@ The existing exact-cylinder derivation says the valuation word selects one resid
 3. Prove the finite concatenation theorem by induction on N, keeping the terminal-state convention explicit.
 4. Prove both directions of predicate equivalence, including positivity and oddness of all accelerated states.
 5. Separately prove the unique residue-class statement and density calculation.
-6. Compare the definitions and indexing with the public Terras-style parity-prefix formalization before claiming novelty.
+6. Align the definitions with the cited Lean source and pin the exact dependency/toolchain before any novelty claim.
 
 ## What this does not prove
 
 The bridge is a representation theorem. It does not prove that every orbit descends, that the exceptional set is empty, or that a density-one result upgrades to a universal theorem. A density estimate may leave a nonempty exceptional set of density zero.
 
-## Existing related work
+## Related checked result and its boundary
 
-A public parity-word/residue-class formalization already exists at:
+ProofAtlas records a checked logarithmic-time power-saving descent theorem:
 https://www.proofatlas.ai/formalizations/terras-log-time-power-saving/
 
-Therefore, the parity-cylinder idea itself is not claimed as new. The prospective contribution is a checked equivalence for the variable-length exact-valuation encoding, plus a source-faithful comparison with that existing formalization. No Lean compilation or CI is claimed for this note.
+Its stated conclusion bounds the proportion of starts below N that fail to descend within a logarithmic number of accelerated steps by 10^7 N^(-1/100), for N >= 15552. It does not prove that every orbit descends or reaches 1. The proposed bridge should reuse compatible definitions where possible, not restate that result as a new theorem.
