@@ -55,7 +55,7 @@ theorem nat_descent_iff_correction_bound
       rw [hsub] at hbound
       omega
     rw [← hidentity] at hstrict
-    exact (Nat.mul_lt_mul_left hp).mpr hstrict
+    exact (Nat.mul_lt_mul_left hp).mp hstrict
 
 /--
 Orbit-instantiated descent criterion.  Unlike the generic arithmetic lemma
