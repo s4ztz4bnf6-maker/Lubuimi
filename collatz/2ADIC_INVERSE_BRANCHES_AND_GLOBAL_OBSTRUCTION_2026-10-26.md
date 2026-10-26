@@ -29,7 +29,37 @@ Since 2^A is invertible modulo 3^N, the word determines one residue class for n_
 
 **Audit correction:** an earlier version of this note incorrectly used 3^j instead of 3^(N−1−j). The N=2 hand-check exposes the error. The formula and all dependent congruences have been corrected here. This is exactly why recurrence-level boundary cases must be checked before a formalization is treated as evidence.
 
-This cross-modulus constraint is exact and potentially useful for ruling out proposed finite valuation patterns or cycles. It does not by itself rule out every infinite positive orbit; no universal contradiction or descent bound has been obtained from it.
+## Exact Archimedean drift identity: the bridge we can state, but not yet close
+Rearranging the affine identity gives the exact positive-integer recurrence over N odd-only steps:
+
+    n_N = (3^N n₀ + C)/2^A,
+    C = Σ_{j=0}^{N−1} 3^(N−1−j) 2^(p_j).
+
+Taking ordinary real logarithms is legitimate because n₀,n_N,C are positive. It yields
+
+    log(n_N/n₀)
+      = N log 3 − A log 2 + log(1 + C/(3^N n₀)).
+
+This is the exact bridge between the discrete valuation sum A and ordinary size. It isolates the correction term instead of pretending that the 2-adic contraction itself controls ordinary magnitude.
+
+Consequently, a block is a strict Archimedean descent block if and only if
+
+    A log 2 > N log 3 + log(1 + C/(3^N n₀)).
+
+This condition is exact but depends on the actual start n₀ and the valuation-word correction C. The simpler average condition A/N > log₂(3) is not by itself sufficient for a block to descend, because the positive correction term can outweigh the negative linear drift.
+
+There is also a useful universal upper bound on C for any word with aᵢ≥1. Since pⱼ≤A−(N−j),
+
+    C ≤ Σ_{j=0}^{N−1} 3^(N−1−j) 2^(A−N+j)
+      = 2^(A−N)(3^N−2^N).
+
+The equality in this bound can occur only when every remaining valuation constraint is simultaneously tight in the corresponding prefix inequalities; use the non-strict bound as written unless strictness is separately established. It follows that
+
+    C/(3^N n₀) ≤ 2^(A−N)(1−(2/3)^N)/(3^N n₀).
+
+This is a computable upper bound on the correction term, but not yet a uniform descent theorem: its right side still depends on A and n₀, and valuation sums can fluctuate. A proof of universal descent would need to show that every orbit that avoids small values eventually satisfies a block inequality strong enough to dominate this correction, or derive a different pointwise contradiction. No such bound has been proved here.
+
+The logarithmic identity suggests a concrete research target: seek a pointwise lower bound on the cumulative valuation excess A log 2−N log 3 along every sufficiently long orbit segment that has not descended, together with an upper bound on the logarithmic correction. Density-one drift estimates do not supply this pointwise statement for every start.
 
 ## Exact cycle obstruction from the same identity
 If the valuation word belongs to a positive odd Syracuse cycle of length N, then n_N=n₀. The affine identity therefore gives
@@ -60,7 +90,8 @@ The threshold A/N>log₂(3) is a familiar necessary cycle condition; the value h
 - Every finite valuation word determines a composition of inverse branches on odd 2-adics.
 - The corresponding 2-adic cylinder has contraction factor 2^(−Σaᵢ).
 - The same word imposes the explicit corrected 3^N terminal congruence above.
-- These two moduli provide independent formal invariants for future cylinder-intersection and cycle-exclusion work.
+- The logarithmic drift identity gives an exact ordinary-size criterion for each finite block.
+- These constraints are independent formal invariants for future cylinder-intersection and cycle-exclusion work.
 
 ## What it does NOT give
 2-adic contraction concerns distance in the 2-adic metric, not ordinary size in ℕ. It does not show that positive integer forward orbits decrease, reach 1, or cannot escape to infinity in the ordinary metric. Compactness of Z₂ alone does not create a unique global attracting sink: a compact dynamical system can have many invariant sets and recurrent orbits.
@@ -76,7 +107,8 @@ Formalize in order:
 5. Derive the corrected terminal congruence modulo 3^N and explicitly prove invertibility of 2^A modulo 3^N.
 6. Derive cylinder modulus 2^(Σaᵢ), carefully distinguishing residue-class depth from ordinary-time parity-prefix length.
 7. Formalize the exact finite cycle filter and regression vector n=1.
-8. Keep the global Archimedean descent theorem as a separate target; do not infer it from contraction.
+8. Formalize the real logarithmic drift identity only after the integer identity; keep positivity hypotheses explicit.
+9. Keep the global Archimedean descent theorem as a separate target; do not infer it from contraction.
 
 ## Source-faithful bridge
 The accelerated Collatz map D(n)=n/2 for even n and (3n+1)/2 for odd n differs from the odd-only map T by grouping a variable number of D-steps. On a positive odd integer with valuation a, D^a(n)=T(n). On the raw map R(n)=n/2 if even and 3n+1 if odd, R^(a+1)(n)=T(n). These identities should be separately formalized and used for all time-bound conversions.
