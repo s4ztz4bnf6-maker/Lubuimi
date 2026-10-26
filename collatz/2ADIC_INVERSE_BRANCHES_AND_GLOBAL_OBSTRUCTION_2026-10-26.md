@@ -42,6 +42,18 @@ Every term in C is positive, so C>0. Since n₀>0, a necessary condition for suc
 
 This is an exact obstruction, not a sufficient condition: satisfying the inequality does not produce a cycle. For a specified valuation word, there is a stronger finite test: calculate C and D=2^A−3^N, require D>0 and D∣C, and then test n₀=C/D against the exact valuation word and all intermediate positivity/oddness conditions. Divisibility alone is necessary but is not sufficient to certify the word, since the reconstructed orbit must realize each asserted valuation.
 
+### Exact regression vector: the trivial Syracuse cycle
+The known odd cycle n₀=1 has N=1, a₀=2, A=2, p₀=0, C=1, D=2²−3=1. Hence D∣C and n₀=C/D=1. Directly, v₂(3·1+1)=v₂(4)=2 and T(1)=1. This is a useful sanity vector for the affine identity, cycle equation, valuation check, and integer divisibility code. It is only a regression test; it supplies no evidence that nontrivial cycles do or do not exist.
+
+### Finite word-filter algorithm (exact integer arithmetic)
+For an input word a₀,…,a_{N−1}:
+1. Reject unless N>0 and every aᵢ≥1.
+2. Compute A and pⱼ by integer addition; compute C=Σ 3^(N−1−j)2^(pⱼ), D=2^A−3^N.
+3. Reject a cycle candidate unless D>0 and C mod D=0.
+4. Set candidate n₀=C/D; reconstruct nᵢ₊₁=(3nᵢ+1)/2^aᵢ only if each division is exact.
+5. At each stage check nᵢ is positive odd and v₂(3nᵢ+1)=aᵢ; finally require n_N=n₀.
+All steps are decidable exact arithmetic. The filter is complete for a supplied finite valuation word: if the word is a genuine positive cycle, it passes; a word that passes is a genuine cycle because the reconstruction and every valuation are checked. This is a classifier for each finite word, not a finite algorithm that proves there are no cycles of arbitrary length.
+
 The threshold A/N>log₂(3) is a familiar necessary cycle condition; the value here is its direct integration with the corrected word-dependent integer C. This creates a sound cycle-filtering stage before any expensive search or Lean proof. It does not exclude all possible cycles, and it does not prove that every orbit reaches 1.
 
 ## What this gives
@@ -63,7 +75,8 @@ Formalize in order:
 4. Prove the corrected finite affine iterate identity by induction on N, testing N=0, 1, 2 explicitly.
 5. Derive the corrected terminal congruence modulo 3^N and explicitly prove invertibility of 2^A modulo 3^N.
 6. Derive cylinder modulus 2^(Σaᵢ), carefully distinguishing residue-class depth from ordinary-time parity-prefix length.
-7. Keep the global Archimedean descent theorem as a separate target; do not infer it from contraction.
+7. Formalize the exact finite cycle filter and regression vector n=1.
+8. Keep the global Archimedean descent theorem as a separate target; do not infer it from contraction.
 
 ## Source-faithful bridge
 The accelerated Collatz map D(n)=n/2 for even n and (3n+1)/2 for odd n differs from the odd-only map T by grouping a variable number of D-steps. On a positive odd integer with valuation a, D^a(n)=T(n). On the raw map R(n)=n/2 if even and 3n+1 if odd, R^(a+1)(n)=T(n). These identities should be separately formalized and used for all time-bound conversions.
