@@ -140,3 +140,52 @@ A crucial correction to the local-witness route: the paper's principal bound in 
 The source's hyperplane mapping is also explicit: a progression (a+d\mathbb Z), with square-free modulus (d=\prod_{i\in I}p_i), maps to the coordinate hyperplane fixing (x_i=a\bmod p_i) for (i\in I), leaving other coordinates unrestricted. Distinct square-free moduli correspond to distinct fixed-coordinate sets, hence nonparallel hyperplanes. The theorem is stated for finite covering systems with distinct square-free moduli greater than 1.
 
 This section records source-derived obligations; it does not claim these stage-measure formulas have been fully formalized in this repository or that a new Lean build was run.
+
+
+## 8. Collatz external formalization: exact import gate (2026-10-26)
+
+A fresh read of the current ProofAtlas theorem pages sharpens the next action. The predecessor-density companion is not just a headline: it publishes the exact root declaration
+`CollatzPredecessorDensity.nonconvergence_positive_lower_density_of_counterexample`
+and its proposition says that if there exists a positive start that never reaches 1 under the ordinary map, then there are constants c>0 and X0 such that for every X≥X0 at least cX distinct positive starts below X also never reach 1. Its definition of the counting function counts positive starts strictly below X. This is a lower-density statement, not a natural-density limit.
+
+The same package advertises `universal_reaches_one_of_arbitrarily_dense_convergence`: if for every epsilon>0 and every N there is a cutoff X≥N with at least (1-epsilon)X positive starts below X reaching 1, then every positive start reaches 1. This is a *conditional* global theorem; its density-one-like premise is not proved. The exact quantified premise is an arbitrarily-large-cutoff condition, not necessarily a limit along every cutoff.
+
+Reproducibility boundary reported on the public artifact:
+- companion root source commit: `c290ac229b379d2b51026d3e86140496870d6f39`;
+- declared toolchain: `leanprover/lean4:v4.30.0-rc2`;
+- recorded build passed and unfinished-step scan passed;
+- reported standard foundations: `Classical.choice`, `Quot.sound`, `propext`;
+- the source record explicitly does not claim a cold independent LeanChecker run or complete independently reconstructed dependency provenance; supporting source revision is `830b9d3f38f2a8da8cd921bf6a9310dd69336fd0`.
+
+**New actionable task:** obtain the exact source supplement and pinned support package from the artifact, inspect the declaration bodies and imported dependencies, compare the theorem’s definitions of `Reaches`, `collatzStep`, and `countBelow` with our ordinary Collatz conventions, and run a clean build in a separately pinned environment if repository tooling permits. Do not copy the conclusion into our project as an established local theorem until that audit passes. This is a verification/import task, not a new proof of Collatz.
+
+The separate logarithmic-time result states that for density-one many starts, some iterate descends below a threshold tending to infinity within 145 Syracuse steps (odd-relative density) or 436 raw Collatz steps (ordinary density), with a square-root corollary in a restricted window. Its own scope explicitly excludes universal convergence and arrival at 1. Therefore it cannot discharge the premise above.
+
+Sources:
+- https://www.proofatlas.ai/proofs/artifact.collatz.nonconvergence_positive_lower_density.v001.html
+- https://www.proofatlas.ai/proofs/artifact.collatz.universal_reaches_one_of_arbitrarily_dense_convergence.v001.html
+- https://www.proofatlas.ai/formalizations/natural-density-log-time-collatz/
+- https://www.proofatlas.ai/sources/positive-density-log-time-collatz/
+
+## 9. Reliability protocol: strengthen, do not overstate
+
+Tao's 9 October 2026 guest post by Thomas Hales reports that Lean soundness bugs were found in summer 2026, including a bug that enabled an illicit Collatz disproof, and discusses independent kernels and kernel verification. For this project, the operational response is layered evidence, not the claim that a kernel is literally infallible:
+1. pinned clean build with no unfinished proof placeholders;
+2. transitive `#print axioms` evidence for the actual theorem root;
+3. independent source-to-statement audit of definitions and quantifiers;
+4. where feasible, cross-check the proof term using an independently implemented checker/kernel and independently obtained source/dependency hashes;
+5. retain a human-readable proof and a reproducible artifact manifest.
+
+The standard axioms `propext`, `Classical.choice`, and `Quot.sound` are not equivalent to a mathematical conjecture such as Collatz or a placeholder axiom. “Axiom-free” should mean “no unapproved theorem assumptions beyond the explicitly accepted foundation profile,” not an empty output regardless of context.
+
+Tao/Hales source: https://terrytao.wordpress.com/2026/10/09/what-mathematicians-should-know-about-the-lean-theorem-proverquestions-of-reliability-and-ai/
+
+## 10. Paired project execution order
+
+**Collatz, next high-value move:** audit/import the two conditional density roots above; then keep the remaining global gap explicitly isolated as an unconditional upper-density-one convergence theorem (or another genuinely global descent argument). Parallel exploration may search for a potential on realized valuation cylinders, but every candidate must prove realizability and a global quantifier—not just a good finite block.
+
+**BBMST, next high-value move:** formalize the stage-measure update before trying to close the global criterion. First prove the pointwise normalization/total-mass identity on a finite fibre with explicit alpha=0 and alpha=1 branches; then prove Lemma 2.1 (4)-(6) in source order; only then derive the exact first/second-moment bound and summation criterion. The finite identity
+`sum_i w_i a_i(1-a_i) = mu(1-mu)-V`
+is a useful algebraic sublemma, but it cannot replace the source's `min(M1, M2/(4 delta (1-delta)))` term or its accumulated bound.
+
+The four pillars are used as complementary methods, not as a promise that a breakthrough follows: abstract structure proposes lemmas; p-adic/continuous models generate hypotheses; Lean checks exact formal claims; experiments search finite cases and counterexamples. No pillar permits an invalid inference from “almost all” to “all”.
