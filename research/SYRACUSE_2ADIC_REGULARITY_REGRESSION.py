@@ -16,6 +16,10 @@ def v2_positive(n: int) -> int:
         k += 1
     return k
 
+def v2_nonzero_integer(n: int) -> int:
+    assert n != 0
+    return v2_positive(abs(n))
+
 def accelerated_value(x: Fraction) -> Fraction:
     z = 3*x + 1
     assert z.denominator % 2 == 1 and z != 0
@@ -42,9 +46,13 @@ def test_local_cylinder(k: int, u: int, t: int) -> None:
     assert v2_positive(zp.numerator) == k
     assert accelerated_value(xp) - accelerated_value(x) == 6*t
     if t:
-        # |T(x')-T(x)|_2 / |x'-x|_2 = 2^k.
-        assert abs((accelerated_value(xp)-accelerated_value(x)).numerator) == abs(6*t)
-        assert abs((xp-x).numerator) == 2**(k+1)*abs(t)
+        # Exact 2-adic norm ratio: |T(x')-T(x)|_2 / |x'-x|_2 = 2^k.
+        # Here both differences are integers, so |m|_2 = 2^(-v2(m)).
+        out_diff = (accelerated_value(xp)-accelerated_value(x)).numerator
+        in_diff = (xp-x).numerator
+        assert out_diff == 6*t
+        assert in_diff == 2**(k+1)*t
+        assert v2_nonzero_integer(in_diff) - v2_nonzero_integer(out_diff) == k
 
 if __name__ == "__main__":
     count = 0
