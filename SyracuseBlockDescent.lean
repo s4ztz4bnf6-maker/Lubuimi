@@ -24,6 +24,21 @@ inductive RealizesBlock : List ℕ → ℕ → ℕ → Prop where
       (hrest : RealizesBlock as mid finish) :
       RealizesBlock (a :: as) n finish
 
+/-!
+The stricter relation below models actual odd-only Syracuse blocks: every
+state is odd and every exponent is positive. The equation
+2^a * next = 3 * current + 1 together with odd(next) makes a the exact
+2-adic valuation of 3 * current + 1.
+-/
+inductive RealizesOddBlock : List ℕ → ℕ → ℕ → Prop where
+  | nil {n : ℕ} (hn : Odd n) : RealizesOddBlock [] n n
+  | cons {a : ℕ} {as : List ℕ} {n mid finish : ℕ}
+      (hn : Odd n)
+      (ha : 0 < a)
+      (hstep : 2 ^ a * mid = 3 * n + 1)
+      (hrest : RealizesOddBlock as mid finish) :
+      RealizesOddBlock (a :: as) n finish
+
 /--
 For every realized finite block, the denominator powers clear exactly:
 2^(sum exponents) * finish = 3^(number of steps) * start + correction.
@@ -58,6 +73,23 @@ theorem exact_block_identity
                 _ = 3 ^ as.length * 3 * n +
                       (3 ^ as.length + 2 ^ a * blockCorrection as) := by ring
 
+/-- Every odd-only block is also a block of exact algebraic steps. -/
+theorem RealizesOddBlock.toRealizesBlock
+    {as : List ℕ} {start finish : ℕ}
+    (h : RealizesOddBlock as start finish) : RealizesBlock as start finish := by
+  induction h with
+  | nil hn => exact RealizesBlock.nil _
+  | @cons a as n mid finish hn ha hstep hrest ih =>
+      exact RealizesBlock.cons hstep ih
+
+/-- Exact block identity specialized to genuine odd-only blocks. -/
+theorem exact_odd_block_identity
+    {as : List ℕ} {start finish : ℕ}
+    (h : RealizesOddBlock as start finish) :
+    2 ^ as.sum * finish =
+      3 ^ as.length * start + blockCorrection as :=
+  exact_block_identity h.toRealizesBlock
+
 /**
 Exact descent criterion with no subtraction or division: the endpoint is
 smaller precisely when the correction-adjusted affine expression lies below
@@ -89,6 +121,8 @@ theorem blockCorrection_cons (a : ℕ) (as : List ℕ) :
       3 ^ as.length + 2 ^ a * blockCorrection as := rfl
 
 #print axioms exact_block_identity
+#print axioms exact_odd_block_identity
+#print axioms block_descends_iff
 #print axioms blockCorrection_cons
 
 end CollatzSyracuseAudit
