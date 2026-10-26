@@ -48,9 +48,15 @@ theorem exact_block_identity
               rw [ih]
         _ = 3 ^ (as.length + 1) * n +
               (3 ^ as.length + 2 ^ a * blockCorrection as) := by
-              rw [show as.length + 1 = Nat.succ as.length by omega,
-                pow_succ, hstep]
-              ring
+              rw [show as.length + 1 = Nat.succ as.length by omega, pow_succ]
+              calc
+                2 ^ a * (3 ^ as.length * mid + blockCorrection as) =
+                    3 ^ as.length * (2 ^ a * mid) +
+                      2 ^ a * blockCorrection as := by ring
+                _ = 3 ^ as.length * (3 * n + 1) +
+                      2 ^ a * blockCorrection as := by rw [hstep]
+                _ = 3 ^ as.length * 3 * n +
+                      (3 ^ as.length + 2 ^ a * blockCorrection as) := by ring
 
 /-- The correction recurrence agrees with the chronological block split. -/
 theorem blockCorrection_cons (a : ℕ) (as : List ℕ) :
