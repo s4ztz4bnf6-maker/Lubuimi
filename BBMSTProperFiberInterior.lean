@@ -101,14 +101,16 @@ theorem finite_proper_fiber_card_ratio_quadratic_floor
         _ = (1 - 1 / (s.card : ℚ)) * (s.card : ℚ) := hright.symm
     linarith
   have hfloor : 0 ≤ 1 / (s.card : ℚ) := by positivity
+  have hcomplement_nonneg :
+      0 ≤ 1 - (t.card : ℚ) / (s.card : ℚ) :=
+    le_trans hfloor hcomplement
   calc
     1 / (s.card : ℚ) ^ 2 =
         (1 / (s.card : ℚ)) * (1 / (s.card : ℚ)) := by
           field_simp
     _ ≤ ((t.card : ℚ) / (s.card : ℚ)) *
           (1 - (t.card : ℚ) / (s.card : ℚ)) :=
-      mul_le_mul hratio hcomplement hfloor
-        (div_nonneg (by positivity) (le_of_lt hq))
+      mul_le_mul hratio hcomplement hfloor hcomplement_nonneg
 
 #print axioms finite_proper_fiber_card_ratio_quadratic_floor
 
