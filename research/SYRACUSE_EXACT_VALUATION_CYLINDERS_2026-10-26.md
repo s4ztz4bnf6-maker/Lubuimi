@@ -49,7 +49,6 @@ Choose a sufficiently large nonnegative representative in the selected residue c
 
 This is a finite-cylinder classification for prescribed positive exponent words. It does not prove that every orbit descends, that a cylinder contains a small representative, or that all Collatz orbits reach 1. Compactness of Z_2 alone does not turn a finite-word statement into universal convergence. The next meaningful target is a quantitative bound on the least positive representative of a word cylinder, or a rigorous count of cylinders with a specified descent property.
 
-
 ## 6. Executable finite certificate added (2026-10-26)
 
 The accompanying script `research/tools/syracuse_valuation_cylinder_certificate.py` computes the unique residue class using modular inversion and checks direct orbit realizations for several lifts. Regression tests are in `research/tools/test_syracuse_valuation_cylinder_certificate.py`.
@@ -57,3 +56,27 @@ The accompanying script `research/tools/syracuse_valuation_cylinder_certificate.
 For the word (1,4), the tool returns the class n_0 = 3 (mod 64), whose first representative gives 3 -> 5 -> 1. A local independent check exercised 119 positive words with total exponent at most 7 (under a maximum word length of 5), checking three lifts per word; all matched their prescribed valuation words.
 
 This is a concrete implementation check, not Lean verification. The general theorem above still requires formalization and a full project build. The tool itself does not establish an Archimedean descent bound: each cylinder contains arbitrarily large starts, and the residue-class structure is 2-adic rather than a monotonicity theorem over the positive integers.
+
+## 7. New structural observation: cylinder measure is exact, descent is a separate observable
+
+For a fixed word a=(a_0,...,a_(N-1)), the class is one residue modulo 2^(A_N+1). Among all integers its natural density is 2^(-(A_N+1)); conditioned on an odd starting integer, its relative density is exactly 2^(-A_N). This follows directly because the odd integers occupy one of two residue classes modulo 2, and the cylinder is a single odd class modulo 2^(A_N+1).
+
+Consequently, for fixed length N the cylinders indexed by all positive words of length N have total conditional 2-adic measure
+sum_{a_0,...,a_(N-1)>=1} 2^(-sum a_i) = (sum_{a>=1}2^(-a))^N = 1.
+This is a partition-of-mass identity, not a descent theorem. It formalizes the valuation process as a probability-preserving symbolic coding under normalized Haar measure on odd 2-adic integers. The key missing estimate is a joint bound linking this cylinder measure to the real-valued endpoint n_N/n_0; Haar measure does not control the least positive representative in the required way.
+
+A candidate next lemma is therefore deliberately modest: formalize the exact cylinder measure and the mass identity first, then separately seek an inequality on the affine correction term
+sum_{j<N} log(1+1/(3 n_j)).
+Any argument that treats the valuation digits as independent for a fixed deterministic integer orbit must prove that dependence claim; the geometric Haar distribution alone is insufficient.
+
+## 8. Literature/reliability audit (2026-10-26)
+
+Recent public literature includes several formalized or computationally supported partial results, but none cited here closes the full conjecture. The 2026 “nu_2 Countdown” claim concerns consecutive single-halving compound steps in a specified residue regime, not universal convergence. Other conditional cycle analyses explicitly retain hypotheses. A project advertised as a full Lean Collatz proof must be checked for statement fidelity, the actual pinned Lean version, and transitive axioms; the July/August 2026 kernel soundness incident makes post-fix rebuilds important.
+
+Relevant reading:
+- Tao/Hales, reliability and AI, 9 Oct 2026: https://terrytao.wordpress.com/2026/10/09/what-mathematicians-should-know-about-the-lean-theorem-proverquestions-of-reliability-and-ai/
+- Lean kernel soundness bug postmortem: https://leodemoura.github.io/blog/2026-8-1-postmortem-for-kernel-soundness-bug-14576/
+- A reported valuation countdown theorem (scope to be audited): https://zenodo.org/records/19371947
+- A conditional-cycle project with a recent post-fix recheck report: https://collatz-lab.org/
+
+No global proof or counterexample is claimed.
