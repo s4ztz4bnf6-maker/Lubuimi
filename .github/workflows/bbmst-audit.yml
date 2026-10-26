@@ -43,3 +43,7 @@ jobs:
         run: |
           lake build BBMSTProperFiberInterior
           lake env lean BBMSTProperFiberInterior.lean
+      - name: Build and compile source pointwise update normalization
+        run: |
+          lake build BBMSTPointwiseUpdate
+          lake env lean BBMSTPointwiseUpdate.lean
