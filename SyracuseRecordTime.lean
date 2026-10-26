@@ -74,3 +74,27 @@ theorem valuationSurplus_increment_le_neg_four
   rw [valuationSurplus_increment]
   have ha' : (a k : ℤ) ≤ 1 := by exact_mod_cast ha
   linarith
+
+
+/-- Exact cumulative drift identity: the surplus at time N is the sum of
+all local increments. This makes the record-time criterion a finite
+prefix-sum constraint on the valuations, not merely a one-step observation. -/
+theorem valuationSurplus_eq_sum_local_drift
+    (a : Nat → Nat) (N : Nat) :
+    valuationSurplus a N =
+      ∑ k ∈ Finset.range N, (5 * (a k : ℤ) - 9) := by
+  induction N with
+  | zero =>
+      simp [valuationSurplus, prefixExponentSum]
+  | succ N ih =>
+      calc
+        valuationSurplus a (N + 1) =
+            valuationSurplus a N + (5 * (a N : ℤ) - 9) := by
+              rw [valuationSurplus_increment]
+              ring
+        _ = (∑ k ∈ Finset.range N, (5 * (a k : ℤ) - 9)) +
+              (5 * (a N : ℤ) - 9) := by rw [ih]
+        _ = ∑ k ∈ Finset.range (N + 1), (5 * (a k : ℤ) - 9) := by
+              rw [Finset.sum_range_succ]
+
+#print axioms valuationSurplus_eq_sum_local_drift
