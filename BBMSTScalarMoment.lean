@@ -67,6 +67,32 @@ theorem removedFraction_one (δ : ℚ) (hδ0 : 0 < δ) (hδ1 : δ < 1) :
   rw [max_eq_right hquot]
   field_simp
 
+
+/-- Weighted finite-fiber form of the two scalar moment bounds.
+The weights need only be nonnegative; normalization is not needed for this
+inequality. In the BBMST application, the weights are the previous-stage
+masses of the fibers. -/
+theorem weighted_removedFraction_bounds {ι : Type*} [Fintype ι]
+    (w α : ι → ℚ) (δ : ℚ)
+    (hw : ∀ i, 0 ≤ w i)
+    (hα0 : ∀ i, 0 ≤ α i)
+    (hα1 : ∀ i, α i ≤ 1)
+    (hδ0 : 0 < δ) (hδ1 : δ < 1) :
+    (∑ i, w i * removedFraction (α i) δ) ≤ ∑ i, w i * α i ∧
+    (∑ i, w i * removedFraction (α i) δ) ≤
+      ∑ i, w i * ((α i) ^ 2 / (4 * δ * (1 - δ))) := by
+  have hpoint := fun i =>
+    removedFraction_bounds (α i) δ (hα0 i) (hα1 i) hδ0 hδ1
+  constructor
+  · apply Finset.sum_le_sum
+    intro i hi
+    exact mul_le_mul_of_nonneg_left (hpoint i).1 (hw i)
+  · apply Finset.sum_le_sum
+    intro i hi
+    exact mul_le_mul_of_nonneg_left (hpoint i).2 (hw i)
+
+#print axioms weighted_removedFraction_bounds
+
 #print axioms removedFraction_bounds
 #print axioms removedFraction_zero
 #print axioms removedFraction_one
