@@ -116,6 +116,15 @@ theorem positive_exponent_sum_pos (as : List ℕ)
   have hlenpos : 0 < as.length := List.length_pos_iff.mpr hne
   omega
 
+/-- The affine correction term is strictly positive for every nonempty block. -/
+theorem blockCorrection_pos_of_nonempty (as : List ℕ) (hne : as ≠ []) :
+    0 < blockCorrection as := by
+  cases as with
+  | nil => contradiction
+  | cons a as =>
+      simp [blockCorrection]
+      positivity
+
 /--
 Exact descent criterion with no subtraction or division: the endpoint is
 smaller precisely when the correction-adjusted affine expression lies below
