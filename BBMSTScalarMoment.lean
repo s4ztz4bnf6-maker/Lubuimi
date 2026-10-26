@@ -6,7 +6,7 @@ import Mathlib
 This file isolates the scalar inequality underlying the two local moment bounds
 in the BBMST fiber update. It is deliberately independent of the geometric
 finite probability space; it does not prove Lemma 2.1 or the final sieve theorem.
--/ 
+-/
 
 namespace BBMSTScalarMoment
 
@@ -37,6 +37,8 @@ theorem removedFraction_bounds (α δ : ℚ)
       div_pos (by linarith) hden
     have hnum : 4 * δ * (α - δ) ≤ α ^ 2 := by
       nlinarith [sq_nonneg (α - 2 * δ)]
+    have hprod : 0 ≤ δ * (1 - α) :=
+      mul_nonneg (le_of_lt hδ0) (sub_nonneg.mpr hα1)
     unfold removedFraction
     rw [max_eq_right (le_of_lt hquot)]
     constructor
