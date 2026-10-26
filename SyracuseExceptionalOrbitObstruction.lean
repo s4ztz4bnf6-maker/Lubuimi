@@ -21,7 +21,12 @@ theorem valuationSurplus_ge_length_sub_five_low_count
   | zero =>
       simp [lowValuationCount, valuationSurplus, prefixExponentSum]
   | succ N ih =>
-      rw [valuationSurplus_increment]
+      have hinc := valuationSurplus_increment a N
+      have hstep :
+          valuationSurplus a (N + 1) =
+            valuationSurplus a N + (5 * (a N : ℤ) - 9) := by
+        linarith
+      rw [hstep]
       simp only [lowValuationCount]
       by_cases hlow : a N ≤ 1
       · have hone : a N = 1 := by omega
