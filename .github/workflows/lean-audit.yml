@@ -11,14 +11,14 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-      - name: Install Lean and generate lake manifest
+      - name: Install Lean and resolve dependencies
         run: |
           curl --fail --location --retry 3 --max-time 60 https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
-          sh elan-init.sh -y --default-toolchain leanprover/lean4:v4.28.0
+          sh elan-init.sh -y --default-toolchain leanprover/lean4:v4.34.1
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
           export PATH="$HOME/.elan/bin:$PATH"
           lake update
-      - uses: leanprover/lean-action@v1
-        with:
-          build: true
-          use-mathlib-cache: true
+      - name: Compile the declared Lean library
+        run: lake build SyracuseAudit
+      - name: Compile standalone record-time module
+        run: lake env lean SyracuseRecordTime.lean
