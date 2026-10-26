@@ -44,7 +44,7 @@ theorem no_next_power_divides_of_odd_quotient
       2 ^ a * m = 3 * n + 1 := hstep
       _ = 2 ^ (a + 1) * k := hk
       _ = 2 ^ a * (2 * k) := by rw [pow_succ]; ring
-  have hmeq : m = 2 * k := Nat.mul_left_cancel hmul
+  have hmeq : m = 2 * k := Nat.mul_left_cancel (by positivity) hmul
   rw [hj] at hmeq
   omega
 
