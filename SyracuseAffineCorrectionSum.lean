@@ -57,6 +57,30 @@ theorem nat_descent_iff_correction_bound
     rw [← hidentity] at hstrict
     exact (Nat.mul_lt_mul_left hp).mpr hstrict
 
+/--
+Orbit-instantiated descent criterion.  Unlike the generic arithmetic lemma
+above, this connects the exact finite-prefix Syracuse step equations to the
+explicit correction sum.  It is conditional on the actual step equations and
+on 3^N ≤ 2^(A_N); it does not assert that such an N exists.
+-/
+theorem finite_prefix_descent_iff_correction_bound
+    (a n : Nat → Nat)
+    (hstep : ∀ k, 2 ^ a k * n (k + 1) = 3 * n k + 1)
+    (N : Nat)
+    (hqp : 3 ^ N ≤ 2 ^ prefixExponentSum a N) :
+    n N < n 0 ↔
+      affineCorrectionSum a N <
+        (2 ^ prefixExponentSum a N - 3 ^ N) * n 0 := by
+  have hidentity :
+      2 ^ prefixExponentSum a N * n N =
+        3 ^ N * n 0 + affineCorrectionSum a N := by
+    rw [finite_prefix_affine_identity a n hstep N,
+      affineCompositionRhs_closed_form a n N]
+  exact nat_descent_iff_correction_bound
+    (2 ^ prefixExponentSum a N) (3 ^ N) (n 0) (n N)
+    (affineCorrectionSum a N) (by positivity) hqp hidentity
+
+
 #print axioms nat_descent_iff_correction_bound
 
 #print axioms affineCompositionRhs_closed_form
