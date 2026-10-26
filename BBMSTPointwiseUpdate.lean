@@ -68,6 +68,35 @@ theorem pointwise_update_normalized
     field_simp
     ring
 
+
+/-- The covered multiplier is bounded by the reciprocal covered mass.
+This is the sharp elementary envelope needed when bounding pointwise
+distortion by the fiber mass. -/
+theorem coveredMultiplier_le_inv
+    (α δ : ℚ) (hα0 : 0 < α) (hα1 : α < 1)
+    (hδ0 : 0 < δ) (hδ1 : δ < 1) :
+    coveredMultiplier α δ ≤ 1 / α := by
+  have hinv : 0 ≤ (1 : ℚ) / α := le_of_lt (div_pos one_pos hα0)
+  have hden : 0 < α * (1 - δ) := mul_pos hα0 (by linarith)
+  have hratio : (α - δ) / (α * (1 - δ)) ≤ 1 / α := by
+    rw [div_le_div_iff₀ hden hα0]
+    nlinarith
+  exact (max_le_iff).2 ⟨hinv, hratio⟩
+
+/-- The uncovered multiplier never exceeds either of its two source
+reciprocal caps. -/
+theorem uncoveredMultiplier_le_inv_alpha (α δ : ℚ) :
+    uncoveredMultiplier α δ ≤ 1 / (1 - α) := by
+  exact min_le_left _ _
+
+theorem uncoveredMultiplier_le_inv_delta (α δ : ℚ) :
+    uncoveredMultiplier α δ ≤ 1 / (1 - δ) := by
+  exact min_le_right _ _
+
+#print axioms coveredMultiplier_le_inv
+#print axioms uncoveredMultiplier_le_inv_alpha
+#print axioms uncoveredMultiplier_le_inv_delta
+
 #print axioms coveredMultiplier_nonneg
 #print axioms uncoveredMultiplier_pos
 #print axioms pointwise_update_normalized
