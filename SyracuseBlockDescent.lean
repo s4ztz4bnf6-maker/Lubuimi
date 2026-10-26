@@ -90,11 +90,11 @@ theorem exact_odd_block_identity
       3 ^ as.length * start + blockCorrection as :=
   exact_block_identity h.toRealizesBlock
 
-/**
+/--
 Exact descent criterion with no subtraction or division: the endpoint is
 smaller precisely when the correction-adjusted affine expression lies below
 the scaled initial value.
-*/
+-/
 theorem block_descends_iff
     {as : List ℕ} {start finish : ℕ}
     (h : RealizesBlock as start finish) :
