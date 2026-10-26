@@ -44,3 +44,12 @@ A candidate research target is a **fixed-orbit rigidity lemma**: combine the exa
 ## Status
 
 This note proposes a source-aware proof boundary and Lean decomposition. It is not a new proof of the Collatz conjecture, and no compilation claim is made for the declarations proposed here.
+
+
+## Follow-up audit: why a 2-adic embedding is not yet a descent proof
+
+The compactness of Z_2 does not imply that every orbit of a continuous self-map converges: continuous maps on compact spaces can have periodic or recurrent orbits. Therefore a proposed 2-adic model must identify a specific Lyapunov function, contraction estimate, or invariant-set exclusion theorem; compactness alone supplies none.
+
+There is also a domain issue for the accelerated map T(n)=(3n+1)/2^{v_2(3n+1)}. On odd integers the valuation is finite, but the natural 2-adic exceptional point x=-1/3 satisfies 3x+1=0, and points approaching it 2-adically have unbounded valuations. Any extension to Z_2 must state its domain and prove continuity on that domain rather than assume a global continuous map. The valuation cylinders are clopen away from the exceptional point, so a useful first theorem is local constancy of v_2(3x+1) on each cylinder where it is fixed; this is not global convergence.
+
+Research gate: do not invoke K-theory or a geodesic flow unless a concrete object and a theorem connecting it to integer descent are supplied.
