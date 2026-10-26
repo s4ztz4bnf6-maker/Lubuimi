@@ -777,3 +777,26 @@ theorem finite_weighted_interior_mass_pos_of_interior_point
   exact lt_of_lt_of_le hterm_pos hle
 
 #print axioms finite_weighted_interior_mass_pos_of_interior_point
+
+
+/--
+Quantitative variance-to-interior bridge. If the weighted variance is at
+least eta below mean*(1-mean), then the weighted interior mass is at least
+eta. The geometric work in BBMST must supply the strict variance gap; this
+lemma does not assume or manufacture that gap.
+-/
+theorem finite_weighted_interior_mass_ge_variance_gap
+    {ι : Type*} [DecidableEq ι]
+    (s : Finset ι) (w a : ι → ℚ) (η : ℚ)
+    (hw : (∑ i ∈ s, w i) = 1)
+    (hgap :
+      η ≤
+        (∑ i ∈ s, w i * a i) *
+          (1 - (∑ i ∈ s, w i * a i)) -
+        (∑ i ∈ s, w i *
+          (a i - (∑ j ∈ s, w j * a j)) ^ 2)) :
+    η ≤ ∑ i ∈ s, w i * a i * (1 - a i) := by
+  rw [finite_weighted_variance_identity s w a hw]
+  exact hgap
+
+#print axioms finite_weighted_interior_mass_ge_variance_gap
