@@ -91,6 +91,32 @@ theorem exact_odd_block_identity
   exact_block_identity h.toRealizesBlock
 
 /--
+In a genuine odd-only block, each exponent is positive, so the sum of the
+2-adic exponents is at least the number of steps. This elementary bound is
+not strong enough by itself to force descent, but it supplies a proved
+constraint on every realizable exponent word.
+-/
+theorem positive_exponent_sum_ge_length (as : List ℕ)
+    (hpos : ∀ a ∈ as, 0 < a) : as.length ≤ as.sum := by
+  induction as with
+  | nil => simp
+  | cons a as ih =>
+      have ha : 0 < a := hpos a (by simp)
+      have htail : ∀ x ∈ as, 0 < x := by
+        intro x hx
+        exact hpos x (by simp [hx])
+      simp only [List.length_cons, List.sum_cons]
+      have hrec := ih htail
+      omega
+
+/-- Every nonempty genuine odd-only block has a positive exponent sum. -/
+theorem positive_exponent_sum_pos (as : List ℕ)
+    (hpos : ∀ a ∈ as, 0 < a) (hne : as ≠ []) : 0 < as.sum := by
+  have hlen := positive_exponent_sum_ge_length as hpos
+  have hlenpos : 0 < as.length := List.length_pos_iff.mpr hne
+  omega
+
+/--
 Exact descent criterion with no subtraction or division: the endpoint is
 smaller precisely when the correction-adjusted affine expression lies below
 the scaled initial value.
@@ -169,6 +195,8 @@ theorem blockCorrection_cons (a : ℕ) (as : List ℕ) :
 
 #print axioms exact_block_identity
 #print axioms exact_odd_block_identity
+#print axioms positive_exponent_sum_ge_length
+#print axioms positive_exponent_sum_pos
 #print axioms block_descends_iff
 #print axioms block_descends_requires_power_gap
 #print axioms blockCorrection_cons
