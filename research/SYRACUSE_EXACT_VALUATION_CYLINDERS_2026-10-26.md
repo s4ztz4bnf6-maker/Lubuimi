@@ -48,3 +48,12 @@ Choose a sufficiently large nonnegative representative in the selected residue c
 ## 5. What this does not prove
 
 This is a finite-cylinder classification for prescribed positive exponent words. It does not prove that every orbit descends, that a cylinder contains a small representative, or that all Collatz orbits reach 1. Compactness of Z_2 alone does not turn a finite-word statement into universal convergence. The next meaningful target is a quantitative bound on the least positive representative of a word cylinder, or a rigorous count of cylinders with a specified descent property.
+
+
+## 6. Executable finite certificate added (2026-10-26)
+
+The accompanying script `research/tools/syracuse_valuation_cylinder_certificate.py` computes the unique residue class using modular inversion and checks direct orbit realizations for several lifts. Regression tests are in `research/tools/test_syracuse_valuation_cylinder_certificate.py`.
+
+For the word (1,4), the tool returns the class n_0 = 3 (mod 64), whose first representative gives 3 -> 5 -> 1. A local independent check exercised 119 positive words with total exponent at most 7 (under a maximum word length of 5), checking three lifts per word; all matched their prescribed valuation words.
+
+This is a concrete implementation check, not Lean verification. The general theorem above still requires formalization and a full project build. The tool itself does not establish an Archimedean descent bound: each cylinder contains arbitrarily large starts, and the residue-class structure is 2-adic rather than a monotonicity theorem over the positive integers.
