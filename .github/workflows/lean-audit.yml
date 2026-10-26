@@ -22,3 +22,5 @@ jobs:
         run: lake build SyracuseAudit
       - name: Compile standalone record-time module
         run: lake env lean SyracuseRecordTime.lean
+      - name: Run explicit axiom report for affine theorems
+        run: lake env lean SyracuseAxiomAudit.lean
