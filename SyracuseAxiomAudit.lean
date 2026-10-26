@@ -1,4 +1,4 @@
-import SyracuseAudit.SyracuseAffineCore
+import SyracuseAffineCore
 
 #print axioms SyracuseAudit.two_step_affine_identity
 #print axioms SyracuseAudit.three_step_affine_identity
