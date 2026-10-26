@@ -43,7 +43,7 @@ theorem three_step_affine_identity
     _ = 3 * (2 ^ a * (3 * y + 1)) + 2 ^ (a + b) := by rw [h₂]
     _ = 3 * (3 * (2 ^ a * y) + 2 ^ a) + 2 ^ (a + b) := by ring
     _ = 3 * (3 * (3 * x + 1) + 2 ^ a) + 2 ^ (a + b) := by rw [h₁]
-    _ = 27 * x + 9 + 3 * 2 ^ a + 2 ^ (a + b) := by\n      rw [pow_add]\n      ring
+    _ = 27 * x + 9 + 3 * 2 ^ a + 2 ^ (a + b) := by ring
 
 
 /--
