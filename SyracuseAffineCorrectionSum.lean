@@ -85,4 +85,13 @@ theorem finite_prefix_descent_iff_correction_bound
 
 #print axioms affineCompositionRhs_closed_form
 
+
+
+/-- Exact rational comparison behind the q = 17/5 suffix certificate:
+(17/5)^5 < 2^9. Cleared of denominators, this is a natural-number
+inequality and is checked by norm_num. -/
+theorem suffix_certificate_constant :
+    17 ^ 5 < 2 ^ 9 * 5 ^ 5 := by
+  norm_num
+
 end SyracuseAudit
