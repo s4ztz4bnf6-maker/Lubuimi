@@ -8,6 +8,7 @@ on:
       - collatz/offset-margin-roadmap-2026-10-23
       - collatz/lean-435-recheck-2026-10-24
       - collatz/weighted-correction-expansion-2026-10-25
+      - research/syracuse-threshold-margin-2026-10-27
     paths-ignore:
       - "**.md"
   pull_request:
