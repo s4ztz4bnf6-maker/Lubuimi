@@ -40,7 +40,6 @@ theorem compose_assoc (first second third : Block) :
       cases third with
       | mk l e f =>
         simp [compose, Nat.pow_add, Nat.add_assoc]
-        <;> ring
 
 /--
 Two certified affine blocks compose to the affine certificate associated
@@ -143,7 +142,6 @@ theorem composed_threshold_weighted_average
   have h₂' : scale₂ - 1 ≠ 0 := ne_of_gt (by linarith)
   have h₁₂ : scale₁ * scale₂ - 1 ≠ 0 := ne_of_gt (by nlinarith)
   field_simp [h₁', h₂', h₁₂]
-  <;> ring
 
 #print axioms SyracuseCarryCocycle.composed_threshold_weighted_average
 
