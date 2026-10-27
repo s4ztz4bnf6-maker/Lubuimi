@@ -80,6 +80,22 @@ theorem compose_affine
             rw [pow_add]
             ring
 
+/-- Exact base-six residue fact: every odd n has 3*n+1 congruent to 4 mod 6.
+This guarantees evenness, but does not imply divisibility by 4 or make division
+by 2 a single-digit shift in base six. -/
+theorem odd_step_residue_mod_six (n : ℕ) (hn : n % 2 = 1) :
+    (3 * n + 1) % 6 = 4 := by
+  omega
+
+/-- The residue theorem gives one factor of two, not necessarily two. -/
+theorem odd_step_even (n : ℕ) (hn : n % 2 = 1) :
+    2 ∣ 3 * n + 1 := by
+  have hmod := odd_step_residue_mod_six n hn
+  omega
+
+#print axioms SyracuseCarryCocycle.odd_step_residue_mod_six
+#print axioms SyracuseCarryCocycle.odd_step_even
+
 #print axioms SyracuseCarryCocycle.compose_assoc
 #print axioms SyracuseCarryCocycle.compose_affine
 
