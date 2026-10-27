@@ -93,6 +93,44 @@ theorem odd_step_even (n : ℕ) (hn : n % 2 = 1) :
   have hmod := odd_step_residue_mod_six n hn
   omega
 
+/-- Normalized block data: scale is 2^A/3^N and debt is C/3^N.
+The composition law retains the additive carry debt explicitly. -/
+structure NormalizedBlock where
+  scale : ℚ
+  debt : ℚ
+deriving DecidableEq, Repr
+
+/-- Compose normalized blocks in temporal order: first, then second. -/
+def composeNormalized (first second : NormalizedBlock) : NormalizedBlock where
+  scale := first.scale * second.scale
+  debt := first.debt + first.scale * second.debt
+
+/-- Normalized carry-gain composition is associative. -/
+theorem composeNormalized_assoc
+    (first second third : NormalizedBlock) :
+    composeNormalized (composeNormalized first second) third =
+      composeNormalized first (composeNormalized second third) := by
+  cases first with
+  | mk l1 q1 =>
+    cases second with
+    | mk l2 q2 =>
+      cases third with
+      | mk l3 q3 =>
+        simp [composeNormalized]
+        constructor <;> ring
+
+/-- Exact threshold criterion for a normalized block.
+If x_next = (x + debt)/scale and scale is positive, then x_next < x
+exactly when debt < (scale - 1) * x. -/
+theorem descent_iff_carry_debt_below_gain
+    (scale debt x : ℚ) (hscale : 0 < scale) :
+    (x + debt) / scale < x ↔ debt < (scale - 1) * x := by
+  rw [div_lt_iff₀ hscale]
+  constructor <;> intro h <;> linarith
+
+#print axioms SyracuseCarryCocycle.composeNormalized_assoc
+#print axioms SyracuseCarryCocycle.descent_iff_carry_debt_below_gain
+
 #print axioms SyracuseCarryCocycle.odd_step_residue_mod_six
 #print axioms SyracuseCarryCocycle.odd_step_even
 
