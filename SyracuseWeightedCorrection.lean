@@ -294,8 +294,10 @@ theorem valuation_three_iff_residue_thirteen_mod_sixteen
       intro ha4
       have hpowdiv : 16 ∣ 2 ^ a := by
         refine ⟨2 ^ (a - 4), ?_⟩
-        have hexp : 4 + (a - 4) = a := by omega
-        rw [show (16 : ℕ) = 2 ^ 4 by norm_num, ← hexp, pow_add]
+        calc
+          2 ^ a = 2 ^ (4 + (a - 4)) := by congr 1; omega
+          _ = 2 ^ 4 * 2 ^ (a - 4) := by rw [pow_add]
+          _ = 16 * 2 ^ (a - 4) := by norm_num
       have hdiv : 16 ∣ 2 ^ a * next :=
         dvd_mul_of_dvd_left hpowdiv next
       rw [hstep] at hdiv
