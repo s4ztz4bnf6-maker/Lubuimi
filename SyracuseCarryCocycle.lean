@@ -126,7 +126,7 @@ theorem descent_iff_carry_debt_below_gain
     (scale debt x : ℚ) (hscale : 0 < scale) :
     (x + debt) / scale < x ↔ debt < (scale - 1) * x := by
   rw [div_lt_iff₀ hscale]
-  constructor <;> intro h <;> linarith
+  constructor <;> intro h <;> nlinarith
 
 #print axioms SyracuseCarryCocycle.composeNormalized_assoc
 #print axioms SyracuseCarryCocycle.descent_iff_carry_debt_below_gain
