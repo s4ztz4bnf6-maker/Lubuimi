@@ -9,6 +9,7 @@ on:
       - collatz/lean-435-recheck-2026-10-24
       - collatz/weighted-correction-expansion-2026-10-25
       - research/syracuse-threshold-margin-2026-10-27
+      - research/syracuse-carry-cocycle-lean-2026-10-27
     paths-ignore:
       - "**.md"
   pull_request:
@@ -50,6 +51,8 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SyracuseOffsetIdentity.olean SyracuseOffsetIdentity.lean
       - name: Compile exact threshold margin characterization
         run: lake env lean SyracuseThresholdMargin.lean
+      - name: Compile exact carry-cocycle composition laws
+        run: lake env lean SyracuseCarryCocycle.lean
       - name: Compile exact base-six residue audit
         run: lake env lean SyracuseBaseSixAudit.lean
       - name: Compile residue-octet correction potential
