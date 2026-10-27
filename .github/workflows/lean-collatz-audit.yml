@@ -49,6 +49,8 @@ jobs:
           lake env lean -o .lake/build/lib/lean/SyracuseOffsetIdentity.olean SyracuseOffsetIdentity.lean
       - name: Compile exact threshold margin characterization
         run: lake env lean SyracuseThresholdMargin.lean
+      - name: Compile exact base-six residue audit
+        run: lake env lean SyracuseBaseSixAudit.lean
       - name: Compile and audit stronger offset lower bound
         run: lake env lean SyracuseOffsetLowerBound.lean
       - name: Compile weighted correction expansion and local sign classification
