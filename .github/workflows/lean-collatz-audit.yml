@@ -58,6 +58,8 @@ jobs:
         run: lake env lean SyracuseOffsetLowerBound.lean
       - name: Compile weighted correction expansion and local sign classification
         run: lake env lean SyracuseWeightedCorrection.lean
+      - name: Compile finite valuation-one count inequality
+        run: lake env lean SyracuseValuationDensity.lean
       - name: Attempt sandbox-based independent recheck
         continue-on-error: true
         run: |
