@@ -8,6 +8,8 @@ on:
       - collatz/offset-margin-roadmap-2026-10-23
       - collatz/lean-435-recheck-2026-10-24
       - collatz/weighted-correction-expansion-2026-10-25
+      - research/syracuse-threshold-margin-2026-10-27
+      - research/syracuse-carry-cocycle-lean-2026-10-27
     paths-ignore:
       - "**.md"
   pull_request:
@@ -47,10 +49,20 @@ jobs:
         run: |
           mkdir -p .lake/build/lib/lean
           lake env lean -o .lake/build/lib/lean/SyracuseOffsetIdentity.olean SyracuseOffsetIdentity.lean
+      - name: Compile exact threshold margin characterization
+        run: lake env lean SyracuseThresholdMargin.lean
+      - name: Compile exact carry-cocycle composition laws
+        run: lake env lean SyracuseCarryCocycle.lean
+      - name: Compile exact base-six residue audit
+        run: lake env lean SyracuseBaseSixAudit.lean
+      - name: Compile residue-octet correction potential
+        run: lake env lean SyracuseResiduePotential.lean
       - name: Compile and audit stronger offset lower bound
         run: lake env lean SyracuseOffsetLowerBound.lean
       - name: Compile weighted correction expansion and local sign classification
         run: lake env lean SyracuseWeightedCorrection.lean
+      - name: Compile finite valuation-one count inequality
+        run: lake env lean SyracuseValuationDensity.lean
       - name: Attempt sandbox-based independent recheck
         continue-on-error: true
         run: |
