@@ -201,6 +201,58 @@ theorem blockCorrection_cons (a : ℕ) (as : List ℕ) :
     blockCorrection (a :: as) =
       3 ^ as.length + 2 ^ a * blockCorrection as := rfl
 
+/--
+Uniform upper bound for the correction term of a realized odd-only exponent
+word.  The proof uses only positivity of the exponents; it does not assert
+that a block descends from a given starting value.
+-/
+theorem blockCorrection_le_geometric_bound (as : List ℕ)
+    (hpos : ∀ a ∈ as, 0 < a) :
+    blockCorrection as ≤
+      2 ^ (as.sum - as.length) *
+        (3 ^ as.length - 2 ^ as.length) := by
+  induction as with
+  | nil =>
+      simp [blockCorrection]
+  | cons a as ih =>
+      have ha : 0 < a := hpos a (by simp)
+      have htail : ∀ x ∈ as, 0 < x := by
+        intro x hx
+        exact hpos x (by simp [hx])
+      have hlen : as.length ≤ as.sum :=
+        positive_exponent_sum_ge_length as htail
+      have hq : as.sum - as.length + a - 1 =
+          (a + as.sum) - (as.length + 1) := by omega
+      have hpowle : 2 ^ as.length ≤ 3 ^ as.length := by
+        exact Nat.pow_le_pow_left (by omega : 2 ≤ 3)
+      have hpowle' : 2 ^ (as.length + 1) ≤ 3 ^ (as.length + 1) := by
+        exact Nat.pow_le_pow_left (by omega : 2 ≤ 3)
+      have hdiff : 3 ^ as.length =
+          (3 ^ as.length - 2 ^ as.length) + 2 ^ as.length := by omega
+      have hqnonneg : 0 ≤ as.sum - as.length := Nat.zero_le _
+      rw [hq]
+      simp only [blockCorrection, List.sum_cons, List.length_cons]
+      calc
+        3 ^ as.length + 2 ^ a * blockCorrection as ≤
+            3 ^ as.length +
+              2 ^ a * (2 ^ (as.sum - as.length) *
+                (3 ^ as.length - 2 ^ as.length)) := by
+                  exact Nat.add_le_add_left (Nat.mul_le_mul_left _ ih) _
+        _ ≤ 2 ^ (as.sum - as.length + a - 1) *
+              (3 ^ (as.length + 1) - 2 ^ (as.length + 1)) := by
+                have hexp : as.sum - as.length + a =
+                    (as.sum - as.length + a - 1) + 1 := by omega
+                have htwo : 2 ^ (as.sum - as.length + a) =
+                    2 ^ (as.sum - as.length + a - 1) * 2 := by
+                  rw [hexp, pow_succ]
+                rw [show 3 ^ (as.length + 1) = 3 ^ as.length * 3 by
+                  rw [pow_succ]; ring]
+                rw [show 2 ^ (as.length + 1) = 2 ^ as.length * 2 by
+                  rw [pow_succ]; ring]
+                rw [htwo]
+                nlinarith [hpowle, hpowle', hdiff]
+
+#print axioms blockCorrection_le_geometric_bound
 #print axioms exact_block_identity
 #print axioms exact_odd_block_identity
 #print axioms positive_exponent_sum_ge_length
