@@ -1,44 +1,56 @@
 import Mathlib
 
 /-!
-# Finite valuation-one count bound
+# Finite valuation-balance inequalities
 
-This module proves the finite combinatorial implication used in the
-necessary-density analysis of a hypothetical divergent accelerated Syracuse
-orbit. It does not formalize the logarithmic limit argument and does not prove
-or refute the Collatz conjecture.
+These are finite combinatorial consequences for positive integer valuations.
+They are the discrete part of a necessary-density condition for a hypothetical
+divergent accelerated Syracuse orbit. The logarithmic limit argument is kept
+separate; this module does not prove or refute the Collatz conjecture.
 -/
 
 namespace SyracuseValuationDensity
 
-/-- Each positive integer valuation is at least two unless it equals one. -/
-theorem two_le_add_one_indicator (a : ℕ) (ha : 1 ≤ a) :
-    2 ≤ a + (if a = 1 then 1 else 0) := by
-  by_cases h : a = 1
-  · simp [h]
-  · have htwo : 2 ≤ a := by omega
-    simpa [h] using htwo
+/-- A positive integer valuation contributes at least two, except that
+valuation one contributes one less and valuation at least three contributes
+one extra. -/
+theorem two_add_ge3_indicator_le_a_add_one_indicator (a : ℕ)
+    (ha : 1 ≤ a) :
+    2 + (if 3 ≤ a then 1 else 0) ≤
+      a + (if a = 1 then 1 else 0) := by
+  by_cases h1 : a = 1
+  · simp [h1]
+  · by_cases h3 : 3 ≤ a
+    · have hthree : 3 ≤ a := h3
+      simp [h1, h3]
+      omega
+    · have htwo : a = 2 := by omega
+      simp [h1, h3, htwo]
 
-/-- Over any finite index set, twice the number of indices is bounded by
-the sum of the positive integer valuations plus the number of valuation-one
-indices (represented as an indicator sum). -/
-theorem twice_card_le_sum_add_one_count
+/-- Summing the pointwise inequality yields a finite balance law:
+twice the number of indices plus the count of valuations at least three
+is bounded by the valuation sum plus the count of valuations equal to one. -/
+theorem finite_valuation_balance
     {α : Type*} [DecidableEq α]
     (s : Finset α) (a : α → ℕ)
     (ha : ∀ x ∈ s, 1 ≤ a x) :
-    2 * s.card ≤
+    2 * s.card + (∑ x ∈ s, if 3 ≤ a x then (1 : ℕ) else 0) ≤
       (∑ x ∈ s, a x) + (∑ x ∈ s, if a x = 1 then (1 : ℕ) else 0) := by
   calc
-    2 * s.card = ∑ x ∈ s, (2 : ℕ) := by simp
+    2 * s.card + (∑ x ∈ s, if 3 ≤ a x then (1 : ℕ) else 0) =
+        (∑ x ∈ s, (2 : ℕ)) +
+          (∑ x ∈ s, if 3 ≤ a x then (1 : ℕ) else 0) := by simp
+    _ = ∑ x ∈ s, (2 + if 3 ≤ a x then (1 : ℕ) else 0) := by
+      rw [Finset.sum_add_distrib]
     _ ≤ ∑ x ∈ s, (a x + if a x = 1 then (1 : ℕ) else 0) := by
       apply Finset.sum_le_sum
       intro x hx
-      exact two_le_add_one_indicator (a x) (ha x hx)
+      exact two_add_ge3_indicator_le_a_add_one_indicator (a x) (ha x hx)
     _ = (∑ x ∈ s, a x) +
         (∑ x ∈ s, if a x = 1 then (1 : ℕ) else 0) := by
       rw [Finset.sum_add_distrib]
 
-#print axioms two_le_add_one_indicator
-#print axioms twice_card_le_sum_add_one_count
+#print axioms two_add_ge3_indicator_le_a_add_one_indicator
+#print axioms finite_valuation_balance
 
 end SyracuseValuationDensity
