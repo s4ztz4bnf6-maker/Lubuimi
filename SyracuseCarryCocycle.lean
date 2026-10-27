@@ -128,6 +128,24 @@ theorem descent_iff_carry_debt_below_gain
   rw [div_lt_iff₀ hscale]
   constructor <;> intro h <;> nlinarith
 
+/-- When both block scales exceed one, the threshold of the concatenated
+block is a weighted average of the two thresholds. This exact identity is
+the key structural property of the normalized carry-gain cocycle. -/
+theorem composed_threshold_weighted_average
+    (scale₁ scale₂ debt₁ debt₂ : ℚ)
+    (h₁ : 1 < scale₁) (h₂ : 1 < scale₂) :
+    (debt₁ + scale₁ * debt₂) / (scale₁ * scale₂ - 1) =
+      ((scale₁ - 1) * (debt₁ / (scale₁ - 1)) +
+        scale₁ * (scale₂ - 1) * (debt₂ / (scale₂ - 1))) /
+          (scale₁ * scale₂ - 1) := by
+  have h₁' : scale₁ - 1 ≠ 0 := ne_of_gt (by linarith)
+  have h₂' : scale₂ - 1 ≠ 0 := ne_of_gt (by linarith)
+  have h₁₂ : scale₁ * scale₂ - 1 ≠ 0 := ne_of_gt (by nlinarith)
+  field_simp [h₁', h₂', h₁₂]
+  <;> ring
+
+#print axioms SyracuseCarryCocycle.composed_threshold_weighted_average
+
 #print axioms SyracuseCarryCocycle.composeNormalized_assoc
 #print axioms SyracuseCarryCocycle.descent_iff_carry_debt_below_gain
 
