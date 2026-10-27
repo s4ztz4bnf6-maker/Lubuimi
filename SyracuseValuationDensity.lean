@@ -23,9 +23,8 @@ theorem two_add_ge3_indicator_le_a_add_one_indicator (a : ℕ)
   · by_cases h3 : 3 ≤ a
     · have hthree : 3 ≤ a := h3
       simp [h1, h3]
-      omega
     · have htwo : a = 2 := by omega
-      simp [h1, h3, htwo]
+      simp [htwo]
 
 /-- Summing the pointwise inequality yields a finite balance law:
 twice the number of indices plus the count of valuations at least three
@@ -39,7 +38,9 @@ theorem finite_valuation_balance
   calc
     2 * s.card + (∑ x ∈ s, if 3 ≤ a x then (1 : ℕ) else 0) =
         (∑ x ∈ s, (2 : ℕ)) +
-          (∑ x ∈ s, if 3 ≤ a x then (1 : ℕ) else 0) := by simp
+          (∑ x ∈ s, if 3 ≤ a x then (1 : ℕ) else 0) := by
+      simp
+      omega
     _ = ∑ x ∈ s, (2 + if 3 ≤ a x then (1 : ℕ) else 0) := by
       rw [Finset.sum_add_distrib]
     _ ≤ ∑ x ∈ s, (a x + if a x = 1 then (1 : ℕ) else 0) := by
