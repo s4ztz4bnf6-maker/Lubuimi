@@ -15,29 +15,30 @@ The odd-only accelerated map
 \[
 S(n)=\frac{3n+1}{2^{v_2(3n+1)}}
 \]
-is different. Its branch length depends on an unbounded valuation, so one cannot simply treat it as a globally continuous 2-adic flow.
+has a branch length depending on an unbounded valuation. It is not globally continuous on its natural domain of odd 2-adic points with finite valuation.
 
-## 2. Exact discontinuity witness
+## 2. Two exact paths show no continuous extension at \(-1/3\)
 
-Let \(x_*=-1/3\in\mathbb Z_2\). Since 3 is a 2-adic unit, this is well-defined and odd. For every integer \(m\ge1\), set
+Let \(x_*=-1/3\in\mathbb Z_2\), which is well-defined because 3 is a 2-adic unit. For \(m\ge1\), define
 \[
-x_m=x_*+2^m.
+x_m=x_*+2^m,\qquad y_m=x_*+3\cdot2^m.
 \]
-Then \(x_m\to x_*\) in the 2-adic metric, each \(x_m\) is odd, and
+Both sequences consist of odd 2-adic integers and converge to \(x_*\). Exact calculation gives
 \[
-3x_m+1=3(x_*+2^m)+1=3\cdot2^m.
+3x_m+1=3\cdot2^m,\qquad 3y_m+1=9\cdot2^m.
 \]
-Hence \(v_2(3x_m+1)=m\) and the accelerated map gives
+Therefore
 \[
-S(x_m)=3
+v_2(3x_m+1)=v_2(3y_m+1)=m,
+\qquad S(x_m)=3,\quad S(y_m)=9.
 \]
-for every \(m\ge1\). But \(3x_*+1=0\), so the valuation in the definition of \(S(x_*)\) is not finite; the accelerated map is not defined there as an ordinary odd Syracuse step. If one artificially extends it by assigning value 0 at \(x_*\), the sequence of outputs still converges to 3, not 0. Thus that extension is discontinuous at \(-1/3\).
+The input sequences converge to the same point, but the output sequences are constantly 3 and constantly 9. Thus no choice of a value for \(S(x_*)\) can make the accelerated map continuous there. At the point itself, \(3x_*+1=0\), so its valuation is infinite and the ordinary accelerated step is undefined.
 
-This is a concrete obstruction to the naive idea that acceleration automatically turns the integer problem into a smooth global flow.
+This is stronger than merely noting that an extension by zero fails: it proves that no continuous extension exists at this exceptional point.
 
 ## 3. Better architecture for the continuous-transform pillar
 
-Keep the continuous 2-adic full map \(C\) as the dynamical system. Treat the accelerated map \(S\) as a return/inducing construction on odd points, with a singular exceptional 2-adic point \(-1/3\) and unbounded return times near it. Any use of compactness, invariant measures, or transfer operators must explicitly account for this exceptional point and for return-time tails.
+Keep the continuous 2-adic full map \(C\) as the dynamical system. Treat \(S\) as a return/inducing construction on odd points, with exceptional point \(-1/3\) and unbounded return times near it. Any use of compactness, invariant measures, or transfer operators must account for this exceptional point and return-time tails.
 
 A promising formal interface is:
 1. define the full map on \(\mathbb Z_2\) and prove continuity branchwise;
@@ -48,4 +49,4 @@ A promising formal interface is:
 
 ## 4. What this does and does not establish
 
-The discontinuity calculation is exact. It does not establish that a positive-integer orbit approaches \(-1/3\), nor that such an orbit diverges, nor that a global descent potential exists. The proposed research gain is a cleaner separation between continuous full dynamics and the singular accelerated return map, preventing an invalid continuity/compactness argument from entering a proof.
+The discontinuity calculation is exact. It does not establish that a positive-integer orbit approaches \(-1/3\), nor that such an orbit diverges, nor that a global descent potential exists. The research value is a clean separation between continuous full dynamics and the singular accelerated return map, preventing an invalid continuity/compactness argument from entering a proof.
