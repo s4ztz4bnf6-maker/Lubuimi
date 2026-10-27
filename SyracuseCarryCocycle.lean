@@ -39,8 +39,8 @@ theorem compose_assoc (first second third : Block) :
     | mk m b d =>
       cases third with
       | mk l e f =>
-        simp [compose, Nat.pow_add, Nat.add_assoc, Nat.mul_assoc,
-          Nat.mul_left_comm, Nat.mul_comm]
+        simp [compose, Nat.pow_add, Nat.add_assoc]
+        <;> ring
 
 /--
 Two certified affine blocks compose to the affine certificate associated
