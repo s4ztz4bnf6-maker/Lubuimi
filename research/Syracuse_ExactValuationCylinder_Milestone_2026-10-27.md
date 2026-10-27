@@ -11,7 +11,7 @@ hence to the single residue class
 n ≡ r_a := 3^{-1}(2^a-1) (mod 2^{a+1}).
 Here 3^{-1} is the inverse of 3 modulo 2^{a+1}, which exists because 3 is odd. This is a precise cylinder statement; the weaker congruence modulo 2^a only says v₂(3n+1) ≥ a and does not determine the exact valuation.
 
-Examples: a=1 gives n ≡ 3 (mod 4); a=2 gives n ≡ 1 (mod 8); a=3 gives n ≡ 5 (mod 16).
+Examples: a=1 gives n ≡ 3 (mod 4); a=2 gives n ≡ 1 (mod 8); a=3 gives n ≡ 13 (mod 16).
 
 ## 2. Affine orbit identity
 
