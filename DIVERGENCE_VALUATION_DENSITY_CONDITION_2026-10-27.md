@@ -1,9 +1,11 @@
-# Necessary valuation-density condition for a divergent accelerated Syracuse orbit
+# Necessary valuation-balance condition for a divergent accelerated Syracuse orbit
 
 Date: 2026-10-27
 
-Status: proved on paper; not yet formalized in Lean. This is a necessary
-condition for divergence, not a proof that divergence is impossible.
+Status: the analytic implication is proved on paper; the finite combinatorial
+inequality is now stated in `SyracuseValuationDensity.lean`. The logarithmic
+limit argument is not yet formalized. This is a necessary condition for
+divergence, not a proof that divergence is impossible.
 
 ## Definitions
 
@@ -17,6 +19,8 @@ Write
 A_N=\sum_{j=0}^{N-1}a_j,\qquad
 C_N=\sum_{j=0}^{N-1}\log_2\!\left(1+\frac1{3n_j}\right).
 \]
+Let \(P_1(N)=\#\{j<N:a_j=1\}\) and
+\(P_{\ge3}(N)=\#\{j<N:a_j\ge3\}\).
 
 Taking logarithms of each exact transition and summing gives
 \[
@@ -24,17 +28,21 @@ Taking logarithms of each exact transition and summing gives
 \]
 No probabilistic assumption is used.
 
-## Theorem (necessary density of valuation-one steps)
+## Theorem (necessary valuation balance)
 
 If \(n_j\to\infty\), then
 \[
 \limsup_{N\to\infty}\frac{A_N}{N}\le\log_2 3
 \]
-and consequently
+and, more strongly,
 \[
+\boxed{
 \liminf_{N\to\infty}
-\frac{\#\{j<N:a_j=1\}}{N}\ge 2-\log_2 3\approx0.4150.
+\frac{P_1(N)-P_{\ge3}(N)}{N}
+\ge 2-\log_2 3\approx0.4150.
+}
 \]
+In particular, \(\liminf P_1(N)/N\ge2-\log_2 3\).
 
 ### Proof
 
@@ -48,42 +56,44 @@ From (1), using \(\log_2 n_N\ge0\), we have
 \[
 A_N\le\log_2 n_0+N\log_2 3+C_N.
 \]
-Divide by \(N\), take the limit superior, and use \(C_N/N\to0\). This
-proves the bound on the average valuation.
+Divide by \(N\), take the limit superior, and use \(C_N/N\to0\). Thus
+\(\limsup A_N/N\le\log_2 3\).
 
-Let \(P_N=\#\{j<N:a_j=1\}\). Each valuation is a positive integer, so
-\(a_j\ge1\), and whenever \(a_j\ne1\), we have \(a_j\ge2\). Therefore
+Every positive integer valuation satisfies the pointwise inequality
 \[
-A_N\ge P_N+2(N-P_N)=2N-P_N.
+2+\mathbf 1_{\{a_j\ge3\}}
+\le a_j+\mathbf 1_{\{a_j=1\}}.
 \]
-Hence \(P_N/N\ge2-A_N/N\). Taking limit inferiors yields
+Summing over \(j<N\) gives the exact finite balance law
 \[
-\liminf_{N\to\infty}P_N/N
-\ge 2-\limsup_{N\to\infty}A_N/N
-\ge2-\log_2 3.
+2N+P_{\ge3}(N)\le A_N+P_1(N),
 \]
+or
+\[
+P_1(N)-P_{\ge3}(N)\ge2N-A_N.
+\]
+Divide by \(N\) and take the limit inferior to obtain the boxed inequality.
 QED.
 
 ## Interpretation and limits
 
 - The result is conditional on a genuinely divergent accelerated orbit.
-- It says such an orbit must have valuation-one steps with lower asymptotic
-  density at least \(2-\log_2 3\).
-- It does **not** contradict known residue constraints: valuation one is
-  equivalent to \(n_j\equiv3\pmod4\), and the argument does not prove that
-  this residue class cannot occur with the required frequency.
-- It does not prove that the orbit exists. Finite valuation words can be
-  realized by residue classes; the missing global issue is whether an infinite
-  compatible word can arise from one positive integer and maintain divergence.
-- The next useful formalization is to separate the elementary finite counting
-  lemma \(A_N\ge2N-P_N\) from the analytic limit argument. A formal proof
-  should state all logarithmic convergence hypotheses explicitly and must not
-  claim global Collatz termination.
+- It forces the lower asymptotic density of valuation-one steps to exceed
+  the density of valuation-at-least-three steps by at least about 41.5
+  percentage points.
+- Valuation one is equivalent to \(n_j\equiv3\pmod4\). This argument does
+  not prove that the required modular frequency is impossible.
+- Finite valuation words can be realized by residue classes. The unresolved
+  global issue is whether one positive integer can realize an infinite
+  compatible sequence with this balance and still diverge.
+- The finite inequality is separated in
+  [`SyracuseValuationDensity.lean`](https://github.com/s4ztz4bnf6-maker/Lubuimi/blob/research/syracuse-threshold-margin-2026-10-27/SyracuseValuationDensity.lean).
+  The formal logarithmic limit argument and its hypotheses remain future work.
 
 ## Research use
 
-This is a constraint to feed into a residue-transition/cocycle analysis. A
-successful next theorem would have to show that the required lower density of
-\(a_j=1\) is incompatible with the weighted block correction or with a
-source-faithful modular transition invariant. Mere heuristic randomness or a
-finite residue scan does not establish that incompatibility.
+This is a valuation-balance constraint to couple with the weighted correction
+cocycle. A successful next theorem would have to show that the required
+unweighted imbalance is incompatible with the exponentially weighted block
+correction or with a source-faithful modular transition invariant. Heuristic
+randomness or a finite residue scan does not establish that incompatibility.
