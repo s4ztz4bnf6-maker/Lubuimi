@@ -2353,3 +2353,128 @@ theorem signed_margin_weighted_sum_expansion
 #print axioms signed_margin_weighted_sum_expansion
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- If an exact odd-to-odd Syracuse transition starts in residue 3 mod 4,
+its exact removed exponent is one. -/
+theorem valuation_exponent_eq_one_of_mod_four_three
+    (n next a : ℕ)
+    (hn : n % 4 = 3)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    a = 1 := by
+  have hnodd : n % 2 = 1 := by omega
+  have haPos : 0 < a :=
+    positive_exponent_of_odd_transition n next a hnodd hnext hstep
+  by_contra hne
+  have haTwo : 2 ≤ a := by omega
+  obtain ⟨k, hk⟩ : ∃ k, a = k + 2 := by omega
+  have hpow : 2 ^ a = 4 * 2 ^ k := by
+    rw [hk, pow_add]
+    norm_num [pow_succ] <;> ring
+  have hdiv : 4 ∣ 3 * n + 1 := by
+    refine ⟨2 ^ k * next, ?_⟩
+    calc
+      3 * n + 1 = 2 ^ a * next := hstep.symm
+      _ = (4 * 2 ^ k) * next := by rw [hpow]
+      _ = 4 * (2 ^ k * next) := by ring
+  rcases hdiv with ⟨t, ht⟩
+  omega
+
+#print axioms valuation_exponent_eq_one_of_mod_four_three
+
+/--
+**Lubuimi's Initial Valuation-One Cylinder Theorem.**
+
+For a positive odd certified accelerated Syracuse orbit, the first N exact
+valuation exponents are all one if and only if the initial value is -1
+modulo 2^(N+1). The forward direction reuses the already formalized
+one-run divisibility obstruction; the reverse direction reconstructs the
+actual odd orbit prefix from the residue class.
+-/
+theorem lubuimi_initial_valuation_one_cylinder
+    (n a : ℕ → ℕ) (N : ℕ)
+    (hodd : ∀ j, n j % 2 = 1)
+    (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1) :
+    (∀ j, j < N → a j = 1) ↔ 2 ^ (N + 1) ∣ n 0 + 1 := by
+  constructor
+  · intro hone
+    have hhalf : ∀ j, j < N → 2 * n (j + 1) = 3 * n j + 1 := by
+      intro j hj
+      calc
+        2 * n (j + 1) = 2 ^ (a j) * n (j + 1) := by rw [hone j hj]; norm_num
+        _ = 3 * n j + 1 := hstep j
+    exact exponent_one_block_bounds_length_by_start_shift n hhalf N (hodd N)
+  · intro hdiv
+    obtain ⟨m, hm⟩ := hdiv
+    have hpow4 : ∀ j, j < N → 4 ∣ 2 ^ (N + 1 - j) := by
+      intro j hj
+      have hexp : 2 ≤ N + 1 - j := by omega
+      obtain ⟨k, hk⟩ : ∃ k, N + 1 - j = k + 2 := by omega
+      refine ⟨2 ^ k, ?_⟩
+      rw [hk, pow_add]
+      norm_num [pow_succ] <;> ring
+    have hformula : ∀ j ≤ N,
+        n j + 1 = 3 ^ j * 2 ^ (N + 1 - j) * m := by
+      intro j
+      induction j with
+      | zero =>
+          intro hj
+          simpa using hm
+      | succ j ih =>
+          intro hj
+          have hjlt : j < N := by omega
+          have hprev := ih (by omega)
+          have hdiv4 : 4 ∣ n j + 1 := by
+            rcases hpow4 j hjlt with ⟨t, ht⟩
+            refine ⟨3 ^ j * t * m, ?_⟩
+            calc
+              n j + 1 = 3 ^ j * 2 ^ (N + 1 - j) * m := hprev
+              _ = 4 * (3 ^ j * t * m) := by rw [ht]; ring
+          rcases hdiv4 with ⟨t, ht⟩
+          have hnmod4 : n j % 4 = 3 := by omega
+          have ha : a j = 1 :=
+            valuation_exponent_eq_one_of_mod_four_three
+              (n j) (n (j + 1)) (a j) hnmod4 (hodd (j + 1)) (hstep j)
+          have hhalf : 2 * n (j + 1) = 3 * n j + 1 := by
+            calc
+              2 * n (j + 1) = 2 ^ (a j) * n (j + 1) := by rw [ha]; norm_num
+              _ = 3 * n j + 1 := hstep j
+          have hshift : 2 * (n (j + 1) + 1) = 3 * (n j + 1) := by
+            nlinarith [hhalf]
+          have hpow : 2 ^ (N + 1 - j) = 2 ^ (N - j) * 2 := by
+            have hexp : N + 1 - j = (N - j) + 1 := by omega
+            rw [hexp, pow_succ]
+            ring
+          have hnext :
+              n (j + 1) + 1 = 3 ^ (j + 1) * 2 ^ (N - j) * m := by
+            have hdouble :
+                2 * (n (j + 1) + 1) =
+                  2 * (3 ^ (j + 1) * 2 ^ (N - j) * m) := by
+              calc
+                2 * (n (j + 1) + 1) = 3 * (n j + 1) := hshift
+                _ = 3 * (3 ^ j * 2 ^ (N + 1 - j) * m) := by rw [hprev]
+                _ = 2 * (3 ^ (j + 1) * 2 ^ (N - j) * m) := by
+                      rw [pow_succ, hpow]
+                      ring
+            omega
+          rw [show N + 1 - (j + 1) = N - j by omega]
+          exact hnext
+    intro j hj
+    have hprev := hformula j (Nat.le_of_lt hj)
+    have hdiv4 : 4 ∣ n j + 1 := by
+      rcases hpow4 j hj with ⟨t, ht⟩
+      refine ⟨3 ^ j * t * m, ?_⟩
+      calc
+        n j + 1 = 3 ^ j * 2 ^ (N + 1 - j) * m := hprev
+        _ = 4 * (3 ^ j * t * m) := by rw [ht]; ring
+    rcases hdiv4 with ⟨t, ht⟩
+    have hnmod4 : n j % 4 = 3 := by omega
+    exact valuation_exponent_eq_one_of_mod_four_three
+      (n j) (n (j + 1)) (a j) hnmod4 (hodd (j + 1)) (hstep j)
+
+#print axioms lubuimi_initial_valuation_one_cylinder
+
+end CollatzSyracuseAudit
