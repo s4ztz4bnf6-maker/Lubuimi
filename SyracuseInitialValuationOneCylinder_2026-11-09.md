@@ -4,7 +4,7 @@
 **Naming:** This exact cylinder classification is named in this project in honour of its author.
 
 **Original derivation date:** 9 November 2026  
-**Status:** Mathematical derivation from the certified odd-step recurrence. This note is not itself a Lean declaration and does not claim a new CI or kernel-verification result.
+**Status:** Mathematical derivation and Lean formalization. The declaration lubuimi_initial_valuation_one_cylinder in SyracuseOffsetIdentity.lean passed the full compile/audit workflow run 42721006544 on merge commit 44bb2ac. Its transitive axiom profile is [propext, Classical.choice, Quot.sound], and the workflow's explicit sorryAx scan found none. The broader finite valuation-word cylinder partition theorem remains a separate Lean formalization target.
 
 ## Setup
 
