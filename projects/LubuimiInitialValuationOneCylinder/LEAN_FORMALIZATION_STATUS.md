@@ -53,3 +53,6 @@ The following mathematical statements are now documented but are not claimed as 
 - Lubuimi's Terminal-Residue Collision Energy: terminal residue map modulo 3^k, exact diagonal mass 3^-k, off-diagonal collision energy and lower bound 1/(2·3^k), including finite truncation error control.
 
 The initial valuation-one cylinder theorem remains the separately verified declaration described above. No failed attempt for that declaration overrides its two later successful full CI audits.
+
+
+The terminal-residue collision-energy note now also gives an explicit finite rational Markov matrix `P_k`, with terminal mass vector `m_k = δ_0 P_k^k`; the order formula for 2 modulo 3^k supplies the matrix entries. The exact k=2 distribution and second moment are recorded. This Markov representation, like the collision-energy identity itself, remains a Lean formalization target and is not part of the already verified initial-cylinder declaration.
