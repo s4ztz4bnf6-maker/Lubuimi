@@ -35,7 +35,9 @@ Both completed the complete library build and every workflow step, including `Sy
 
 Run `42721911555` is now also complete and successful. Its full workflow again built the library and every listed Syracuse module; the target declaration printed `[propext, Classical.choice, Quot.sound]`, and the explicit complete-log sorryAx scan passed. This is a third successful exact-head snapshot for the initial cylinder theorem. Run `42722186081` remains in progress at this retrieval. The broader finite valuation-word partition theorem and finite tail-cylinder partition remain formalization targets.
 
-The earlier failed attempts are preserved above as part of the chronology. They are not erased, but they are superseded for the main cylinder theorem by the two later successful exact-commit audits.
+Run `42721911555` and run `42722186081` are also complete and successful. Both completed the full workflow, printed the same transitive profile `[propext, Classical.choice, Quot.sound]` for the main declaration, and passed the complete-log `sorryAx` scan. The main cylinder theorem therefore has four successful exact-commit CI snapshots: 42721006544, 42721305220, 42721911555 and 42722186081.
+
+The earlier failed attempts are preserved above as part of the chronology. They are not erased, but are superseded for the main cylinder theorem by the four later successful exact-commit audits.
 
 ## Scope
 
