@@ -2370,7 +2370,7 @@ theorem valuation_exponent_eq_one_of_mod_four_three
     positive_exponent_of_odd_transition n next a hnodd hnext hstep
   by_contra hne
   have haTwo : 2 ≤ a := by omega
-  obtain ⟨k, hk⟩ : ∃ k, a = k + 2 := by omega
+  obtain ⟨k, hk⟩ : ∃ k, a = k + 2 := ⟨a - 2, by omega⟩
   have hpow : 2 ^ a = 4 * 2 ^ k := by
     rw [hk, pow_add]
     norm_num [pow_succ] <;> ring
@@ -2406,13 +2406,38 @@ theorem lubuimi_initial_valuation_one_cylinder
       calc
         2 * n (j + 1) = 2 ^ (a j) * n (j + 1) := by rw [hone j hj]; norm_num
         _ = 3 * n j + 1 := hstep j
-    exact exponent_one_block_bounds_length_by_start_shift n hhalf N (hodd N)
+    have hscaled : 2 ^ N * (n N + 1) = 3 ^ N * (n 0 + 1) := by
+      induction N with
+      | zero => simp
+      | succ k ih =>
+          have hstepk : 2 * n (k + 1) = 3 * n k + 1 := hhalf k (by omega)
+          have hshift : 2 * (n (k + 1) + 1) = 3 * (n k + 1) := by
+            nlinarith [hstepk]
+          calc
+            2 ^ (k + 1) * (n (k + 1) + 1)
+                = 2 ^ k * (2 * (n (k + 1) + 1)) := by rw [pow_succ]; ring
+            _ = 2 ^ k * (3 * (n k + 1)) := by rw [hshift]
+            _ = 3 ^ (k + 1) * (n 0 + 1) := by
+                  rw [pow_succ]
+                  nlinarith [ih]
+    have hmod : (n N + 1) % 2 = 0 := by omega
+    have hdiv : 2 ∣ n N + 1 := Nat.dvd_of_mod_eq_zero hmod
+    rcases hdiv with ⟨k, hk⟩
+    have hbig : 2 ^ (N + 1) ∣ 3 ^ N * (n 0 + 1) := by
+      refine ⟨k, ?_⟩
+      calc
+        3 ^ N * (n 0 + 1) = 2 ^ N * (n N + 1) := hscaled.symm
+        _ = 2 ^ (N + 1) * k := by rw [pow_succ, hk]; ring
+    have hcop : (2 ^ (N + 1)).Coprime (3 ^ N) := by
+      apply Nat.Coprime.pow_left (N + 1)
+      exact Nat.Coprime.pow_right N (by norm_num : Nat.Coprime 2 3)
+    exact Nat.Coprime.dvd_of_dvd_mul_left hcop hbig
   · intro hdiv
     obtain ⟨m, hm⟩ := hdiv
     have hpow4 : ∀ j, j < N → 4 ∣ 2 ^ (N + 1 - j) := by
       intro j hj
       have hexp : 2 ≤ N + 1 - j := by omega
-      obtain ⟨k, hk⟩ : ∃ k, N + 1 - j = k + 2 := by omega
+      obtain ⟨k, hk⟩ : ∃ k, N + 1 - j = k + 2 := ⟨N + 1 - j - 2, by omega⟩
       refine ⟨2 ^ k, ?_⟩
       rw [hk, pow_add]
       norm_num [pow_succ] <;> ring
@@ -2447,7 +2472,6 @@ theorem lubuimi_initial_valuation_one_cylinder
           have hpow : 2 ^ (N + 1 - j) = 2 ^ (N - j) * 2 := by
             have hexp : N + 1 - j = (N - j) + 1 := by omega
             rw [hexp, pow_succ]
-            ring
           have hnext :
               n (j + 1) + 1 = 3 ^ (j + 1) * 2 ^ (N - j) * m := by
             have hdouble :
