@@ -167,7 +167,7 @@ Two independent exact-commit GitHub Actions runs completed successfully:
 
 Both runs completed the full workflow: library build, iteration and threshold modules, Syracuse reference and quarter-descent modules, offset identity and strict-margin audit, closed-form offset, stronger offset lower bound, valuation-one margin block, and exact valuation-transition modules. In both logs, the declaration `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` has transitive axiom profile `[propext, Classical.choice, Quot.sound]`. The workflow's explicit complete-log `sorryAx` scan passed. Thus the initial valuation-one cylinder equivalence is Lean-compiled and axiom-audited on both checked snapshots.
 
-Runs `42721911555` and `42722186081` are rechecking later documentation/status branch heads and were in progress at the latest retrieval; they do not supersede the two completed positive results. Earlier failed attempts `42719689591` and `42720406876` remain part of the chronology, but they do not invalidate the later successful runs.
+Run `42721911555` is an additional successful exact-head recheck: the full workflow completed, the theorem retained transitive profile `[propext, Classical.choice, Quot.sound]`, and the complete-log `sorryAx` scan passed. Run `42722186081` remains in progress at this retrieval. The earlier two positive exact-commit audits remain valid. Earlier failed attempts `42719689591` and `42720406876` remain part of the chronology, but they do not invalidate the later successful runs.
 
 The general finite valuation-word cylinder partition theorem in the companion note is a separate mathematical derivation and Lean formalization target; it is not yet claimed as compiled. No global Collatz proof is claimed.
 
