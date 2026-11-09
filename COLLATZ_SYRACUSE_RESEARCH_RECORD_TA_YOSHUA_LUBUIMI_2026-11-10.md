@@ -222,3 +222,8 @@ The failed attempts `42719689591` and `42720406876` remain in the record as hist
 Both workflows completed the library build and every listed Syracuse module/audit step. In both logs, `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` has transitive axiom profile `[propext, Classical.choice, Quot.sound]`. The workflow's explicit complete-log search for `sorryAx` found none. Therefore the initial valuation-one cylinder equivalence is now Lean-compiled and axiom-audited on two exact snapshots. The broader finite valuation-word cylinder partition theorem is mathematically derived but remains a separate Lean formalization target. Neither result is a proof of the global Collatz conjecture.
 
 Run [42721911555](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721911555) is a further recheck of the later documentation/status head and was in progress at the time of this update; it does not replace or downgrade the two completed positive runs.
+
+
+## 15. Latest exact-head recheck — 10 November 2026
+
+The current branch head `a36894eefc52e5d28cd43110f5e289805509ad33` triggered run [42722186081](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42722186081). At the latest retrieval, checkout had completed and Lean toolchain/manifest setup was in progress. This is a further documentation/status recheck. It does not supersede the two completed positive exact-commit audits `42721006544` and `42721305220`, which already establish the initial cylinder declaration's successful compile and transitive axiom profile on their respective snapshots.
