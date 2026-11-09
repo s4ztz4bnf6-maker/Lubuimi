@@ -252,3 +252,18 @@ Cauchy–Schwarz on the finite place set gives \(E_k\ge1/(2\cdot3^{k-1})\), henc
 For \(k=1\), the two terminal places modulo 3 have masses \(2/3\) and \(1/3\), yielding \(E_1=5/9\), \(D_1=1/3\), and collision mass \(2/9\).
 
 This is the **Lubuimi Terminal-Residue Collision Energy**. It is a genuine exact diagonal/off-diagonal incidence identity in the Syracuse valuation-word model and a concrete APW4-style bridge candidate. It is not silently identified with the historical APW4 BIB reserve. That transfer still requires an index-preserving map to original APW4 event/place objects, preservation of historical weights, and a proved capacity/Hall inequality. The new collision-energy statement is mathematically derived but not yet Lean-compiled; the initial one-cylinder theorem remains separately Lean-verified by runs 42721006544 and 42721305220.
+
+
+## 17. Finite Markov representation of Lubuimi terminal-residue energy — 10 November 2026
+
+The terminal-residue mass distribution has a finite rational Markov representation. For fixed \(k\), set \(x_j=C_j2^{-A_j}\pmod{3^k}\). The recurrence is
+\[
+x_{j+1}=2^{-a_j}(3x_j+1)\pmod{3^k},\qquad x_0=0.
+\]
+The finite valuation-word cylinder theorem gives independent geometric exponent coordinates with \(\mathbb P(a_j=b)=2^{-b}\). Since 2 is primitive modulo \(3^k\), the transition matrix has explicit entries \(P_k(x,y)=2^{-r}/(1-2^{-\phi_k})\), where \(\phi_k=2\cdot3^{k-1}\) and \(r\) is the unique representative in \(1,\ldots,\phi_k\) solving \(2^ry\equiv3x+1\pmod{3^k}\). The terminal mass vector is \(m_k=\delta_0P_k^k\), and \(E_k=\|m_k\|_2^2\).
+
+For \(k=2\), in unit-residue order \(1,2,4,5,7,8\pmod9\),
+\[
+m_2=\frac1{63}(8,16,11,4,2,22),\quad E_2=\frac5{21},\quad D_2=\frac19,\quad C_2^{\mathrm{coll}}=\frac8{63}.
+\]
+This is an exact finite matrix and moment model suitable for further APW4-style work. The finite-word partition, collision energy, Markov matrix and explicit k=2 vector are mathematically derived; they remain separate Lean formalization targets. The initial one-cylinder theorem remains the separately verified declaration from runs 42721006544 and 42721305220.
