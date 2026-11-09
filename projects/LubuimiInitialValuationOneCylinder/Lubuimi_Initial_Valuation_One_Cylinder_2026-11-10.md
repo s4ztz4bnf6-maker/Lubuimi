@@ -130,7 +130,29 @@ form a nested chain, with \(\mathcal C_{N+1}\subset\mathcal C_N\) and conditiona
 
 A genuine APW4–Syracuse transport theorem would still require an explicit index-preserving map from realized Syracuse cylinders and transitions to the APW4 source indices, events, BIB places, incidences, weights, and capacities, together with proofs of the corresponding mass and Hall conditions. No such map is asserted here. The **Lubuimi APW4–Syracuse Cylinder–Energy Bridge** is therefore a named research programme, not a premise or theorem used in this proof.
 
-## 8. Formal verification record
+## 8. General finite valuation-word cylinder partition
+
+The initial all-one theorem is a special case of the following stronger result, recorded with its full recursive proof in the companion note [Lubuimi's Finite Valuation-Word Cylinder Partition Theorem](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md).
+
+Let \(\alpha=(a_0,\ldots,a_{k-1})\) be any finite word with every \(a_i\geq1\), and put \(A=\sum_i a_i\). The set of positive odd starts whose first \(k\) exact Syracuse exponents equal \(\alpha\) is exactly one odd residue class modulo \(2^{A+1}\). Therefore its relative natural density among odd starts is \(2^{-A}\).
+
+To see the recursive mechanism, write \(\alpha=(a_0,\beta)\), and let the tail word \(\beta\) have total exponent \(B\) and unique residue \(r_\beta\pmod{2^{B+1}}\). The full word is realized precisely when
+
+\[3n_0+1\equiv 2^{a_0}r_\beta\pmod{2^{a_0+B+1}}.\]
+
+Because \(3\) is invertible modulo powers of two, this gives one residue class modulo \(2^{A+1}\). Since \(r_\beta\) is odd, the congruence also forces the first valuation to be exactly \(a_0\). This proves existence and uniqueness by induction on word length.
+
+The affine offset identity gives an explicit formula. If \(C_k\) is the offset associated with \(\alpha\), then
+
+\[\boxed{r_\alpha\equiv(2^A-C_k)(3^k)^{-1}\pmod{2^{A+1}}.}\]
+
+Extending a prefix of total exponent \(A\) by a next exponent \(b\geq1\) gives a child of relative mass \(2^{-b}\). The children partition the parent, and \(\sum_{b\geq1}2^{-b}=1\). Thus the finite valuation words form an exact measure-consistent prefix tree.
+
+For the all-one word of length \(N\), \(A=N\) and \(C_N=3^N-2^N\), so the residue formula reduces to \(r_\alpha\equiv-1\pmod{2^{N+1}}\), recovering the main theorem.
+
+This general partition theorem is a mathematical derivation and a Lean formalization target; no compile or axiom-audit success for it is claimed. It provides a stronger finite-cylinder foundation for the proposed Lubuimi APW4–Syracuse Cylinder–Energy Bridge, but the bridge still needs an explicit index-preserving incidence/capacity map.
+
+## 9. Formal verification record
 
 The mathematical proof in this manuscript is presented independently of the current Lean integration status. The source repository contains a Lean declaration named `lubuimi_initial_valuation_one_cylinder` and helper lemma `valuation_exponent_eq_one_of_mod_four_three`. The helper compiled in run `42719689591` with axiom profile `[propext, Quot.sound]`. The main theorem did not compile in that run; error-recovery output contained `sorryAx`, so it is not claimed as formally verified there.
 
