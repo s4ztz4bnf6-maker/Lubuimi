@@ -19,6 +19,8 @@ Thus the initial run length is exactly `v₂(n₀+1) − 1`.
 ## Contents
 
 - `Lubuimi_Initial_Valuation_One_Cylinder_2026-11-10.md` — self-contained manuscript draft.
+- `Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md` — stronger companion theorem for every finite positive valuation word.
+- `CITATION.cff` — citation metadata.
 - Companion research note: `SyracuseInitialValuationOneCylinder_2026-11-09.md`.
 - Lean source: `SyracuseOffsetIdentity.lean`.
 - Consolidated record: `COLLATZ_SYRACUSE_RESEARCH_RECORD_TA_YOSHUA_LUBUIMI_2026-11-10.md`.
@@ -28,6 +30,7 @@ Thus the initial run length is exactly `v₂(n₀+1) − 1`.
 1. Exact equivalence between the all-one initial valuation block and the single residue class modulo `2^{N+1}`.
 2. Exact initial run length `r=v₂(n₀+1)-1`.
 3. Natural densities: among odd starts, at least `N` initial ones has density `2^{-N}`, and exactly `r` has density `2^{-(r+1)}`; among all integers the corresponding densities are `2^{-(N+1)}` and `2^{-(r+2)}`.
+5. Generalization: every finite exact valuation word determines one unique odd residue class modulo `2^{A+1}`, with relative density `2^{-A}` among odd starts and exact child mass ratios `2^{-b}`.
 4. Exact initial signed margin `D_r=-2(3^r-2^r)` and next-step recovery threshold `2^{a_r+r}>6·3^r-2^{r+1}`.
 
 ## Scope
