@@ -33,7 +33,7 @@ The source was refined to explicitly apply the induction hypothesis to the two r
 
 Both completed the complete library build and every workflow step, including `SyracuseOffsetIdentity.lean`, closed-form offset, lower bound, margin block and valuation transition. Both logs print `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` with transitive axiom profile `[propext, Classical.choice, Quot.sound]`. The workflow's explicit complete-log `sorryAx` scan found no occurrence. This is a positive Lean/kernel-audit result for the initial cylinder declaration on those exact snapshots.
 
-Run `42721911555` and the later exact-head recheck `42722186081` are documentation/status rechecks; both were in progress at the latest status retrieval. These do not supersede or downgrade the two completed positive results. The broader finite valuation-word partition theorem and finite tail-cylinder partition remain formalization targets.
+Run `42721911555` is now also complete and successful. Its full workflow again built the library and every listed Syracuse module; the target declaration printed `[propext, Classical.choice, Quot.sound]`, and the explicit complete-log sorryAx scan passed. This is a third successful exact-head snapshot for the initial cylinder theorem. Run `42722186081` remains in progress at this retrieval. The broader finite valuation-word partition theorem and finite tail-cylinder partition remain formalization targets.
 
 The earlier failed attempts are preserved above as part of the chronology. They are not erased, but they are superseded for the main cylinder theorem by the two later successful exact-commit audits.
 
