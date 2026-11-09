@@ -180,3 +180,28 @@ The repository now includes LICENSE-PROPRIETARY.md and LICENSE-COMMERCIAL-USE-AN
 The stronger generalization of the initial all-ones cylinder is documented in [Lubuimi's Finite Valuation-Word Cylinder Partition Theorem](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md). For every finite positive exponent word \(\alpha\) with total exponent \(A\), its exact starting-value cylinder is one unique odd residue class modulo \(2^{A+1}\), with relative density \(2^{-A}\) among odd residues. Its children have exact relative masses \(2^{-b}\) for next exponent \(b\ge1\), and these sum to one. The explicit residue is \((2^A-C_k)(3^k)^{-1}\bmod 2^{A+1}\), using the certified affine offset.
 
 This is a mathematically derived theorem and a Lean formalization target, not yet a compiled declaration. It supplies a concrete finite-prefix tree for the named Lubuimi APW4–Syracuse cylinder–energy bridge programme. The bridge still requires an explicit index-preserving incidence/capacity map and an integer-level obstruction; a measure-zero exceptional set alone does not prove Collatz.
+
+
+## 13. Lubuimi finite valuation-word partition and exact CI correction — 10 November 2026
+
+### 13.1 Stronger cylinder theorem
+
+The initial all-ones cylinder is now accompanied by **Lubuimi's Finite Valuation-Word Cylinder Partition Theorem** in `Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md`. For every finite positive exact exponent word \(\alpha=(a_0,\ldots,a_{k-1})\), with total exponent \(A=\sum_i a_i\), the set of positive odd starts realizing exactly that word is one unique odd residue class modulo \(2^{A+1}\). Its relative natural density among odd starts is exactly \(2^{-A}\).
+
+The affine-offset formula for its residue is
+\[
+r_\alpha\equiv(2^A-C_k)(3^k)^{-1}\pmod{2^{A+1}}.
+\]
+Every finite positive valuation word is therefore realizable. Extending a prefix by next exponent \(b\ge1\) gives a child cylinder of relative mass \(2^{-b}\), and the children partition the parent with \(\sum_{b\ge1}2^{-b}=1\). The initial valuation-one cylinder is the all-ones special case. This is a mathematical derivation recorded separately from Lean verification.
+
+### 13.2 Exact status of the main-cylinder Lean attempts
+
+- Run `42719689591` compiled the helper `valuation_exponent_eq_one_of_mod_four_three` with `[propext, Quot.sound]`; the main cylinder declaration failed and error recovery showed `sorryAx`.
+- Run `42720406876` completed with failure. The remaining goal at `SyracuseOffsetIdentity.lean:2421:43` showed that the induction hypothesis `ih` was still a function requiring the restricted `hone` and `hhalf` hypotheses; it had not yet been applied. The helper again reported `[propext, Quot.sound]`, but the main declaration's error-recovery output contained `sorryAx` and is not certified by this run.
+- The current Collatz branch now contains an explicit term `ih'` applying both restricted prefix hypotheses before rewriting the induction step. The current branch head is `ad7203f5571d03e5989b9ac935b2103300f02409`. Exact-commit GitHub Actions run [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220) is in progress. At the latest check it had completed checkout and Lean setup and was restoring the Mathlib cache. No compile or axiom-audit success is claimed yet.
+
+The finite valuation-word partition theorem is also a Lean formalization target and is not yet claimed as compiled. Earlier successful run `42717134267` remains valid for its own checked commit and modules.
+
+### 13.3 APW4 bridge consequence
+
+The full finite-word cylinder partition supplies a more substantial exact prefix tree than the single all-ones chain: every node has a unique residue class, exact mass \(2^{-A}\), and child mass ratios \(2^{-b}\). This is a legitimate mathematical input for developing the proposed **Lubuimi APW4–Syracuse Cylinder–Energy Bridge**. The bridge still requires an explicit index-preserving incidence map, proof of weight preservation and a verified BIB/Hall capacity condition. No such transport theorem is claimed at this stage, and no APW4 result is weakened or used as an unproved premise in Collatz.
