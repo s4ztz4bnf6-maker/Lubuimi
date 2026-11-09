@@ -17,7 +17,7 @@ with every \(n_j\) positive and odd.
 
 Previously established lemmas and exact calculations are preserved. Mathematical derivations, Lean elaboration/kernel checking, transitive axiom audits, and GitHub CI status remain separate. A successful compile proves only the declarations actually compiled. No conditional block result is promoted to a universal orbit theorem without the missing orbit-realizability and coverage argument. No sorry, sorryAx, or hidden project axiom is accepted in a claimed final theorem.
 
-## 2. Certified affine offset identity
+## 2. Lubuimi's certified affine-offset framework
 
 For exact odd-to-odd transitions
 \[
@@ -38,7 +38,7 @@ C_k=\sum_{j=0}^{k-1}3^{k-1-j}2^{A_j}.
 \]
 Existing declarations include offset_identity_of_certified_steps, canonical_offset_identity_of_certified_steps, canonicalOffset_eq_weighted_sum, offsetClosedForm_succ, and offset_eq_closed_form. This is an exact identity for certified blocks, not itself a descent theorem.
 
-## 3. Signed offset margin and block correction
+## 3. Lubuimi's signed-offset-margin framework and block correction
 
 Define
 \[
@@ -151,7 +151,7 @@ The job installed Lean 4.34.1 and Mathlib v4.34.1, built CollatzAudit (8,930 job
 
 The offset and valuation-transition audit steps explicitly searched their full logs for sorryAx and would fail if found; neither check found it. The named declarations reported the Lean standard profile [propext, Classical.choice, Quot.sound] or a subset. This run verifies the existing declarations in the checked merge snapshot. It does not compile the new Lubuimi cylinder equivalence, which remains a mathematical research note pending Lean formalization.
 
-## 9. APW4 bridge: research interface, not an imported theorem
+## 9. Lubuimi's APW4–Syracuse cylinder–energy bridge: research programme, not an imported theorem
 
 The APW4 energy/transport architecture should be explored as a possible proof-design tool, but it cannot be imported into Collatz merely by analogy. Syracuse valuation words define finite residue cylinders and a prefix tree. A potential finite interface consists of cylinder nodes indexed by realized valuation prefixes, exact residue classes and measures, parent/child refinement, weighted incidence between prefixes and terminal states, and a collision/energy quantity separating diagonal mass from off-diagonal overlap.
 
