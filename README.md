@@ -34,3 +34,8 @@ The main-cylinder CI attempt [42720406876](https://github.com/s4ztz4bnf6-maker/L
 
 
 Latest exact-head recheck: run [42722186081](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42722186081) was triggered on current branch head `a36894eefc52e5d28cd43110f5e289805509ad33` and was in progress at the latest retrieval (checkout complete; Lean toolchain/manifest setup underway). The two completed positive audits 42721006544 and 42721305220 remain the verified evidence for the initial-cylinder declaration.
+
+
+### Lubuimi terminal-residue collision energy — 10 November 2026
+
+A new mathematical note, [Lubuimi's Terminal-Residue Collision Energy](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md), derives a finite-place incidence map from length-k valuation words to terminal unit residues modulo 3^k. With source weights 2^-A, its exact energy splits as E_k = 3^-k + C_k^coll, and C_k^coll ≥ 1/(2·3^k). This is an exact APW4-style diagonal/off-diagonal collision identity in the Syracuse model, not yet the historical APW4 BIB reserve and not a Collatz descent proof. Its Lean formalization remains open.
