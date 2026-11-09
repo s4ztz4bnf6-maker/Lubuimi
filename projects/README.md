@@ -10,7 +10,7 @@ The exact all-one initial valuation cylinder for the accelerated odd Syracuse ma
 \qquad r=v_2(n_0+1)-1.
 \]
 
-This theorem has a self-contained manuscript and has passed three full exact-commit Lean CI workflows (42721006544, 42721305220, 42721911555), with transitive axiom profile [propext, Classical.choice, Quot.sound] and no sorryAx in the complete-log scans.
+This theorem has a self-contained manuscript and has passed four full exact-commit Lean CI workflows (42721006544, 42721305220, 42721911555, 42722186081), with transitive axiom profile [propext, Classical.choice, Quot.sound] and no sorryAx in the complete-log scans.
 
 Project directory: LubuimiInitialValuationOneCylinder.
 
