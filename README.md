@@ -26,3 +26,8 @@ The Lubuimi initial-cylinder theorem has been added as a Lean declaration. Its h
 ## Copyright and license
 
 Copyright © 2026 Ta-Yoshua Lubuimi. All rights reserved for original Collatz/Syracuse materials owned by the author. The repository includes [LICENSE-PROPRIETARY.md](LICENSE-PROPRIETARY.md) and [commercial licensing and remuneration terms](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md). Lean, Mathlib, and all third-party materials remain subject to their own licenses. No general open-source or commercial reuse license is granted for the author's original materials.
+
+
+### Cylinder formalization update — 10 November 2026
+
+The main-cylinder CI attempt [42720406876](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42720406876) failed at the induction step because the dependent induction hypothesis still required the restricted prefix hypotheses. The current branch now explicitly applies both restrictions in `ih'`; exact-commit run [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220) is in progress. No new compile/audit success is claimed yet. The research record also now documents **Lubuimi's Finite Valuation-Word Cylinder Partition Theorem**: every finite positive exact valuation word is one unique odd residue class modulo `2^(A+1)`, with exact relative density `2^-A` among odd starts and child mass ratio `2^-b`. The full mathematical statement and proof are in `Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md`.
