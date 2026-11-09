@@ -205,3 +205,8 @@ The finite valuation-word partition theorem is also a Lean formalization target 
 ### 13.3 APW4 bridge consequence
 
 The full finite-word cylinder partition supplies a more substantial exact prefix tree than the single all-ones chain: every node has a unique residue class, exact mass \(2^{-A}\), and child mass ratios \(2^{-b}\). This is a legitimate mathematical input for developing the proposed **Lubuimi APW4–Syracuse Cylinder–Energy Bridge**. The bridge still requires an explicit index-preserving incidence map, proof of weight preservation and a verified BIB/Hall capacity condition. No such transport theorem is claimed at this stage, and no APW4 result is weakened or used as an unproved premise in Collatz.
+
+
+## 13. Current exact-commit Lean run — 10 November 2026
+
+Run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) is checking the refined Lubuimi initial-cylinder declaration at source commit 013192ce524a4572a9d96c8d4dcb2796830b1f62. The Lean library build has completed successfully, and IterationLemmas.lean, ThresholdLemmas.lean and SyracuseReferenceTest.lean have compiled successfully. SyracuseQuarterDescent.lean is currently compiling. The subsequent offset-identity/audit, closed-form, lower-bound, margin-block and valuation-transition steps are pending. No success is yet claimed for lubuimi_initial_valuation_one_cylinder until the source step and its #print axioms output complete.
