@@ -133,3 +133,26 @@ The general finite valuation-word theorem and finite tail partition in this manu
 Every finite exact valuation word is one unique odd residue class modulo \(2^{A+1}\), with relative density \(2^{-A}\), where \(A\) is the total exponent. The exact prefix tree has child weights \(2^{-b}\) and a single tail cylinder at every finite cutoff. This is a self-contained local theorem and a foundation for further arithmetic and incidence research, not a proof of global Collatz descent.
 
 **Author:** Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
+
+
+## 8. Terminal exact-residue characterization and formalization route
+
+The finite-word cylinder also admits a direct terminal characterization. With
+\[
+X_j=3^j n_0+C_j,\qquad A_j=\sum_{t<j}a_t,
+\]
+the exact word is characterized by the terminal congruence
+\[
+X_k\equiv2^{A_k}\pmod{2^{A_k+1}}.
+\]
+Indeed, for every \(j<k\), the suffix expansion
+\[
+X_k=3^{k-j}X_j+2^{A_j}R_j,
+\qquad
+R_j=\sum_{t=j}^{k-1}3^{k-1-t}2^{A_t-A_j}
+\]
+has \(R_j\) odd: its first summand is odd and all later summands are even. The terminal congruence therefore forces \(2^{A_j}\mid X_j\), and after division by \(2^{A_j}\) forces the quotient to be odd. Thus exactness propagates backwards to every prefix. Conversely, an exact realized word has an odd terminal quotient and hence satisfies the terminal congruence.
+
+Solving the terminal congruence for \(n_0\) gives the same explicit residue formula as §3, because \(3^k\) is invertible modulo \(2^{A_k+1}\). This is an alternative proof architecture for Lean: it replaces nested quotient recursion by a finite suffix expansion, an oddness lemma, backward propagation of exact prefix residues, and reconstruction of the quotient orbit. The detailed declaration sequence is recorded separately in `LEAN_FORMALIZATION_ROUTE_TERMINAL_CONGRUENCE.md`.
+
+**Formalization status:** This terminal characterization is a mathematical derivation and a Lean proof route only. It is not yet Lean-compiled or axiom-audited. The four successful CI snapshots continue to certify only the initial all-one special case.
