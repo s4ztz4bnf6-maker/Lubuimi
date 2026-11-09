@@ -147,7 +147,47 @@ However, this does not yet instantiate the historical APW4 BIB reserve. A nontri
 
 Nor does (5) prove Collatz descent. The remaining orbitwise task is to connect terminal-residue collision structure to the signed-margin recurrence and show that every positive odd start has a finite realized block with positive margin, or establish another universal obstruction.
 
-## 8. Formalization target
+## 8. Finite Markov representation of the terminal-residue masses
+
+The exact product weights of valuation words imply that, under the natural probability measure on odd starts, the exponent coordinates are independent with
+
+\[\mathbb P(a_j=b)=2^{-b},\qquad b\ge1.\]
+
+Fix \(k\) and work modulo \(3^k\). Define the state
+
+\[x_j=C_j2^{-A_j}\pmod{3^k},\qquad x_0=0.\]
+
+The offset recurrence gives
+
+\[\boxed{x_{j+1}=2^{-a_j}(3x_j+1)\pmod{3^k}.}\tag{6}\]
+
+At time \(k\), this state is exactly \(\tau_k(\alpha)\). Thus the terminal-residue masses are the distribution of a finite-state Markov chain driven by independent geometric exponents.
+
+Let \(\phi_k=2\cdot3^{k-1}\). The integer 2 is a primitive root modulo \(3^k\), so for every state \(x\) and unit \(y\) there is a unique \(r_k(x,y)\in\{1,\ldots,\phi_k\}\) such that
+
+\[2^{r_k(x,y)}y\equiv3x+1\pmod{3^k}.\]
+
+The transition matrix is explicitly
+
+\[\boxed{P_k(x,y)=\frac{2^{-r_k(x,y)}}{1-2^{-\phi_k}}\quad(y\in U_k),\qquad P_k(x,y)=0\quad(3\mid y).}\tag{7}\]
+
+All exponents \(a\equiv r_k(x,y)\pmod{\phi_k}\) produce the same next state, and their probabilities sum to the geometric series in (7). Each row sums to one. The primitive-root assertion follows from the LTE identity \(v_3(2^{2\cdot3^j}-1)=v_3(4^{3^j}-1)=j+1\), which gives \(\operatorname{ord}_{3^k}(2)=2\cdot3^{k-1}\).
+
+Writing \(\delta_0\) for the point mass at zero, the terminal distribution is
+
+\[\boxed{m_k=\delta_0P_k^k.}\tag{8}\]
+
+This converts the countable valuation-word source family into an explicit finite rational matrix computation. In particular,
+
+\[E_k=\|\delta_0P_k^k\|_2^2.\]
+
+For \(k=1\), the two place masses are \((1/3,2/3)\) and \(E_1=5/9\). For \(k=2\), ordering the unit residues as \(1,2,4,5,7,8\), the exact terminal distribution is
+
+\[m_2=\frac1{63}(8,16,11,4,2,22),\qquad E_2=\frac5{21},\qquad D_2=\frac19,\qquad C_2^{\rm coll}=\frac8{63}.\]
+
+This finite Markov representation makes the collision energy directly computable with exact rational arithmetic and provides a concrete matrix/second-moment interface for the APW4 programme.
+
+## 9. Formalization target
 
 Formalize the following in Lean, in dependency order:
 
