@@ -2417,9 +2417,12 @@ theorem lubuimi_initial_valuation_one_cylinder
             2 ^ (k + 1) * (n (k + 1) + 1)
                 = 2 ^ k * (2 * (n (k + 1) + 1)) := by rw [pow_succ]; ring
             _ = 2 ^ k * (3 * (n k + 1)) := by rw [hshift]
+            _ = 3 * (2 ^ k * (n k + 1)) := by ring
+            _ = 3 * (3 ^ k * (n 0 + 1)) := by rw [ih]
             _ = 3 ^ (k + 1) * (n 0 + 1) := by
                   rw [pow_succ]
-                  nlinarith [ih]
+                  ring
+    have hNodd : n N % 2 = 1 := hodd N
     have hmod : (n N + 1) % 2 = 0 := by omega
     have hdiv : 2 ∣ n N + 1 := Nat.dvd_of_mod_eq_zero hmod
     rcases hdiv with ⟨k, hk⟩
