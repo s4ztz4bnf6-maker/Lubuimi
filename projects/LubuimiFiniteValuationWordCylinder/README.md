@@ -14,7 +14,7 @@ The initial all-one cylinder theorem is the special case \(\alpha=(1,\ldots,1)\)
 - LICENSE.md — rights and attribution notice.
 
 ## Verification
-The finite-word theorem is mathematically derived here. It is not yet claimed as Lean-compiled or axiom-audited. Its all-one special case is separately formalized as CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder and passed two full exact-commit CI workflows: 42721006544, 42721305220, 42721911555 and 42722186081. Both report [propext, Classical.choice, Quot.sound] and passed the complete-log sorryAx scan.
+The all-one special case is separately formalized as `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` and passed four successful exact-commit CI workflows: 42721006544, 42721305220, 42721911555 and 42722186081. Each reports [propext, Classical.choice, Quot.sound] and passed the complete-log sorryAx scan.
 
 The theorem gives exact finite prefix distributions; it does not prove global Collatz descent. The APW4 bridge is a research programme until an explicit index-preserving incidence and capacity map is proved.
 
