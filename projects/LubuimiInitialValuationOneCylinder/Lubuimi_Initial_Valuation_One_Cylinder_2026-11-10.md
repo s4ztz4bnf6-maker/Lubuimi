@@ -148,6 +148,10 @@ The affine offset identity gives an explicit formula. If \(C_k\) is the offset a
 
 Extending a prefix of total exponent \(A\) by a next exponent \(b\geq1\) gives a child of relative mass \(2^{-b}\). The children partition the parent, and \(\sum_{b\geq1}2^{-b}=1\). Thus the finite valuation words form an exact measure-consistent prefix tree.
 
+There is also a finite truncation at any cutoff \(B\ge1\): the exact children with next exponent \(b=1,\ldots,B\), together with the single tail event \(a_k\ge B+1\), partition the parent cylinder. Their relative masses are \(2^{-1},\ldots,2^{-B},2^{-B}\), and
+\[\sum_{b=1}^{B}2^{-b}+2^{-B}=1.\]
+The tail is itself one residue class modulo \(2^{A+B+1}\): along a parent class \(n_0=r+2^{A+1}t\), the affine identity gives \(n_k=n_k^*+2\cdot3^k t\), which runs bijectively through the odd classes modulo \(2^{B+1}\) as \(t\) runs modulo \(2^B\). This gives a finite weighted refinement with one explicit tail atom.
+
 For the all-one word of length \(N\), \(A=N\) and \(C_N=3^N-2^N\), so the residue formula reduces to \(r_\alpha\equiv-1\pmod{2^{N+1}}\), recovering the main theorem.
 
 This general partition theorem is a mathematical derivation and a Lean formalization target; no compile or axiom-audit success for it is claimed. It provides a stronger finite-cylinder foundation for the proposed Lubuimi APW4–Syracuse Cylinder–Energy Bridge, but the bridge still needs an explicit index-preserving incidence/capacity map.
