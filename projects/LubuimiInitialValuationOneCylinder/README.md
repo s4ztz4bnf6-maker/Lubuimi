@@ -34,7 +34,7 @@ Thus the initial run length is exactly `v₂(n₀+1) − 1`.
 
 ## Scope
 
-This theorem is not a proof of the global Collatz conjecture. The current Lean declaration is not yet reported as successfully compiled and axiom-audited. Run 42720406876 failed at the induction-hypothesis application; the current Collatz branch now contains an explicit application of both restricted prefix hypotheses, and exact-commit run 42721305220 is in progress. The APW4–Syracuse cylinder–energy bridge remains a research programme, not a theorem used here.
+This theorem is not a proof of the global Collatz conjecture. The initial-cylinder Lean declaration is now compiled and axiom-audited on two exact CI snapshots: run 42721006544 (merge commit 44bb2ac, PR head 013192ce524a4572a9d96c8d4dcb2796830b1f62) and run 42721305220 (merge commit 3d79761, PR head ad7203f5571d03e5989b9ac935b2103300f02409). Both completed every workflow step successfully. The transitive axiom profile is [propext, Classical.choice, Quot.sound], and the explicit sorryAx scan found none. Run 42721911555 is rechecking the latest documentation-only head and is in progress. The broader finite valuation-word partition theorem remains a separate Lean formalization target. The APW4–Syracuse cylinder–energy bridge remains a research programme, not a theorem used here.
 
 The manuscript is a self-contained preprint draft for scholarly circulation and review. No journal acceptance, DOI, or independent peer review is claimed. The result is named **Lubuimi's Initial Valuation-One Cylinder Theorem** and attributed to Ta-Yoshua Lubuimi. AI systems are assistants only, never authors or independent mathematical verifiers.
 
