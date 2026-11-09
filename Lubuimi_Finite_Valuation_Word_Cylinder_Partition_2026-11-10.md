@@ -155,3 +155,31 @@ No Lean compile or axiom-audit success is claimed for this new theorem yet.
 
 **Ta-Yoshua Lubuimi**  
 Copyright © 2026 Ta-Yoshua Lubuimi. All rights reserved for the original text and formalization materials, subject to the repository's proprietary license and third-party rights.
+
+
+## 8. Finite truncation with an exact tail cylinder
+
+Fix a finite prefix word \(\alpha\) of total exponent \(A\), and let \(B\ge1\). The parent cylinder \(\mathcal C_\alpha\) is partitioned into the \(B\) exact child cylinders
+\[
+\mathcal C_{\alpha b},\qquad 1\le b\le B,
+\]
+and the single tail cylinder
+\[
+\mathcal T_{\alpha,B}=\{n_0\in\mathcal C_\alpha:a_k\ge B+1\},
+\]
+where \(k\) is the length of \(\alpha\). The tail condition is the congruence
+\[
+3n_k+1\equiv0\pmod{2^{B+1}}.
+\]
+Since \(3\) is invertible modulo \(2^{B+1}\), this selects one odd residue class for \(n_k\). The affine offset identity transports it to one residue class of starting values modulo \(2^{A+B+1}\). Hence the tail is itself one cylinder, not an uncontrolled union.
+
+The relative measures inside the parent are
+\[
+\mu_\alpha(\mathcal C_{\alpha b})=2^{-b},\qquad
+\mu_\alpha(\mathcal T_{\alpha,B})=2^{-B}.
+\]
+They sum exactly to one:
+\[
+\boxed{\sum_{b=1}^{B}2^{-b}+2^{-B}=1.}
+\]
+The partition is disjoint and exhaustive because the next exact exponent is either one of \(1,\ldots,B\) or is at least \(B+1\). This gives a genuinely finite weighted refinement at every cutoff, with an explicit tail atom. It is a useful finite interface for later incidence and moment constructions; it does not by itself provide an APW4 BIB capacity or an orbitwise descent theorem.
