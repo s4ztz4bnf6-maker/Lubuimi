@@ -33,6 +33,7 @@ Thus the initial run length is exactly `v₂(n₀+1) − 1`.
 5. Generalization: every finite exact valuation word determines one unique odd residue class modulo `2^{A+1}`, with relative density `2^{-A}` among odd starts and exact child mass ratios `2^{-b}`.
 6. Finite truncation: the first `B` exact next-exponent children plus one `a_k≥B+1` tail cylinder form a finite partition with relative masses `2^{-1},…,2^{-B},2^{-B}`.
 7. Terminal-residue collision energy: the word-to-unit-residue incidence modulo `3^k` has diagonal mass `3^{-k}` and off-diagonal collision mass at least `1/(2·3^k)`.
+8. Finite Markov representation: the terminal-residue mass vector is `δ₀ P_k^k` for an explicit rational stochastic matrix; at `k=2`, the mass vector is `(8,16,11,4,2,22)/63` and the energy is `5/21`.
 
 ## Scope
 
