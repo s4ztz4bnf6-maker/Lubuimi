@@ -4,7 +4,7 @@
 
 ## Mathematical result versus Lean status
 
-The mathematical equivalence in the project manuscript has a complete direct proof. The Lean formalization is a separate task and is not yet complete. The project does not claim that the main theorem has passed Lean compilation or a transitive axiom audit.
+The mathematical equivalence in the project manuscript has a complete direct proof. The main Lean declaration `lubuimi_initial_valuation_one_cylinder` is now compiled and transitive-axiom-audited on two independent exact-commit workflow snapshots. The broader finite valuation-word cylinder partition theorem remains a separate formalization task.
 
 ## Relevant successful baseline
 
@@ -24,11 +24,18 @@ Run 42720406876 failed again at SyracuseOffsetIdentity.lean:2421. The diagnostic
 
 Lean left these two goals unsolved at the attempted application of the induction hypothesis. The failed declaration again showed sorryAx in the error-recovery output. The helper theorem continued to compile with [propext, Quot.sound].
 
-## Next formalization repair
+## Successful full formalization and axiom audits
 
-The next edit should construct the two restricted hypotheses as named local facts before applying the induction hypothesis, rather than embedding both tactic proofs directly in the application. The proofs must explicitly transport j < k to j < k + 1. Then rerun the complete build and inspect the actual theorem's #print axioms output. A green compile alone is insufficient: the target declaration must have no sorryAx, and all transitive axioms must be reported.
+The source was refined to explicitly apply the induction hypothesis to the two restricted prefix assumptions. The resulting declaration passed two full workflows:
 
-No source file or successful earlier CI result is to be deleted or overwritten to conceal a failed attempt. The failed runs remain part of the audit history.
+- Run `42721006544`: merge commit `44bb2ac`, PR head `013192ce524a4572a9d96c8d4dcb2796830b1f62`.
+- Run `42721305220`: merge commit `3d79761`, PR head `ad7203f5571d03e5989b9ac935b2103300f02409`.
+
+Both completed the complete library build and every workflow step, including `SyracuseOffsetIdentity.lean`, closed-form offset, lower bound, margin block and valuation transition. Both logs print `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` with transitive axiom profile `[propext, Classical.choice, Quot.sound]`. The workflow's explicit complete-log `sorryAx` scan found no occurrence. This is a positive Lean/kernel-audit result for the initial cylinder declaration on those exact snapshots.
+
+Run `42721911555` and the later exact-head recheck `42722186081` are documentation/status rechecks; both were in progress at the latest status retrieval. These do not supersede or downgrade the two completed positive results. The broader finite valuation-word partition theorem and finite tail-cylinder partition remain formalization targets.
+
+The earlier failed attempts are preserved above as part of the chronology. They are not erased, but they are superseded for the main cylinder theorem by the two later successful exact-commit audits.
 
 ## Scope
 
