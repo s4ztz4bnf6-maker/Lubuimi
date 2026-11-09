@@ -39,3 +39,8 @@ Latest exact-head recheck: run [42722186081](https://github.com/s4ztz4bnf6-maker
 ### Lubuimi terminal-residue collision energy — 10 November 2026
 
 A new mathematical note, [Lubuimi's Terminal-Residue Collision Energy](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md), derives a finite-place incidence map from length-k valuation words to terminal unit residues modulo 3^k. With source weights 2^-A, its exact energy splits as E_k = 3^-k + C_k^coll, and C_k^coll ≥ 1/(2·3^k). This is an exact APW4-style diagonal/off-diagonal collision identity in the Syracuse model, not yet the historical APW4 BIB reserve and not a Collatz descent proof. Its Lean formalization remains open.
+
+
+### Finite Markov representation of terminal-residue collision energy
+
+The new [Lubuimi Terminal-Residue Collision Energy](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md) note now derives an explicit finite rational Markov matrix `P_k` for the terminal-residue distribution: `m_k = δ₀ P_k^k`. At `k=2`, the exact vector on units mod 9 is `(8,16,11,4,2,22)/63`, giving energy `5/21`, diagonal `1/9`, and collision mass `8/63`. This is a mathematically derived finite-matrix/second-moment interface; its Lean formalization and the historical APW4/BIB capacity transfer remain open.
