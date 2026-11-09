@@ -38,10 +38,11 @@ and the exact next-step positivity threshold is
 
 ### 1.2 Formal verification chronology
 
-The main declaration CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder has passed three complete exact-commit workflows:
+The main declaration CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder has passed four complete exact-commit workflows:
 - 42721006544 — success;
 - 42721305220 — success;
-- 42721911555 — success.
+- 42721911555 — success;
+- 42722186081 — success.
 
 The job steps show successful library build, iteration/threshold, Syracuse reference/quarter-descent, offset identity, closed form, stronger offset lower bound, margin block and valuation-transition modules. Each log prints the main declaration's transitive axiom profile as
 \[
