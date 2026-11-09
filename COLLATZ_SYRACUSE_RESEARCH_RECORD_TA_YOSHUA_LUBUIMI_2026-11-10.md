@@ -173,3 +173,24 @@ No global Collatz proof is claimed in this record.
 **Copyright © 2026 Ta-Yoshua Lubuimi.** All research, mathematical statements, Lean formalization work and project documentation in this repository are attributed to Ta-Yoshua Lubuimi, except external results, which remain attributed to their original authors.
 
 The repository now includes LICENSE-PROPRIETARY.md and LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md. Original Collatz/Syracuse code, manuscripts, research notes and documentation owned by Ta-Yoshua Lubuimi are all-rights-reserved; no general open-source or commercial license is granted. Lean, Mathlib and other third-party materials remain under their own licenses. The commercial policy reserves negotiated permission for commercial exploitation of copyrightable original materials, but does not claim copyright ownership over mathematical facts, abstract ideas or independently developed implementations.
+
+
+## 12. Standalone publication project and exact-commit continuation — 10 November 2026
+
+A self-contained project directory has been created at `projects/LubuimiInitialValuationOneCylinder/`, with its own project index, manuscript draft, and project-specific rights/attribution notice. The project is named **Lubuimi's Initial Valuation-One Cylinder Theorem** and remains cross-linked to this larger Collatz–Syracuse research record. It is a manuscript draft for scholarly circulation; no journal acceptance, DOI, or independent peer review is claimed.
+
+The manuscript states the exact cylinder equivalence, exact run-length formula, densities with both normalizations (odd starts and all integers), signed-margin formula and next-step recovery threshold. It explicitly separates the mathematical proof from Lean status and does not claim global Collatz descent.
+
+### Formalization chronology
+
+- Run `42717134267` remains a successful compile/audit for its own merge commit and module scope; it does not include the new cylinder equivalence.
+- Run `42719689591` compiled the helper `valuation_exponent_eq_one_of_mod_four_three` with `[propext, Quot.sound]`, but the main theorem failed in the affine induction/terminal parity section. Error-recovery output included `sorryAx`; this is not a valid axiom profile and the main theorem is not certified by that run.
+- Commit `7cbb49c694bf2812c730e2214a66989b4c9ae961` contains the next source refinement. Exact-commit run `42720406876` was in progress at the time of this record update, with checkout and Lean setup completed and Mathlib cache restoration ongoing. No compile or axiom-audit success is claimed until the run finishes and its full logs are inspected.
+
+### APW4–Syracuse bridge boundary
+
+The proposed **Lubuimi APW4–Syracuse Cylinder–Energy Bridge** is retained as a named research programme. The initial valuation-one cylinders form a nested filtration with exact conditional mass ratios, which is a legitimate structural point of contact with finite-fibre and incidence methods. A theorem importing APW4 transport into Syracuse still requires a concrete index-preserving map, exact weight preservation, and proof of the corresponding Hall/capacity hypotheses. No such bridge theorem is claimed or used in the standalone cylinder proof. Conversely, the APW4 mathematical proof record is not changed by this exploratory connection.
+
+### Rights and attribution
+
+The standalone project directory carries its own rights notice, in addition to the repository-wide proprietary and commercial-use policies. These reserve rights only in protected original expression and code actually owned by Ta-Yoshua Lubuimi; they do not assert copyright ownership over mathematical facts, abstract ideas, or independently developed implementations. Third-party licenses remain intact.
