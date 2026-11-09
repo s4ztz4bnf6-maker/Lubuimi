@@ -22,4 +22,4 @@ The Lubuimi initial-cylinder theorem has been added as a Lean declaration in com
 
 ## Copyright and license
 
-Copyright © 2026 Ta-Yoshua Lubuimi. No repository license has yet been selected; see Section 11 of the research record. Do not infer an open-source license from the presence of this repository.
+Copyright © 2026 Ta-Yoshua Lubuimi. All rights reserved for original Collatz/Syracuse materials owned by the author. The repository includes [LICENSE-PROPRIETARY.md](LICENSE-PROPRIETARY.md) and [commercial licensing and remuneration terms](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md). Lean, Mathlib, and all third-party materials remain subject to their own licenses. No general open-source or commercial reuse license is granted for the author's original materials.
