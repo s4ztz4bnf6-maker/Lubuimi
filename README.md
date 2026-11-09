@@ -10,6 +10,8 @@ The affine-offset and signed-margin framework and the initial valuation-one cyli
 
 - [Consolidated Collatz–Syracuse research record](COLLATZ_SYRACUSE_RESEARCH_RECORD_TA_YOSHUA_LUBUIMI_2026-11-10.md)
 - [Lubuimi's Initial Valuation-One Cylinder Theorem](SyracuseInitialValuationOneCylinder_2026-11-09.md)
+- [Standalone Lubuimi Initial Valuation-One Cylinder Project](projects/LubuimiInitialValuationOneCylinder/README.md)
+- [Standalone manuscript draft](projects/LubuimiInitialValuationOneCylinder/Lubuimi_Initial_Valuation_One_Cylinder_2026-11-10.md)
 - [Syracuse affine offset, signed margin, and Lubuimi cylinder theorem source](SyracuseOffsetIdentity.lean)
 - [Closed-form offset](SyracuseOffsetClosedForm.lean)
 - [Offset lower bound](SyracuseOffsetLowerBound.lean)
@@ -20,7 +22,7 @@ The affine-offset and signed-margin framework and the initial valuation-one cyli
 
 [GitHub Actions run 42717134267](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42717134267) passed on the Lean 4.34.1 / Mathlib v4.34.1 snapshot at merge commit 28003791738900f6dc456bc71d37151c1f3f8a78. It compiled the CollatzAudit library and the listed Syracuse offset, margin, and valuation modules; the offset and valuation-transition audit steps rejected sorryAx if present and completed successfully.
 
-The Lubuimi initial-cylinder theorem has been added as a Lean declaration. Its helper lemma compiled in run 42719689591 with standard axiom profile, but the main theorem failed at the finite affine induction and terminal parity proof steps. Commit 7cbb49c694bf2812c730e2214a66989b4c9ae961 contains the next proof refinement; its CI is pending. The global Collatz conjecture is not claimed as proved. The current central obligation is to prove a positive signed margin on some finite realized block for every positive odd starting value.
+The Lubuimi initial-cylinder theorem has been added as a Lean declaration. Its helper lemma compiled in run 42719689591 with standard axiom profile, but the main theorem failed at the finite affine induction and terminal parity proof steps, with sorryAx in error recovery. Commit 7cbb49c694bf2812c730e2214a66989b4c9ae961 contains a further proof refinement. Exact-commit run 42720406876 is currently in progress; no success is claimed until it completes and the logs plus transitive axiom profile are checked. The global Collatz conjecture is not claimed as proved. The current central obligation is to prove a positive signed margin on some finite realized block for every positive odd starting value.
 
 ## Copyright and license
 
