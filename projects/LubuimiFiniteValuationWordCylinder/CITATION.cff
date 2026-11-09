@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this research project, please cite the author and manuscript."
+title: "Lubuimi's Finite Valuation-Word Cylinder Partition Theorem"
+authors:
+  - family-names: Lubuimi
+    given-names: Ta-Yoshua
+date-released: 2026-11-10
+version: "0.1.0"
+type: article
+abstract: >-
+  Every finite exact valuation word of the accelerated odd Syracuse map is
+  represented by one unique odd residue class modulo the power of two determined
+  by its cumulative exponent. The project derives exact densities, an affine
+  residue formula, a prefix-tree mass identity, and finite tail-cylinder partitions.
+keywords:
+  - Syracuse dynamics
+  - Collatz conjecture
+  - 2-adic valuation
+  - residue cylinders
+  - finite valuation words
+  - affine offset identity
+repository-code: "https://github.com/s4ztz4bnf6-maker/Lubuimi"
