@@ -18,7 +18,7 @@ Thus the initial run length is exactly `v₂(n₀+1) − 1`.
 
 ## Contents
 
-- `Lubuimi_Initial_Valuation_One_Cylinder_2026-11-10.tex` — self-contained manuscript draft.
+- `Lubuimi_Initial_Valuation_One_Cylinder_2026-11-10.md` — self-contained manuscript draft.
 - Companion research note: `SyracuseInitialValuationOneCylinder_2026-11-09.md`.
 - Lean source: `SyracuseOffsetIdentity.lean`.
 - Consolidated record: `COLLATZ_SYRACUSE_RESEARCH_RECORD_TA_YOSHUA_LUBUIMI_2026-11-10.md`.
