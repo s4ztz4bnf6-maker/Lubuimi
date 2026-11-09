@@ -1,6 +1,9 @@
-# Exact initial valuation-one cylinder for accelerated Syracuse
+# Lubuimi's Initial Valuation-One Cylinder Theorem for accelerated Syracuse
 
-**Date:** 2026-11-09  
+**Author:** Ta-Yoshua Lubuimi  
+**Naming:** This exact cylinder classification is named in this project in honour of its author.
+
+**Original derivation date:** 9 November 2026  
 **Status:** Mathematical derivation from the certified odd-step recurrence. This note is not itself a Lean declaration and does not claim a new CI or kernel-verification result.
 
 ## Setup
