@@ -120,3 +120,10 @@ Add a theorem to `SyracuseOffsetIdentity.lean` using the existing certified-step
 - `exact_exponent_residue`
 
 No Lean compile, `#print axioms`, or CI success is claimed by this note.
+
+
+## Generalizations and next incidence layer
+
+The exact all-one cylinder is the special case of [Lubuimi's Finite Valuation-Word Cylinder Partition Theorem](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md), which assigns every finite positive exact valuation word a unique odd residue class modulo \(2^{A+1}\) and relative odd-start density \(2^{-A}\).
+
+A further consequence is [Lubuimi's Terminal-Residue Collision Energy](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md): every length-k word maps to a terminal unit residue modulo \(3^k\); the resulting second moment has diagonal mass \(3^{-k}\) and off-diagonal collision mass at least \(1/(2\cdot3^k)\). It also has an explicit finite rational Markov representation. These generalizations are mathematical derivations; their Lean formalizations remain separate from the already verified initial-cylinder declaration.
