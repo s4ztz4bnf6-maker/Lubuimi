@@ -227,3 +227,28 @@ Run [42721911555](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721
 ## 15. Latest exact-head recheck — 10 November 2026
 
 The current branch head `a36894eefc52e5d28cd43110f5e289805509ad33` triggered run [42722186081](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42722186081). At the latest retrieval, checkout had completed and Lean toolchain/manifest setup was in progress. This is a further documentation/status recheck. It does not supersede the two completed positive exact-commit audits `42721006544` and `42721305220`, which already establish the initial cylinder declaration's successful compile and transitive axiom profile on their respective snapshots.
+
+
+## 16. Lubuimi terminal-residue collision energy — 10 November 2026
+
+The finite valuation-word partition yields a new exact finite-place incidence model. For every length-k exponent word \(\alpha\), with total exponent \(A\) and affine offset \(C_k\), define
+\[
+\tau_k(\alpha)=C_k2^{-A}\pmod{3^k}.
+\]
+The affine identity proves that every orbit realizing \(\alpha\) has terminal state \(n_k\equiv\tau_k(\alpha)\pmod{3^k}\). Since \(C_k\equiv2^{A-a_{k-1}}\pmod3\), the place is a unit modulo \(3^k\). The finite place set is \(U_k=(\mathbb Z/3^k\mathbb Z)^\times\), of size \(2\cdot3^{k-1}\).
+
+Assign source weight \(w_\alpha=2^{-A}\) and aggregate place mass \(m_k(t)=\sum_{\tau_k(\alpha)=t}w_\alpha\). Since all length-k valuation-word cylinders partition odd starts, \(\sum_\alpha w_\alpha=1\) and \(\sum_t m_k(t)=1\). The second moment
+\[
+E_k=\sum_{t\in U_k}m_k(t)^2
+\]
+has the exact diagonal/off-diagonal expansion
+\[
+E_k=D_k+C_k^{\mathrm{coll}},\qquad D_k=\sum_\alpha w_\alpha^2=(\sum_{a\ge1}4^{-a})^k=3^{-k}.
+\]
+Cauchy–Schwarz on the finite place set gives \(E_k\ge1/(2\cdot3^{k-1})\), hence
+\[
+\boxed{C_k^{\mathrm{coll}}\ge1/(2\cdot3^k).}
+\]
+For \(k=1\), the two terminal places modulo 3 have masses \(2/3\) and \(1/3\), yielding \(E_1=5/9\), \(D_1=1/3\), and collision mass \(2/9\).
+
+This is the **Lubuimi Terminal-Residue Collision Energy**. It is a genuine exact diagonal/off-diagonal incidence identity in the Syracuse valuation-word model and a concrete APW4-style bridge candidate. It is not silently identified with the historical APW4 BIB reserve. That transfer still requires an index-preserving map to original APW4 event/place objects, preservation of historical weights, and a proved capacity/Hall inequality. The new collision-energy statement is mathematically derived but not yet Lean-compiled; the initial one-cylinder theorem remains separately Lean-verified by runs 42721006544 and 42721305220.
