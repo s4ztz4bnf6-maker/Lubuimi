@@ -60,7 +60,7 @@ D_{m+r}=3^rD_m-
 \]
 For a block of valuation-two steps, \(D_{m+r}=3^rD_m\).
 
-The source already contains signedOffsetMargin_succ, signedOffsetMargin_block_decomposition, signedOffsetMargin_pos_iff_block_correction, signed_margin_after_run_of_ones, signed_margin_positive_after_run_of_ones_iff, signed_margin_after_run_of_twos, and signed_margin_weighted_sum_expansion.
+The new Lubuimi cylinder declarations are followed by #print axioms. The source already contains signedOffsetMargin_succ, signedOffsetMargin_block_decomposition, signedOffsetMargin_pos_iff_block_correction, signed_margin_after_run_of_ones, signed_margin_positive_after_run_of_ones_iff, signed_margin_after_run_of_twos, and signed_margin_weighted_sum_expansion.
 
 A positive terminal margin is equivalent to strict descent for the certified block. The unresolved global obligation is to prove that every positive odd start admits a finite realized block with positive margin.
 
@@ -103,7 +103,7 @@ equivalently
 \]
 Every positive odd start therefore has a finite initial valuation-one run. Among odd residue classes, the density with at least \(N\) initial ones is \(2^{-N}\), and the density with exactly \(N\) is \(2^{-(N+1)}\).
 
-This refines the already formalized one-way obstruction exponent_one_block_bounds_length_by_start_shift: the converse direction constructs the actual orbit prefix from the residue class. The equivalence is mathematically derived and documented, but it has not yet been added as a new Lean theorem.
+This refines the already formalized one-way obstruction exponent_one_block_bounds_length_by_start_shift: the converse direction constructs the actual orbit prefix from the residue class. The Lean declaration lubuimi_initial_valuation_one_cylinder and its helper valuation_exponent_eq_one_of_mod_four_three have now been added to SyracuseOffsetIdentity.lean at commit 137bc0a4cf0e2b2787aacbe2ed43df60c6e001a7. GitHub Actions run 42718893397 was triggered for that exact commit and is still in progress; no compile or axiom-audit success is claimed until its final logs are inspected.
 
 ## 5. Exact recovery threshold after the initial run
 
