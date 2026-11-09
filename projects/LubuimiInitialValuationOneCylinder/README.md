@@ -21,21 +21,19 @@ Thus the initial run length is exactly `v₂(n₀+1) − 1`.
 - `Lubuimi_Initial_Valuation_One_Cylinder_2026-11-10.md` — self-contained manuscript draft.
 - `Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md` — stronger companion theorem for every finite positive valuation word.
 - `CITATION.cff` — citation metadata.
-- Companion research note: `SyracuseInitialValuationOneCylinder_2026-11-09.md`.
-- Lean source: `SyracuseOffsetIdentity.lean`.
-- Consolidated record: `COLLATZ_SYRACUSE_RESEARCH_RECORD_TA_YOSHUA_LUBUIMI_2026-11-10.md`.
+- The full proof of the general finite-word extension is in the companion file listed above. The Lean declaration and full CI chronology are maintained in the parent Collatz–Syracuse research workspace.
 
 ## Mathematical results
 
 1. Exact equivalence between the all-one initial valuation block and the single residue class modulo `2^{N+1}`.
 2. Exact initial run length `r=v₂(n₀+1)-1`.
 3. Natural densities: among odd starts, at least `N` initial ones has density `2^{-N}`, and exactly `r` has density `2^{-(r+1)}`; among all integers the corresponding densities are `2^{-(N+1)}` and `2^{-(r+2)}`.
-5. Generalization: every finite exact valuation word determines one unique odd residue class modulo `2^{A+1}`, with relative density `2^{-A}` among odd starts and exact child mass ratios `2^{-b}`.
 4. Exact initial signed margin `D_r=-2(3^r-2^r)` and next-step recovery threshold `2^{a_r+r}>6·3^r-2^{r+1}`.
+5. Generalization: every finite exact valuation word determines one unique odd residue class modulo `2^{A+1}`, with relative density `2^{-A}` among odd starts and exact child mass ratios `2^{-b}`.
 
 ## Scope
 
-This theorem is not a proof of the global Collatz conjecture. The current Lean declaration is not yet reported as successfully compiled and axiom-audited. The APW4–Syracuse cylinder–energy bridge remains a research programme, not a theorem used here.
+This theorem is not a proof of the global Collatz conjecture. The current Lean declaration is not yet reported as successfully compiled and axiom-audited. Run 42720406876 failed at the induction-hypothesis application; the current Collatz branch now contains an explicit application of both restricted prefix hypotheses, and exact-commit run 42721305220 is in progress. The APW4–Syracuse cylinder–energy bridge remains a research programme, not a theorem used here.
 
 The manuscript is a self-contained preprint draft for scholarly circulation and review. No journal acceptance, DOI, or independent peer review is claimed. The result is named **Lubuimi's Initial Valuation-One Cylinder Theorem** and attributed to Ta-Yoshua Lubuimi. AI systems are assistants only, never authors or independent mathematical verifiers.
 
