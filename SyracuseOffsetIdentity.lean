@@ -2413,12 +2413,16 @@ theorem lubuimi_initial_valuation_one_cylinder
           have hstepk : 2 * n (k + 1) = 3 * n k + 1 := hhalf k (by omega)
           have hshift : 2 * (n (k + 1) + 1) = 3 * (n k + 1) := by
             nlinarith [hstepk]
+          have ih' : 2 ^ k * (n k + 1) = 3 ^ k * (n 0 + 1) :=
+            ih
+              (by intro j hj; exact hone j (by omega))
+              (by intro j hj; exact hhalf j (by omega))
           calc
             2 ^ (k + 1) * (n (k + 1) + 1)
                 = 2 ^ k * (2 * (n (k + 1) + 1)) := by rw [pow_succ]; ring
             _ = 2 ^ k * (3 * (n k + 1)) := by rw [hshift]
             _ = 3 * (2 ^ k * (n k + 1)) := by ring
-            _ = 3 * (3 ^ k * (n 0 + 1)) := by rw [ih]
+            _ = 3 * (3 ^ k * (n 0 + 1)) := by rw [ih']
             _ = 3 ^ (k + 1) * (n 0 + 1) := by
                   rw [pow_succ]
                   ring
