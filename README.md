@@ -10,6 +10,7 @@ The affine-offset and signed-margin framework and the initial valuation-one cyli
 
 - [Consolidated Collatz–Syracuse research record](COLLATZ_SYRACUSE_RESEARCH_RECORD_TA_YOSHUA_LUBUIMI_2026-11-10.md)
 - [Lubuimi's Initial Valuation-One Cylinder Theorem](SyracuseInitialValuationOneCylinder_2026-11-09.md)
+- [Lubuimi's Finite Valuation-Word Cylinder Partition Theorem](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md)
 - [Syracuse affine offset, signed margin, and Lubuimi cylinder theorem source](SyracuseOffsetIdentity.lean)
 - [Closed-form offset](SyracuseOffsetClosedForm.lean)
 - [Offset lower bound](SyracuseOffsetLowerBound.lean)
