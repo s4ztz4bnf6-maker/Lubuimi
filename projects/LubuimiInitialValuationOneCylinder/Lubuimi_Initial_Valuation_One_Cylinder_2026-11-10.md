@@ -158,13 +158,18 @@ This general partition theorem is a mathematical derivation and a Lean formaliza
 
 ## 9. Formal verification record
 
-The mathematical proof in this manuscript is presented independently of the current Lean integration status. The Collatz/Syracuse source repository contains the Lean declaration `lubuimi_initial_valuation_one_cylinder` and helper lemma `valuation_exponent_eq_one_of_mod_four_three`.
+The mathematical proof in this manuscript is now also formally checked in Lean. The Collatz/Syracuse source repository contains the declaration `lubuimi_initial_valuation_one_cylinder` and helper lemma `valuation_exponent_eq_one_of_mod_four_three`.
 
-Run `42719689591` compiled the helper with axiom profile `[propext, Quot.sound]`, but the main theorem failed in the affine induction/terminal parity section; error recovery included `sorryAx`. Run `42720406876` also failed. Its exact remaining goal at `SyracuseOffsetIdentity.lean:2421:43` showed that the induction hypothesis still required the restricted prefix hypotheses `hone` and `hhalf` to be supplied.
+Two independent exact-commit GitHub Actions runs completed successfully:
 
-The current Collatz branch now explicitly applies those restricted hypotheses in an intermediate `ih'` proof. Current branch head: `ad7203f5571d03e5989b9ac935b2103300f02409`. Exact-commit GitHub Actions run `42721305220` is in progress; at this manuscript update it had completed checkout and Lean setup and was restoring the Mathlib cache. No successful compile or transitive axiom audit for the main cylinder theorem is claimed yet.
+- Run `42721006544` checked merge commit `44bb2ac`, with PR head `013192ce524a4572a9d96c8d4dcb2796830b1f62`.
+- Run `42721305220` checked merge commit `3d79761`, with PR head `ad7203f5571d03e5989b9ac935b2103300f02409`.
 
-The general finite valuation-word partition theorem in the companion note is also a mathematical result and a Lean formalization target; it is not yet claimed as compiled. Earlier successful run `42717134267` remains valid for its distinct commit and modules actually checked. No global Collatz proof is claimed.
+Both runs completed the full workflow: library build, iteration and threshold modules, Syracuse reference and quarter-descent modules, offset identity and strict-margin audit, closed-form offset, stronger offset lower bound, valuation-one margin block, and exact valuation-transition modules. In both logs, the declaration `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` has transitive axiom profile `[propext, Classical.choice, Quot.sound]`. The workflow's explicit complete-log `sorryAx` scan passed. Thus the initial valuation-one cylinder equivalence is Lean-compiled and axiom-audited on both checked snapshots.
+
+Run `42721911555` is rechecking the latest documentation-only branch head and is in progress; it does not supersede the two completed positive results. Earlier failed attempts `42719689591` and `42720406876` remain part of the chronology, but they do not invalidate the later successful runs.
+
+The general finite valuation-word cylinder partition theorem in the companion note is a separate mathematical derivation and Lean formalization target; it is not yet claimed as compiled. No global Collatz proof is claimed.
 
 ## Authorship and rights
 
