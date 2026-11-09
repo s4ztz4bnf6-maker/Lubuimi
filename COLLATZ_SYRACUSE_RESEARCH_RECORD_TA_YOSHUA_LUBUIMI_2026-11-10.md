@@ -287,3 +287,8 @@ A more direct Lean formalization route is now recorded in `projects/LubuimiFinit
 The APW4–Syracuse bridge remains a separate research programme. Its open mathematical obligation is still an explicit index-preserving transport between finite Syracuse prefix cylinders and the historical APW4/BIB objects, with diagonal, off-diagonal and BIB capacity accounting kept distinct. No global Collatz proof is claimed.
 
 **Attribution:** all research and theorem authorship: Ta-Yoshua Lubuimi. AI tools are assistants only.
+
+
+## 18. Current exact-head Collatz recheck — 10 November 2026
+
+The latest research-record/documentation commit is `29b27dc529b9e81a33b5211e9e01a01e19edc256`. Run [42724343412](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42724343412) is active on that exact head. Checkout and Lean manifest setup completed; Mathlib cache restoration was in progress at the latest retrieval. This is a current recheck of the source tree and does not alter the already established positive cylinder theorem audits `42721006544` and `42721305220`.
