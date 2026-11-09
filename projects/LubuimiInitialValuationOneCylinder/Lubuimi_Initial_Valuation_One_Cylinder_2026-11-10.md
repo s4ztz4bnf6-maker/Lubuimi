@@ -154,9 +154,13 @@ This general partition theorem is a mathematical derivation and a Lean formaliza
 
 ## 9. Formal verification record
 
-The mathematical proof in this manuscript is presented independently of the current Lean integration status. The source repository contains a Lean declaration named `lubuimi_initial_valuation_one_cylinder` and helper lemma `valuation_exponent_eq_one_of_mod_four_three`. The helper compiled in run `42719689591` with axiom profile `[propext, Quot.sound]`. The main theorem did not compile in that run; error-recovery output contained `sorryAx`, so it is not claimed as formally verified there.
+The mathematical proof in this manuscript is presented independently of the current Lean integration status. The Collatz/Syracuse source repository contains the Lean declaration `lubuimi_initial_valuation_one_cylinder` and helper lemma `valuation_exponent_eq_one_of_mod_four_three`.
 
-A proof refinement was committed as `7cbb49c694bf2812c730e2214a66989b4c9ae961`. GitHub Actions run `42720406876` is testing that revision. At the time of this manuscript revision it had not completed. No successful Lean compile or transitive axiom audit for the main cylinder theorem is claimed here. Earlier successful run `42717134267` remains valid for the different commit and modules it actually checked.
+Run `42719689591` compiled the helper with axiom profile `[propext, Quot.sound]`, but the main theorem failed in the affine induction/terminal parity section; error recovery included `sorryAx`. Run `42720406876` also failed. Its exact remaining goal at `SyracuseOffsetIdentity.lean:2421:43` showed that the induction hypothesis still required the restricted prefix hypotheses `hone` and `hhalf` to be supplied.
+
+The current Collatz branch now explicitly applies those restricted hypotheses in an intermediate `ih'` proof. Current branch head: `ad7203f5571d03e5989b9ac935b2103300f02409`. Exact-commit GitHub Actions run `42721305220` is in progress; at this manuscript update it had completed checkout and Lean setup and was restoring the Mathlib cache. No successful compile or transitive axiom audit for the main cylinder theorem is claimed yet.
+
+The general finite valuation-word partition theorem in the companion note is also a mathematical result and a Lean formalization target; it is not yet claimed as compiled. Earlier successful run `42717134267` remains valid for its distinct commit and modules actually checked. No global Collatz proof is claimed.
 
 ## Authorship and rights
 
