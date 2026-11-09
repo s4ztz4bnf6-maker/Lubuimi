@@ -50,7 +50,7 @@ The job steps show successful library build, iteration/threshold, Syracuse refer
 \]
 and the complete-log sorryAx scan passes. These results apply to their exact checked snapshots.
 
-Failed earlier proof-script attempts 42719689591 and 42720406876 remain in the chronology and are superseded for this declaration by the later successful checks. The separate recheck 42722186081 was still in progress at the latest retrieval.
+Failed earlier proof-script attempts 42719689591 and 42720406876 remain in the chronology and are superseded for this declaration by the later successful checks. The separate recheck 42722186081 completed successfully. It is the fourth successful exact-commit snapshot for the initial cylinder declaration.
 
 ### 1.3 General finite valuation-word cylinder theorem — mathematical proof supplied
 
