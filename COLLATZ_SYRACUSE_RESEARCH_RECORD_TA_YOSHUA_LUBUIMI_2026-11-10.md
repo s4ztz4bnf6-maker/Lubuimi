@@ -210,3 +210,15 @@ The full finite-word cylinder partition supplies a more substantial exact prefix
 ## 13. Current exact-commit Lean run — 10 November 2026
 
 Run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) is checking the refined Lubuimi initial-cylinder declaration at source commit 013192ce524a4572a9d96c8d4dcb2796830b1f62. Run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) has now completed successfully on merge commit 44bb2ac (PR head 013192ce524a4572a9d96c8d4dcb2796830b1f62 merged into base fc1e8023f9dcc0c777e25d08df0b011b13cdcb26). The full Lean library build and every workflow step passed: IterationLemmas, ThresholdLemmas, SyracuseReferenceTest, SyracuseQuarterDescent, SyracuseOffsetIdentity, SyracuseOffsetClosedForm, SyracuseOffsetLowerBound, SyracuseMarginBlock and SyracuseValuationTransition. The exact declaration lubuimi_initial_valuation_one_cylinder printed the transitive profile [propext, Classical.choice, Quot.sound]. The workflow's explicit grep of the complete offset-audit log for sorryAx found none. Thus the initial-cylinder equivalence is now Lean-compiled and axiom-audited at that checked merge commit. This verifies the cylinder theorem, not the global Collatz conjecture.
+
+
+## 14. Positive Lean verification of Lubuimi's initial cylinder theorem — 10 November 2026
+
+The failed attempts `42719689591` and `42720406876` remain in the record as historical proof-script diagnostics. They are superseded for the initial-cylinder declaration by two later successful, commit-bound full workflows:
+
+- [Run 42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544): merge commit `44bb2ac`, PR head `013192ce524a4572a9d96c8d4dcb2796830b1f62`.
+- [Run 42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220): merge commit `3d79761`, PR head `ad7203f5571d03e5989b9ac935b2103300f02409`.
+
+Both workflows completed the library build and every listed Syracuse module/audit step. In both logs, `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` has transitive axiom profile `[propext, Classical.choice, Quot.sound]`. The workflow's explicit complete-log search for `sorryAx` found none. Therefore the initial valuation-one cylinder equivalence is now Lean-compiled and axiom-audited on two exact snapshots. The broader finite valuation-word cylinder partition theorem is mathematically derived but remains a separate Lean formalization target. Neither result is a proof of the global Collatz conjecture.
+
+Run [42721911555](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721911555) is a further recheck of the later documentation/status head and was in progress at the time of this update; it does not replace or downgrade the two completed positive runs.
