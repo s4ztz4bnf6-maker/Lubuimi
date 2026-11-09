@@ -267,3 +267,23 @@ For \(k=2\), in unit-residue order \(1,2,4,5,7,8\pmod9\),
 m_2=\frac1{63}(8,16,11,4,2,22),\quad E_2=\frac5{21},\quad D_2=\frac19,\quad C_2^{\mathrm{coll}}=\frac8{63}.
 \]
 This is an exact finite matrix and moment model suitable for further APW4-style work. The finite-word partition, collision energy, Markov matrix and explicit k=2 vector are mathematically derived; they remain separate Lean formalization targets. The initial one-cylinder theorem remains the separately verified declaration from runs 42721006544 and 42721305220.
+
+
+## 9. Status continuation — 10 November 2026 (append-only)
+
+The mathematical and formalization status in earlier sections is preserved, but the earlier pending/failure wording for the initial valuation-one cylinder has been superseded by four later successful exact-commit CI snapshots:
+
+- 42721006544 — successful full workflow;
+- 42721305220 — successful full workflow;
+- 42721911555 — successful full workflow;
+- 42722186081 — successful full workflow.
+
+For each run, the declaration `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` printed transitive axiom profile `[propext, Classical.choice, Quot.sound]`; the complete-log `sorryAx` scan passed. These runs certify the initial all-one cylinder declaration on their exact checked snapshots only. The earlier failed proof-script attempts remain in the historical chronology and are superseded for this declaration by the later successful runs.
+
+The stronger general finite valuation-word cylinder theorem is mathematically proved in the standalone companion manuscript `projects/LubuimiFiniteValuationWordCylinder/MANUSCRIPT.md`. For any finite positive word with total exponent A, the exact cylinder is one odd residue class modulo 2^(A+1), of relative odd-start density 2^(-A), with explicit residue formula from the affine offset. Its finite cutoff refinement has exact children and one exact tail cylinder. This general theorem and tail partition are not yet Lean-compiled or axiom-audited.
+
+A more direct Lean formalization route is now recorded in `projects/LubuimiFiniteValuationWordCylinder/LEAN_FORMALIZATION_ROUTE_TERMINAL_CONGRUENCE.md`. It uses the terminal exact-residue condition X_k ≡ 2^A (mod 2^(A+1)), the finite suffix expansion X_k = 3^(k-j) X_j + 2^(A_j) R_j, oddness of R_j, backward propagation of exact prefix residues, and reconstruction of the quotient orbit. This is a proof route, not a new formal verification claim.
+
+The APW4–Syracuse bridge remains a separate research programme. Its open mathematical obligation is still an explicit index-preserving transport between finite Syracuse prefix cylinders and the historical APW4/BIB objects, with diagonal, off-diagonal and BIB capacity accounting kept distinct. No global Collatz proof is claimed.
+
+**Attribution:** all research and theorem authorship: Ta-Yoshua Lubuimi. AI tools are assistants only.
