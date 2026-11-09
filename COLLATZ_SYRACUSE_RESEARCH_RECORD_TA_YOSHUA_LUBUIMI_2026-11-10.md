@@ -173,3 +173,10 @@ No global Collatz proof is claimed in this record.
 **Copyright © 2026 Ta-Yoshua Lubuimi.** All research, mathematical statements, Lean formalization work and project documentation in this repository are attributed to Ta-Yoshua Lubuimi, except external results, which remain attributed to their original authors.
 
 The repository now includes LICENSE-PROPRIETARY.md and LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md. Original Collatz/Syracuse code, manuscripts, research notes and documentation owned by Ta-Yoshua Lubuimi are all-rights-reserved; no general open-source or commercial license is granted. Lean, Mathlib and other third-party materials remain under their own licenses. The commercial policy reserves negotiated permission for commercial exploitation of copyrightable original materials, but does not claim copyright ownership over mathematical facts, abstract ideas or independently developed implementations.
+
+
+## 12. Lubuimi's finite valuation-word cylinder partition
+
+The stronger generalization of the initial all-ones cylinder is documented in [Lubuimi's Finite Valuation-Word Cylinder Partition Theorem](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md). For every finite positive exponent word \(\alpha\) with total exponent \(A\), its exact starting-value cylinder is one unique odd residue class modulo \(2^{A+1}\), with relative density \(2^{-A}\) among odd residues. Its children have exact relative masses \(2^{-b}\) for next exponent \(b\ge1\), and these sum to one. The explicit residue is \((2^A-C_k)(3^k)^{-1}\bmod 2^{A+1}\), using the certified affine offset.
+
+This is a mathematically derived theorem and a Lean formalization target, not yet a compiled declaration. It supplies a concrete finite-prefix tree for the named Lubuimi APW4–Syracuse cylinder–energy bridge programme. The bridge still requires an explicit index-preserving incidence/capacity map and an integer-level obstruction; a measure-zero exceptional set alone does not prove Collatz.
