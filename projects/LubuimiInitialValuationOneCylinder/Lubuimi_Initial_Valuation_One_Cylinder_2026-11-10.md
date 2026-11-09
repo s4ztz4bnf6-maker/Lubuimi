@@ -156,7 +156,31 @@ For the all-one word of length \(N\), \(A=N\) and \(C_N=3^N-2^N\), so the residu
 
 This general partition theorem is a mathematical derivation and a Lean formalization target; no compile or axiom-audit success for it is claimed. It provides a stronger finite-cylinder foundation for the proposed Lubuimi APW4–Syracuse Cylinder–Energy Bridge, but the bridge still needs an explicit index-preserving incidence/capacity map.
 
-## 9. Formal verification record
+## 9. Lubuimi's terminal-residue collision energy
+
+The finite valuation-word partition also induces a finite-place incidence map. For a word \(\alpha=(a_0,\ldots,a_{k-1})\), let \(A=\sum_j a_j\) and let \(C_k(\alpha)\) be its affine offset. The affine identity implies that every orbit realizing \(\alpha\) has the same terminal residue
+
+\[\boxed{\tau_k(\alpha)=C_k(\alpha)2^{-A}\pmod{3^k}.}\]
+
+Since \(C_k\equiv2^{A-a_{k-1}}\pmod3\), this is a unit modulo \(3^k\). Thus the finite place set is \(U_k=(\mathbb Z/3^k\mathbb Z)^\times\), of size \(2\cdot3^{k-1}\).
+
+Give each word its exact cylinder weight \(w_\alpha=2^{-A}\), and aggregate the weights at each terminal place:
+
+\[m_k(t)=\sum_{\tau_k(\alpha)=t}w_\alpha,\qquad E_k=\sum_{t\in U_k}m_k(t)^2.\]
+
+The exact diagonal/off-diagonal expansion is
+
+\[\boxed{E_k=D_k+C_k^{\rm coll},\qquad D_k=\sum_\alpha w_\alpha^2=\left(\sum_{a\ge1}4^{-a}\right)^k=3^{-k}.}\]
+
+By Cauchy–Schwarz, \(E_k\ge1/|U_k|=1/(2\cdot3^{k-1})\). Hence
+
+\[\boxed{C_k^{\rm coll}\ge\frac{1}{2\cdot3^k}.}\]
+
+For \(k=1\), the two terminal places modulo 3 have masses \(2/3\) and \(1/3\), so \(E_1=5/9\), \(D_1=1/3\), and \(C_1^{\rm coll}=2/9\).
+
+This is an exact weighted collision identity on Syracuse valuation words and a concrete APW4-style diagonal/off-diagonal structure. It is not yet the historical APW4 BIB reserve: an index-preserving map to the original APW4 event/place objects, preservation of historical weights, and a proved capacity/Hall inequality are still required. The collision-energy theorem is a separate mathematical derivation and Lean formalization target, not yet claimed as Lean-compiled. It does not prove Collatz descent. The complete statement, finite truncation bounds, and proof details are in [Lubuimi's Terminal-Residue Collision Energy](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md).
+
+## 10. Formal verification record
 
 The mathematical proof in this manuscript is now also formally checked in Lean. The Collatz/Syracuse source repository contains the declaration `lubuimi_initial_valuation_one_cylinder` and helper lemma `valuation_exponent_eq_one_of_mod_four_three`.
 
