@@ -171,7 +171,7 @@ where \(k\) is the length of \(\alpha\). The tail condition is the congruence
 \[
 3n_k+1\equiv0\pmod{2^{B+1}}.
 \]
-Since \(3\) is invertible modulo \(2^{B+1}\), this selects one odd residue class for \(n_k\). The affine offset identity transports it to one residue class of starting values modulo \(2^{A+B+1}\). Hence the tail is itself one cylinder, not an uncontrolled union.
+Write the parent residue as \(n_0=r+2^{A+1}t\). The affine identity shows that, along this parent cylinder, the terminal value has the form \(n_k=n_k^*+2\cdot3^k t\). As \(t\) ranges modulo \(2^B\), these values run bijectively through all odd residue classes modulo \(2^{B+1}\), because \(3^k\) is invertible modulo \(2^B\). The tail condition therefore selects exactly one value of \(t\) modulo \(2^B\), hence one residue class of starting values modulo \(2^{A+B+1}\). Thus the tail is itself one cylinder, not an uncontrolled union.
 
 The relative measures inside the parent are
 \[
