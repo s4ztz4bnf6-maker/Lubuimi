@@ -40,3 +40,14 @@ The earlier failed attempts are preserved above as part of the chronology. They 
 ## Scope
 
 This Lean target concerns the initial valuation-one cylinder only. It is not a proof of global Collatz descent. The APW4 bridge remains a separate research programme until a concrete index- and weight-preserving map and the necessary incidence inequalities are proved.
+
+
+## Additional Lean targets — not yet compiled
+
+The following mathematical statements are now documented but are not claimed as Lean-verified:
+
+- Lubuimi's Finite Valuation-Word Cylinder Partition Theorem (all finite exact positive exponent words, explicit residue class and mass).
+- The finite truncation/tail-cylinder partition with exact weights.
+- Lubuimi's Terminal-Residue Collision Energy: terminal residue map modulo 3^k, exact diagonal mass 3^-k, off-diagonal collision energy and lower bound 1/(2·3^k), including finite truncation error control.
+
+The initial valuation-one cylinder theorem remains the separately verified declaration described above. No failed attempt for that declaration overrides its two later successful full CI audits.
