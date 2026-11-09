@@ -20,6 +20,7 @@ Thus the initial run length is exactly `v₂(n₀+1) − 1`.
 
 - `Lubuimi_Initial_Valuation_One_Cylinder_2026-11-10.md` — self-contained manuscript draft.
 - `Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md` — stronger companion theorem for every finite positive valuation word.
+- `Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md` — exact finite-place incidence and diagonal/off-diagonal collision energy identity.
 - `CITATION.cff` — citation metadata.
 - The full proof of the general finite-word extension is in the companion file listed above. The Lean declaration and full CI chronology are maintained in the parent Collatz–Syracuse research workspace.
 
@@ -31,6 +32,7 @@ Thus the initial run length is exactly `v₂(n₀+1) − 1`.
 4. Exact initial signed margin `D_r=-2(3^r-2^r)` and next-step recovery threshold `2^{a_r+r}>6·3^r-2^{r+1}`.
 5. Generalization: every finite exact valuation word determines one unique odd residue class modulo `2^{A+1}`, with relative density `2^{-A}` among odd starts and exact child mass ratios `2^{-b}`.
 6. Finite truncation: the first `B` exact next-exponent children plus one `a_k≥B+1` tail cylinder form a finite partition with relative masses `2^{-1},…,2^{-B},2^{-B}`.
+7. Terminal-residue collision energy: the word-to-unit-residue incidence modulo `3^k` has diagonal mass `3^{-k}` and off-diagonal collision mass at least `1/(2·3^k)`.
 
 ## Scope
 
