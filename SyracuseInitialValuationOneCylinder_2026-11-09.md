@@ -4,7 +4,7 @@
 **Naming:** This exact cylinder classification is named in this project in honour of its author.
 
 **Original derivation date:** 9 November 2026  
-**Status:** Mathematical derivation and Lean formalization. The declaration lubuimi_initial_valuation_one_cylinder in SyracuseOffsetIdentity.lean passed the full compile/audit workflow run 42721006544 on merge commit 44bb2ac. Its transitive axiom profile is [propext, Classical.choice, Quot.sound], and the workflow's explicit sorryAx scan found none. The broader finite valuation-word cylinder partition theorem remains a separate Lean formalization target.
+**Status:** Mathematical derivation and Lean formalization. The declaration `lubuimi_initial_valuation_one_cylinder` passed two complete exact-commit CI workflows: run `42721006544` on merge commit `44bb2ac` (PR head `013192ce524a4572a9d96c8d4dcb2796830b1f62`) and run `42721305220` on merge commit `3d79761` (PR head `ad7203f5571d03e5989b9ac935b2103300f02409`). Both printed the transitive profile `[propext, Classical.choice, Quot.sound]`; the workflow's explicit complete-log `sorryAx` scans found none. A later documentation-only recheck, run `42721911555`, is in progress. The broader finite valuation-word cylinder partition theorem remains a separate Lean formalization target.
 
 ## Setup
 
