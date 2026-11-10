@@ -192,7 +192,7 @@ Sei \(\mathcal C_N\) die Menge der positiven ungeraden ganzen Zahlen, deren erst
 
 **Satz 5.1 (Zylinderdichten).** Die natürliche Dichte relativ zu den positiven ungeraden ganzen Zahlen ist
 \[
-\boxed{\operatorname{dens}_{\rm ungerade}(\mathcal C_N)=2^{-N}.}
+\boxed{\operatorname{dens}_{\mathrm{ungerade}}(\mathcal C_N)=2^{-N}.}
 \tag{5.2}
 \]
 Die natürliche Dichte als Teilmenge aller positiven ganzen Zahlen ist
@@ -270,7 +270,7 @@ D_{r+1}>0
 
 Die Schwelle (6.5) ist exakt und hängt von der tatsächlich realisierten Länge des anfänglichen Blocks ab. Sie behauptet nicht universell, dass die nächste Bewertung diese Schwelle erfüllt. Ebenso begründet die Positivität dieser einzelnen Margin für sich genommen keinen globalen Collatz-Abstiegssatz.
 
-**Korollar 6.3 (Positive Margin erzwingt Abstieg unter den Startwert).** Für jede Orbitpräfix gilt: Aus \(D_j>0\) folgt \(n_j<n_0\).
+**Korollar 6.3 (Positive Margin erzwingt Abstieg unter den Startwert).** Für jedes Orbitpräfix gilt: Aus \(D_j>0\) folgt \(n_j<n_0\).
 
 **Beweis.** Die affine Identität liefert \(2^{A_j}n_j=3^j n_0+C_j\). Wegen \(C_j\geq0\) und \(D_j=2^{A_j}-C_j-3^j>0\) gilt \(2^{A_j}-3^j>C_j\). Da \(n_0\geq1\), folgt
 \[
