@@ -41,3 +41,8 @@ The current Collatz continuation candidate renames the initial valuation-one cyl
 ## Operative licence clarification — 10 November 2026
 
 The two existing notices `LICENSE-PROPRIETARY.md` and `LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md` are the operative project-specific notices for original copyrightable materials owned by Ta-Yoshua Lubuimi. The earlier A/B/C “Decision required” paragraph above is retained only as historical planning text and is superseded; it is not an outstanding choice request. This documentation update does not amend either notice, create a new licence, promise an automatic royalty, or claim copyright over mathematical facts, abstract ideas, independently developed implementations, Lean, Mathlib, or third-party material. Third-party licences remain separate.
+
+
+## 10 November 2026 — PR #65 / #66 status-only addendum
+
+The terminal-residue bridge repair changes no copyright, attribution, licence, or commercial-use terms. Existing notices remain unchanged. The documentation records exact verification status only; it grants no additional rights and makes no new licensing or royalty claims. Research and formalization remain attributed to Ta-Yoshua Lubuimi.
