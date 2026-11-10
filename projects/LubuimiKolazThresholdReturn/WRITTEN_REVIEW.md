@@ -45,3 +45,18 @@ The Python script uses integer arithmetic only and no third-party libraries. The
 **Verdict:** The finite threshold tables and confluence suffixes are exact, reproducible, and worth preserving as a numerical research archive. The general mathematical consequences remain open.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
+
+
+## 6. Exact source-set theorem and 1097 bridge
+
+The manuscript now proves that for every positive odd threshold B,
+\[
+E_B=\{x<B:x\equiv3\pmod4,\ 2B\le3x+1\}.
+\]
+For B=2^k-1, k>=2, this yields the exact count |E_B|=floor(2^k/12). This explains the complete arithmetic progression of escape sources and the counts 2,5,10,21,42,85. The implementation now enumerates from this criterion; local regression tests compare it with direct evaluation of T.
+
+The B=1023 entry x=731 -> z0=1097 -> R=823 has valuation word (1,2), exact cylinder 731=11 mod16, offset identity 8*823=9*731+5=6584, and signed-margin values D0=0,D1=-2 with local cap inequalities 2<=4 and 2<=8. This is an exact finite bridge to the cylinder and margin machinery. It does not resolve the separate archival “1097 threshold/count” lead.
+
+## 7. CI status
+
+The integer-only script and regression assertions have been locally checked, including all six threshold tables, the CSV data, the source-set characterization, the power-of-two count, and the common-suffix identities. The workflow file is included in the PR, but there is no GitHub Actions run attached yet because the base branch does not contain an existing workflow that can execute this newly introduced workflow on the pull_request event. No GitHub CI pass is claimed.
