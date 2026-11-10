@@ -343,3 +343,8 @@ The next global proof obligation remains to derive the suffix-return premise fro
 
 
 The separate manuscript and exact-head verification addendum is recorded in [COLLATZ_MANUSCRIPT_AND_CI_ADDENDUM_2026-11-10.md](COLLATZ_MANUSCRIPT_AND_CI_ADDENDUM_2026-11-10.md). It preserves the published finite valuation-word cylinder theorem and states the remaining deterministic-tail/minimality obligation.
+
+
+## Separate terminal-exact backward result — 10 November 2026
+
+A distinct isolated branch, `collatz/terminal-exact-backward-step-2026-11-10` (draft PR [#72](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/72)), now kernel-verifies `SyracuseAudit.terminalExact_backward_step` and `SyracuseAudit.terminalExact_backward_prefix`. Exact Lean source commit `e44eb4331cc1481e10d6f60780d695412c47a726`; workflow [42844423707](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42844423707) passed, and later documentation-head workflow [42845962042](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42845962042) passed the declared library build and named axiom/no-`sorryAx` gates. Both declarations have profile `[propext, Classical.choice, Quot.sound]`. Lean 4.34.1 does not provide `lake check`, so no paranoid Lake check is claimed. This finite result is isolated to that branch and does not close global Collatz descent.
