@@ -319,6 +319,20 @@ Der Bezeichner bleibt hier als wörtlicher Quellcode-Name erhalten, damit die hi
 
 Mathematischer Beweis, historische Einordnung und Lean-/CI-Verifikation sind getrennte Aussagen. Ein erfolgreicher Audit dieser Deklaration ist kein Neuheitsnachweis.
 
+### Aktuelle neutrale Lean-Deklaration — 10. November 2026
+
+Die oben dokumentierte historische Deklaration bleibt Teil der Quellcode- und Audit-Chronologie. Eine spätere Quellcodeänderung führte die neutrale Deklarationsbezeichnung ein:
+
+    theorem initial_valuation_one_cylinder_iff_dyadic_divisibility
+        (n a : ℕ → ℕ) (N : ℕ)
+        (hodd : ∀ j, n j % 2 = 1)
+        (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1) :
+        (∀ j, j < N → a j = 1) ↔ 2 ^ (N + 1) ∣ n 0 + 1 := by
+
+Sie steht in `SyracuseOffsetIdentity.lean:2603` am exakten Quell-Commit `5f6e46de8bed7061f8336089857143c54e997af5`. Workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956) bestand alle drei Jobs am exakten Quellstand: Lean-4.34.1-Kernelprüfung, `compile-drafts` und Lean-4.35.0-Paranoid-Kernelprüfung. Das benannte transitive Axiomprofil lautet `[propext, Classical.choice, Quot.sound]`; die no-`sorryAx`-Prüfung bestand.
+
+Dies ist ein eigener Verifikationsnachweis für die neutrale Deklaration. Die sieben früheren erfolgreichen Snapshots bleiben Nachweise für den historischen Bezeichner an ihren jeweiligen exakten Quellständen; sie werden nicht auf die umbenannte Deklaration übertragen. Die mathematische Aussage ist unverändert. Die Formalisierung beweist weiterhin nur die endliche Anfangszylinder-Klassifikation, nicht den globalen Collatz-Abstieg und nicht den allgemeinen endlichen Bewertungswortsatz.
+
 ## 10. Literatur
 
 [1] R. Terras, „A stopping time problem on the positive integers“, *Acta Arithmetica* **30** (1976), 241–252. https://doi.org/10.4064/aa-30-3-241-252
