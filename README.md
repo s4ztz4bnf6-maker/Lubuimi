@@ -16,3 +16,8 @@ PR [#72](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/72) is documentation-o
 ### Licence boundary
 
 The repository's existing `LICENSE-PROPRIETARY.md` and `LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md` notices apply only to original materials owned by Ta-Yoshua Lubuimi, subject to third-party rights. They do not claim copyright ownership over mathematical facts or theorem statements and do not relicense Lean, Mathlib, upstream sources, or other third-party materials. This status entry grants no additional rights or licence terms.
+
+
+## Original-materials licensing
+
+The project-specific [proprietary rights notice](LICENSE-PROPRIETARY.md) and [commercial licensing and remuneration policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md) apply only to original materials owned by Ta-Yoshua Lubuimi. They do not claim ownership over mathematical facts or theorem statements and do not relicense Lean, Mathlib, upstream code, dependencies, or other third-party materials, which remain under their respective licences. These notices grant no automatic commercial licence or fixed royalty; any commercial permission requires a separate express written agreement.
