@@ -197,3 +197,23 @@ Ein dritter, zeitlich späterer Auditlauf ist ebenfalls erfolgreich: Workflow [4
 ## Literatur- und Namenskorrektur — Version 1.1
 
 Dieses Manuskript dokumentiert die eigenständige Beweisführung und Lean-Formalisierung von Ta-Yoshua Lubuimi für die Klassifikation des anfänglichen Valuierungs-eins-Zylinders. Die endliche Kongruenzaussage ist eine klassische Konsequenz der Paritätsvektor-Kodierung; einschlägig sind Terras (1976), Everett (1977) und Lagarias (1985), Theorem B. Es wird kein nach dem Autor benannter Satz und kein Prioritätsanspruch behauptet. Tao (2022), Proposition 1.9, wird nicht als Beleg für den exakten Eindeutigkeits-/Restklassensatz zitiert; die Proposition betrifft die angenäherte Verteilung endlicher Syracuse-Valuierungsvektoren unter einer Gleichverteilungsvoraussetzung. Die mathematische Aussage und der Beweistext oben werden durch diese Namens- und Literaturkorrektur nicht verändert.
+
+
+## Positiver Margin impliziert strikte Abnahme
+
+Für einen zertifizierten Präfix der Länge (j) gilt nach der affinen Identität
+[
+2^{A_j}n_j=3^j n_0+C_j.
+]
+Aus (D_j=2^{A_j}-C_j-3^j>0) folgt (C_j<2^{A_j}-3^j). Wegen (n_0ge1) gilt daher
+[
+3^j n_0+C_j < 3^j n_0+(2^{A_j}-3^j)n_0=2^{A_j}n_0.
+]
+Zusammen mit der affinen Identität und (2^{A_j}>0) ergibt sich (n_j<n_0). Ein positiver signierter Margin ist somit ein hinreichendes striktes Abstiegszertifikat für diesen tatsächlich realisierten Präfix. Es wird damit nicht behauptet, dass jede Startzahl einen Präfix mit positivem Margin besitzt.
+
+## Ausgewählte Literatur
+
+- R. Terras, „A stopping time problem on the positive integers“, *Acta Arithmetica* 30 (1976), Nr. 3, 241–252. [DOI](https://doi.org/10.4064/aa-30-3-241-252).
+- C. J. Everett, „Iteration of the number-theoretic function (f(2n)=n, f(2n+1)=3n+2)“, *Advances in Mathematics* 25 (1977), Nr. 1, 42–45. [DOI](https://doi.org/10.1016/0001-8708(77)90087-1).
+- J. C. Lagarias, „The (3x+1) problem and its generalizations“, *The American Mathematical Monthly* 92 (1985), Nr. 1, 3–23, insbesondere Theorem B. [DOI](https://doi.org/10.1080/00029890.1985.11971528).
+- T. Tao, „Almost all orbits of the Collatz map attain almost bounded values“, *Forum of Mathematics, Pi* 10 (2022), e12. [DOI](https://doi.org/10.1017/fmp.2022.8). Proposition 1.9 wird nur für ihre bedingte Aussage zur angenäherten Verteilung endlicher Syracuse-Valuierungsvektoren zitiert, nicht als Beleg für die exakte Paritätsvektor-Bijektion.
