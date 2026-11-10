@@ -3150,6 +3150,119 @@ theorem minimal_counterexample_prefix_cap_tree_and_terminal_unit
 #print axioms minimal_counterexample_prefix_cap_tree_and_terminal_unit
 
 
+
+/-!
+## Minimality directly forces the orbit lower bound
+
+The preceding minimal-counterexample wrapper used the explicit suffix-return
+premise: every lower iterate has a future suffix reaching 1. The following
+formulation replaces that premise by the standard minimality condition:
+there is no smaller odd starting value admitting any infinite exact
+accelerated-Syracuse path that avoids 1. A lower iterate would itself
+generate such a path by shifting the original trajectory, so minimality
+forces every iterate to stay at least the initial value.
+-/
+
+/-- An infinite exact accelerated-Syracuse path from an odd starting value.
+Each state is odd, and every transition removes a positive power of two
+from 3*n+1 to the next odd state. -/
+def HasNonterminatingOddSyracusePath (m : ℕ) : Prop :=
+  ∃ p : ℕ → ℕ,
+    p 0 = m ∧
+    (∀ j, p j % 2 = 1) ∧
+    (∀ j, ∃ b, 0 < b ∧ 2 ^ b * p (j + 1) = 3 * p j + 1) ∧
+    (∀ j, p j ≠ 1)
+
+/-- If n₀ is minimal among odd starting values admitting a nonterminating
+exact accelerated-Syracuse path, then any given such path from n₀ stays
+at least n₀ at every time. The proof shifts the path at a hypothetical
+lower iterate; it does not assume a separate suffix-return theorem. -/
+theorem orbit_lower_bound_of_minimal_nonterminating_odd_path
+    (n₀ : ℕ) (n : ℕ → ℕ)
+    (hodd : ∀ j, n j % 2 = 1)
+    (hstep : ∀ j, ∃ b, 0 < b ∧
+      2 ^ b * n (j + 1) = 3 * n j + 1)
+    (hnever : ∀ j, n j ≠ 1)
+    (hminimal : ∀ m, 1 < m → m < n₀ → m % 2 = 1 →
+      ¬ HasNonterminatingOddSyracusePath m) :
+    ∀ j, n₀ ≤ n j := by
+  intro j
+  by_contra hbound
+  have hlt : n j < n₀ := Nat.lt_of_not_ge hbound
+  have hgt : 1 < n j := by
+    have hoddj := hodd j
+    have hnotone := hnever j
+    omega
+  have hshift : HasNonterminatingOddSyracusePath (n j) := by
+    refine ⟨fun k => n (j + k), ?_, ?_, ?_, ?_⟩
+    · simp
+    · intro k
+      exact hodd (j + k)
+    · intro k
+      obtain ⟨b, hb, hstepk⟩ := hstep (j + k)
+      refine ⟨b, hb, ?_⟩
+      simpa [Nat.add_assoc] using hstepk
+    · intro k
+      exact hnever (j + k)
+  exact (hminimal (n j) hgt hlt (hodd j)) hshift
+
+/-- A minimal nonterminating odd path has every valuation-word prefix in
+the finite state-dependent cap tree. This replaces the earlier explicit
+suffix-return premise by minimality among nonterminating odd paths. -/
+theorem minimal_nonterminating_path_prefix_mem_finiteCapTree
+    (n₀ : ℕ) (n : ℕ → ℕ) (A a : ℕ → ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (ha : ∀ j, 0 < a j)
+    (hn₀ : 1 < n₀)
+    (hoffset :
+      ∀ j, 2 ^ A j * n j =
+        3 ^ j * n₀ + canonicalOffset A j)
+    (hodd : ∀ j, n j % 2 = 1)
+    (hstep : ∀ j,
+      2 ^ (a j) * n (j + 1) = 3 * n j + 1)
+    (hnever : ∀ j, n j ≠ 1)
+    (hminimal : ∀ m, 1 < m → m < n₀ → m % 2 = 1 →
+      ¬ HasNonterminatingOddSyracusePath m) :
+    ∀ j, valuationPrefix a j ∈ finiteCapTreeLevel j := by
+  apply initial_lower_bounded_orbit_prefix_mem_finiteCapTree
+    n₀ n A a hA0 hA ha hn₀ hoffset
+  exact orbit_lower_bound_of_minimal_nonterminating_odd_path
+    n₀ n hodd
+    (fun j => ⟨a j, ha j, hstep j⟩) hnever hminimal
+
+/-- At each positive depth, a minimal nonterminating odd path has both
+its finite-cap-tree prefix and the exact terminal-residue unit condition. -/
+theorem minimal_nonterminating_path_prefix_cap_tree_and_terminal_unit
+    (n₀ : ℕ) (n : ℕ → ℕ) (A a : ℕ → ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (ha : ∀ j, 0 < a j)
+    (hn₀ : 1 < n₀)
+    (hoffset :
+      ∀ j, 2 ^ A j * n j =
+        3 ^ j * n₀ + canonicalOffset A j)
+    (hodd : ∀ j, n j % 2 = 1)
+    (hstep : ∀ j,
+      2 ^ (a j) * n (j + 1) = 3 * n j + 1)
+    (hnever : ∀ j, n j ≠ 1)
+    (hminimal : ∀ m, 1 < m → m < n₀ → m % 2 = 1 →
+      ¬ HasNonterminatingOddSyracusePath m)
+    (j : ℕ) (hj : 0 < j) :
+    valuationPrefix a j ∈ finiteCapTreeLevel j ∧
+      IsUnit (n j : ZMod (3 ^ j)) := by
+  constructor
+  · exact minimal_nonterminating_path_prefix_mem_finiteCapTree
+      n₀ n A a hA0 hA ha hn₀ hoffset hstart hodd hstep
+      hnever hminimal j
+  · exact terminal_residue_unit_of_affine_identity
+      A j n₀ (n j) hj (hoffset j)
+
+#print axioms HasNonterminatingOddSyracusePath
+#print axioms orbit_lower_bound_of_minimal_nonterminating_odd_path
+#print axioms minimal_nonterminating_path_prefix_mem_finiteCapTree
+#print axioms minimal_nonterminating_path_prefix_cap_tree_and_terminal_unit
+
 /-!
 ## Exact scale bridge from Syracuse iterates to terminal residues
 
