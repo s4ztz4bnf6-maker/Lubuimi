@@ -139,3 +139,8 @@ This is a substantial formal reduction, not a proof of global Collatz. The suffi
 PR #62 exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow [42811286670](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42811286670), adds the cap-tree path and terminal-unit packaging declarations. Jobs `129813061512` (compile-drafts), `129813061895` (Lean 4.35.0 paranoid), and `129813062043` (Lean 4.34.1) were all in progress at the latest poll. No PASS or axiom result is claimed yet.
 
 The new bridge is conditional on a least odd nonterminating start and the exact affine sequence assumptions. If verified, it derives finite-depth cap-tree membership and terminal-residue unit conditions. It does not rule out an infinite branch. A pathwise inequality must be proved independently; the (k=2) terminal-residue energy result is only an average bound.
+
+
+## 15. PR #62 partial verification update — 10 November 2026
+
+On exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, Lean 4.35.0 paranoid job `129813061895` and Lean 4.34.1 job `129813062043` have passed. Both named new declarations print `[propext, Classical.choice, Quot.sound]`; the paranoid kernel accepted the solution and the no-`sorryAx` guard did not trigger. Compile-drafts job `129813061512` remains in progress. Do not mark the workflow complete until that job concludes.
