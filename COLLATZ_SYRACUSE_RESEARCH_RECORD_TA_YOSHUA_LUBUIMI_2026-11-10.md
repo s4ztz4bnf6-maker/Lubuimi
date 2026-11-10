@@ -658,3 +658,21 @@ Current PR #48 source head: 7920b26f8a230c6f9fdc144be40fb2070eba5f00. Exact work
 The workflow source was corrected in commit e95d21771a38c1748169672d326f54162aae4dcd: Lean 4.34.1 no longer invokes the unsupported lake check command; it repeats lake build CollatzAudit instead. The 4.34.1 job is therefore a build/compile check only. The separate 4.35.0 job performs lake check --paranoid.
 
 Previously verified source result remains exact-head scoped: on commit e1fb06eaa07190d8abfb3fc7368f3dc0663a5a66, workflow 42754461228 passed both compile-drafts and Lean 4.35.0 paranoid kernel verification for the finite-cap/minimal-counterexample path declarations. Its 4.34.1 job failed only at the unsupported lake check command. No new PASS is claimed for current head 7920b26f8a230c6f9fdc144be40fb2070eba5f00 until workflow 42756479069 completes.
+
+
+## 15. Exact-head status and next reduction — 10 November 2026
+
+The current PR #48 head is `cbe9f19b9ba1bd4bad290b1cbc56da2881c238b8`. Workflow [42757504798](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42757504798) has been created for this exact commit; the three jobs `kernel-check-lean-435-paranoid`, `compile-drafts`, and `kernel-check-lean-434` were all QUEUED at the latest poll. No new exact-head PASS is claimed. Earlier verified finite-cap path declarations remain established on their own recorded source head and are not invalidated by this pending integration.
+
+### Removing the explicit suffix-return assumption
+
+The current theorem `orbit_lower_bound_of_minimal_counterexample` is valid but conditional on `hminimal : ∀ j, n j < n₀ → ∃ k, n (j+k)=1`. A concrete route to derive that premise from minimality of the least odd counterexample has been isolated:
+
+- Use the exact accelerated step identity `2^(a j) * n(j+1) = 3*n j + 1` and `a j>0` to prove `n j` odd.
+- Use oddness of the next iterate to show the quotient `n(j+1)` is odd; hence `a j` is the exact 2-adic valuation, not merely an exponent for which divisibility happens to hold.
+- Prove uniqueness/determinism of the accelerated Syracuse successor and identify the tail `fun k => n(j+k)` with the orbit from `n j`.
+- For `n j<n₀`, minimality among odd nonterminating starts then supplies a finite suffix reaching 1.
+
+These are explicit proof obligations, not yet Lean results. The finite cap-tree membership theorem still proves only that every finite prefix of a hypothetical lower-bounded path belongs to the corresponding finite level; no uniform bound on all prefixes and no exclusion of an infinite branch has been obtained.
+
+The current run state is pending as above. Existing Initial Valuation-One Cylinder, finite valuation-word cylinder, exact offset/margin, dyadic fibre-cardinality, and earlier exact-head finite-cap results retain their separately documented scopes.
