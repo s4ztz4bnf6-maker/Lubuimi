@@ -38,3 +38,10 @@ The general finite valuation-word theorem, its density corollary, and finite tai
 The research exposition and formalization are attributed to Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers. The project rights notice applies only to original copyrightable expression/code actually owned by the author; it does not claim exclusive rights over mathematical facts, theorem statements, or abstract ideas. Lean, Mathlib, TeX packages, and other third-party materials retain their own licences. No new licence or commercial permission is granted by this editorial reconciliation.
 
 **Conclusion:** The supplied editorial comments are reflected in the current initial-cylinder source. This reconciliation does not change the mathematical theorem, claim novelty, certify the general finite-word formalization, or assert a global Collatz proof.
+
+
+## Workflow-scope correction — 10 November 2026
+
+A job-level inspection corrects the interpretation of the PR #35 workflow records. Runs [42827159570](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42827159570) and [42835418762](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42835418762) completed at the workflow level, but their `compile-drafts`, Lean 4.34 kernel-check, and Lean 4.35 paranoid jobs were **skipped** after the project detector found no Lean project at the checkout root. They are not Lean compilation or kernel-verification passes. The actual current neutral-declaration evidence remains the separate exact-source workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956) on source commit `5f6e46de8bed7061f8336089857143c54e997af5`.
+
+The PR #35 branch now has a later documentation-only head `d2fcac1ee82cccf1c86dc1da6fe294db60316ab43`; the code-bearing Lean source is unchanged. No verification claim is transferred to the arbitrary finite-word theorem.
