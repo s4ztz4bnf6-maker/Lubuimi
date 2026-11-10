@@ -33,9 +33,9 @@ The source was refined to explicitly apply the induction hypothesis to the two r
 
 Both completed the complete library build and every workflow step, including `SyracuseOffsetIdentity.lean`, closed-form offset, lower bound, margin block and valuation transition. Both logs print `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` with transitive axiom profile `[propext, Classical.choice, Quot.sound]`. The workflow's explicit complete-log `sorryAx` scan found no occurrence. This is a positive Lean/kernel-audit result for the initial cylinder declaration on those exact snapshots.
 
-Runs `42721911555` and `42722186081` are both complete and successful. Both completed the full workflow, printed the same transitive profile `[propext, Classical.choice, Quot.sound]` for the main declaration, and passed the complete-log `sorryAx` scan. The main cylinder theorem therefore has four successful exact-commit CI snapshots: 42721006544, 42721305220, 42721911555 and 42722186081. The latest checked run, 42722186081, belongs to the Syracuse offset-roadmap pull-request workflow and is successful on its exact checked snapshot.
+Runs `42721911555` and `42722186081` are both complete and successful. Both completed the full workflow, printed the same transitive profile `[propext, Classical.choice, Quot.sound]` for the main declaration, and passed the complete-log `sorryAx` scan. The main cylinder theorem therefore has six successful exact-commit CI snapshots: 42721006544, 42721305220, 42721911555 and 42722186081. The latest checked run, 42722186081, belongs to the Syracuse offset-roadmap pull-request workflow and is successful on its exact checked snapshot.
 
-The earlier failed attempts are preserved above as part of the chronology. They are not erased, but are superseded for the main cylinder theorem by the four later successful exact-commit audits.
+The earlier failed attempts are preserved above as part of the chronology. They are not erased, but are superseded for the main cylinder theorem by the six later successful exact-commit audits.
 
 ## Scope
 
@@ -63,9 +63,14 @@ In addition to runs 42721006544 and 42721305220, the same declaration passed run
 - `42721911555`: merge `7b84a1b`, PR head `21829b4dd3b82a73edb19cf0d09ed011f55ef384`.
 - `42722186081`: merge `5d4a19c`, PR head `a36894eefc52e5d28cd43110f5e289805509ad33`.
 
-All four complete workflows succeeded. The main theorem's transitive axiom profile is `[propext, Classical.choice, Quot.sound]`, and the explicit `sorryAx` audit steps passed. Current recheck 42724343412 is in progress on head `29b27dc529b9e81a33b5211e9e01a01e19edc256`. The finite valuation-word partition, tail partition, terminal-residue collision energy and Markov matrix remain separate Lean targets.
+All six complete workflows succeeded. The main theorem's transitive axiom profile is `[propext, Classical.choice, Quot.sound]`, and the explicit `sorryAx` audit steps passed. Current recheck 42724343412 is in progress on head `29b27dc529b9e81a33b5211e9e01a01e19edc256`. The finite valuation-word partition, tail partition, terminal-residue collision energy and Markov matrix remain separate Lean targets.
 
 
 ## Fifth successful exact-commit audit
 
 Run `42724343412` also completed successfully on merge commit `06675a1`, PR head `29b27dc529b9e81a33b5211e9e01a01e19edc256`. It completed the full compile-drafts workflow, including library build, iteration and threshold modules, Syracuse reference and quarter-descent modules, offset identity, closed-form offset, stronger lower bound, valuation-one margin block and exact valuation transition. The main cylinder theorem again printed `[propext, Classical.choice, Quot.sound]`, and both explicit `sorryAx` audit steps passed. The current documentation/status recheck is run `42725493567` on head `a52dffc23b323964f33bc7f6c61c2cb24bcdf708`, in progress.
+
+
+## Sixth successful exact-commit audit
+
+Run `42725006480` completed successfully on exact source commit `b1a8599c686c37893a33453b759dee42047c7727` in the Syracuse programme PR #9 workflow. It compiled `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder`, printed `[propext, Classical.choice, Quot.sound]`, and the complete job log contained no actual `sorryAx` occurrence. This is a sixth independent successful exact-source snapshot for the initial-cylinder declaration. The general finite-word theorem, finite tail partition, collision energy and Markov matrix remain separate Lean targets.
