@@ -8,6 +8,18 @@ As checked on 10 November 2026, the repository has no root `LICENSE`, `LICENSE.m
 
 Mathlib and other dependencies retain their own upstream licences. This project register does not relicense third-party code or published source material.
 
+## Current operative status — reconciled 10 November 2026
+
+The earlier alternative licence proposals below are historical planning text only and are superseded by the two published notices already present in this repository: `LICENSE-PROPRIETARY.md` and `LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md`.
+
+Those notices reserve rights in original copyrightable materials owned by Ta-Yoshua Lubuimi and require prior express written permission for commercial exploitation of such protected materials. They do not create an automatic contractual royalty for every unauthorized use, and they do not claim copyright in mathematical facts, abstract ideas, independently developed implementations, Lean, Mathlib, or third-party materials.
+
+No general open-source reuse licence is granted for the author's original materials. Lean, Mathlib, packages, external publications, and all third-party materials remain subject to their own licences and notices. This documentation reconciliation does not change the text or legal scope of either published license notice.
+
+Do not add Apache-2.0, MIT, CC BY, CC0, or any other permissive licence unless the author separately and explicitly selects it.
+
+## Historical planning text (superseded)
+
 ## Proposed policy — pending explicit author choice
 
 - Lean source: Apache-2.0 (express patent grant) or MIT (shorter permissive terms).
