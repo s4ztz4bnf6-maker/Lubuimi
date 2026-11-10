@@ -83,19 +83,18 @@ jobs:
           fi
 
 
-  paranoid-lean-435:
+  paranoid-lean-434:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
-      - name: Install Lean 4.35.0 and select the audited toolchain
+      - name: Install Lean 4.34.1 and select the audited toolchain
         run: |
           curl --fail --location --retry 3 --max-time 60 https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
-          sh elan-init.sh -y --default-toolchain leanprover/lean4:v4.35.0
+          sh elan-init.sh -y --default-toolchain leanprover/lean4:v4.34.1
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
           export PATH="$HOME/.elan/bin:$PATH"
-          echo "leanprover/lean4:v4.35.0" > lean-toolchain
-          sed -i 's/@ "v4.34.1"/@ "v4.35.0"/' lakefile.lean
+          echo "leanprover/lean4:v4.34.1" > lean-toolchain
           lake update
       - name: Install dependencies and restore Mathlib cache
         uses: leanprover/lean-action@v1
@@ -106,13 +105,13 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install --yes bubblewrap
-      - name: Build the audited Collatz library under Lean 4.35.0
+      - name: Build the audited Collatz library under Lean 4.34.1
         run: lake build CollatzAudit
       - name: Compile and axiom-audit the exact offset and finite-cap path declarations
         run: |
           set -o pipefail
-          lake env lean SyracuseOffsetIdentity.lean 2>&1 | tee /tmp/syracuse-offset-435.log
-          if grep -q 'sorryAx' /tmp/syracuse-offset-435.log; then
+          lake env lean SyracuseOffsetIdentity.lean 2>&1 | tee /tmp/syracuse-offset-434.log
+          if grep -q 'sorryAx' /tmp/syracuse-offset-434.log; then
             echo "Forbidden sorryAx found in SyracuseOffsetIdentity.lean."
             exit 1
           fi
