@@ -1,11 +1,11 @@
-# Lubuimis Satz über den anfänglichen Valuierungs-eins-Zylinder für die beschleunigte Syracuse-Abbildung
+# Klassifikation des anfänglichen Valuierungs-eins-Zylinders der beschleunigten Syracuse-Abbildung
 
 **Autor:** Ta-Yoshua Lubuimi  
-**Benennung:** Dieser exakte Zylinderklassifikationssatz wird in diesem Projekt zu Ehren seines Autors unter seinem Namen geführt.  
+**Benennung:** Es wird ausschließlich eine beschreibende mathematische Bezeichnung verwendet. Die Aussage ist eine klassische endliche Paritätsvektor-Zylinderklassifikation; es wird weder ein eponymischer Satzname noch ein Prioritätsanspruch erhoben. Die eigenständige Herleitung und diese Formalisierung werden Ta-Yoshua Lubuimi zugeschrieben.  
 **Ursprüngliche Herleitung:** 9. November 2026  
 **Deutscher Dokumentationsstand:** 10. November 2026
 
-**Status:** Mathematisch hergeleitet und formalisiert. Die Lean-Deklaration `lubuimi_initial_valuation_one_cylinder` bestand zwei vollständige CI-Läufe auf exakt festgelegten Quellständen: [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) auf Merge-Commit `44bb2ac` und [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220) auf Merge-Commit `3d79761`. Beide Läufe meldeten das transitive Axiomprofil `[propext, Classical.choice, Quot.sound]`; die vollständigen Log-Prüfungen fanden kein `sorryAx`. Der allgemeinere Satz über beliebige endliche Valuierungswörter bleibt ein separates Formalisierungsziel.
+**Status:** Eigenständige mathematische Herleitung und Lean-Formalisierung von Ta-Yoshua Lubuimi für eine klassische endliche Paritätsvektor-Zylinderklassifikation. Die historische Lean-Deklaration `lubuimi_initial_valuation_one_cylinder` bestand zwei vollständige CI-Läufe auf exakt festgelegten Quellständen: [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) auf Merge-Commit `44bb2ac` und [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220) auf Merge-Commit `3d79761`. Beide Läufe meldeten `[propext, Classical.choice, Quot.sound]`; die vollständigen Log-Prüfungen fanden kein `sorryAx`. PR #56 führt den neutralen internen Namen `initial_valuation_one_cylinder_iff_dyadic_divisibility` ein; dessen exakte CI-Prüfung steht noch aus. Die historischen Audits werden nicht auf die umbenannte Deklaration übertragen. Der allgemeinere Satz über beliebige endliche Valuierungswörter bleibt ein separates Formalisierungsziel.
 
 ## 1. Ausgangslage
 
@@ -161,13 +161,13 @@ Dies ist eine exakte, von der Startzahl abhängige Erholungsschwelle. Es wird ni
 
 ## 5. Lean-Formalisation und Reproduzierbarkeit
 
-Die Aussage ist in `SyracuseOffsetIdentity.lean` als
+Die Aussage wurde in `SyracuseOffsetIdentity.lean` historisch unter dem internen Bezeichner
 
 `lubuimi_initial_valuation_one_cylinder`
 
-formalisiert. Sie verwendet die vorhandene Rekursion für zertifizierte Schritte und dieselbe Konvention der beschleunigten ungeraden Syracuse-Bahn.
+formalisiert. Sie verwendet die vorhandene Rekursion für zertifizierte Schritte und dieselbe Konvention der beschleunigten ungeraden Syracuse-Bahn. PR #56 ersetzt diesen internen Namen durch `initial_valuation_one_cylinder_iff_dyadic_divisibility`; für den neuen Bezeichner ist ein eigener exakter CI- und Axiom-Audit erforderlich.
 
-Die beiden erfolgreichen vollständigen CI-Läufe sind:
+Die beiden erfolgreichen vollständigen CI-Läufe für den historischen Bezeichner sind:
 
 - [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544), Merge-Commit `44bb2ac`;
 - [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220), Merge-Commit `3d79761`.
@@ -182,9 +182,9 @@ Diese Verifikation ist auf die genannte Deklaration und ihren transitiven Abhän
 
 ## 6. Verallgemeinerungen und nächste Inzidenzebene
 
-Der anfängliche Eins-Zylinder ist der Spezialfall von [Lubuimis Satz über die Partition endlicher Valuierungswörter](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md). Dieser ordnet jedem endlichen positiven exakten Valuierungswort eine eindeutige ungerade Restklasse modulo (2^{A+1}) mit relativer Dichte (2^{-A}) unter den ungeraden Startzahlen zu.
+Der anfängliche Eins-Zylinder ist der Spezialfall von [Klassifikation endlicher exakter Valuierungswort-Zylinder](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md). Dieser ordnet jedem endlichen positiven exakten Valuierungswort eine eindeutige ungerade Restklasse modulo (2^{A+1}) mit relativer Dichte (2^{-A}) unter den ungeraden Startzahlen zu.
 
-Eine weitere mathematische Entwicklung ist [Lubuimis terminale Restklassen-Kollisionsenergie](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md). Sie bildet Wörter der Länge (k) auf terminale Einheitsrestklassen modulo (3^k) ab; das zweite Moment besitzt Diagonalmasse (3^{-k}) und Off-Diagonal-Kollisionsmasse mindestens (1/(2\cdot3^k)). Hinzu kommt eine endliche rationale Markov-Darstellung. Diese Verallgemeinerungen sind von der bereits erfolgreich formalisierten Anfangszylinder-Aussage getrennte Resultate und Formalisierungsziele.
+Eine weitere mathematische Entwicklung ist [terminale Restklassen-Kollisionsenergie](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md). Sie bildet Wörter der Länge (k) auf terminale Einheitsrestklassen modulo (3^k) ab; das zweite Moment besitzt Diagonalmasse (3^{-k}) und Off-Diagonal-Kollisionsmasse mindestens (1/(2\cdot3^k)). Hinzu kommt eine endliche rationale Markov-Darstellung. Diese Verallgemeinerungen sind von der bereits erfolgreich formalisierten Anfangszylinder-Aussage getrennte Resultate und Formalisierungsziele.
 
 **Autorschaft:** Ta-Yoshua Lubuimi. KI-Systeme dienen ausschließlich als Hilfsmittel und sind weder Autoren noch unabhängige mathematische Verifikatoren.
 
@@ -192,3 +192,38 @@ Eine weitere mathematische Entwicklung ist [Lubuimis terminale Restklassen-Kolli
 ## 7. Dritter späterer Auditlauf auf dem aktuellen Quellstand
 
 Ein dritter, zeitlich späterer Auditlauf ist ebenfalls erfolgreich: Workflow [42738528207](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738528207) kompilierte den aktuellen Quell-Commit `a1becbc8e837f10abcd952a2e03832cb057fb2b8` und gab für `lubuimi_initial_valuation_one_cylinder` sowie `dyadicUniformFibre_partition_card` dasselbe Standardprofil der transitiven Axiome aus. Die explizite `sorryAx`-Prüfung bestand. Dieser spätere Lauf stärkt den Nachweis für den exakten Quellstand, erweitert aber nicht den mathematischen Geltungsbereich der beiden Aussagen.
+
+
+## Literatur- und Namenskorrektur — Version 1.1
+
+Dieses Manuskript dokumentiert die eigenständige Beweisführung und Lean-Formalisierung von Ta-Yoshua Lubuimi für die Klassifikation des anfänglichen Valuierungs-eins-Zylinders. Die endliche Kongruenzaussage ist eine klassische Konsequenz der Paritätsvektor-Kodierung; einschlägig sind Terras (1976), Everett (1977) und Lagarias (1985), Theorem B. Es wird kein nach dem Autor benannter Satz und kein Prioritätsanspruch behauptet. Tao (2022), Proposition 1.9, wird nicht als Beleg für den exakten Eindeutigkeits-/Restklassensatz zitiert; die Proposition betrifft die angenäherte Verteilung endlicher Syracuse-Valuierungsvektoren unter einer Gleichverteilungsvoraussetzung. Die mathematische Aussage und der Beweistext oben werden durch diese Namens- und Literaturkorrektur nicht verändert.
+
+
+## Positiver Margin impliziert strikte Abnahme
+
+Für einen zertifizierten Präfix der Länge \(j\) gilt nach der affinen Identität
+\[
+2^{A_j}n_j=3^j n_0+C_j.
+\]
+Aus der Rekursion \(C_0=0\), \(C_{j+1}=3C_j+2^{A_j}\) folgt \(C_j\ge0\) für alle \(j\) (und \(C_j>0\) für \(j\ge1\)). Setze \(X=2^{A_j}-3^j\). Aus \(D_j=2^{A_j}-C_j-3^j>0\) folgt \(X>C_j\ge0\). Wegen \(n_0\ge1\) gilt \(C_j<X\le Xn_0\), also
+\[
+3^j n_0+C_j < 3^j n_0+(2^{A_j}-3^j)n_0=2^{A_j}n_0.
+\]
+Zusammen mit der affinen Identität und \(2^{A_j}>0\) ergibt sich \(n_j<n_0\). Ein positiver signierter Margin ist somit ein hinreichendes striktes Abstiegszertifikat für diesen tatsächlich realisierten Präfix. Es wird damit nicht behauptet, dass jede Startzahl einen Präfix mit positivem Margin besitzt.
+
+## Ausgewählte Literatur
+
+- R. Terras, „A stopping time problem on the positive integers“, *Acta Arithmetica* 30 (1976), Nr. 3, 241–252. [DOI](https://doi.org/10.4064/aa-30-3-241-252).
+- C. J. Everett, „Iteration of the number-theoretic function \(f(2n)=n,\ f(2n+1)=3n+2\)“, *Advances in Mathematics* 25 (1977), Nr. 1, 42–45. [DOI](https://doi.org/10.1016/0001-8708(77)90087-1).
+- J. C. Lagarias, „The \(3x+1\) problem and its generalizations“, *The American Mathematical Monthly* 92 (1985), Nr. 1, 3–23, insbesondere Theorem B. [DOI](https://doi.org/10.1080/00029890.1985.11971528).
+- T. Tao, „Almost all orbits of the Collatz map attain almost bounded values“, *Forum of Mathematics, Pi* 10 (2022), e12. [DOI](https://doi.org/10.1017/fmp.2022.8). Proposition 1.9 wird nur für ihre bedingte Aussage zur angenäherten Verteilung endlicher Syracuse-Valuierungsvektoren zitiert, nicht als Beleg für die exakte Paritätsvektor-Bijektion.
+
+
+## Exakter Folgeaudit — 10. November 2026
+
+Der historische Bezeichner `lubuimi_initial_valuation_one_cylinder` wurde im Fortsetzungszweig durch `initial_valuation_one_cylinder_iff_dyadic_divisibility` ersetzt. Im Teillog des fehlgeschlagenen PR-#56-Builds gab die umbenannte Deklaration `[propext, Classical.choice, Quot.sound]` aus. Das gesamte Quellmodul scheiterte jedoch später im neuen Beweisblock zur Minimalität; daher wird dies nicht als abgeschlossene exakte Verifikation geführt. PR #59 repariert die späteren Beweisskriptfehler. Vor einer Anerkennung des neuen Bezeichners sind ein vollständiger erfolgreicher CI-Lauf und die `sorryAx`-Prüfung erforderlich.
+
+
+## Exakte Verifikation des neutralen Lean-Bezeichners — 10. November 2026
+
+Die umbenannte Deklaration `initial_valuation_one_cylinder_iff_dyadic_divisibility` ist nun auf dem exakten Quellstand `5f6e46de8bed7061f8336089857143c54e997af5`, Workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956), verifiziert. Alle drei CI-Jobs waren erfolgreich; das deklarationsbezogene Axiomprofil lautet `[propext, Classical.choice, Quot.sound]`; die `sorryAx`-Prüfung des Compile-Jobs war erfolgreich und der Paranoid-Kernel akzeptierte die Lösung. Es handelt sich um einen neutralen internen Bezeichner für eine klassische Paritätsvektor-Zylinderklassifikation. Ein eponymischer Satzname oder Neuheitsanspruch wird nicht erhoben.
