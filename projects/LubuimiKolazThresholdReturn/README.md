@@ -30,7 +30,7 @@ The exact source-set characterization E_B={x<B: x=3 mod 4 and 2B<=3x+1} and the 
 
 ## Reproducibility and scope
 
-The script uses exact integer arithmetic only and has no third-party dependencies. Local checks reproduce all seven thresholds, all three complete extended CSV tables, the named common suffixes, the source-set criterion and the power-of-two count formula. A GitHub Actions workflow is included, but no GitHub CI run is claimed while the base main branch lacks the workflow. This is a finite computational audit, not a proof about all thresholds or all starting values.
+The script uses exact integer arithmetic only and has no third-party dependencies. Local checks reproduce all nine thresholds, all five complete extended CSV tables, the named common suffixes, the source-set criterion and the power-of-two count formula. A GitHub Actions workflow is included, but no GitHub CI run is claimed while the base main branch lacks the workflow. This is a finite computational audit, not a proof about all thresholds or all starting values.
 
 The value 1097 occurs as z0=T(731) in the B=1023 finite table, with first return 823 after one further step. This does not identify or verify the separate earlier “1097 threshold/count” lead, whose definition remains unresolved.
 
