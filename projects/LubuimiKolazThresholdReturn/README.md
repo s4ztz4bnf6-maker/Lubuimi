@@ -26,7 +26,7 @@ The edge x -> z0 is not counted in m. This convention matters for reproducing th
 - B=127: ten source edges x=87,91,95,99,103,107,111,115,119,123; longest excursion starts at z0=155, returns to 61 in 25 steps, and reaches H=3077. The z0=167 excursion returns to 61 in 18 steps.
 - B=255: twenty-one source edges x=171,175,...,251; longest excursion starts at z0=335, returns to 61 in 18 steps, and reaches H=3077. Another starts at z0=359 (11 steps to 61), and z0=377 (16 steps to 61). The z0=341 excursion returns directly to 1.
 
-The full B=31,63,127,255 tables and confluence suffixes are in MANUSCRIPT.md. The complete extended B=511 and B=1023 tables are archived in threshold_511.csv and threshold_1023.csv. The independent integer-only reproduction script is threshold_return.py; its regression tests are test_threshold_return.py.
+The full B=31,63,127,255 tables, extended B=511/1023 CSV archives, confluence suffixes, and a worked valuation-cylinder/signed-margin certificate are in MANUSCRIPT.md. The complete extended B=511 and B=1023 tables are archived in threshold_511.csv and threshold_1023.csv. The independent integer-only reproduction script is threshold_return.py; its regression tests are test_threshold_return.py.
 
 ## Reproducibility and scope
 
