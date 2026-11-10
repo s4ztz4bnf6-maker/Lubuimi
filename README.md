@@ -66,6 +66,13 @@ The specific valuation word (1,2) is now formally verified by declaration realiz
 See [SYRACUSE_FINITE_DEPTH_UNIFORM_FIBRE_BRIDGE_2026-11-10.md](SYRACUSE_FINITE_DEPTH_UNIFORM_FIBRE_BRIDGE_2026-11-10.md). The exact cap and dyadic child/tail partition yield a common uniform finite fibre at every fixed depth, with prefix-dependent distinguished proportion 1-2^-B_α. This is a mathematical bridge candidate, not yet Lean-formalized and not the historical APW4/BIB incidence map.
 
 
-### Uniform-fibre cardinality formalization — pending
+### Uniform-fibre cardinality formalization — local lemma verified; full bridge open
 
-A Lean declaration dyadicUniformFibre_partition_card was added to SyracuseOffsetIdentity.lean. It states the exact count of child blocks plus tail block at a common dyadic refinement depth. Exact source head a1becbc8e837f10abcd952a2e03832cb057fb2b8 passed compile/audit in workflow 42738528207 with standard transitive profile and no actual sorryAx. The general cap/tree/residue-fibre bridge remains outside this lemma.
+A Lean declaration `dyadicUniformFibre_partition_card` was added to `SyracuseOffsetIdentity.lean`. It states the exact count of child blocks plus the tail block at a common dyadic refinement depth. Exact source head `a1becbc8e837f10abcd952a2e03832cb057fb2b8` passed compile/audit in workflow [42738528207](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738528207), with the standard transitive axiom profile and no actual `sorryAx` in the completed audit. This verifies that named local cardinality identity only. The full cap/tree/residue-fibre bridge, historical APW4/BIB incidence identification, and any global Collatz descent remain open.
+
+
+### Cross-project verification update — 10 November 2026
+
+The exact dyadic common-refinement cardinality identity `dyadicUniformFibre_partition_card` passed Lean 4.35.0 compile/audit on source commit `a1becbc8e837f10abcd952a2e03832cb057fb2b8`, workflow [42738528207](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738528207). The complete finite-depth cap/tree/residue-fibre construction is still not fully formalized. This local result is suitable as a component of the longer proof architecture, but it does not establish the infinite-path exclusion or global Collatz conjecture.
+
+The APW4 connection remains conditional on explicit mathematical maps that preserve the historical event indices, weights, and incidence/capacity structure. No such identification is asserted here. The Syracuse-derived finite fibre is used as a test model only until those obligations are proved.
