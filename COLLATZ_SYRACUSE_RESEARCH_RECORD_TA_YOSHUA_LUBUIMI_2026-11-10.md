@@ -64,9 +64,9 @@ The new Lubuimi cylinder declarations are followed by #print axioms. The source 
 
 A positive terminal margin is equivalent to strict descent for the certified block. The unresolved global obligation is to prove that every positive odd start admits a finite realized block with positive margin.
 
-## 4. Lubuimi's Initial Valuation-One Cylinder Theorem
+## 4. Initial valuation-one cylinder classification
 
-This exact statement is named in this research record in honour of its author as **Lubuimi's Initial Valuation-One Cylinder Theorem**.
+This is an independent derivation by Ta-Yoshua Lubuimi of a classical finite parity-vector cylinder classification. It is not assigned an eponymous theorem name and no priority claim is made.
 
 For every positive odd accelerated Syracuse orbit and every \(N\ge0\),
 \[
@@ -175,18 +175,18 @@ No global Collatz proof is claimed in this record.
 The repository now includes LICENSE-PROPRIETARY.md and LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md. Original Collatz/Syracuse code, manuscripts, research notes and documentation owned by Ta-Yoshua Lubuimi are all-rights-reserved; no general open-source or commercial license is granted. Lean, Mathlib and other third-party materials remain under their own licenses. The commercial policy reserves negotiated permission for commercial exploitation of copyrightable original materials, but does not claim copyright ownership over mathematical facts, abstract ideas or independently developed implementations.
 
 
-## 12. Lubuimi's finite valuation-word cylinder partition
+## 12. Finite exact valuation-word cylinder classification
 
-The stronger generalization of the initial all-ones cylinder is documented in [Lubuimi's Finite Valuation-Word Cylinder Partition Theorem](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md). For every finite positive exponent word \(\alpha\) with total exponent \(A\), its exact starting-value cylinder is one unique odd residue class modulo \(2^{A+1}\), with relative density \(2^{-A}\) among odd residues. Its children have exact relative masses \(2^{-b}\) for next exponent \(b\ge1\), and these sum to one. The explicit residue is \((2^A-C_k)(3^k)^{-1}\bmod 2^{A+1}\), using the certified affine offset.
+The stronger generalization of the initial all-ones cylinder is documented in [finite exact valuation-word cylinder classification](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md). For every finite positive exponent word \(\alpha\) with total exponent \(A\), its exact starting-value cylinder is one unique odd residue class modulo \(2^{A+1}\), with relative density \(2^{-A}\) among odd residues. Its children have exact relative masses \(2^{-b}\) for next exponent \(b\ge1\), and these sum to one. The explicit residue is \((2^A-C_k)(3^k)^{-1}\bmod 2^{A+1}\), using the certified affine offset.
 
-This is a mathematically derived theorem and a Lean formalization target, not yet a compiled declaration. It supplies a concrete finite-prefix tree for the named Lubuimi APW4–Syracuse cylinder–energy bridge programme. The bridge still requires an explicit index-preserving incidence/capacity map and an integer-level obstruction; a measure-zero exceptional set alone does not prove Collatz.
+This is a mathematically derived theorem and a Lean formalization target, not yet a compiled declaration. It supplies a concrete finite-prefix tree for the APW4–Syracuse cylinder–energy bridge programme. The bridge still requires an explicit index-preserving incidence/capacity map and an integer-level obstruction; a measure-zero exceptional set alone does not prove Collatz.
 
 
 ## 13. Lubuimi finite valuation-word partition and exact CI correction — 10 November 2026
 
 ### 13.1 Stronger cylinder theorem
 
-The initial all-ones cylinder is now accompanied by **Lubuimi's Finite Valuation-Word Cylinder Partition Theorem** in `Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md`. For every finite positive exact exponent word \(\alpha=(a_0,\ldots,a_{k-1})\), with total exponent \(A=\sum_i a_i\), the set of positive odd starts realizing exactly that word is one unique odd residue class modulo \(2^{A+1}\). Its relative natural density among odd starts is exactly \(2^{-A}\).
+The initial all-ones cylinder is now accompanied by **finite exact valuation-word cylinder classification** in `Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md`. For every finite positive exact exponent word \(\alpha=(a_0,\ldots,a_{k-1})\), with total exponent \(A=\sum_i a_i\), the set of positive odd starts realizing exactly that word is one unique odd residue class modulo \(2^{A+1}\). Its relative natural density among odd starts is exactly \(2^{-A}\).
 
 The affine-offset formula for its residue is
 \[
@@ -212,7 +212,7 @@ The full finite-word cylinder partition supplies a more substantial exact prefix
 Run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) is checking the refined Lubuimi initial-cylinder declaration at source commit 013192ce524a4572a9d96c8d4dcb2796830b1f62. Run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) has now completed successfully on merge commit 44bb2ac (PR head 013192ce524a4572a9d96c8d4dcb2796830b1f62 merged into base fc1e8023f9dcc0c777e25d08df0b011b13cdcb26). The full Lean library build and every workflow step passed: IterationLemmas, ThresholdLemmas, SyracuseReferenceTest, SyracuseQuarterDescent, SyracuseOffsetIdentity, SyracuseOffsetClosedForm, SyracuseOffsetLowerBound, SyracuseMarginBlock and SyracuseValuationTransition. The exact declaration lubuimi_initial_valuation_one_cylinder printed the transitive profile [propext, Classical.choice, Quot.sound]. The workflow's explicit grep of the complete offset-audit log for sorryAx found none. Thus the initial-cylinder equivalence is now Lean-compiled and axiom-audited at that checked merge commit. This verifies the cylinder theorem, not the global Collatz conjecture.
 
 
-## 14. Positive Lean verification of Lubuimi's initial cylinder theorem — 10 November 2026
+## 14. Positive Lean verification of the initial valuation-one cylinder declaration — 10 November 2026
 
 The failed attempts `42719689591` and `42720406876` remain in the record as historical proof-script diagnostics. They are superseded for the initial-cylinder declaration by two later successful, commit-bound full workflows:
 
@@ -229,7 +229,7 @@ Run [42721911555](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721
 The current branch head `a36894eefc52e5d28cd43110f5e289805509ad33` triggered run [42722186081](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42722186081). At the latest retrieval, checkout had completed and Lean toolchain/manifest setup was in progress. This is a further documentation/status recheck. It does not supersede the two completed positive exact-commit audits `42721006544` and `42721305220`, which already establish the initial cylinder declaration's successful compile and transitive axiom profile on their respective snapshots.
 
 
-## 16. Lubuimi terminal-residue collision energy — 10 November 2026
+## 16. Terminal-residue collision energy — 10 November 2026
 
 The finite valuation-word partition yields a new exact finite-place incidence model. For every length-k exponent word \(\alpha\), with total exponent \(A\) and affine offset \(C_k\), define
 \[
@@ -431,7 +431,7 @@ PR #39 exact-head workflow 42735880399 passed on source head 012c8717e9d80025e7a
 
 ### Initial valuation-one manuscript v1.0
 
-The standalone manuscript for Lubuimi's Initial Valuation-One Cylinder Theorem is now consolidated as version 1.0 at PR #35 head 6dd47a9b18b373c274b0bc4d4001d9fad4e8ba24. It includes the complete two-way proof, explicit orbit formula, exact run length, natural densities, signed-margin consequence, worked example, literature context, references, limitations, and seven exact-commit Lean audit records. The Lean source was not changed by this editorial revision; the seven previously completed exact-commit audits remain the formal evidence for the theorem declaration.
+The standalone manuscript for initial valuation-one cylinder classification is now consolidated as version 1.0 at PR #35 head 6dd47a9b18b373c274b0bc4d4001d9fad4e8ba24. It includes the complete two-way proof, explicit orbit formula, exact run length, natural densities, signed-margin consequence, worked example, literature context, references, limitations, and seven exact-commit Lean audit records. The Lean source was not changed by this editorial revision; the seven previously completed exact-commit audits remain the formal evidence for the theorem declaration.
 
 
 ## 17. Exact mixed valuation word (1,2) — Lean verification passed
@@ -697,3 +697,9 @@ The initial-cylinder theorem, valuation bounds, exact offset and strict-margin r
 The next global proof obligation remains to derive the suffix-return premise from the deterministic accelerated Syracuse dynamics and the minimal-counterexample definition. The intended chain is: establish oddness of every orbit term from the exact affine identity and positive exponent; identify each exponent as the exact 2-adic valuation; prove the shifted tail is the unique deterministic Syracuse orbit from its current term; then apply minimality to obtain the suffix-return premise. Each link must be proved explicitly. Until then, the current minimal-counterexample wrapper remains conditional. Even after that bridge, finite-tree membership alone does not rule out an infinite branch; a separate descent, ranking, or well-foundedness argument is required.
 
 **Status:** PR #48 CI fully green on run 42759509255; finite-depth theorem verified within its exact scope; global Collatz theorem remains open.
+
+## Exact-head correction and continuation — 10 November 2026
+
+The exact CI state for the new affine parity/exponent lemmas is recorded in [COLLATZ_EXACT_HEAD_CI_AND_OPEN_OBLIGATIONS_2026-11-10.md](COLLATZ_EXACT_HEAD_CI_AND_OPEN_OBLIGATIONS_2026-11-10.md). The previous candidate commit `a8b593cd8ef59105e6b62b11d0dfc7e41e89a3bb` failed at line 3095 because `omega` could not derive `a j ≠ 0` from `ha : ∀ j, 0 < a j`. The repair candidate is `7d17d7111946b328421f9046f95b03c939dfddb1`, PR #53, workflow 42805867475. Its three jobs were still in progress at the latest poll. The repair uses `Nat.ne_of_gt (ha j)`; it remains unverified until all exact-head jobs and the named axiom/no-`sorryAx` checks pass.
+
+The already successful finite-cap baseline run 42759509255 on exact source `b0509fb5944f172ad9f7d71e7316907d4e988842` remains valid at its own scope. No later candidate failure downgrades the initial valuation-one cylinder, exact offset/margin, mixed-word, dyadic-cardinality, or finite cap-tree results previously verified on their own commits. The global Collatz theorem remains open because the deterministic suffix-return implication and infinite-path exclusion are not yet proved.
