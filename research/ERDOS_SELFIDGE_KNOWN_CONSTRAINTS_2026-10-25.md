@@ -29,3 +29,13 @@ The exact definitions of Q, the covering predicates, and any divisibility hypoth
 
 ## Scope warning
 A new preprint or computer certificate about a large finite lower bound can strengthen finite exclusion but does not close the unrestricted conjecture unless it proves a bound that applies to every possible finite covering. Audit all quantifiers and assumptions before incorporating such a result.
+
+
+## Addendum — exact CI and admitted-axiom status, 10 November 2026
+
+The audit branch now has a completed successful workflow: run 40438579953 on exact source commit b27765f601a46ad103ea020d9fc246a5bb6693ec, Lean 4.34.1. The run built the configured project modules. The main conditional declaration erdos_selfridge_conditional_on_admitted_sieve_interfaces prints the transitive axiom profile
+[admitted_sf_sieve_certificate_exists, admitted_sieve_criterion, propext, Classical.choice, Quot.sound].
+
+Thus the build is successful, but the unrestricted theorem is not yet Lean-proved. The two admitted interfaces remain the substantive missing proof obligations. Their returned conditions include positive valid delta parameters and a matching list-length condition, so the previously identified empty/misaligned-delta degeneration is guarded at this interface; the existence of such a valid certificate is still admitted.
+
+The project now includes research/ERDOS_SELFRIDGE_WRITTEN_REVIEW_2026-11-10.md, which records the scope, axiom profile, source-fidelity requirements and next proof obligations. Do not report the successful build as an axiom-free proof of Erdős–Selfridge.
