@@ -20,3 +20,8 @@ The all-one special case is separately formalized as `CollatzSyracuseAudit.lubui
 The theorem gives exact finite prefix distributions; it does not prove global Collatz descent. The APW4 bridge is a research programme until an explicit index-preserving incidence and capacity map is proved.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers. Lean, Mathlib and other dependencies retain their own licences.
+
+
+## Mathematical reach
+
+The theorem classifies every finite exact valuation word as one odd residue class modulo 2^(A+1), with relative density 2^(-A) among odd starts and absolute natural density 2^(-(A+1)) among all positive integers. The explicit residue is computed from the affine offset. The finite tail partition has one exact terminal cylinder at every cutoff. A further local corollary: for any fixed prefix, a sufficiently high next valuation forces positive next signed margin and strict descent; the cutoff is prefix-dependent and does not prove global Collatz.
