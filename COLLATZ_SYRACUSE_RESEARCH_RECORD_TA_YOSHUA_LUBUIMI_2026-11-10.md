@@ -317,3 +317,26 @@ The general finite valuation-word theorem now has a canonical standalone manuscr
 The global Collatz objective remains unchanged: prove a finite realized block with sufficient positive signed-margin correction for every positive odd start, or establish another universal descent mechanism. A density-zero or measure-theoretic exceptional-set statement alone is not enough to settle an individual integer orbit.
 
 **Attribution:** all research and theorem authorship: Ta-Yoshua Lubuimi. AI tools are assistants only.
+
+
+## 11. Tail-cylinder margin certificate — new local descent theorem
+
+For a finite realized prefix word \(\alpha\) of length \(k\), let \(A=A_k\), \(C=C_k\), and \(D(\alpha)=2^A-C-3^k\). If the next exact exponent is \(b\), the existing signed-margin recurrence gives
+\[
+D(\alpha b)=3D(\alpha)+(2^b-4)2^A.
+\]
+For any finite cutoff \(B\ge1\), every start in the exact tail cylinder \(a_k\ge B+1\) therefore satisfies
+\[
+D(\alpha b)\ge 3D(\alpha)+(2^{B+1}-4)2^A.
+\]
+Choose \(B\) so that the right-hand side is strictly positive. Such a finite \(B\) exists for every fixed prefix because powers of two are unbounded. Then every start in that one exact tail residue cylinder has positive margin after the next step and hence a strict decrease of the accelerated odd iterate below its initial value.
+
+This yields a finite pruning decomposition at every prefix: the exact children \(b=1,\ldots,B\) are the finite unresolved branches; the single tail cylinder \(a_k\ge B+1\), of relative parent mass \(2^{-B}\), is already certified to descend. The cutoff is prefix-dependent. This does not establish a uniform bound over all prefixes, does not eliminate an infinite path through the finite unresolved children, and does not prove global Collatz.
+
+For the initial all-one prefix of length \(r\), \(A=r\) and \(D=-2(3^r-2^r)\). The general tail inequality reduces exactly to
+\[
+2^{B+1+r}>6\cdot3^r-2^{r+1},
+\]
+recovering the previously established initial-run recovery threshold as a special case.
+
+The complete proof and its limitations are appended to the canonical standalone manuscript at projects/LubuimiFiniteValuationWordCylinder/MANUSCRIPT.md. This is a mathematical manuscript result; it is not yet a Lean-compiled declaration.
