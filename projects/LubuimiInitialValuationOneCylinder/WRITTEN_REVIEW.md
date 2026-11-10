@@ -83,3 +83,10 @@ The source now also contains `initial_valuation_one_cylinder_iff_dyadic_divisibi
 ## Review reconciliation — 10 November 2026
 
 The supplied editorial checklist has been reconciled with the current source. The initial-cylinder manuscript now has correctly typeset affine and density formulae, Corollary 6.3 explicitly states and proves that positive signed margin forces the iterate below the start, and Corollary 4.2 is titled “Exact initial run length” rather than a stopping-time statement. The note no longer contains APW4/tail-partition cross-project claims. The detailed source check is recorded in [REVIEW_RECONCILIATION_2026-11-10.md](REVIEW_RECONCILIATION_2026-11-10.md). This remains an internal review record, not independent peer review.
+
+
+## Workflow-scope correction — 10 November 2026
+
+A job-level inspection corrects the interpretation of the PR #35 workflow records. Runs [42827159570](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42827159570) and [42835418762](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42835418762) completed at the workflow level, but their `compile-drafts`, Lean 4.34 kernel-check, and Lean 4.35 paranoid jobs were **skipped** after the project detector found no Lean project at the checkout root. They are not Lean compilation or kernel-verification passes. The actual current neutral-declaration evidence remains the separate exact-source workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956) on source commit `5f6e46de8bed7061f8336089857143c54e997af5`.
+
+The PR #35 branch now has a later documentation-only head `d2fcac1ee82cccf1c86dc1da6fe294db60316ab43`; the code-bearing Lean source is unchanged. No verification claim is transferred to the arbitrary finite-word theorem.
