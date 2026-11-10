@@ -1,4 +1,4 @@
-# Written Review — Lubuimi's Initial Valuation-One Cylinder Theorem
+# Written Review — Initial Valuation-One Cylinder Classification
 
 **Author:** Ta-Yoshua Lubuimi  
 **Review date:** 10 November 2026  
@@ -48,9 +48,11 @@ This theorem classifies the initial valuation-one cylinder exactly. It does not 
 
 ## 5. Publication assessment
 
-The revised manuscript v1.0 is self-contained, includes a literature-context section, exact hypotheses, both directions of the proof, density counting, margin corollary, a worked example, scope limits and an exact-commit verification record. It is suitable for circulation as a research-note preprint. A comprehensive priority/novelty survey and independent peer review are not claimed. It should be presented as a precise local 2-adic classification theorem, not as a solution or partial proof of global Collatz beyond the stated margin corollaries. No journal acceptance, DOI, or independent peer review is claimed.
+The manuscript is a self-contained independent exposition and proof of a classical finite congruence consequence. It must not use an eponymous theorem label or claim novelty or priority for the parity-vector classification. Its legitimate contribution is the author's independent derivation in accelerated-valuation coordinates, the explicit run-length/density/margin presentation, and the Lean formalization at the exact source snapshots documented separately. No journal acceptance, DOI, or independent peer review is claimed.
 
-**Verdict:** The initial valuation-one cylinder theorem is mathematically established and independently Lean-audited on the listed exact snapshots. The wider Collatz programme remains open.
+The companion finite valuation-word cylinder statement is also a classical parity-vector consequence. It must not be presented as a new general theorem. Its Lean status remains separate and unverified unless a dedicated exact-commit build and declaration-scoped axiom audit are supplied.
+
+**Verdict:** The mathematical statements and elementary proofs are correct as reviewed. Their historical content is classical. The initial-cylinder Lean audit record is separate and applies only to the named declaration and checked source snapshots. The wider Collatz programme remains open.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
 
@@ -58,3 +60,16 @@ The revised manuscript v1.0 is self-contained, includes a literature-context sec
 ## Verification-scope clarification
 
 The seven listed exact-commit workflows audit the main initial-cylinder declaration. The separate Syracuse margin-cap declarations passed workflow 42728049650 on exact source commit ca48ec7fdad5e8d6f8aeb82fed8586a1b57c12bc. Neither record should be overread as a claim that every displayed signed-margin corollary in the manuscript has its own named Lean theorem and audit.
+
+
+## 6. References
+
+[1] R. Terras, “A stopping time problem on the positive integers,” *Acta Arithmetica* **30** (1976), 241–252.
+
+[2] C. J. Everett, “Iteration of the number-theoretic function f(2n) = n, f(2n + 1) = 3n + 2,” *Advances in Mathematics* **25** (1977), 42–45.
+
+[3] J. C. Lagarias, “The 3x + 1 Problem and Its Generalizations,” *The American Mathematical Monthly* **92** (1985), 3–23, Theorem B.
+
+[4] T. Tao, “Almost all orbits of the Collatz map attain almost bounded values,” *Forum of Mathematics, Pi* **10** (2022), e12, §1.2 and Proposition 1.9.
+
+**Correction note:** Tao's Proposition 1.9 is a distribution theorem under a residue-equidistribution hypothesis; it is not cited as the exact one-residue-class theorem.
