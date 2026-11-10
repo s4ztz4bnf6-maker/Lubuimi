@@ -55,3 +55,8 @@ Workflow 42737245099 passed on source head `9081ab4da049f5713dfafa0e7a8fbba6b0b6
 ## Exact-head B=4095/B=8191 extension result — 10 November 2026
 
 Workflow 42737593864 passed on code snapshot 710fb173c3006bbf622f6b7b3a67ac69907fc783. All nine regression tests passed, including the complete B=4095 and B=8191 tables. B=4095 has 341 escape sources, maximum excursion length 30 and maximum height 425645. B=8191 has 682 sources, maximum length 45 and maximum height 2717873. The B=4095 path from z0=4607 and B=8191 path from z0=10367 share a 29-term suffix ending at 3371. This is exact finite Python reproducibility, not Lean verification or a universal Collatz result.
+
+
+## Exact-head confluence CI reconfirmation — 10 November 2026
+
+Workflow [42738273620](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738273620) passed on PR #39 head `c8ae9d010757b82342fa8085011c6d55bdcbbd94`; the separate written-review reconciliation [42738265402](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738265402) also passed on that exact head. The reproducibility log prints the cross-threshold suffix checks through B=8191, including the B=4095 start 4607 and B=8191 start 10367 sharing a 29-term suffix ending at 3371. This is a finite exact-integer regression/reproducibility result only. It does not prove a uniform excursion bound, exclude all nontrivial cycles, or establish the Collatz conjecture.
