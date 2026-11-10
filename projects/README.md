@@ -28,6 +28,7 @@ This index keeps the Syracuse/Collatz results separate by theorem and verificati
 - Project directory: projects/LubuimiTerminalResidueCollisionEnergy/
 - Standalone manuscript: MANUSCRIPT.md
 - Written review: WRITTEN_REVIEW.md
+- Lean formalization route: LEAN_FORMALIZATION_ROUTE.md
 - GitHub PR: https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/38
 - Status: mathematical second-moment theorem, forced off-diagonal lower bound, finite truncation bounds and rational Markov representation; not yet Lean-compiled or axiom-audited.
 
