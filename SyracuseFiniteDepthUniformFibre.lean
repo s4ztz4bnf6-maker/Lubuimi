@@ -73,7 +73,7 @@ theorem childBlocks_tail_partition (Bstar B : ℕ) (hB : B ≤ Bstar) :
 private theorem pow_two_le_pow_two_add (a b : ℕ) :
     2 ^ a ≤ 2 ^ (a + b) := by
   rw [pow_add]
-  have hfactor : 1 ≤ 2 ^ b := by positivity
+  have hfactor : 1 ≤ 2 ^ b := Nat.succ_le_iff.mpr (by positivity)
   calc
     2 ^ a = 2 ^ a * 1 := by simp
     _ ≤ 2 ^ a * 2 ^ b :=
@@ -83,14 +83,14 @@ private theorem pow_two_le_pow_two_add (a b : ℕ) :
 by its exponent. -/
 theorem card_childBlock (Bstar b : ℕ) (hb : 1 ≤ b) (hB : b ≤ Bstar) :
     (childBlock Bstar b).card = 2 ^ (Bstar - b) := by
-  rw [childBlock, Finset.card_Ico]
+  rw [childBlock, Nat.card_Ico]
   have hM :
       2 ^ Bstar =
         2 ^ (Bstar - b + 1) * 2 ^ (b - 1) := by
     rw [← pow_add]
     congr 1
     omega
-  have hfactor : 1 ≤ 2 ^ (b - 1) := by positivity
+  have hfactor : 1 ≤ 2 ^ (b - 1) := Nat.succ_le_iff.mpr (by positivity)
   have hleft : 2 ^ (Bstar - b + 1) ≤ 2 ^ Bstar := by
     rw [hM]
     calc
@@ -109,13 +109,13 @@ theorem card_childBlock (Bstar b : ℕ) (hb : 1 ≤ b) (hB : b ≤ Bstar) :
 by the cutoff. -/
 theorem card_tailBlock (Bstar B : ℕ) (hB : B ≤ Bstar) :
     (tailBlock Bstar B).card = 2 ^ (Bstar - B) := by
-  rw [tailBlock, Finset.card_Ico]
+  rw [tailBlock, Nat.card_Ico]
   have hM :
       2 ^ Bstar = 2 ^ (Bstar - B) * 2 ^ B := by
     rw [← pow_add]
     congr 1
     omega
-  have hfactor : 1 ≤ 2 ^ B := by positivity
+  have hfactor : 1 ≤ 2 ^ B := Nat.succ_le_iff.mpr (by positivity)
   have hleft : 2 ^ (Bstar - B) ≤ 2 ^ Bstar := by
     rw [hM]
     calc
