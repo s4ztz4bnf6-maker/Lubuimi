@@ -46,7 +46,7 @@ The result is finite and conditional: positive valuations on the finite suffix p
 
 ## Finite-depth uniform-fibre partition — kernel-verified candidate branch, 10 November 2026
 
-The isolated branch `collatz/finite-depth-uniform-fibre-2026-11-10` now contains `SyracuseFiniteDepthUniformFibre.lean`. At exact source commit `8a9d2b32a265e70d662aeedd21ec8a3ca9a7e594`, GitHub Actions run `42861207383` completed successfully under Lean 4.34.1 / Mathlib 4.34.1.
+The isolated branch `collatz/finite-depth-uniform-fibre-2026-11-10` now contains `SyracuseFiniteDepthUniformFibre.lean`. At exact source commit `de022f653de94dd589c98eb51a31f57559682004`, GitHub Actions run `42861870848` completed successfully under Lean 4.34.1 / Mathlib 4.34.1.
 
 The declared library build and the dedicated `#print axioms` step succeeded. The following declarations each have the exact profile `[propext, Classical.choice, Quot.sound]`, with no `sorryAx`:
 
