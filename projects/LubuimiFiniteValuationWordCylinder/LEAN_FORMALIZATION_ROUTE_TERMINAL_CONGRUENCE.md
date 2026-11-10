@@ -131,3 +131,10 @@ Formalize this only after parent-cylinder reconstruction and the exact-next-expo
 - Finite cylinder density alone does not imply global Collatz descent.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
+
+
+## Cross-project formalization note — 10 November 2026
+
+The general finite valuation-word cylinder theorem and its exact tail partition remain mathematically proved in the companion manuscript but are not yet Lean-formalized. A separate finite-state sub-result arising from the terminal-residue project has now been implemented as `LubuimiTerminalResidueEnergyK2.lean` on the Syracuse/Collatz formalization branch, commit `c0d3e93e19d13fda2044e24f7c8902d4c47d75d8`. It encodes the rational k=2 transition matrix modulo 9 and the exact two-step distribution/energy. Workflow 42730248268 was queued for that exact head when this note was written.
+
+This is a formalization of the finite k=2 calculation only. It does not formalize the general finite-word cylinder classification, its density theorem, or the exact finite tail partition. Those remain separate obligations in Sections 4–5 above. No formal verification claim is made until the exact-head run completes and the named declarations pass the axiom audit.
