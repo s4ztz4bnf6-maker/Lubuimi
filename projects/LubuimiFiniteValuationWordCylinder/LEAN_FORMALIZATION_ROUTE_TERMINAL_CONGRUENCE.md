@@ -125,8 +125,8 @@ Formalize this only after parent-cylinder reconstruction and the exact-next-expo
 ## 6. Required audit boundary
 
 - The general finite-word theorem and finite tail partition have mathematical proofs in the standalone manuscript, but are not yet Lean-compiled.
-- The initial all-one special case is separately Lean-audited in four successful exact-commit workflows: 42721006544, 42721305220, 42721911555, and 42722186081.
-- This terminal-congruence route is a proof design, not a fifth verified result.
+- The initial all-one special case is separately Lean-audited in six successful exact-commit workflows: 42721006544, 42721305220, 42721911555, 42722186081, 42724343412, and 42725006480.
+- This terminal-congruence route is a proof design, not a verified general-word result.
 - Final evidence must include the exact commit SHA, successful full build, positive declaration coverage, lake check --paranoid, named #print axioms output for the theorem and density corollary, and a complete-log scan free of sorryAx and project-specific axioms.
 - Finite cylinder density alone does not imply global Collatz descent.
 
