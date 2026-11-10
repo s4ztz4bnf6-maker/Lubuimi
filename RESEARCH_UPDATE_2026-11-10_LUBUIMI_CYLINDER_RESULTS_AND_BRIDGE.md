@@ -97,3 +97,8 @@ A bridge theorem is not yet claimed. It requires explicit finite source and targ
 The cylinder density theorems alone do not prove that every orbit descends. No global Collatz proof is claimed. APW4 and Syracuse remain independent proved inputs until the bridge theorem is actually established.
 
 All research and theorem attribution: **Ta-Yoshua Lubuimi**. AI tools are assistants only, not authors or independent mathematical verifiers. Earlier results and CI records are preserved append-only.
+
+
+## Chronology correction — seventh successful exact-commit audit confirmed
+
+A previous paragraph in this status file described run 42725493567 as still in progress. That was a stale status captured before completion. The exact workflow was rechecked: run 42725493567 completed successfully on source commit a52dffc23b323964f33bc7f6c61c2cb24bcdf708. Its compile-drafts job includes CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder, prints the transitive axiom profile [propext, Classical.choice, Quot.sound], and contains no actual sorryAx occurrence in the completed job log. Therefore the initial valuation-one declaration has seven verified successful exact-commit workflow snapshots: 42721006544, 42721305220, 42721911555, 42722186081, 42724343412, 42725006480 and 42725493567. The earlier chronology entries saying four or six refer to earlier points in time and are superseded by this explicit count of seven. This correction does not change the theorem or broaden the audited scope.
