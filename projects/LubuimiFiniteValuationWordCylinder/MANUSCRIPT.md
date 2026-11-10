@@ -301,3 +301,8 @@ The tail cutoff inequality becomes
 2^{B+1+r}>6\cdot3^r-2^{r+1},
 \]
 which is exactly the previously recorded one-step signed-margin recovery threshold when the next exponent is at least \(B+1\). This confirms that the initial-run threshold is the special case of the general tail-cylinder margin certificate.
+
+
+## Publication summary and scope
+
+The main theorem and finite tail partition are fully proved in this manuscript. The explicit affine residue formula and worked examples make the classification constructive. The local tail-margin corollary gives a finite pruning rule: for each fixed prefix, all sufficiently high next valuations lie in one exact tail cylinder and force descent; only finitely many lower next valuations remain to be analyzed. This is a genuine local arithmetic descent certificate, not a global Collatz proof. The general finite-word theorem, finite partition and tail-margin corollary remain pending Lean formalization and exact-commit kernel audit. The all-one special case retains its four independent successful CI snapshots.
