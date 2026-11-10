@@ -100,6 +100,30 @@ The exact integer-only enumerator and regression tests have now been extended to
 
 At B=1023, the source x=731 has first image z0=1097 and returns below the threshold in one further step, at 823. This is an exact entry in the B=1023 table. It does **not** verify or identify the earlier separate “1097 threshold/count” lead, whose definition remains unresolved.
 
+### Worked valuation-cylinder and signed-margin certificate
+
+The B=1023 excursion with source x=731 is a concrete cross-check against the exact valuation-cylinder and offset-margin framework:
+\[
+731\xrightarrow{a_0=1}1097\xrightarrow{a_1=2}823.
+\]
+The valuation word is \((1,2)\), so \(A_2=3\) and the affine offset recurrence gives \(C_0=0,C_1=1,C_2=5\). Hence
+\[
+2^3\cdot823=3^2\cdot731+5=6584.
+\]
+The unique initial cylinder residue for this word is
+\[
+r\equiv(2^3-5)(3^2)^{-1}\equiv3\cdot9\equiv11\pmod{16},
+\]
+and indeed \(731\equiv11\pmod{16}\).
+
+The signed margins are \(D_0=0\), \(D_1=2-1-3=-2\), and \(D_2=8-5-9=-6\). The two local non-descent cap inequalities are
+\[
+2^1+3D_0=2\le4,
+\qquad
+2^{1+2}+3D_1=2\le8.
+\]
+This is an exact finite example where the threshold-return path, its valuation cylinder, affine offset, and signed-margin cap agree. It is a consistency check of the three frameworks, not a proof of the general cylinder theorem or a global Collatz statement. The corresponding Python regression test recomputes the word, residue, offset identity, and both cap inequalities.
+
 ## 3. Exact confluence and common suffixes
 
 The excursions display exact confluence, not merely similar maxima.
