@@ -8,6 +8,10 @@ For a finite word \(\alpha=(a_0,\ldots,a_{k-1})\), with every \(a_i\ge1\), and t
 
 The initial all-one cylinder theorem is the special case \(\alpha=(1,\ldots,1)\). The finite cutoff refinement adds the exact tail cylinder \(a_k\ge B+1\), giving a finite, disjoint, exhaustive partition with relative masses \(2^{-1},\ldots,2^{-B},2^{-B}\).
 
+## Companion incidence project
+
+The terminal-residue second-moment theorem built on these cylinders is maintained as a separate project with its own manuscript and written review: [PR #38](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/38). It is not identified with the historical APW4 BIB reserve.
+
 ## Contents
 - WRITTEN_REVIEW.md — internal proof review, mathematical scope, finite-branching corollary and Lean status.
 - MANUSCRIPT.md — canonical standalone theorem manuscript, recursive proof, explicit residue formula, worked examples, prefix-tree masses, finite tail partition, tail-cylinder margin certificate, worked applications and limits.
