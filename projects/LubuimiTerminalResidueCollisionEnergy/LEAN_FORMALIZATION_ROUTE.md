@@ -260,3 +260,10 @@ A self-contained Lean project now lives in `projects/LubuimiTerminalResidueColli
 The module source is synchronized with the copy at the root of the Syracuse/Collatz formalization branch, whose exact-head compile/audit workflow is run 42730248268. That run was queued when this addendum was written. The standalone PR branch has the corresponding module at commit `aec1dd4399fbe86cd3503fb5dc905c4416eb999e`; its dedicated workflow is triggered by the branch push and its result is not inferred from the separate root-module run.
 
 Until the exact workflow result is retrieved, this remains an implemented formalization candidate, not a verified theorem. The general (k)-state Markov theorem, countable source moment identity, and APW4/BIB transport remain outside the scope of this finite k=2 module.
+
+
+## Chronology correction — k=2 module now Lean-verified
+
+The candidate-status paragraphs above describe earlier snapshots and are retained as chronology. The finite k=2 standalone module subsequently passed workflow 42735716873 on source commit 4e30c083f3e1657edd08b0945cdda4e16c8b0e14 with Lean 4.35.0 and Mathlib v4.35.0. All seven declarations (initialRow_sum, rowOne_sum, rowTwo_sum, transitionRow_sum, twoStepNumerator_eq, twoStepMass_eq, twoStepEnergy_eq_five_div_twentyOne) have transitive axiom profile [propext, Classical.choice, Quot.sound]; no actual sorryAx was found, and lake check --paranoid passed.
+
+This closes the finite k=2 formalization target. It does not close the general k-state Markov theorem, the infinite-word collision-energy identity, its truncation theorem, or the APW4/BIB transport.
