@@ -183,3 +183,10 @@ They sum exactly to one:
 \boxed{\sum_{b=1}^{B}2^{-b}+2^{-B}=1.}
 \]
 The partition is disjoint and exhaustive because the next exact exponent is either one of \(1,\ldots,B\) or is at least \(B+1\). This gives a genuinely finite weighted refinement at every cutoff, with an explicit tail atom. It is a useful finite interface for later incidence and moment constructions; it does not by itself provide an APW4 BIB capacity or an orbitwise descent theorem.
+
+
+## Local tail-cylinder margin corollary
+
+For a finite prefix alpha of total exponent A and signed margin D(alpha), extension by next exponent b satisfies D(alpha b)=3D(alpha)+(2^b-4)2^A. For any cutoff B with 3D(alpha)+(2^(B+1)-4)2^A>0, the exact tail cylinder a_k>=B+1 has relative parent mass 2^-B and every start in it has positive next margin, hence strict descent. Such a finite B exists for each fixed prefix. The cutoff is prefix-dependent; the finite lower-exponent children remain unresolved, so this is not a global Collatz proof. The canonical standalone manuscript contains the full derivation, worked examples and scope statement.
+
+The general theorem and tail partition are mathematically proved in the manuscript but not yet Lean-compiled. The initial all-one specialization alone has four successful exact-commit Lean audits.
