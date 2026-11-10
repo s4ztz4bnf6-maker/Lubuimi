@@ -64,21 +64,21 @@ class ThresholdReturnTests(unittest.TestCase):
 
     def test_common_suffixes(self):
         pairs = [
-            (63, 71, 127, 155, 26, 155),
-            (127, 155, 127, 167, 19, 167),
-            (127, 167, 255, 377, 17, 377),
-            (255, 335, 255, 377, 15, 425),
-            (255, 359, 255, 377, 8, 911),
-            (255, 263, 255, 311, 5, 263),
+            (63, 71, 127, 155, 26, 155, 61),
+            (127, 155, 127, 167, 19, 167, 61),
+            (127, 167, 255, 377, 17, 377, 61),
+            (255, 335, 255, 377, 15, 425, 61),
+            (255, 359, 255, 377, 8, 911, 61),
+            (255, 263, 255, 311, 5, 263, 167),
         ]
-        for B1, z1, B2, z2, length, first in pairs:
+        for B1, z1, B2, z2, length, first, last in pairs:
             suffix = common_suffix(
                 row_by_z0(B1, z1)["path"],
                 row_by_z0(B2, z2)["path"],
             )
             self.assertEqual(len(suffix), length)
             self.assertEqual(suffix[0], first)
-            self.assertEqual(suffix[-1], 61 if first >= 155 else 167)
+            self.assertEqual(suffix[-1], last)
 
     def test_direct_return_to_one(self):
         row = row_by_z0(255, 341)
