@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this research project, please cite the author and manuscript."
+title: "Lubuimi's Terminal-Residue Collision Energy"
+authors:
+  - family-names: Lubuimi
+    given-names: Ta-Yoshua
+date-released: 2026-11-10
+version: "0.1.0"
+type: article
+abstract: >-
+  A finite-place second-moment identity for accelerated-Syracuse valuation
+  words. The manuscript proves an exact diagonal/off-diagonal decomposition,
+  a forced lower bound for terminal-residue collision mass, finite truncation
+  error bounds, and an explicit rational Markov-chain representation.
+keywords:
+  - Collatz conjecture
+  - Syracuse dynamics
+  - valuation words
+  - terminal residues
+  - collision energy
+  - second moment
+  - Markov chain
+repository-code: "https://github.com/s4ztz4bnf6-maker/Lubuimi"
