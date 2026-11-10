@@ -117,3 +117,11 @@ The standalone PR #38 Lean module `LubuimiTerminalResidueEnergyK2.lean` passed e
 The logical limitation is now made explicit in the research record: the full valuation-word energy and its Cauchy lower bound average over all finite words. A single exceptional infinite trajectory can have cylinder mass tending to zero. Therefore that average lower bound does not exclude one exceptional infinite word. A Collatz proof would require a separate orbitwise implication, such as a uniform finite block with positive signed margin for every non-descending candidate, or a non-tautological survival-event capacity bound derived from the exact margin dynamics. No such uniform implication is presently established.
 
 The APW4 analogy remains a design heuristic only. The terminal-residue places and collision energy are independently defined Syracuse objects; no equality with the historical APW4 BIB reserve or weighted Hall capacity is asserted.
+
+
+
+### 7.5 Current formalization boundary: finite k=2 PASS, orbitwise cap tree OPEN
+
+The PR #38 finite `k=2` collision-energy computation has a completed exact-head audit [42743051889](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42743051889): 9,048 build jobs completed; all printed named declarations have the standard axiom profile; the only textual occurrences of `sorryAx` in the workflow log are the shell guard that rejects it, not declaration output. The exact value is `twoStepEnergy = 5/21` for the six unit residues modulo 9.
+
+For the global Syracuse question, the concrete next target remains the well-foundedness of the finite branching tree of valuation prefixes satisfying every exact signed-margin cap. The cap is necessary for a nondecreasing endpoint but not sufficient for survival. A proof that typical prefixes have small measure, or that each fixed finite depth has low total mass, does not rule out one infinite branch. The required theorem must exclude every infinite realizable cap-compatible branch (or give a valid orbitwise finite positive-margin block), with all quantifiers uniform in the starting odd integer. No APW4 BIB capacity is imported into this problem.
