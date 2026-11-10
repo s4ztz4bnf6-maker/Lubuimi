@@ -81,15 +81,15 @@ def outputNumerator (j : Fin 6) : ℕ :=
 /-- Every displayed row has denominator 63. -/
 theorem initialRow_sum :
     (∑ j : Fin 6, initialNumerator j) = 63 := by
-  native_decide
+  decide
 
 theorem rowOne_sum :
     (∑ j : Fin 6, rowOneNumerator j) = 63 := by
-  native_decide
+  decide
 
 theorem rowTwo_sum :
     (∑ j : Fin 6, rowTwoNumerator j) = 63 := by
-  native_decide
+  decide
 
 /-- Every unit-state transition row is stochastic after division by 63. -/
 theorem transitionRow_sum (i : Fin 6) :
@@ -102,7 +102,7 @@ theorem transitionRow_sum (i : Fin 6) :
 /-- Exact multiplication of the initial row by the transition matrix. -/
 theorem twoStepNumerator_eq (j : Fin 6) :
     twoStepNumerator j = 63 * outputNumerator j := by
-  native_decide
+  fin_cases j <;> decide
 
 /-- The exact rational two-step terminal mass at each unit residue. -/
 def twoStepMass (j : Fin 6) : ℚ :=
@@ -114,7 +114,8 @@ theorem twoStepMass_eq (j : Fin 6) :
   unfold twoStepMass
   rw [twoStepNumerator_eq]
   push_cast
-  norm_num
+  field_simp
+  <;> ring
 
 /-- The exact second moment of the two-step terminal distribution. -/
 def twoStepEnergy : ℚ :=
@@ -123,7 +124,7 @@ def twoStepEnergy : ℚ :=
 /-- The k = 2 terminal-residue collision energy is exactly 5/21. -/
 theorem twoStepEnergy_eq_five_div_twentyOne :
     twoStepEnergy = (5 : ℚ) / 21 := by
-  native_decide
+  decide
 
 #print axioms initialRow_sum
 #print axioms rowOne_sum
