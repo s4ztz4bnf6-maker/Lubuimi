@@ -697,3 +697,24 @@ The initial-cylinder theorem, valuation bounds, exact offset and strict-margin r
 The next global proof obligation remains to derive the suffix-return premise from the deterministic accelerated Syracuse dynamics and the minimal-counterexample definition. The intended chain is: establish oddness of every orbit term from the exact affine identity and positive exponent; identify each exponent as the exact 2-adic valuation; prove the shifted tail is the unique deterministic Syracuse orbit from its current term; then apply minimality to obtain the suffix-return premise. Each link must be proved explicitly. Until then, the current minimal-counterexample wrapper remains conditional. Even after that bridge, finite-tree membership alone does not rule out an infinite branch; a separate descent, ranking, or well-foundedness argument is required.
 
 **Status:** PR #48 CI fully green on run 42759509255; finite-depth theorem verified within its exact scope; global Collatz theorem remains open.
+
+
+## Terminal-residue / finite-cap-tree scale bridge — proof-script correction, 10 November 2026
+
+The exact scale estimate and residue representative theorem are present in the source:
+- `syracuse_step_scale_inequality`: (2(n_{j+1}+1)\le 3(n_j+1)).
+- `syracuse_iterate_dyadic_ternary_scale_bound): (2^j(n_j+1)\le 3^j(n_0+1)).
+- `syracuse_iterate_lt_terminal_modulus): if (n_0+1<2^j), then (n_j<3^j).
+- `canonicalTerminalResidue_val_eq_actual_iterate): at that depth the canonical terminal residue has the actual iterate as its least nonnegative representative.
+- `affine_minimal_counterexample_terminal_residue_cap_tree_bridge): combines finite-cap-tree membership, the terminal-residue unit condition, and the representative identity.
+
+The first integration head `1ad0cf18bb8d2fd8a76376cb3768fd3b60bc6a7c` failed workflow [42812961296](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42812961296) at the normalization step: the proof used `rw [← hn0eq]` although `hn0eq : n 0 = n₀) must normalize the target (n 0+1<2^j) from the hypothesis (n₀+1<2^j). The diagnostic showed the rewrite searched for (n₀) in the target, where only (n 0) occurred.
+
+The current candidate replaces that rewrite with:
+```lean
+have hdepth' : n 0 + 1 < 2 ^ j := by
+  simpa [hn0eq] using hdepth
+```
+This is the directionally correct simplification. Candidate source branch: `collatz/terminal-residue-cap-tree-bridge-simpa-v4-2026-11-10`; current exact-head refresh commit: `ad40af22c1b2c8322616dec94c09d98b73e3eabb`. **OFFEN – NICHT VERIFIZIERT:** no exact-head workflow has yet been returned for this candidate. The failed run is retained as history and does not alter earlier verified finite-cap or minimality lemmas.
+
+Even after this bridge compiles, it only identifies the terminal residue with the actual orbit value at sufficiently large depth. It does not exclude an infinite branch or prove global Collatz termination.
