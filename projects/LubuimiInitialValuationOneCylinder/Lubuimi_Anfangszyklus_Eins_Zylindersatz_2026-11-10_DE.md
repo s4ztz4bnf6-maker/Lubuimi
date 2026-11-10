@@ -1,8 +1,8 @@
-# Lubuimis Zylindersatz für anfängliche Bewertungs-Einsen
+# Anfängliche Bewertungs-Eins-Zylinder der beschleunigten Syracuse-Abbildung
 ## Eine exakte Kongruenzklassifikation anfänglicher Bewertungsblöcke der beschleunigten Syracuse-Abbildung
 
 **Autor:** Ta-Yoshua Lubuimi  
-**Version:** 1.0-DE  
+**Version:** 1.1-DE (korrigierte wissenschaftliche Einordnung)  
 **Datum:** 10. November 2026  
 **Arbeitstyp:** Wissenschaftliche Forschungsnotiz / Preprint  
 **Status:** Vollständiger eigenständiger Beweis; der Formalisierungsstatus wird gesondert ausgewiesen.
@@ -31,7 +31,7 @@ Das \(3x+1\)-Problem fragt nach dem Langzeitverhalten der wiederholten Iteration
 
 Diese Arbeit isoliert eine exakte Frage über endliche Präfixe: Welche ungeraden Startzahlen haben die Eigenschaft, dass ihre ersten \(N\) beschleunigten Bewertungs-Exponenten sämtlich gleich eins sind? Die Antwort ist eine einzige Kongruenzklasse modulo \(2^{N+1}\). Der Beweis ist elementar, liefert aber eine vollständige Äquivalenz in beiden Richtungen, eine exakte Formel für die Länge des anfänglichen Blocks und exakte Dichteaussagen.
 
-Die 2-adische Perspektive ist für die Untersuchung der \(3x+1\)-Abbildung naheliegend. Frühere Arbeiten entwickeln die Abbildung auf den 2-adischen ganzen Zahlen und untersuchen ihre Konjugation mit einer Shift-Abbildung; siehe Lagarias [1] und Bernstein–Lagarias [2]. Die vorliegende Arbeit verwendet ausschließlich endliche Kongruenzen und die elementare Bewertung \(v_2\). Sie beansprucht nicht, den allgemeinen 2-adischen Rahmen neu einzuführen. Ihr Schwerpunkt liegt auf dem expliziten Zylinder beschleunigter Bewertungen, seiner Interpretation als Stoppzeit und seiner Konsequenz für den vorzeichenbehafteten Offset.
+Die endliche Kongruenzklassifikation dieser Notiz ist eine klassische Konsequenz der Paritätsvektor-Kodierung der \(3x+1\)-Abbildung. Lagarias [3, Satz B] formuliert die explizite Permutationseigenschaft endlicher Paritätsvektoren; Terras [1] und Everett [2] gehören zur klassischen historischen Entwicklung. Diese Notiz bietet einen eigenständigen elementaren Beweis in Koordinaten der beschleunigten Syracuse-Bewertungen und dokumentiert die Lean-Formalisierung des Autors. Sie erhebt keinen Neuheitsanspruch für die Kongruenzklassifikation. Tao [4, §1.2, Proposition 1.9] untersucht die angenäherte Verteilung endlicher Syracuse-Bewertungsvektoren unter einer Gleichverteilungsvoraussetzung; diese Proposition ist thematischer Kontext, aber nicht die Quelle des hier verwendeten exakten Eindeutigkeitssatzes.
 
 ## 2. Definitionen und affine Identität
 
@@ -74,7 +74,7 @@ wobei wir (2.3) verwendet haben. Induktion beweist die Identität. \(\square\)
 
 ## 3. Hauptsatz: der Zylinder anfänglicher Bewertungs-Einsen
 
-**Satz 3.1 (Lubuimis Zylindersatz für anfängliche Bewertungs-Einsen).**  
+**Satz 3.1 (Klassifikation des anfänglichen Bewertungs-Eins-Zylinders).**  
 Sei \(n_0\) eine beliebige positive ungerade ganze Zahl, sei \((n_j,a_j)_{j\geq0}\) durch (2.1) definiert, und sei \(N\geq0\). Dann gilt
 \[
 \boxed{
@@ -270,6 +270,15 @@ D_{r+1}>0
 
 Die Schwelle (6.5) ist exakt und hängt von der tatsächlich realisierten Länge des anfänglichen Blocks ab. Sie behauptet nicht universell, dass die nächste Bewertung diese Schwelle erfüllt. Ebenso begründet die Positivität dieser einzelnen Margin für sich genommen keinen globalen Collatz-Abstiegssatz.
 
+**Korollar 6.3 (Positive Margin erzwingt Abstieg unter den Startwert).** Für jede Orbitpräfix gilt: Aus \(D_j>0\) folgt \(n_j<n_0\).
+
+**Beweis.** Die affine Identität liefert \(2^{A_j}n_j=3^j n_0+C_j\). Wegen \(C_j\geq0\) und \(D_j=2^{A_j}-C_j-3^j>0\) gilt \(2^{A_j}-3^j>C_j\). Da \(n_0\geq1\), folgt
+\[
+(2^{A_j}-3^j)n_0>C_j.
+\]
+Also ist \(2^{A_j}n_0>3^j n_0+C_j=2^{A_j}n_j\), folglich \(n_j<n_0\). QED.
+
+
 ## 7. Beispiel
 
 Wir wählen \(n_0=7\). Da \(7+1=8\) gilt, ist \(v_2(8)=3\), und Korollar 4.2 sagt genau zwei anfängliche Schritte mit Bewertungs-Exponent eins voraus. Tatsächlich gilt
@@ -288,52 +297,42 @@ Satz 3.1 klassifiziert eine Familie endlicher Bewertungspräfixe vollständig. I
 
 1. einen exakten Kongruenztest für jeden vorgeschriebenen anfänglichen Block von Bewertungs-Exponenten gleich eins;
 2. eine explizite Formel für jeden Iterierten innerhalb dieses Blocks;
-3. eine exakte Stoppzeitformel für die Länge des anfänglichen Blocks;
+3. eine exakte Formel für die Länge des anfänglichen Blocks;
 4. exakte natürliche Dichten sowohl für „mindestens“ als auch für „genau“ \(r\) anfängliche Schritte; und
 5. eine exakte Formel für die signierte Margin und eine Schwelle für die nächste Bewertung.
 
 Das Ergebnis ist lokal. Es impliziert weder, dass jede Bahn irgendwann abnimmt, noch dass jede Bahn beschränkt ist oder jede Bahn die Zahl \(1\) erreicht. Insbesondere kann eine Dichteinformation über endliche Präfixe für sich allein keine außergewöhnliche unendliche Bahn ausschließen. Ein globaler Beweis der Collatz-Vermutung erfordert weiterhin ein Argument für jede einzelne Bahn oder einen anderen Satz, der sämtliche nicht absteigenden Trajektorien ausschließt.
 
-Die exakten Zylinder liefern außerdem ein natürliches endliches Präfixmodell für Vergleiche mit gewichteten Faser- und Inzidenzmethoden in anderen Projekten. Ein solcher Vergleich ist jedoch kein Identifikationssatz: Eine projektübergreifende Übertragung erfordert eine spezifizierte Abbildung der Indizes, die Erhaltung der relevanten Gewichte sowie den Beweis der entsprechenden Inzidenz- und Kapazitätsungleichungen. In dieser Arbeit wird keine APW4-Transportaussage vorausgesetzt oder verwendet.
+Die exakten Zylinderidentitäten werden vollständig innerhalb der beschleunigten Syracuse-Dynamik formuliert. Eine projektübergreifende Identifikation oder Übertragung ist nicht Bestandteil dieser Notiz.
 
-## 9. Formale Verifikation und Reproduzierbarkeit
+## 9. Lean-Formalisierungsnachweis
 
-Der Hauptsatz ist in Lean formalisiert als
-CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder.
+Die Quelldeklaration steht in SyracuseOffsetIdentity.lean, Zeile 2397, am exakten Quell-Commit b1a8599c686c37893a33453b759dee42047c7727. Ihre Lean-Signatur lautet:
 
-Die Deklaration wurde kompiliert und ihre transitiven Axiomabhängigkeiten wurden in sieben erfolgreichen GitHub-Actions-Snapshots für exakt bezeichnete Commits ausgegeben:
+    theorem lubuimi_initial_valuation_one_cylinder
+        (n a : ℕ → ℕ) (N : ℕ)
+        (hodd : ∀ j, n j % 2 = 1)
+        (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1) :
+        (∀ j, j < N → a j = 1) ↔ 2 ^ (N + 1) ∣ n 0 + 1 := by
 
-| Lauf | Geprüfter Quellstand / PR-Snapshot |
-|---|---|
-| 42721006544 | PR #35 Head 013192ce524a4572a9d96c8d4dcb2796830b1f62 |
-| 42721305220 | PR #35 Head ad7203f5571d03e5989b9ac935b2103300f02409 |
-| 42721911555 | PR #35 Head 21829b4dd3b82a73edb19cf0d09ed011f55ef384 |
-| 42722186081 | PR #35 Head a36894eefc52e5d28cd43110f5e289805509ad33 |
-| 42724343412 | PR #35 Head 29b27dc529b9e81a33b5211e9e01a01e19edc256 |
-| 42725006480 | Exakter Quell-Commit b1a8599c686c37893a33453b759dee42047c7727 |
-| 42725493567 | Exakter Quell-Commit a52dffc23b323964f33bc7f6c61c2cb24bcdf708 |
+Der Bezeichner bleibt hier als wörtlicher Quellcode-Name erhalten, damit die historisch geprüfte Deklaration eindeutig auffindbar bleibt; er ist nicht der mathematische Name des Ergebnisses. Die dokumentierten erfolgreichen Workflows geben für diese Deklaration das transitive Profil [propext, Classical.choice, Quot.sound] aus und melden keinen tatsächlichen sorryAx-Fund. Die vollständige Formalisierungsakte enthält die exakten Workflow-Snapshots und bewahrt frühere fehlgeschlagene Beweisskriptversuche als Chronologie. Diese Audits zertifizieren nur diese Deklaration an den jeweils geprüften Quellständen. Sie zertifizieren weder den allgemeinen endlichen Bewertungswortsatz noch die endliche Tail-Partition, die Kollisionsenergie-Identität, die Markovdarstellung oder die globale Collatz-Vermutung.
 
-Das für die Hauptdeklaration in den geprüften Snapshots berichtete transitive Axiomprofil lautet
-\[
-[\texttt{propext},\ \texttt{Classical.choice},\ \texttt{Quot.sound}].
-\]
-Die abgeschlossenen Workflow-Protokolle berichten keinen tatsächlichen Fund von sorryAx im geprüften Satz. Lauf 42725493567 war eine vollständige erneute Prüfung eines dokumentationsbezogenen Nachfolge-Commits des vorherigen Lean-Quellstands; er erweiterte nicht den formalen Umfang des Satzes.
-
-Frühere fehlgeschlagene Versuche bei der Entwicklung der Beweisskripte bleiben in der Projektchronologie erhalten. Sie entwerten nicht die späteren erfolgreichen Audits. Umgekehrt gelten diese Audits nur für die benannte Deklaration und die tatsächlich geprüften Quellstände. Sie zertifizieren weder den allgemeinen Zylindersatz für endliche Bewertungswörter noch die endliche Tail-Partition, den Satz über Terminal-Residue-Kollisionsenergie, die Markovdarstellung oder die globale Collatz-Vermutung.
-
-Projektquellen, Lean-Deklaration, Workflow-Historie und Review-Aufzeichnungen werden im Repository des Autors gepflegt:
-https://github.com/s4ztz4bnf6-maker/Lubuimi/tree/publication/lubuimi-initial-valuation-one-cylinder-2026-11-10.
+Mathematischer Beweis, historische Einordnung und Lean-/CI-Verifikation sind getrennte Aussagen. Ein erfolgreicher Audit dieser Deklaration ist kein Neuheitsnachweis.
 
 ## 10. Literatur
 
-[1] J. C. Lagarias, „The 3x + 1 Problem and Its Generalizations“, The American Mathematical Monthly 92 (1985), Nr. 1, 3–23.
+[1] R. Terras, „A stopping time problem on the positive integers“, *Acta Arithmetica* **30** (1976), 241–252. https://doi.org/10.4064/aa-30-3-241-252
 
-[2] D. J. Bernstein und J. C. Lagarias, „The 3x + 1 Conjugacy Map“, Canadian Journal of Mathematics 48 (1996), Nr. 6, 1154–1169.
+[2] C. J. Everett, „Iteration of the number-theoretic function f(2n) = n, f(2n + 1) = 3n + 2“, *Advances in Mathematics* **25** (1977), Nr. 1, 42–45. https://doi.org/10.1016/0001-8708(77)90087-1
 
-Die Literaturangaben stellen den breiteren Collatz- und 2-adischen dynamischen Kontext bereit. Der Beweis in dieser Arbeit ist eigenständig und stützt sich auf keine der beiden Referenzen.
+[3] J. C. Lagarias, „The 3x + 1 Problem and Its Generalizations“, *The American Mathematical Monthly* **92** (1985), Nr. 1, 3–23, insbesondere Satz B. https://doi.org/10.1080/00029890.1985.11971528
+
+[4] T. Tao, „Almost all orbits of the Collatz map attain almost bounded values“, *Forum of Mathematics, Pi* **10** (2022), e12. https://doi.org/10.1017/fmp.2022.8; arXiv:1909.03562, §1.2 und Proposition 1.9.
+
+Lagarias' Satz B formuliert die explizite Permutationseigenschaft endlicher Paritätsvektoren. Terras und Everett gehören zur klassischen historischen Entwicklung. Tao's Proposition 1.9 betrifft die angenäherte Verteilung endlicher Syracuse-Bewertungsvektoren unter einer Restklassen-Gleichverteilungsvoraussetzung; sie wird nicht als Quelle des exakten Eindeutigkeitssatzes zitiert.
 
 ---
 
 **Autorschaft:** Die mathematische Arbeit und der Satz werden Ta-Yoshua Lubuimi zugeschrieben. KI-Systeme werden, sofern eingesetzt, ausschließlich als Hilfsmittel anerkannt und sind weder Autoren noch Mitautoren oder unabhängige mathematische Verifikatoren.
 
-**Publikationshinweis:** Dies ist ein eigenständiges Forschungsnotiz-/Preprint-Manuskript. Der oben angegebene Formalisierungsnachweis ist an den genannten Snapshots reproduzierbar. Eine Annahme durch eine Fachzeitschrift oder ein unabhängiges Peer Review wird nicht behauptet.
+**Publikationshinweis:** Dies ist eine eigenständige Darstellung und Formalisierung einer klassischen endlichen Kongruenzfolge, kein Neuheits- oder Prioritätsanspruch. Eine Annahme durch eine Fachzeitschrift oder ein unabhängiges Peer Review wird nicht behauptet.
