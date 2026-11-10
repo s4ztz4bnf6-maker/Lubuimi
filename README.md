@@ -43,3 +43,22 @@ No `sorryAx` occurs in either reported transitive axiom profile. This verifies t
 
 The result is finite and conditional: positive valuations on the finite suffix plus exactness at its terminal endpoint imply exactness at every earlier index. It does not establish arbitrary valuation-word realizability, density-to-pointwise transfer, a global finite tail partition, or global Collatz convergence. The authoritative branch `collatz/valuation-cylinders-2026-10-26` remains unchanged. Draft PR #72 remains open and unmerged.
 \n\n### Toolchain audit boundary correction\n\nThe pinned Lean 4.34.1 / Mathlib 4.34.1 environment does not provide `lake check` at all; `lake check --paranoid` therefore fails as an unsupported command, not as a theorem or trust failure. The workflow now omits that unavailable command and instead requires: successful compilation of the declared Lean library, the explicit axiom report for the named theorems, and an automated rejection if `sorryAx` appears in that report. No project-wide paranoid Lake check is claimed for this toolchain.\n
+
+## Finite-depth uniform-fibre partition — kernel-verified candidate branch, 10 November 2026
+
+The isolated branch `collatz/finite-depth-uniform-fibre-2026-11-10` now contains `SyracuseFiniteDepthUniformFibre.lean`. At exact source commit `8a9d2b32a265e70d662aeedd21ec8a3ca9a7e594`, GitHub Actions run `42861207383` completed successfully under Lean 4.34.1 / Mathlib 4.34.1.
+
+The declared library build and the dedicated `#print axioms` step succeeded. The following declarations each have the exact profile `[propext, Classical.choice, Quot.sound]`, with no `sorryAx`:
+
+- `SyracuseUniformFibre.ico_union_adjacent`
+- `SyracuseUniformFibre.childBlocks_tail_partition`
+- `SyracuseUniformFibre.card_childBlock`
+- `SyracuseUniformFibre.card_tailBlock`
+
+The verified statements give the exact union coverage
+`childBlocks Bstar B ∪ tailBlock Bstar B = Finset.range (2 ^ Bstar)`
+for `B ≤ Bstar`, and the dyadic cardinalities
+`card (childBlock Bstar b) = 2 ^ (Bstar - b)` for `1 ≤ b ≤ Bstar`, and
+`card (tailBlock Bstar B) = 2 ^ (Bstar - B)`.
+
+**Scope boundary:** this module has not yet formalized the finite surviving-level tree, the construction of `Bstar` as the maximum cap on that level, pairwise disjointness of all child blocks, rational mass/proportion identities, or the residue-cylinder refinement bijection. It does not identify these atoms with historical APW4 events/BIB slots and does not exclude an infinite surviving path. The authoritative branch `collatz/valuation-cylinders-2026-10-26` remains unchanged; this is a separate candidate branch.
