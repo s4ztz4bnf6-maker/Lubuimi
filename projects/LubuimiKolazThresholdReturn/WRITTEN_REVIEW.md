@@ -25,7 +25,7 @@ The exact integer-only implementation reproduces:
 
 The extended B=511, B=1023, B=2047, B=4095 and B=8191 tables are preserved row-by-row in CSV and checked against fresh enumeration by the regression suite. The B=1023 source x=731 also gives a checked exact valuation word (1,2), cylinder residue 11 mod 16, affine offset identity 8·823=9·731+5, and two signed-margin cap inequalities.
 
-It reproduces every row in the manuscript tables and both extended CSV files. The maximum excursion lengths at B=31,63,127,255,511,1023,2047,4095,8191 are 36,32,25,18,24,50,50,30,45; the maximum heights are 3077,3077,3077,3077,13121,83501,425645,425645,2717873. These statements are restricted to the enumerated source sets.
+It reproduces every row in the manuscript tables and all five extended CSV files. The maximum excursion lengths at B=31,63,127,255,511,1023,2047,4095,8191 are 36,32,25,18,24,50,50,30,45; the maximum heights are 3077,3077,3077,3077,13121,83501,425645,425645,2717873. These statements are restricted to the enumerated source sets.
 
 ## 3. Confluence result
 
@@ -39,11 +39,11 @@ The shared terminal suffix from 155 to 61 is printed explicitly in the manuscrip
 
 ## 4. Limitations
 
-No uniform bound on excursion length or height as B varies has been proved. The finite tables do not establish that all orbits return below every threshold, nor that all orbits reach 1. At B=2047 all 170 enumerated escape sources return below threshold; the maximum observed height is 425645. The integer 1097 appears as the first image T(731) in the B=1023 table and returns to 823 in one further step; this does not resolve the separate earlier 1097 threshold/count lead, which remains unverified. The data are exact computational observations, not a theorem about all starting values.
+No uniform bound on excursion length or height as B varies has been proved. The finite tables do not establish that all orbits return below every threshold, nor that all orbits reach 1. At B=2047 all 170, at B=4095 all 341, and at B=8191 all 682 enumerated escape sources return below threshold. The maximum observed heights at the last three thresholds are 425645, 425645 and 2717873. The integer 1097 appears as the first image T(731) in the B=1023 table and returns to 823 in one further step; this does not resolve the separate earlier 1097 threshold/count lead, which remains unverified. The data are exact computational observations, not a theorem about all starting values.
 
 ## 5. Verification status
 
-The Python script uses integer arithmetic only and no third-party libraries. The project includes a CI workflow that checks the four inline exact tables, the complete B=511 and B=1023 CSV tables, and the named common suffixes. This is reproducibility CI, not Lean kernel verification. No Lean proof is claimed.
+The Python script uses integer arithmetic only and no third-party libraries. The project CI checks the four inline exact tables, the complete B=511, B=1023, B=2047, B=4095 and B=8191 CSV tables, the exact source-set characterization, the power-of-two count formula, and the named common suffixes. This is Python reproducibility CI, not Lean kernel verification of the excursion table enumeration.
 
 **Verdict:** The finite threshold tables and confluence suffixes are exact, reproducible, and worth preserving as a numerical research archive. The general mathematical consequences remain open.
 
@@ -56,13 +56,13 @@ The manuscript now proves that for every positive odd threshold B,
 \[
 E_B=\{x<B:x\equiv3\pmod4,\ 2B\le3x+1\}.
 \]
-For B=2^k-1, k>=2, this yields the exact count |E_B|=floor(2^k/12). This explains the complete arithmetic progression of escape sources and the counts 2,5,10,21,42,85. The implementation now enumerates from this criterion; local regression tests compare it with direct evaluation of T.
+For B=2^k-1, k>=2, this yields the exact count |E_B|=floor(2^k/12). This explains the complete arithmetic progression of escape sources and the counts 2,5,10,21,42,85,170,341,682. The implementation now enumerates from this criterion; local regression tests compare it with direct evaluation of T.
 
 The B=1023 entry x=731 -> z0=1097 -> R=823 has valuation word (1,2), exact cylinder 731=11 mod16, offset identity 8*823=9*731+5=6584, and signed-margin values D0=0,D1=-2 with local cap inequalities 2<=4 and 2<=8. This is an exact finite bridge to the cylinder and margin machinery. It does not resolve the separate archival “1097 threshold/count” lead.
 
 ## 7. CI status
 
-The integer-only script and regression assertions have been locally checked, including all six threshold tables, the CSV data, the source-set characterization, the power-of-two count, and the common-suffix identities. The workflow file is included in the PR, but there is no GitHub Actions run attached yet because the base branch does not contain an existing workflow that can execute this newly introduced workflow on the pull_request event. No GitHub CI pass is claimed.
+The exact-head expanded workflow 42737593864 passed on source head 710fb173c3006bbf622f6b7b3a67ac69907fc783. All nine regression tests passed, including fresh enumeration against all five extended CSV tables, all nine thresholds, the exact source-set characterization, the power-of-two count formula, and the named confluence suffixes. This is Python integer-arithmetic reproducibility CI, not Lean kernel verification of the threshold-return enumeration.
 
 
 ## Exact-head CI result — 10 November 2026
@@ -78,3 +78,8 @@ Workflow 42732216205 passed on source head `821579ea5555a6f5e2e38fa771f8797dc465
 ## Exact-head B=2047 extension result — 10 November 2026
 
 Workflow 42737245099 passed on source head `9081ab4da049f5713dfafa0e7a8fbba6b0b65584`. All eight regression tests passed. The complete B=2047 CSV table contains 170 escape sources; all return below threshold in the finite enumeration. The maximum excursion length is 50 (z0=2111, return 157), and the maximum height is 425645 (z0=2729, 37 steps, return 1067). Two exact B=1023-to-B=2047 common suffixes are verified: length 49 from 2375 to 157, and length 45 from 3007 to 157. This is finite deterministic computation only; no uniform threshold bound or universal Collatz result is claimed.
+
+
+## Exact-head B=4095/B=8191 extension result — 10 November 2026
+
+Workflow 42737593864 passed on code snapshot 710fb173c3006bbf622f6b7b3a67ac69907fc783. The B=4095 archive has 341 sources, maximum length 30 and maximum height 425645; B=8191 has 682 sources, maximum length 45 and maximum height 2717873. The two paths from z0=4607 and z0=10367 share a 29-term suffix ending at 3371. All nine regression tests passed. This is finite exact computation only.
