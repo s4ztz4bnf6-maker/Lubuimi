@@ -4,7 +4,7 @@
 **Naming:** This exact cylinder classification is named in this project in honour of its author.
 
 **Original derivation date:** 9 November 2026  
-**Status:** Mathematical derivation and Lean formalization. The declaration `lubuimi_initial_valuation_one_cylinder` passed two complete exact-commit CI workflows: run `42721006544` on merge commit `44bb2ac` (PR head `013192ce524a4572a9d96c8d4dcb2796830b1f62`) and run `42721305220` on merge commit `3d79761` (PR head `ad7203f5571d03e5989b9ac935b2103300f02409`). Both printed the transitive profile `[propext, Classical.choice, Quot.sound]`; the workflow's explicit complete-log `sorryAx` scans found none. A later documentation-only recheck, run `42721911555`, is in progress. The broader finite valuation-word cylinder partition theorem remains a separate Lean formalization target.
+**Status:** Mathematical derivation and Lean formalization. The declaration `lubuimi_initial_valuation_one_cylinder` passed two complete exact-commit CI workflows: run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) on merge commit `44bb2ac` (PR head `013192ce524a4572a9d96c8d4dcb2796830b1f62`) and run [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220) on merge commit `3d79761` (PR head `ad7203f5571d03e5989b9ac935b2103300f02409`). Both printed the transitive profile `[propext, Classical.choice, Quot.sound]`; the workflow's explicit complete-log `sorryAx` scans found none. The later documentation-only recheck is not needed to establish the theorem's two successful exact-source audits. The broader finite valuation-word cylinder partition theorem remains a separate Lean formalization target.
 
 ## Setup
 
@@ -111,15 +111,9 @@ Therefore the margin becomes positive immediately after that step exactly when
 \]
 This is an exact, start-dependent recovery threshold. It identifies the next quantitative obligation after the initial valuation-one cylinder; it is not a universal claim that the threshold is met.
 
-## Lean formalization target
+## Lean formalization and audit record
 
-Add a theorem to `SyracuseOffsetIdentity.lean` using the existing certified-step hypotheses, proving the cylinder equivalence without introducing a new orbit convention. Then derive the exact-run statement and the margin threshold from the already present declarations:
-- `offset_identity_of_certified_steps`
-- `signed_margin_after_run_of_ones`
-- `signedOffsetMargin_succ`
-- `exact_exponent_residue`
-
-No Lean compile, `#print axioms`, or CI success is claimed by this note.
+The theorem is formalized in `SyracuseOffsetIdentity.lean` as `lubuimi_initial_valuation_one_cylinder`, using the certified-step recurrence and the existing accelerated-odd orbit convention. It passed the two complete exact-commit CI workflows listed above. Both workflows printed the transitive profile `[propext, Classical.choice, Quot.sound]`, and both complete-log scans found no `sorryAx`. This evidence is declaration- and commit-scoped: it verifies the named cylinder theorem and its dependency closure, not the general finite valuation-word theorem or global Collatz descent.
 
 
 ## Generalizations and next incidence layer
