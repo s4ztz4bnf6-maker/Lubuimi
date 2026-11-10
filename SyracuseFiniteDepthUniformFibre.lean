@@ -109,7 +109,7 @@ theorem card_childBlock (Bstar b : ℕ) (hb : 1 ≤ b) (hB : b ≤ Bstar) :
 
 /-- Distinct child blocks are disjoint in increasing exponent order. -/
 theorem childBlock_disjoint (Bstar b₁ b₂ : ℕ)
-    (hb₁ : 1 ≤ b₁) (hb₂ : b₂ ≤ Bstar) (hlt : b₁ < b₂) :
+    (_hb₁ : 1 ≤ b₁) (hb₂ : b₂ ≤ Bstar) (hlt : b₁ < b₂) :
     Disjoint (childBlock Bstar b₁) (childBlock Bstar b₂) := by
   apply Finset.disjoint_left.mpr
   intro x hx₁ hx₂
@@ -152,7 +152,8 @@ theorem childBlock_disjoint_tail (Bstar b B : ℕ)
       2 ^ Bstar - 2 ^ (Bstar - b) ≤
         2 ^ Bstar - 2 ^ (Bstar - B) :=
     Nat.sub_le_sub_left hpow _
-  unfold childBlock tailBlock at hxChild hxTail
+  unfold childBlock at hxChild
+  unfold tailBlock at hxTail
   simp only [Finset.mem_Ico] at hxChild hxTail
   omega
 
