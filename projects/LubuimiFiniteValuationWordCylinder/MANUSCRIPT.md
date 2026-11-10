@@ -2,6 +2,22 @@
 
 **Author:** Ta-Yoshua Lubuimi  
 **Research date:** 10 November 2026  
+**Manuscript status:** Mathematical proof presented in full; Lean formalization remains a separate open verification task.
+
+## Abstract
+
+For the accelerated Syracuse map on positive odd integers, every prescribed finite word of exact 2-adic valuations is realized by precisely one odd residue class modulo a power of two. If the word is \(\alpha=(a_0,\ldots,a_{k-1})\) and \(A=\sum_i a_i\), the modulus is \(2^{A+1}\), and the relative natural density among odd starting values is exactly \(2^{-A}\). The residue is given explicitly by the affine offset cocycle. These cylinders form an exact prefix tree: extending a word by valuation \(b\) multiplies its relative mass by \(2^{-b}\). At every finite cutoff, all valuations above the cutoff combine into one exact tail cylinder, yielding a finite disjoint partition with total mass one. A further signed-margin corollary shows that, for each fixed prefix, a sufficiently high next valuation forces strict descent of the corresponding accelerated odd iterate. The cutoff depends on the prefix, so this local pruning statement does not prove global Collatz descent.
+
+The manuscript gives recursive and affine proofs, exact residue formulas, worked examples, finite tail partition, signed-margin consequences, applications, and a precise account of what remains open for Lean formalization and the global Collatz problem.
+
+**Keywords:** accelerated Syracuse map; Collatz problem; 2-adic valuation; residue classes; exact cylinders; affine cocycle; finite prefix partition; signed margin.
+
+---
+
+# Lubuimi's Finite Valuation-Word Cylinder Partition Theorem
+
+**Author:** Ta-Yoshua Lubuimi  
+**Research date:** 10 November 2026  
 **Status:** Exact mathematical derivation; Lean formalization target, not yet a compiled Lean theorem.
 
 ## 1. Statement
