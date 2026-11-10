@@ -291,3 +291,33 @@ otequiv0pmod3), and (	au_kin U_k) remain open in Lean. The root
 workflow is a compile plus named axiom/`sorryAx` audit; it is not recorded as a
 `lake check --paranoid` pass. The standalone PR #38 k=2 module retains its own
 independent Lean 4.35.0 paranoid pass.
+
+
+## Addendum — explicit inverse formula verified in the root Syracuse module
+
+At exact root commit `b58e1ddc859caaf678c2239c5ed3e952b0ef4ae0`, workflow
+[42743672688](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42743672688)
+passed. The following declarations are now Lean-compiled from the exact affine
+identity:
+- `twoPow_isUnit_mod_threePow`, profile
+  `[propext, Classical.choice, Quot.sound]`;
+- `terminal_residue_eq_offset_mul_inv_of_affine_identity`, profile
+  `[propext, Quot.sound]`.
+
+Thus, for arbitrary natural (C) satisfying the affine identity, the terminal
+state has the exact inverse representation
+[
+n_k = C,(2^A)^{-1}quad	ext{in }mathbb Z/3^kmathbb Z.
+]
+The full log's no-`sorryAx` guard passed. This root workflow is a compile and
+named-axiom audit, not a `lake check --paranoid` pass.
+
+The next exact step is to prove that the canonical offset (C_k) is a unit
+modulo (3^k), so the canonical terminal residue itself belongs to the unit
+group. The declarations `canonicalOffset_not_dvd_three`,
+`canonicalOffset_isUnit_mod_three_pow`, and
+`canonicalTerminalResidue_isUnit` have now been added on root head
+`7a1c174e1c5e70e1b601760db57692009dc1f552`; exact-head run
+[42744418555](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42744418555)
+is still in progress. No unit-group claim for the canonical offset is made
+until that run and its full axiom log pass.
