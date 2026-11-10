@@ -267,3 +267,27 @@ Until the exact workflow result is retrieved, this remains an implemented formal
 The candidate-status paragraphs above describe earlier snapshots and are retained as chronology. The finite k=2 standalone module subsequently passed workflow 42735716873 on source commit 4e30c083f3e1657edd08b0945cdda4e16c8b0e14 with Lean 4.35.0 and Mathlib v4.35.0. All seven declarations (initialRow_sum, rowOne_sum, rowTwo_sum, transitionRow_sum, twoStepNumerator_eq, twoStepMass_eq, twoStepEnergy_eq_five_div_twentyOne) have transitive axiom profile [propext, Classical.choice, Quot.sound]; no actual sorryAx was found, and lake check --paranoid passed.
 
 This closes the finite k=2 formalization target. It does not close the general k-state Markov theorem, the infinite-word collision-energy identity, its truncation theorem, or the APW4/BIB transport.
+
+
+## Addendum — affine terminal congruence now Lean-compiled in the root Syracuse branch
+
+The root Syracuse/Collatz module now proves the multiplicative terminal congruence
+[
+(2^A : mathbb Z/3^kmathbb Z),(n_k : mathbb Z/3^kmathbb Z)
+=(C_k : mathbb Z/3^kmathbb Z)
+]
+from the exact affine identity (2^A n_k=3^k n_0+C_k). The declaration is
+`CollatzSyracuseAudit.terminal_residue_congruence_of_affine_identity`
+in `SyracuseOffsetIdentity.lean`, exact commit
+`db58a4054238e1a52ea935968dc96a7066de20d6`, verified by root workflow
+[42742247801](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42742247801).
+Its transitive axiom profile is `[propext, Quot.sound]`; the complete log has
+no actual `sorryAx`.
+
+This is the multiplicative congruence form of equation (2), not yet the explicit
+inverse formula. The separate obligations `2^A` is a unit modulo (3^k),
+(C_k
+otequiv0pmod3), and (	au_kin U_k) remain open in Lean. The root
+workflow is a compile plus named axiom/`sorryAx` audit; it is not recorded as a
+`lake check --paranoid` pass. The standalone PR #38 k=2 module retains its own
+independent Lean 4.35.0 paranoid pass.
