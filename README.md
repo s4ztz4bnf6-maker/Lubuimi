@@ -343,3 +343,10 @@ Two new declarations have been added immediately before the minimal-counterexamp
 - `every_affine_exponent_is_exact`: uses oddness of the next state and the existing `exponent_is_maximal_of_odd_quotient` lemma to show `2^(a(j)+1)` does not divide `3*n(j)+1`.
 
 These declarations directly address the first two steps of the deterministic-tail proof plan. They do not yet define the canonical successor, prove uniqueness of its odd quotient, identify shifted tails with iterates of that successor, or derive the suffix-return premise from minimality. This is a new Lean source candidate only; no compile, axiom-profile, or paranoid PASS is claimed until exact-head CI runs and logs are inspected.
+
+
+## Parity/exact-valuation source candidate — 10 November 2026
+
+New source head: `a8b593cd8ef59105e6b62b11d0dfc7e41e89a3bb`; workflow [42762395691](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42762395691) has been created with the Lean 4.34.1 build, compile-drafts, and Lean 4.35.0 paranoid jobs queued at the latest poll.
+
+The candidate adds `every_state_odd_of_positive_affine_steps` and `every_affine_exponent_is_exact` to derive the first two links of the deterministic-tail chain. These are not yet verified: the workflow is queued and no compile or axiom output is available. The previous run 42759509255 remains a completed PASS only for its exact earlier source head `b0509fb5944f172ad9f7d71e7316907d4e988842`.
