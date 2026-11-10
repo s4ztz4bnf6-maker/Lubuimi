@@ -3149,4 +3149,103 @@ theorem minimal_counterexample_prefix_cap_tree_and_terminal_unit
 #print axioms minimal_counterexample_prefix_mem_finiteCapTree
 #print axioms minimal_counterexample_prefix_cap_tree_and_terminal_unit
 
+
+/-!
+## Exact scale bridge from Syracuse iterates to terminal residues
+
+Every accelerated odd step removes at least one factor of two. This gives
+an exact rational-scale inequality. Once 2^j exceeds n₀+1, the j-th
+Syracuse iterate lies strictly below 3^j, so its canonical terminal
+residue modulo 3^j has that iterate itself as its least nonnegative
+representative. This connects the terminal-residue strand to actual
+integer orbit values; it is not a descent or termination result.
+-/
+
+/-- A positive Syracuse valuation gives the local scale inequality
+2(n_{j+1}+1) ≤ 3(n_j+1). -/
+theorem syracuse_step_scale_inequality
+    (n a : ℕ → ℕ)
+    (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1)
+    (ha : ∀ j, 0 < a j) (j : ℕ) :
+    2 * (n (j + 1) + 1) ≤ 3 * (n j + 1) := by
+  have hp : 2 ≤ 2 ^ (a j) :=
+    Nat.pow_le_pow_right (by omega : 1 ≤ 2)
+      (Nat.succ_le_iff.mpr (ha j))
+  have hmul :
+      2 * n (j + 1) ≤ 2 ^ (a j) * n (j + 1) :=
+    Nat.mul_le_mul_right (n (j + 1)) hp
+  rw [hstep j] at hmul
+  omega
+
+/-- Iterating the local scale inequality gives
+2^j(n_j+1) ≤ 3^j(n₀+1) for every finite Syracuse prefix. -/
+theorem syracuse_iterate_dyadic_ternary_scale_bound
+    (n a : ℕ → ℕ)
+    (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1)
+    (ha : ∀ j, 0 < a j) :
+    ∀ j, 2 ^ j * (n j + 1) ≤ 3 ^ j * (n 0 + 1) := by
+  intro j
+  induction j with
+  | zero =>
+      simp
+  | succ j ih =>
+      have hlocal := syracuse_step_scale_inequality n a hstep ha j
+      calc
+        2 ^ (j + 1) * (n (j + 1) + 1)
+            = 2 ^ j * (2 * (n (j + 1) + 1)) := by
+                rw [pow_succ]
+                ring
+        _ ≤ 2 ^ j * (3 * (n j + 1)) :=
+          Nat.mul_le_mul_left (2 ^ j) hlocal
+        _ = 3 * (2 ^ j * (n j + 1)) := by ring
+        _ ≤ 3 * (3 ^ j * (n 0 + 1)) :=
+          Nat.mul_le_mul_left 3 ih
+        _ = 3 ^ (j + 1) * (n 0 + 1) := by
+          rw [pow_succ]
+          ring
+
+/-- If the depth is large enough that 2^j > n₀+1, the actual Syracuse
+iterate is smaller than the terminal modulus 3^j. -/
+theorem syracuse_iterate_lt_terminal_modulus
+    (n a : ℕ → ℕ)
+    (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1)
+    (ha : ∀ j, 0 < a j)
+    (j : ℕ) (hdepth : n 0 + 1 < 2 ^ j) :
+    n j < 3 ^ j := by
+  have hscale := syracuse_iterate_dyadic_ternary_scale_bound n a hstep ha j
+  have hprod :
+      2 ^ j * (n j + 1) < 2 ^ j * 3 ^ j := by
+    calc
+      2 ^ j * (n j + 1) ≤ 3 ^ j * (n 0 + 1) := hscale
+      _ < 3 ^ j * 2 ^ j := Nat.mul_lt_mul_left (3 ^ j) hdepth
+      _ = 2 ^ j * 3 ^ j := Nat.mul_comm _ _
+  have hsmall :
+      n j + 1 < 3 ^ j :=
+    (Nat.mul_lt_mul_left (pow_pos (by omega : 0 < (2 : ℕ)) j)).mp hprod
+  omega
+
+/-- At every depth with 2^j > n₀+1, the canonical terminal residue
+has the actual Syracuse iterate as its least nonnegative representative. -/
+theorem canonicalTerminalResidue_val_eq_actual_iterate
+    (n a A : ℕ → ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1)
+    (ha : ∀ j, 0 < a j)
+    (j : ℕ) (hdepth : n 0 + 1 < 2 ^ j) :
+    (canonicalTerminalResidue A j).val = n j := by
+  have hsmall := syracuse_iterate_lt_terminal_modulus n a hstep ha j hdepth
+  have hidentity :=
+    canonical_offset_identity_of_certified_steps n a A hA0 hA hstep j
+  have hres :=
+    terminal_residue_eq_canonicalTerminalResidue_of_affine_identity
+      A j (n 0) (n j) hidentity
+  have hval := congrArg ZMod.val hres
+  simpa only [ZMod.val_natCast_of_lt hsmall] using hval.symm
+
+#print axioms syracuse_step_scale_inequality
+#print axioms syracuse_iterate_dyadic_ternary_scale_bound
+#print axioms syracuse_iterate_lt_terminal_modulus
+#print axioms canonicalTerminalResidue_val_eq_actual_iterate
+
 end CollatzSyracuseAudit
