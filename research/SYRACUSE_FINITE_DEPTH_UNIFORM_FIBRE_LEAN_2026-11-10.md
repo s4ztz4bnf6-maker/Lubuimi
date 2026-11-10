@@ -83,3 +83,19 @@ Two additional declarations were checked:
 Both have profile `[propext, Classical.choice, Quot.sound]`; no `sorryAx` occurs in their transitive axiom reports. Thus the combined retained-child region is now proved disjoint from the terminal tail.
 
 **Still open:** pairwise disjointness of the individual child blocks within `childBlocks`, finite surviving-level construction and maximum cap, rational mass identities, and the residue-cylinder refinement bijection. Do not call the full family a disjoint partition until the internal child-block disjointness theorem is also established.
+
+
+### Follow-up: the dyadic family is now a disjoint partition
+
+The child-block disjointness obligations were closed at exact source commit `f63939af733ff0b33fd28711a9963e14935364ef`. GitHub Actions run `42863922030` completed successfully under Lean 4.34.1 / Mathlib 4.34.1. The full declared library, finite-fibre `sorryAx` rejection, and explicit project axiom report all passed.
+
+The following additional declarations have exact profile `[propext, Classical.choice, Quot.sound]` and no `sorryAx`:
+
+- `SyracuseUniformFibre.childBlock_disjoint`: distinct child blocks are disjoint in increasing exponent order;
+- `SyracuseUniformFibre.childBlock_disjoint_tail`: every retained child block is disjoint from the cutoff tail;
+- `SyracuseUniformFibre.childBlocks_disjoint_next`: each newly appended child block is disjoint from the union of all earlier child blocks;
+- `SyracuseUniformFibre.childBlocks_disjoint_tail`: the combined child region is disjoint from the tail.
+
+Together with `childBlocks_tail_partition`, these establish the exact disjoint dyadic partition of the finite ambient range at every cutoff `B ≤ Bstar`. The previously open *internal child-block disjointness* item is therefore closed for this generic finite interval model.
+
+The next open mathematical bridge is no longer interval partitioning: it is the finite surviving-prefix level and its cap maximum, followed by rational mass identities and the exact residue-cylinder refinement map. Historical APW4 event/BIB identification and infinite-path exclusion remain separate.
