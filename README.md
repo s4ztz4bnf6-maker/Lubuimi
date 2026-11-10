@@ -391,3 +391,8 @@ Exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow [42811286670](ht
 ### PR #62 partial verification update — 10 November 2026
 
 The Lean 4.35.0 paranoid and Lean 4.34.1 kernel-check jobs have both passed on exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`. Both print `[propext, Classical.choice, Quot.sound]` for the two new cap-tree bridge declarations; the paranoid kernel accepted the solution and the no-`sorryAx` guard did not trigger. The `compile-drafts` job `129813061512` remains in progress, so the full three-job result is still pending.
+
+
+### PR #62 complete exact-head result — 10 November 2026
+
+Workflow [42811286670](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42811286670) has now passed all three jobs: compile-drafts, Lean 4.35.0 paranoid, and Lean 4.34.1. Both new declarations `affine_minimal_counterexample_prefix_mem_finiteCapTree` and `affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit` print `[propext, Classical.choice, Quot.sound]`. The compile job completed; the `sorryAx` guards did not trigger; the paranoid kernel accepted the solution. This closes the finite-cap-tree interface formalization at this exact head, but not the global infinite-branch exclusion.
