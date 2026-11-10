@@ -45,7 +45,7 @@ It does not prove that almost every orbit descends, does not eliminate a zero-de
 
 ## 5. Formalization status
 
-The initial all-one specialization has seven successful exact-commit compile/audit snapshots: 42721006544, 42721305220, 42721911555, 42722186081, 42724343412, 42725006480, and 42725493567. Those audits do not cover the general finite-word theorem, the finite tail partition, or the state-dependent cap. The general theorem and these corollaries remain mathematical manuscript results awaiting Lean formalization and exact-commit axiom audit.
+The initial all-one specialization has seven successful exact-commit compile/audit snapshots: 42721006544, 42721305220, 42721911555, 42722186081, 42724343412, 42725006480, and 42725493567. Those audits do not cover the general finite-word theorem, the finite tail partition, or the state-dependent cap. The general cylinder theorem, exact tail partition and formal maximum B_alpha remain mathematical manuscript results awaiting Lean formalization. The algebraic cap equivalence, nonpositive-margin implication for a nondecreasing exact affine endpoint, and next-exponent cap have since been Lean-compiled on exact commit ca48ec7fdad5e8d6f8aeb82fed8586a1b57c12bc (run 42728049650, Lean 4.34.1), each with profile [propext, Classical.choice, Quot.sound] and no actual sorryAx in the full log.
 
 **Verdict:** The general finite-word cylinder theorem and its finite tail partition are mathematically proved in the manuscript. The local tail-margin and finite-branching corollaries follow from the existing signed-margin recurrence. Formal verification of these general results remains open.
 
