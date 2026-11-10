@@ -497,3 +497,18 @@ The manuscript v1.0 in PR #35 has a final documentation commit ddf366d7654a27595
 The standalone PR #38 module `LubuimiTerminalResidueEnergyK2.lean` passed exact-head workflow [42743051889](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42743051889) on source head `6c73f82a5e2eeef44fda294f71986474d2f50988`. The finite rational transition rows modulo 9 are checked exactly; the two-step distribution is `(8,16,11,4,2,22)/63`, and the collision energy is `5/21`. This verifies the named finite k=2 computation only.
 
 It does not verify the general countable-word energy expansion, the general Markov formula, or a universal Collatz theorem. In particular, an average lower bound for the full source distribution cannot rule out a single exceptional infinite valuation word. A survival-restricted energy would be useful only if its prefix admissibility is defined from the exact signed-margin recurrence and an independent, non-tautological upper capacity bound is proved. The APW4/BIB transport remains a heuristic analogy until those Collatz-specific objects and bounds exist.
+
+
+## 12. New finite path lemma programme — 10 November 2026
+
+### Explicit next-valuation bound (PR #42)
+
+Exact-head workflow 42747001077 passed on source head d3b2a55c1987b4a4f2cdbaef2a97486679d68f26. The declarations next_exponent_lt_integer_bound and nondecreasing_orbit_next_exponent_finite_bound have the standard transitive profile [propext, Classical.choice, Quot.sound]. The SyracuseOffsetIdentity.lean no-sorryAx scan passed. The proof derives the integer bound b < 4*2^A - 3D from the existing exponential margin cap. It is pointwise/state-dependent and does not exclude an infinite trajectory.
+
+### Finite cap-tree path certificate (PR #48)
+
+A new Lean candidate defines a prefix state (A,C,D), the exact valuation-word append recurrence, finite cap-compatible children, and a finite tree at every depth. It aims to prove that every prefix of a nondecreasing exact affine path belongs to this tree, and that its terminal value is a unit modulo 3^j under the explicit affine map. Exact source head 82cb74118eff69afd667c0fd827b266d115284ca; workflow 42748141012 queued. This is not yet a verified result.
+
+### Separation from cylinder and energy strands
+
+The general finite valuation-word cylinder theorem remains mathematically proved and documented, but not yet Lean-audited. The dyadic common-fibre cardinality identity is separately Lean-checked. The k=2 terminal-residue energy is separately Lean-checked. PR #48 connects the margin cap to finite valuation-word prefixes and the terminal-residue unit map; it does not use the energy value as a global upper bound. A future bridge to a survival-restricted energy requires an explicit finite map from cap-tree words to terminal-residue places, multiplicity/weight preservation, and an independently proved capacity bound. No average energy estimate is used to exclude one exceptional infinite path.
