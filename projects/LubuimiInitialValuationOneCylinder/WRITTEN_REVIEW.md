@@ -2,7 +2,7 @@
 
 **Author:** Ta-Yoshua Lubuimi  
 **Review date:** 10 November 2026  
-**Review type:** Internal mathematical and formalization review; not independent peer review.
+**Review type:** Internal mathematical and formalization review of manuscript v1.0; not independent peer review.
 
 ## 1. Statement
 
@@ -48,7 +48,7 @@ This theorem classifies the initial valuation-one cylinder exactly. It does not 
 
 ## 5. Publication assessment
 
-The manuscript is self-contained and suitable as a standalone preprint draft for scholarly circulation. It should be presented as a precise local 2-adic classification theorem, not as a solution or partial proof of global Collatz beyond the stated margin corollaries. No journal acceptance, DOI, or independent peer review is claimed.
+The revised manuscript v1.0 is self-contained, includes a literature-context section, exact hypotheses, both directions of the proof, density counting, margin corollary, a worked example, scope limits and an exact-commit verification record. It is suitable for circulation as a research-note preprint. A comprehensive priority/novelty survey and independent peer review are not claimed. It should be presented as a precise local 2-adic classification theorem, not as a solution or partial proof of global Collatz beyond the stated margin corollaries. No journal acceptance, DOI, or independent peer review is claimed.
 
 **Verdict:** The initial valuation-one cylinder theorem is mathematically established and independently Lean-audited on the listed exact snapshots. The wider Collatz programme remains open.
 
