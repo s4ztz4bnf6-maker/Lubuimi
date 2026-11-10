@@ -91,10 +91,11 @@ jobs:
       - name: Install Lean 4.35.0 and select the audited toolchain
         run: |
           curl --fail --location --retry 3 --max-time 60 https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
-          sh elan-init.sh -y --default-toolchain leanprover/lean4:v4.34.1
+          sh elan-init.sh -y --default-toolchain leanprover/lean4:v4.35.0
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
           export PATH="$HOME/.elan/bin:$PATH"
-          echo "leanprover/lean4:v4.34.1" > lean-toolchain
+          echo "leanprover/lean4:v4.35.0" > lean-toolchain
+          sed -i 's/@ "v4.34.1"/@ "v4.35.0"/' lakefile.lean
           lake update
       - name: Install dependencies and restore Mathlib cache
         uses: leanprover/lean-action@v1
