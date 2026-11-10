@@ -107,3 +107,13 @@ The full-source collision lower bound is an average over all valuation words. It
 A genuine Collatz off-diagonal transport would need a separately defined target place/capacity system, with a proved weighted Hall inequality for the surviving non-descending collision events and a capacity budget derived from the signed-margin or descent structure. Assigning each collision to its terminal residue and taking the capacity to be the resulting mass square merely restates (E_k^{m surv}); it gives no independent upper bound and no contradiction.
 
 **Decision:** the finite terminal-residue energy is retained as an exact, separate incidence model. The APW4-style transport analogy is useful as a design constraint, but no BIB-like Collatz capacity or global energy theorem is introduced until a non-tautological target capacity and the required Hall bound are constructed.
+
+
+
+### 7.4 Exact k=2 terminal-residue energy: verified scope and orbitwise limitation
+
+The standalone PR #38 Lean module `LubuimiTerminalResidueEnergyK2.lean` passed exact-head workflow [42743051889](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42743051889) at source head `6c73f82a5e2eeef44fda294f71986474d2f50988`. The completed job compiles the finite rational transition rows modulo 9, verifies their row sums, computes the two-step distribution `(8,16,11,4,2,22)/63`, and proves `twoStepEnergy = 5/21` by exact rational arithmetic. The file prints the axiom profiles for all named declarations. This is an exact finite-state computation for k=2, not a proof of the general countable-source energy identities or any orbitwise Collatz conclusion.
+
+The logical limitation is now made explicit in the research record: the full valuation-word energy and its Cauchy lower bound average over all finite words. A single exceptional infinite trajectory can have cylinder mass tending to zero. Therefore that average lower bound does not exclude one exceptional infinite word. A Collatz proof would require a separate orbitwise implication, such as a uniform finite block with positive signed margin for every non-descending candidate, or a non-tautological survival-event capacity bound derived from the exact margin dynamics. No such uniform implication is presently established.
+
+The APW4 analogy remains a design heuristic only. The terminal-residue places and collision energy are independently defined Syracuse objects; no equality with the historical APW4 BIB reserve or weighted Hall capacity is asserted.
