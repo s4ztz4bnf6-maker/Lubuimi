@@ -178,3 +178,8 @@ This formally verifies one nontrivial finite word and its exact residue cylinder
 ## Local one-step backward lemma — 10 November 2026
 
 Before formalizing the full suffix expansion, the source accumulator recurrence permits a shorter local implication. If `a k ≥ 1` and `C_(k+1) ≡ 2^(A_(k+1)) [MOD 2^(A_(k+1)+1)]`, then `C_k ≡ 2^(A_k) [MOD 2^(A_k+1)]`. The mathematical divisibility proof and target signature are recorded in the companion [backward-step note](https://github.com/s4ztz4bnf6-maker/Lubuimi/blob/collatz/terminal-exact-backward-step-2026-11-10/research/SYRACUSE_TERMINAL_EXACT_BACKWARD_STEP_2026-11-10.md). This is not yet implemented or Lean-compiled. It does not replace the remaining reconstruction, arbitrary-word cylinder, density, or finite-tail formalization obligations.
+
+
+## CI job-level scope correction — 10 November 2026
+
+The current PR #36 branch-head workflow [42835807279](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42835807279) completed at workflow level, but the `compile-drafts`, Lean 4.34 kernel-check, and Lean 4.35 paranoid jobs were **skipped** because the project detector found no Lean project at the checkout root. It is not evidence of Lean compilation of the finite-word theorem. The verified initial all-one special case and the separately verified mixed word `(1,2)` retain their own exact source commits and CI scope. The arbitrary finite-word theorem, density corollary, and finite tail partition remain **OFFEN – NICHT VERIFIZIERT** in Lean.
