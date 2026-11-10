@@ -449,3 +449,12 @@ The declaration printed transitive profile [propext, Classical.choice, Quot.soun
 This is the first formally audited mixed-word instance in the current general finite-word programme. It matches the exact Kolaz witness 731 -> 1097 -> 823 and the general residue formula with total exponent A=3 and offset C=5. The verification is specific to word (1,2); it does not yet formalize arbitrary finite words or the finite tail partition.
 
 The PR #9 branch subsequently received documentation-only commits. The exact Lean source snapshot audited above remains 56c6d6d86fb5122d75f89f5e614f7f333e2d31a9; no claim is made that workflow 42736159935 checked the later documentation-only descendant head.
+
+
+## 18. Finite-depth uniform-fibre construction — APW4 bridge candidate
+
+The new note SYRACUSE_FINITE_DEPTH_UNIFORM_FIBRE_BRIDGE_2026-11-10.md proves a finite-depth uniformization result. For each realized prefix α, the state-dependent cap B_α leaves only the finite candidate child exponents 1,...,B_α; the exact finite-word cylinder theorem gives their masses 2^-b and a single tail mass 2^-B_α. The tail is forced to descend below n₀; children b≤B_α are merely not excluded by the necessary cap and need not all survive.
+
+At any fixed depth k, the set S_k of cap-compatible prefixes is finite. Let B*_k=max B_α on S_k and M_k=2^(B*_k). Every local partition can be refined to the same uniform coordinate set of size M_k: child b receives 2^(B*_k-b) equal micro-atoms and the tail receives 2^(B*_k-B_α). Hence the candidate-survivor subset has exact uniform proportion 1-2^-B_α and its tail complement has proportion 2^-B_α. The micro-atoms correspond to genuine refined residue cylinders.
+
+This is an explicit finite-depth APW4-style uniform-fibre model. It is not yet Lean-formalized and is not the historical APW4 hyperplane-covered set. The original APW4 event-index map, BIB-place identification, original-weight transport, diagonal/off-diagonal inequalities and Hall/capacity proof remain separate obligations. Finite-depth uniformization does not rule out an infinite path through the surviving tree.
