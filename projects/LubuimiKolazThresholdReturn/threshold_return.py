@@ -21,6 +21,48 @@ def T(n: int) -> int:
     return q >> v2(q)
 
 
+def valuation_word(n: int, steps: int) -> tuple[list[int], int]:
+    """Return the exact accelerated valuation word and endpoint."""
+    if n <= 0 or n % 2 == 0 or steps < 0:
+        raise ValueError("expected a positive odd start and nonnegative step count")
+    word = []
+    for _ in range(steps):
+        q = 3 * n + 1
+        a = v2(q)
+        word.append(a)
+        n = q >> a
+    return word, n
+
+
+def offset_margin_certificate(n0: int, word: list[int]) -> dict:
+    """Compute the exact affine offset, cylinder residue, and local margin caps."""
+    A = 0
+    C = 0
+    caps = []
+    for j, a in enumerate(word):
+        D = 2**A - C - 3**j
+        lhs = 2 ** (A + a) + 3 * D
+        rhs = 4 * 2**A
+        caps.append({
+            "j": j, "A": A, "a": a, "C": C, "D": D,
+            "cap_lhs": lhs, "cap_rhs": rhs, "cap_holds": lhs <= rhs,
+        })
+        C = 3 * C + 2**A
+        A += a
+    k = len(word)
+    numerator = 3**k * n0 + C
+    if numerator % (2**A):
+        raise ArithmeticError("word does not divide the affine numerator")
+    endpoint = numerator // (2**A)
+    modulus = 2 ** (A + 1)
+    residue = ((2**A - C) * pow(3**k, -1, modulus)) % modulus
+    return {
+        "k": k, "A": A, "C": C, "endpoint": endpoint,
+        "modulus": modulus, "residue": residue, "caps": caps,
+        "offset_lhs": 2**A * endpoint, "offset_rhs": 3**k * n0 + C,
+    }
+
+
 def trace_excursion(B: int, x: int) -> dict | None:
     """Trace x -> z0=T(x), stopping at the first later iterate below B.
 
