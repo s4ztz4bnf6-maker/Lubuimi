@@ -127,3 +127,10 @@ This induction is a separate Lean declaration. It should call the one-step lemma
 - APW4 is not modified or used as a premise.
 
 **Next gate:** implement the one-step lemma in an isolated Lean module on this branch, run the pinned project toolchain, inspect the named `#print axioms` output, and verify the dependency closure has no `sorryAx). Only then add the backward induction.
+
+
+## Existing build blocker found and isolated repair — 10 November 2026
+
+The first workflow on this branch, [42835859458](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42835859458), failed while compiling the pre-existing `SyracuseAffineCorrectionSum` target at line 108 with `No goals to be solved`. The diagnostic is caused by `simp [affineCorrectionSum]` already closing the goal in `affineCorrectionSum_ge_last_power`, followed by a redundant `omega` tactic.
+
+A minimal source repair was committed on this branch as `b9a89872e39b6688f7c7ef567755beceb0c1e5f9`: the redundant `omega` line was removed and no theorem statement, definition, or hypothesis changed. The updated blob is `251d96781e9bec0e482ca9ef9c6bcbe731156467`. A fresh exact-head workflow is required; the repair is **OFFEN – NICHT VERIFIZIERT** until that run completes. This is a pre-existing compile blocker exposed by the branch build, not a failure of the new backward-step mathematics.
