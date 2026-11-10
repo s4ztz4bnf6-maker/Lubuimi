@@ -36,3 +36,8 @@ This is a genuine finite-place second-moment theorem for Syracuse valuation word
 The general collision-energy and Markov-matrix theorems remain mathematical manuscript derivations and are not yet Lean-compiled or axiom-audited. A separate finite k=2 matrix/distribution/energy module has been submitted for exact-head Lean audit on the Syracuse/Collatz branch; see the formalization-route addendum. It is not yet verified. The initial all-one cylinder theorem and the offset/margin modules have separate successful Lean audits; those do not certify this manuscript.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
+
+
+## Exact-head Lean 4.35.0 verification — 10 November 2026
+
+Standalone workflow 42735188229 passed on commit `26c7b92fd529bf03582995e1bee301b0d07c131c`. Lean 4.35.0 and Mathlib v4.35.0 were used. All seven audited declarations — `initialRow_sum`, `rowOne_sum`, `rowTwo_sum`, `transitionRow_sum`, `twoStepNumerator_eq`, `twoStepMass_eq`, and `twoStepEnergy_eq_five_div_twentyOne` — print the standard transitive profile [propext, Classical.choice, Quot.sound]. The completed log contains no actual `sorryAx` hit. The exact two-step mass is (8,16,11,4,2,22)/63 and the collision energy is 5/21. This is a finite k=2 theorem module; no APW4/BIB identification or global Collatz consequence is claimed.
