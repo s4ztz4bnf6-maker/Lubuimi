@@ -79,3 +79,9 @@ Combined with the exact affine identity and the finite exponent cap, this yields
 ## 6. Next mathematical obligation
 
 Use the actual orbit-value representation of terminal residues to derive a pathwise inequality from the k=2 terminal-residue energy, or prove that no such inequality follows from the current finite-state data. Any transfer must preserve the exact residue indices and weights. The ultimate goal remains exclusion of a nontrivial infinite Syracuse path; the current theorem is only a new finite-prefix bridge.
+
+## Latest exact-head CI update
+
+The latest PR #48 head is e45b372a7727e3fd105df50452e6c43400a3439d. Workflow 42754068650 is running three independent jobs: the Lean 4.34.1 full library/audit job, the focused compile-and-axiom audit, and the Lean 4.35.0 paranoid kernel job. No PASS is claimed yet.
+
+The prior failed build confirmed that the first two scale lemmas themselves compiled with the standard profile [propext, Quot.sound]. The failures were in the downstream terminal-modulus cancellation and the minimal-counterexample prefix theorem's forward reference. Both source defects have been corrected in the commits listed above; this exact-head run is the first verification of the combined corrected state.
