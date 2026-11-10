@@ -35,3 +35,8 @@ The script uses exact integer arithmetic only and has no third-party dependencie
 The value 1097 occurs as z0=T(731) in the B=1023 finite table, with first return 823 after one further step. This does not identify or verify the separate earlier “1097 threshold/count” lead, whose definition remains unresolved.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
+
+
+## Exact-head CI result — 10 November 2026
+
+Expanded reproducibility run 42732032993 on source head `5a01e5e56d203c0ed987f6bb70c1519b107e9f23` passed. Job 129552163491 (`exact-finite-tables`) verified all six thresholds, both complete extended CSV tables, the original and new confluence suffixes, and the B=1023 valuation-word/cylinder/margin certificate. This is finite Python reproducibility CI only; no Lean kernel verification or universal Collatz result is claimed.
