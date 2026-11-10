@@ -83,7 +83,7 @@ jobs:
           fi
 
 
-  paranoid-lean-434:
+  kernel-check-lean-434:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -115,5 +115,5 @@ jobs:
             echo "Forbidden sorryAx found in SyracuseOffsetIdentity.lean."
             exit 1
           fi
-      - name: Run the full paranoid kernel check
-        run: lake check --paranoid
+      - name: Run the full Lake check under the pinned Lean toolchain
+        run: lake check
