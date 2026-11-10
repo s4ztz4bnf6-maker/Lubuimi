@@ -2,7 +2,7 @@ import unittest
 import csv
 from pathlib import Path
 
-from threshold_return import analyze_threshold, common_suffix, row_by_z0
+from threshold_return import (analyze_threshold, common_suffix, row_by_z0,\n                               valuation_word, offset_margin_certificate)
 
 
 EXPECTED = {
@@ -98,6 +98,22 @@ class ThresholdReturnTests(unittest.TestCase):
                 for r in analyze_threshold(B)
             ]
             self.assertEqual(actual, expected)
+
+    def test_b1023_1097_cylinder_and_margin_certificate(self):
+        word, endpoint = valuation_word(731, 2)
+        self.assertEqual(word, [1, 2])
+        self.assertEqual(endpoint, 823)
+        cert = offset_margin_certificate(731, word)
+        self.assertEqual((cert["A"], cert["C"], cert["k"]), (3, 5, 2))
+        self.assertEqual((cert["modulus"], cert["residue"]), (16, 11))
+        self.assertEqual(731 % cert["modulus"], cert["residue"])
+        self.assertEqual(cert["offset_lhs"], cert["offset_rhs"])
+        self.assertEqual(cert["offset_lhs"], 6584)
+        self.assertEqual(
+            [(c["D"], c["cap_lhs"], c["cap_rhs"], c["cap_holds"])
+             for c in cert["caps"]],
+            [(0, 2, 4, True), (-2, 2, 8, True)],
+        )
 
     def test_direct_return_to_one(self):
         row = row_by_z0(255, 341)
