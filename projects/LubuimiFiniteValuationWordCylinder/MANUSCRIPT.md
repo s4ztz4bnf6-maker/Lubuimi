@@ -139,21 +139,31 @@ Every positive odd terminal state has one and only one exact next exponent, so t
 \]
 Thus the finite valuation words form an exact, measure-consistent prefix tree of residue cylinders.
 
-## 6. APW4 interface and the next proof obligation
+## 6. Historical context and priority boundary
 
-This result gives an exact finite source family for an APW4-style incidence analysis:
-- prefix nodes are finite valuation words;
-- each node has a unique residue-class cylinder and exact mass \(2^{-A}\);
-- parent/child incidences have exact relative weights \(2^{-b}\);
-- terminal states and block margins are attached to the same index-preserving word.
+The one-cylinder classification is a classical consequence of parity-vector coding. Let
+\\[
+T(n)=
+\\begin{cases}
+(3n+1)/2,&n\\text{ odd},\\\\
+n/2,&n\\text{ even}.
+\\end{cases}
+\\]
+For the accelerated valuation word \\(\\alpha=(a_0,\\ldots,a_{k-1})\\), define \\(A_0=0\\) and \\(A_{j+1}=A_j+a_j\\). Its exact realization is equivalent to the length-`A+1` parity vector whose entries are (1) exactly at the positions
+\\[
+A_0,A_1,\\ldots,A_k,
+\\]
+and (0) at all intervening positions. During the \\(j\\)-th accelerated block, the first ordinary iterate is odd and the next \\(a_j-1\\) iterates are even; the iterate at time \\(A_{j+1}\\) is the next odd Syracuse value.
 
-The next step is to define a finite incidence matrix between prefix cylinders and terminal-state/collision events, then separate diagonal mass from off-diagonal overlap and identify a genuine BIB/Hall capacity. The APW4 transport theorem can only be applied after an explicit index-preserving map and all its hypotheses have been proved.
+Terras (1976) and Everett (1977) established the finite parity-vector coding; Lagarias (1985, Theorem B) gives a standard explicit account. Kontorovich and Lagarias restate the symbolic-dynamics result as Theorem 2.1 and identify its historical origin. Consequently, the unique residue class modulo \\(2^{A+1}\\) and its density are not claimed here as a new theorem.
 
-A zero-measure exceptional family alone would not exclude an individual integer orbit. The Collatz application must produce a quantitative finite obstruction or a uniform arithmetic lower bound for every hypothetical non-descending integer path.
+Tao (2022, §4, in the proof of Proposition 1.9) also observes that fixing a finite Syracuse valuation tuple constrains the starting value to a single odd residue class modulo \\(2^{|\\mathbf a|+1}\\). Proposition 1.9 itself is a quantitative distribution statement under an approximate-uniformity hypothesis; it should not be misdescribed as merely the exact cylinder theorem.
+
+The purpose of this manuscript is a self-contained derivation in accelerated-valuation coordinates, the explicit affine-offset formula, and a unified presentation of finite tail truncation and signed-margin consequences. No priority claim is made for the classical residue classification, and no eponymous theorem name is used. Any independent novelty claim for additional corollaries requires a separate literature comparison.
 
 ## 7. Formalization target
 
-Add a Lean theorem, named for the author, asserting that for every finite positive exponent word the set of positive odd starts realizing that exact word is one residue class modulo \(2^{A+1}\). Prove it recursively using:
+Add a neutrally named Lean theorem asserting that for every finite positive exponent word the set of positive odd starts realizing that exact word is one residue class modulo \(2^{A+1}\). Prove it recursively using:
 1. invertibility of \(3\) modulo \(2^m\);
 2. exactness of the first valuation from the odd tail residue;
 3. the affine offset identity for the explicit residue formula;
@@ -343,3 +353,12 @@ If a nonterminating positive odd start existed, choose the least such start \(n_
 This is a genuine state-dependent finite-branching reduction. It does **not** give a uniform bound on \(B_\alpha\), does not rule out an infinite path through the surviving children, and does not prove global Collatz. The remaining global task is to exclude every infinite realized path in this constrained tree or derive a further arithmetic obstruction from its recurrence.
 
 **Lean status:** The algebraic cap equivalence, nonpositive-margin implication for a nondecreasing exact affine endpoint, and next-exponent cap are now Lean-compiled on exact source commit ca48ec7fdad5e8d6f8aeb82fed8586a1b57c12bc in workflow 42728049650 (Lean 4.34.1). All three declarations have profile [propext, Classical.choice, Quot.sound], and the complete log has no actual sorryAx occurrence. The existence of the maximum B_alpha, the finite surviving-child set as a formal object, the exact tail-cylinder partition, and the general finite-word cylinder theorem remain unformalized. The initial all-one special case retains seven successful exact-commit Lean audit snapshots.
+
+
+## References
+
+1. R. Terras, “A stopping time problem on the positive integers,” *Acta Arithmetica* 30 (1976), 241–252. https://doi.org/10.4064/aa-30-3-241-252.
+2. C. J. Everett, “Iteration of the number theoretic function \\(f(2n)=n,\\ f(2n+1)=3n+2\\),” *Advances in Mathematics* 25 (1977), 42–45. https://doi.org/10.1016/0001-8708(77)90087-1.
+3. J. C. Lagarias, “The 3x+1 problem and its generalizations,” *The American Mathematical Monthly* 92 (1985), no. 1, 3–23. See Theorem B.
+4. A. V. Kontorovich and J. C. Lagarias, “Stochastic Models for the 3x+1 and 5x+1 Problems,” arXiv:0910.1944 (2009), Theorem 2.1.
+5. T. Tao, “Almost all orbits of the Collatz map attain almost bounded values,” *Forum of Mathematics, Pi* 10 (2022), e12, §4 (proof of Proposition 1.9). https://doi.org/10.1017/fmp.2022.8.
