@@ -6,6 +6,7 @@ on:
       - collatz/compiler-audit-2026-10-19
       - collatz/quarter-descent-lemma-2026-10-20
       - collatz/offset-margin-roadmap-2026-10-23
+      - collatz/terminal-residue-cap-tree-bridge-simpa-v4-2026-11-10
     paths-ignore:
       - "**.md"
   pull_request:
