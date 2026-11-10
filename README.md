@@ -186,3 +186,8 @@ New source head: ffae3ea4ca6fdd54d607d99c846b51fa75519790. New declarations:
 The suffix-return premise is explicit and must still be derived from the actual deterministic Syracuse dynamics and the chosen minimal-counterexample definition. The theorem does not show that the finite tree has no infinite branch. Exact-head workflow 42751669336 is queued; the new declarations are candidates until compile, named axiom audit, no-sorryAx scan, and the supported Lake check finish.
 
 Terminology is now corrected: the old nondecreasing theorem names are compatibility aliases, while the actual hypothesis is that no iterate falls below the initial value. This is the standard lower-bound property relevant to a minimal-counterexample argument, not stepwise monotonicity.
+
+
+## Licensing and attribution
+
+Original Collatz/Syracuse research and Lean source are attributed to Ta-Yoshua Lubuimi. The repository's current licensing status and proposed release choices are recorded in [LICENSING_REGISTER_AND_RELEASE_PLAN_2026-11-10.md](LICENSING_REGISTER_AND_RELEASE_PLAN_2026-11-10.md). No public reuse licence is claimed until the author selects one.
