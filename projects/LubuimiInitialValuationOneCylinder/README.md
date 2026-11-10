@@ -21,6 +21,7 @@ The companion finite exact valuation-word cylinder statement is likewise a direc
 - Lubuimi_Initial_Valuation_One_Cylinder_2026-11-10.md — corrected English research note, version 1.1.
 - Lubuimi_Anfangszyklus_Eins_Zylindersatz_2026-11-10_DE.md — corrected German parallel note, version 1.1-DE.
 - Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md — companion derivation, now explicitly framed as a classical parity-vector consequence and independent exposition.
+- Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md — separate terminal-residue collision-energy derivation; its novelty and formal verification are not asserted by the cylinder results.
 - WRITTEN_REVIEW.md — corrected internal review and scope statement.
 - LEAN_FORMALIZATION_STATUS.md — exact source and CI record, kept separate from mathematical novelty.
 - LITERATURE_AND_ATTRIBUTION_CORRECTION_2026-11-10.md — authoritative correction register.
