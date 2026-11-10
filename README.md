@@ -300,3 +300,10 @@ Current PR #48 source head: 7920b26f8a230c6f9fdc144be40fb2070eba5f00. Exact work
 The workflow source was corrected in commit e95d21771a38c1748169672d326f54162aae4dcd: Lean 4.34.1 no longer invokes the unsupported lake check command; it repeats lake build CollatzAudit instead. The 4.34.1 job is therefore a build/compile check only. The separate 4.35.0 job performs lake check --paranoid.
 
 Previously verified source result remains exact-head scoped: on commit e1fb06eaa07190d8abfb3fc7368f3dc0663a5a66, workflow 42754461228 passed both compile-drafts and Lean 4.35.0 paranoid kernel verification for the finite-cap/minimal-counterexample path declarations. Its 4.34.1 job failed only at the unsupported lake check command. No new PASS is claimed for current head 7920b26f8a230c6f9fdc144be40fb2070eba5f00 until workflow 42756479069 completes.
+
+
+### Exact-head status update — 10 November 2026
+
+PR #48 is currently at exact head `cbe9f19b9ba1bd4bad290b1cbc56da2881c238b8`. Its own workflow [42757504798](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42757504798) has three jobs — `kernel-check-lean-435-paranoid`, `compile-drafts`, and `kernel-check-lean-434` — all QUEUED at the latest poll. This head has no new compile, axiom, or paranoid PASS yet. Previously verified finite-cap path declarations on the earlier exact head remain valid at that earlier scope and are not downgraded by this pending run.
+
+The current conditional minimal-counterexample wrapper still assumes the suffix-return premise. A concrete Lean target is to derive it from the actual accelerated Syracuse dynamics: `2^(a j) * n(j+1) = 3*n(j)+1` and `0<a j` imply `n j` is odd; oddness of `n(j+1)` then makes the quotient odd and `a j` the exact 2-adic valuation. Prove the shifted tail is therefore the deterministic Syracuse orbit from `n j`. Minimality among odd nonterminating starting values can then yield the suffix-return premise. This is a proof plan, not a completed theorem. The finite cap tree still gives only finite-depth membership and does not exclude an infinite branch.
