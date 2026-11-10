@@ -308,3 +308,8 @@ Workflow source commit: e95d21771a38c1748169672d326f54162aae4dcd. Exact-head CI 
 - The separate Collatz documentation workflow on commit 54d9e0aab85982387585eb8fd403c6306aeb9742 also has all three jobs queued. No result is claimed until those jobs complete.
 - Established initial-cylinder, valuation-bound, offset, strict-margin, mixed valuation-word (1,2) residue-11-mod-16, and dyadic uniform-fibre cardinality results remain separate results with their prior verification records. The finite cap-tree terminal-path statement is a finite structural result, not a global Collatz proof.
 - Kolaz PR #39 workflow 42739986917 passed finite-table reproducibility checks only; this is not a Lean kernel check or a proof of the global conjecture.
+
+
+## Latest branch and run identifiers — 10 November 2026
+
+The PR #48 branch now includes documentation snapshot head 9ee3a7c92ac16c3b0f20cbb1e8cef27b1a3241bf; the latest code-bearing finite-cap-tree source head remains 7920b26f8a230c6f9fdc144be40fb2070eba5f00. Workflow 42755702331 has compile-drafts and Lean 4.34.1 build jobs in progress, with Lean 4.35.0 paranoid queued. A second workflow on the documentation-updated head, 42756847368, is queued with all three jobs. No PASS is claimed for either current run yet.
