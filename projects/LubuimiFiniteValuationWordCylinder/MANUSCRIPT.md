@@ -146,22 +146,22 @@ Thus the finite valuation words form an exact, measure-consistent prefix tree of
 ## 6. Historical context and priority boundary
 
 The one-cylinder classification is a classical consequence of parity-vector coding. Let
-\\[
+\[
 T(n)=
-\\begin{cases}
-(3n+1)/2,&n\\text{ odd},\\\\
-n/2,&n\\text{ even}.
-\\end{cases}
-\\]
-For the accelerated valuation word \\(\\alpha=(a_0,\\ldots,a_{k-1})\\), define \\(A_0=0\\) and \\(A_{j+1}=A_j+a_j\\). Its exact realization is equivalent to the length-\\(A+1\\) parity vector whose entries are one exactly at the positions
-\\[
-A_0,A_1,\\ldots,A_k,
-\\]
-and zero at all intervening positions. During the \\(j\\)-th accelerated block, the first ordinary iterate is odd and the next \\(a_j-1\\) iterates are even; the iterate at time \\(A_{j+1}\\) is the next odd Syracuse value.
+\begin{cases}
+(3n+1)/2,&n\text{ odd},\\
+n/2,&n\text{ even}.
+\end{cases}
+\]
+For the accelerated valuation word \(\alpha=(a_0,\ldots,a_{k-1})\), define \(A_0=0\) and \(A_{j+1}=A_j+a_j\). Its exact realization is equivalent to the length-\(A+1\) parity vector whose entries are one exactly at the positions
+\[
+A_0,A_1,\ldots,A_k,
+\]
+and zero at all intervening positions. During the \(j\)-th accelerated block, the first ordinary iterate is odd and the next \(a_j-1\) iterates are even; the iterate at time \(A_{j+1}\) is the next odd Syracuse value.
 
-Terras (1976) and Everett (1977) established the finite parity-vector coding; Lagarias (1985, Theorem B) gives a standard explicit account. Kontorovich and Lagarias restate the symbolic-dynamics result as Theorem 2.1 and identify its historical origin. Consequently, the unique residue class modulo \\(2^{A+1}\\) and its density are not claimed here as a new theorem.
+Terras (1976) and Everett (1977) established the finite parity-vector coding; Lagarias (1985, Theorem B) gives a standard explicit account. Kontorovich and Lagarias restate the symbolic-dynamics result as Theorem 2.1 and identify its historical origin. Consequently, the unique residue class modulo \(2^{A+1}\) and its density are not claimed here as a new theorem.
 
-Tao (2022, §4, in the proof of Proposition 1.9) also observes that fixing a finite Syracuse valuation tuple constrains the starting value to a single odd residue class modulo \\(2^{|\\mathbf a|+1}\\). Proposition 1.9 itself is a quantitative distribution statement under an approximate-uniformity hypothesis; it should not be misdescribed as merely the exact cylinder theorem.
+Tao (2022, §4, in the proof of Proposition 1.9) also observes that fixing a finite Syracuse valuation tuple constrains the starting value to a single odd residue class modulo \(2^{|\mathbf a|+1}\). Proposition 1.9 itself is a quantitative distribution statement under an approximate-uniformity hypothesis; it should not be misdescribed as merely the exact cylinder theorem.
 
 The purpose of this manuscript is a self-contained derivation in accelerated-valuation coordinates, the explicit affine-offset formula, and a unified presentation of finite tail truncation and signed-margin consequences. No priority claim is made for the classical residue classification, and no eponymous theorem name is used. Any independent novelty claim for additional corollaries requires a separate literature comparison.
 
