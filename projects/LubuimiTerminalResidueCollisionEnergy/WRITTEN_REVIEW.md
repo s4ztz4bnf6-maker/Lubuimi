@@ -74,3 +74,8 @@ The manuscript now prints the exact transition matrix in column order \(1,2,4,5,
 ## Exact-head Lean 4.35.0 verification — 10 November 2026
 
 Standalone workflow 42735188229 passed on commit `26c7b92fd529bf03582995e1bee301b0d07c131c`. Lean 4.35.0 and Mathlib v4.35.0 were used. All seven audited declarations — `initialRow_sum`, `rowOne_sum`, `rowTwo_sum`, `transitionRow_sum`, `twoStepNumerator_eq`, `twoStepMass_eq`, and `twoStepEnergy_eq_five_div_twentyOne` — print the standard transitive profile [propext, Classical.choice, Quot.sound]. The completed log contains no actual `sorryAx` hit. The exact two-step mass is (8,16,11,4,2,22)/63 and the collision energy is 5/21. This is a finite k=2 theorem module; no APW4/BIB identification or global Collatz consequence is claimed.
+
+
+## Chronology correction — finite k=2 formalization completed
+
+The earlier review verdict that the collision-energy manuscript had not yet been Lean-compiled is superseded only for the finite k=2 matrix/distribution/energy submodule. Standalone workflow 42735716873 passed on source commit 4e30c083f3e1657edd08b0945cdda4e16c8b0e14 with Lean/Mathlib 4.35.0. Seven declarations were compiled and axiom-audited with [propext, Classical.choice, Quot.sound]; the completed log had no actual sorryAx and lake check --paranoid passed. The general k theorem, countable-word energy identity and APW4/BIB identification remain open formalization/research tasks.
