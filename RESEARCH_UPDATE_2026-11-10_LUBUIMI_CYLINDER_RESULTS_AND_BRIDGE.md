@@ -114,3 +114,8 @@ Use descriptive mathematical labels only: “initial valuation-one cylinder clas
 ## Initial-cylinder editorial reconciliation — 10 November 2026
 
 The review checklist for the initial valuation-one note has been checked against the current manuscript and recorded in `projects/LubuimiInitialValuationOneCylinder/REVIEW_RECONCILIATION_2026-11-10.md`. The note now has corrected formula typesetting, the explicit `D_j > 0` descent implication, neutral exact-run terminology, no irrelevant APW4 cross-reference, and a source-scoped Lean record. The general finite-word theorem and finite tail partition remain separate Lean obligations. This editorial update does not alter the APW4 proof record or claim global Collatz convergence.
+
+
+## CI job-level correction — 10 November 2026
+
+The PR #35 workflow runs 42827159570 and 42835418762 completed as workflows but skipped `compile-drafts`, Lean 4.34 kernel-check, and Lean 4.35 paranoid jobs because the project detector found no Lean project at the checkout root. They are not Lean verification evidence. The neutral initial-cylinder declaration remains independently verified by run 42809750956 on source commit `5f6e46de8bed7061f8336089857143c54e997af5`. The general finite-word theorem remains unverified in Lean.
