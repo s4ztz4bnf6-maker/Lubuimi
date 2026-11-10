@@ -517,3 +517,12 @@ The general finite valuation-word cylinder theorem remains mathematically proved
 ## 13. Finite cap-tree audit correction — 10 November 2026
 
 The earlier cap-tree build exposed a duplicate explicit ext theorem and a type mismatch in the coordinate-state induction. The duplicate declaration was removed, preserving the existing structure extensionality theorem. Current exact head: 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb; workflow 42749969443 is in progress. The new paranoid job is pinned to the repository's Lean/Mathlib 4.34.1 pair. No kernel PASS or global Collatz conclusion is claimed at this point.
+
+
+## 14. Verified finite cap-tree path certificate — 10 November 2026
+
+The exact code head 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb passed the complete compile-drafts job in workflow 42749969443. The five new declarations in SyracuseOffsetIdentity.lean compiled; their profiles are [propext, Quot.sound] for finiteCapPrefixState_eq_actual and [propext, Classical.choice, Quot.sound] for the child-bound, path-embedding, terminal-residue-unit, and combined certificate theorems. The exact source-file sorryAx scan passed.
+
+The additional 4.34.1 job did not run a paranoid check because that Lake version rejects --paranoid. The workflow was changed to the supported lake check; run 42750825692 is queued. The prior 4.35.0 attempt failed inside Mathlib Cache/Requests.lean, not in the new project declarations.
+
+Mathematical scope: every prefix of a hypothetical nondecreasing exact affine Syracuse path belongs to a finite state-dependent cap tree, and the endpoint is a unit modulo 3^j. This does not rule out an infinite branch and does not prove global Collatz.
