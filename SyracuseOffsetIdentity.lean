@@ -2527,3 +2527,63 @@ theorem terminalResidue_mul_modEq_of_offset_identity
 #print axioms terminalResidue_mul_modEq_of_offset_identity
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- The nonpositive next signed margin is exactly the finite exponent-cap
+inequality. This is the algebraic form of the state-dependent pruning bound. -/
+theorem signedOffsetMargin_nonpos_succ_iff_exponent_cap
+    (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (n : ℕ) :
+    signedOffsetMargin A (n + 1) ≤ 0 ↔
+      (2 : ℤ) ^ (A n + a n) +
+          3 * signedOffsetMargin A n ≤ 4 * (2 : ℤ) ^ A n := by
+  rw [signedOffsetMargin_succ A a hA n, pow_add]
+  constructor <;> intro h <;> nlinarith
+
+#print axioms signedOffsetMargin_nonpos_succ_iff_exponent_cap
+
+/-- A nondecreasing endpoint of an exact affine Syracuse block must have
+nonpositive signed margin. Positive margin would force strict descent. -/
+theorem signedOffsetMargin_nonpos_of_nondecreasing_orbit
+    (n₀ nⱼ : ℕ) (A : ℕ → ℕ) (j : ℕ)
+    (hn₀ : 1 < n₀) (hj : 0 < j)
+    (hoffset :
+      2 ^ A j * nⱼ = 3 ^ j * n₀ + canonicalOffset A j)
+    (hnondecreasing : n₀ ≤ nⱼ) :
+    signedOffsetMargin A j ≤ 0 := by
+  by_contra hnot
+  have hpositive : 0 < signedOffsetMargin A j := by omega
+  have hdescent :=
+    certified_block_descent_of_positive_signed_margin
+      n₀ nⱼ A j hn₀ hj hoffset hpositive
+  omega
+
+#print axioms signedOffsetMargin_nonpos_of_nondecreasing_orbit
+
+/-- Exact state-dependent cap for the next valuation along a nondecreasing
+odd-orbit endpoint. This is a necessary condition, not a sufficient one:
+values satisfying the inequality may still descend for other reasons. -/
+theorem nondecreasing_orbit_next_exponent_cap
+    (n₀ nnext : ℕ) (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (j : ℕ) (hn₀ : 1 < n₀)
+    (hoffset :
+      2 ^ A (j + 1) * nnext =
+        3 ^ (j + 1) * n₀ + canonicalOffset A (j + 1))
+    (hnondecreasing : n₀ ≤ nnext) :
+    (2 : ℤ) ^ (A j + a j) +
+        3 * signedOffsetMargin A j ≤ 4 * (2 : ℤ) ^ A j := by
+  have hnext : signedOffsetMargin A (j + 1) ≤ 0 :=
+    signedOffsetMargin_nonpos_of_nondecreasing_orbit
+      n₀ nnext A (j + 1) hn₀ (by omega) hoffset hnondecreasing
+  have hcap :=
+    (signedOffsetMargin_nonpos_succ_iff_exponent_cap A a hA j).1
+      (by simpa using hnext)
+  exact hcap
+
+#print axioms nondecreasing_orbit_next_exponent_cap
+
+end CollatzSyracuseAudit
