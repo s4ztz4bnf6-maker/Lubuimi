@@ -190,3 +190,10 @@ A corresponding arithmetic lemma has been added to SyracuseOffsetIdentity.lean a
 \sum_{b=1}^{B}2^{B^*-b}+2^{B^*-B}=2^{B^*}
 \]
 for (B\leq B^*\). Exact source head a1becbc8e837f10abcd952a2e03832cb057fb2b8 is under compile/axiom workflow 42738528207. The result is pending; no Lean verification is claimed. A pass would certify only this counting identity, not the full dependent uniform-fibre construction or APW4 historical transport.
+
+
+## 9. Lean result for the cardinality conservation law
+
+The finite count lemma dyadicUniformFibre_partition_card has now passed compile-drafts workflow 42738528207 on exact source commit a1becbc8e837f10abcd952a2e03832cb057fb2b8. Its transitive profile is [propext, Classical.choice, Quot.sound]; the complete log contains no actual sorryAx occurrence and reports successful completion of the 8,932-job build.
+
+This verifies the algebraic cardinality identity only. The dependent cap maximum, finite surviving tree, interval partition and residue-cylinder bijection are not yet Lean-formalized. The APW4 historical hyperplane/BIB map remains open.
