@@ -326,3 +326,36 @@ This set is finite for every fixed prefix because the left-hand power of two ten
 If a counterexample to eventual termination exists, choose the least positive odd counterexample n_0 by well-ordering. Its accelerated odd orbit cannot fall below n_0, since any smaller positive odd iterate would terminate by minimality and would force the original orbit to terminate as well. Thus a least counterexample determines an infinite path through the prefix tree in which, at every node (A,D), the next letter b is restricted to the finite set \(\mathcal B(A,D)\).
 
 This is a stronger structural reduction than merely saying that a sufficiently high valuation descends: it gives an explicit finite branching rule for every hypothetical non-descending trajectory. It still does not rule out an infinite path through the resulting state-dependent finite sets. The remaining global problem is to prove that this constrained tree has no infinite realized path, or to derive a uniform arithmetic obstruction from its recurrence.
+
+
+## 13. Exact finite cap for a non-descending next valuation
+
+The tail-margin certificate can be stated as an exact necessary cap on any next valuation along a trajectory that has not yet descended below its initial value.
+
+For a prefix \(\alpha\) with total exponent \(A\) and signed margin \(D=D(\alpha)\), extension by exponent \(b\ge1\) has
+\[
+D(\alpha b)=3D+(2^b-4)2^A.
+\]
+Positive next margin forces strict descent. Therefore, if an extension does **not** descend below its initial odd start, it is necessary that
+\[
+D(\alpha b)\le0.
+\]
+Equivalently,
+\[
+\boxed{2^{A+b}+3D\le4\cdot2^A.}
+\]
+For each fixed prefix, this inequality permits only finitely many positive integers \(b\), because \(2^{A+b}\) tends to infinity. Define the local cap
+\[
+B_\alpha=\max\bigl(\{b\ge1:2^{A+b}+3D\le4\cdot2^A\}\cup\{0\}\bigr).
+\]
+Then every next valuation on a non-descending path must satisfy \(1\le b\le B_\alpha\). If \(B_\alpha=0\), no non-descending next valuation is possible.
+
+When \(B_\alpha\ge1\), the exact children \(b=1,\ldots,B_\alpha\) have total relative parent mass
+\[
+\sum_{b=1}^{B_\alpha}2^{-b}=1-2^{-B_\alpha},
+\]
+and the complementary single tail cylinder \(b\ge B_\alpha+1\) has relative mass \(2^{-B_\alpha}\). Every start in that tail has positive next margin and strict descent. Thus the local cap and the exact tail-cylinder partition are two sides of the same finite-pruning statement.
+
+For a least hypothetical nonterminating odd start, every accelerated odd iterate must remain at least the initial start; otherwise a smaller nonterminating start would contradict minimality. Its valuation sequence would therefore define an infinite path in the state-dependent tree whose node \(\alpha\) has at most \(B_\alpha\) possible non-descending children. This is a genuine finite-branching reduction.
+
+**What remains open.** The cap \(B_\alpha\) depends on the current prefix. The theorem does not give a uniform bound on all \(B_\alpha\), does not rule out an infinite path through the surviving finite children, and does not prove global Collatz. A further argument must exclude such an infinite path or show that its weights/margins cannot persist.
