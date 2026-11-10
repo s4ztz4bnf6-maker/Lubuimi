@@ -71,3 +71,8 @@ Expanded reproducibility run 42732032993 on source head `5a01e5e56d203c0ed987f6b
 ## Exact-head expanded reproducibility result — 10 November 2026
 
 Workflow 42732216205 passed on source head `821579ea5555a6f5e2e38fa771f8797dc4650106`. All seven regression tests passed, including the complete B=511 and B=1023 CSV tables, the two new cross-threshold confluence suffixes, and the exact x=731 valuation-word/cylinder/offset/signed-margin certificate. This is Python integer-arithmetic reproducibility only. The current PR head may advance with documentation-only changes; the exact code/test commit above is the verified snapshot.
+
+
+## Exact-head B=2047 extension result — 10 November 2026
+
+Workflow 42737245099 passed on source head `9081ab4da049f5713dfafa0e7a8fbba6b0b65584`. All eight regression tests passed. The complete B=2047 CSV table contains 170 escape sources; all return below threshold in the finite enumeration. The maximum excursion length is 50 (z0=2111, return 157), and the maximum height is 425645 (z0=2729, 37 steps, return 1067). Two exact B=1023-to-B=2047 common suffixes are verified: length 49 from 2375 to 157, and length 45 from 3007 to 157. This is finite deterministic computation only; no uniform threshold bound or universal Collatz result is claimed.
