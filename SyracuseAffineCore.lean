@@ -165,6 +165,14 @@ theorem constant_valuation_one_identity
                 ring
 
 
+/-- A natural number q is odd whenever 3*q+1 is divisible by two.
+This elementary parity fact is isolated from the larger arithmetic context
+so the Presburger solver sees only the two relevant variables. -/
+private theorem odd_of_two_dvd_three_mul_add_one
+    (q : Nat) (h : 2 ∣ 3 * q + 1) : ∃ r, q = 2 * r + 1 := by
+  obtain ⟨s, hs⟩ := h
+  omega
+
 /--
 Backward propagation of exact terminal parity through one affine Syracuse
 accumulator step.  The terminal congruence at k+1 and positivity of a k
@@ -203,8 +211,10 @@ theorem terminalExact_backward_step
         (Nat.pow_dvd_pow 2 (by omega : A + 1 ≤ B + 1)) _
   have hdivSmall : 2 ^ A ∣ 3 * C + 2 ^ A := by
     exact dvd_trans (Nat.pow_dvd_pow 2 (Nat.le_succ A)) hdiv
+  have hdivSmall' : 2 ^ A ∣ 2 ^ A + 3 * C := by
+    simpa [Nat.add_comm] using hdivSmall
   have hdivThree : 2 ^ A ∣ 3 * C := by
-    exact (Nat.dvd_add_iff_right (Nat.dvd_refl (2 ^ A))).mpr hdivSmall
+    exact (Nat.dvd_add_iff_right (Nat.dvd_refl (2 ^ A))).mpr hdivSmall'
   have hcop : (2 ^ A).Coprime 3 := by
     exact Nat.Coprime.pow_left A (by norm_num : Nat.Coprime 2 3)
   have hdivC : 2 ^ A ∣ C :=
@@ -219,12 +229,8 @@ theorem terminalExact_backward_step
   have hparity : 2 ∣ 3 * q + 1 := by
     rw [pow_succ] at hstrong
     exact (Nat.mul_dvd_mul_iff_left (by positivity : 0 < 2 ^ A)).mp hstrong
-  have hqOdd : ∃ r, q = 2 * r + 1 := by
-    have hparity' : 2 ∣ 3 * q + 1 := hparity
-    clear hterminal hAB hterm hdecomp hdiv hdivSmall hdivThree hcop hq
-      hfactor hstrong hparity
-    obtain ⟨s, hs⟩ := hparity'
-    omega
+  have hqOdd : ∃ r, q = 2 * r + 1 :=
+    odd_of_two_dvd_three_mul_add_one q hparity
   obtain ⟨r, hr⟩ := hqOdd
   have hC : C = 2 ^ (A + 1) * r + 2 ^ A := by
     rw [hq, hr, pow_succ]
