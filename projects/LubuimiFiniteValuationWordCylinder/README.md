@@ -48,3 +48,8 @@ This formally verifies one nontrivial finite word and its exact residue cylinder
 ## Terminal exactness backward-step design — 10 November 2026
 
 A local one-step implication has now been derived from the existing affine accumulator recursion: terminal exactness at `k+1`, together with `a k ≥ 1`, forces exactness at `k`. The proof uses divisibility by `2^(A_k+1)`, coprime cancellation for `3` and `2^A_k`, and an explicit odd-quotient argument. The derivation and intended Lean signature are recorded in the companion research branch at [SYRACUSE_TERMINAL_EXACT_BACKWARD_STEP_2026-11-10.md](https://github.com/s4ztz4bnf6-maker/Lubuimi/blob/collatz/terminal-exact-backward-step-2026-11-10/research/SYRACUSE_TERMINAL_EXACT_BACKWARD_STEP_2026-11-10.md). This is a proof design, not a Lean result; the one-step declaration and finite backward induction remain **OFFEN – NICHT VERIFIZIERT**.
+
+
+## CI job-level scope correction — 10 November 2026
+
+The current PR #36 branch-head workflow [42835807279](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42835807279) completed at workflow level, but the `compile-drafts`, Lean 4.34 kernel-check, and Lean 4.35 paranoid jobs were **skipped** because the project detector found no Lean project at the checkout root. It is not evidence of Lean compilation of the finite-word theorem. The verified initial all-one special case and the separately verified mixed word `(1,2)` retain their own exact source commits and CI scope. The arbitrary finite-word theorem, density corollary, and finite tail partition remain **OFFEN – NICHT VERIFIZIERT** in Lean.
