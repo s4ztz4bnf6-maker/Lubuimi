@@ -2,7 +2,7 @@
 
 **Author:** Ta-Yoshua Lubuimi  
 **Project date:** 10 November 2026  
-**Status:** Standalone mathematical project and preprint manuscript draft.
+**Status:** Standalone mathematical project; manuscript version 1.0 prepared as a self-contained research note/preprint.
 
 This project isolates and documents the exact initial valuation-one cylinder theorem for accelerated Syracuse orbits. It is a self-contained research subproject within the author's Collatz–Syracuse repository; it does not replace or detach the result from the larger Collatz/Syracuse programme.
 
@@ -18,7 +18,7 @@ Thus the initial run length is exactly `v₂(n₀+1) − 1`.
 
 ## Contents
 
-- `Lubuimi_Initial_Valuation_One_Cylinder_2026-11-10.md` — self-contained manuscript draft.
+- `Lubuimi_Initial_Valuation_One_Cylinder_2026-11-10.md` — version 1.0 research-note manuscript, with complete two-way proof, density corollaries, signed-margin consequence, references, scope statement and exact Lean verification record.
 - `WRITTEN_REVIEW.md` — internal mathematical and formalization review, with scope and verification boundaries.
 - `Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md` — stronger companion theorem for every finite positive valuation word.
 - `Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md` — exact finite-place incidence and diagonal/off-diagonal collision energy identity.
@@ -52,7 +52,7 @@ All seven full workflows completed successfully. The transitive axiom profile fo
 
 The broader finite valuation-word partition theorem, finite tail-cylinder partition, terminal-residue collision energy and finite Markov matrix remain separate Lean formalization targets. The APW4–Syracuse cylinder–energy bridge remains a research programme, not a theorem used in the initial-cylinder proof.
 
-The manuscript is a self-contained preprint draft for scholarly circulation and review. No journal acceptance, DOI, or independent peer review is claimed. The result is named **Lubuimi's Initial Valuation-One Cylinder Theorem** and attributed to Ta-Yoshua Lubuimi. AI systems are assistants only, never authors or independent mathematical verifiers.
+The manuscript is a self-contained research note/preprint prepared for scholarly circulation. No journal acceptance or independent peer review is claimed. No journal acceptance, DOI, or independent peer review is claimed. The result is named **Lubuimi's Initial Valuation-One Cylinder Theorem** and attributed to Ta-Yoshua Lubuimi. AI systems are assistants only, never authors or independent mathematical verifiers.
 
 ## Rights
 
