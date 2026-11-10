@@ -365,3 +365,16 @@ The next global proof obligation remains to derive the suffix-return premise fro
 The failed candidate `a8b593cd8ef59105e6b62b11d0dfc7e41e89a3bb` / workflow 42762395691 is diagnosed at `SyracuseOffsetIdentity.lean:3095`: `omega` cannot derive `a j ≠ 0` from the quantified strict-positivity assumption. Both new declarations therefore remain unverified at that source head, and the error-recovery axiom output contains `sorryAx`. The candidate repair `7d17d7111946b328421f9046f95b03c939dfddb1` (PR #53; run 42805867475) uses `Nat.ne_of_gt (ha j)`; all three exact-head jobs were in progress at the latest poll. No pass is claimed.
 
 The earlier run 42759509255 on `b0509fb5944f172ad9f7d71e7316907d4e988842` passed all three jobs and remains valid for its exact scope. The conditional suffix-return premise remains open. Oddness, exact valuation, deterministic tail identification, and minimality must all be proved; even after those steps, finite cap-tree membership does not exclude an infinite branch. Preserve all earlier verified results independently; do not infer a global Collatz proof from these local components.
+## Exact-head repair result — 10 November 2026
+
+Workflow [42805867475](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42805867475) completed successfully on exact source commit `7d17d7111946b328421f9046f95b03c939dfddb1`. All three jobs passed: Lean 4.34.1 kernel/build check, `compile-drafts`, and Lean 4.35.0 paranoid kernel check.
+
+The named declaration outputs are:
+
+- `CollatzSyracuseAudit.every_state_odd_of_positive_affine_steps`: `[propext, Quot.sound]`.
+- `CollatzSyracuseAudit.every_affine_exponent_is_exact`: `[propext, Classical.choice, Quot.sound]`.
+- `CollatzSyracuseAudit.orbit_lower_bound_of_minimal_counterexample`: no axioms, but still conditional on its explicit suffix-return premise.
+
+The completed Lean 4.35.0 log explicitly reports `Lean paranoid kernel accepts the solution`. The `sorryAx` guard passed for `SyracuseOffsetIdentity.lean`; no actual `sorryAx` dependency is reported for the two new declarations. This verifies these two named affine/parity lemmas on this exact source head and the listed toolchains only.
+
+The global Collatz conjecture remains open. The suffix-return premise still must be derived from deterministic Syracuse dynamics and minimality, and a separate well-founded descent/ranking or other infinite-branch exclusion is still required.
