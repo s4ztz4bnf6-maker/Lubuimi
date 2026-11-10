@@ -319,6 +319,20 @@ The identifier is retained as the literal source-level name needed to locate the
 
 The mathematical proof, historical attribution, and Lean/CI verification are separate claims. A successful audit of this declaration is not evidence of novelty.
 
+### Current neutral Lean declaration — 10 November 2026
+
+The historical declaration above remains part of the source and audit chronology. A later source change introduced the neutral declaration name
+
+    theorem initial_valuation_one_cylinder_iff_dyadic_divisibility
+        (n a : ℕ → ℕ) (N : ℕ)
+        (hodd : ∀ j, n j % 2 = 1)
+        (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1) :
+        (∀ j, j < N → a j = 1) ↔ 2 ^ (N + 1) ∣ n 0 + 1 := by
+
+It is located in `SyracuseOffsetIdentity.lean:2603` at exact source commit `5f6e46de8bed7061f8336089857143c54e997af5`. Workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956) passed all three exact-head jobs: Lean 4.34.1 kernel-check, `compile-drafts`, and Lean 4.35.0 paranoid kernel-check. The named transitive axiom profile is `[propext, Classical.choice, Quot.sound]`; the no-`sorryAx` guard passed.
+
+This is a separate verification record for the neutral declaration. The seven earlier successful snapshots remain evidence for the historical identifier at their exact source snapshots; they are not transferred to the renamed declaration. The mathematical proposition is unchanged. This formalization still proves only the finite initial-cylinder classification, not global Collatz descent or the arbitrary finite valuation-word theorem.
+
 ## 10. References
 
 [1] R. Terras, “A stopping time problem on the positive integers,” *Acta Arithmetica* **30** (1976), 241–252. https://doi.org/10.4064/aa-30-3-241-252
