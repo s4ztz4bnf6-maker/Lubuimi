@@ -201,21 +201,21 @@ Dieses Manuskript dokumentiert die eigenständige Beweisführung und Lean-Formal
 
 ## Positiver Margin impliziert strikte Abnahme
 
-Für einen zertifizierten Präfix der Länge (j) gilt nach der affinen Identität
-[
+Für einen zertifizierten Präfix der Länge \(j\) gilt nach der affinen Identität
+\[
 2^{A_j}n_j=3^j n_0+C_j.
-]
-Aus (D_j=2^{A_j}-C_j-3^j>0) folgt (C_j<2^{A_j}-3^j). Wegen (n_0ge1) gilt daher
-[
+\]
+Aus der Rekursion \(C_0=0\), \(C_{j+1}=3C_j+2^{A_j}\) folgt \(C_j\ge0\) für alle \(j\) (und \(C_j>0\) für \(j\ge1\)). Setze \(X=2^{A_j}-3^j\). Aus \(D_j=2^{A_j}-C_j-3^j>0\) folgt \(X>C_j\ge0\). Wegen \(n_0\ge1\) gilt \(C_j<X\le Xn_0\), also
+\[
 3^j n_0+C_j < 3^j n_0+(2^{A_j}-3^j)n_0=2^{A_j}n_0.
-]
-Zusammen mit der affinen Identität und (2^{A_j}>0) ergibt sich (n_j<n_0). Ein positiver signierter Margin ist somit ein hinreichendes striktes Abstiegszertifikat für diesen tatsächlich realisierten Präfix. Es wird damit nicht behauptet, dass jede Startzahl einen Präfix mit positivem Margin besitzt.
+\]
+Zusammen mit der affinen Identität und \(2^{A_j}>0\) ergibt sich \(n_j<n_0\). Ein positiver signierter Margin ist somit ein hinreichendes striktes Abstiegszertifikat für diesen tatsächlich realisierten Präfix. Es wird damit nicht behauptet, dass jede Startzahl einen Präfix mit positivem Margin besitzt.
 
 ## Ausgewählte Literatur
 
 - R. Terras, „A stopping time problem on the positive integers“, *Acta Arithmetica* 30 (1976), Nr. 3, 241–252. [DOI](https://doi.org/10.4064/aa-30-3-241-252).
-- C. J. Everett, „Iteration of the number-theoretic function (f(2n)=n, f(2n+1)=3n+2)“, *Advances in Mathematics* 25 (1977), Nr. 1, 42–45. [DOI](https://doi.org/10.1016/0001-8708(77)90087-1).
-- J. C. Lagarias, „The (3x+1) problem and its generalizations“, *The American Mathematical Monthly* 92 (1985), Nr. 1, 3–23, insbesondere Theorem B. [DOI](https://doi.org/10.1080/00029890.1985.11971528).
+- C. J. Everett, „Iteration of the number-theoretic function \(f(2n)=n,\ f(2n+1)=3n+2\)“, *Advances in Mathematics* 25 (1977), Nr. 1, 42–45. [DOI](https://doi.org/10.1016/0001-8708(77)90087-1).
+- J. C. Lagarias, „The \(3x+1\) problem and its generalizations“, *The American Mathematical Monthly* 92 (1985), Nr. 1, 3–23, insbesondere Theorem B. [DOI](https://doi.org/10.1080/00029890.1985.11971528).
 - T. Tao, „Almost all orbits of the Collatz map attain almost bounded values“, *Forum of Mathematics, Pi* 10 (2022), e12. [DOI](https://doi.org/10.1017/fmp.2022.8). Proposition 1.9 wird nur für ihre bedingte Aussage zur angenäherten Verteilung endlicher Syracuse-Valuierungsvektoren zitiert, nicht als Beleg für die exakte Paritätsvektor-Bijektion.
 
 
