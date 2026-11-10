@@ -170,7 +170,12 @@ This elementary parity fact is isolated from the larger arithmetic context
 so the Presburger solver sees only the two relevant variables. -/
 private theorem odd_of_two_dvd_three_mul_add_one
     (q : Nat) (h : 2 ∣ 3 * q + 1) : ∃ r, q = 2 * r + 1 := by
-  obtain ⟨s, hs⟩ := h
+  have hmod : (3 * q + 1) % 2 = 0 := Nat.mod_eq_zero_of_dvd h
+  have hmod' : (q % 2 + 1) % 2 = 0 := by
+    simpa [Nat.add_mod, Nat.mul_mod] using hmod
+  have hqmod : q % 2 = 1 := by omega
+  refine ⟨q / 2, ?_⟩
+  have hdecomp : q % 2 + 2 * (q / 2) = q := Nat.mod_add_div q 2
   omega
 
 /--
