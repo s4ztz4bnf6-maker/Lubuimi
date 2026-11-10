@@ -155,3 +155,8 @@ PR #48 adds the finite cap-tree path certificate: every prefix of a nondecreasin
 ### Addendum — cap-tree formalization repair
 
 The finite cap-tree source now uses the existing prefix-state extensionality theorem without a duplicate declaration. Exact head 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb; workflow 42749969443 is in progress with the paranoid job aligned to Lean/Mathlib 4.34.1. The path theorem remains unverified until the exact compile, axiom scan, and paranoid check finish.
+
+
+### Addendum — finite cap-tree path certificate: Lean PASS
+
+Exact code head 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb passed workflow 42749969443 compile-drafts. The five new path/cap declarations have standard axiom profiles and the exact SyracuseOffsetIdentity.lean sorryAx scan passed. The separate paranoid check did not run because Lean 4.34.1 rejects the --paranoid Lake option; supported lake check is queued in workflow 42750825692. This result is finite-depth path embedding, not global Collatz termination.
