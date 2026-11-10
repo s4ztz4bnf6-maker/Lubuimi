@@ -184,3 +184,10 @@ The earlier candidate-only status above is superseded for the two declarations o
 The one-step theorem proves that, for (a_k\geq1), terminal exactness of (C_{k+1}) modulo (2^{A_{k+1}+1}) forces exactness of (C_k) modulo (2^{A_k+1}). The prefix theorem iterates this implication backwards through every (k\leq N), provided all exponents in the finite suffix are positive.
 
 This is a genuine finite accumulator result. It does not establish arbitrary valuation-word realizability, the general tail partition, a density-to-pointwise transfer, or global Collatz convergence. The run used Lean 4.34.1; it did **not** run `lake check --paranoid`, which is unavailable in that toolchain. No result is transferred to the authoritative `collatz/valuation-cylinders-2026-10-26` branch or to APW4.
+
+
+## Superseding exact-head verification update — 10 November 2026
+
+The earlier target-only status in Sections 2 and 4 is superseded by the later implementation and CI evidence. Both `SyracuseAudit.terminalExact_backward_step` and `SyracuseAudit.terminalExact_backward_prefix` are now present in Lean source and were kernel-checked on source commit `e44eb4331cc1481e10d6f60780d695412c47a726`. Workflow [42844423707](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42844423707) passed; the later documentation-only head `f36fdcc157e2f40dffd96485898f4ad35136550b` was also checked by successful workflow [42845962042](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42845962042). Both declarations report `[propext, Classical.choice, Quot.sound]`, and the explicit no-`sorryAx` gate passed.
+
+This is a finite backward-propagation theorem under the positive-valuation hypothesis. The pinned Lean 4.34.1 environment does not provide `lake check`, so no `lake check --paranoid` pass is claimed. Arbitrary valuation-word realizability, general tail partition, density-to-pointwise transfer, and global Collatz descent remain open. See the [cross-project continuity checkpoint](../COLLATZ_APW4_RESEARCH_CONTINUITY_CHECKPOINT_2026-11-10.md).
