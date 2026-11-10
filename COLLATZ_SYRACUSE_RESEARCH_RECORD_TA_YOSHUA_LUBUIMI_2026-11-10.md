@@ -572,3 +572,23 @@ The Initial Valuation-One Cylinder Theorem, the finite valuation-word cylinder t
 ### Kolaz finite-return archive
 
 PR #39's exact finite-table reproducibility workflow [42739986917](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42739986917) passed on its exact source head `54f8b177d70f216fac81aa6cf6b28b8fec36596c`. This is a finite integer-computation archive and confluence test, not Lean kernel verification, a uniform bound, or a global Collatz proof. The earlier 1097 lead remains explicitly unverified.
+
+
+## Lean 4.35.0 exact-source verification result — 10 November 2026
+
+The Lean 4.35.0 paranoid kernel job has now **passed** on the code head `e1fb06eaa07190d8abfb3fc7368f3dc0663a5a66`:
+
+- Workflow: [42754461228](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42754461228)
+- Job: `kernel-check-lean-435-paranoid` (job 129625495913)
+- Full Collatz library build: success.
+- Exact finite-path and terminal-residue module compile plus forbidden-`sorryAx` check: success. The only two `sorryAx` strings in the job log are the shell guard itself; there is no actual `sorryAx` declaration in the Lean output.
+- `lake check --paranoid`: success; log states that the paranoid kernel accepts the solution.
+- The four new finite-cap/minimal-counterexample path declarations print exactly `[propext, Classical.choice, Quot.sound]`:
+  - `initial_lower_bounded_orbit_prefix_mem_finiteCapTree`
+  - `initial_lower_bounded_orbit_prefix_cap_tree_and_terminal_unit`
+  - `minimal_counterexample_prefix_mem_finiteCapTree`
+  - `minimal_counterexample_prefix_cap_tree_and_terminal_unit`
+
+This verifies the stated finite-depth path embedding and terminal-residue unit certificate on that exact source commit. It does not prove that the finite cap tree has no infinite branch or that every Syracuse orbit reaches 1.
+
+The PR branch subsequently advanced to documentation-only head `307b1c174199ed3ad8038c41bc12ff536419d2cb). A separate exact-head workflow [42755030352](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42755030352) is queued for that later branch head; the successful source result above remains scoped to `e1fb06e...`.
