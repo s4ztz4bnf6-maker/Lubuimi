@@ -340,3 +340,20 @@ For the initial all-one prefix of length \(r\), \(A=r\) and \(D=-2(3^r-2^r)\). T
 recovering the previously established initial-run recovery threshold as a special case.
 
 The complete proof and its limitations are appended to the canonical standalone manuscript at projects/LubuimiFiniteValuationWordCylinder/MANUSCRIPT.md. This is a mathematical manuscript result; it is not yet a Lean-compiled declaration.
+
+
+## 12. Completed Syracuse draft compile audit — run 42725006480
+
+Workflow 42725006480 completed successfully on exact source commit b1a8599c686c37893a33453b759dee42047c7727. Its compile-drafts job successfully completed:
+- Lean library build;
+- IterationLemmas and ThresholdLemmas;
+- SyracuseReferenceTest and SyracuseQuarterDescent;
+- offset identity and strict-margin consequence;
+- exact closed-form offset theorem;
+- stronger offset lower bound;
+- exact valuation-one block margin;
+- exact valuation-one to valuation-two transition.
+
+The log contains 274 named axiom-profile outputs. The observed profiles are exactly among [propext], [propext, Quot.sound], and [propext, Classical.choice, Quot.sound]. No actual sorryAx occurrence appears in the completed job log; the only text matches are the workflow's grep command and its forbidden-token diagnostic strings. The workflow is a successful compile/audit snapshot for its exact source commit and listed declarations. It does not formalize the general finite-word theorem or the new tail-cylinder margin certificate, and it does not prove global Collatz.
+
+The research-record-only commit after the checked source snapshot changes no Lean source. It appends the finite tail-cylinder margin theorem and the exact audit chronology.
