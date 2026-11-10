@@ -18,11 +18,12 @@ The exact integer-only implementation reproduces:
 - 10 for B=127;
 - 21 for B=255;
 - 42 for B=511;
-- 85 for B=1023.
+- 85 for B=1023;
+- 170 for B=2047.
 
-The two extended tables are preserved row-by-row in CSV and checked against fresh enumeration by the regression suite. The B=1023 source x=731 also gives a checked exact valuation word (1,2), cylinder residue 11 mod 16, affine offset identity 8·823=9·731+5, and two signed-margin cap inequalities.
+The extended B=511, B=1023 and B=2047 tables are preserved row-by-row in CSV and checked against fresh enumeration by the regression suite. The B=1023 source x=731 also gives a checked exact valuation word (1,2), cylinder residue 11 mod 16, affine offset identity 8·823=9·731+5, and two signed-margin cap inequalities.
 
-It reproduces every row in the manuscript tables and both extended CSV files. The maximum excursion lengths at B=31,63,127,255,511,1023 are 36,32,25,18,24,50; the maximum heights are 3077,3077,3077,3077,13121,83501. These statements are restricted to the enumerated source sets.
+It reproduces every row in the manuscript tables and both extended CSV files. The maximum excursion lengths at B=31,63,127,255,511,1023,2047 are 36,32,25,18,24,50,50; the maximum heights are 3077,3077,3077,3077,13121,83501,425645. These statements are restricted to the enumerated source sets.
 
 ## 3. Confluence result
 
@@ -32,11 +33,11 @@ The most substantial structural observation is the nested common suffix:
 - that path enters the B=255 z0=377 path;
 - the B=255 z0=335 and z0=359 paths join the same terminal route at 425 and 911 respectively.
 
-The shared terminal suffix from 155 to 61 is printed explicitly in the manuscript. The extended B=511 and B=1023 tables add two exact common suffixes of lengths 10 and 7, also checked by regression tests. This is a genuine finite confluence result, not an extrapolation.
+The shared terminal suffix from 155 to 61 is printed explicitly in the manuscript. The extended B=511 and B=1023 tables add two exact common suffixes of lengths 10 and 7; B=1023 to B=2047 adds exact shared suffixes of lengths 49 and 45. All are checked by regression tests. This is a genuine finite confluence result, not an extrapolation.
 
 ## 4. Limitations
 
-No uniform bound on excursion length or height as B varies has been proved. The finite tables do not establish that all orbits return below every threshold, nor that all orbits reach 1. The integer 1097 appears as the first image T(731) in the B=1023 table and returns to 823 in one further step; this does not resolve the separate earlier 1097 threshold/count lead, which remains unverified. The data are exact computational observations, not a theorem about all starting values.
+No uniform bound on excursion length or height as B varies has been proved. The finite tables do not establish that all orbits return below every threshold, nor that all orbits reach 1. At B=2047 all 170 enumerated escape sources return below threshold; the maximum observed height is 425645. The integer 1097 appears as the first image T(731) in the B=1023 table and returns to 823 in one further step; this does not resolve the separate earlier 1097 threshold/count lead, which remains unverified. The data are exact computational observations, not a theorem about all starting values.
 
 ## 5. Verification status
 
