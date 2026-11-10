@@ -1,0 +1,50 @@
+name: Terminal-residue k=2 exact Lean audit
+
+on:
+  pull_request:
+    paths:
+      - "projects/LubuimiTerminalResidueCollisionEnergy/lean/**"
+      - ".github/workflows/terminal-residue-k2.yml"
+  push:
+    branches:
+      - publication/lubuimi-terminal-residue-collision-energy-standalone-2026-11-10
+    paths:
+      - "projects/LubuimiTerminalResidueCollisionEnergy/lean/**"
+      - ".github/workflows/terminal-residue-k2.yml"
+
+jobs:
+  compile-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: projects/LubuimiTerminalResidueCollisionEnergy/lean
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean
+        run: |
+          curl --fail --location --retry 3 --max-time 60 https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
+          sh elan-init.sh -y --default-toolchain leanprover/lean4:v4.35.0
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve dependencies and restore Mathlib cache
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: Build standalone Lean library
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build TerminalResidueK2
+      - name: Compile, print transitive axioms, and reject sorryAx
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          set -o pipefail
+          lake env lean LubuimiTerminalResidueEnergyK2.lean 2>&1 | tee /tmp/terminal-residue-k2-axioms.log
+          if grep -q 'sorryAx' /tmp/terminal-residue-k2-axioms.log; then
+            echo "Forbidden sorryAx found in terminal-residue k=2 declarations."
+            exit 1
+          fi
+      - name: Paranoid kernel check
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake check --paranoid
