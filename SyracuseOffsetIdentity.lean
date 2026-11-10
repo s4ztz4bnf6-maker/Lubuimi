@@ -3092,9 +3092,9 @@ theorem every_state_odd_of_positive_affine_steps
     ∀ j, n j % 2 = 1 := by
   intro j
   have hpow : 2 ^ (a j) % 2 = 0 := by
-    have ha0 : a j ≠ 0 := by omega
+    have ha0 : a j ≠ 0 := Nat.ne_of_gt (ha j)
     cases h : a j with
-    | zero => omega
+    | zero => exact (ha0 h).elim
     | succ r => simp [h, pow_succ, Nat.mul_mod]
   have hleft : (2 ^ (a j) * n (j + 1)) % 2 = 0 := by
     rw [Nat.mul_mod, hpow]
