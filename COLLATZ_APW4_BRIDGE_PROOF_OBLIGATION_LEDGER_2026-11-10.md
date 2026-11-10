@@ -140,3 +140,8 @@ n_k = C(2^A)^{-1}quad	ext{in }mathbb Z/3^kmathbb Z.
 The complete workflow's no-`sorryAx` guard passed. This establishes the inverse formula for arbitrary (C) under the affine identity, but not yet the canonical-offset unit property.
 
 The next declarations are on root head `7a1c174e1c5e70e1b601760db57692009dc1f552`: `twoPow_mod_three_ne_zero`, `canonicalOffset_not_dvd_three`, `canonicalOffset_isUnit_mod_three_pow`, `canonicalTerminalResidue_isUnit), and the exact canonical terminal-state formula. Their exact-head run [42744418555](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42744418555) is in progress. No canonical unit-group claim is made until it passes with named axiom profiles and a full no-`sorryAx` scan.
+
+
+### 7.5 Canonical terminal-residue unit proof — current repair
+
+The first attempt at `canonicalTerminalResidue_isUnit` failed at the implicit inverse-unit typeclass inference for the inverse of the casted natural (2^{A_k}); the failed declaration therefore had a temporary `sorryAx` in the compiler's error-recovery output and is not accepted as verified. The current head `daa2fd1cf945b15abc7e8fc11b2f67104f8c0fa8` names the casted power's unit proof and its inverse-unit proof explicitly before applying `IsUnit.mul`. Exact-head run [42745303364](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42745303364) is in progress. Do not claim the canonical offset or terminal residue is a unit until this run passes and the named declaration profile is checked.
