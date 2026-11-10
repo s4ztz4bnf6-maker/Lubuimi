@@ -17,7 +17,7 @@ The initial all-one cylinder theorem is the special case \(\alpha=(1,\ldots,1)\)
 ## Verification
 The all-one special case is separately formalized as `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` and passed six successful exact-commit CI workflows: 42721006544, 42721305220, 42721911555, 42722186081, 42724343412 and 42725006480. Each reports [propext, Classical.choice, Quot.sound] and passed the complete-log sorryAx scan.
 
-The theorem gives exact finite prefix distributions; it does not prove global Collatz descent. The APW4 bridge is a research programme until an explicit index-preserving incidence and capacity map is proved.
+The theorem also yields a state-dependent finite cap B_alpha on any next valuation along a non-descending path: 2^(A+b)+3D(alpha) <= 4*2^A. Thus each node has finitely many candidate non-descending children, while the complementary exact tail cylinder forces descent. This is not a uniform bound and does not prove global Collatz descent. The APW4 bridge is a research programme until an explicit index-preserving incidence and capacity map is proved.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers. Lean, Mathlib and other dependencies retain their own licences.
 
