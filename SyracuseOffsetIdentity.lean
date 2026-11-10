@@ -2509,3 +2509,21 @@ theorem lubuimi_initial_valuation_one_cylinder
 #print axioms lubuimi_initial_valuation_one_cylinder
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- The affine Syracuse offset identity immediately fixes the terminal
+residue modulo the corresponding power of three. This is the first formal
+interface for the Lubuimi terminal-residue incidence map. -/
+theorem terminalResidue_mul_modEq_of_offset_identity
+    (k A n₀ nₖ C : ℕ)
+    (hoffset : 2 ^ A * nₖ = 3 ^ k * n₀ + C) :
+    Nat.ModEq (3 ^ k) (2 ^ A * nₖ) C := by
+  change (2 ^ A * nₖ) % (3 ^ k) = C % (3 ^ k)
+  rw [hoffset]
+  simp [Nat.add_mod, Nat.mul_mod]
+
+#print axioms terminalResidue_mul_modEq_of_offset_identity
+
+end CollatzSyracuseAudit
