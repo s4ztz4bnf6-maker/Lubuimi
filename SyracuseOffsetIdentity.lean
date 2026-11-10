@@ -3080,4 +3080,73 @@ theorem nondecreasing_orbit_prefix_cap_tree_and_terminal_unit
 #print axioms nondecreasing_orbit_prefix_mem_finiteCapTree
 #print axioms nondecreasing_orbit_prefix_cap_tree_and_terminal_unit
 
+
+/-- Sequence-level minimal-counterexample reduction. If no term of the
+orbit is 1, and every term below n₀ would have a future suffix reaching 1
+(as required by minimality of n₀ among counterexamples), then no term can
+fall below n₀. The suffix-return premise must be established from the
+actual deterministic Syracuse dynamics in an application. -/
+theorem orbit_lower_bound_of_minimal_counterexample
+    (n₀ : ℕ) (n : ℕ → ℕ)
+    (hminimal :
+      ∀ j, n j < n₀ → ∃ k, n (j + k) = 1)
+    (hnever : ∀ j, n j ≠ 1) :
+    ∀ j, n₀ ≤ n j := by
+  intro j
+  by_contra h
+  have hj : n j < n₀ := Nat.lt_of_not_ge h
+  obtain ⟨k, hk⟩ := hminimal j hj
+  exact hnever (j + k) hk
+
+/-- A hypothetical minimal counterexample orbit with an exact affine
+Syracuse representation has every valuation-word prefix in the finite
+state-dependent cap tree. This packages the minimal-counterexample
+lower-bound reduction with the already-proved finite branching theorem.
+It does not show that the tree has no infinite branch. -/
+theorem minimal_counterexample_prefix_mem_finiteCapTree
+    (n₀ : ℕ) (n : ℕ → ℕ) (A a : ℕ → ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (ha : ∀ j, 0 < a j)
+    (hn₀ : 1 < n₀)
+    (hoffset :
+      ∀ j, 2 ^ A j * n j =
+        3 ^ j * n₀ + canonicalOffset A j)
+    (hminimal :
+      ∀ j, n j < n₀ → ∃ k, n (j + k) = 1)
+    (hnever : ∀ j, n j ≠ 1) :
+    ∀ j, valuationPrefix a j ∈ finiteCapTreeLevel j := by
+  apply initial_lower_bounded_orbit_prefix_mem_finiteCapTree
+    n₀ n A a hA0 hA ha hn₀ hoffset
+  exact orbit_lower_bound_of_minimal_counterexample n₀ n hminimal hnever
+
+/-- At each positive depth, a hypothetical minimal counterexample has
+both a finite-cap-tree prefix and the exact terminal-residue unit
+condition. This is still a necessary path certificate, not a global
+Collatz termination theorem. -/
+theorem minimal_counterexample_prefix_cap_tree_and_terminal_unit
+    (n₀ : ℕ) (n : ℕ → ℕ) (A a : ℕ → ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (ha : ∀ j, 0 < a j)
+    (hn₀ : 1 < n₀)
+    (hoffset :
+      ∀ j, 2 ^ A j * n j =
+        3 ^ j * n₀ + canonicalOffset A j)
+    (hminimal :
+      ∀ j, n j < n₀ → ∃ k, n (j + k) = 1)
+    (hnever : ∀ j, n j ≠ 1)
+    (j : ℕ) (hj : 0 < j) :
+    valuationPrefix a j ∈ finiteCapTreeLevel j ∧
+      IsUnit (n j : ZMod (3 ^ j)) := by
+  constructor
+  · exact minimal_counterexample_prefix_mem_finiteCapTree
+      n₀ n A a hA0 hA ha hn₀ hoffset hminimal hnever j
+  · exact terminal_residue_unit_of_affine_identity
+      A j n₀ (n j) hj (hoffset j)
+
+#print axioms orbit_lower_bound_of_minimal_counterexample
+#print axioms minimal_counterexample_prefix_mem_finiteCapTree
+#print axioms minimal_counterexample_prefix_cap_tree_and_terminal_unit
+
 end CollatzSyracuseAudit
