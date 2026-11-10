@@ -159,3 +159,10 @@ It formalizes the exact two-step word (1,2), using odd quotient witnesses n₁,n
 2*n₁=3*n+1 and 4*n₂=3*n₁+1, and proves that this word is realized exactly when n ≡ 11 (mod 16). This is the A=3 instance of the general finite-word residue formula. It is also the exact valuation word of the finite Kolaz witness 731 -> 1097 -> 823.
 
 The declaration is present on Syracuse PR #9 source head 56c6d6d86fb5122d75f89f5e614f7f333e2d31a9. Exact-head workflow 42736159935 is still in progress at this update. Therefore this is a formalization candidate, not yet a Lean-verified result. If it passes, it will provide a verified mixed-word test case, but it will not by itself formalize the arbitrary-word theorem or the finite tail partition.
+
+
+## Exact mixed-word (1,2) Lean verification — completed
+
+The pending declaration above has now passed. Workflow 42736159935 completed successfully on exact Syracuse source commit 56c6d6d86fb5122d75f89f5e614f7f333e2d31a9. It compiled realizesValuationWord12_iff_mod_sixteen_eleven, printed transitive profile [propext, Classical.choice, Quot.sound], and the completed job log contained no actual sorryAx occurrence. The compile-drafts build completed successfully (8,932 jobs).
+
+This verifies the specific mixed word (1,2), equivalently n ≡ 11 mod 16, including the exact odd quotient witnesses. It is the A=3 instance of the general finite-word formula. It does not formalize arbitrary words, the tail partition, or the general finite-word theorem. The general theorem remains mathematically proved with Lean formalization open.
