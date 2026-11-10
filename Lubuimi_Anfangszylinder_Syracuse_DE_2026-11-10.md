@@ -187,3 +187,8 @@ Der anfängliche Eins-Zylinder ist der Spezialfall von [Lubuimis Satz über die 
 Eine weitere mathematische Entwicklung ist [Lubuimis terminale Restklassen-Kollisionsenergie](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md). Sie bildet Wörter der Länge (k) auf terminale Einheitsrestklassen modulo (3^k) ab; das zweite Moment besitzt Diagonalmasse (3^{-k}) und Off-Diagonal-Kollisionsmasse mindestens (1/(2\cdot3^k)). Hinzu kommt eine endliche rationale Markov-Darstellung. Diese Verallgemeinerungen sind von der bereits erfolgreich formalisierten Anfangszylinder-Aussage getrennte Resultate und Formalisierungsziele.
 
 **Autorschaft:** Ta-Yoshua Lubuimi. KI-Systeme dienen ausschließlich als Hilfsmittel und sind weder Autoren noch unabhängige mathematische Verifikatoren.
+
+
+## 7. Dritter späterer Auditlauf auf dem aktuellen Quellstand
+
+Ein dritter, zeitlich späterer Auditlauf ist ebenfalls erfolgreich: Workflow [42738528207](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738528207) kompilierte den aktuellen Quell-Commit `a1becbc8e837f10abcd952a2e03832cb057fb2b8` und gab für `lubuimi_initial_valuation_one_cylinder` sowie `dyadicUniformFibre_partition_card` dasselbe Standardprofil der transitiven Axiome aus. Die explizite `sorryAx`-Prüfung bestand. Dieser spätere Lauf stärkt den Nachweis für den exakten Quellstand, erweitert aber nicht den mathematischen Geltungsbereich der beiden Aussagen.
