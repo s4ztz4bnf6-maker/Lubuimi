@@ -164,6 +164,85 @@ theorem constant_valuation_one_identity
                 rw [pow_succ]
                 ring
 
+
+/--
+Backward propagation of exact terminal parity through one affine Syracuse
+accumulator step.  The terminal congruence at k+1 and positivity of a k
+force the accumulator at k to have exact residue 2^(A_k) modulo 2^(A_k+1).
+This is a local arithmetic statement only; it does not assert realizability
+of arbitrary valuation words or global Collatz convergence.
+-/
+theorem terminalExact_backward_step
+    (a n : Nat → Nat) (k : Nat)
+    (ha : 1 ≤ a k)
+    (hterminal :
+      affineCompositionRhs a n (k + 1) %
+          2 ^ (prefixExponentSum a (k + 1) + 1) =
+        2 ^ prefixExponentSum a (k + 1)) :
+    affineCompositionRhs a n k %
+        2 ^ (prefixExponentSum a k + 1) =
+      2 ^ prefixExponentSum a k := by
+  let A := prefixExponentSum a k
+  let B := prefixExponentSum a (k + 1)
+  let C := affineCompositionRhs a n k
+  have hAB : A + 1 ≤ B := by
+    dsimp [A, B, prefixExponentSum]
+    omega
+  have hterm : (3 * C + 2 ^ A) % 2 ^ (B + 1) = 2 ^ B := by
+    simpa [A, B, C, affineCompositionRhs, prefixExponentSum] using hterminal
+  have hdecomp :
+      2 ^ B + 2 ^ (B + 1) * ((3 * C + 2 ^ A) / 2 ^ (B + 1)) =
+        3 * C + 2 ^ A := by
+    simpa [hterm] using
+      (Nat.mod_add_div (3 * C + 2 ^ A) (2 ^ (B + 1)))
+  have hdiv : 2 ^ (A + 1) ∣ 3 * C + 2 ^ A := by
+    rw [← hdecomp]
+    apply Nat.dvd_add
+    · exact Nat.pow_dvd_pow 2 hAB
+    · exact dvd_mul_of_dvd_left
+        (Nat.pow_dvd_pow 2 (by omega : A + 1 ≤ B + 1)) _
+  have hdivSmall : 2 ^ A ∣ 3 * C + 2 ^ A := by
+    exact dvd_trans (Nat.pow_dvd_pow 2 (Nat.le_succ A)) hdiv
+  have hdivThree : 2 ^ A ∣ 3 * C := by
+    exact (Nat.dvd_add_iff_right (dvd_self (2 ^ A))).mp hdivSmall
+  have hcop : (2 ^ A).Coprime 3 := by
+    exact Nat.Coprime.pow_left A (by norm_num : Nat.Coprime 2 3)
+  have hdivC : 2 ^ A ∣ C :=
+    hcop.dvd_of_dvd_mul_left hdivThree
+  obtain ⟨q, hq⟩ := hdivC
+  have hfactor : 3 * C + 2 ^ A = 2 ^ A * (3 * q + 1) := by
+    rw [hq]
+    ring
+  have hstrong : 2 ^ (A + 1) ∣ 2 ^ A * (3 * q + 1) := by
+    rw [← hfactor]
+    exact hdiv
+  have hparity : 2 ∣ 3 * q + 1 := by
+    rw [pow_succ] at hstrong
+    exact (Nat.mul_dvd_mul_iff_left (by positivity : 0 < 2 ^ A)).mp hstrong
+  have hqOdd : ∃ r, q = 2 * r + 1 := by
+    obtain ⟨s, hs⟩ := hparity
+    omega
+  obtain ⟨r, hr⟩ := hqOdd
+  have hC : C = 2 ^ (A + 1) * r + 2 ^ A := by
+    rw [hq, hr, pow_succ]
+    ring
+  have hlt : 2 ^ A < 2 ^ (A + 1) := by
+    rw [pow_succ]
+    have hpos : 0 < 2 ^ A := by positivity
+    nlinarith
+  calc
+    C % 2 ^ (A + 1) =
+        (2 ^ (A + 1) * r + 2 ^ A) % 2 ^ (A + 1) := by rw [hC]
+    _ = ((2 ^ (A + 1) * r) % 2 ^ (A + 1) +
+        (2 ^ A) % 2 ^ (A + 1)) % 2 ^ (A + 1) := by
+          rw [Nat.add_mod]
+    _ = 2 ^ A := by
+          rw [Nat.mul_mod_right, Nat.mod_eq_of_lt hlt]
+          simp
+
+#print axioms terminalExact_backward_step
+
+
 #print axioms constant_valuation_one_identity
 
 end SyracuseAudit
