@@ -44,3 +44,6 @@ A new mathematical note, [Lubuimi's Terminal-Residue Collision Energy](Lubuimi_T
 ### Finite Markov representation of terminal-residue collision energy
 
 The new [Lubuimi Terminal-Residue Collision Energy](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md) note now derives an explicit finite rational Markov matrix `P_k` for the terminal-residue distribution: `m_k = δ₀ P_k^k`. At `k=2`, the exact vector on units mod 9 is `(8,16,11,4,2,22)/63`, giving energy `5/21`, diagonal `1/9`, and collision mass `8/63`. This is a mathematically derived finite-matrix/second-moment interface; its Lean formalization and the historical APW4/BIB capacity transfer remain open.
+
+
+Repository citation metadata is provided in [`CITATION.cff`](CITATION.cff). Original Syracuse/Collatz research, mathematical statements, manuscripts and original Lean formalization are attributed to **Ta-Yoshua Lubuimi**; AI tools are acknowledged only as assistance, not as authors or independent mathematical verifiers.
