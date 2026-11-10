@@ -791,3 +791,8 @@ The new finite-cap-tree bridge declarations have passed Lean 4.34.1 and Lean 4.3
 ## PR #62 complete verification — 10 November 2026
 
 PR #62 head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow 42811286670, passed all three jobs. Both new cap-tree bridge declarations have `[propext, Classical.choice, Quot.sound]`; no `sorryAx` was detected and the paranoid kernel accepted. The finite-depth path-certificate bridge is formally verified. It remains a conditional reduction and does not prove absence of an infinite nonterminating trajectory.
+
+
+## Addendum — PR #65 / PR #66 terminal residue bridge
+
+The new terminal-residue/cap-tree packaging in PR #65 was not verified: all three jobs failed due to a mismatch between the user-supplied depth bound `n₀ + 1 < 2^j` and the existing theorem's required bound `n 0 + 1 < 2^j`. PR #66 derives the missing equality `n 0 = n₀` from the affine offset identity at index zero and is pending CI. This bridge is still a finite-depth certificate only; it does not rule out an infinite nonterminating path. Authorship remains Ta-Yoshua Lubuimi; AI tools are assistants only.
