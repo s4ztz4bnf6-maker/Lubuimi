@@ -737,3 +737,10 @@ This bridge does not rule out the existence of a least odd nonterminating start.
 ## Neutral Lean declaration identifier — 10 November 2026
 
 The current Collatz continuation candidate renames the initial valuation-one cylinder declaration to `initial_valuation_one_cylinder_iff_dyadic_divisibility`. The mathematical proposition and proof are unchanged. Earlier successful CI snapshots remain historical evidence for the then-current source declaration only; they do not automatically verify the new identifier. The rename and all new shifted-tail/minimality declarations are being checked together on PR #56, exact head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow 42808797159, queued at the latest poll.
+
+
+## Finite terminal-exact backward propagation — separate branch PASS, 10 November 2026
+
+The separate branch `collatz/terminal-exact-backward-step-2026-11-10` now contains the one-step terminal-exact backward implication and its finite-prefix induction. Both `SyracuseAudit.terminalExact_backward_step` and `SyracuseAudit.terminalExact_backward_prefix` were kernel-checked on source commit `e44eb4331cc1481e10d6f60780d695412c47a726`, workflow [42844423707](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42844423707) PASS. The later documentation head `f36fdcc157e2f40dffd96485898f4ad35136550b` was checked by workflow [42845962042](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42845962042), also PASS. Both declarations report `[propext, Classical.choice, Quot.sound]`; no `sorryAx` was found by the workflow gate.
+
+This closes only the finite backward accumulator obligation on that isolated branch. Lean 4.34.1 lacks `lake check`, so no paranoid Lake check is claimed. The result does not establish arbitrary valuation-word realizability, the complete tail partition, density-to-pointwise transfer, or global Collatz convergence. No source result is transferred to this branch without an exact-head build here.
