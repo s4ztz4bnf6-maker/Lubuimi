@@ -319,6 +319,8 @@ The completed workflow logs report no actual occurrence of `sorryAx` in the audi
 
 Earlier failed proof-script attempts are retained in the project chronology. They do not invalidate the later successful audits. Conversely, these audits apply to the named declaration and checked source snapshots only. They do not certify the general finite-word cylinder theorem, the finite tail partition, the terminal-residue collision-energy theorem, the Markov representation, or the global Collatz conjecture.
 
+The separate Syracuse offset/margin programme has its own successful exact-commit audit: workflow 42728049650 on source commit ca48ec7fdad5e8d6f8aeb82fed8586a1b57c12bc verified the named non-descent exponent-cap declarations with the standard profile and no actual sorryAx. That is a distinct formal result. The seven audits listed in this section concern the initial-cylinder declaration specifically; they should not be read as a claim that every displayed signed-margin corollary in this manuscript was separately declared and audited in Lean.
+
 The project source, Lean declaration, workflow history, and review notes are maintained in the author's repository:
 `https://github.com/s4ztz4bnf6-maker/Lubuimi/tree/publication/lubuimi-initial-valuation-one-cylinder-2026-11-10`.
 
