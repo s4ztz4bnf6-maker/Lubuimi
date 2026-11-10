@@ -60,13 +60,13 @@ EXPECTED = {
 
 class ThresholdReturnTests(unittest.TestCase):
     def test_exact_escape_source_characterization(self):
-        for B in (31, 63, 127, 255, 511, 1023, 2047):
+        for B in (31, 63, 127, 255, 511, 1023, 2047, 4095, 8191):
             brute_force = [x for x in range(1, B, 2) if T(x) >= B]
             self.assertEqual(escape_source_characterization(B), brute_force)
             self.assertEqual([r["x"] for r in analyze_threshold(B)], brute_force)
 
     def test_power_two_threshold_source_count(self):
-        for k in range(2, 12):
+        for k in range(2, 14):
             B = 2**k - 1
             self.assertEqual(
                 len(escape_source_characterization(B)),
@@ -93,6 +93,7 @@ class ThresholdReturnTests(unittest.TestCase):
             (511, 623, 1023, 1403, 7, 1403, 125),
             (1023, 1055, 2047, 2375, 49, 2375, 157),
             (1023, 1055, 2047, 2111, 45, 3007, 157),
+            (4095, 4607, 8191, 10367, 29, 10367, 3371),
         ]
         for B1, z1, B2, z2, length, first, last in pairs:
             suffix = common_suffix(
@@ -104,7 +105,7 @@ class ThresholdReturnTests(unittest.TestCase):
             self.assertEqual(suffix[-1], last)
 
     def test_extended_csv_tables(self):
-        for B in (511, 1023, 2047):
+        for B in (511, 1023, 2047, 4095, 8191):
             path = Path(__file__).with_name(f"threshold_{B}.csv")
             with path.open(newline="", encoding="utf-8") as handle:
                 expected = [
@@ -132,6 +133,26 @@ class ThresholdReturnTests(unittest.TestCase):
             (row_by_z0(2047, 2729)["m"], row_by_z0(2047, 2729)["H"],
              row_by_z0(2047, 2729)["R"]),
             (37, 425645, 1067),
+        )
+
+    def test_b4095_and_b8191_extended_summaries(self):
+        rows4095 = analyze_threshold(4095)
+        self.assertEqual(len(rows4095), 341)
+        self.assertEqual(max(r["m"] for r in rows4095), 30)
+        self.assertEqual(max(r["H"] for r in rows4095), 425645)
+        rows8191 = analyze_threshold(8191)
+        self.assertEqual(len(rows8191), 682)
+        self.assertEqual(max(r["m"] for r in rows8191), 45)
+        self.assertEqual(max(r["H"] for r in rows8191), 2717873)
+        self.assertEqual(
+            (row_by_z0(4095, 4607)["m"], row_by_z0(4095, 4607)["H"],
+             row_by_z0(4095, 4607)["R"]),
+            (30, 425645, 3371),
+        )
+        self.assertEqual(
+            (row_by_z0(8191, 10367)["m"], row_by_z0(8191, 10367)["H"],
+             row_by_z0(8191, 10367)["R"]),
+            (29, 425645, 3371),
         )
 
     def test_b1023_1097_cylinder_and_margin_certificate(self):
