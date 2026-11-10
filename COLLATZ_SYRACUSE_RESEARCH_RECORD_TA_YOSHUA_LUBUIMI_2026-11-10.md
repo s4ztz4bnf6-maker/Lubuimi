@@ -786,3 +786,8 @@ This closes a formal interface gap between deterministic minimality and the exis
 ## PR #62 partial kernel verification — 10 November 2026
 
 The new finite-cap-tree bridge declarations have passed Lean 4.34.1 and Lean 4.35.0 paranoid checks on exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, each with `[propext, Classical.choice, Quot.sound]`. The paranoid kernel accepted and no `sorryAx` was detected. The compile-drafts job remains in progress, so the full exact-head workflow is not yet complete.
+
+
+## PR #62 complete verification — 10 November 2026
+
+PR #62 head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow 42811286670, passed all three jobs. Both new cap-tree bridge declarations have `[propext, Classical.choice, Quot.sound]`; no `sorryAx` was detected and the paranoid kernel accepted. The finite-depth path-certificate bridge is formally verified. It remains a conditional reduction and does not prove absence of an infinite nonterminating trajectory.
