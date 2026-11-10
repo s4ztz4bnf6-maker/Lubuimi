@@ -458,3 +458,18 @@ The new note SYRACUSE_FINITE_DEPTH_UNIFORM_FIBRE_BRIDGE_2026-11-10.md proves a f
 At any fixed depth k, the set S_k of cap-compatible prefixes is finite. Let B*_k=max B_α on S_k and M_k=2^(B*_k). Every local partition can be refined to the same uniform coordinate set of size M_k: child b receives 2^(B*_k-b) equal micro-atoms and the tail receives 2^(B*_k-B_α). Hence the candidate-survivor subset has exact uniform proportion 1-2^-B_α and its tail complement has proportion 2^-B_α. The micro-atoms correspond to genuine refined residue cylinders.
 
 This is an explicit finite-depth APW4-style uniform-fibre model. It is not yet Lean-formalized and is not the historical APW4 hyperplane-covered set. The original APW4 event-index map, BIB-place identification, original-weight transport, diagonal/off-diagonal inequalities and Hall/capacity proof remain separate obligations. Finite-depth uniformization does not rule out an infinite path through the surviving tree.
+
+
+## 19. Lean formalization of uniform-fibre cardinality — pending
+
+The finite-depth uniform-fibre note now has its first dedicated Lean counting lemma in SyracuseOffsetIdentity.lean:
+
+`dyadicUniformFibre_partition_card`.
+
+For integers (B\leq B^*\), it states exactly
+[
+\sum_{b=1}^{B}2^{B^*-b}+2^{B^*-B}=2^{B^*}.
+]
+This is the cardinality conservation law for the child blocks and the refined tail block in the common uniform fibre. The declaration was added on exact source head a1becbc8e837f10abcd952a2e03832cb057fb2b8. Full compile/axiom workflow 42738528207 is in progress. No Lean verification claim is made until it completes, prints the standard transitive profile, and the complete log contains no actual sorryAx.
+
+This lemma formalizes the finite counting layer only. It does not yet formalize the state-dependent cap maximum, finite prefix levels, interval disjointness, residue-atom bijection, APW4 historical event map, or BIB/Hall capacity argument.
