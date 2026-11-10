@@ -305,7 +305,7 @@ which is exactly the previously recorded one-step signed-margin recovery thresho
 
 ## Publication summary and scope
 
-The main theorem and finite tail partition are fully proved in this manuscript. The explicit affine residue formula and worked examples make the classification constructive. The local tail-margin corollary gives a finite pruning rule: for each fixed prefix, all sufficiently high next valuations lie in one exact tail cylinder and force descent; only finitely many lower next valuations remain to be analyzed. This is a genuine local arithmetic descent certificate, not a global Collatz proof. The general finite-word theorem, finite partition and tail-margin corollary remain pending Lean formalization and exact-commit kernel audit. The all-one special case retains its six independent successful CI snapshots.
+The main theorem and finite tail partition are fully proved in this manuscript. The explicit affine residue formula and worked examples make the classification constructive. The local tail-margin corollary gives a finite pruning rule: for each fixed prefix, all sufficiently high next valuations lie in one exact tail cylinder and force descent; only finitely many lower next valuations remain to be analyzed. This is a genuine local arithmetic descent certificate, not a global Collatz proof. The general finite-word theorem, finite partition and tail-margin corollary remain pending Lean formalization and exact-commit kernel audit. The all-one special case retains its seven independent successful CI snapshots.
 
 ## 13. Exact finite cap for a non-descending next valuation
 
