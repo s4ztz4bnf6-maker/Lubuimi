@@ -3512,3 +3512,7 @@ theorem affine_minimal_counterexample_terminal_residue_cap_tree_bridge
 
 
 end CollatzSyracuseAudit
+
+
+/- Exact-head CI refresh after workflow installation on main — 10 November 2026.
+   No declarations or mathematical statements changed in this refresh. -/
