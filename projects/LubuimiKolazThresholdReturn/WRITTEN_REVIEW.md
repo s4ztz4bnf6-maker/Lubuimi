@@ -60,3 +60,8 @@ The B=1023 entry x=731 -> z0=1097 -> R=823 has valuation word (1,2), exact cylin
 ## 7. CI status
 
 The integer-only script and regression assertions have been locally checked, including all six threshold tables, the CSV data, the source-set characterization, the power-of-two count, and the common-suffix identities. The workflow file is included in the PR, but there is no GitHub Actions run attached yet because the base branch does not contain an existing workflow that can execute this newly introduced workflow on the pull_request event. No GitHub CI pass is claimed.
+
+
+## Exact-head CI result — 10 November 2026
+
+Expanded reproducibility run 42732032993 on source head `5a01e5e56d203c0ed987f6bb70c1519b107e9f23` passed. Job 129552163491 (`exact-finite-tables`) verified all six thresholds, both complete extended CSV tables, the original and new confluence suffixes, and the B=1023 valuation-word/cylinder/margin certificate. This is finite Python reproducibility CI only; no Lean kernel verification or universal Collatz result is claimed.
