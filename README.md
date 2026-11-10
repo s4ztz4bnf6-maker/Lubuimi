@@ -54,3 +54,8 @@ Repository citation metadata is provided in [`CITATION.cff`](CITATION.cff). Orig
 The finite Kolaz path 731 -> 1097 -> 823 realizes valuation word (1,2), with cylinder residue 11 mod 16 and affine offset identity 8*823=9*731+5. The corresponding Lean declaration realizesValuationWord12_iff_mod_sixteen_eleven is in SyracuseOffsetIdentity.lean on PR #9 head 56c6d6d86fb5122d75f89f5e614f7f333e2d31a9; exact-head run 42736159935 is pending.
 
 The standalone terminal-residue k=2 module passed Lean 4.35.0 workflow 42735716873 with seven standard-profile declarations, no actual sorryAx, and lake check --paranoid. It proves the finite distribution (8,16,11,4,2,22)/63 and energy 5/21. Kolaz PR #39's B=511/B=1023 archive and x=731 regression bridge passed run 42735880399. These finite results do not prove global Collatz descent.
+
+
+### Exact mixed-word Lean result — 10 November 2026
+
+The specific valuation word (1,2) is now formally verified by declaration realizesValuationWord12_iff_mod_sixteen_eleven in workflow 42736159935 on exact source commit 56c6d6d86fb5122d75f89f5e614f7f333e2d31a9. It is equivalent to n ≡ 11 mod 16, has standard transitive axiom profile [propext, Classical.choice, Quot.sound], and the completed log contains no actual sorryAx. This is a verified special case only; arbitrary finite words and the tail partition remain open Lean targets.
