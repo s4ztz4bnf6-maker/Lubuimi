@@ -355,3 +355,8 @@ PR #53's affine parity/exactness repair and PR #55's deterministic one-step brid
 PR #56 head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow [42808797159](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42808797159), completed with all three jobs failed. The log confirms `affine_trajectory_eq_syracuse_iterate` itself compiled and printed `[propext, Classical.choice, Quot.sound]`. The new least-start proof then failed because `Nat.find` needed `classical`, the positivity proof needed the explicit oddness hypothesis, and a lower-bound theorem was referenced before its declaration. The error-recovery output includes `sorryAx`; no full PR #56 PASS is claimed. The renamed cylinder declaration printed `[propext, Classical.choice, Quot.sound]` in the partial build log, but the complete source module did not pass; its acceptance gate remains a fresh successful exact-head run and no-`sorryAx` check.
 
 PR #59 / exact source head `5f6e46de8bed7061f8336089857143c54e997af5` applies the three focused repairs. At the latest poll no workflow run was yet visible for this head. Status: **OFFEN – NICHT VERIFIZIERT**. The global infinite-branch exclusion remains a separate unresolved obligation.
+
+
+### Latest PR #59 CI poll — 10 November 2026
+
+The exact-head workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956) is now visible for PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5`. `compile-drafts` job `129807911809` is in progress; Lean 4.34.1 job `129807911748` and Lean 4.35.0 paranoid job `129807911880` are queued. No PASS is claimed.
