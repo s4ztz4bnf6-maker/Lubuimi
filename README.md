@@ -133,3 +133,8 @@ The terminal-residue collision energy remains a separate finite-place model. Its
 ### Verified terminal-residue inverse formula — 10 November 2026
 
 The exact affine identity now yields the Lean-verified formula (n_k=C_k(2^{A_k})^{-1}) in (mathbb Z/3^kmathbb Z) at root commit `b58e1ddc859caaf678c2239c5ed3e952b0ef4ae0), workflow [42743672688](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42743672688). The named profiles are [propext, Classical.choice, Quot.sound] for the power-of-two unit lemma and [propext, Quot.sound] for the inverse formula; the full no-sorryAx guard passed. The canonical offset's own unit property is a separate next theorem, currently under exact-head run [42744418555](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42744418555).
+
+
+### Canonical terminal-residue unit proof — current status
+
+The inverse formula itself remains verified at commit `b58e1ddc859caaf678c2239c5ed3e952b0ef4ae0` (run 42743672688). The first attempt to prove the canonical offset unit failed at the inverse-unit typeclass inference; the current explicit proof repair is at head `daa2fd1cf945b15abc7e8fc11b2f67104f8c0fa8`, run [42745303364](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42745303364) in progress. No canonical unit claim is made until it passes.
