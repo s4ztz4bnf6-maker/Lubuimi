@@ -914,6 +914,53 @@ theorem realizesValuationWord12_iff_mod_sixteen_eleven (n : ℕ) :
 
 #print axioms realizesValuationWord12_iff_mod_sixteen_eleven
 
+
+/-!
+## Dyadic uniform-fibre counting lemma
+
+At a fixed finite depth, a common cap Bstar refines each child b into
+2^(Bstar-b) equal micro-atoms and the tail into 2^(Bstar-B) atoms.
+The following arithmetic identity is the exact cardinality conservation
+law behind that uniformization.
+-/
+
+/-- Number of equal micro-atoms assigned to the exact child exponents
+1,...,B when the common refinement depth is Bstar. -/
+def dyadicChildBlockCount (Bstar B : ℕ) : ℕ :=
+  ∑ b ∈ Finset.range B, 2 ^ (Bstar - (b + 1))
+
+/-- The child blocks together with the tail block partition a uniform
+fibre of cardinality 2^Bstar. This is the finite counting identity used
+in the Syracuse-to-APW4 uniform-fibre construction. -/
+theorem dyadicUniformFibre_partition_card
+    (Bstar B : ℕ) (hB : B ≤ Bstar) :
+    dyadicChildBlockCount Bstar B + 2 ^ (Bstar - B) = 2 ^ Bstar := by
+  induction B with
+  | zero =>
+      simp [dyadicChildBlockCount]
+  | succ B ih =>
+      have hle : B ≤ Bstar := by omega
+      have hexp : Bstar - B = (Bstar - (B + 1)) + 1 := by omega
+      have hpow :
+          2 ^ (Bstar - B) =
+            2 ^ (Bstar - (B + 1)) + 2 ^ (Bstar - (B + 1)) := by
+        rw [hexp, pow_succ]
+        ring
+      change
+        (∑ b ∈ Finset.range (B + 1),
+          2 ^ (Bstar - (b + 1))) +
+          2 ^ (Bstar - (B + 1)) = 2 ^ Bstar
+      rw [Finset.sum_range_succ]
+      calc
+        (∑ b ∈ Finset.range B, 2 ^ (Bstar - (b + 1))) +
+            2 ^ (Bstar - (B + 1)) +
+            2 ^ (Bstar - (B + 1))
+          = (∑ b ∈ Finset.range B, 2 ^ (Bstar - (b + 1))) +
+              2 ^ (Bstar - B) := by rw [hpow]; ring
+        _ = 2 ^ Bstar := ih hle
+
+#print axioms dyadicUniformFibre_partition_card
+
 end CollatzSyracuseAudit
 
 
