@@ -256,3 +256,14 @@ The Lean 4.35.0 paranoid kernel job has now **passed** on the code head `e1fb06e
 This verifies the stated finite-depth path embedding and terminal-residue unit certificate on that exact source commit. It does not prove that the finite cap tree has no infinite branch or that every Syracuse orbit reaches 1.
 
 The PR branch subsequently advanced to documentation-only head `307b1c174199ed3ad8038c41bc12ff536419d2cb). A separate exact-head workflow [42755030352](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42755030352) is queued for that later branch head; the successful source result above remains scoped to `e1fb06e...`.
+
+
+## Dual-toolchain and compile-drafts reconciliation — 10 November 2026
+
+On source head `e1fb06eaa07190d8abfb3fc7368f3dc0663a5a66`, workflow [42754461228](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42754461228) produced a split result:
+
+- `kernel-check-lean-435-paranoid`: **PASS**. The library build, exact finite-path/terminal-residue compile and no-`sorryAx` guard succeeded; `lake check --paranoid) completed with “Lean paranoid kernel accepts the solution.” The four named finite-cap/minimal-counterexample path declarations have profile `[propext, Classical.choice, Quot.sound]`.
+- `compile-drafts`: **PASS**. All listed steps completed, including `IterationLemmas.lean`, `ThresholdLemmas.lean`, `SyracuseReferenceTest.lean`, `SyracuseQuarterDescent.lean`, offset identity, closed-form offset, stronger offset lower bound, exact valuation-one block margin, valuation-one-to-two transition, terminal-residue k=2 energy, and L945 odd-covering moment audit.
+- `kernel-check-lean-434`: **FAIL** only at the final command `lake check`, with exact error `unknown command 'check'`. The Lean 4.34.1 build had completed, but this Lake version does not expose that command. This is a workflow/toolchain command-availability failure, not a failed mathematical theorem or a kernel counterexample. The Lean 4.35.0 paranoid PASS remains valid on its exact source commit.
+
+The PR branch later advanced through documentation-only commits to `022f019d9673e5fa5e7e7642324b7f373d689599). The new exact-head run for that later documentation head was queued; the source-code PASS above remains scoped to `e1fb06e...`.
