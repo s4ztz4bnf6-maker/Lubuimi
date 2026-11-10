@@ -213,3 +213,12 @@ This does not yet formalize the interval partition for every child valuation, th
 The finite cap-tree candidate now uses the structure's existing extensionality theorem; a duplicate extensionality declaration from the previous attempt was removed. The exact head 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb is under CI run 42749969443. The paranoid job now uses the repository-pinned Lean/Mathlib 4.34.1 pair, rather than changing only the toolchain for a separate 4.35.0 experiment. Both jobs remain pending at this entry.
 
 The candidate still asserts only finite-depth embedding of any hypothetical nondecreasing exact affine path into the state-dependent finite cap tree, plus the terminal-residue unit property. It does not show that the tree has no infinite branch.
+
+
+## 9. Finite cap-tree theorem — exact Lean compile PASS
+
+On code head 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb, workflow 42749969443 completed the full compile-drafts job successfully. The five new cap-tree/path declarations compiled and printed standard profiles: finiteCapPrefixState_eq_actual has [propext, Quot.sound]; the child-bound, path-embedding, terminal-unit, and combined path-certificate theorems have [propext, Classical.choice, Quot.sound]. The source-file sorryAx scan passed.
+
+The separate 4.34.1 job failed only because that Lake version does not recognize the --paranoid option. The workflow now invokes the supported lake check; exact-head run 42750825692 is queued. The earlier 4.35.0 dependency attempt failed inside Mathlib Cache/Requests.lean before checking project code.
+
+This is a finite-depth path embedding result, not a proof that no infinite branch exists.
