@@ -144,3 +144,10 @@ The new bridge is conditional on a least odd nonterminating start and the exact 
 ## 15. PR #62 partial verification update — 10 November 2026
 
 On exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, Lean 4.35.0 paranoid job `129813061895` and Lean 4.34.1 job `129813062043` have passed. Both named new declarations print `[propext, Classical.choice, Quot.sound]`; the paranoid kernel accepted the solution and the no-`sorryAx` guard did not trigger. Compile-drafts job `129813061512` remains in progress. Do not mark the workflow complete until that job concludes.
+
+
+## 16. PR #62 complete exact-head verification — 10 November 2026
+
+Exact source head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow [42811286670](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42811286670): all three jobs passed — compile-drafts `129813061512`, Lean 4.35.0 paranoid `129813061895`, and Lean 4.34.1 `129813062043`. Both new declarations `affine_minimal_counterexample_prefix_mem_finiteCapTree` and `affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit` print `[propext, Classical.choice, Quot.sound]`. The compile job completed, no `sorryAx` guard triggered, and the paranoid kernel accepted the solution.
+
+This verifies the finite-cap-tree/terminal-unit packaging at this exact head. It does not exclude an infinite branch and therefore does not prove global Collatz termination.
