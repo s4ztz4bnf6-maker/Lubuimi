@@ -3501,7 +3501,7 @@ theorem affine_minimal_counterexample_terminal_residue_cap_tree_bridge
   have hn0eq : n 0 = n₀ := by
     simpa [hA0, canonicalOffset] using hoffset 0
   have hdepth' : n 0 + 1 < 2 ^ j := by
-    rw [← hn0eq]
+    rw [hn0eq]
     exact hdepth
   have hval :=
     canonicalTerminalResidue_val_eq_actual_iterate
