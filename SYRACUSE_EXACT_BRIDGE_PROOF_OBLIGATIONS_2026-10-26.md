@@ -55,3 +55,17 @@ The earlier statement that the terminal-exact backward lemma and finite inductio
 On isolated candidate branch `collatz/finite-depth-uniform-fibre-2026-11-10`, exact source commit `8a9d2b32a265e70d662aeedd21ec8a3ca9a7e594`, workflow `42861207383` succeeded under Lean 4.34.1 / Mathlib 4.34.1. The interval union identity and the exact child/tail cardinality lemmas in `SyracuseFiniteDepthUniformFibre.lean` each report `[propext, Classical.choice, Quot.sound]`; the dedicated `sorryAx` rejection step passed.
 
 Still open: finite-level construction and maximum cap, pairwise disjointness of the complete family, rational mass identities, residue-cylinder refinement bijection, and any global infinite-path exclusion. This candidate does not identify the finite atoms with historical APW4 events/BIB slots. The authoritative branch `collatz/valuation-cylinders-2026-10-26` remains unchanged.
+
+
+### Follow-up: child-region / tail disjointness kernel-verified
+
+The formalization was extended at exact source commit `c7a6d1c19fe6d8541871064413b0c5e558ed1524`. GitHub Actions run `42862468237` completed successfully under Lean 4.34.1 / Mathlib 4.34.1. The declared library, dedicated finite-fibre axiom audit, all other named modules, and the explicit project axiom report passed.
+
+Two additional declarations were checked:
+
+- `SyracuseUniformFibre.mem_childBlocks_lt_tailLower`
+- `SyracuseUniformFibre.childBlocks_disjoint_tail`
+
+Both have profile `[propext, Classical.choice, Quot.sound]`; no `sorryAx` occurs in their transitive axiom reports. Thus the combined retained-child region is now proved disjoint from the terminal tail.
+
+**Still open:** pairwise disjointness of the individual child blocks within `childBlocks`, finite surviving-level construction and maximum cap, rational mass identities, and the residue-cylinder refinement bijection. Do not call the full family a disjoint partition until the internal child-block disjointness theorem is also established.
