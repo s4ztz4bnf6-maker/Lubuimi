@@ -17,7 +17,7 @@ with every \(n_j\) positive and odd.
 
 Previously established lemmas and exact calculations are preserved. Mathematical derivations, Lean elaboration/kernel checking, transitive axiom audits, and GitHub CI status remain separate. A successful compile proves only the declarations actually compiled. No conditional block result is promoted to a universal orbit theorem without the missing orbit-realizability and coverage argument. No sorry, sorryAx, or hidden project axiom is accepted in a claimed final theorem.
 
-## 2. Lubuimi's certified affine-offset framework
+## 2. Certified affine-offset framework
 
 For exact odd-to-odd transitions
 \[
@@ -38,7 +38,7 @@ C_k=\sum_{j=0}^{k-1}3^{k-1-j}2^{A_j}.
 \]
 Existing declarations include offset_identity_of_certified_steps, canonical_offset_identity_of_certified_steps, canonicalOffset_eq_weighted_sum, offsetClosedForm_succ, and offset_eq_closed_form. This is an exact identity for certified blocks, not itself a descent theorem.
 
-## 3. Lubuimi's signed-offset-margin framework and block correction
+## 3. Signed-offset-margin framework and block correction
 
 Define
 \[
@@ -60,13 +60,13 @@ D_{m+r}=3^rD_m-
 \]
 For a block of valuation-two steps, \(D_{m+r}=3^rD_m\).
 
-The new Lubuimi cylinder declarations are followed by #print axioms. The source already contains signedOffsetMargin_succ, signedOffsetMargin_block_decomposition, signedOffsetMargin_pos_iff_block_correction, signed_margin_after_run_of_ones, signed_margin_positive_after_run_of_ones_iff, signed_margin_after_run_of_twos, and signed_margin_weighted_sum_expansion.
+The new cylinder declarations are followed by #print axioms. The source already contains signedOffsetMargin_succ, signedOffsetMargin_block_decomposition, signedOffsetMargin_pos_iff_block_correction, signed_margin_after_run_of_ones, signed_margin_positive_after_run_of_ones_iff, signed_margin_after_run_of_twos, and signed_margin_weighted_sum_expansion.
 
 A positive terminal margin is equivalent to strict descent for the certified block. The unresolved global obligation is to prove that every positive odd start admits a finite realized block with positive margin.
 
-## 4. Lubuimi's Initial Valuation-One Cylinder Theorem
+## 4. Initial valuation-one cylinder classification
 
-This exact statement is named in this research record in honour of its author as **Lubuimi's Initial Valuation-One Cylinder Theorem**.
+This is an independent derivation by Ta-Yoshua Lubuimi of a classical finite parity-vector cylinder classification. It is not assigned an eponymous theorem name and no priority claim is made.
 
 For every positive odd accelerated Syracuse orbit and every \(N\ge0\),
 \[
@@ -103,7 +103,7 @@ equivalently
 \]
 Every positive odd start therefore has a finite initial valuation-one run. Among odd residue classes, the density with at least \(N\) initial ones is \(2^{-N}\), and the density with exactly \(N\) is \(2^{-(N+1)}\).
 
-This refines the already formalized one-way obstruction exponent_one_block_bounds_length_by_start_shift: the converse direction constructs the actual orbit prefix from the residue class. The Lean declaration `lubuimi_initial_valuation_one_cylinder` is verified on three complete exact-commit workflows: [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544), [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220), and the later current-source audit [42738528207](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738528207) on source commit `a1becbc8e837f10abcd952a2e03832cb057fb2b8`. All report the transitive profile `[propext, Classical.choice, Quot.sound]`; the explicit `sorryAx` gates passed. The later run also checks `dyadicUniformFibre_partition_card`. Earlier failed proof-script attempts remain part of the audit chronology and are not represented as successful theorem verification. The exact statement and proof are recorded in `SyracuseInitialValuationOneCylinder_2026-11-09.md`; a matching German manuscript is in `Lubuimi_Anfangszylinder_Syracuse_DE_2026-11-10.md`. The general finite valuation-word cylinder partition theorem remains a separate Lean formalization target.
+This refines the already formalized one-way obstruction exponent_one_block_bounds_length_by_start_shift: the converse direction constructs the actual orbit prefix from the residue class. The Lean declaration `initial valuation-one cylinder declaration` is verified on three complete exact-commit workflows: [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544), [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220), and the later current-source audit [42738528207](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738528207) on source commit `a1becbc8e837f10abcd952a2e03832cb057fb2b8`. All report the transitive profile `[propext, Classical.choice, Quot.sound]`; the explicit `sorryAx` gates passed. The later run also checks `dyadicUniformFibre_partition_card`. Earlier failed proof-script attempts remain part of the audit chronology and are not represented as successful theorem verification. The exact statement and proof are recorded in `SyracuseInitialValuationOneCylinder_2026-11-09.md`; a matching German manuscript is in `Lubuimi_Anfangszylinder_Syracuse_DE_2026-11-10.md`. The general finite valuation-word cylinder partition theorem remains a separate Lean formalization target.
 
 ## 5. Exact recovery threshold after the initial run
 
@@ -151,7 +151,7 @@ The job installed Lean 4.34.1 and Mathlib v4.34.1, built CollatzAudit (8,930 job
 
 The offset and valuation-transition audit steps explicitly searched their full logs for sorryAx and would fail if found; neither check found it. The named declarations reported the Lean standard profile [propext, Classical.choice, Quot.sound] or a subset. This run verifies the existing declarations in the checked merge snapshot. It does not compile the new Lubuimi cylinder equivalence, which remains a mathematical research note pending Lean formalization.
 
-## 9. Lubuimi's APW4–Syracuse cylinder–energy bridge: research programme, not an imported theorem
+## 9. APW4–Syracuse cylinder–energy bridge: research programme, not an imported theorem
 
 The APW4 energy/transport architecture should be explored as a possible proof-design tool, but it cannot be imported into Collatz merely by analogy. Syracuse valuation words define finite residue cylinders and a prefix tree. A potential finite interface consists of cylinder nodes indexed by realized valuation prefixes, exact residue classes and measures, parent/child refinement, weighted incidence between prefixes and terminal states, and a collision/energy quantity separating diagonal mass from off-diagonal overlap.
 
@@ -159,7 +159,7 @@ An actual APW4-to-Collatz theorem requires a concrete finite map from Syracuse c
 
 ## 10. Next mathematical and formalization steps
 
-1. Add the Lubuimi initial-cylinder equivalence to SyracuseOffsetIdentity.lean using the existing certified-transition conventions and oddness hypotheses.
+1. Add the initial-cylinder equivalence to SyracuseOffsetIdentity.lean using the existing certified-transition conventions and oddness hypotheses.
 2. Derive the exact-run-length statement and one-step margin-recovery threshold as Lean corollaries.
 3. Prove a finite-state or weighted-block lemma controlling how realized exponents \(a_j\ge2\) compensate for valuation-one corrections.
 4. Search existing residue and stopping-time branches before introducing new notation; preserve exact local descent results and their hypotheses.
@@ -175,18 +175,18 @@ No global Collatz proof is claimed in this record.
 The repository now includes LICENSE-PROPRIETARY.md and LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md. Original Collatz/Syracuse code, manuscripts, research notes and documentation owned by Ta-Yoshua Lubuimi are all-rights-reserved; no general open-source or commercial license is granted. Lean, Mathlib and other third-party materials remain under their own licenses. The commercial policy reserves negotiated permission for commercial exploitation of copyrightable original materials, but does not claim copyright ownership over mathematical facts, abstract ideas or independently developed implementations.
 
 
-## 12. Lubuimi's finite valuation-word cylinder partition
+## 12. Finite exact valuation-word cylinder classification
 
-The stronger generalization of the initial all-ones cylinder is documented in [Lubuimi's Finite Valuation-Word Cylinder Partition Theorem](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md). For every finite positive exponent word \(\alpha\) with total exponent \(A\), its exact starting-value cylinder is one unique odd residue class modulo \(2^{A+1}\), with relative density \(2^{-A}\) among odd residues. Its children have exact relative masses \(2^{-b}\) for next exponent \(b\ge1\), and these sum to one. The explicit residue is \((2^A-C_k)(3^k)^{-1}\bmod 2^{A+1}\), using the certified affine offset.
+The stronger generalization of the initial all-ones cylinder is documented in [finite exact valuation-word cylinder classification](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md). For every finite positive exponent word \(\alpha\) with total exponent \(A\), its exact starting-value cylinder is one unique odd residue class modulo \(2^{A+1}\), with relative density \(2^{-A}\) among odd residues. Its children have exact relative masses \(2^{-b}\) for next exponent \(b\ge1\), and these sum to one. The explicit residue is \((2^A-C_k)(3^k)^{-1}\bmod 2^{A+1}\), using the certified affine offset.
 
-This is a mathematically derived theorem and a Lean formalization target, not yet a compiled declaration. It supplies a concrete finite-prefix tree for the named Lubuimi APW4–Syracuse cylinder–energy bridge programme. The bridge still requires an explicit index-preserving incidence/capacity map and an integer-level obstruction; a measure-zero exceptional set alone does not prove Collatz.
+This is a mathematically derived theorem and a Lean formalization target, not yet a compiled declaration. It supplies a concrete finite-prefix tree for the APW4–Syracuse cylinder–energy bridge programme. The bridge still requires an explicit index-preserving incidence/capacity map and an integer-level obstruction; a measure-zero exceptional set alone does not prove Collatz.
 
 
 ## 13. Lubuimi finite valuation-word partition and exact CI correction — 10 November 2026
 
 ### 13.1 Stronger cylinder theorem
 
-The initial all-ones cylinder is now accompanied by **Lubuimi's Finite Valuation-Word Cylinder Partition Theorem** in `Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md`. For every finite positive exact exponent word \(\alpha=(a_0,\ldots,a_{k-1})\), with total exponent \(A=\sum_i a_i\), the set of positive odd starts realizing exactly that word is one unique odd residue class modulo \(2^{A+1}\). Its relative natural density among odd starts is exactly \(2^{-A}\).
+The initial all-ones cylinder is now accompanied by **finite exact valuation-word cylinder classification** in `Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md`. For every finite positive exact exponent word \(\alpha=(a_0,\ldots,a_{k-1})\), with total exponent \(A=\sum_i a_i\), the set of positive odd starts realizing exactly that word is one unique odd residue class modulo \(2^{A+1}\). Its relative natural density among odd starts is exactly \(2^{-A}\).
 
 The affine-offset formula for its residue is
 \[
@@ -204,22 +204,22 @@ The finite valuation-word partition theorem is also a Lean formalization target 
 
 ### 13.3 APW4 bridge consequence
 
-The full finite-word cylinder partition supplies a more substantial exact prefix tree than the single all-ones chain: every node has a unique residue class, exact mass \(2^{-A}\), and child mass ratios \(2^{-b}\). This is a legitimate mathematical input for developing the proposed **Lubuimi APW4–Syracuse Cylinder–Energy Bridge**. The bridge still requires an explicit index-preserving incidence map, proof of weight preservation and a verified BIB/Hall capacity condition. No such transport theorem is claimed at this stage, and no APW4 result is weakened or used as an unproved premise in Collatz.
+The full finite-word cylinder partition supplies a more substantial exact prefix tree than the single all-ones chain: every node has a unique residue class, exact mass \(2^{-A}\), and child mass ratios \(2^{-b}\). This is a legitimate mathematical input for developing the proposed **APW4–Syracuse cylinder–energy bridge**. The bridge still requires an explicit index-preserving incidence map, proof of weight preservation and a verified BIB/Hall capacity condition. No such transport theorem is claimed at this stage, and no APW4 result is weakened or used as an unproved premise in Collatz.
 
 
 ## 13. Current exact-commit Lean run — 10 November 2026
 
-Run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) is checking the refined Lubuimi initial-cylinder declaration at source commit 013192ce524a4572a9d96c8d4dcb2796830b1f62. Run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) has now completed successfully on merge commit 44bb2ac (PR head 013192ce524a4572a9d96c8d4dcb2796830b1f62 merged into base fc1e8023f9dcc0c777e25d08df0b011b13cdcb26). The full Lean library build and every workflow step passed: IterationLemmas, ThresholdLemmas, SyracuseReferenceTest, SyracuseQuarterDescent, SyracuseOffsetIdentity, SyracuseOffsetClosedForm, SyracuseOffsetLowerBound, SyracuseMarginBlock and SyracuseValuationTransition. The exact declaration lubuimi_initial_valuation_one_cylinder printed the transitive profile [propext, Classical.choice, Quot.sound]. The workflow's explicit grep of the complete offset-audit log for sorryAx found none. Thus the initial-cylinder equivalence is now Lean-compiled and axiom-audited at that checked merge commit. This verifies the cylinder theorem, not the global Collatz conjecture.
+Run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) is checking the refined initial-cylinder declaration at source commit 013192ce524a4572a9d96c8d4dcb2796830b1f62. Run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) has now completed successfully on merge commit 44bb2ac (PR head 013192ce524a4572a9d96c8d4dcb2796830b1f62 merged into base fc1e8023f9dcc0c777e25d08df0b011b13cdcb26). The full Lean library build and every workflow step passed: IterationLemmas, ThresholdLemmas, SyracuseReferenceTest, SyracuseQuarterDescent, SyracuseOffsetIdentity, SyracuseOffsetClosedForm, SyracuseOffsetLowerBound, SyracuseMarginBlock and SyracuseValuationTransition. The exact declaration initial valuation-one cylinder declaration printed the transitive profile [propext, Classical.choice, Quot.sound]. The workflow's explicit grep of the complete offset-audit log for sorryAx found none. Thus the initial-cylinder equivalence is now Lean-compiled and axiom-audited at that checked merge commit. This verifies the cylinder theorem, not the global Collatz conjecture.
 
 
-## 14. Positive Lean verification of Lubuimi's initial cylinder theorem — 10 November 2026
+## 14. Positive Lean verification of the initial valuation-one cylinder declaration — 10 November 2026
 
 The failed attempts `42719689591` and `42720406876` remain in the record as historical proof-script diagnostics. They are superseded for the initial-cylinder declaration by two later successful, commit-bound full workflows:
 
 - [Run 42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544): merge commit `44bb2ac`, PR head `013192ce524a4572a9d96c8d4dcb2796830b1f62`.
 - [Run 42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220): merge commit `3d79761`, PR head `ad7203f5571d03e5989b9ac935b2103300f02409`.
 
-Both workflows completed the library build and every listed Syracuse module/audit step. In both logs, `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` has transitive axiom profile `[propext, Classical.choice, Quot.sound]`. The workflow's explicit complete-log search for `sorryAx` found none. Therefore the initial valuation-one cylinder equivalence is now Lean-compiled and axiom-audited on two exact snapshots. The broader finite valuation-word cylinder partition theorem is mathematically derived but remains a separate Lean formalization target. Neither result is a proof of the global Collatz conjecture.
+Both workflows completed the library build and every listed Syracuse module/audit step. In both logs, `CollatzSyracuseAudit.initial valuation-one cylinder declaration` has transitive axiom profile `[propext, Classical.choice, Quot.sound]`. The workflow's explicit complete-log search for `sorryAx` found none. Therefore the initial valuation-one cylinder equivalence is now Lean-compiled and axiom-audited on two exact snapshots. The broader finite valuation-word cylinder partition theorem is mathematically derived but remains a separate Lean formalization target. Neither result is a proof of the global Collatz conjecture.
 
 Run [42721911555](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721911555) is a further recheck of the later documentation/status head and was in progress at the time of this update; it does not replace or downgrade the two completed positive runs.
 
@@ -229,7 +229,7 @@ Run [42721911555](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721
 The current branch head `a36894eefc52e5d28cd43110f5e289805509ad33` triggered run [42722186081](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42722186081). At the latest retrieval, checkout had completed and Lean toolchain/manifest setup was in progress. This is a further documentation/status recheck. It does not supersede the two completed positive exact-commit audits `42721006544` and `42721305220`, which already establish the initial cylinder declaration's successful compile and transitive axiom profile on their respective snapshots.
 
 
-## 16. Lubuimi terminal-residue collision energy — 10 November 2026
+## 16. Terminal-residue collision energy — 10 November 2026
 
 The finite valuation-word partition yields a new exact finite-place incidence model. For every length-k exponent word \(\alpha\), with total exponent \(A\) and affine offset \(C_k\), define
 \[
@@ -251,10 +251,10 @@ Cauchy–Schwarz on the finite place set gives \(E_k\ge1/(2\cdot3^{k-1})\), henc
 \]
 For \(k=1\), the two terminal places modulo 3 have masses \(2/3\) and \(1/3\), yielding \(E_1=5/9\), \(D_1=1/3\), and collision mass \(2/9\).
 
-This is the **Lubuimi Terminal-Residue Collision Energy**. It is a genuine exact diagonal/off-diagonal incidence identity in the Syracuse valuation-word model and a concrete APW4-style bridge candidate. It is not silently identified with the historical APW4 BIB reserve. That transfer still requires an index-preserving map to original APW4 event/place objects, preservation of historical weights, and a proved capacity/Hall inequality. The new collision-energy statement is mathematically derived but not yet Lean-compiled; the initial one-cylinder theorem remains separately Lean-verified by runs 42721006544 and 42721305220.
+This is the **terminal-residue collision-energy identity**. It is a genuine exact diagonal/off-diagonal incidence identity in the Syracuse valuation-word model and a concrete APW4-style bridge candidate. It is not silently identified with the historical APW4 BIB reserve. That transfer still requires an index-preserving map to original APW4 event/place objects, preservation of historical weights, and a proved capacity/Hall inequality. The new collision-energy statement is mathematically derived but not yet Lean-compiled; the initial one-cylinder theorem remains separately Lean-verified by runs 42721006544 and 42721305220.
 
 
-## 17. Finite Markov representation of Lubuimi terminal-residue energy — 10 November 2026
+## 17. Finite Markov representation of terminal-residue energy — 10 November 2026
 
 The terminal-residue mass distribution has a finite rational Markov representation. For fixed \(k\), set \(x_j=C_j2^{-A_j}\pmod{3^k}\). The recurrence is
 \[
@@ -278,7 +278,7 @@ The mathematical and formalization status in earlier sections is preserved, but 
 - 42721911555 — successful full workflow;
 - 42722186081 — successful full workflow.
 
-For each run, the declaration `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` printed transitive axiom profile `[propext, Classical.choice, Quot.sound]`; the complete-log `sorryAx` scan passed. These runs certify the initial all-one cylinder declaration on their exact checked snapshots only. The earlier failed proof-script attempts remain in the historical chronology and are superseded for this declaration by the later successful runs.
+For each run, the declaration `CollatzSyracuseAudit.initial valuation-one cylinder declaration` printed transitive axiom profile `[propext, Classical.choice, Quot.sound]`; the complete-log `sorryAx` scan passed. These runs certify the initial all-one cylinder declaration on their exact checked snapshots only. The earlier failed proof-script attempts remain in the historical chronology and are superseded for this declaration by the later successful runs.
 
 The stronger general finite valuation-word cylinder theorem is mathematically proved in the standalone companion manuscript `projects/LubuimiFiniteValuationWordCylinder/MANUSCRIPT.md`. For any finite positive word with total exponent A, the exact cylinder is one odd residue class modulo 2^(A+1), of relative odd-start density 2^(-A), with explicit residue formula from the affine offset. Its finite cutoff refinement has exact children and one exact tail cylinder. This general theorem and tail partition are not yet Lean-compiled or axiom-audited.
 
@@ -303,7 +303,7 @@ The initial-cylinder declaration has now passed four full, independent, commit-b
 3. Run `42721911555` — merge `7b84a1b`, PR head `21829b4dd3b82a73edb19cf0d09ed011f55ef384`.
 4. Run `42722186081` — merge `5d4a19c`, PR head `a36894eefc52e5d28cd43110f5e289805509ad33`.
 
-All four full compile workflows completed successfully. Each printed the transitive axiom profile `[propext, Classical.choice, Quot.sound]` for `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder`; the explicit complete-log `sorryAx` audit steps passed. The subsequent current-head recheck `42724343412` is in progress on head `29b27dc529b9e81a33b5211e9e01a01e19edc256`. The general finite valuation-word partition, finite tail partition, terminal-residue collision energy and Markov matrix remain separate Lean formalization targets.
+All four full compile workflows completed successfully. Each printed the transitive axiom profile `[propext, Classical.choice, Quot.sound]` for `CollatzSyracuseAudit.initial valuation-one cylinder declaration`; the explicit complete-log `sorryAx` audit steps passed. The subsequent current-head recheck `42724343412` is in progress on head `29b27dc529b9e81a33b5211e9e01a01e19edc256`. The general finite valuation-word partition, finite tail partition, terminal-residue collision energy and Markov matrix remain separate Lean formalization targets.
 
 
 ## 10. Exact-head draft compile audit — 10 November 2026
@@ -431,7 +431,7 @@ PR #39 exact-head workflow 42735880399 passed on source head 012c8717e9d80025e7a
 
 ### Initial valuation-one manuscript v1.0
 
-The standalone manuscript for Lubuimi's Initial Valuation-One Cylinder Theorem is now consolidated as version 1.0 at PR #35 head 6dd47a9b18b373c274b0bc4d4001d9fad4e8ba24. It includes the complete two-way proof, explicit orbit formula, exact run length, natural densities, signed-margin consequence, worked example, literature context, references, limitations, and seven exact-commit Lean audit records. The Lean source was not changed by this editorial revision; the seven previously completed exact-commit audits remain the formal evidence for the theorem declaration.
+The standalone manuscript for initial valuation-one cylinder classification is now consolidated as version 1.0 at PR #35 head 6dd47a9b18b373c274b0bc4d4001d9fad4e8ba24. It includes the complete two-way proof, explicit orbit formula, exact run length, natural densities, signed-margin consequence, worked example, literature context, references, limitations, and seven exact-commit Lean audit records. The Lean source was not changed by this editorial revision; the seven previously completed exact-commit audits remain the formal evidence for the theorem declaration.
 
 
 ## 17. Exact mixed valuation word (1,2) — Lean verification passed
@@ -697,3 +697,97 @@ The initial-cylinder theorem, valuation bounds, exact offset and strict-margin r
 The next global proof obligation remains to derive the suffix-return premise from the deterministic accelerated Syracuse dynamics and the minimal-counterexample definition. The intended chain is: establish oddness of every orbit term from the exact affine identity and positive exponent; identify each exponent as the exact 2-adic valuation; prove the shifted tail is the unique deterministic Syracuse orbit from its current term; then apply minimality to obtain the suffix-return premise. Each link must be proved explicitly. Until then, the current minimal-counterexample wrapper remains conditional. Even after that bridge, finite-tree membership alone does not rule out an infinite branch; a separate descent, ranking, or well-foundedness argument is required.
 
 **Status:** PR #48 CI fully green on run 42759509255; finite-depth theorem verified within its exact scope; global Collatz theorem remains open.
+
+## Exact-head correction and continuation — 10 November 2026
+
+The exact CI state for the new affine parity/exponent lemmas is recorded in [COLLATZ_EXACT_HEAD_CI_AND_OPEN_OBLIGATIONS_2026-11-10.md](COLLATZ_EXACT_HEAD_CI_AND_OPEN_OBLIGATIONS_2026-11-10.md). The previous candidate commit `a8b593cd8ef59105e6b62b11d0dfc7e41e89a3bb` failed at line 3095 because `omega` could not derive `a j ≠ 0` from `ha : ∀ j, 0 < a j`. The repair candidate is `7d17d7111946b328421f9046f95b03c939dfddb1`, PR #53, workflow 42805867475. Its three jobs were still in progress at the latest poll. The repair uses `Nat.ne_of_gt (ha j)`; it remains unverified until all exact-head jobs and the named axiom/no-`sorryAx` checks pass.
+
+The already successful finite-cap baseline run 42759509255 on exact source `b0509fb5944f172ad9f7d71e7316907d4e988842` remains valid at its own scope. No later candidate failure downgrades the initial valuation-one cylinder, exact offset/margin, mixed-word, dyadic-cardinality, or finite cap-tree results previously verified on their own commits. The global Collatz theorem remains open because the deterministic suffix-return implication and infinite-path exclusion are not yet proved.
+## Exact-head repair result — 10 November 2026
+
+Workflow [42805867475](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42805867475) completed successfully on exact source commit `7d17d7111946b328421f9046f95b03c939dfddb1`. All three jobs passed: Lean 4.34.1 kernel/build check, `compile-drafts`, and Lean 4.35.0 paranoid kernel check.
+
+The named declaration outputs are:
+
+- `CollatzSyracuseAudit.every_state_odd_of_positive_affine_steps`: `[propext, Quot.sound]`.
+- `CollatzSyracuseAudit.every_affine_exponent_is_exact`: `[propext, Classical.choice, Quot.sound]`.
+- `CollatzSyracuseAudit.orbit_lower_bound_of_minimal_counterexample`: no axioms, but still conditional on its explicit suffix-return premise.
+
+The completed Lean 4.35.0 log explicitly reports `Lean paranoid kernel accepts the solution`. The `sorryAx` guard passed for `SyracuseOffsetIdentity.lean`; no actual `sorryAx` dependency is reported for the two new declarations. This verifies these two named affine/parity lemmas on this exact source head and the listed toolchains only.
+
+The global Collatz conjecture remains open. The suffix-return premise still must be derived from deterministic Syracuse dynamics and minimality, and a separate well-founded descent/ranking or other infinite-branch exclusion is still required.
+## Deterministic Syracuse successor bridge — 10 November 2026
+
+The next candidate declaration is `affine_step_eq_syracuse_of_exact_exponent`, connecting the affine transition with odd quotient to the deterministic map in `SyracuseReferenceTest.lean`. The first candidate head `400307622c62488878c1fa00362d06bddfa54744` did not reach proof checking because the imported module was not registered as a library root. The candidate build graph now includes `SyracuseReferenceTest` in `CollatzAudit` roots.
+
+Current exact head: `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, PR #55, workflow 42807396471. The three jobs were in progress at the latest poll. This theorem remains unverified until exact-head compilation, named axiom audit, and no-`sorryAx` checks pass. If it passes, the next proof target is the shifted-tail iterate identity by induction; the suffix-return and infinite-branch obligations remain open.
+## Deterministic Syracuse one-step transition — exact-head PASS
+
+Source head `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, workflow [42807396471](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42807396471): all three jobs passed (Lean 4.34.1, Lean 4.35.0 paranoid, and `compile-drafts`). `CollatzSyracuseAudit.affine_step_eq_syracuse_of_exact_exponent` has transitive profile `[propext, Classical.choice, Quot.sound]`; the paranoid kernel accepts the solution and the no-`sorryAx` gate passed. The earlier parity and exact-exponent lemmas remain separately verified on their exact source head `7d17d7111946b328421f9046f95b03c939dfddb1`.
+
+The verified one-step identity is the next link in the chain. The shifted-tail iterate identity, suffix-return derivation from least odd nonterminating counterexample minimality, and infinite-branch exclusion remain open.
+## Shifted-tail and least-counterexample bridge — candidate PR #56
+
+Following the exact-head PASS for `affine_step_eq_syracuse_of_exact_exponent` at head `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, candidate PR #56 adds the finite iterate identity for every shifted affine sequence tail and derives suffix return from the least odd nonterminating Syracuse start. It replaces the earlier abstract sequence-level suffix-return assumption with an explicit deterministic-orbit/minimality interface.
+
+Exact candidate head `1fd204750a1088efbf5e81b40b9ad95962fdb2ed`, workflow 42808379459, was in progress at the latest poll. The new declarations remain unverified until all exact-head jobs, named axiom outputs, and no-`sorryAx` checks pass.
+
+This bridge does not rule out the existence of a least odd nonterminating start. The global infinite-trajectory/infinite-branch exclusion remains open.
+
+## Neutral Lean declaration identifier — 10 November 2026
+
+The current Collatz continuation candidate renames the initial valuation-one cylinder declaration to `initial_valuation_one_cylinder_iff_dyadic_divisibility`. The mathematical proposition and proof are unchanged. Earlier successful CI snapshots remain historical evidence for the then-current source declaration only; they do not automatically verify the new identifier. The rename and all new shifted-tail/minimality declarations are being checked together on PR #56, exact head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow 42808797159, queued at the latest poll.
+
+
+## 13. Exact-head continuation: parity, deterministic step, shifted tails, and naming — 10 November 2026
+
+The two affine parity/exactness declarations passed all three exact-head jobs on PR #53 head `7d17d7111946b328421f9046f95b03c939dfddb1`, workflow 42805867475. Their transitive axiom profiles are `[propext, Quot.sound]` and `[propext, Classical.choice, Quot.sound]`; the no-`sorryAx` guard passed.
+
+The exact affine-to-deterministic Syracuse one-step theorem passed all three jobs on PR #55 head `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, workflow 42807396471. Its profile is `[propext, Classical.choice, Quot.sound]`, the paranoid kernel accepted the solution, and the no-`sorryAx` gate passed.
+
+PR #56 now has exact head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f` and workflow 42808797159. It adds the shifted-tail iterate identity and least-counterexample/minimality consequences, and renames the old internal theorem identifier to `initial_valuation_one_cylinder_iff_dyadic_divisibility` without changing the mathematical proposition. At the latest poll, compile-drafts and Lean 4.34.1 jobs were in progress, with Lean 4.35.0 paranoid queued. The new declarations and the renamed identifier are not verified until this exact run passes and its named axiom/no-`sorryAx` evidence is inspected. The prior audits of the historical identifier remain valid only for their recorded commits.
+
+The next global mathematical obligation remains a genuine infinite-branch exclusion: a hypothetical least nonterminating odd start yields an orbit whose shifted tails are deterministic and cannot fall below the least start, but that does not by itself rule out the hypothetical start. No global Collatz proof is claimed.
+
+
+## Shifted-tail/minimality exact-head follow-up — 10 November 2026
+
+PR #56's shifted-tail identity compiled with standard profile `[propext, Classical.choice, Quot.sound]`, but its complete exact-head workflow 42808797159 failed all three jobs in the subsequent least-start layer. The failure causes were a missing local classical instance for `Nat.find`, a positivity proof that did not use the already established oddness fact, and a forward reference to a later theorem. Error recovery included `sorryAx`; no integrated proof claim is made.
+
+The neutral cylinder identifier printed `[propext, Classical.choice, Quot.sound]` in the partial build log, but because the full module failed later this is not accepted as a complete exact-head verification. The historical identifier's prior successful audits remain scoped to their own commits.
+
+PR #59 / head `5f6e46de8bed7061f8336089857143c54e997af5` is the focused repair. It has no visible exact-head workflow at the latest poll. The global nontermination exclusion remains a separate open obligation.
+
+
+## Latest PR #59 exact-head CI poll — 10 November 2026
+
+Workflow 42809750956 has started on head `5f6e46de8bed7061f8336089857143c54e997af5`: compile-drafts is in progress, Lean 4.34.1 and Lean 4.35.0 paranoid are queued. The new proof repairs remain candidates until all three exact-head jobs complete and named axiom/no-`sorryAx` evidence is inspected.
+
+
+## Parallel minimality proof-script candidates — 10 November 2026
+
+Two independent Lean proof-script variants now address the PR #56 errors. PR #58 head `a2eea6f3c979e25a705c3da60d09d6ec84a41b7f` (workflow 42809723676) and PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5` (workflow 42809750956) both have compile, Lean 4.34.1, and Lean 4.35.0 paranoid jobs in progress. They share the same mathematical argument; the final contradiction is discharged by `omega` in #58 and by `Nat.lt_of_not_ge` in #59. No new theorem is claimed from these uncompleted candidates.
+
+
+## 15. PR #59 exact-head verification completed — 10 November 2026
+
+PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5`, workflow 42809750956, passed all three jobs. The no-`sorryAx` guard passed, and the Lean 4.35.0 paranoid kernel accepted the solution. Declaration-scoped profiles: `initial_valuation_one_cylinder_iff_dyadic_divisibility` `[propext, Classical.choice, Quot.sound]`; `every_state_odd_of_positive_affine_steps` `[propext, Quot.sound]`; `every_affine_exponent_is_exact`, `affine_trajectory_eq_syracuse_iterate`, `affine_suffix_returns_of_least_odd_nonterminating_start`, and `affine_minimal_counterexample_orbit_lower_bound` each `[propext, Classical.choice, Quot.sound]`.
+
+The exact shifted-tail and minimality reduction is now formally verified at this commit. Its logical scope is conditional: it derives a lower bound from a least odd positive nonterminating start and a sequence that never reaches one. It does not prove that no such start exists. A separate infinite-trajectory exclusion remains the central global obligation.
+
+
+## 16. Deterministic minimality-to-cap-tree bridge candidate — 10 November 2026
+
+PR #62 adds `affine_minimal_counterexample_prefix_mem_finiteCapTree` and `affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit`. The first composes the PR #59 verified lower-bound theorem with the existing finite-cap-tree membership result; the second adds the terminal-residue unit conclusion. Exact source head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow 42811286670, has all three jobs in progress at the latest poll. No verification claim is made yet.
+
+This closes a formal interface gap between deterministic minimality and the existing finite-depth path certificate if the exact-head CI passes. It does not exclude an infinite branch. The average (k=2) terminal-residue energy bound remains an average statement; no pathwise upper bound is inferred from it.
+
+
+## PR #62 partial kernel verification — 10 November 2026
+
+The new finite-cap-tree bridge declarations have passed Lean 4.34.1 and Lean 4.35.0 paranoid checks on exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, each with `[propext, Classical.choice, Quot.sound]`. The paranoid kernel accepted and no `sorryAx` was detected. The compile-drafts job remains in progress, so the full exact-head workflow is not yet complete.
+
+
+## PR #62 complete verification — 10 November 2026
+
+PR #62 head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow 42811286670, passed all three jobs. Both new cap-tree bridge declarations have `[propext, Classical.choice, Quot.sound]`; no `sorryAx` was detected and the paranoid kernel accepted. The finite-depth path-certificate bridge is formally verified. It remains a conditional reduction and does not prove absence of an infinite nonterminating trajectory.
