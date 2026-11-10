@@ -3498,9 +3498,14 @@ theorem affine_minimal_counterexample_terminal_residue_cap_tree_bridge
   have hcap :=
     affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit
       n₀ n A a hA0 hA ha hn₀ hoffset hstep hleast hnever j hj
+  have hn0eq : n 0 = n₀ := by
+    simpa [hA0, canonicalOffset] using hoffset 0
+  have hdepth' : n 0 + 1 < 2 ^ j := by
+    rw [← hn0eq]
+    exact hdepth
   have hval :=
     canonicalTerminalResidue_val_eq_actual_iterate
-      n a A hA0 hA hstep ha j hdepth
+      n a A hA0 hA hstep ha j hdepth'
   exact ⟨hcap.1, hcap.2, hval⟩
 
 #print axioms affine_minimal_counterexample_terminal_residue_cap_tree_bridge
