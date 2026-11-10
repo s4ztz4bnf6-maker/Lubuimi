@@ -2817,10 +2817,13 @@ theorem next_exponent_lt_integer_bound
     linarith
   exact lt_of_le_of_lt hle (lt_of_lt_of_le hpow hbound)
 
-/-- Every next valuation on a nondecreasing exact Syracuse endpoint lies
-below an explicit finite integer depending on its current prefix state.
-This proves pointwise finite branching, not a uniform bound over all
-prefixes and not the nonexistence of an infinite path. -/
+/-- Every next valuation on an exact Syracuse orbit whose next endpoint
+stays at least the initial value n₀ lies below an explicit finite integer
+depending on its current prefix state. The legacy theorem name below says
+"nondecreasing", but the hypothesis is only n₀ ≤ nnext, not monotonicity
+between consecutive orbit values. This proves pointwise finite branching,
+not a uniform bound over all prefixes and not the nonexistence of an
+infinite path. -/
 theorem nondecreasing_orbit_next_exponent_finite_bound
     (n₀ nnext : ℕ) (A a : ℕ → ℕ)
     (hA : ∀ j, A (j + 1) = A j + a j)
@@ -2954,11 +2957,11 @@ theorem finiteCapTreeLevel_succ_mem
   simp only [finiteCapTreeLevel, Finset.mem_biUnion]
   exact ⟨α, hα, Finset.mem_image.mpr ⟨b, hb, rfl⟩⟩
 
-/-- Every prefix of a nondecreasing exact affine Syracuse path belongs
-to the finite state-dependent cap tree. This is a path-embedding theorem:
-it proves finite branching at each prefix, not the absence of an infinite
-path through the tree. -/
-theorem nondecreasing_orbit_prefix_mem_finiteCapTree
+/-- Every prefix of an exact affine Syracuse orbit that never falls below
+its initial value belongs to the finite state-dependent cap tree. This
+is the condition relevant to a minimal-counterexample reduction. It is
+not a claim that the orbit is monotone from one step to the next. -/
+theorem initial_lower_bounded_orbit_prefix_mem_finiteCapTree
     (n₀ : ℕ) (n : ℕ → ℕ) (A a : ℕ → ℕ)
     (hA0 : A 0 = 0)
     (hA : ∀ j, A (j + 1) = A j + a j)
@@ -3013,10 +3016,10 @@ theorem terminal_residue_unit_of_affine_identity
     A j n₀ nj hidentity]
   exact canonicalTerminalResidue_isUnit A j hj
 
-/-- A nondecreasing exact affine path has, at every positive depth, both
-a finite-cap-tree prefix and a unit terminal residue. This is a finite
-path certificate, not a global Collatz termination theorem. -/
-theorem nondecreasing_orbit_prefix_cap_tree_and_terminal_unit
+/-- An exact affine path that remains at least its initial value has,
+at every positive depth, both a finite-cap-tree prefix and a unit terminal
+residue. This is a finite path certificate, not a global Collatz theorem. -/
+theorem initial_lower_bounded_orbit_prefix_cap_tree_and_terminal_unit
     (n₀ : ℕ) (n : ℕ → ℕ) (A a : ℕ → ℕ)
     (hA0 : A 0 = 0)
     (hA : ∀ j, A (j + 1) = A j + a j)
@@ -3035,10 +3038,46 @@ theorem nondecreasing_orbit_prefix_cap_tree_and_terminal_unit
   · exact terminal_residue_unit_of_affine_identity
       A j n₀ (n j) hj (hoffset j)
 
+/-- Compatibility alias. The condition is n₀ ≤ n j for every j,
+not stepwise monotonicity n j ≤ n (j+1). -/
+theorem nondecreasing_orbit_prefix_mem_finiteCapTree
+    (n₀ : ℕ) (n : ℕ → ℕ) (A a : ℕ → ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (ha : ∀ j, 0 < a j)
+    (hn₀ : 1 < n₀)
+    (hoffset :
+      ∀ j, 2 ^ A j * n j =
+        3 ^ j * n₀ + canonicalOffset A j)
+    (hnd : ∀ j, n₀ ≤ n j) :
+    ∀ j, valuationPrefix a j ∈ finiteCapTreeLevel j :=
+  initial_lower_bounded_orbit_prefix_mem_finiteCapTree
+    n₀ n A a hA0 hA ha hn₀ hoffset hnd
+
+/-- Compatibility alias. Its hypothesis is a lower bound by n₀, not
+monotonicity of consecutive orbit values. -/
+theorem nondecreasing_orbit_prefix_cap_tree_and_terminal_unit
+    (n₀ : ℕ) (n : ℕ → ℕ) (A a : ℕ → ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (ha : ∀ j, 0 < a j)
+    (hn₀ : 1 < n₀)
+    (hoffset :
+      ∀ j, 2 ^ A j * n j =
+        3 ^ j * n₀ + canonicalOffset A j)
+    (hnd : ∀ j, n₀ ≤ n j)
+    (j : ℕ) (hj : 0 < j) :
+    valuationPrefix a j ∈ finiteCapTreeLevel j ∧
+      IsUnit (n j : ZMod (3 ^ j)) :=
+  initial_lower_bounded_orbit_prefix_cap_tree_and_terminal_unit
+    n₀ n A a hA0 hA ha hn₀ hoffset hnd j hj
+
 #print axioms finiteCapPrefixState_eq_actual
 #print axioms finiteCapChildren_mem_of_int_bound
-#print axioms nondecreasing_orbit_prefix_mem_finiteCapTree
+#print axioms initial_lower_bounded_orbit_prefix_mem_finiteCapTree
 #print axioms terminal_residue_unit_of_affine_identity
+#print axioms initial_lower_bounded_orbit_prefix_cap_tree_and_terminal_unit
+#print axioms nondecreasing_orbit_prefix_mem_finiteCapTree
 #print axioms nondecreasing_orbit_prefix_cap_tree_and_terminal_unit
 
 end CollatzSyracuseAudit
