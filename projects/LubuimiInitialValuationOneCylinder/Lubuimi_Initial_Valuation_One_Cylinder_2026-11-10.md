@@ -1,8 +1,8 @@
-# Lubuimi's Initial Valuation-One Cylinder Theorem
+# Initial Valuation-One Cylinders in the Accelerated Syracuse Map
 ## An exact congruence classification for initial valuation blocks in the accelerated Syracuse map
 
 **Author:** Ta-Yoshua Lubuimi  
-**Version:** 1.0  
+**Version:** 1.1 (corrected scholarly framing)  
 **Date:** 10 November 2026  
 **Article type:** Research note / preprint
 
@@ -31,7 +31,7 @@ The \(3x+1\) problem asks about the long-term behaviour of repeated iteration of
 
 This note isolates one exact finite-prefix question: which odd starting integers have their first \(N\) accelerated valuation exponents equal to one? The answer is a single congruence class modulo \(2^{N+1}\). The proof gives a complete two-way classification, an exact initial run-length formula, and exact density statements.
 
-The 2-adic viewpoint is natural in the study of the \(3x+1\) map. Earlier work develops the map on the 2-adic integers and studies its conjugacy with a shift map; see Lagarias [1] and Bernstein–Lagarias [2]. The present note uses only finite congruences and the elementary valuation \(v_2\). It does not claim that the general 2-adic framework is new. Its focus is the explicit accelerated-valuation cylinder, its stopping-time interpretation, and its signed-offset consequence.
+The finite congruence classification in this note is a classical consequence of parity-vector coding for the \(3x+1\) map. Lagarias [3, Theorem B] gives the explicit finite permutation statement; Terras [1] and Everett [2] belong to the classical historical development. This note gives an independent elementary proof in accelerated-Syracuse valuation coordinates and records the author's Lean formalization. It makes no claim that the congruence classification is new. Tao [4, §1.2, Proposition 1.9] studies the approximate distribution of finite Syracuse valuation vectors under an equidistribution hypothesis; that proposition is related context, not the exact uniqueness theorem used here.
 
 The derivation proceeds from the affine identity in Lemma 2.1. Under an initial valuation-one block, the cumulative exponent is exactly the block length and the offset recurrence collapses to \(C_N=3^N-2^N\). Substitution into the terminal orbit identity produces a factor \(2^N\); the oddness of the terminal iterate supplies the additional factor \(2\), yielding the modulus \(2^{N+1}\). The converse is constructive: a starting value in the residue class is written as \(2^{N+1}m-1\), and the candidate iterates \(3^j2^{N+1-j}m-1\) show directly that each of the first \(N\) valuations is exactly one.
 
@@ -74,7 +74,7 @@ by (2.3). Induction proves the identity. \(\square\)
 
 ## 3. Main theorem: the initial valuation-one cylinder
 
-**Theorem 3.1 (Lubuimi's Initial Valuation-One Cylinder Theorem).**  
+**Theorem 3.1 (Initial valuation-one cylinder classification).**  
 Let \(n_0\) be any positive odd integer, let \((n_j,a_j)_{j\geq0}\) be defined by (2.1), and let \(N\geq0\). Then
 \[
 \boxed{
@@ -270,6 +270,15 @@ D_{r+1}>0
 
 The threshold (6.5) is exact and depends on the realized initial run length. It is not a universal assertion that the next valuation satisfies the threshold. Nor does positivity of this particular margin, by itself, establish a global Collatz descent theorem.
 
+**Corollary 6.3 (Positive margin forces descent below the start).** For any orbit prefix, \(D_j>0\) implies \(n_j<n_0\).
+
+**Proof.** The affine identity gives \(2^{A_j}n_j=3^j n_0+C_j\). Since \(C_j\geq0\) and \(D_j=2^{A_j}-C_j-3^j>0\), we have \(2^{A_j}-3^j>C_j\). As \(n_0\geq1\),
+\[
+(2^{A_j}-3^j)n_0>C_j.
+\]
+Therefore \(2^{A_j}n_0>3^j n_0+C_j=2^{A_j}n_j\), hence \(n_j<n_0\). QED.
+
+
 ## 7. Example
 
 Take \(n_0=7\). Since \(7+1=8\), one has \(v_2(8)=3\), and Corollary 4.2 predicts exactly two initial valuation-one steps. Indeed,
@@ -288,53 +297,42 @@ Theorem 3.1 completely classifies one family of finite valuation prefixes. At ev
 
 1. an exact congruence test for any prescribed initial block of valuation-one steps;
 2. an explicit formula for every iterate within that block;
-3. an exact stopping-time formula for the initial run length;
+3. an exact formula for the initial run length;
 4. exact natural densities for both “at least” and “exactly” \(r\) initial steps; and
 5. an exact signed-margin formula and next-step recovery threshold.
 
 The result is local. It does not imply that every orbit eventually decreases, that every orbit is bounded, or that every orbit reaches \(1\). In particular, density information about finite prefixes cannot by itself exclude an exceptional infinite orbit. A global Collatz proof still requires an orbit-by-orbit argument or another theorem that rules out all non-descending trajectories.
 
-The exact cylinders also provide a natural finite-prefix model for comparisons with weighted-fibre and incidence methods in other projects. Such a comparison is not an identification theorem: a cross-project transfer requires a specified map on indices, preservation of the relevant weights, and proof of the corresponding incidence and capacity inequalities. No APW4 transport statement is assumed or used in this paper.
+The exact cylinder identities are stated entirely within the accelerated Syracuse dynamics. No cross-project identification or transfer claim is part of this note.
 
-## 9. Formal verification and reproducibility
+## 9. Lean formalization record
 
-The main equivalence is formalized in Lean as
-\(\texttt{CollatzSyracuseAudit.lubuimi\_initial\_valuation\_one\_cylinder}\).
-The declaration was compiled and its transitive axiom dependencies were printed on seven successful exact-commit GitHub Actions snapshots:
+The source declaration is in SyracuseOffsetIdentity.lean, line 2397 at exact source commit b1a8599c686c37893a33453b759dee42047c7727. Its Lean signature is:
 
-| Run | Checked source / PR snapshot |
-|---|---|
-| 42721006544 | PR #35 head \(\texttt{013192ce524a4572a9d96c8d4dcb2796830b1f62}\) |
-| 42721305220 | PR #35 head \(\texttt{ad7203f5571d03e5989b9ac935b2103300f02409}\) |
-| 42721911555 | PR #35 head \(\texttt{21829b4dd3b82a73edb19cf0d09ed011f55ef384}\) |
-| 42722186081 | PR #35 head \(\texttt{a36894eefc52e5d28cd43110f5e289805509ad33}\) |
-| 42724343412 | PR #35 head \(\texttt{29b27dc529b9e81a33b5211e9e01a01e19edc256}\) |
-| 42725006480 | exact source commit \(\texttt{b1a8599c686c37893a33453b759dee42047c7727}\) |
-| 42725493567 | exact source commit \(\texttt{a52dffc23b323964f33bc7f6c61c2cb24bcdf708}\) |
+    theorem lubuimi_initial_valuation_one_cylinder
+        (n a : ℕ → ℕ) (N : ℕ)
+        (hodd : ∀ j, n j % 2 = 1)
+        (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1) :
+        (∀ j, j < N → a j = 1) ↔ 2 ^ (N + 1) ∣ n 0 + 1 := by
 
-The reported transitive axiom profile for the main declaration in the audited snapshots is
-\[
-[\texttt{propext},\ \texttt{Classical.choice},\ \texttt{Quot.sound}].
-\]
-The completed workflow logs report no actual occurrence of \(\texttt{sorryAx}\) in the audited theorem. Run 42725493567 was a full exact-commit recheck on a documentation-only descendant of the preceding Lean source snapshot; it did not enlarge the theorem's formal scope.
+The identifier is retained as the literal source-level name needed to locate the historical audited declaration; it is not used as the mathematical name of the result. The documented successful exact-commit workflows report the transitive profile [propext, Classical.choice, Quot.sound] and no actual sorryAx finding for that declaration. The dedicated formalization-status file preserves the complete workflow chronology, including earlier failed proof-script attempts. These audits certify only this declaration at the checked snapshots. They do not certify the arbitrary finite-word statement, the finite tail partition, the collision-energy identity, the Markov representation, or the global Collatz conjecture.
 
-Earlier failed proof-script attempts are retained in the project chronology. They do not invalidate the later successful audits. Conversely, these audits apply to the named declaration and checked source snapshots only. They do not certify the general finite-word cylinder theorem, the finite tail partition, the terminal-residue collision-energy theorem, the Markov representation, or the global Collatz conjecture.
-
-The separate Syracuse offset/margin programme has its own successful exact-commit audit: workflow 42728049650 on source commit \(\texttt{ca48ec7fdad5e8d6f8aeb82fed8586a1b57c12bc}\) verified the named non-descent exponent-cap declarations with the standard profile and no actual \(\texttt{sorryAx}\). That is a distinct formal result. The seven audits listed in this section concern the initial-cylinder declaration specifically; they should not be read as a claim that every displayed signed-margin corollary in this manuscript was separately declared and audited in Lean.
-
-The project source, Lean declaration, workflow history, and review notes are maintained in the author's repository:
-https://github.com/s4ztz4bnf6-maker/Lubuimi/tree/publication/lubuimi-initial-valuation-one-cylinder-2026-11-10
+The mathematical proof, historical attribution, and Lean/CI verification are separate claims. A successful audit of this declaration is not evidence of novelty.
 
 ## 10. References
 
-[1] J. C. Lagarias, “The 3x + 1 Problem and Its Generalizations,” *The American Mathematical Monthly* **92** (1985), no. 1, 3–23.
+[1] R. Terras, “A stopping time problem on the positive integers,” *Acta Arithmetica* **30** (1976), 241–252. https://doi.org/10.4064/aa-30-3-241-252
 
-[2] D. J. Bernstein and J. C. Lagarias, “The 3x + 1 Conjugacy Map,” *Canadian Journal of Mathematics* **48** (1996), no. 6, 1154–1169.
+[2] C. J. Everett, “Iteration of the number-theoretic function f(2n) = n, f(2n + 1) = 3n + 2,” *Advances in Mathematics* **25** (1977), no. 1, 42–45. https://doi.org/10.1016/0001-8708(77)90087-1
 
-The references provide the broader Collatz and 2-adic dynamical context. The proof in this note is self-contained and does not rely on either reference.
+[3] J. C. Lagarias, “The 3x + 1 Problem and Its Generalizations,” *The American Mathematical Monthly* **92** (1985), no. 1, 3–23, especially Theorem B. https://doi.org/10.1080/00029890.1985.11971528
+
+[4] T. Tao, “Almost all orbits of the Collatz map attain almost bounded values,” *Forum of Mathematics, Pi* **10** (2022), e12. https://doi.org/10.1017/fmp.2022.8; arXiv:1909.03562, §1.2 and Proposition 1.9.
+
+Lagarias's Theorem B gives the explicit finite parity-vector permutation statement. Terras and Everett are part of the classical historical development. Tao's Proposition 1.9 concerns approximate distribution of finite Syracuse valuation vectors under a residue-equidistribution hypothesis; it is not cited as the source of the exact one-residue-class theorem.
 
 ---
 
 **Authorship:** The mathematical work and theorem are attributed to **Ta-Yoshua Lubuimi**. AI systems, where used, are acknowledged only as assistance tools and are not authors, co-authors, or independent mathematical verifiers.
 
-**Publication note:** This is a self-contained research-note/preprint manuscript. The formal proof record above is reproducible at the stated snapshots. No journal acceptance or independent peer-review status is claimed.
+**Publication note:** This is an independent exposition and formalization of a classical finite congruence consequence, not a novelty or priority claim. No journal acceptance or independent peer-review status is claimed.
