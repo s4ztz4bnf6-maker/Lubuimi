@@ -106,3 +106,24 @@ E_2=\sum_{i=1}^{6}m_{2,i}^{,2}
 \]
 
 This is an independently checked finite arithmetic identity for the k=2 terminal-residue distribution. It is not a Lean/BIB equivalence, not a pathwise bound, and not the missing infinite-branch exclusion. Keep it as a separate quantitative input when examining the cap-tree terminal condition; do not turn the average energy into a pointwise orbit inequality.
+
+
+## Exact-head update — terminal-residue scale bridge and audit activation (10 November 2026)
+
+PR #71 has now been merged into `main` at `6cf56c2fc5c3c0fbc04f34c618da63fb690dfac7`. Its workflow-installation check passed in run [42817093578](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42817093578). This is CI infrastructure only, not a mathematical theorem.
+
+PR #70 now carries the proof-script candidate at exact source head `eb99ae200332bda1b3e67e64b5c4d2a0020bb0a6`. Its only proof change relative to the prior candidate is the depth transport `simpa [hn0eq] using hdepth`, using the already-derived equality `hn0eq : n 0 = n₀`. **OFFEN – NICHT VERIFIZIERT**: no exact-head run has yet been recorded for this head; do not promote the bridge until Lean 4.34.1, Lean 4.35.0 paranoid, compile-drafts, named axiom output, and the no-`sorryAx` guard pass.
+
+### Newly connected exact scale statement
+
+For every certified Syracuse step with positive valuation, the exact step identity gives
+
+    2 * (n (j+1) + 1) ≤ 3 * (n j + 1).
+
+Induction yields
+
+    2^j * (n j + 1) ≤ 3^j * (n 0 + 1).
+
+Consequently, if `n 0 + 1 < 2^j`, then `n j < 3^j`. Combined with the exact affine-offset identity, the canonical terminal residue modulo `3^j` therefore has least nonnegative representative exactly `n j`; under the least-counterexample hypotheses, that same prefix lies in the finite cap tree and its terminal residue is a unit. The source theorem is `affine_minimal_counterexample_terminal_residue_cap_tree_bridge` in `SyracuseOffsetIdentity.lean`.
+
+This is a finite-depth bridge between the actual Syracuse orbit, the cap-tree prefix, and the terminal residue. It does not establish a descent, exclude an infinite branch, or prove global Collatz termination. The independent k=2 energy calculation and the signed-offset margin theorem remain separate verified/checked inputs, not substitutes for this missing global step.
