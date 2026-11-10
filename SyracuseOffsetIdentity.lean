@@ -2791,4 +2791,86 @@ theorem nondecreasing_orbit_next_exponent_cap
 
 #print axioms nondecreasing_orbit_next_exponent_cap
 
+
+/-- Every natural exponent is strictly smaller than its power of two. -/
+private theorem nat_lt_two_pow (m : ℕ) : m < 2 ^ m := by
+  induction m with
+  | zero => norm_num
+  | succ m ih =>
+      rw [pow_succ]
+      have hp : 0 < 2 ^ m := by positivity
+      nlinarith
+
+/-- A necessary exponential cap gives an explicit finite integer bound
+on the next valuation. -/
+theorem next_exponent_lt_integer_bound
+    (A b : ℕ) (D : ℤ)
+    (hcap :
+      (2 : ℤ) ^ (A + b) + 3 * D ≤ 4 * (2 : ℤ) ^ A) :
+    (b : ℤ) < 4 * (2 : ℤ) ^ A - 3 * D := by
+  have hpow : ((A + b : ℕ) : ℤ) < (2 : ℤ) ^ (A + b) := by
+    exact_mod_cast nat_lt_two_pow (A + b)
+  have hle : (b : ℤ) ≤ (A + b : ℤ) := by omega
+  have hpow_le :
+      (2 : ℤ) ^ (A + b) ≤ 4 * (2 : ℤ) ^ A - 3 * D := by
+    linarith [hcap]
+  exact lt_of_le_of_lt hle (lt_of_lt_of_le hpow hpow_le)
+
+/-- Every next valuation on a nondecreasing exact Syracuse endpoint lies
+below an explicit finite integer depending only on its current prefix
+state. This proves pointwise finite branching, not a uniform bound. -/
+theorem nondecreasing_orbit_next_exponent_finite_bound
+    (n₀ nnext : ℕ) (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (j : ℕ) (hn₀ : 1 < n₀)
+    (hoffset :
+      2 ^ A (j + 1) * nnext =
+        3 ^ (j + 1) * n₀ + canonicalOffset A (j + 1))
+    (hnondecreasing : n₀ ≤ nnext) :
+    (a j : ℤ) <
+      4 * (2 : ℤ) ^ A j - 3 * signedOffsetMargin A j := by
+  exact next_exponent_lt_integer_bound
+    (A j) (a j) (signedOffsetMargin A j)
+    (nondecreasing_orbit_next_exponent_cap
+      n₀ nnext A a hA j hn₀ hoffset hnondecreasing)
+
+/-- The integer cap determines an explicit finite initial segment of
+possible natural next valuations. -/
+theorem next_exponent_mem_finite_range_of_cap
+    (A b : ℕ) (D : ℤ)
+    (hcap :
+      (2 : ℤ) ^ (A + b) + 3 * D ≤ 4 * (2 : ℤ) ^ A) :
+    b ∈ Finset.range (Int.toNat (4 * (2 : ℤ) ^ A - 3 * D)) := by
+  have hbound := next_exponent_lt_integer_bound A b D hcap
+  let R : ℤ := 4 * (2 : ℤ) ^ A - 3 * D
+  have hR : 0 < R := by
+    dsimp [R]
+    have hb : (0 : ℤ) ≤ (b : ℤ) := by exact_mod_cast Nat.zero_le b
+    omega
+  have hNat : b < Int.toNat R := by
+    simpa [R] using (Int.toNat_lt_toNat hR).2 hbound
+  simpa [R, Finset.mem_range] using hNat
+
+/-- The actual next valuation of a nondecreasing exact Syracuse endpoint
+belongs to a concrete finite initial segment determined by its prefix. -/
+theorem nondecreasing_orbit_next_exponent_mem_finite_range
+    (n₀ nnext : ℕ) (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (j : ℕ) (hn₀ : 1 < n₀)
+    (hoffset :
+      2 ^ A (j + 1) * nnext =
+        3 ^ (j + 1) * n₀ + canonicalOffset A (j + 1))
+    (hnondecreasing : n₀ ≤ nnext) :
+    a j ∈ Finset.range
+      (Int.toNat (4 * (2 : ℤ) ^ A j - 3 * signedOffsetMargin A j)) := by
+  exact next_exponent_mem_finite_range_of_cap
+    (A j) (a j) (signedOffsetMargin A j)
+    (nondecreasing_orbit_next_exponent_cap
+      n₀ nnext A a hA j hn₀ hoffset hnondecreasing)
+
+#print axioms next_exponent_lt_integer_bound
+#print axioms nondecreasing_orbit_next_exponent_finite_bound
+#print axioms next_exponent_mem_finite_range_of_cap
+#print axioms nondecreasing_orbit_next_exponent_mem_finite_range
+
 end CollatzSyracuseAudit
