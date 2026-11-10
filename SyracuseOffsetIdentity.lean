@@ -890,6 +890,30 @@ theorem canonicalOffset_plus_three_pow_le_accumulated_power
 
 #print axioms canonicalOffset_plus_three_pow_le_accumulated_power
 
+/-- Exact two-step valuation-word certificate for the word (1,2).
+The witnesses n₁,n₂ are odd, with 2 n₁ = 3 n + 1 and
+4 n₂ = 3 n₁ + 1. -/
+def realizesValuationWord12 (n : ℕ) : Prop :=
+  ∃ n₁ n₂ : ℕ,
+    2 * n₁ = 3 * n + 1 ∧
+    4 * n₂ = 3 * n₁ + 1 ∧
+    n₁ % 2 = 1 ∧ n₂ % 2 = 1
+
+/-- The exact valuation word (1,2) is one residue cylinder modulo 16:
+it is realized precisely by n ≡ 11 (mod 16). -/
+theorem realizesValuationWord12_iff_mod_sixteen_eleven (n : ℕ) :
+    realizesValuationWord12 n ↔ n % 16 = 11 := by
+  constructor
+  · rintro ⟨n₁, n₂, h₁, h₂, hodd₁, hodd₂⟩
+    have hAffine : 8 * n₂ = 9 * n + 5 := by
+      nlinarith [h₁, h₂]
+    omega
+  · intro hn
+    refine ⟨(3 * n + 1) / 2,
+      (3 * ((3 * n + 1) / 2) + 1) / 4, ?_, ?_, ?_, ?_⟩ <;> omega
+
+#print axioms realizesValuationWord12_iff_mod_sixteen_eleven
+
 end CollatzSyracuseAudit
 
 
