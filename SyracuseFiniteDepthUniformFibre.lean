@@ -107,6 +107,55 @@ theorem card_childBlock (Bstar b : ℕ) (hb : 1 ≤ b) (hB : b ≤ Bstar) :
     rw [pow_succ]
   omega
 
+/-- Distinct child blocks are disjoint in increasing exponent order. -/
+theorem childBlock_disjoint (Bstar b₁ b₂ : ℕ)
+    (hb₁ : 1 ≤ b₁) (hb₂ : b₂ ≤ Bstar) (hlt : b₁ < b₂) :
+    Disjoint (childBlock Bstar b₁) (childBlock Bstar b₂) := by
+  apply Finset.disjoint_left.mpr
+  intro x hx₁ hx₂
+  have hx₁' := Finset.mem_Ico.mp hx₁
+  have hx₂' := Finset.mem_Ico.mp hx₂
+  have hexp : Bstar - b₂ + 1 ≤ Bstar - b₁ := by omega
+  have hpow :
+      2 ^ (Bstar - b₂ + 1) ≤ 2 ^ (Bstar - b₁) := by
+    calc
+      2 ^ (Bstar - b₂ + 1) ≤
+          2 ^ ((Bstar - b₂ + 1) +
+            ((Bstar - b₁) - (Bstar - b₂ + 1))) :=
+        pow_two_le_pow_two_add _ _
+      _ = 2 ^ (Bstar - b₁) := by congr 1; omega
+  have hend :
+      2 ^ Bstar - 2 ^ (Bstar - b₁) ≤
+        2 ^ Bstar - 2 ^ (Bstar - b₂ + 1) :=
+    Nat.sub_le_sub_left hpow _
+  unfold childBlock at hx₁ hx₂
+  simp only [Finset.mem_Ico] at hx₁ hx₂
+  omega
+
+/-- A child block retained through cutoff B is disjoint from the tail. -/
+theorem childBlock_disjoint_tail (Bstar b B : ℕ)
+    (hb : 1 ≤ b) (hcut : b ≤ B) (hB : B ≤ Bstar) :
+    Disjoint (childBlock Bstar b) (tailBlock Bstar B) := by
+  apply Finset.disjoint_left.mpr
+  intro x hxChild hxTail
+  have hxChild' := Finset.mem_Ico.mp hxChild
+  have hxTail' := Finset.mem_Ico.mp hxTail
+  have hexp : Bstar - B ≤ Bstar - b := by omega
+  have hpow :
+      2 ^ (Bstar - B) ≤ 2 ^ (Bstar - b) := by
+    calc
+      2 ^ (Bstar - B) ≤
+          2 ^ ((Bstar - B) + ((Bstar - b) - (Bstar - B))) :=
+        pow_two_le_pow_two_add _ _
+      _ = 2 ^ (Bstar - b) := by congr 1; omega
+  have hend :
+      2 ^ Bstar - 2 ^ (Bstar - b) ≤
+        2 ^ Bstar - 2 ^ (Bstar - B) :=
+    Nat.sub_le_sub_left hpow _
+  unfold childBlock tailBlock at hxChild hxTail
+  simp only [Finset.mem_Ico] at hxChild hxTail
+  omega
+
 /-- The tail block has exactly the dyadic number of atoms prescribed
 by the cutoff. -/
 theorem card_tailBlock (Bstar B : ℕ) (hB : B ≤ Bstar) :
@@ -130,6 +179,8 @@ theorem card_tailBlock (Bstar B : ℕ) (hB : B ≤ Bstar) :
 #print axioms childBlocks_tail_partition
 #print axioms card_childBlock
 #print axioms card_tailBlock
+#print axioms childBlock_disjoint
+#print axioms childBlock_disjoint_tail
 
 /-- The lower endpoint of the tail moves right as the cutoff increases. -/
 private theorem tailLower_mono (Bstar B : ℕ) (hB : B + 1 ≤ Bstar) :
