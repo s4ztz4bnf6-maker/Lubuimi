@@ -103,3 +103,22 @@ PR [#59](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/59) and PR [#62](https
 PRs [#68](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/68) and [#70](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/70) are parallel proof-script candidates for transporting the initial depth bound through `n 0 = n₀`; neither is promoted to verified without exact-head runs. PR [#71](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/71) installs the exact-head audit workflow on the default branch; once it is merged, trigger fresh runs for #68 and #70 and inspect all three jobs, named axioms, and the no-`sorryAx` guard.
 
 The remaining mathematical target is still the infinite-branch exclusion / well-founded descent step. The verified margin and finite-depth certificates are useful constraints on that step, not substitutes for it. No global Collatz proof is claimed.
+
+
+## Independent exact terminal-residue calculation — k = 2 (10 November 2026)
+
+The exact six-component terminal-residue distribution recorded in today's derivation is
+
+\[
+m_2=\frac1{63}(8,16,11,4,2,22).
+\]
+
+Its components sum to one, and its exact quadratic energy is
+
+\[
+E_2=\sum_{i=1}^{6}m_{2,i}^{,2}
+=\frac{8^2+16^2+11^2+4^2+2^2+22^2}{63^2}
+=\frac{945}{3969}=\frac5{21}.
+\]
+
+This is an independently checked finite arithmetic identity for the k=2 terminal-residue distribution. It is not a Lean/BIB equivalence, not a pathwise bound, and not the missing infinite-branch exclusion. Keep it as a separate quantitative input when examining the cap-tree terminal condition; do not turn the average energy into a pointwise orbit inequality.
