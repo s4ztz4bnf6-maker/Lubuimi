@@ -66,7 +66,7 @@ C_{j+1}=3C_j+2^{A_j}.
 **Proof.** For \(j=0\), both sides equal \(n_0\). Suppose (2.4) holds at \(j\). Multiplying (2.2) by \(2^{A_j}\) gives
 \[
 2^{A_{j+1}}n_{j+1}
-=3\,2^{A_j}n_j+2^{A_j}
+=3\cdot2^{A_j}n_j+2^{A_j}
 =3(3^j n_0+C_j)+2^{A_j}
 =3^{j+1}n_0+C_{j+1},
 \]
@@ -189,7 +189,7 @@ Let \(\mathcal C_N\) be the set of positive odd integers whose first \(N\) accel
 
 **Theorem 5.1 (Cylinder densities).** The natural density relative to the positive odd integers is
 \[
-\boxed{\operatorname{dens}_{\rm odd}(\mathcal C_N)=2^{-N}.}
+\boxed{\operatorname{dens}_{\mathrm{odd}}(\mathcal C_N)=2^{-N}.}
 \tag{5.2}
 \]
 The natural density as a subset of all positive integers is
