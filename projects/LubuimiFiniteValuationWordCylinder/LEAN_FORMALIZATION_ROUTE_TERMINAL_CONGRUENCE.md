@@ -147,3 +147,15 @@ The separate finite k=2 terminal-residue transition matrix and collision-energy 
 The B=1023 threshold-return archive supplies a concrete exact word `(1,2)`: (731\to1097\to823), (A=3), (C=5), residue (11\pmod{16}), and affine identity (8\cdot823=9\cdot731+5). Its regression certificate also checks the local margin caps. This is a finite cross-check of the cylinder and margin formulae, not a Lean proof of the general finite-word theorem.
 
 **Unchanged formalization boundary:** this project’s general finite-word one-cylinder theorem, its exact density corollary, and the finite cutoff/tail-cylinder partition remain mathematically proved in the manuscript but not yet Lean-compiled. The all-one special case and the local signed-margin cap are separately Lean-verified; neither substitutes for this general theorem.
+
+
+## First mixed-word Lean test case — (1,2), pending exact-head audit
+
+The Syracuse/Collatz programme now contains a concrete finite-word declaration in SyracuseOffsetIdentity.lean:
+
+`realizesValuationWord12_iff_mod_sixteen_eleven`.
+
+It formalizes the exact two-step word (1,2), using odd quotient witnesses n₁,n₂ with
+2*n₁=3*n+1 and 4*n₂=3*n₁+1, and proves that this word is realized exactly when n ≡ 11 (mod 16). This is the A=3 instance of the general finite-word residue formula. It is also the exact valuation word of the finite Kolaz witness 731 -> 1097 -> 823.
+
+The declaration is present on Syracuse PR #9 source head 56c6d6d86fb5122d75f89f5e614f7f333e2d31a9. Exact-head workflow 42736159935 is still in progress at this update. Therefore this is a formalization candidate, not yet a Lean-verified result. If it passes, it will provide a verified mixed-word test case, but it will not by itself formalize the arbitrary-word theorem or the finite tail partition.
