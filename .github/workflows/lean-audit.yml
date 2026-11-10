@@ -20,6 +20,15 @@ jobs:
           lake update
       - name: Compile the declared Lean library
         run: lake build SyracuseAudit
+      - name: Audit finite-depth uniform-fibre partition and reject sorryAx
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean SyracuseFiniteDepthUniformFibre.lean 2>&1 | tee /tmp/uniform-fibre-axioms.log
+          if grep -q 'sorryAx' /tmp/uniform-fibre-axioms.log; then
+            echo "::error::sorryAx detected in the finite-depth uniform-fibre axiom report"
+            exit 1
+          fi
       - name: Compile standalone record-time module
         run: lake env lean SyracuseRecordTime.lean
       - name: Compile deterministic exceptional-orbit obstruction
