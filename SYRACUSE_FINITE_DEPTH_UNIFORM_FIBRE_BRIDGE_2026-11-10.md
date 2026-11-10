@@ -325,3 +325,12 @@ The finite cap-tree embedding branch now has updated head `5699182344be6a7950c62
 This branch's mathematical target is the finite cap-tree embedding for a minimal counterexample orbit bounded below by its initial value, together with the terminal-residue unit condition. This is a finite structural lemma; it does not by itself prove a uniform cap bound or global Collatz.
 
 The previously verified initial-cylinder, valuation-bound, offset identity and strict-margin results remain independent results with their existing exact-head verification records. The mixed valuation word (1,2) iff residue 11 mod 16, and the dyadic uniform-fibre cardinality identity, also retain their own exact Lean evidence. Kolaz PR #39 workflow [42739986917](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42739986917) passed finite-table reproducibility checks; those are finite computation, not Lean kernel verification or a global theorem.
+
+
+## Latest exact-head workflow queue — 10 November 2026
+
+Current PR #48 source head: 7920b26f8a230c6f9fdc144be40fb2070eba5f00. Exact workflow [42756479069](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42756479069) is queued with three jobs: Lean 4.34.1 build check, compile-drafts, and Lean 4.35.0 paranoid kernel check.
+
+The workflow source was corrected in commit e95d21771a38c1748169672d326f54162aae4dcd: Lean 4.34.1 no longer invokes the unsupported lake check command; it repeats lake build CollatzAudit instead. The 4.34.1 job is therefore a build/compile check only. The separate 4.35.0 job performs lake check --paranoid.
+
+Previously verified source result remains exact-head scoped: on commit e1fb06eaa07190d8abfb3fc7368f3dc0663a5a66, workflow 42754461228 passed both compile-drafts and Lean 4.35.0 paranoid kernel verification for the finite-cap/minimal-counterexample path declarations. Its 4.34.1 job failed only at the unsupported lake check command. No new PASS is claimed for current head 7920b26f8a230c6f9fdc144be40fb2070eba5f00 until workflow 42756479069 completes.
