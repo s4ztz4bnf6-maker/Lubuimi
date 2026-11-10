@@ -2930,7 +2930,7 @@ theorem finiteCapPrefixState_eq_actual
       apply FiniteCapPrefixState.ext
       · exact (hA j).symm
       · rfl
-      · exact signedOffsetMargin_succ A a hA j
+      · exact (signedOffsetMargin_succ A a hA j).symm
 
 /-- The integer margin cap converted into a natural finite branching bound. -/
 def finiteCapBoundState (s : FiniteCapPrefixState) : ℕ :=
