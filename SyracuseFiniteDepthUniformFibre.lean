@@ -68,4 +68,63 @@ theorem childBlocks_tail_partition (Bstar B : ℕ) (hB : B ≤ Bstar) :
               rw [hinterval]
         _ = Finset.range (2 ^ Bstar) := ih hB'
 
+/-- A power of two is monotone in its natural exponent. -/
+private theorem pow_two_le_pow_two_add (a b : ℕ) :
+    2 ^ a ≤ 2 ^ (a + b) := by
+  rw [pow_add]
+  calc
+    2 ^ a = 2 ^ a * 1 := by simp
+    _ ≤ 2 ^ a * 2 ^ b :=
+      Nat.mul_le_mul_left _ (by positivity)
+
+/-- Each child block has exactly the dyadic number of atoms prescribed
+by its exponent. -/
+theorem card_childBlock (Bstar b : ℕ) (hb : 1 ≤ b) (hB : b ≤ Bstar) :
+    (childBlock Bstar b).card = 2 ^ (Bstar - b) := by
+  rw [childBlock, Finset.card_Ico]
+  have hM :
+      2 ^ Bstar =
+        2 ^ (Bstar - b + 1) * 2 ^ (b - 1) := by
+    rw [← pow_add]
+    congr 1
+    omega
+  have hfactor : 1 ≤ 2 ^ (b - 1) := by positivity
+  have hleft : 2 ^ (Bstar - b + 1) ≤ 2 ^ Bstar := by
+    rw [hM]
+    calc
+      2 ^ (Bstar - b + 1) = 2 ^ (Bstar - b + 1) * 1 := by simp
+      _ ≤ 2 ^ (Bstar - b + 1) * 2 ^ (b - 1) :=
+        Nat.mul_le_mul_left _ hfactor
+  have hright : 2 ^ (Bstar - b) ≤ 2 ^ Bstar :=
+    pow_two_le_pow_two_add (Bstar - b) b
+  have hdouble :
+      2 ^ (Bstar - b + 1) = 2 ^ (Bstar - b) * 2 := by
+    rw [pow_succ]
+    norm_num
+  omega
+
+/-- The tail block has exactly the dyadic number of atoms prescribed
+by the cutoff. -/
+theorem card_tailBlock (Bstar B : ℕ) (hB : B ≤ Bstar) :
+    (tailBlock Bstar B).card = 2 ^ (Bstar - B) := by
+  rw [tailBlock, Finset.card_Ico]
+  have hM :
+      2 ^ Bstar = 2 ^ (Bstar - B) * 2 ^ B := by
+    rw [← pow_add]
+    congr 1
+    omega
+  have hfactor : 1 ≤ 2 ^ B := by positivity
+  have hleft : 2 ^ (Bstar - B) ≤ 2 ^ Bstar := by
+    rw [hM]
+    calc
+      2 ^ (Bstar - B) = 2 ^ (Bstar - B) * 1 := by simp
+      _ ≤ 2 ^ (Bstar - B) * 2 ^ B :=
+        Nat.mul_le_mul_left _ hfactor
+  omega
+
+#print axioms ico_union_adjacent
+#print axioms childBlocks_tail_partition
+#print axioms card_childBlock
+#print axioms card_tailBlock
+
 end SyracuseUniformFibre
