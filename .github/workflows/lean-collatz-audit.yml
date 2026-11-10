@@ -1,5 +1,6 @@
 # Copyright © 2026 Ta-Yoshua Lubuimi. All rights reserved.
 # Project-owned workflow; see LICENSE-PROPRIETARY.md. Third-party actions retain their own licenses.
+# Lean jobs are skipped for documentation-only PRs without a Lean project at the checkout root.
 
 name: Collatz draft Lean compile audit
 
@@ -18,6 +19,7 @@ on:
 
 jobs:
   compile-drafts:
+    if: ${{ hashFiles('lakefile.lean') != '' && hashFiles('lean-toolchain') != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -87,6 +89,7 @@ jobs:
 
 
   kernel-check-lean-434:
+    if: ${{ hashFiles('lakefile.lean') != '' && hashFiles('lean-toolchain') != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -123,6 +126,7 @@ jobs:
 
 
   kernel-check-lean-435-paranoid:
+    if: ${{ hashFiles('lakefile.lean') != '' && hashFiles('lean-toolchain') != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
