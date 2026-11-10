@@ -160,3 +160,16 @@ The finite cap-tree source now uses the existing prefix-state extensionality the
 ### Addendum — finite cap-tree path certificate: Lean PASS
 
 Exact code head 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb passed workflow 42749969443 compile-drafts. The five new path/cap declarations have standard axiom profiles and the exact SyracuseOffsetIdentity.lean sorryAx scan passed. The separate paranoid check did not run because Lean 4.34.1 rejects the --paranoid Lake option; supported lake check is queued in workflow 42750825692. This result is finite-depth path embedding, not global Collatz termination.
+
+
+## Terminology correction — lower-bounded orbit, not stepwise monotone orbit
+
+The previous entries used the phrase "nondecreasing orbit" for the hypothesis hnd : ∀ j, n₀ ≤ n j. That phrase is misleading: the hypothesis says that no iterate falls below the initial value; it does not say n j ≤ n (j+1). The source docstrings now state this explicitly.
+
+The new precise declarations are:
+- initial_lower_bounded_orbit_prefix_mem_finiteCapTree
+- initial_lower_bounded_orbit_prefix_cap_tree_and_terminal_unit
+
+The old theorem names containing nondecreasing are retained only as compatibility aliases, with docstrings recording the actual lower-bound condition. The exact source head is 3cc651a5257dfae87061f7c12cd806814354b28e; workflow 42751535385 is queued.
+
+This lower-bound condition is exactly the type needed in a minimal-counterexample reduction: if a counterexample orbit ever fell below its initial odd value, the smaller odd iterate would itself be a smaller counterexample. The current theorem embeds all prefixes of such a hypothetical lower-bounded orbit in a finite state-dependent cap tree and attaches the terminal-residue unit condition. It still does not prove that the tree has no infinite branch; that remains the central global Collatz obstruction.
