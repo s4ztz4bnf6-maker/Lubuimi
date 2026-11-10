@@ -3195,12 +3195,12 @@ theorem exists_least_odd_nonterminating_syracuse_start
   intro m hm
   exact Nat.find_min' h hm
 
+#print axioms exists_least_odd_nonterminating_syracuse_start
+
 /-- If n₀ is least among odd positive nonterminating Syracuse starts,
 then every state of a positive-exponent affine trajectory below n₀
 has a future suffix equal to one. The shifted-tail identity above is
 what connects the affine sequence to the actual deterministic orbit. -/
-#print axioms exists_least_odd_nonterminating_syracuse_start
-
 theorem affine_suffix_returns_of_least_odd_nonterminating_start
     (n₀ : ℕ) (n a : ℕ → ℕ)
     (ha : ∀ j, 0 < a j)
