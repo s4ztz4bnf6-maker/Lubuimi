@@ -1,11 +1,11 @@
 # Klassifikation des anfänglichen Valuierungs-eins-Zylinders der beschleunigten Syracuse-Abbildung
 
 **Autor:** Ta-Yoshua Lubuimi  
-**Benennung:** Dieser exakte Zylinderklassifikationssatz wird in diesem Projekt zu Ehren seines Autors unter seinem Namen geführt.  
+**Benennung:** Es wird ausschließlich eine beschreibende mathematische Bezeichnung verwendet. Die Aussage ist eine klassische endliche Paritätsvektor-Zylinderklassifikation; es wird weder ein eponymischer Satzname noch ein Prioritätsanspruch erhoben. Die eigenständige Herleitung und diese Formalisierung werden Ta-Yoshua Lubuimi zugeschrieben.  
 **Ursprüngliche Herleitung:** 9. November 2026  
 **Deutscher Dokumentationsstand:** 10. November 2026
 
-**Status:** Mathematisch hergeleitet und formalisiert. Die Lean-Deklaration `lubuimi_initial_valuation_one_cylinder` bestand zwei vollständige CI-Läufe auf exakt festgelegten Quellständen: [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) auf Merge-Commit `44bb2ac` und [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220) auf Merge-Commit `3d79761`. Beide Läufe meldeten das transitive Axiomprofil `[propext, Classical.choice, Quot.sound]`; die vollständigen Log-Prüfungen fanden kein `sorryAx`. Der allgemeinere Satz über beliebige endliche Valuierungswörter bleibt ein separates Formalisierungsziel.
+**Status:** Eigenständige mathematische Herleitung und Lean-Formalisierung von Ta-Yoshua Lubuimi für eine klassische endliche Paritätsvektor-Zylinderklassifikation. Die historische Lean-Deklaration `lubuimi_initial_valuation_one_cylinder` bestand zwei vollständige CI-Läufe auf exakt festgelegten Quellständen: [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) auf Merge-Commit `44bb2ac` und [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220) auf Merge-Commit `3d79761`. Beide Läufe meldeten `[propext, Classical.choice, Quot.sound]`; die vollständigen Log-Prüfungen fanden kein `sorryAx`. PR #56 führt den neutralen internen Namen `initial_valuation_one_cylinder_iff_dyadic_divisibility` ein; dessen exakte CI-Prüfung steht noch aus. Die historischen Audits werden nicht auf die umbenannte Deklaration übertragen. Der allgemeinere Satz über beliebige endliche Valuierungswörter bleibt ein separates Formalisierungsziel.
 
 ## 1. Ausgangslage
 
@@ -161,13 +161,13 @@ Dies ist eine exakte, von der Startzahl abhängige Erholungsschwelle. Es wird ni
 
 ## 5. Lean-Formalisation und Reproduzierbarkeit
 
-Die Aussage ist in `SyracuseOffsetIdentity.lean` als
+Die Aussage wurde in `SyracuseOffsetIdentity.lean` historisch unter dem internen Bezeichner
 
 `lubuimi_initial_valuation_one_cylinder`
 
-formalisiert. Sie verwendet die vorhandene Rekursion für zertifizierte Schritte und dieselbe Konvention der beschleunigten ungeraden Syracuse-Bahn.
+formalisiert. Sie verwendet die vorhandene Rekursion für zertifizierte Schritte und dieselbe Konvention der beschleunigten ungeraden Syracuse-Bahn. PR #56 ersetzt diesen internen Namen durch `initial_valuation_one_cylinder_iff_dyadic_divisibility`; für den neuen Bezeichner ist ein eigener exakter CI- und Axiom-Audit erforderlich.
 
-Die beiden erfolgreichen vollständigen CI-Läufe sind:
+Die beiden erfolgreichen vollständigen CI-Läufe für den historischen Bezeichner sind:
 
 - [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544), Merge-Commit `44bb2ac`;
 - [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220), Merge-Commit `3d79761`.
