@@ -4,7 +4,7 @@
 **Date:** 10 November 2026  
 **Status:** Standalone mathematical research manuscript; Lean formalization target, not yet compiled.
 
-This project studies the terminal-residue map induced by finite accelerated-Syracuse valuation words. At fixed prefix length \(k\), every exact word \(\alpha\) has source weight \(w_\alpha=2^{-A(\alpha)}\) and maps to a unit residue
+This project studies the terminal-residue map induced by finite accelerated-Syracuse valuation words. It uses Lubuimi's Finite Valuation-Word Cylinder Partition Theorem as a mathematical input; that theorem is maintained separately in [PR #36](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/36). At fixed prefix length \(k\), every exact word \(\alpha\) has source weight \(w_\alpha=2^{-A(\alpha)}\) and maps to a unit residue
 \[
 \tau_k(\alpha)=C_k(\alpha)2^{-A(\alpha)}\pmod{3^k}.
 \]
