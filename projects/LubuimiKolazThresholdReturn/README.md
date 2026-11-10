@@ -45,3 +45,8 @@ Expanded reproducibility run 42732032993 on source head `5a01e5e56d203c0ed987f6b
 ## Reproducibility CI
 
 The expanded B=511/B=1023 archive and all seven regression tests passed workflow 42732216205 on code/test commit `821579ea5555a6f5e2e38fa771f8797dc4650106`. This is exact finite Python reproducibility, not Lean kernel verification.
+
+
+## Exact-head B=2047 extension result — 10 November 2026
+
+Workflow 42737245099 passed on source head `9081ab4da049f5713dfafa0e7a8fbba6b0b65584`. All eight regression tests passed. The complete B=2047 CSV table contains 170 escape sources; all return below threshold in the finite enumeration. The maximum excursion length is 50 (z0=2111, return 157), and the maximum height is 425645 (z0=2729, 37 steps, return 1067). Two exact B=1023-to-B=2047 common suffixes are verified: length 49 from 2375 to 157, and length 45 from 3007 to 157. This is finite deterministic computation only; no uniform threshold bound or universal Collatz result is claimed.
