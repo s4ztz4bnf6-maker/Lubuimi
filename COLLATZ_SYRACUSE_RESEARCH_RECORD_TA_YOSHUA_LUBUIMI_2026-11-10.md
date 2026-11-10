@@ -17,7 +17,7 @@ with every \(n_j\) positive and odd.
 
 Previously established lemmas and exact calculations are preserved. Mathematical derivations, Lean elaboration/kernel checking, transitive axiom audits, and GitHub CI status remain separate. A successful compile proves only the declarations actually compiled. No conditional block result is promoted to a universal orbit theorem without the missing orbit-realizability and coverage argument. No sorry, sorryAx, or hidden project axiom is accepted in a claimed final theorem.
 
-## 2. Lubuimi's certified affine-offset framework
+## 2. Certified affine-offset framework
 
 For exact odd-to-odd transitions
 \[
@@ -38,7 +38,7 @@ C_k=\sum_{j=0}^{k-1}3^{k-1-j}2^{A_j}.
 \]
 Existing declarations include offset_identity_of_certified_steps, canonical_offset_identity_of_certified_steps, canonicalOffset_eq_weighted_sum, offsetClosedForm_succ, and offset_eq_closed_form. This is an exact identity for certified blocks, not itself a descent theorem.
 
-## 3. Lubuimi's signed-offset-margin framework and block correction
+## 3. Signed-offset-margin framework and block correction
 
 Define
 \[
@@ -60,7 +60,7 @@ D_{m+r}=3^rD_m-
 \]
 For a block of valuation-two steps, \(D_{m+r}=3^rD_m\).
 
-The new Lubuimi cylinder declarations are followed by #print axioms. The source already contains signedOffsetMargin_succ, signedOffsetMargin_block_decomposition, signedOffsetMargin_pos_iff_block_correction, signed_margin_after_run_of_ones, signed_margin_positive_after_run_of_ones_iff, signed_margin_after_run_of_twos, and signed_margin_weighted_sum_expansion.
+The new cylinder declarations are followed by #print axioms. The source already contains signedOffsetMargin_succ, signedOffsetMargin_block_decomposition, signedOffsetMargin_pos_iff_block_correction, signed_margin_after_run_of_ones, signed_margin_positive_after_run_of_ones_iff, signed_margin_after_run_of_twos, and signed_margin_weighted_sum_expansion.
 
 A positive terminal margin is equivalent to strict descent for the certified block. The unresolved global obligation is to prove that every positive odd start admits a finite realized block with positive margin.
 
@@ -151,7 +151,7 @@ The job installed Lean 4.34.1 and Mathlib v4.34.1, built CollatzAudit (8,930 job
 
 The offset and valuation-transition audit steps explicitly searched their full logs for sorryAx and would fail if found; neither check found it. The named declarations reported the Lean standard profile [propext, Classical.choice, Quot.sound] or a subset. This run verifies the existing declarations in the checked merge snapshot. It does not compile the new Lubuimi cylinder equivalence, which remains a mathematical research note pending Lean formalization.
 
-## 9. Lubuimi's APW4–Syracuse cylinder–energy bridge: research programme, not an imported theorem
+## 9. APW4–Syracuse cylinder–energy bridge: research programme, not an imported theorem
 
 The APW4 energy/transport architecture should be explored as a possible proof-design tool, but it cannot be imported into Collatz merely by analogy. Syracuse valuation words define finite residue cylinders and a prefix tree. A potential finite interface consists of cylinder nodes indexed by realized valuation prefixes, exact residue classes and measures, parent/child refinement, weighted incidence between prefixes and terminal states, and a collision/energy quantity separating diagonal mass from off-diagonal overlap.
 
@@ -159,7 +159,7 @@ An actual APW4-to-Collatz theorem requires a concrete finite map from Syracuse c
 
 ## 10. Next mathematical and formalization steps
 
-1. Add the Lubuimi initial-cylinder equivalence to SyracuseOffsetIdentity.lean using the existing certified-transition conventions and oddness hypotheses.
+1. Add the initial-cylinder equivalence to SyracuseOffsetIdentity.lean using the existing certified-transition conventions and oddness hypotheses.
 2. Derive the exact-run-length statement and one-step margin-recovery threshold as Lean corollaries.
 3. Prove a finite-state or weighted-block lemma controlling how realized exponents \(a_j\ge2\) compensate for valuation-one corrections.
 4. Search existing residue and stopping-time branches before introducing new notation; preserve exact local descent results and their hypotheses.
@@ -204,12 +204,12 @@ The finite valuation-word partition theorem is also a Lean formalization target 
 
 ### 13.3 APW4 bridge consequence
 
-The full finite-word cylinder partition supplies a more substantial exact prefix tree than the single all-ones chain: every node has a unique residue class, exact mass \(2^{-A}\), and child mass ratios \(2^{-b}\). This is a legitimate mathematical input for developing the proposed **Lubuimi APW4–Syracuse Cylinder–Energy Bridge**. The bridge still requires an explicit index-preserving incidence map, proof of weight preservation and a verified BIB/Hall capacity condition. No such transport theorem is claimed at this stage, and no APW4 result is weakened or used as an unproved premise in Collatz.
+The full finite-word cylinder partition supplies a more substantial exact prefix tree than the single all-ones chain: every node has a unique residue class, exact mass \(2^{-A}\), and child mass ratios \(2^{-b}\). This is a legitimate mathematical input for developing the proposed **APW4–Syracuse cylinder–energy bridge**. The bridge still requires an explicit index-preserving incidence map, proof of weight preservation and a verified BIB/Hall capacity condition. No such transport theorem is claimed at this stage, and no APW4 result is weakened or used as an unproved premise in Collatz.
 
 
 ## 13. Current exact-commit Lean run — 10 November 2026
 
-Run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) is checking the refined Lubuimi initial-cylinder declaration at source commit 013192ce524a4572a9d96c8d4dcb2796830b1f62. Run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) has now completed successfully on merge commit 44bb2ac (PR head 013192ce524a4572a9d96c8d4dcb2796830b1f62 merged into base fc1e8023f9dcc0c777e25d08df0b011b13cdcb26). The full Lean library build and every workflow step passed: IterationLemmas, ThresholdLemmas, SyracuseReferenceTest, SyracuseQuarterDescent, SyracuseOffsetIdentity, SyracuseOffsetClosedForm, SyracuseOffsetLowerBound, SyracuseMarginBlock and SyracuseValuationTransition. The exact declaration lubuimi_initial_valuation_one_cylinder printed the transitive profile [propext, Classical.choice, Quot.sound]. The workflow's explicit grep of the complete offset-audit log for sorryAx found none. Thus the initial-cylinder equivalence is now Lean-compiled and axiom-audited at that checked merge commit. This verifies the cylinder theorem, not the global Collatz conjecture.
+Run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) is checking the refined initial-cylinder declaration at source commit 013192ce524a4572a9d96c8d4dcb2796830b1f62. Run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) has now completed successfully on merge commit 44bb2ac (PR head 013192ce524a4572a9d96c8d4dcb2796830b1f62 merged into base fc1e8023f9dcc0c777e25d08df0b011b13cdcb26). The full Lean library build and every workflow step passed: IterationLemmas, ThresholdLemmas, SyracuseReferenceTest, SyracuseQuarterDescent, SyracuseOffsetIdentity, SyracuseOffsetClosedForm, SyracuseOffsetLowerBound, SyracuseMarginBlock and SyracuseValuationTransition. The exact declaration lubuimi_initial_valuation_one_cylinder printed the transitive profile [propext, Classical.choice, Quot.sound]. The workflow's explicit grep of the complete offset-audit log for sorryAx found none. Thus the initial-cylinder equivalence is now Lean-compiled and axiom-audited at that checked merge commit. This verifies the cylinder theorem, not the global Collatz conjecture.
 
 
 ## 14. Positive Lean verification of the initial valuation-one cylinder declaration — 10 November 2026
@@ -251,10 +251,10 @@ Cauchy–Schwarz on the finite place set gives \(E_k\ge1/(2\cdot3^{k-1})\), henc
 \]
 For \(k=1\), the two terminal places modulo 3 have masses \(2/3\) and \(1/3\), yielding \(E_1=5/9\), \(D_1=1/3\), and collision mass \(2/9\).
 
-This is the **Lubuimi Terminal-Residue Collision Energy**. It is a genuine exact diagonal/off-diagonal incidence identity in the Syracuse valuation-word model and a concrete APW4-style bridge candidate. It is not silently identified with the historical APW4 BIB reserve. That transfer still requires an index-preserving map to original APW4 event/place objects, preservation of historical weights, and a proved capacity/Hall inequality. The new collision-energy statement is mathematically derived but not yet Lean-compiled; the initial one-cylinder theorem remains separately Lean-verified by runs 42721006544 and 42721305220.
+This is the **terminal-residue collision-energy identity**. It is a genuine exact diagonal/off-diagonal incidence identity in the Syracuse valuation-word model and a concrete APW4-style bridge candidate. It is not silently identified with the historical APW4 BIB reserve. That transfer still requires an index-preserving map to original APW4 event/place objects, preservation of historical weights, and a proved capacity/Hall inequality. The new collision-energy statement is mathematically derived but not yet Lean-compiled; the initial one-cylinder theorem remains separately Lean-verified by runs 42721006544 and 42721305220.
 
 
-## 17. Finite Markov representation of Lubuimi terminal-residue energy — 10 November 2026
+## 17. Finite Markov representation of terminal-residue energy — 10 November 2026
 
 The terminal-residue mass distribution has a finite rational Markov representation. For fixed \(k\), set \(x_j=C_j2^{-A_j}\pmod{3^k}\). The recurrence is
 \[
