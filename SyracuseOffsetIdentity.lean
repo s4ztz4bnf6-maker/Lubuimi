@@ -2851,17 +2851,6 @@ structure FiniteCapPrefixState where
   margin : ℤ
   deriving DecidableEq, Repr
 
-/-- Extensionality for the three exact coordinates of a prefix state. -/
-@[ext] theorem FiniteCapPrefixState.ext
-    {s t : FiniteCapPrefixState}
-    (hA : s.exponent = t.exponent)
-    (hC : s.offset = t.offset)
-    (hD : s.margin = t.margin) :
-    s = t := by
-  cases s
-  cases t
-  simp_all
-
 namespace FiniteCapPrefixState
 
 @[ext] theorem ext {s t : FiniteCapPrefixState}
