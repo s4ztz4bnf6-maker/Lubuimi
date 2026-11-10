@@ -2,7 +2,9 @@ import unittest
 import csv
 from pathlib import Path
 
-from threshold_return import (analyze_threshold, common_suffix, row_by_z0,
+from threshold_return import (T, analyze_threshold, common_suffix, row_by_z0,
+                               escape_source_characterization,
+                               power_two_threshold_source_count,
                                valuation_word, offset_margin_certificate)
 
 
@@ -57,6 +59,20 @@ EXPECTED = {
 
 
 class ThresholdReturnTests(unittest.TestCase):
+    def test_exact_escape_source_characterization(self):
+        for B in (31, 63, 127, 255, 511, 1023):
+            brute_force = [x for x in range(1, B, 2) if T(x) >= B]
+            self.assertEqual(escape_source_characterization(B), brute_force)
+            self.assertEqual([r["x"] for r in analyze_threshold(B)], brute_force)
+
+    def test_power_two_threshold_source_count(self):
+        for k in range(2, 11):
+            B = 2**k - 1
+            self.assertEqual(
+                len(escape_source_characterization(B)),
+                power_two_threshold_source_count(k),
+            )
+
     def test_exact_tables(self):
         for B, expected in EXPECTED.items():
             actual = [
