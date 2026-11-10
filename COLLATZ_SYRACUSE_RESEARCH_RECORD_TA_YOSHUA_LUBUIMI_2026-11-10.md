@@ -512,3 +512,8 @@ A new Lean candidate defines a prefix state (A,C,D), the exact valuation-word ap
 ### Separation from cylinder and energy strands
 
 The general finite valuation-word cylinder theorem remains mathematically proved and documented, but not yet Lean-audited. The dyadic common-fibre cardinality identity is separately Lean-checked. The k=2 terminal-residue energy is separately Lean-checked. PR #48 connects the margin cap to finite valuation-word prefixes and the terminal-residue unit map; it does not use the energy value as a global upper bound. A future bridge to a survival-restricted energy requires an explicit finite map from cap-tree words to terminal-residue places, multiplicity/weight preservation, and an independently proved capacity bound. No average energy estimate is used to exclude one exceptional infinite path.
+
+
+## 13. Finite cap-tree audit correction — 10 November 2026
+
+The earlier cap-tree build exposed a duplicate explicit ext theorem and a type mismatch in the coordinate-state induction. The duplicate declaration was removed, preserving the existing structure extensionality theorem. Current exact head: 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb; workflow 42749969443 is in progress. The new paranoid job is pinned to the repository's Lean/Mathlib 4.34.1 pair. No kernel PASS or global Collatz conclusion is claimed at this point.
