@@ -417,3 +417,8 @@ Even if the deterministic shifted-tail/minimality bridge passes, the existence o
 PR #56 head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow [42808797159](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42808797159), failed all three jobs. The exact errors were: (i) `Nat.find` lacked a local classical instance for `DecidablePred isOddNonterminatingSyracuseStart`; (ii) the positivity proof did not feed the already established oddness `n j % 2 = 1` to `omega`; and (iii) `affine_minimal_counterexample_orbit_lower_bound` forward-referenced `orbit_lower_bound_of_minimal_counterexample`, which is declared later. The shifted-tail identity itself compiled and printed `[propext, Classical.choice, Quot.sound]`. The renamed cylinder declaration printed the same standard profile in the partial build, but the full module failed later, so no complete exact-head verification is claimed.
 
 PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5` fixes those three proof-script issues. No exact-head workflow was visible at the latest poll. Status: OFFEN – NICHT VERIFIZIERT. Even after this bridge passes, a global infinite-branch exclusion remains open.
+
+
+## Latest PR #59 CI poll — 10 November 2026
+
+Workflow 42809750956 is attached to exact head `5f6e46de8bed7061f8336089857143c54e997af5`. Compile job `129807911809` is in progress; Lean 4.34.1 job `129807911748` and Lean 4.35.0 paranoid job `129807911880` are queued. This is still OFFEN – NICHT VERIFIZIERT.
