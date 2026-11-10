@@ -182,18 +182,21 @@ This is an exact weighted collision identity on Syracuse valuation words and a c
 
 ## 10. Formal verification record
 
-The mathematical proof in this manuscript is now also formally checked in Lean. The Collatz/Syracuse source repository contains the declaration `lubuimi_initial_valuation_one_cylinder` and helper lemma `valuation_exponent_eq_one_of_mod_four_three`.
+The mathematical proof in this manuscript is also formally checked in Lean. The Collatz/Syracuse source repository contains the declaration `lubuimi_initial_valuation_one_cylinder` and helper lemma `valuation_exponent_eq_one_of_mod_four_three`.
 
-Two independent exact-commit GitHub Actions runs completed successfully:
+Five complete exact-commit GitHub Actions workflows passed:
 
-- Run `42721006544` checked merge commit `44bb2ac`, with PR head `013192ce524a4572a9d96c8d4dcb2796830b1f62`.
-- Run `42721305220` checked merge commit `3d79761`, with PR head `ad7203f5571d03e5989b9ac935b2103300f02409`.
+- Run `42721006544`: merge `44bb2ac`, PR head `013192ce524a4572a9d96c8d4dcb2796830b1f62`.
+- Run `42721305220`: merge `3d79761`, PR head `ad7203f5571d03e5989b9ac935b2103300f02409`.
+- Run `42721911555`: merge `7b84a1b`, PR head `21829b4dd3b82a73edb19cf0d09ed011f55ef384`.
+- Run `42722186081`: merge `5d4a19c`, PR head `a36894eefc52e5d28cd43110f5e289805509ad33`.
+- Run `42724343412`: merge `06675a1`, PR head `29b27dc529b9e81a33b5211e9e01a01e19edc256`.
 
-Both runs completed the full workflow: library build, iteration and threshold modules, Syracuse reference and quarter-descent modules, offset identity and strict-margin audit, closed-form offset, stronger offset lower bound, valuation-one margin block, and exact valuation-transition modules. In both logs, the declaration `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` has transitive axiom profile `[propext, Classical.choice, Quot.sound]`. The workflow's explicit complete-log `sorryAx` scan passed. Thus the initial valuation-one cylinder equivalence is Lean-compiled and axiom-audited on both checked snapshots.
+All five workflows completed the full compile/audit sequence. In each log, `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` has transitive axiom profile `[propext, Classical.choice, Quot.sound]`; the explicit complete-log `sorryAx` audit steps passed. The initial valuation-one cylinder equivalence is therefore Lean-compiled and axiom-audited on five distinct exact snapshots.
 
-Runs `42721911555` and `42722186081` are additional successful exact-head rechecks: both full workflows completed, the theorem retained transitive profile `[propext, Classical.choice, Quot.sound]`, and both complete-log `sorryAx` scans passed. The initial cylinder theorem therefore has four successful exact-commit CI snapshots. The earlier failed attempts remain historical proof-script attempts and are superseded by these four positive checks. Earlier failed attempts `42719689591` and `42720406876` remain part of the chronology, but they do not invalidate the later successful runs.
+Earlier attempts `42719689591` and `42720406876` failed at proof-script obligations and remain preserved as historical diagnostics; they do not invalidate the later five positive runs. Current documentation/status recheck `42725493567` is in progress on head `a52dffc23b323964f33bc7f6c61c2cb24bcdf708` and does not supersede the completed results.
 
-The general finite valuation-word cylinder partition theorem in the companion note is a separate mathematical derivation and Lean formalization target; it is not yet claimed as compiled. No global Collatz proof is claimed.
+The general finite valuation-word cylinder partition, finite tail-cylinder partition, terminal-residue collision energy, and finite Markov matrix are separate mathematical derivations and Lean formalization targets; they are not yet claimed as compiled. No global Collatz proof is claimed.
 
 ## Authorship and rights
 
