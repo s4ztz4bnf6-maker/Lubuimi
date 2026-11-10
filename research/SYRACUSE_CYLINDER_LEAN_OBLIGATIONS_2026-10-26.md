@@ -39,3 +39,7 @@ This cylinder theorem only characterizes finite valuation itineraries. It does n
 - Run #print axioms on the exact public theorem and its transitive dependencies.
 - Reject sorry, sorryAx, added axioms, unproved assumptions, or a theorem whose statement weakens the intended claim.
 - Record the exact commit and CI run; no CI status is asserted by this note.
+
+## Local terminal-exactness step — 10 November 2026
+
+A direct divisibility proof of the one-step backward implication is now recorded in [SYRACUSE_TERMINAL_EXACT_BACKWARD_STEP_2026-11-10.md](SYRACUSE_TERMINAL_EXACT_BACKWARD_STEP_2026-11-10.md). The key hypotheses are terminal exactness at `k+1` and `1 ≤ a k`; the proof reduces to coprime cancellation for `3` and `2^A`, followed by an explicit parity witness. No Lean compilation is claimed. The next implementation must test the exact Mathlib lemma names rather than assume them.
