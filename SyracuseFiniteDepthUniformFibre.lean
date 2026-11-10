@@ -97,12 +97,14 @@ theorem card_childBlock (Bstar b : ℕ) (hb : 1 ≤ b) (hB : b ≤ Bstar) :
       2 ^ (Bstar - b + 1) = 2 ^ (Bstar - b + 1) * 1 := by simp
       _ ≤ 2 ^ (Bstar - b + 1) * 2 ^ (b - 1) :=
         Nat.mul_le_mul_left _ hfactor
-  have hright : 2 ^ (Bstar - b) ≤ 2 ^ Bstar :=
-    pow_two_le_pow_two_add (Bstar - b) b
+  have hright : 2 ^ (Bstar - b) ≤ 2 ^ Bstar := by
+    calc
+      2 ^ (Bstar - b) ≤ 2 ^ ((Bstar - b) + b) :=
+        pow_two_le_pow_two_add (Bstar - b) b
+      _ = 2 ^ Bstar := by congr 1; omega
   have hdouble :
       2 ^ (Bstar - b + 1) = 2 ^ (Bstar - b) * 2 := by
     rw [pow_succ]
-    norm_num
   omega
 
 /-- The tail block has exactly the dyadic number of atoms prescribed
@@ -122,7 +124,7 @@ theorem card_tailBlock (Bstar B : ℕ) (hB : B ≤ Bstar) :
       2 ^ (Bstar - B) = 2 ^ (Bstar - B) * 1 := by simp
       _ ≤ 2 ^ (Bstar - B) * 2 ^ B :=
         Nat.mul_le_mul_left _ hfactor
-  omega
+  exact Nat.sub_sub_self hleft
 
 #print axioms ico_union_adjacent
 #print axioms childBlocks_tail_partition
