@@ -354,7 +354,7 @@ PR #53's affine parity/exactness repair and PR #55's deterministic one-step brid
 
 PR #56 head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow [42808797159](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42808797159), completed with all three jobs failed. The log confirms `affine_trajectory_eq_syracuse_iterate` itself compiled and printed `[propext, Classical.choice, Quot.sound]`. The new least-start proof then failed because `Nat.find` needed `classical`, the positivity proof needed the explicit oddness hypothesis, and a lower-bound theorem was referenced before its declaration. The error-recovery output includes `sorryAx`; no full PR #56 PASS is claimed. The renamed cylinder declaration printed `[propext, Classical.choice, Quot.sound]` in the partial build log, but the complete source module did not pass; its acceptance gate remains a fresh successful exact-head run and no-`sorryAx` check.
 
-PR #59 / exact source head `5f6e46de8bed7061f8336089857143c54e997af5` applies the three focused repairs. At the latest poll no workflow run was yet visible for this head. Status: **OFFEN – NICHT VERIFIZIERT**. The global infinite-branch exclusion remains a separate unresolved obligation.
+PR #59 / exact source head `5f6e46de8bed7061f8336089857143c54e997af5`, workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956), passed all three jobs: compile-drafts, Lean 4.34.1 kernel-check, and Lean 4.35.0 paranoid. The named declarations printed only the standard profile `[propext, Classical.choice, Quot.sound]` (with `[propext, Quot.sound]` for the parity lemma); the no-`sorryAx` guard passed and the paranoid kernel accepted the solution. PR #58 is closed as a superseded proof-script variant; its two kernel jobs had passed, while its compile job was still running at closure. The global infinite-branch exclusion remains a separate unresolved obligation.
 
 
 ### Latest PR #59 CI poll — 10 November 2026
@@ -365,3 +365,17 @@ The exact-head workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuim
 ### Parallel PR #58 / PR #59 proof-script variants — 10 November 2026
 
 Two focused variants now test the same three repairs in parallel. PR #58 head `a2eea6f3c979e25a705c3da60d09d6ec84a41b7f`, workflow [42809723676](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809723676), has all three jobs in progress. PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5`, workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956), also has all three jobs in progress. They differ only in the final arithmetic closure (`omega` versus `Nat.lt_of_not_ge`); neither is accepted until exact-head compile, kernel, axiom and no-`sorryAx` checks finish.
+
+
+## PR #59 exact-head verification completed — 10 November 2026
+
+<badge>PASS</badge> Exact source head `5f6e46de8bed7061f8336089857143c54e997af5`, workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956): all three jobs passed. The following declaration-scoped outputs were recorded:
+
+- `initial_valuation_one_cylinder_iff_dyadic_divisibility`: `[propext, Classical.choice, Quot.sound]`.
+- `every_state_odd_of_positive_affine_steps`: `[propext, Quot.sound]`.
+- `every_affine_exponent_is_exact`: `[propext, Classical.choice, Quot.sound]`.
+- `affine_trajectory_eq_syracuse_iterate`: `[propext, Classical.choice, Quot.sound]`.
+- `affine_suffix_returns_of_least_odd_nonterminating_start`: `[propext, Classical.choice, Quot.sound]`.
+- `affine_minimal_counterexample_orbit_lower_bound`: `[propext, Classical.choice, Quot.sound]`.
+
+The compile job completed successfully and its `sorryAx` guard did not trigger. The Lean 4.35.0 paranoid job reports “Lean paranoid kernel accepts the solution”; the Lean 4.34.1 job completed its build and named axiom output. This verifies the exact declarations at this commit. It does not prove that a nonterminating start exists, nor does the least-start reduction rule out an infinite nonterminating trajectory. Global Collatz remains open.
