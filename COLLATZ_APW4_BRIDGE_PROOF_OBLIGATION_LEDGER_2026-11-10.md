@@ -322,3 +322,19 @@ Current PR #48 source head: 7920b26f8a230c6f9fdc144be40fb2070eba5f00. Exact work
 The workflow source was corrected in commit e95d21771a38c1748169672d326f54162aae4dcd: Lean 4.34.1 no longer invokes the unsupported lake check command; it repeats lake build CollatzAudit instead. The 4.34.1 job is therefore a build/compile check only. The separate 4.35.0 job performs lake check --paranoid.
 
 Previously verified source result remains exact-head scoped: on commit e1fb06eaa07190d8abfb3fc7368f3dc0663a5a66, workflow 42754461228 passed both compile-drafts and Lean 4.35.0 paranoid kernel verification for the finite-cap/minimal-counterexample path declarations. Its 4.34.1 job failed only at the unsupported lake check command. No new PASS is claimed for current head 7920b26f8a230c6f9fdc144be40fb2070eba5f00 until workflow 42756479069 completes.
+
+
+## Exact-head continuation — 10 November 2026
+
+PR #48 head `cbe9f19b9ba1bd4bad290b1cbc56da2881c238b8` triggered workflow [42757504798](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42757504798). At the latest poll, `kernel-check-lean-435-paranoid`, `compile-drafts`, and `kernel-check-lean-434` were all QUEUED. Do not infer a pass from the earlier exact-head workflow; no new result is claimed for cbe9f19.
+
+### Next formal obligation: derive suffix return from deterministic dynamics
+
+The current theorem `orbit_lower_bound_of_minimal_counterexample` accepts `hminimal : ∀ j, n j < n₀ → ∃ k, n (j+k)=1` as an explicit hypothesis. To derive this from the standard least-odd-counterexample premise, the next Lean chain is:
+
+1. From the exact accelerated relation `2^(a j) * n(j+1) = 3*n j + 1` and `0 < a j`, prove `n j` is odd.
+2. Prove every `n(j+1)` is odd as well; then the quotient in the exact relation is odd, so `a j` is the exact 2-adic valuation of `3*n j+1`.
+3. Prove by recursion/uniqueness that the sequence tail `fun k => n (j+k)` is the deterministic Syracuse orbit starting from `n j`.
+4. If `n j < n₀` and `n j ≠ 1`, minimality of (n₀) among odd nonterminating starts gives the required future return to 1.
+
+This chain is not yet formalized. Until all four links are proved, the minimal-counterexample reduction remains conditional on `hminimal`. The finite cap-tree theorem remains a finite-depth path certificate only, not an infinite-branch exclusion or global Collatz proof.
