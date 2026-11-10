@@ -32,3 +32,31 @@ Do not infer a global Collatz proof from finite-depth membership, average energy
 ### Attribution and licence boundary
 
 The original Collatz/Syracuse research, scripts, manuscripts, and Lean formalization authored by Ta-Yoshua Lubuimi remain attributed to him. AI tools are assistants only. The existing proprietary-rights and commercial-use notices remain unchanged; this entry grants no new licence or reuse permission. Lean, Mathlib, upstream results, and third-party material retain their own licences.
+
+
+## Exact-head update — terminal-residue bridge and CI activation (10 November 2026, 13:43 CET)
+
+### Verified finite-path milestone retained
+
+PR #62 remains the verified finite-cap-tree bridge at its exact source head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow [42811286670](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42811286670). All three jobs passed: compile-drafts, Lean 4.35.0 paranoid, and Lean 4.34.1 kernel-check. The declarations `affine_minimal_counterexample_prefix_mem_finiteCapTree` and `affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit` report `[propext, Classical.choice, Quot.sound]` and no `sorryAx`. This proves the stated necessary finite-depth path certificate under a hypothetical least odd nonterminating start; it does not exclude an infinite branch or prove global Collatz termination.
+
+### New terminal bridge candidates
+
+- PR #65 exact head `78222bfae2e28a767d3482531b495ef48d85a342`, workflow 42812080857, failed because the depth hypothesis was expressed using `n₀` while the called terminal-residue lemma required `n 0`.
+- PR #66 derives `n 0 = n₀` from the existing affine offset identity at index zero.
+- PR #68 / v3 exact head `214561c9e680f503ec000e74003fe61e8854cc55` changes the depth rewrite direction to `rw [hn0eq]`.
+- PR #70 / v4 exact head `1870845e3afe3fce2f0be4d55264e085c5eb6146` uses `simpa [hn0eq] using hdepth` as an alternative transport.
+- At this checkpoint, neither #68 nor #70 has an associated workflow run. Do not claim either repair is verified.
+
+### CI workflow dependency
+
+PR #71 adds `.github/workflows/lean-collatz-audit.yml` to the default branch as the required infrastructure for pull-request-triggered exact-head CI. The PR is still **OPEN / DRAFT / NOT MERGED** at this checkpoint. The file is not yet present on `main`; therefore the #68/#70 exact-head jobs have not been activated. After the workflow is merged, synchronize or reopen the proof PRs and inspect all three jobs, their named axiom outputs, and no-`sorryAx` guards.
+
+### Exact arithmetic research boundary
+
+The valuation-word program records the realized-block identity
+`2^A_N n_N = 3^N n_0 + C_N`, with `C_{j+1}=3C_j+2^{A_j}`, and the exact margin identity
+`M_N = 2^{A_N}(n_0-n_N)`.
+For a realized block, `M_N>0` is equivalent to descent. Neither identity supplies a uniform upper bound on `C_N` or `M_N>0` for every starting value. The finite congruence-cylinder representation is useful for exact enumeration, but the universal infinite-branch exclusion remains open.
+
+Existing verified PR #59/#62 results remain valid at their exact heads and are not withdrawn by the later PR #65 failure.
