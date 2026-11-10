@@ -451,3 +451,8 @@ Mathematical scope: the result derives a necessary finite-depth path certificate
 ## PR #62 partial CI result — 10 November 2026
 
 Lean 4.34.1 and Lean 4.35.0 paranoid jobs passed for exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`; both new declarations have standard profile `[propext, Classical.choice, Quot.sound]`, the paranoid kernel accepted, and no `sorryAx` was detected. Compile-drafts is still in progress. The exact-head three-job gate remains open.
+
+
+## PR #62 final result — exact-head PASS
+
+All three jobs in workflow 42811286670 passed on head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`. The two new finite-cap-tree bridge declarations print `[propext, Classical.choice, Quot.sound]`; no `sorryAx` was detected and the paranoid kernel accepted. The deterministic-minimality-to-finite-cap-tree interface is now formally verified at this head. The infinite-branch exclusion remains open.
