@@ -28,7 +28,11 @@ The companion finite exact valuation-word cylinder statement is likewise a direc
 
 ## Verification scope
 
-The main initial valuation-one equivalence has a Lean declaration in SyracuseOffsetIdentity.lean, line 2397 at source commit b1a8599c686c37893a33453b759dee42047c7727. The documented successful workflows and axiom output apply only to that declaration and their exact source snapshots. The arbitrary finite-word statement, the finite tail partition, the terminal-residue collision-energy identity, and the Markov representation remain separate formalization targets unless separately audited.
+The historical source declaration `lubuimi_initial_valuation_one_cylinder` is recorded at its original source snapshots, including the earlier line-2397 locator at commit `b1a8599c686c37893a33453b759dee42047c7727`. Its seven successful exact-commit audits apply only to that historical identifier and those exact snapshots.
+
+The current neutral declaration is `initial_valuation_one_cylinder_iff_dyadic_divisibility`, at `SyracuseOffsetIdentity.lean:2603), exact source commit `5f6e46de8bed7061f8336089857143c54e997af5`, audited independently by workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956). All three jobs passed: Lean 4.34.1 kernel-check, `compile-drafts`, and Lean 4.35.0 paranoid kernel-check. Its named transitive profile is `[propext, Classical.choice, Quot.sound]`; the no-`sorryAx` guard passed. The mathematical proposition is unchanged, but no historical audit is transferred across the identifier change.
+
+The arbitrary finite-word statement, the finite tail partition, the terminal-residue collision-energy identity, and the Markov representation remain separate formalization targets unless separately audited.
 
 The note is not a proof of global Collatz descent. No journal acceptance or independent peer review is claimed.
 
