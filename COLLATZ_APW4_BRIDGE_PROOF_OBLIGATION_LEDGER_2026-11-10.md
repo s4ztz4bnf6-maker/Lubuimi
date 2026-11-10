@@ -150,3 +150,21 @@ The first attempt at `canonicalTerminalResidue_isUnit` failed at the implicit in
 ### 7.6 Explicit inverse-unit construction — current candidate
 
 The exact-head run [42745303364](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42745303364) failed again at the generic `IsUnit.inv` inference, despite naming the casted power's unit proof. The current head `628a0a4d67428251fbf32f627aea3843d7a090e3` avoids that inference entirely: it destructures the existing `IsUnit) witness into a unit (u), constructs (u^{-1}) in the unit group, and proves its coercion is the inverse of the casted power. Exact-head CI is pending. The canonical terminal-residue unit theorem remains unverified until the new run passes.
+
+
+## 1.6 — Explicit finite exponent cap: exact-head compile PASS
+
+The clean follow-up PR #42 is based on the current PR #9 head and does not build on the failed PR #40 candidate. Exact source head d3b2a55c1987b4a4f2cdbaef2a97486679d68f26 completed workflow 42747001077 successfully. The workflow built CollatzAudit and compiled SyracuseOffsetIdentity.lean. The new declarations
+
+- CollatzSyracuseAudit.next_exponent_lt_integer_bound
+- CollatzSyracuseAudit.nondecreasing_orbit_next_exponent_finite_bound
+
+printed exactly [propext, Classical.choice, Quot.sound]. The offset module's own sorryAx scan passed; the whole repository log contains unrelated audit commands for other modules, so no repository-wide no-sorryAx claim is made. This workflow did not run lake check --paranoid; no paranoid PASS is claimed.
+
+The new bound is b < 4*2^A - 3D, derived from the already-established exponential cap. It is state-dependent, not uniform across all prefixes, and does not exclude an infinite path. The earlier PR #40 failure is preserved as a failed candidate and does not alter the prior PR #9 theorem record.
+
+## 1.7 — Finite cap-tree path certificate candidate
+
+PR #48 adds a finite prefix state (A,C,D), exact append transition, finite child set, and finite cap tree at every depth. Its principal target is that every prefix of a nondecreasing exact affine Syracuse path lies in the finite cap tree. It also attaches the exact terminal-residue unit map to the path certificate. Exact head 82cb74118eff69afd667c0fd827b266d115284ca; workflow 42748141012 is queued. This is a proof candidate until the exact build and axiom logs complete.
+
+The theorem is deliberately a finite-depth path embedding, not a proof that the tree has no infinite path. The full general valuation-word cylinder bijection and the k=2 terminal-residue energy remain distinct modules; no energy upper bound or global Collatz conclusion is inferred.
