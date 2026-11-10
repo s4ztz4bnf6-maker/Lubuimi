@@ -629,3 +629,10 @@ The finite cap-tree embedding branch now has updated head `5699182344be6a7950c62
 This branch's mathematical target is the finite cap-tree embedding for a minimal counterexample orbit bounded below by its initial value, together with the terminal-residue unit condition. This is a finite structural lemma; it does not by itself prove a uniform cap bound or global Collatz.
 
 The previously verified initial-cylinder, valuation-bound, offset identity and strict-margin results remain independent results with their existing exact-head verification records. The mixed valuation word (1,2) iff residue 11 mod 16, and the dyadic uniform-fibre cardinality identity, also retain their own exact Lean evidence. Kolaz PR #39 workflow [42739986917](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42739986917) passed finite-table reproducibility checks; those are finite computation, not Lean kernel verification or a global theorem.
+
+
+## Lean 4.34.1 workflow correction — 10 November 2026
+
+The previous exact-head 4.34.1 job reached its final command and failed only because Lake 4.34.1 does not recognize the command lake check (unknown command 'check'). The library build and exact source-file compile had already succeeded. The workflow now replaces that unsupported command with a second explicit lake build CollatzAudit confirmation. This 4.34.1 job is a compile/build check only; the separate Lean 4.35.0 lake check --paranoid job remains the paranoid kernel-verification path.
+
+Workflow source commit: e95d21771a38c1748169672d326f54162aae4dcd. Exact-head CI is pending; no result is claimed for this workflow revision.
