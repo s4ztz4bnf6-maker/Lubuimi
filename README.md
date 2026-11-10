@@ -97,3 +97,14 @@ The separate [Kolaz / Collatz threshold-return archive PR #39](https://github.co
 ## Universal-proof and APW4 bridge obligation ledger — 10 November 2026
 
 See [the Collatz–Syracuse and APW4 bridge proof-obligation ledger](COLLATZ_APW4_BRIDGE_PROOF_OBLIGATION_LEDGER_2026-11-10.md). It preserves the distinction between exact finite cylinder/energy/threshold results and the still-open universal positive-margin/descent obligation. The APW4-style bridge remains conditional on explicit atom, index, weight and weighted-capacity transport; no historical APW4/BIB identification is assumed.
+
+
+## Addendum — Syracuse finite-depth uniform-fibre bridge and current proof boundary, 10 November 2026
+
+The Collatz/Syracuse programme now records an exact finite-depth uniform-fibre construction in [the bridge note](https://github.com/s4ztz4bnf6-maker/Lubuimi/blob/main/SYRACUSE_FINITE_DEPTH_UNIFORM_FIBRE_BRIDGE_2026-11-10.md). The separate Lean checkpoint [run 42738528207](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738528207), on commit `a1becbc8e837f10abcd952a2e03832cb057fb2b8` with Lean 4.34.1, passed for the named declaration `dyadicUniformFibre_partition_card` and its reported standard axiom profile. This verifies that finite cardinality identity on that exact source/toolchain snapshot; it does not verify the entire prefix-dependent cylinder partition or the APW4 transport bridge.
+
+The bridge note specifies the finite interval partition, exact child/tail cardinalities and uniform masses, and the refinement to common-modulus residue atoms. It also records the exact remaining obligations: formalize disjointness/coverage and the residue-atom bijection; instantiate the generic finite-fibre data; and prove a genuine infinite-path exclusion argument. Finite branching and fixed-depth uniformization alone do not exclude an infinite path.
+
+The exact affine offset identity, signed-margin recurrence, initial valuation-one cylinder equivalence, and conditional positive-margin descent results remain separate established components. The universal Collatz conclusion still requires a theorem that every positive odd start has a realized finite block with positive signed margin (or another rigorously sufficient global descent mechanism), together with the corresponding orbit argument. No such universal theorem is claimed here.
+
+The APW4 bridge is only a candidate transfer architecture. It is not imported into the Collatz proof unless the historical event/slot maps, indices, weights, diagonal and off-diagonal mass transports, and weighted Hall/BIB capacity inequality are all explicitly proved and the resulting theorem closes the infinite-path obligation. The independent Kolaz threshold-return archive remains a separate research strand and its reproducibility CI is not a Collatz proof.
