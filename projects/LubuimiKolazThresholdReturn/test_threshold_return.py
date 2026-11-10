@@ -2,7 +2,8 @@ import unittest
 import csv
 from pathlib import Path
 
-from threshold_return import (analyze_threshold, common_suffix, row_by_z0,\n                               valuation_word, offset_margin_certificate)
+from threshold_return import (analyze_threshold, common_suffix, row_by_z0,
+                               valuation_word, offset_margin_certificate)
 
 
 EXPECTED = {
