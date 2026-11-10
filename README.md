@@ -328,3 +328,6 @@ The initial-cylinder theorem, valuation bounds, exact offset and strict-margin r
 The next global proof obligation remains to derive the suffix-return premise from the deterministic accelerated Syracuse dynamics and the minimal-counterexample definition. The intended chain is: establish oddness of every orbit term from the exact affine identity and positive exponent; identify each exponent as the exact 2-adic valuation; prove the shifted tail is the unique deterministic Syracuse orbit from its current term; then apply minimality to obtain the suffix-return premise. Each link must be proved explicitly. Until then, the current minimal-counterexample wrapper remains conditional. Even after that bridge, finite-tree membership alone does not rule out an infinite branch; a separate descent, ranking, or well-foundedness argument is required.
 
 **Status:** PR #48 CI fully green on run 42759509255; finite-depth theorem verified within its exact scope; global Collatz theorem remains open.
+
+
+The separate manuscript and exact-head verification addendum is recorded in [COLLATZ_MANUSCRIPT_AND_CI_ADDENDUM_2026-11-10.md](COLLATZ_MANUSCRIPT_AND_CI_ADDENDUM_2026-11-10.md). It preserves the published finite valuation-word cylinder theorem and states the remaining deterministic-tail/minimality obligation.
