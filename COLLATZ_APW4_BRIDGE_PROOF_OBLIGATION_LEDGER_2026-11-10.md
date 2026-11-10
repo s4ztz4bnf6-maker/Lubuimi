@@ -359,3 +359,15 @@ The initial-cylinder theorem, valuation bounds, exact offset and strict-margin r
 The next global proof obligation remains to derive the suffix-return premise from the deterministic accelerated Syracuse dynamics and the minimal-counterexample definition. The intended chain is: establish oddness of every orbit term from the exact affine identity and positive exponent; identify each exponent as the exact 2-adic valuation; prove the shifted tail is the unique deterministic Syracuse orbit from its current term; then apply minimality to obtain the suffix-return premise. Each link must be proved explicitly. Until then, the current minimal-counterexample wrapper remains conditional. Even after that bridge, finite-tree membership alone does not rule out an infinite branch; a separate descent, ranking, or well-foundedness argument is required.
 
 **Status:** PR #48 CI fully green on run 42759509255; finite-depth theorem verified within its exact scope; global Collatz theorem remains open.
+
+
+## New Lean proof candidate — parity and exact valuation bridge, 10 November 2026
+
+Source head: `a8b593cd8ef59105e6b62b11d0dfc7e41e89a3bb`.
+
+Two new declarations have been added immediately before the minimal-counterexample wrapper in `SyracuseOffsetIdentity.lean`:
+
+- `every_state_odd_of_positive_affine_steps`: from `0 < a(j)` and `2^(a(j))*n(j+1)=3*n(j)+1`, it derives `n(j) % 2 = 1) for every j by parity of the exact affine identity.
+- `every_affine_exponent_is_exact`: uses oddness of the next state and the existing `exponent_is_maximal_of_odd_quotient` lemma to show `2^(a(j)+1)` does not divide `3*n(j)+1`.
+
+These declarations directly address the first two steps of the deterministic-tail proof plan. They do not yet define the canonical successor, prove uniqueness of its odd quotient, identify shifted tails with iterates of that successor, or derive the suffix-return premise from minimality. This is a new Lean source candidate only; no compile, axiom-profile, or paranoid PASS is claimed until exact-head CI runs and logs are inspected.
