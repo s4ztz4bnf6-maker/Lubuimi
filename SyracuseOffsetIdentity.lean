@@ -1072,8 +1072,8 @@ theorem canonicalTerminalResidue_isUnit (A : ℕ → ℕ) (k : ℕ)
   have h2 : IsUnit ((2 ^ A k : ℕ) : ZMod (3 ^ k)) :=
     twoPow_isUnit_mod_threePow (A k) k
   have h2inv :
-      IsUnit (((2 ^ A k : ℕ) : ZMod (3 ^ k))⁻¹) :=
-    IsUnit.inv h2
+      IsUnit (((2 ^ A k : ℕ) : ZMod (3 ^ k))⁻¹) := by
+    simpa using h2.inv
   exact IsUnit.mul hC h2inv
 
 /-- For an exact affine trajectory identity, the terminal state is precisely
@@ -1094,51 +1094,7 @@ theorem terminal_residue_eq_canonicalTerminalResidue_of_affine_identity
 #print axioms terminal_residue_eq_canonicalTerminalResidue_of_affine_identity
 
 
-/-- Every natural exponent is strictly smaller than its power of two.
-This elementary growth lemma turns the exponential necessary condition
-above into an explicit (coarse) integer upper bound. -/
-private theorem nat_lt_two_pow (m : ℕ) : m < 2 ^ m := by
-  induction m with
-  | zero => norm_num
-  | succ m ih =>
-      rw [pow_succ]
-      have hp : 0 < 2 ^ m := by positivity
-      nlinarith
 
-/-- A necessary exponential cap gives a concrete finite integer bound on
-the next valuation. The bound is deliberately coarse but explicit:
-b < 4*2^A - 3*D. -/
-theorem next_exponent_lt_integer_bound
-    (A b : ℕ) (D : ℤ)
-    (hcap :
-      (2 : ℤ) ^ (A + b) + 3 * D ≤ 4 * (2 : ℤ) ^ A) :
-    (b : ℤ) < 4 * (2 : ℤ) ^ A - 3 * D := by
-  have hpow : ((A + b : ℕ) : ℤ) < (2 : ℤ) ^ (A + b) := by
-    exact_mod_cast nat_lt_two_pow (A + b)
-  have hle : (b : ℤ) ≤ (A + b : ℤ) := by omega
-  linarith
-
-/-- Every next valuation on a nondecreasing exact Syracuse endpoint lies
-below an explicit finite integer depending only on the current prefix
-state (A j, signedOffsetMargin A j). This proves pointwise finite
-branching; it does not give a uniform bound over all prefixes. -/
-theorem nondecreasing_orbit_next_exponent_finite_bound
-    (n₀ nnext : ℕ) (A a : ℕ → ℕ)
-    (hA : ∀ j, A (j + 1) = A j + a j)
-    (j : ℕ) (hn₀ : 1 < n₀)
-    (hoffset :
-      2 ^ A (j + 1) * nnext =
-        3 ^ (j + 1) * n₀ + canonicalOffset A (j + 1))
-    (hnondecreasing : n₀ ≤ nnext) :
-    (a j : ℤ) <
-      4 * (2 : ℤ) ^ A j - 3 * signedOffsetMargin A j := by
-  exact next_exponent_lt_integer_bound
-    (A j) (a j) (signedOffsetMargin A j)
-    (nondecreasing_orbit_next_exponent_cap
-      n₀ nnext A a hA j hn₀ hoffset hnondecreasing)
-
-#print axioms next_exponent_lt_integer_bound
-#print axioms nondecreasing_orbit_next_exponent_finite_bound
 
 end CollatzSyracuseAudit
 
@@ -2835,5 +2791,55 @@ theorem nondecreasing_orbit_next_exponent_cap
   exact hcap
 
 #print axioms nondecreasing_orbit_next_exponent_cap
+
+
+/-- Every natural exponent is strictly smaller than its power of two.
+This elementary growth lemma turns the exponential necessary condition
+above into an explicit (coarse) integer upper bound. -/
+private theorem nat_lt_two_pow (m : ℕ) : m < 2 ^ m := by
+  induction m with
+  | zero => norm_num
+  | succ m ih =>
+      rw [pow_succ]
+      have hp : 0 < 2 ^ m := by positivity
+      nlinarith
+
+/-- A necessary exponential cap gives a concrete finite integer bound on
+the next valuation. The bound is deliberately coarse but explicit:
+b < 4*2^A - 3*D. -/
+theorem next_exponent_lt_integer_bound
+    (A b : ℕ) (D : ℤ)
+    (hcap :
+      (2 : ℤ) ^ (A + b) + 3 * D ≤ 4 * (2 : ℤ) ^ A) :
+    (b : ℤ) < 4 * (2 : ℤ) ^ A - 3 * D := by
+  have hpow : ((A + b : ℕ) : ℤ) < (2 : ℤ) ^ (A + b) := by
+    exact_mod_cast nat_lt_two_pow (A + b)
+  have hle : (b : ℤ) ≤ (A + b : ℤ) := by omega
+  have hpow_le :
+      (2 : ℤ) ^ (A + b) ≤ 4 * (2 : ℤ) ^ A - 3 * D := by
+    linarith [hcap]
+  exact lt_of_le_of_lt hle (lt_of_lt_of_le hpow hpow_le)
+
+/-- Every next valuation on a nondecreasing exact Syracuse endpoint lies
+below an explicit finite integer depending only on the current prefix
+state (A j, signedOffsetMargin A j). This proves pointwise finite
+branching; it does not give a uniform bound over all prefixes. -/
+theorem nondecreasing_orbit_next_exponent_finite_bound
+    (n₀ nnext : ℕ) (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (j : ℕ) (hn₀ : 1 < n₀)
+    (hoffset :
+      2 ^ A (j + 1) * nnext =
+        3 ^ (j + 1) * n₀ + canonicalOffset A (j + 1))
+    (hnondecreasing : n₀ ≤ nnext) :
+    (a j : ℤ) <
+      4 * (2 : ℤ) ^ A j - 3 * signedOffsetMargin A j := by
+  exact next_exponent_lt_integer_bound
+    (A j) (a j) (signedOffsetMargin A j)
+    (nondecreasing_orbit_next_exponent_cap
+      n₀ nnext A a hA j hn₀ hoffset hnondecreasing)
+
+#print axioms next_exponent_lt_integer_bound
+#print axioms nondecreasing_orbit_next_exponent_finite_bound
 
 end CollatzSyracuseAudit
