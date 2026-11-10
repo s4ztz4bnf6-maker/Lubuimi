@@ -2789,6 +2789,54 @@ theorem nondecreasing_orbit_next_exponent_cap
       (by simpa using hnext)
   exact hcap
 
+
 #print axioms nondecreasing_orbit_next_exponent_cap
+
+/-- Every natural exponent is strictly smaller than its power of two. -/
+private theorem nat_lt_two_pow (m : ℕ) : m < 2 ^ m := by
+  induction m with
+  | zero => norm_num
+  | succ m ih =>
+      rw [pow_succ]
+      have hp : 0 < 2 ^ m := by positivity
+      nlinarith
+
+/-- Convert the exponential next-valuation cap into an explicit integer
+upper bound. The estimate is coarse and depends on the current state. -/
+theorem next_exponent_lt_integer_bound
+    (A b : ℕ) (D : ℤ)
+    (hcap :
+      (2 : ℤ) ^ (A + b) + 3 * D ≤ 4 * (2 : ℤ) ^ A) :
+    (b : ℤ) < 4 * (2 : ℤ) ^ A - 3 * D := by
+  have hpow : ((A + b : ℕ) : ℤ) < (2 : ℤ) ^ (A + b) := by
+    exact_mod_cast nat_lt_two_pow (A + b)
+  have hle : (b : ℤ) ≤ (A + b : ℤ) := by
+    exact_mod_cast (Nat.le_add_left b A)
+  have hbound :
+      (2 : ℤ) ^ (A + b) ≤ 4 * (2 : ℤ) ^ A - 3 * D := by
+    linarith
+  exact lt_of_le_of_lt hle (lt_of_lt_of_le hpow hbound)
+
+/-- Every next valuation on a nondecreasing exact Syracuse endpoint lies
+below an explicit finite integer depending on its current prefix state.
+This proves pointwise finite branching, not a uniform bound over all
+prefixes and not the nonexistence of an infinite path. -/
+theorem nondecreasing_orbit_next_exponent_finite_bound
+    (n₀ nnext : ℕ) (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (j : ℕ) (hn₀ : 1 < n₀)
+    (hoffset :
+      2 ^ A (j + 1) * nnext =
+        3 ^ (j + 1) * n₀ + canonicalOffset A (j + 1))
+    (hnondecreasing : n₀ ≤ nnext) :
+    (a j : ℤ) <
+      4 * (2 : ℤ) ^ A j - 3 * signedOffsetMargin A j := by
+  exact next_exponent_lt_integer_bound
+    (A j) (a j) (signedOffsetMargin A j)
+    (nondecreasing_orbit_next_exponent_cap
+      n₀ nnext A a hA j hn₀ hoffset hnondecreasing)
+
+#print axioms next_exponent_lt_integer_bound
+#print axioms nondecreasing_orbit_next_exponent_finite_bound
 
 end CollatzSyracuseAudit
