@@ -87,3 +87,8 @@ The theorem note and consolidated research record now reflect the two completed 
 ### Exact current-source audit for the initial cylinder — 10 November 2026
 
 The current source commit `a1becbc8e837f10abcd952a2e03832cb057fb2b8` passed [workflow 42738528207](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738528207). The log prints the standard transitive axiom profile for both `lubuimi_initial_valuation_one_cylinder` and `dyadicUniformFibre_partition_card`; the explicit `sorryAx` gate passed. This is a later exact-source recheck, not a claim of global Collatz descent.
+
+
+### Kolaz threshold-return archive — exact finite CI
+
+The separate [Kolaz / Collatz threshold-return archive PR #39](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/39) now records exact first-return tables for thresholds (B=31,63,127,255,511,1023,2047,4095,8191), regression tests against fresh integer enumeration, and named common-suffix/confluence checks. The exact finite-computation workflow [42738273620](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738273620) passed on source head `c8ae9d010757b82342fa8085011c6d55bdcbbd94`. This is a reproducibility result for those finite tables and tests, not Lean kernel verification, a uniform threshold theorem, or a proof of global Collatz. The separate 1097 threshold/count lead remains **OFFEN – NICHT VERIFIZIERT**.
