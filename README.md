@@ -92,3 +92,8 @@ The current source commit `a1becbc8e837f10abcd952a2e03832cb057fb2b8` passed [wor
 ### Kolaz threshold-return archive — exact finite CI
 
 The separate [Kolaz / Collatz threshold-return archive PR #39](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/39) now records exact first-return tables for thresholds (B=31,63,127,255,511,1023,2047,4095,8191), regression tests against fresh integer enumeration, and named common-suffix/confluence checks. The exact finite-computation workflow [42738273620](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738273620) passed on source head `c8ae9d010757b82342fa8085011c6d55bdcbbd94`. This is a reproducibility result for those finite tables and tests, not Lean kernel verification, a uniform threshold theorem, or a proof of global Collatz. The separate 1097 threshold/count lead remains **OFFEN – NICHT VERIFIZIERT**.
+
+
+## Universal-proof and APW4 bridge obligation ledger — 10 November 2026
+
+See [the Collatz–Syracuse and APW4 bridge proof-obligation ledger](COLLATZ_APW4_BRIDGE_PROOF_OBLIGATION_LEDGER_2026-11-10.md). It preserves the distinction between exact finite cylinder/energy/threshold results and the still-open universal positive-margin/descent obligation. The APW4-style bridge remains conditional on explicit atom, index, weight and weighted-capacity transport; no historical APW4/BIB identification is assumed.
