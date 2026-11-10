@@ -3033,7 +3033,7 @@ theorem initial_lower_bounded_orbit_prefix_cap_tree_and_terminal_unit
     valuationPrefix a j ∈ finiteCapTreeLevel j ∧
       IsUnit (n j : ZMod (3 ^ j)) := by
   constructor
-  · exact nondecreasing_orbit_prefix_mem_finiteCapTree
+  · exact initial_lower_bounded_orbit_prefix_mem_finiteCapTree
       n₀ n A a hA0 hA ha hn₀ hoffset hnd j
   · exact terminal_residue_unit_of_affine_identity
       A j n₀ (n j) hj (hoffset j)
