@@ -162,7 +162,7 @@ These are finite-sample facts about the specified escape-source sets. They do no
 
 The exact integer-only script threshold_return.py enumerates E_B and computes every row. The tests in test_threshold_return.py verify the four inline tables, all rows in threshold_511.csv and threshold_1023.csv, the first-return convention, the direct return to 1, and the named common suffixes. The workflow kolaz-threshold-return.yml runs those tests.
 
-The archival “1097” lead has no recovered definition or verified relation to these threshold tables. It remains OFFEN – NICHT VERIFIZIERT and is not used.
+The integer 1097 is recorded above as the B=1023 first image T(731), returning to 823 in one further step. The separate earlier “1097 threshold/count” lead has no recovered definition and remains OFFEN – NICHT VERIFIZIERT; the finite table entry does not resolve that distinct claim.
 
 ## 6. Open mathematical questions
 
