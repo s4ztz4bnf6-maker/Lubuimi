@@ -432,3 +432,20 @@ PR #39 exact-head workflow 42735880399 passed on source head 012c8717e9d80025e7a
 ### Initial valuation-one manuscript v1.0
 
 The standalone manuscript for Lubuimi's Initial Valuation-One Cylinder Theorem is now consolidated as version 1.0 at PR #35 head 6dd47a9b18b373c274b0bc4d4001d9fad4e8ba24. It includes the complete two-way proof, explicit orbit formula, exact run length, natural densities, signed-margin consequence, worked example, literature context, references, limitations, and seven exact-commit Lean audit records. The Lean source was not changed by this editorial revision; the seven previously completed exact-commit audits remain the formal evidence for the theorem declaration.
+
+
+## 17. Exact mixed valuation word (1,2) — Lean verification passed
+
+The declaration `CollatzSyracuseAudit.realizesValuationWord12_iff_mod_sixteen_eleven` compiled successfully in workflow 42736159935 on exact Lean source commit `56c6d6d86fb5122d75f89f5e614f7f333e2d31a9`. It proves that the two-step exact valuation word (1,2), represented by odd quotient witnesses
+[
+2n_1=3n+1,\qquad4n_2=3n_1+1,
+]
+is realized exactly when
+[
+n\equiv11\pmod{16}.
+]
+The declaration printed transitive profile [propext, Classical.choice, Quot.sound]. The completed job log contains no actual sorryAx occurrence, and the compile-drafts build completed successfully (8,932 jobs).
+
+This is the first formally audited mixed-word instance in the current general finite-word programme. It matches the exact Kolaz witness 731 -> 1097 -> 823 and the general residue formula with total exponent A=3 and offset C=5. The verification is specific to word (1,2); it does not yet formalize arbitrary finite words or the finite tail partition.
+
+The PR #9 branch subsequently received documentation-only commits. The exact Lean source snapshot audited above remains 56c6d6d86fb5122d75f89f5e614f7f333e2d31a9; no claim is made that workflow 42736159935 checked the later documentation-only descendant head.
