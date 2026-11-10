@@ -68,4 +68,4 @@ See [SYRACUSE_FINITE_DEPTH_UNIFORM_FIBRE_BRIDGE_2026-11-10.md](SYRACUSE_FINITE_D
 
 ### Uniform-fibre cardinality formalization — pending
 
-A Lean declaration dyadicUniformFibre_partition_card was added to SyracuseOffsetIdentity.lean. It states the exact count of child blocks plus tail block at a common dyadic refinement depth. Exact source head a1becbc8e837f10abcd952a2e03832cb057fb2b8 is under compile/audit in workflow 42738528207. The general cap/tree/residue-fibre bridge remains outside this lemma.
+A Lean declaration dyadicUniformFibre_partition_card was added to SyracuseOffsetIdentity.lean. It states the exact count of child blocks plus tail block at a common dyadic refinement depth. Exact source head a1becbc8e837f10abcd952a2e03832cb057fb2b8 passed compile/audit in workflow 42738528207 with standard transitive profile and no actual sorryAx. The general cap/tree/residue-fibre bridge remains outside this lemma.
