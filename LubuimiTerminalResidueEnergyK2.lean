@@ -115,7 +115,6 @@ theorem twoStepMass_eq (j : Fin 6) :
   rw [twoStepNumerator_eq]
   push_cast
   field_simp
-  <;> ring
 
 /-- The exact second moment of the two-step terminal distribution. -/
 def twoStepEnergy : ℚ :=
@@ -124,7 +123,9 @@ def twoStepEnergy : ℚ :=
 /-- The k = 2 terminal-residue collision energy is exactly 5/21. -/
 theorem twoStepEnergy_eq_five_div_twentyOne :
     twoStepEnergy = (5 : ℚ) / 21 := by
-  decide
+  unfold twoStepEnergy
+  simp_rw [twoStepMass_eq]
+  norm_num [outputNumerator, Fin.sum_univ_succ]
 
 #print axioms initialRow_sum
 #print axioms rowOne_sum
