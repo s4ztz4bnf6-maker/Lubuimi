@@ -961,6 +961,23 @@ theorem dyadicUniformFibre_partition_card
 
 #print axioms dyadicUniformFibre_partition_card
 
+
+/-- Reducing the certified affine block identity modulo 3^k fixes the
+terminal residue through the exact congruence
+2^A * n_k = C_k (mod 3^k). This is the multiplicative form of the
+terminal-residue map; invertibility of 2^A and the unit property are
+separate lemmas and are not assumed here. -/
+theorem terminal_residue_congruence_of_affine_identity
+    (k A n₀ nₖ C : ℕ)
+    (hidentity : 2 ^ A * nₖ = 3 ^ k * n₀ + C) :
+    (2 ^ A : ZMod (3 ^ k)) * (nₖ : ZMod (3 ^ k)) =
+      (C : ZMod (3 ^ k)) := by
+  have hcast :=
+    congrArg (fun t : ℕ => (t : ZMod (3 ^ k))) hidentity
+  simpa using hcast
+
+#print axioms terminal_residue_congruence_of_affine_identity
+
 end CollatzSyracuseAudit
 
 
