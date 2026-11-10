@@ -360,3 +360,8 @@ PR #59 / exact source head `5f6e46de8bed7061f8336089857143c54e997af5` applies th
 ### Latest PR #59 CI poll — 10 November 2026
 
 The exact-head workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956) is now visible for PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5`. `compile-drafts` job `129807911809` is in progress; Lean 4.34.1 job `129807911748` and Lean 4.35.0 paranoid job `129807911880` are queued. No PASS is claimed.
+
+
+### Parallel PR #58 / PR #59 proof-script variants — 10 November 2026
+
+Two focused variants now test the same three repairs in parallel. PR #58 head `a2eea6f3c979e25a705c3da60d09d6ec84a41b7f`, workflow [42809723676](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809723676), has all three jobs in progress. PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5`, workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956), also has all three jobs in progress. They differ only in the final arithmetic closure (`omega` versus `Nat.lt_of_not_ge`); neither is accepted until exact-head compile, kernel, axiom and no-`sorryAx` checks finish.
