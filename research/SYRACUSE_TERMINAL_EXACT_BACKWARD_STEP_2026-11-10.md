@@ -152,3 +152,18 @@ A second declaration, `SyracuseAudit.terminalExact_backward_prefix`, has now bee
 Source commit: `e8f1687f756a6448bfea125e8c5b215607a1f727`; source blob: `14ed3908605d8d8e673d73d96b9eedb5629c7379`. The earlier one-step source commit remains `0cd469f27477d9ac8364e3feb8d462f280e546cd`.
 
 **OFFEN – NICHT VERIFIZIERT:** no exact-head Lean workflow run, isolated compile, axiom output, or transitive no-`sorryAx` check has been returned for the new source head. The induction is a formalization candidate only. It does not prove realizability of arbitrary valuation words, density-to-pointwise transfer, a finite tail partition, or global Collatz convergence. The authoritative working branch `collatz/valuation-cylinders-2026-10-26` remains unchanged; this work is isolated on the terminal-backward-step candidate branch.
+
+
+## Kernel-verification correction — 10 November 2026
+
+The earlier **OFFEN – NICHT VERIFIZIERT** status above is superseded for the two declarations on the exact source head recorded here. The initial candidate exposed three concrete Lean issues: the `Nat.dvd_add_iff_right` direction was used backwards, the parity inference was too broad for `omega` in the surrounding arithmetic context, and the finite induction introduced its theorem hypotheses twice. These were repaired by commuting the divisibility sum before cancellation, isolating the parity fact as an explicit modulo-two argument, and removing the duplicate `intro` binders.
+
+**Verified source commit:** `e44eb4331cc1481e10d6f60780d695412c47a726`.
+
+**GitHub Actions:** run `42844423707` completed successfully. The declared Lean library, record-time module, deterministic exceptional-orbit obstruction, and exact density arithmetic modules compiled under Lean 4.34.1 / Mathlib 4.34.1. The explicit `#print axioms` report gave, for both `terminalExact_backward_step` and `terminalExact_backward_prefix`:
+
+`[propext, Classical.choice, Quot.sound]`
+
+There is no `sorryAx` in either transitive profile. The two declarations are therefore kernel-verified on this exact commit. This does not claim that `lake check --paranoid` has run; that remains a separate audit step.
+
+The authoritative branch `collatz/valuation-cylinders-2026-10-26` was not changed; it still does not contain either new declaration. Draft PR #72 remains open and unmerged. The mathematical scope remains local finite backward propagation only: no arbitrary-word realizability, density-to-pointwise transfer, global infinite-orbit exclusion, or global Collatz theorem follows from these declarations.
