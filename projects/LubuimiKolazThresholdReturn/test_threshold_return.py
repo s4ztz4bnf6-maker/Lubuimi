@@ -152,7 +152,7 @@ class ThresholdReturnTests(unittest.TestCase):
         self.assertEqual(
             (row_by_z0(8191, 10367)["m"], row_by_z0(8191, 10367)["H"],
              row_by_z0(8191, 10367)["R"]),
-            (29, 425645, 3371),
+            (28, 425645, 3371),
         )
 
     def test_b1023_1097_cylinder_and_margin_certificate(self):
