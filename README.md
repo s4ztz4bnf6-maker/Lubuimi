@@ -143,3 +143,8 @@ The inverse formula itself remains verified at commit `b58e1ddc859caaf678c2239c5
 ### Inverse-unit witness repair — 10 November 2026
 
 The canonical terminal-residue unit proof no longer relies on the generic IsUnit.inv inference that failed at run 42745303364. The current root head `628a0a4d67428251fbf32f627aea3843d7a090e3` constructs the inverse unit directly from the existing Units witness. Exact-head CI is pending; the canonical unit claim remains open.
+
+
+## Konsolidierter Fortschrittsstand — 10. November 2026, 22:54 CET
+
+Der append-only Exact-Head- und Forschungsledger [COLLATZ_STATUS_CHECKPOINT_2026-11-10.md](COLLATZ_STATUS_CHECKPOINT_2026-11-10.md) bündelt erhaltene Syracuse-/Collatz-Ergebnisse, frühere exakte CI-Nachweise, den aktuellen PR-#9-/PR-#72-Status und die verbleibende globale Infinite-Branch-/Abstiegsverpflichtung. Der globale Collatz-Satz wird ausdrücklich nicht behauptet.
