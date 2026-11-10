@@ -7,7 +7,7 @@
 
 ## 1. Exact source definitions
 
-The source module is `SyracuseAffineCore.lean`, namespace `SyracuseAudit`. The checked branch-ref file has blob SHA `f12e3ad0f887e215446f03b5070b0122207f4093`; the companion `SyracuseAffineCorrectionSum.lean) has blob SHA `47616363ac04f999297c7ccb16c3ebc6803fb552`. These are blob identifiers, not the current branch-head commit SHA.
+The source module is `SyracuseAffineCore.lean`, namespace `SyracuseAudit`. The checked branch-ref file has blob SHA `f12e3ad0f887e215446f03b5070b0122207f4093`; the companion `SyracuseAffineCorrectionSum.lean` had baseline blob SHA `47616363ac04f999297c7ccb16c3ebc6803fb552`. These are blob identifiers, not the current branch-head commit SHA.
 
 The source definitions are:
 
@@ -126,7 +126,7 @@ This induction is a separate Lean declaration. It should call the one-step lemma
 - The initial valuation-one cylinder result and its exact-head CI evidence remain independent and unchanged.
 - APW4 is not modified or used as a premise.
 
-**Next gate:** implement the one-step lemma in an isolated Lean module on this branch, run the pinned project toolchain, inspect the named `#print axioms` output, and verify the dependency closure has no `sorryAx). Only then add the backward induction.
+**Next gate:** implement the one-step lemma in an isolated Lean module on this branch, run the pinned project toolchain, inspect the named `#print axioms` output, and verify the dependency closure has no `sorryAx`. Only then add the backward induction.
 
 
 ## Existing build blocker found and isolated repair — 10 November 2026
