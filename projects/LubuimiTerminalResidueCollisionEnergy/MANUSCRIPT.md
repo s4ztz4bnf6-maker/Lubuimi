@@ -17,6 +17,8 @@ By Lubuimi's Finite Valuation-Word Cylinder Partition Theorem, every such word i
 
 Thus the valuation words are a countable probability source family with explicit product weights.
 
+The finite valuation-word cylinder theorem is presented in its own companion manuscript and project ([PR #36](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/36)). The present collision-energy manuscript uses that theorem as an explicit mathematical input; it does not duplicate or alter its proof or Lean-verification status.
+
 ## 2. The terminal-residue map
 
 For a word \(\alpha\), let \(C_k(\alpha)\) be its affine offset, defined by
