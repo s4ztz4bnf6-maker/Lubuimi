@@ -73,3 +73,8 @@ The seven listed exact-commit workflows audit the main initial-cylinder declarat
 [4] T. Tao, “Almost all orbits of the Collatz map attain almost bounded values,” *Forum of Mathematics, Pi* **10** (2022), e12, §1.2 and Proposition 1.9.
 
 **Correction note:** Tao's Proposition 1.9 is a distribution theorem under a residue-equidistribution hypothesis; it is not cited as the exact one-residue-class theorem.
+
+
+## Current neutral declaration — verification update, 10 November 2026
+
+The source now also contains `initial_valuation_one_cylinder_iff_dyadic_divisibility` at `SyracuseOffsetIdentity.lean:2603`, exact source commit `5f6e46de8bed7061f8336089857143c54e997af5`. Exact-head workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956) passed Lean 4.34.1, `compile-drafts`, and Lean 4.35.0 paranoid. Its declaration-scoped transitive profile is `[propext, Classical.choice, Quot.sound]`, and the no-`sorryAx` guard passed. The seven earlier workflows remain historical evidence for the original identifier only; no audit is transferred across the rename. This does not certify the general finite-word theorem, tail partition, or global Collatz descent.
