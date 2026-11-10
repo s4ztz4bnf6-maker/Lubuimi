@@ -262,3 +262,20 @@ Standalone PR #38 head `a4775db22e2ff774aa6992441da8e70673298e41` passed exact w
 ### PR #39 — Kolaz finite archive
 
 PR #39 exact finite-table/confluence workflow [42739986917](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42739986917) passed. Its evidence is exact finite integer computation and archive reproducibility, not Lean kernel verification or a uniform infinite bound.
+
+
+## New minimal-path reduction — PR #49, 10 November 2026
+
+PR #49 adds a direct path-minimality formulation intended to remove the explicit suffix-return premise from the finite-cap-tree reduction.
+
+The new predicate `HasNonterminatingOddSyracusePath(m)` means that there exists an infinite sequence of odd states starting at (m), with each exact accelerated transition (2^b n_{j+1}=3n_j+1) for some (b>0), and with no state equal to 1. If no smaller odd start admits such a path, then any hypothetical term (n_j<n_0) of the given nonterminating path yields a smaller forbidden path by shifting (k\mapsto n_{j+k}). This directly proves (n_0\le n_j) for every (j).
+
+New declarations:
+- `HasNonterminatingOddSyracusePath)
+- `orbit_lower_bound_of_minimal_nonterminating_odd_path)
+- `minimal_nonterminating_path_prefix_mem_finiteCapTree)
+- `minimal_nonterminating_path_prefix_cap_tree_and_terminal_unit)
+
+The finite-cap-tree wrapper feeds this derived lower bound into the existing prefix theorem; the terminal-residue unit result is retained. Existing suffix-return theorems and earlier cap-tree results remain unchanged.
+
+Exact source head: `25264626071923d6a87c46fa153e6ae8d60bc737`. PR #49 exact-head CI is pending. No Lean PASS or paranoid PASS is claimed yet. This remains a finite-depth necessary path certificate; it does not prove the finite tree has no infinite branch or establish global Collatz termination.
