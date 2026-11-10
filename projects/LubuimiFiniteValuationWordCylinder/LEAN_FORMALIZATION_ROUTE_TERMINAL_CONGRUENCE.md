@@ -166,3 +166,10 @@ The declaration is present on Syracuse PR #9 source head 56c6d6d86fb5122d75f89f5
 The pending declaration above has now passed. Workflow 42736159935 completed successfully on exact Syracuse source commit 56c6d6d86fb5122d75f89f5e614f7f333e2d31a9. It compiled realizesValuationWord12_iff_mod_sixteen_eleven, printed transitive profile [propext, Classical.choice, Quot.sound], and the completed job log contained no actual sorryAx occurrence. The compile-drafts build completed successfully (8,932 jobs).
 
 This verifies the specific mixed word (1,2), equivalently n ≡ 11 mod 16, including the exact odd quotient witnesses. It is the A=3 instance of the general finite-word formula. It does not formalize arbitrary words, the tail partition, or the general finite-word theorem. The general theorem remains mathematically proved with Lean formalization open.
+
+
+## Lean-verified mixed-word example — 10 November 2026
+
+The unified Syracuse/Collatz root audit now includes the concrete mixed word (1,2). Declaration `CollatzSyracuseAudit.realizesValuationWord12_iff_mod_sixteen_eleven` proves that there exist odd quotients n₁,n₂ with 2n₁=3n+1 and 4n₂=3n₁+1 if and only if n≡11 (mod 16). Exact-head workflow 42736159935 passed on commit `56c6d6d86fb5122d75f89f5e614f7f333e2d31a9`; the declaration prints [propext, Classical.choice, Quot.sound], and the completed checked logs have no actual `sorryAx` hit.
+
+This formally verifies one nontrivial finite word and its exact residue cylinder. It is consistent with the B=1023 Kolaz example 731→1097→823, but does not yet prove the general finite-word theorem, its density corollary, or the finite tail-cylinder partition. Those remain open Lean formalization tasks.
