@@ -1,29 +1,41 @@
-# Lubuimi research projects
+# Lubuimi Syracuse theorem projects
 
-**Research author:** Ta-Yoshua Lubuimi
+**Research author:** Ta-Yoshua Lubuimi  
+**Last updated:** 10 November 2026
+
+This index keeps the Syracuse/Collatz results separate by theorem and verification scope.
 
 ## 1. Initial Valuation-One Cylinder Theorem
 
-The exact all-one initial valuation cylinder for the accelerated odd Syracuse map:
-\[
-(\forall j<N,\ a_j=1)\iff n_0\equiv-1\pmod{2^{N+1}},
-\qquad r=v_2(n_0+1)-1.
-\]
-
-This theorem has a self-contained manuscript and has passed four full exact-commit Lean CI workflows (42721006544, 42721305220, 42721911555, 42722186081), with transitive axiom profile [propext, Classical.choice, Quot.sound] and no sorryAx in the complete-log scans.
-
-Project directory: LubuimiInitialValuationOneCylinder.
+- Project directory: projects/LubuimiInitialValuationOneCylinder/
+- Standalone manuscript: Lubuimi_Initial_Valuation_One_Cylinder_2026-11-10.md
+- Written review: WRITTEN_REVIEW.md
+- Formalization status: LEAN_FORMALIZATION_STATUS.md
+- GitHub PR: https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/35
+- Status: mathematically proved and Lean-compiled/axiom-audited on seven successful exact-commit full compile workflows.
 
 ## 2. Finite Valuation-Word Cylinder Partition Theorem
 
-The general finite-word extension: every finite exact exponent word with total exponent A is exactly one odd residue class modulo 2^(A+1), with relative odd-start density 2^(-A). It includes an explicit affine residue formula, exact prefix-tree child weights and a finite cutoff with one exact tail cylinder.
+- Project directory: projects/LubuimiFiniteValuationWordCylinder/
+- Canonical manuscript: MANUSCRIPT.md
+- Written review: WRITTEN_REVIEW.md
+- Terminal-residue Lean route: LEAN_FORMALIZATION_ROUTE_TERMINAL_CONGRUENCE.md
+- GitHub PR: https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/36
+- Status: complete mathematical manuscript proof, exact finite tail partition, local tail-margin certificate and state-dependent finite cap; general theorem not yet Lean-compiled or axiom-audited.
 
-Project directory: LubuimiFiniteValuationWordCylinder.
+## 3. Terminal-Residue Collision Energy
 
-The general theorem is mathematically derived in its manuscript but is not yet claimed as Lean-compiled or axiom-audited.
+- Project directory: projects/LubuimiTerminalResidueCollisionEnergy/
+- Standalone manuscript: MANUSCRIPT.md
+- Written review: WRITTEN_REVIEW.md
+- GitHub PR: https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/38
+- Status: mathematical second-moment theorem, forced off-diagonal lower bound, finite truncation bounds and rational Markov representation; not yet Lean-compiled or axiom-audited.
 
-## 3. Research continuation
+## Cross-project safeguards
 
-See RESEARCH_UPDATE_2026-11-10_LUBUIMI_CYLINDER_RESULTS_AND_BRIDGE.md for the append-only proof/CI chronology and the proposed Lubuimi APW4–Syracuse Cylinder–Energy Bridge.
+- The initial all-one theorem is a special case of the finite-word cylinder theorem, but the projects retain separate manuscripts and formalization status.
+- The collision-energy theorem is a separate Syracuse incidence/moment construction. Its diagonal and off-diagonal terms are not identified with the historical APW4 diagonal mass or BIB reserve.
+- The APW4–Syracuse transport remains open pending an explicit historical index-preserving map, weight preservation/dominance, separate diagonal/off-diagonal inequalities and a capacity/Hall proof.
+- None of these results is presented as a proof of global Collatz.
 
-All projects are attributed to Ta-Yoshua Lubuimi. AI tools are assistants only. Third-party dependencies retain their own licences.
+All mathematical research and authorship are attributed to Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
