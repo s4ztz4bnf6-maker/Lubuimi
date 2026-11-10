@@ -3081,6 +3081,47 @@ theorem nondecreasing_orbit_prefix_cap_tree_and_terminal_unit
 #print axioms nondecreasing_orbit_prefix_cap_tree_and_terminal_unit
 
 
+/-- Every state of a positive-exponent affine Syracuse trajectory is odd.
+Indeed, the left side of the certified transition is even, so 3*n_j+1
+is even and hence n_j is odd. This is the first parity step needed before
+identifying the exact 2-adic exponent. -/
+theorem every_state_odd_of_positive_affine_steps
+    (n a : ℕ → ℕ)
+    (ha : ∀ j, 0 < a j)
+    (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1) :
+    ∀ j, n j % 2 = 1 := by
+  intro j
+  have hpow : 2 ^ (a j) % 2 = 0 := by
+    have ha0 : a j ≠ 0 := Nat.ne_of_gt (ha j)
+    cases h : a j with
+    | zero => exact (ha0 h).elim
+    | succ r => simp [h, pow_succ, Nat.mul_mod]
+  have hleft : (2 ^ (a j) * n (j + 1)) % 2 = 0 := by
+    rw [Nat.mul_mod, hpow]
+    simp
+  have hright : (3 * n j + 1) % 2 = 0 := by
+    rw [← hstep j]
+    exact hleft
+  omega
+
+#print axioms every_state_odd_of_positive_affine_steps
+
+/-- In a positive-exponent affine trajectory, the exponent is maximal:
+the next iterate is odd by the preceding theorem, so no additional factor
+of two divides the numerator. This certifies exactness of every removed
+2-adic power, not merely the scaled transition identity. -/
+theorem every_affine_exponent_is_exact
+    (n a : ℕ → ℕ)
+    (ha : ∀ j, 0 < a j)
+    (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1) :
+    ∀ j, ¬ 2 ^ (a j + 1) ∣ 3 * n j + 1 := by
+  have hodd := every_state_odd_of_positive_affine_steps n a ha hstep
+  intro j
+  exact exponent_is_maximal_of_odd_quotient
+    (n j) (n (j + 1)) (a j) (hodd (j + 1)) (hstep j)
+
+#print axioms every_affine_exponent_is_exact
+
 /-- Sequence-level minimal-counterexample reduction. If no term of the
 orbit is 1, and every term below n₀ would have a future suffix reaching 1
 (as required by minimality of n₀ among counterexamples), then no term can
