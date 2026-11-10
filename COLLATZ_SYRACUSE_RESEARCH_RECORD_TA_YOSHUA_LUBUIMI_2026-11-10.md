@@ -366,3 +366,20 @@ The finite-word manuscript now proves an exact necessary condition for a next st
 2^{A+b}+3D\le4\cdot2^A.
 \]
 For each fixed prefix state (A,D), this leaves only finitely many possible non-descending next exponents. If a counterexample exists, choose the least positive odd counterexample by well-ordering. Its orbit cannot fall below its initial value, so it must determine an infinite path through this state-dependent finitely branching valuation-prefix tree. This is a new structural reduction; it does not rule out an infinite realized path. The proof is in Section 13 of `projects/LubuimiFiniteValuationWordCylinder/MANUSCRIPT.md`; the general finite-word theorem, finite tail partition and this corollary remain not yet Lean-compiled.
+
+
+## 14. Exact finite branching cap for least-counterexample paths
+
+The local tail-margin theorem has the equivalent necessary cap form. For a prefix \(\alpha\) with total exponent \(A\) and signed margin \(D\), extension by exponent \(b\) satisfies
+\[
+D(\alpha b)=3D+(2^b-4)2^A.
+\]
+If the next odd iterate has not descended below the initial odd start, then \(D(\alpha b)\le0\) is necessary, since positive margin forces strict descent. Rearranging,
+\[
+\boxed{2^{A+b}+3D\le4\cdot2^A.}
+\]
+For each fixed prefix this admits only finitely many positive integers \(b\). Let \(B_\alpha\) be the largest admissible b, or zero if there is none. A least hypothetical nonterminating start must choose at each prefix one of the finitely many children \(b\le B_\alpha\); all larger exponents lie in the exact tail cylinder and force strict descent.
+
+Thus a least counterexample would generate an infinite path in a state-dependent finitely branching valuation tree. The cylinder weight of child \(b\) is exactly \(2^{-b}\), and the aggregate mass of all possible non-descending children is at most \(1-2^{-B_\alpha}\), with complementary tail mass \(2^{-B_\alpha}\) certified to descend.
+
+This is a finite-branching reduction, not a contradiction. The cap depends on the prefix through \(A,D\); no uniform bound on \(B_\alpha\) is known here, and an infinite path through the allowed finite children has not been excluded. The proof and limitations are in the canonical finite-word manuscript and its written review.
