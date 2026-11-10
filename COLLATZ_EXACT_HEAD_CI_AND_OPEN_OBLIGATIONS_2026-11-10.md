@@ -116,3 +116,19 @@ Workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/
 Both PRs are focused repairs of the same PR #56 diagnostics. PR #58 head `a2eea6f3c979e25a705c3da60d09d6ec84a41b7f`, workflow [42809723676](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809723676), has compile-drafts job `129807819022`, Lean 4.34.1 job `129807818770`, and Lean 4.35.0 paranoid job `129807818658` all in progress. PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5`, workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956), has compile-drafts `129807911809`, Lean 4.34.1 `129807911748`, and Lean 4.35.0 paranoid `129807911880` all in progress.
 
 Both add the local classical instance for `Nat.find`, pass the instantiated oddness fact into the positivity proof, and avoid the forward reference by proving the sequence lower bound directly. PR #58 closes the final inequality with `omega`; PR #59 uses `Nat.lt_of_not_ge`. These are alternative proof-script candidates for the same conditional reduction, not two separate mathematical results. No PASS is claimed yet.
+
+
+## 13. PR #59 completed exact-head verification — 10 November 2026
+
+Exact source head `5f6e46de8bed7061f8336089857143c54e997af5`, workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956): all three jobs passed (compile-drafts, Lean 4.34.1 kernel-check, Lean 4.35.0 paranoid). Named axiom output:
+
+- `initial_valuation_one_cylinder_iff_dyadic_divisibility`: `[propext, Classical.choice, Quot.sound]`.
+- `every_state_odd_of_positive_affine_steps`: `[propext, Quot.sound]`.
+- `every_affine_exponent_is_exact`: `[propext, Classical.choice, Quot.sound]`.
+- `affine_trajectory_eq_syracuse_iterate`: `[propext, Classical.choice, Quot.sound]`.
+- `affine_suffix_returns_of_least_odd_nonterminating_start`: `[propext, Classical.choice, Quot.sound]`.
+- `affine_minimal_counterexample_orbit_lower_bound`: `[propext, Classical.choice, Quot.sound]`.
+
+The compile job's `sorryAx` guard did not trigger. The paranoid kernel accepted the solution. PR #58 was closed as a superseded alternative after its Lean 4.34.1 and Lean 4.35.0 kernel jobs passed; its compile-drafts job had not completed at closure. PR #59 is the selected verified repair candidate.
+
+This is a substantial formal reduction, not a proof of global Collatz. The suffix-return/minimality result is conditional on the lower-bound property of a least odd nonterminating start. An independent argument excluding every infinite nonterminating trajectory is still required.
