@@ -26,7 +26,14 @@ jobs:
         run: lake env lean SyracuseExceptionalOrbitObstruction.lean
       - name: Compile exact density arithmetic lemmas
         run: lake env lean SyracuseDensityArithmetic.lean
-      - name: Run explicit axiom report for affine theorems
-        run: lake env lean SyracuseAxiomAudit.lean
-      - name: Run paranoid kernel check
-        run: lake check --paranoid
+      - name: Run explicit axiom report and reject sorryAx
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean SyracuseAxiomAudit.lean 2>&1 | tee /tmp/syracuse-axioms.log
+          if grep -q 'sorryAx' /tmp/syracuse-axioms.log; then
+            echo "::error::sorryAx detected in the explicit axiom report"
+            exit 1
+          fi
+      - name: Run Lake check
+        run: lake check
