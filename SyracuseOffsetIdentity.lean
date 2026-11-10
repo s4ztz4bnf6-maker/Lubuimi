@@ -3476,6 +3476,7 @@ a finite-cap-tree prefix whose terminal residue is represented by the
 actual Syracuse state. The state is a unit modulo the terminal modulus.
 This joins the finite-depth cap-tree and terminal-residue strands without
 turning the average energy estimate into a pathwise statement. -/
+-- Exact-head CI rerun after installing the audit workflow on main.
 theorem affine_minimal_counterexample_terminal_residue_cap_tree_bridge
     (n₀ : ℕ) (n A a : ℕ → ℕ)
     (hA0 : A 0 = 0)
