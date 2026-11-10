@@ -1067,8 +1067,14 @@ def canonicalTerminalResidue (A : ℕ → ℕ) (k : ℕ) : ZMod (3 ^ k) :=
 theorem canonicalTerminalResidue_isUnit (A : ℕ → ℕ) (k : ℕ)
     (hk : 0 < k) : IsUnit (canonicalTerminalResidue A k) := by
   unfold canonicalTerminalResidue
-  exact (canonicalOffset_isUnit_mod_three_pow A k hk).mul
-    (twoPow_isUnit_mod_threePow (A k) k).inv
+  have hC : IsUnit ((canonicalOffset A k : ℕ) : ZMod (3 ^ k)) :=
+    canonicalOffset_isUnit_mod_three_pow A k hk
+  have h2 : IsUnit ((2 ^ A k : ℕ) : ZMod (3 ^ k)) :=
+    twoPow_isUnit_mod_threePow (A k) k
+  have h2inv :
+      IsUnit (((2 ^ A k : ℕ) : ZMod (3 ^ k))⁻¹) :=
+    IsUnit.inv h2
+  exact IsUnit.mul hC h2inv
 
 /-- For an exact affine trajectory identity, the terminal state is precisely
 the canonical unit residue defined above. -/
