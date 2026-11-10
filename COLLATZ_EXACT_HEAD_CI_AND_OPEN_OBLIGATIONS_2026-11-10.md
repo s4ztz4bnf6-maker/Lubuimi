@@ -66,3 +66,12 @@ The named declaration outputs are:
 The completed Lean 4.35.0 log explicitly reports `Lean paranoid kernel accepts the solution`. The `sorryAx` guard passed for `SyracuseOffsetIdentity.lean`; no actual `sorryAx` dependency is reported for the two new declarations. This verifies these two named affine/parity lemmas on this exact source head and the listed toolchains only.
 
 The global Collatz conjecture remains open. The suffix-return premise still must be derived from deterministic Syracuse dynamics and minimality, and a separate well-founded descent/ranking or other infinite-branch exclusion is still required.
+## 7. Deterministic Syracuse one-step bridge — candidate
+
+After the parity and exact-exponent lemmas passed, a new declaration `affine_step_eq_syracuse_of_exact_exponent` was added to connect an affine transition with an odd quotient to the deterministic map `syracuse` already defined in `SyracuseReferenceTest.lean`.
+
+The first candidate source head `400307622c62488878c1fa00362d06bddfa54744` failed before the theorem body was checked: `SyracuseReferenceTest` was not a registered library root, so `SyracuseOffsetIdentity.lean` could not import the module. This was a build dependency-graph error, not a mathematical counterexample or proof failure.
+
+The dependency graph was corrected by adding `SyracuseReferenceTest` to the `CollatzAudit` library roots. Current candidate: PR [#55](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/55), exact head `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, workflow [42807396471](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42807396471). At the latest poll, Lean 4.34.1, Lean 4.35.0 paranoid, and `compile-drafts` were in progress. The one-step theorem remains **OFFEN – NICHT VERIFIZIERT** until those jobs pass and its named axiom output is inspected.
+
+If verified, the next target is the shifted-tail identity `syracuse^[k] (n j) = n (j+k)` by induction. That identity would let the minimality premise be applied to each actual shifted Syracuse orbit. The suffix-return implication itself and the infinite-branch exclusion would still remain separate obligations.
