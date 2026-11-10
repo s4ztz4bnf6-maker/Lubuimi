@@ -58,3 +58,52 @@ The universal Collatz gap is unchanged: show that the necessary state-dependent 
 The dyadic uniform-fibre cardinality identity remains a separate Lean-verified finite counting lemma at exact commit `a1becbc8e837f10abcd952a2e03832cb057fb2b8` / workflow [42738528207](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738528207). The full prefix-dependent cap/tree/interval/residue-atom bijection remains open.
 
 The APW4-to-Collatz transport checklist in §§2–3 remains mandatory and unchanged. No bridge is admitted without exact source/target atoms, index multiplicities, original weight preservation, diagonal identity, weighted Hall/BIB capacity, and strict positive margin. No historical APW4 definitions are retrofitted to the Syracuse setting.
+
+
+## 7. Terminal-residue congruence and the energy-transport test — 10 November 2026
+
+### 7.1 New exact Lean bridge from the affine offset identity
+
+The root Syracuse module now contains
+`CollatzSyracuseAudit.terminal_residue_congruence_of_affine_identity`
+at exact commit `db58a4054238e1a52ea935968dc96a7066de20d6`. The exact-head compile/axiom-audit workflow [42742247801](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42742247801) succeeded. The declaration has transitive axiom profile `[propext, Quot.sound]`, a subset of the standard profile, and the complete workflow log contains no `sorryAx`.
+
+The theorem states only the multiplicative congruence
+[
+(2^Amod 3^k)(n_kmod 3^k)=C_kmod 3^k
+]
+under the exact affine identity (2^A n_k=3^k n_0+C_k). It does **not** yet prove that (2^A) is a unit in (mathbb Z/3^kmathbb Z), does not derive the explicit inverse formula (	au_k=C_k2^{-A}), and does not prove that the terminal residue is a unit. Those are the next separate formal obligations.
+
+### 7.2 Exact finite-source energy model
+
+The standalone terminal-residue project PR #38 gives the exact source/place construction:
+- sources: (mathcal W_k=mathbb N_{>0}^k), with (w_alpha=2^{-A(alpha)});
+- places: (U_k=(mathbb Z/3^kmathbb Z)^	imes);
+- incidence: (alphamapsto	au_k(alpha)=C_k(alpha)2^{-A(alpha)}mod 3^k);
+- place masses: (m_k(t)=sum_{	au_k(alpha)=t}w_alpha);
+- energy: (E_k=sum_t m_k(t)^2=D_k+C_k^{m coll});
+- diagonal: (D_k=3^{-k});
+- off-diagonal: (C_k^{m coll}=sum_{alpha
+eeta,,	au_k(alpha)=	au_k(eta)}w_alpha w_eta);
+- finite-place Cauchy bound: (C_k^{m coll}ge 1/(2cdot3^k)).
+
+The finite (k=2) matrix computation is separately Lean-verified in PR #38; it is not the general countable-source energy proof.
+
+### 7.3 Why the proposed APW4-style transport is not yet a Collatz proof
+
+For a minimal counterexample reduction, a hypothetical non-descending trajectory would give an infinite valuation word whose every prefix remains above its starting value. Restricting the source family to finite prefixes satisfying the necessary signed-margin inequalities gives a possible *survival-energy* research object:
+[
+m_k^{m surv}(t)=
+sum_{substack{alphainmathcal W_k\
+alpha {m satisfies all prefix margin constraints}\
+	au_k(alpha)=t}}w_alpha,
+qquad
+E_k^{m surv}=sum_{tin U_k}m_k^{m surv}(t)^2.
+]
+This is only a proposed restricted measure until its prefix predicate and weights are formally tied to the exact signed-margin recurrence.
+
+The full-source collision lower bound is an average over all valuation words. It does not exclude one exceptional infinite word: the mass of a single length-(k) cylinder is (2^{-A(alpha)}), which tends to zero as the prefix length grows. Thus an average Cauchy bound, even when exact, cannot by itself exclude a single positive-integer orbit.
+
+A genuine Collatz off-diagonal transport would need a separately defined target place/capacity system, with a proved weighted Hall inequality for the surviving non-descending collision events and a capacity budget derived from the signed-margin or descent structure. Assigning each collision to its terminal residue and taking the capacity to be the resulting mass square merely restates (E_k^{m surv}); it gives no independent upper bound and no contradiction.
+
+**Decision:** the finite terminal-residue energy is retained as an exact, separate incidence model. The APW4-style transport analogy is useful as a design constraint, but no BIB-like Collatz capacity or global energy theorem is introduced until a non-tautological target capacity and the required Hall bound are constructed.
