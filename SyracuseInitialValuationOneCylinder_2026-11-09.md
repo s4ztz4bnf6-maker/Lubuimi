@@ -132,20 +132,20 @@ This manuscript records an independent proof and Lean formalization by Ta-Yoshua
 
 ## Positive margin implies strict descent
 
-For any certified prefix of length (j), the affine identity gives
-[
+For any certified prefix of length \(j\), the affine identity gives
+\[
 2^{A_j}n_j=3^j n_0+C_j.
-]
-If (D_j=2^{A_j}-C_j-3^j>0), then (C_j<2^{A_j}-3^j). Since (n_0ge1),
-[
+\]
+The recurrence \(C_0=0\), \(C_{j+1}=3C_j+2^{A_j}\) gives \(C_j\ge0\) for every \(j\) (and \(C_j>0\) for \(j\ge1\)). Put \(X=2^{A_j}-3^j\). If \(D_j=2^{A_j}-C_j-3^j>0\), then \(X>C_j\ge0\). Since \(n_0\ge1\), we have \(C_j<X\le Xn_0\), and hence
+\[
 3^j n_0+C_j < 3^j n_0+(2^{A_j}-3^j)n_0=2^{A_j}n_0.
-]
-Combining this with the affine identity and (2^{A_j}>0) yields (n_j<n_0). Thus positive signed margin is a sufficient strict-descent certificate for that realized prefix. This implication does not assert that every start has a prefix with positive margin.
+\]
+Combining this with the affine identity and \(2^{A_j}>0\) yields \(n_j<n_0\). Thus positive signed margin is a sufficient strict-descent certificate for that realized prefix. This implication does not assert that every start has a prefix with positive margin.
 
 ## Selected literature
 
 - R. Terras, “A stopping time problem on the positive integers,” *Acta Arithmetica* 30 (1976), no. 3, 241–252. [DOI](https://doi.org/10.4064/aa-30-3-241-252).
-- C. J. Everett, “Iteration of the number-theoretic function (f(2n)=n, f(2n+1)=3n+2),” *Advances in Mathematics* 25 (1977), no. 1, 42–45. [DOI](https://doi.org/10.1016/0001-8708(77)90087-1).
+- C. J. Everett, “Iteration of the number-theoretic function \(f(2n)=n,\ f(2n+1)=3n+2\),” *Advances in Mathematics* 25 (1977), no. 1, 42–45. [DOI](https://doi.org/10.1016/0001-8708(77)90087-1).
 - J. C. Lagarias, “The (3x+1) problem and its generalizations,” *The American Mathematical Monthly* 92 (1985), no. 1, 3–23, especially Theorem B. [DOI](https://doi.org/10.1080/00029890.1985.11971528).
 - T. Tao, “Almost all orbits of the Collatz map attain almost bounded values,” *Forum of Mathematics, Pi* 10 (2022), e12. [DOI](https://doi.org/10.1017/fmp.2022.8). Proposition 1.9 is cited only for its conditional approximate-distribution statement for finite Syracuse valuation vectors, not as the exact parity-vector bijection.
 
