@@ -331,3 +331,24 @@ The next global proof obligation remains to derive the suffix-return premise fro
 
 
 The separate manuscript and exact-head verification addendum is recorded in [COLLATZ_MANUSCRIPT_AND_CI_ADDENDUM_2026-11-10.md](COLLATZ_MANUSCRIPT_AND_CI_ADDENDUM_2026-11-10.md). It preserves the published finite valuation-word cylinder theorem and states the remaining deterministic-tail/minimality obligation.
+
+
+## Terminal-residue / finite-cap-tree scale bridge — proof-script correction, 10 November 2026
+
+The exact scale estimate and residue representative theorem are present in the source:
+- `syracuse_step_scale_inequality`: (2(n_{j+1}+1)\le 3(n_j+1)).
+- `syracuse_iterate_dyadic_ternary_scale_bound): (2^j(n_j+1)\le 3^j(n_0+1)).
+- `syracuse_iterate_lt_terminal_modulus): if (n_0+1<2^j), then (n_j<3^j).
+- `canonicalTerminalResidue_val_eq_actual_iterate): at that depth the canonical terminal residue has the actual iterate as its least nonnegative representative.
+- `affine_minimal_counterexample_terminal_residue_cap_tree_bridge): combines finite-cap-tree membership, the terminal-residue unit condition, and the representative identity.
+
+The first integration head `1ad0cf18bb8d2fd8a76376cb3768fd3b60bc6a7c` failed workflow [42812961296](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42812961296) at the normalization step: the proof used `rw [← hn0eq]` although `hn0eq : n 0 = n₀) must normalize the target (n 0+1<2^j) from the hypothesis (n₀+1<2^j). The diagnostic showed the rewrite searched for (n₀) in the target, where only (n 0) occurred.
+
+The current candidate replaces that rewrite with:
+```lean
+have hdepth' : n 0 + 1 < 2 ^ j := by
+  simpa [hn0eq] using hdepth
+```
+This is the directionally correct simplification. Candidate source branch: `collatz/terminal-residue-cap-tree-bridge-simpa-v4-2026-11-10`; current exact-head refresh commit: `ad40af22c1b2c8322616dec94c09d98b73e3eabb`. **OFFEN – NICHT VERIFIZIERT:** no exact-head workflow has yet been returned for this candidate. The failed run is retained as history and does not alter earlier verified finite-cap or minimality lemmas.
+
+Even after this bridge compiles, it only identifies the terminal residue with the actual orbit value at sufficiently large depth. It does not exclude an infinite branch or prove global Collatz termination.
