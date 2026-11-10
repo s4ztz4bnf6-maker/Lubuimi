@@ -3179,7 +3179,6 @@ at least n₀ at every time. The proof shifts the path at a hypothetical
 lower iterate; it does not assume a separate suffix-return theorem. -/
 theorem orbit_lower_bound_of_minimal_nonterminating_odd_path
     (n₀ : ℕ) (n : ℕ → ℕ)
-    (hstart : n 0 = n₀)
     (hodd : ∀ j, n j % 2 = 1)
     (hstep : ∀ j, ∃ b, 0 < b ∧
       2 ^ b * n (j + 1) = 3 * n j + 1)
@@ -3219,7 +3218,6 @@ theorem minimal_nonterminating_path_prefix_mem_finiteCapTree
     (hoffset :
       ∀ j, 2 ^ A j * n j =
         3 ^ j * n₀ + canonicalOffset A j)
-    (hstart : n 0 = n₀)
     (hodd : ∀ j, n j % 2 = 1)
     (hstep : ∀ j,
       2 ^ (a j) * n (j + 1) = 3 * n j + 1)
@@ -3230,7 +3228,7 @@ theorem minimal_nonterminating_path_prefix_mem_finiteCapTree
   apply initial_lower_bounded_orbit_prefix_mem_finiteCapTree
     n₀ n A a hA0 hA ha hn₀ hoffset
   exact orbit_lower_bound_of_minimal_nonterminating_odd_path
-    n₀ n hstart hodd
+    n₀ n hodd
     (fun j => ⟨a j, ha j, hstep j⟩) hnever hminimal
 
 /-- At each positive depth, a minimal nonterminating odd path has both
@@ -3244,7 +3242,6 @@ theorem minimal_nonterminating_path_prefix_cap_tree_and_terminal_unit
     (hoffset :
       ∀ j, 2 ^ A j * n j =
         3 ^ j * n₀ + canonicalOffset A j)
-    (hstart : n 0 = n₀)
     (hodd : ∀ j, n j % 2 = 1)
     (hstep : ∀ j,
       2 ^ (a j) * n (j + 1) = 3 * n j + 1)
