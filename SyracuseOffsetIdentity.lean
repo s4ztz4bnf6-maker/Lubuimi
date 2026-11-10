@@ -978,6 +978,47 @@ theorem terminal_residue_congruence_of_affine_identity
 
 #print axioms terminal_residue_congruence_of_affine_identity
 
+
+/-- Every power of 2 is a unit modulo every power of 3. -/
+theorem twoPow_isUnit_mod_threePow (A k : ℕ) :
+    IsUnit (2 ^ A : ZMod (3 ^ k)) := by
+  rw [ZMod.isUnit_iff_coprime]
+  exact Nat.Coprime.pow_right k
+    (Nat.Coprime.pow_left A (by decide : Nat.Coprime 2 3))
+
+/-- The explicit terminal-residue formula follows from the affine identity:
+the inverse is justified by the independently proved coprimality of 2^A
+and 3^k. -/
+theorem terminal_residue_eq_offset_mul_inv_of_affine_identity
+    (k A n₀ nₖ C : ℕ)
+    (hidentity : 2 ^ A * nₖ = 3 ^ k * n₀ + C) :
+    (nₖ : ZMod (3 ^ k)) =
+      (C : ZMod (3 ^ k)) * (2 ^ A : ZMod (3 ^ k))⁻¹ := by
+  have hcop : Nat.Coprime (2 ^ A) (3 ^ k) :=
+    Nat.Coprime.pow_right k
+      (Nat.Coprime.pow_left A (by decide : Nat.Coprime 2 3))
+  have hinv :
+      (2 ^ A : ZMod (3 ^ k)) * (2 ^ A : ZMod (3 ^ k))⁻¹ = 1 :=
+    ZMod.coe_mul_inv_eq_one _ hcop
+  have hinv' :
+      (2 ^ A : ZMod (3 ^ k))⁻¹ * (2 ^ A : ZMod (3 ^ k)) = 1 := by
+    simpa [mul_comm] using hinv
+  have hcong :=
+    terminal_residue_congruence_of_affine_identity k A n₀ nₖ C hidentity
+  calc
+    (nₖ : ZMod (3 ^ k)) = 1 * (nₖ : ZMod (3 ^ k)) := by simp
+    _ = ((2 ^ A : ZMod (3 ^ k))⁻¹ *
+          (2 ^ A : ZMod (3 ^ k))) * (nₖ : ZMod (3 ^ k)) := by
+      rw [hinv']
+    _ = (2 ^ A : ZMod (3 ^ k))⁻¹ *
+          ((2 ^ A : ZMod (3 ^ k)) * (nₖ : ZMod (3 ^ k)) := by ring
+    _ = (2 ^ A : ZMod (3 ^ k))⁻¹ * (C : ZMod (3 ^ k)) := by
+      rw [hcong]
+    _ = (C : ZMod (3 ^ k)) * (2 ^ A : ZMod (3 ^ k))⁻¹ := by ring
+
+#print axioms twoPow_isUnit_mod_threePow
+#print axioms terminal_residue_eq_offset_mul_inv_of_affine_identity
+
 end CollatzSyracuseAudit
 
 
