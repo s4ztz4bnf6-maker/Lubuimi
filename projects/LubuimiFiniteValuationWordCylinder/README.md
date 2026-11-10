@@ -43,3 +43,8 @@ A concrete Lean declaration for the exact word (1,2) has been added to the Syrac
 The unified Syracuse/Collatz root audit now includes the concrete mixed word (1,2). Declaration `CollatzSyracuseAudit.realizesValuationWord12_iff_mod_sixteen_eleven` proves that there exist odd quotients n₁,n₂ with 2n₁=3n+1 and 4n₂=3n₁+1 if and only if n≡11 (mod 16). Exact-head workflow 42736159935 passed on commit `56c6d6d86fb5122d75f89f5e614f7f333e2d31a9`; the declaration prints [propext, Classical.choice, Quot.sound], and the completed checked logs have no actual `sorryAx` hit.
 
 This formally verifies one nontrivial finite word and its exact residue cylinder. It is consistent with the B=1023 Kolaz example 731→1097→823, but does not yet prove the general finite-word theorem, its density corollary, or the finite tail-cylinder partition. Those remain open Lean formalization tasks.
+
+
+## Terminal exactness backward-step design — 10 November 2026
+
+A local one-step implication has now been derived from the existing affine accumulator recursion: terminal exactness at `k+1`, together with `a k ≥ 1`, forces exactness at `k`. The proof uses divisibility by `2^(A_k+1)`, coprime cancellation for `3` and `2^A_k`, and an explicit odd-quotient argument. The derivation and intended Lean signature are recorded in the companion research branch at [SYRACUSE_TERMINAL_EXACT_BACKWARD_STEP_2026-11-10.md](https://github.com/s4ztz4bnf6-maker/Lubuimi/blob/collatz/terminal-exact-backward-step-2026-11-10/research/SYRACUSE_TERMINAL_EXACT_BACKWARD_STEP_2026-11-10.md). This is a proof design, not a Lean result; the one-step declaration and finite backward induction remain **OFFEN – NICHT VERIFIZIERT**.
