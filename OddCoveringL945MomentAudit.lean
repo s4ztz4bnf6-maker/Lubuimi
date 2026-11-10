@@ -68,8 +68,9 @@ theorem coprimePairs_card_eq_16 :
 
 theorem coprimePairDensity_eq_74_over_315 :
     coprimePairDensity = (74 : ℚ) / 315 := by
+  unfold coprimePairDensity
   rw [coprimePairs_eq_expected]
-  norm_num [coprimePairDensity, expectedCoprimePairs]
+  norm_num [expectedCoprimePairs]
 
 theorem coprimeTriples_card_eq_3 :
     coprimeTriples.card = 3 := by
@@ -78,8 +79,9 @@ theorem coprimeTriples_card_eq_3 :
 
 theorem coprimeTripleDensity_eq_13_over_945 :
     coprimeTripleDensity = (13 : ℚ) / 945 := by
+  unfold coprimeTripleDensity
   rw [coprimeTriples_eq_expected]
-  norm_num [coprimeTripleDensity, expectedCoprimeTriples]
+  norm_num [expectedCoprimeTriples]
 
 #print axioms coprimePairs_eq_expected
 #print axioms coprimeTriples_eq_expected
