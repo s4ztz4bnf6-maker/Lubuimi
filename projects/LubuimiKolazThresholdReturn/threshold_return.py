@@ -98,13 +98,30 @@ def trace_excursion(B: int, x: int) -> dict | None:
             }
 
 
+def escape_source_characterization(B: int) -> list[int]:
+    """Exact source-set criterion: x=3 mod 4 and 2B<=3x+1."""
+    if B <= 0 or B % 2 == 0:
+        raise ValueError("B must be a positive odd threshold")
+    return [x for x in range(3, B, 4) if 2 * B <= 3 * x + 1]
+
+
+def power_two_threshold_source_count(k: int) -> int:
+    """Exact count |E_(2^k-1)| = floor(2^k/12), for k>=2."""
+    if k < 2:
+        raise ValueError("k must be at least 2")
+    B = 2**k - 1
+    return (B + 1) // 12
+
+
 def analyze_threshold(B: int) -> list[dict]:
-    """Enumerate all positive odd x<B with T(x)>=B."""
-    return [
-        row
-        for x in range(1, B, 2)
-        if (row := trace_excursion(B, x)) is not None
-    ]
+    """Enumerate all positive odd x<B with T(x)>=B via the exact source criterion."""
+    rows = []
+    for x in escape_source_characterization(B):
+        row = trace_excursion(B, x)
+        if row is None:
+            raise AssertionError("source characterization produced a non-escape")
+        rows.append(row)
+    return rows
 
 
 def common_suffix(path_a: list[int], path_b: list[int]) -> list[int]:
