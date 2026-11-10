@@ -306,3 +306,23 @@ which is exactly the previously recorded one-step signed-margin recovery thresho
 ## Publication summary and scope
 
 The main theorem and finite tail partition are fully proved in this manuscript. The explicit affine residue formula and worked examples make the classification constructive. The local tail-margin corollary gives a finite pruning rule: for each fixed prefix, all sufficiently high next valuations lie in one exact tail cylinder and force descent; only finitely many lower next valuations remain to be analyzed. This is a genuine local arithmetic descent certificate, not a global Collatz proof. The general finite-word theorem, finite partition and tail-margin corollary remain pending Lean formalization and exact-commit kernel audit. The all-one special case retains its six independent successful CI snapshots.
+
+## 13. Exact valuation cap along a hypothetical non-descending path
+
+The local tail certificate has a useful contrapositive. Let a realized prefix have length k, cumulative exponent A, offset C, and signed margin D=2^A-C-3^k. If the next exact valuation is b, then
+\[
+D_{k+1}=3D+(2^b-4)2^A.
+\]
+If the next accelerated odd iterate does not fall below the initial value, i.e. n_{k+1}≥n_0, then D_{k+1}≤0, since positive next margin implies strict descent. Hence every such non-descending extension must satisfy the exact integer inequality
+\[
+\boxed{2^{A+b}+3D\le 4\cdot2^A.}
+\]
+Equivalently, its next valuation belongs to the finite set
+\[
+\mathcal B(A,D)=\{b\in\mathbb N: b\ge1,\ 2^{A+b}+3D\le4\cdot2^A\}.
+\]
+This set is finite for every fixed prefix because the left-hand power of two tends to infinity with b. If the set is empty, every possible next valuation forces strict descent below n_0.
+
+By strong induction on the positive odd starting value, any hypothetical counterexample to eventual termination must remain at least as large as its initial value at every accelerated odd iterate: once an iterate falls below n_0, the induction hypothesis gives termination of that smaller positive odd integer. Therefore a hypothetical counterexample determines an infinite path through the prefix tree in which, at every node (A,D), the next letter b is restricted to the finite set \(\mathcal B(A,D)\).
+
+This is a stronger structural reduction than merely saying that a sufficiently high valuation descends: it gives an explicit finite branching rule for every hypothetical non-descending trajectory. It still does not rule out an infinite path through the resulting state-dependent finite sets. The remaining global problem is to prove that this constrained tree has no infinite realized path, or to derive a uniform arithmetic obstruction from its recurrence.
