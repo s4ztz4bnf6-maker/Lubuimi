@@ -32,6 +32,6 @@ This is a genuine finite-place second-moment theorem for Syracuse valuation word
 
 ## Verification boundary
 
-The collision-energy and Markov-matrix results are mathematical manuscript derivations. They are not yet Lean-compiled or axiom-audited. The initial all-one cylinder theorem and the offset/margin modules have separate successful Lean audits; those do not certify this manuscript.
+The general collision-energy and Markov-matrix theorems remain mathematical manuscript derivations and are not yet Lean-compiled or axiom-audited. A separate finite k=2 matrix/distribution/energy module has been submitted for exact-head Lean audit on the Syracuse/Collatz branch; see the formalization-route addendum. It is not yet verified. The initial all-one cylinder theorem and the offset/margin modules have separate successful Lean audits; those do not certify this manuscript.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
