@@ -207,3 +207,23 @@ No Lean compile, kernel check, or axiom audit is claimed for this new collision-
 
 **Ta-Yoshua Lubuimi**  
 Copyright © 2026 Ta-Yoshua Lubuimi. All rights reserved in the author's original expression and code, subject to applicable law, third-party rights and the repository's licensing notices.
+
+## 7. The explicit \(k=2\) transition matrix
+
+For \(k=2\), the unit state space is \(U_2=\{1,2,4,5,7,8\}\), \(\varphi(9)=6\), and the denominator in every transition probability is \(2^6-1=63\). In the column order \(1,2,4,5,7,8\), the initial row and the two distinct unit-state row types are
+
+| State \(x\) | \(63P_2(x,1)\) | \(63P_2(x,2)\) | \(63P_2(x,4)\) | \(63P_2(x,5)\) | \(63P_2(x,7)\) | \(63P_2(x,8)\) |
+|---|---:|---:|---:|---:|---:|---:|
+| \(0\) | 1 | 2 | 4 | 32 | 16 | 8 |
+| \(x\equiv1\pmod3\) | 16 | 32 | 1 | 8 | 4 | 2 |
+| \(x\equiv2\pmod3\) | 4 | 8 | 16 | 2 | 1 | 32 |
+
+Each row sums to \(63\), so after division by \(63\) this is a row-stochastic rational transition matrix. Applying the initial row twice gives
+\[
+m_2=\frac1{63}(8,16,11,4,2,22)
+\]
+in the same state order, and therefore
+\[
+E_2=\sum_{t\in U_2}m_2(t)^2=\frac5{21}.
+\]
+This table makes the finite-state representation directly reproducible without iterating over an infinite word family.
