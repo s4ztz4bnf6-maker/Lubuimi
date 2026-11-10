@@ -2907,8 +2907,8 @@ theorem finiteCapPrefixState_eq_actual
         canonicalOffset, signedOffsetMargin, hA0]
   | succ j ih =>
       rw [valuationPrefix, finiteCapPrefixState_append_singleton, ih]
-      simp [finiteCapExtendState, hA j, canonicalOffset,
-        signedOffsetMargin_succ]
+      simp [finiteCapExtendState, hA j, canonicalOffset]
+      rw [signedOffsetMargin_succ A a hA j]
 
 /-- The integer margin cap converted into a natural finite branching bound. -/
 def finiteCapBoundState (s : FiniteCapPrefixState) : ℕ :=
@@ -3221,7 +3221,7 @@ theorem syracuse_iterate_lt_terminal_modulus
       _ = 2 ^ j * 3 ^ j := Nat.mul_comm _ _
   have hsmall :
       n j + 1 < 3 ^ j :=
-    (Nat.mul_lt_mul_left (pow_pos (by omega : 0 < (2 : ℕ)) j)).mp hprod
+    (Nat.mul_lt_mul_left (2 ^ j)).mp hprod
   omega
 
 /-- At every depth with 2^j > n₀+1, the canonical terminal residue
