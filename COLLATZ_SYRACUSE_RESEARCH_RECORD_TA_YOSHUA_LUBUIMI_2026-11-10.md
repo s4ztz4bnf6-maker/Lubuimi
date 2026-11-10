@@ -762,3 +762,8 @@ PR #59 / head `5f6e46de8bed7061f8336089857143c54e997af5` is the focused repair. 
 ## Latest PR #59 exact-head CI poll — 10 November 2026
 
 Workflow 42809750956 has started on head `5f6e46de8bed7061f8336089857143c54e997af5`: compile-drafts is in progress, Lean 4.34.1 and Lean 4.35.0 paranoid are queued. The new proof repairs remain candidates until all three exact-head jobs complete and named axiom/no-`sorryAx` evidence is inspected.
+
+
+## Parallel minimality proof-script candidates — 10 November 2026
+
+Two independent Lean proof-script variants now address the PR #56 errors. PR #58 head `a2eea6f3c979e25a705c3da60d09d6ec84a41b7f` (workflow 42809723676) and PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5` (workflow 42809750956) both have compile, Lean 4.34.1, and Lean 4.35.0 paranoid jobs in progress. They share the same mathematical argument; the final contradiction is discharged by `omega` in #58 and by `Nat.lt_of_not_ge` in #59. No new theorem is claimed from these uncompleted candidates.
