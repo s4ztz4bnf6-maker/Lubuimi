@@ -19,11 +19,13 @@ The exact integer-only implementation reproduces:
 - 21 for B=255;
 - 42 for B=511;
 - 85 for B=1023;
-- 170 for B=2047.
+- 170 for B=2047;
+- 341 for B=4095;
+- 682 for B=8191.
 
-The extended B=511, B=1023 and B=2047 tables are preserved row-by-row in CSV and checked against fresh enumeration by the regression suite. The B=1023 source x=731 also gives a checked exact valuation word (1,2), cylinder residue 11 mod 16, affine offset identity 8·823=9·731+5, and two signed-margin cap inequalities.
+The extended B=511, B=1023, B=2047, B=4095 and B=8191 tables are preserved row-by-row in CSV and checked against fresh enumeration by the regression suite. The B=1023 source x=731 also gives a checked exact valuation word (1,2), cylinder residue 11 mod 16, affine offset identity 8·823=9·731+5, and two signed-margin cap inequalities.
 
-It reproduces every row in the manuscript tables and both extended CSV files. The maximum excursion lengths at B=31,63,127,255,511,1023,2047 are 36,32,25,18,24,50,50; the maximum heights are 3077,3077,3077,3077,13121,83501,425645. These statements are restricted to the enumerated source sets.
+It reproduces every row in the manuscript tables and both extended CSV files. The maximum excursion lengths at B=31,63,127,255,511,1023,2047,4095,8191 are 36,32,25,18,24,50,50,30,45; the maximum heights are 3077,3077,3077,3077,13121,83501,425645,425645,2717873. These statements are restricted to the enumerated source sets.
 
 ## 3. Confluence result
 
@@ -33,7 +35,7 @@ The most substantial structural observation is the nested common suffix:
 - that path enters the B=255 z0=377 path;
 - the B=255 z0=335 and z0=359 paths join the same terminal route at 425 and 911 respectively.
 
-The shared terminal suffix from 155 to 61 is printed explicitly in the manuscript. The extended B=511 and B=1023 tables add two exact common suffixes of lengths 10 and 7; B=1023 to B=2047 adds exact shared suffixes of lengths 49 and 45. All are checked by regression tests. This is a genuine finite confluence result, not an extrapolation.
+The shared terminal suffix from 155 to 61 is printed explicitly in the manuscript. The extended B=511 and B=1023 tables add two exact common suffixes of lengths 10 and 7; B=1023 to B=2047 adds exact shared suffixes of lengths 49 and 45; B=4095 to B=8191 adds a 29-term suffix. All are checked by regression tests. This is a genuine finite confluence result, not an extrapolation.
 
 ## 4. Limitations
 
