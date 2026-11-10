@@ -92,3 +92,15 @@ Even if this bridge passes, it only shows that a hypothetical least odd nontermi
 PR [#58](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/58) fixes the three exact errors from PR #56: it adds a local `classical` declaration for `Nat.find`, explicitly names `hoddj`, and proves the lower bound directly from suffix return and `hnever` rather than forward-referencing a later theorem.
 
 Current exact source head `a2eea6f3c979e25a705c3da60d09d6ec84a41b7f`; workflow [42809723676](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809723676) was queued at the latest poll. The shifted-tail, least-start, suffix-return, lower-bound, and renamed-cylinder declarations remain **OFFEN – NICHT VERIFIZIERT** until all exact-head jobs, named axiom outputs, and no-`sorryAx` checks pass.
+## PR #58 exact-head progress — partial checks passed
+
+PR #58 exact source head `a2eea6f3c979e25a705c3da60d09d6ec84a41b7f`, workflow [42809723676](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809723676): Lean 4.34.1 kernel/build **PASS**; Lean 4.35.0 paranoid kernel **PASS**; `compile-drafts` was still in progress at the latest poll.
+
+The Lean 4.34.1 log prints the following declaration profiles, all with no `sorryAx` in the named output:
+
+- `initial_valuation_one_cylinder_iff_dyadic_divisibility`: `[propext, Classical.choice, Quot.sound]`.
+- `affine_trajectory_eq_syracuse_iterate`: `[propext, Classical.choice, Quot.sound]`.
+- `affine_suffix_returns_of_least_odd_nonterminating_start`: `[propext, Classical.choice, Quot.sound]`.
+- `affine_minimal_counterexample_orbit_lower_bound`: `[propext, Classical.choice, Quot.sound]`.
+
+The paranoid log explicitly says `Lean paranoid kernel accepts the solution` and the `sorryAx` guard passed. The `exists_least_odd_nonterminating_syracuse_start` declaration did not yet have its own explicit `#print axioms` line; audit-only PR #62 adds that print command and therefore requires a fresh exact-head run. Do not call the whole three-job workflow complete until `compile-drafts` finishes and the audit-only follow-up has its own run.
