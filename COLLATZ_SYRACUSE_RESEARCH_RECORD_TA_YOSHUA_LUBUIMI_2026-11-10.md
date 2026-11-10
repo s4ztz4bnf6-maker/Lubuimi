@@ -757,3 +757,8 @@ PR #56's shifted-tail identity compiled with standard profile `[propext, Classic
 The neutral cylinder identifier printed `[propext, Classical.choice, Quot.sound]` in the partial build log, but because the full module failed later this is not accepted as a complete exact-head verification. The historical identifier's prior successful audits remain scoped to their own commits.
 
 PR #59 / head `5f6e46de8bed7061f8336089857143c54e997af5` is the focused repair. It has no visible exact-head workflow at the latest poll. The global nontermination exclusion remains a separate open obligation.
+
+
+## Latest PR #59 exact-head CI poll — 10 November 2026
+
+Workflow 42809750956 has started on head `5f6e46de8bed7061f8336089857143c54e997af5`: compile-drafts is in progress, Lean 4.34.1 and Lean 4.35.0 paranoid are queued. The new proof repairs remain candidates until all three exact-head jobs complete and named axiom/no-`sorryAx` evidence is inspected.
