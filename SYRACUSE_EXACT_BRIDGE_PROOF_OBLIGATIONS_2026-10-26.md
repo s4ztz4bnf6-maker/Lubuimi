@@ -34,3 +34,8 @@ Earlier exact-integer regression tested 180 valuation words (length 1–4, entri
 3. Prove positivity and oddness of every odd-only iterate.
 4. Check the N=0 case explicitly: the empty valuation word expands to the one-bit terminal prefix 1 only if the starting odd state is the chosen endpoint; otherwise define the zero-step convention separately and consistently.
 5. Do not claim Collatz convergence from this representation lemma.
+
+
+## New local backward-exactness lemma — 10 November 2026
+
+The one-step implication from terminal exactness at `k+1` to exactness at `k` is derived in [the dedicated proof note](research/SYRACUSE_TERMINAL_EXACT_BACKWARD_STEP_2026-11-10.md). It uses only the accumulator recursion and `1 ≤ a k`; no orbit step equations are needed for this local implication. The Lean theorem and finite backward induction remain unimplemented and unverified. This does not close the general finite-word realization or tail-partition obligations.
