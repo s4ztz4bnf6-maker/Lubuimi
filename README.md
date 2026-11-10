@@ -62,3 +62,17 @@ for `B ≤ Bstar`, and the dyadic cardinalities
 `card (tailBlock Bstar B) = 2 ^ (Bstar - B)`.
 
 **Scope boundary:** this module has not yet formalized the finite surviving-level tree, the construction of `Bstar` as the maximum cap on that level, pairwise disjointness of all child blocks, rational mass/proportion identities, or the residue-cylinder refinement bijection. It does not identify these atoms with historical APW4 events/BIB slots and does not exclude an infinite surviving path. The authoritative branch `collatz/valuation-cylinders-2026-10-26` remains unchanged; this is a separate candidate branch.
+
+
+### Follow-up: child-region / tail disjointness kernel-verified
+
+The formalization was extended at exact source commit `c7a6d1c19fe6d8541871064413b0c5e558ed1524`. GitHub Actions run `42862468237` completed successfully under Lean 4.34.1 / Mathlib 4.34.1. The declared library, dedicated finite-fibre axiom audit, all other named modules, and the explicit project axiom report passed.
+
+Two additional declarations were checked:
+
+- `SyracuseUniformFibre.mem_childBlocks_lt_tailLower`
+- `SyracuseUniformFibre.childBlocks_disjoint_tail`
+
+Both have profile `[propext, Classical.choice, Quot.sound]`; no `sorryAx` occurs in their transitive axiom reports. Thus the combined retained-child region is now proved disjoint from the terminal tail.
+
+**Still open:** pairwise disjointness of the individual child blocks within `childBlocks`, finite surviving-level construction and maximum cap, rational mass identities, and the residue-cylinder refinement bijection. Do not call the full family a disjoint partition until the internal child-block disjointness theorem is also established.
