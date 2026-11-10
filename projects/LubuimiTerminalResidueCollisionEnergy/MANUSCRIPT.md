@@ -227,3 +227,10 @@ in the same state order, and therefore
 E_2=\sum_{t\in U_2}m_2(t)^2=\frac5{21}.
 \]
 This table makes the finite-state representation directly reproducible without iterating over an infinite word family.
+
+
+## Exact-head Lean verification addendum — 10 November 2026
+
+The standalone finite k=2 terminal-residue module passed exact-head pull-request workflow [42744750457](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42744750457) on commit `a4775db22e2ff774aa6992441da8e70673298e41`, using Lean 4.35.0 and Mathlib v4.35.0. The build completed 9,048 jobs. The seven declarations `initialRow_sum`, `rowOne_sum`, `rowTwo_sum`, `transitionRow_sum`, `twoStepNumerator_eq`, `twoStepMass_eq`, and `twoStepEnergy_eq_five_div_twentyOne` all reported [propext, Classical.choice, Quot.sound]. The full log contained no actual `sorryAx` hit. The `lake check --paranoid` step completed and printed “Lean paranoid kernel accepts the solution”; its summary reported “checked 0 declarations”, which is recorded as a limitation of the reported check count.
+
+The verified finite result is the exact two-step terminal distribution (8,16,11,4,2,22)/63 on the six unit residues modulo 9, with second moment 5/21. This does not formalize the general k-state Markov theorem, the infinite-word source-moment identity, the truncation/tail limit, or any APW4/BIB transport. Earlier candidate-status and “no Lean verification” statements are historical snapshots and are superseded only for this finite k=2 module.
