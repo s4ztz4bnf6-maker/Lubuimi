@@ -395,3 +395,8 @@ Following the exact-head PASS for `affine_step_eq_syracuse_of_exact_exponent` at
 Exact candidate head `1fd204750a1088efbf5e81b40b9ad95962fdb2ed`, workflow 42808379459, was in progress at the latest poll. The new declarations remain unverified until all exact-head jobs, named axiom outputs, and no-`sorryAx` checks pass.
 
 This bridge does not rule out the existence of a least odd nonterminating start. The global infinite-trajectory/infinite-branch exclusion remains open.
+## Neutral cylinder identifier and refreshed shifted-tail head — 10 November 2026
+
+The initial valuation-one cylinder declaration is renamed in the continuation candidate to `initial_valuation_one_cylinder_iff_dyadic_divisibility`. The proposition and proof are unchanged. Earlier CI records verify the prior source identifier only and must not be represented as verification of the renamed declaration.
+
+PR #56 now includes the rename together with the shifted-tail, least-start, suffix-return, and minimal-counterexample lower-bound declarations. Current exact head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow 42808797159, queued at latest poll. No fresh verification claim is made until all exact-head jobs and axiom/no-`sorryAx` gates pass.
