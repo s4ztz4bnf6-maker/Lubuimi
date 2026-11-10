@@ -44,3 +44,8 @@ The research exposition and Lean formalization are by **Ta-Yoshua Lubuimi**. AI 
 ## Current Lean declaration and exact-head audit — 10 November 2026
 
 The neutral declaration `initial_valuation_one_cylinder_iff_dyadic_divisibility` is located at `SyracuseOffsetIdentity.lean:2603`, exact source commit `5f6e46de8bed7061f8336089857143c54e997af5`. Workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956) passed Lean 4.34.1, `compile-drafts`, and Lean 4.35.0 paranoid. Its named transitive profile is `[propext, Classical.choice, Quot.sound]`; the no-`sorryAx` guard passed. The seven earlier successful workflows apply to the historical identifier and remain recorded as such; they are not transferred to the neutral declaration. The arbitrary finite-word theorem and tail partition remain separate formalization targets.
+
+
+## Review reconciliation — 10 November 2026
+
+The supplied editorial comments have been checked against the current manuscript. The exact changes and their source locations are recorded in [REVIEW_RECONCILIATION_2026-11-10.md](REVIEW_RECONCILIATION_2026-11-10.md): corrected mathematical typesetting, the explicit implication from positive signed margin to descent below the start, neutral “exact initial run length” terminology, removal of irrelevant cross-project references, and a scoped Lean evidence section. The general finite-word theorem remains a separate unverified Lean target; no global Collatz proof is claimed.
