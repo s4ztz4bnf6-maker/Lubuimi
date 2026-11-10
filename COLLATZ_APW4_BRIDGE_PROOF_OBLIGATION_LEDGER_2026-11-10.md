@@ -267,3 +267,20 @@ On source head `e1fb06eaa07190d8abfb3fc7368f3dc0663a5a66`, workflow [42754461228
 - `kernel-check-lean-434`: **FAIL** only at the final command `lake check`, with exact error `unknown command 'check'`. The Lean 4.34.1 build had completed, but this Lake version does not expose that command. This is a workflow/toolchain command-availability failure, not a failed mathematical theorem or a kernel counterexample. The Lean 4.35.0 paranoid PASS remains valid on its exact source commit.
 
 The PR branch later advanced through documentation-only commits to `022f019d9673e5fa5e7e7642324b7f373d689599). The new exact-head run for that later documentation head was queued; the source-code PASS above remains scoped to `e1fb06e...`.
+
+
+## Published valuation-word cylinder and standalone finite-energy audits — 10 November 2026
+
+### PR #36 — published finite valuation-word cylinder theorem
+
+The standalone manuscript project is published in PR #36 (head `ed2348b427dd89f5c3ca0787037247b16d1cf916`). Its theorem states that every finite exact accelerated-Syracuse valuation word with cumulative exponent (A) is realized by one unique odd residue class modulo (2^{A+1}), with relative natural density (2^{-A}) among odd starts. The manuscript records the recursive existence/uniqueness proof, explicit residue formula from the affine offset cocycle, exact parent/child mass identity, and finite truncation into exact children plus one explicit tail cylinder. This theorem is an established mathematical result and is not reopened by the later Lean integration work.
+
+The Lean route is separately tracked. The exact mixed word ((1,2)) has its own declaration and prior exact-head compile evidence; the arbitrary-word manuscript theorem is not to be conflated with a full Lean formalization of every word or the finite-depth APW4 historical bridge.
+
+### PR #38 — terminal-residue k=2 energy
+
+Standalone PR #38 head `a4775db22e2ff774aa6992441da8e70673298e41` passed exact workflow [42744750457](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42744750457): library build, seven named axiom audits, forbidden-`sorryAx` guard and paranoid kernel check all succeeded. The seven declarations for the initial row, row-one, row-two, transition row, two-step numerator, two-step mass and exact energy (5/21) print `[propext, Classical.choice, Quot.sound]). This is the exact finite k=2 terminal-residue energy result, not a global Collatz proof.
+
+### PR #39 — Kolaz finite archive
+
+PR #39 exact finite-table/confluence workflow [42739986917](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42739986917) passed. Its evidence is exact finite integer computation and archive reproducibility, not Lean kernel verification or a uniform infinite bound.
