@@ -59,3 +59,8 @@ The standalone terminal-residue k=2 module passed Lean 4.35.0 workflow 427357168
 ### Exact mixed-word Lean result — 10 November 2026
 
 The specific valuation word (1,2) is now formally verified by declaration realizesValuationWord12_iff_mod_sixteen_eleven in workflow 42736159935 on exact source commit 56c6d6d86fb5122d75f89f5e614f7f333e2d31a9. It is equivalent to n ≡ 11 mod 16, has standard transitive axiom profile [propext, Classical.choice, Quot.sound], and the completed log contains no actual sorryAx. This is a verified special case only; arbitrary finite words and the tail partition remain open Lean targets.
+
+
+### Finite-depth APW4-style uniform-fibre bridge
+
+See [SYRACUSE_FINITE_DEPTH_UNIFORM_FIBRE_BRIDGE_2026-11-10.md](SYRACUSE_FINITE_DEPTH_UNIFORM_FIBRE_BRIDGE_2026-11-10.md). The exact cap and dyadic child/tail partition yield a common uniform finite fibre at every fixed depth, with prefix-dependent distinguished proportion 1-2^-B_α. This is a mathematical bridge candidate, not yet Lean-formalized and not the historical APW4/BIB incidence map.
