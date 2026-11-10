@@ -125,3 +125,18 @@ The APW4 analogy remains a design heuristic only. The terminal-residue places an
 The PR #38 finite `k=2` collision-energy computation has a completed exact-head audit [42743051889](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42743051889): 9,048 build jobs completed; all printed named declarations have the standard axiom profile; the only textual occurrences of `sorryAx` in the workflow log are the shell guard that rejects it, not declaration output. The exact value is `twoStepEnergy = 5/21` for the six unit residues modulo 9.
 
 For the global Syracuse question, the concrete next target remains the well-foundedness of the finite branching tree of valuation prefixes satisfying every exact signed-margin cap. The cap is necessary for a nondecreasing endpoint but not sufficient for survival. A proof that typical prefixes have small measure, or that each fixed finite depth has low total mass, does not rule out one infinite branch. The required theorem must exclude every infinite realizable cap-compatible branch (or give a valid orbitwise finite positive-margin block), with all quantifiers uniform in the starting odd integer. No APW4 BIB capacity is imported into this problem.
+
+
+### 7.4 Explicit inverse terminal-residue formula — verified
+
+At exact root commit `b58e1ddc859caaf678c2239c5ed3e952b0ef4ae0`, workflow [42743672688](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42743672688) passed. It verifies:
+- `twoPow_isUnit_mod_threePow` with profile `[propext, Classical.choice, Quot.sound]`;
+- `terminal_residue_eq_offset_mul_inv_of_affine_identity` with profile `[propext, Quot.sound]`.
+
+Consequently, whenever the exact affine identity (2^A n_k=3^k n_0+C) holds, Lean proves
+[
+n_k = C(2^A)^{-1}quad	ext{in }mathbb Z/3^kmathbb Z.
+]
+The complete workflow's no-`sorryAx` guard passed. This establishes the inverse formula for arbitrary (C) under the affine identity, but not yet the canonical-offset unit property.
+
+The next declarations are on root head `7a1c174e1c5e70e1b601760db57692009dc1f552`: `twoPow_mod_three_ne_zero`, `canonicalOffset_not_dvd_three`, `canonicalOffset_isUnit_mod_three_pow`, `canonicalTerminalResidue_isUnit), and the exact canonical terminal-state formula. Their exact-head run [42744418555](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42744418555) is in progress. No canonical unit-group claim is made until it passes with named axiom profiles and a full no-`sorryAx` scan.
