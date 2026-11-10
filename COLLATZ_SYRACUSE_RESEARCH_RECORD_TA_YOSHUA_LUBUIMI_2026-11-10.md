@@ -304,3 +304,16 @@ The initial-cylinder declaration has now passed four full, independent, commit-b
 4. Run `42722186081` — merge `5d4a19c`, PR head `a36894eefc52e5d28cd43110f5e289805509ad33`.
 
 All four full compile workflows completed successfully. Each printed the transitive axiom profile `[propext, Classical.choice, Quot.sound]` for `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder`; the explicit complete-log `sorryAx` audit steps passed. The subsequent current-head recheck `42724343412` is in progress on head `29b27dc529b9e81a33b5211e9e01a01e19edc256`. The general finite valuation-word partition, finite tail partition, terminal-residue collision energy and Markov matrix remain separate Lean formalization targets.
+
+
+## 10. Exact-head draft compile audit — 10 November 2026
+
+A new draft compile-audit workflow, 42725006480, was triggered for the current Syracuse programme PR #9 head b1a8599c686c37893a33453b759dee42047c7727. At the latest inspection its compile-drafts job was still in progress. No compile success or failure is claimed until the job completes and its log is inspected.
+
+The four successful initial valuation-one cylinder audits remain separately recorded: 42721006544, 42721305220, 42721911555 and 42722186081. The current draft compile audit is not substituted for those exact declaration audits and does not change their scope.
+
+The general finite valuation-word theorem now has a canonical standalone manuscript at projects/LubuimiFiniteValuationWordCylinder/MANUSCRIPT.md. It includes worked residue examples, the exact tail-cylinder partition, applications to finite-prefix coding, and explicit limitations. The terminal-congruence Lean design has been rewritten with consistent mathematical notation. These documentation improvements do not claim a general-word Lean verification.
+
+The global Collatz objective remains unchanged: prove a finite realized block with sufficient positive signed-margin correction for every positive odd start, or establish another universal descent mechanism. A density-zero or measure-theoretic exceptional-set statement alone is not enough to settle an individual integer orbit.
+
+**Attribution:** all research and theorem authorship: Ta-Yoshua Lubuimi. AI tools are assistants only.
