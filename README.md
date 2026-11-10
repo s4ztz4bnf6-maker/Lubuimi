@@ -386,3 +386,8 @@ The compile job completed successfully and its `sorryAx` guard did not trigger. 
 PR #62 adds `affine_minimal_counterexample_prefix_mem_finiteCapTree` and `affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit`. They compose the exact affine-to-Syracuse shifted-tail result and the verified least-start suffix-return/lower-bound lemma from PR #59 with the existing finite-cap-tree and terminal-residue unit results. This derives the finite-depth cap-tree path from the actual deterministic minimality assumptions rather than taking the old abstract `hminimal` suffix-return premise.
 
 Exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow [42811286670](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42811286670): compile-drafts job `129813061512`, Lean 4.35.0 paranoid job `129813061895`, and Lean 4.34.1 job `129813062043` are all in progress at the latest poll. No PASS is claimed. Even if these declarations pass, they establish only a necessary finite-depth path certificate under a hypothetical least nonterminating start; they do not exclude an infinite branch.
+
+
+### PR #62 partial verification update — 10 November 2026
+
+The Lean 4.35.0 paranoid and Lean 4.34.1 kernel-check jobs have both passed on exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`. Both print `[propext, Classical.choice, Quot.sound]` for the two new cap-tree bridge declarations; the paranoid kernel accepted the solution and the no-`sorryAx` guard did not trigger. The `compile-drafts` job `129813061512` remains in progress, so the full three-job result is still pending.
