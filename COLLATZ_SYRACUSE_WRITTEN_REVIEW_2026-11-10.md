@@ -75,3 +75,12 @@ Keep mathematical proof, source reconstruction, Lean elaboration, kernel axiom o
 All research and theorem authorship belongs to Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
 
 **Verdict:** The affine/margin core and initial all-one cylinder are established; the new state-dependent exponent cap is also Lean-verified on the listed exact commit. The general finite-word cylinder, tail partition, collision energy and global Collatz obstruction remain at their separately stated status levels.
+
+
+## 7. New finite-word and terminal-residue progress
+
+The exact Kolaz witness 731 -> 1097 -> 823 realizes valuation word (1,2), has initial cylinder residue 11 mod 16, affine offset C=5, and exact endpoint identity 8*823=9*731+5. The two signed-margin caps hold. A corresponding Lean declaration realizesValuationWord12_iff_mod_sixteen_eleven is now present on PR #9 head 56c6d6d86fb5122d75f89f5e614f7f333e2d31a9; workflow 42736159935 is pending, so this is not yet a formal verification claim.
+
+The finite k=2 terminal-residue matrix module has passed standalone Lean 4.35.0 / Mathlib 4.35.0 workflow 42735716873 on source snapshot 4e30c083f3e1657edd08b0945cdda4e16c8b0e14. Seven declarations have standard transitive profile [propext, Classical.choice, Quot.sound], no actual sorryAx, and lake check --paranoid passed. This verifies the finite k=2 computation, not the general k collision theorem.
+
+Kolaz PR #39's expanded exact tables through B=1023 and the x=731 bridge passed workflow 42735880399 with seven integer-arithmetic regression tests. The initial valuation-one manuscript has been consolidated to version 1.0; its seven earlier Lean audits remain the theorem's formal verification evidence.
