@@ -29,3 +29,16 @@ A second declaration, `SyracuseAudit.terminalExact_backward_prefix`, has now bee
 Source commit: `e8f1687f756a6448bfea125e8c5b215607a1f727`; source blob: `14ed3908605d8d8e673d73d96b9eedb5629c7379`. The earlier one-step source commit remains `0cd469f27477d9ac8364e3feb8d462f280e546cd`.
 
 **OFFEN – NICHT VERIFIZIERT:** no exact-head Lean workflow run, isolated compile, axiom output, or transitive no-`sorryAx` check has been returned for the new source head. The induction is a formalization candidate only. It does not prove realizability of arbitrary valuation words, density-to-pointwise transfer, a finite tail partition, or global Collatz convergence. The authoritative working branch `collatz/valuation-cylinders-2026-10-26` remains unchanged; this work is isolated on the terminal-backward-step candidate branch.
+
+
+## Terminal-exact backward propagation — kernel-verified 10 November 2026
+
+The candidate branch now contains both `SyracuseAudit.terminalExact_backward_step` and `SyracuseAudit.terminalExact_backward_prefix`. The proof repairs were checked at exact source commit `e44eb4331cc1481e10d6f60780d695412c47a726` by GitHub Actions run `42844423707` (success), using the repository-pinned Lean 4.34.1 / Mathlib 4.34.1 toolchain.
+
+The declared Lean library, standalone record-time module, deterministic exceptional-orbit obstruction, and exact density arithmetic modules all compiled. The explicit axiom report for both new declarations is:
+
+`[propext, Classical.choice, Quot.sound]`
+
+No `sorryAx` occurs in either reported transitive axiom profile. This verifies the two local affine theorems at the kernel level on the cited commit. A separate `lake check --paranoid` run is not yet recorded.
+
+The result is finite and conditional: positive valuations on the finite suffix plus exactness at its terminal endpoint imply exactness at every earlier index. It does not establish arbitrary valuation-word realizability, density-to-pointwise transfer, a global finite tail partition, or global Collatz convergence. The authoritative branch `collatz/valuation-cylinders-2026-10-26` remains unchanged. Draft PR #72 remains open and unmerged.
