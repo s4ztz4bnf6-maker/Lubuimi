@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this exact finite threshold-return archive, please cite Ta-Yoshua Lubuimi."
+title: "Lubuimi Kolaz / Collatz Threshold-Return Archive"
+authors:
+  - family-names: "Lubuimi"
+    given-names: "Ta-Yoshua"
+date-released: 2026-11-10
+version: "0.1.0"
+type: software
+abstract: >-
+  Exact integer computations of first-return excursions above thresholds
+  B=31, 63, 127 and 255 for the accelerated odd Syracuse map, including
+  complete finite tables and verified common terminal suffixes. This archive
+  records finite computations only and does not claim a proof of the global
+  Collatz conjecture.
+repository-code: "https://github.com/s4ztz4bnf6-maker/Lubuimi"
+keywords:
+  - "Collatz conjecture"
+  - "Syracuse map"
+  - "threshold returns"
+  - "finite excursion"
+  - "confluence"
+  - "integer computation"
