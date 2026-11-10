@@ -22,7 +22,7 @@ The exact integer-only implementation reproduces:
 
 The two extended tables are preserved row-by-row in CSV and checked against fresh enumeration by the regression suite.
 
-It reproduces every row in the manuscript tables. The longest excursion lengths are respectively 36, 32, 25 and 18; the maximum observed height is 3077 at each threshold. These statements are restricted to the enumerated source sets.
+It reproduces every row in the manuscript tables and both extended CSV files. The maximum excursion lengths at B=31,63,127,255,511,1023 are 36,32,25,18,24,50; the maximum heights are 3077,3077,3077,3077,13121,83501. These statements are restricted to the enumerated source sets.
 
 ## 3. Confluence result
 
