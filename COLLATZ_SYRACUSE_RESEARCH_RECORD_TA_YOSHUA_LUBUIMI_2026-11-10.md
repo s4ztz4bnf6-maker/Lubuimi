@@ -383,3 +383,23 @@ For each fixed prefix this admits only finitely many positive integers \(b\). Le
 Thus a least counterexample would generate an infinite path in a state-dependent finitely branching valuation tree. The cylinder weight of child \(b\) is exactly \(2^{-b}\), and the aggregate mass of all possible non-descending children is at most \(1-2^{-B_\alpha}\), with complementary tail mass \(2^{-B_\alpha}\) certified to descend.
 
 This is a finite-branching reduction, not a contradiction. The cap depends on the prefix through \(A,D\); no uniform bound on \(B_\alpha\) is known here, and an infinite path through the allowed finite children has not been excluded. The proof and limitations are in the canonical finite-word manuscript and its written review.
+
+
+## 15. Lean-verified finite non-descent exponent cap — run 42728049650
+
+The state-dependent finite cap has now gained a Lean-verified algebraic/orbit core. Three declarations were added to SyracuseOffsetIdentity.lean:
+
+1. signedOffsetMargin_nonpos_succ_iff_exponent_cap:
+\[
+D_{j+1}\le0
+\iff
+2^{A_j+a_j}+3D_j\le4\cdot2^{A_j}.
+\]
+2. signedOffsetMargin_nonpos_of_nondecreasing_orbit: for an exact affine block endpoint \(n_j\) with \(n_0>1\), if \(n_j\ge n_0\), then \(D_j\le0\), because positive signed margin forces strict descent.
+3. nondecreasing_orbit_next_exponent_cap: combining the two statements, any next valuation on an exact affine orbit whose next odd endpoint has not fallen below its initial odd start must satisfy the exact finite cap.
+
+The full compile-drafts workflow 42728049650 completed successfully on exact source commit ca48ec7fdad5e8d6f8aeb82fed8586a1b57c12bc using Lean 4.34.1. All three declarations printed transitive axiom profile [propext, Classical.choice, Quot.sound]. The complete job log contained no actual sorryAx occurrence. The build completed 8,930 jobs successfully.
+
+**Scope boundary:** This formally verifies the margin equivalence, nonpositive-margin implication for a nondecreasing affine endpoint, and the next-exponent inequality. It does not yet formalize the existence of the maximum cap B_alpha, the finite tail-cylinder partition, the full arbitrary-word cylinder theorem, or exclusion of an infinite surviving path. No global Collatz proof is claimed.
+
+The new cap result is a genuine Lean-verified strengthening of the Syracuse proof infrastructure, not a numerical observation. It is recorded separately from the seven initial all-one cylinder audits and the earlier offset/margin CI snapshots.
