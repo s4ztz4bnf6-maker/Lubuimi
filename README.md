@@ -143,3 +143,10 @@ The inverse formula itself remains verified at commit `b58e1ddc859caaf678c2239c5
 ### Inverse-unit witness repair — 10 November 2026
 
 The canonical terminal-residue unit proof no longer relies on the generic IsUnit.inv inference that failed at run 42745303364. The current root head `628a0a4d67428251fbf32f627aea3843d7a090e3` constructs the inverse unit directly from the existing Units witness. Exact-head CI is pending; the canonical unit claim remains open.
+
+
+### Addendum — finite cap-tree path work, 10 November 2026
+
+PR #42 exact head d3b2a55c1987b4a4f2cdbaef2a97486679d68f26 passed workflow 42747001077. The new state-dependent integer bound on the next valuation has standard axiom profile and the SyracuseOffsetIdentity.lean sorryAx scan passed. It does not run lake check --paranoid and does not prove global descent.
+
+PR #48 adds the finite cap-tree path certificate: every prefix of a nondecreasing exact affine path is intended to lie in a finite state-dependent tree, with the terminal residue carried through the exact affine map. Exact head 82cb74118eff69afd667c0fd827b266d115284ca; workflow 42748141012 queued. It remains a candidate until CI completes. The general word-cylinder bijection and k=2 energy remain separate, with no unsupported global energy inference.
