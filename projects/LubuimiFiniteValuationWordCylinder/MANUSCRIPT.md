@@ -48,10 +48,14 @@ such that
 =\{n_0>0:n_0\equiv r_\alpha\pmod {2^{A(\alpha)+1}}\}.
 }
 \]
-Consequently, among positive odd residue classes, the exact cylinder has relative natural density
-\[
-\boxed{\mu(\mathcal C_\alpha)=2^{-A(\alpha)}.}
-\]
+Consequently, among positive odd starts, the exact cylinder has relative natural density
+\\[
+\\boxed{\\mu_{\\mathrm{odd}}(\\mathcal C_\\alpha)=2^{-A(\\alpha)}.}
+\\]
+Its absolute natural density among all positive integers is
+\\[
+\\boxed{\\mu_{\\mathbb N}(\\mathcal C_\\alpha)=2^{-(A(\\alpha)+1)}.}
+\\]
 
 The empty word has \(A=0\) and its cylinder is the single odd residue class modulo \(2\).
 
@@ -149,11 +153,11 @@ T(n)=
 n/2,&n\\text{ even}.
 \\end{cases}
 \\]
-For the accelerated valuation word \\(\\alpha=(a_0,\\ldots,a_{k-1})\\), define \\(A_0=0\\) and \\(A_{j+1}=A_j+a_j\\). Its exact realization is equivalent to the length-`A+1` parity vector whose entries are (1) exactly at the positions
+For the accelerated valuation word \\(\\alpha=(a_0,\\ldots,a_{k-1})\\), define \\(A_0=0\\) and \\(A_{j+1}=A_j+a_j\\). Its exact realization is equivalent to the length-\\(A+1\\) parity vector whose entries are one exactly at the positions
 \\[
 A_0,A_1,\\ldots,A_k,
 \\]
-and (0) at all intervening positions. During the \\(j\\)-th accelerated block, the first ordinary iterate is odd and the next \\(a_j-1\\) iterates are even; the iterate at time \\(A_{j+1}\\) is the next odd Syracuse value.
+and zero at all intervening positions. During the \\(j\\)-th accelerated block, the first ordinary iterate is odd and the next \\(a_j-1\\) iterates are even; the iterate at time \\(A_{j+1}\\) is the next odd Syracuse value.
 
 Terras (1976) and Everett (1977) established the finite parity-vector coding; Lagarias (1985, Theorem B) gives a standard explicit account. Kontorovich and Lagarias restate the symbolic-dynamics result as Theorem 2.1 and identify its historical origin. Consequently, the unique residue class modulo \\(2^{A+1}\\) and its density are not claimed here as a new theorem.
 
@@ -163,13 +167,17 @@ The purpose of this manuscript is a self-contained derivation in accelerated-val
 
 ## 7. Formalization target
 
-Add a neutrally named Lean theorem asserting that for every finite positive exponent word the set of positive odd starts realizing that exact word is one residue class modulo \(2^{A+1}\). Prove it recursively using:
-1. invertibility of \(3\) modulo \(2^m\);
-2. exactness of the first valuation from the odd tail residue;
-3. the affine offset identity for the explicit residue formula;
-4. exact relative cylinder mass and parent/child partition.
+Formalize the general theorem under a neutral declaration name using the terminal exact-residue criterion. The implementation is deliberately separate from the already verified initial valuation-one declaration and the concrete mixed-word test case.
 
-No Lean compile or axiom-audit success is claimed for this new theorem yet.
+The staged proof obligations are:
+1. prefix-exponent monotonicity and the affine offset recurrence;
+2. the exact suffix expansion and oddness of its correction term;
+3. propagation of the terminal exact-residue condition to every prefix;
+4. reconstruction of all odd intermediate Syracuse values;
+5. the equivalence between terminal exact residue and realization of the prescribed word;
+6. uniqueness of the initial residue and the two density normalizations.
+
+The finite tail partition is a separate formalization target and must not be inferred from the one-cylinder theorem's CI record. No Lean compile or axiom-audit success is claimed for the general theorem or the tail partition.
 
 ---
 
