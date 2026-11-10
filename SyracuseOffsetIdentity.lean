@@ -2842,4 +2842,44 @@ theorem nondecreasing_orbit_next_exponent_finite_bound
 #print axioms next_exponent_lt_integer_bound
 #print axioms nondecreasing_orbit_next_exponent_finite_bound
 
+
+/-- The integer cap above determines an explicit finite set of natural
+next valuations: every exponent satisfying the nondecreasing cap belongs
+to the initial segment below its positive integer bound. -/
+theorem next_exponent_mem_finite_range_of_cap
+    (A b : ℕ) (D : ℤ)
+    (hcap :
+      (2 : ℤ) ^ (A + b) + 3 * D ≤ 4 * (2 : ℤ) ^ A) :
+    b ∈ Finset.range (Int.toNat (4 * (2 : ℤ) ^ A - 3 * D)) := by
+  have hbound := next_exponent_lt_integer_bound A b D hcap
+  let R : ℤ := 4 * (2 : ℤ) ^ A - 3 * D
+  have hR : 0 < R := by
+    dsimp [R]
+    have hb : (0 : ℤ) ≤ (b : ℤ) := by exact_mod_cast Nat.zero_le b
+    omega
+  have hNat : b < Int.toNat R := by
+    simpa [R] using (Int.toNat_lt_toNat hR).2 hbound
+  simpa [R, Finset.mem_range] using hNat
+
+/-- The actual next valuation of any nondecreasing exact Syracuse endpoint
+lies in a concrete finite initial segment determined by its current
+prefix state. -/
+theorem nondecreasing_orbit_next_exponent_mem_finite_range
+    (n₀ nnext : ℕ) (A a : ℕ → ℕ)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (j : ℕ) (hn₀ : 1 < n₀)
+    (hoffset :
+      2 ^ A (j + 1) * nnext =
+        3 ^ (j + 1) * n₀ + canonicalOffset A (j + 1))
+    (hnondecreasing : n₀ ≤ nnext) :
+    a j ∈ Finset.range
+      (Int.toNat (4 * (2 : ℤ) ^ A j - 3 * signedOffsetMargin A j)) := by
+  exact next_exponent_mem_finite_range_of_cap
+    (A j) (a j) (signedOffsetMargin A j)
+    (nondecreasing_orbit_next_exponent_cap
+      n₀ nnext A a hA j hn₀ hoffset hnondecreasing)
+
+#print axioms next_exponent_mem_finite_range_of_cap
+#print axioms nondecreasing_orbit_next_exponent_mem_finite_range
+
 end CollatzSyracuseAudit
