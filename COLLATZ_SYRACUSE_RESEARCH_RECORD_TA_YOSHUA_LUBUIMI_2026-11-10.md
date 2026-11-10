@@ -357,3 +357,12 @@ Workflow 42725006480 completed successfully on exact source commit b1a8599c686c3
 The log contains 274 named axiom-profile outputs. The observed profiles are exactly among [propext], [propext, Quot.sound], and [propext, Classical.choice, Quot.sound]. No actual sorryAx occurrence appears in the completed job log; the only text matches are the workflow's grep command and its forbidden-token diagnostic strings. The workflow is a successful compile/audit snapshot for its exact source commit and listed declarations. It does not formalize the general finite-word theorem or the new tail-cylinder margin certificate, and it does not prove global Collatz.
 
 The research-record-only commit after the checked source snapshot changes no Lean source. It appends the finite tail-cylinder margin theorem and the exact audit chronology.
+
+
+## 13. Finite-branching obstruction for a least hypothetical counterexample
+
+The finite-word manuscript now proves an exact necessary condition for a next step not to descend. At a realized prefix with cumulative exponent A and signed margin D, a next exact valuation b must satisfy
+\[
+2^{A+b}+3D\le4\cdot2^A.
+\]
+For each fixed prefix state (A,D), this leaves only finitely many possible non-descending next exponents. If a counterexample exists, choose the least positive odd counterexample by well-ordering. Its orbit cannot fall below its initial value, so it must determine an infinite path through this state-dependent finitely branching valuation-prefix tree. This is a new structural reduction; it does not rule out an infinite realized path. The proof is in Section 13 of `projects/LubuimiFiniteValuationWordCylinder/MANUSCRIPT.md`; the general finite-word theorem, finite tail partition and this corollary remain not yet Lean-compiled.
