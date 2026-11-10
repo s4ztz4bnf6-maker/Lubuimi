@@ -473,3 +473,14 @@ For integers (B\leq B^*\), it states exactly
 This is the cardinality conservation law for the child blocks and the refined tail block in the common uniform fibre. The declaration was added on exact source head a1becbc8e837f10abcd952a2e03832cb057fb2b8. Full compile/axiom workflow 42738528207 is in progress. No Lean verification claim is made until it completes, prints the standard transitive profile, and the complete log contains no actual sorryAx.
 
 This lemma formalizes the finite counting layer only. It does not yet formalize the state-dependent cap maximum, finite prefix levels, interval disjointness, residue-atom bijection, APW4 historical event map, or BIB/Hall capacity argument.
+
+
+## 20. Dyadic uniform-fibre cardinality lemma — Lean verified
+
+The declaration CollatzSyracuseAudit.dyadicUniformFibre_partition_card passed compile-drafts workflow 42738528207 on exact source commit a1becbc8e837f10abcd952a2e03832cb057fb2b8. It proves, for B≤Bstar,
+[
+\sum_{b=1}^{B}2^{B^*-b}+2^{B^*-B}=2^{B^*}.
+]
+The printed transitive profile is [propext, Classical.choice, Quot.sound]. The complete log contains no actual sorryAx occurrence and reports “Build completed successfully (8932 jobs).”
+
+This is a formal verification of the finite cardinality conservation law underlying the common dyadic refinement. It does not yet verify the state-dependent cap maximum, finite prefix tree, interval disjointness as a finset partition, the residue-atom bijection, or the historical APW4 event/BIB transport. The exact run is scoped to the new counting declaration and the declarations actually printed by the workflow.
