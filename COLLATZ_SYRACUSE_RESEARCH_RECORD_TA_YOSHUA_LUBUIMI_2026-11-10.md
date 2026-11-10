@@ -497,3 +497,8 @@ The manuscript v1.0 in PR #35 has a final documentation commit ddf366d7654a27595
 The standalone PR #38 module `LubuimiTerminalResidueEnergyK2.lean` passed exact-head workflow [42743051889](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42743051889) on source head `6c73f82a5e2eeef44fda294f71986474d2f50988`. The finite rational transition rows modulo 9 are checked exactly; the two-step distribution is `(8,16,11,4,2,22)/63`, and the collision energy is `5/21`. This verifies the named finite k=2 computation only.
 
 It does not verify the general countable-word energy expansion, the general Markov formula, or a universal Collatz theorem. In particular, an average lower bound for the full source distribution cannot rule out a single exceptional infinite valuation word. A survival-restricted energy would be useful only if its prefix admissibility is defined from the exact signed-margin recurrence and an independent, non-tautological upper capacity bound is proved. The APW4/BIB transport remains a heuristic analogy until those Collatz-specific objects and bounds exist.
+
+
+## Integrierter Exact-Head- und Fortschrittsstand — 10. November 2026, 22:54 CET
+
+Der neue append-only Statusledger [COLLATZ_STATUS_CHECKPOINT_2026-11-10.md](COLLATZ_STATUS_CHECKPOINT_2026-11-10.md) führt Offsetidentität, erhaltene Zylinder-/Margen-/Cap-Tree-Ergebnisse, exakte frühere CI-Nachweise, PR #9 und PR #72 sowie die verbleibende globale Infinite-Branch-/Universal-Margin-Verpflichtung zusammen. Frühere verifizierte Resultate werden durch spätere fehlgeschlagene Integrationsläufe nicht zurückgestuft. Der aktuelle PR-#9- und PR-#72-Head hat in der letzten Workflow-Abfrage keine zugeordneten PR-Runs; dies ist ausdrücklich kein PASS. Globaler Collatz bleibt offen.
