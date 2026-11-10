@@ -3217,11 +3217,12 @@ theorem syracuse_iterate_lt_terminal_modulus
       2 ^ j * (n j + 1) < 2 ^ j * 3 ^ j := by
     calc
       2 ^ j * (n j + 1) ≤ 3 ^ j * (n 0 + 1) := hscale
-      _ < 3 ^ j * 2 ^ j := Nat.mul_lt_mul_left (3 ^ j) hdepth
+      _ < 3 ^ j * 2 ^ j :=
+        (Nat.mul_lt_mul_left (pow_pos (by omega : 0 < (3 : ℕ)) j)).2 hdepth
       _ = 2 ^ j * 3 ^ j := Nat.mul_comm _ _
   have hsmall :
       n j + 1 < 3 ^ j :=
-    (Nat.mul_lt_mul_left (2 ^ j)).mp hprod
+    (Nat.mul_lt_mul_left (pow_pos (by omega : 0 < (2 : ℕ)) j)).mp hprod
   omega
 
 /-- At every depth with 2^j > n₀+1, the canonical terminal residue
