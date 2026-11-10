@@ -422,3 +422,8 @@ PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5` fixes those three proof-s
 ## Latest PR #59 CI poll — 10 November 2026
 
 Workflow 42809750956 is attached to exact head `5f6e46de8bed7061f8336089857143c54e997af5`. Compile job `129807911809` is in progress; Lean 4.34.1 job `129807911748` and Lean 4.35.0 paranoid job `129807911880` are queued. This is still OFFEN – NICHT VERIFIZIERT.
+
+
+## Parallel exact-head checks for minimality repair variants — 10 November 2026
+
+PR #58 / head `a2eea6f3c979e25a705c3da60d09d6ec84a41b7f`, run 42809723676, and PR #59 / head `5f6e46de8bed7061f8336089857143c54e997af5`, run 42809750956, both have all three jobs in progress. They implement the same three corrections to PR #56; PR #58 uses `omega` for the final natural-number contradiction, while PR #59 uses `Nat.lt_of_not_ge`. Keep their exact-head CI and axiom evidence separate. The global infinite-branch exclusion remains open.
