@@ -84,3 +84,8 @@ The exact Kolaz witness 731 -> 1097 -> 823 realizes valuation word (1,2), has in
 The finite k=2 terminal-residue matrix module has passed standalone Lean 4.35.0 / Mathlib 4.35.0 workflow 42735716873 on source snapshot 4e30c083f3e1657edd08b0945cdda4e16c8b0e14. Seven declarations have standard transitive profile [propext, Classical.choice, Quot.sound], no actual sorryAx, and lake check --paranoid passed. This verifies the finite k=2 computation, not the general k collision theorem.
 
 Kolaz PR #39's expanded exact tables through B=1023 and the x=731 bridge passed workflow 42735880399 with seven integer-arithmetic regression tests. The initial valuation-one manuscript has been consolidated to version 1.0; its seven earlier Lean audits remain the theorem's formal verification evidence.
+
+
+## 8. Mixed-word (1,2) Lean audit passed
+
+Workflow 42736159935 completed on exact source commit 56c6d6d86fb5122d75f89f5e614f7f333e2d31a9. The declaration realizesValuationWord12_iff_mod_sixteen_eleven has transitive axiom profile [propext, Classical.choice, Quot.sound], and the complete log has no actual sorryAx occurrence. It proves the exact word (1,2) iff n ≡ 11 mod 16. This is a verified specific finite-word instance, not the arbitrary-word theorem or tail partition.
