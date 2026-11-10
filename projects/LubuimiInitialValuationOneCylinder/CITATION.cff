@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this research project, please cite the author and manuscript."
-title: "Lubuimi's Initial Valuation-One Cylinder Theorem"
+title: "Finite Exact Valuation-Word Cylinders in the Accelerated Syracuse Map"
 authors:
   - family-names: Lubuimi
     given-names: Ta-Yoshua
@@ -8,10 +8,10 @@ date-released: 2026-11-10
 version: "0.1.0"
 type: article
 abstract: >-
-  An exact 2-adic classification of the initial valuation-one run in accelerated
-  Syracuse orbits, with exact run length, natural densities, and a signed-offset
-  margin recovery threshold. The project also records the general finite
-  valuation-word cylinder partition theorem as a companion extension.
+  An independent derivation of the classical finite parity-vector congruence coding
+  in accelerated-Syracuse valuation coordinates. Every finite exact valuation word
+  determines one odd residue class modulo the corresponding power of two, with
+  relative odd density given by its total exponent. No novelty or priority claim is made.
 keywords:
   - Collatz conjecture
   - Syracuse dynamics
