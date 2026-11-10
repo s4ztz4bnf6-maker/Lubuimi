@@ -40,3 +40,8 @@ This index keeps the Syracuse/Collatz results separate by theorem and verificati
 - None of these results is presented as a proof of global Collatz.
 
 All mathematical research and authorship are attributed to Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
+
+
+## Initial valuation-one review reconciliation
+
+The 10 November editorial/source reconciliation for the initial valuation-one cylinder note is recorded in [the project review reconciliation](LubuimiInitialValuationOneCylinder/REVIEW_RECONCILIATION_2026-11-10.md). It is distinct from the general finite valuation-word formalization status and from APW4.
