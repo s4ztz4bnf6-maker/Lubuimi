@@ -2592,7 +2592,7 @@ theorem valuation_exponent_eq_one_of_mod_four_three
 #print axioms valuation_exponent_eq_one_of_mod_four_three
 
 /--
-**Lubuimi's Initial Valuation-One Cylinder Theorem.**
+**Initial valuation-one cylinder classification.**
 
 For a positive odd certified accelerated Syracuse orbit, the first N exact
 valuation exponents are all one if and only if the initial value is -1
@@ -2600,7 +2600,7 @@ modulo 2^(N+1). The forward direction reuses the already formalized
 one-run divisibility obstruction; the reverse direction reconstructs the
 actual odd orbit prefix from the residue class.
 -/
-theorem lubuimi_initial_valuation_one_cylinder
+theorem initial_valuation_one_cylinder_iff_dyadic_divisibility
     (n a : ℕ → ℕ) (N : ℕ)
     (hodd : ∀ j, n j % 2 = 1)
     (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1) :
@@ -2712,7 +2712,7 @@ theorem lubuimi_initial_valuation_one_cylinder
     exact valuation_exponent_eq_one_of_mod_four_three
       (n j) (n (j + 1)) (a j) hnmod4 (hodd (j + 1)) (hstep j)
 
-#print axioms lubuimi_initial_valuation_one_cylinder
+#print axioms initial_valuation_one_cylinder_iff_dyadic_divisibility
 
 end CollatzSyracuseAudit
 
