@@ -109,3 +109,8 @@ A previous paragraph in this status file described run 42725493567 as still in p
 The initial valuation-one cylinder and the arbitrary finite exact valuation-word residue-class statement are classical consequences of the finite parity-vector permutation theorem. Lagarias (1985), Theorem B, gives the explicit finite permutation statement; Terras (1976) and Everett (1977) belong to the classical historical development. Tao (2022), §1.2, Proposition 1.9, concerns approximate distribution of finite Syracuse valuation vectors under an equidistribution hypothesis, not the exact unique-residue-class assertion.
 
 Use descriptive mathematical labels only: “initial valuation-one cylinder classification” and “finite exact valuation-word cylinder classification.” Authorship of the independent derivations and Lean formalization remains attributed to Ta-Yoshua Lubuimi. This correction does not alter any mathematical identity, the APW4 record, or the exact scope of the seven successful initial-cylinder CI snapshots.
+
+
+## Initial-cylinder editorial reconciliation — 10 November 2026
+
+The review checklist for the initial valuation-one note has been checked against the current manuscript and recorded in `projects/LubuimiInitialValuationOneCylinder/REVIEW_RECONCILIATION_2026-11-10.md`. The note now has corrected formula typesetting, the explicit `D_j > 0` descent implication, neutral exact-run terminology, no irrelevant APW4 cross-reference, and a source-scoped Lean record. The general finite-word theorem and finite tail partition remain separate Lean obligations. This editorial update does not alter the APW4 proof record or claim global Collatz convergence.
