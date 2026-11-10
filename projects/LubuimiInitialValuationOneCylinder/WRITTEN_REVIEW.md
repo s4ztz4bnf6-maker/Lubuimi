@@ -78,3 +78,8 @@ The seven listed exact-commit workflows audit the main initial-cylinder declarat
 ## Current neutral declaration — verification update, 10 November 2026
 
 The source now also contains `initial_valuation_one_cylinder_iff_dyadic_divisibility` at `SyracuseOffsetIdentity.lean:2603`, exact source commit `5f6e46de8bed7061f8336089857143c54e997af5`. Exact-head workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956) passed Lean 4.34.1, `compile-drafts`, and Lean 4.35.0 paranoid. Its declaration-scoped transitive profile is `[propext, Classical.choice, Quot.sound]`, and the no-`sorryAx` guard passed. The seven earlier workflows remain historical evidence for the original identifier only; no audit is transferred across the rename. This does not certify the general finite-word theorem, tail partition, or global Collatz descent.
+
+
+## Review reconciliation — 10 November 2026
+
+The supplied editorial checklist has been reconciled with the current source. The initial-cylinder manuscript now has correctly typeset affine and density formulae, Corollary 6.3 explicitly states and proves that positive signed margin forces the iterate below the start, and Corollary 4.2 is titled “Exact initial run length” rather than a stopping-time statement. The note no longer contains APW4/tail-partition cross-project claims. The detailed source check is recorded in [REVIEW_RECONCILIATION_2026-11-10.md](REVIEW_RECONCILIATION_2026-11-10.md). This remains an internal review record, not independent peer review.
