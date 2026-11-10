@@ -4,14 +4,26 @@
 
 This repository records Ta-Yoshua Lubuimi's Collatz/Syracuse mathematical research and Lean formalization. AI tools are assistants only and are not authors or independent verifiers.
 
+## Current exact-head status — 10 November 2026
+
+The current code-repair candidates are tracked separately from earlier successful snapshots:
+
+- **Previously verified finite-cap baseline:** [run 42759509255](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42759509255), exact source commit `b0509fb5944f172ad9f7d71e7316907d4e988842`, all three jobs passed.
+- **Affine parity/exactness attempt:** [run 42762395691](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42762395691), source `a8b593cd8ef59105e6b62b11d0dfc7e41e89a3bb`, failed at `SyracuseOffsetIdentity.lean:3095` because `omega` could not derive nonzero exponent from the quantified positivity hypothesis.
+- **Affine parity/exactness repair:** [PR #53](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/53), exact source `7d17d7111946b328421f9046f95b03c939dfddb1`, [run 42805867475](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42805867475) passed all three jobs: Lean 4.34.1, `compile-drafts`, and Lean 4.35.0 paranoid. The new declarations have profiles `[propext, Quot.sound]` and `[propext, Classical.choice, Quot.sound]`, respectively; the `sorryAx` guard passed.
+- **Open global obligation:** the suffix-return premise in `orbit_lower_bound_of_minimal_counterexample` is still explicit; finite-depth cap-tree membership does not exclude an infinite branch.
+- **Deterministic one-step bridge:** [PR #55](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/55), exact head `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, run [42807396471](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42807396471) passed all three jobs (Lean 4.34.1, Lean 4.35.0 paranoid, `compile-drafts`). `affine_step_eq_syracuse_of_exact_exponent` prints `[propext, Classical.choice, Quot.sound]`; the paranoid kernel accepted and the `sorryAx` gate passed.
+- **Shifted-tail/minimality bridge:** [PR #56](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/56), current exact head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, run [42808797159](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42808797159) queued at latest poll. It attempts the finite iterate identity, derives suffix return from least odd nonterminating-start minimality, and renames the initial-cylinder Lean declaration to a neutral descriptive identifier. No new theorem or renamed-declaration verification is claimed yet; infinite-branch exclusion remains open.
+
+See [the exact-head CI and open-obligation record](COLLATZ_EXACT_HEAD_CI_AND_OPEN_OBLIGATIONS_2026-11-10.md) for the full distinction between established exact-scope results, failed candidates, and remaining proof obligations.
 ## Research record
 
 The affine-offset and signed-margin framework and the initial valuation-one cylinder theorem are attributed to Ta-Yoshua Lubuimi. The APW4–Syracuse cylinder–energy bridge is tracked as a named research programme, not asserted as an established theorem.
 
 - [Consolidated Collatz–Syracuse research record](COLLATZ_SYRACUSE_RESEARCH_RECORD_TA_YOSHUA_LUBUIMI_2026-11-10.md)
-- [Lubuimi's Initial Valuation-One Cylinder Theorem — English](SyracuseInitialValuationOneCylinder_2026-11-09.md)
-- [Lubuimis Satz über den anfänglichen Valuierungs-eins-Zylinder — Deutsch](Lubuimi_Anfangszylinder_Syracuse_DE_2026-11-10.md)
-- [Lubuimi's Finite Valuation-Word Cylinder Partition Theorem](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md)
+- [Initial valuation-one cylinder classification — English](SyracuseInitialValuationOneCylinder_2026-11-09.md)
+- [Klassifikation des anfänglichen Valuierungs-eins-Zylinders — Deutsch](Lubuimi_Anfangszylinder_Syracuse_DE_2026-11-10.md)
+- [Finite exact valuation-word cylinder classification](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md)
 - [Syracuse affine offset, signed margin, and Lubuimi cylinder theorem source](SyracuseOffsetIdentity.lean)
 - [Closed-form offset](SyracuseOffsetClosedForm.lean)
 - [Offset lower bound](SyracuseOffsetLowerBound.lean)
@@ -31,15 +43,15 @@ Copyright © 2026 Ta-Yoshua Lubuimi. All rights reserved for original Collatz/Sy
 
 ### Cylinder formalization update — 10 November 2026
 
-The main-cylinder CI attempts [42719689591](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42719689591) and [42720406876](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42720406876) failed at proof-script obligations; their error-recovery `sorryAx` output is preserved as failed-attempt history. The current branch applies the restricted induction hypotheses explicitly. The refined declaration then passed two complete exact-commit workflows, [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) and [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220), with transitive profile `[propext, Classical.choice, Quot.sound]` and no `sorryAx` in the complete-log scan. The research record also now documents **Lubuimi's Finite Valuation-Word Cylinder Partition Theorem**: every finite positive exact valuation word is one unique odd residue class modulo `2^(A+1)`, with exact relative density `2^-A` among odd starts and child mass ratio `2^-b`. The full mathematical statement and proof are in `Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md`.
+The main-cylinder CI attempts [42719689591](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42719689591) and [42720406876](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42720406876) failed at proof-script obligations; their error-recovery `sorryAx` output is preserved as failed-attempt history. The current branch applies the restricted induction hypotheses explicitly. The refined declaration then passed two complete exact-commit workflows, [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) and [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220), with transitive profile `[propext, Classical.choice, Quot.sound]` and no `sorryAx` in the complete-log scan. The research record also now documents **Finite exact valuation-word cylinder classification**: every finite positive exact valuation word is one unique odd residue class modulo `2^(A+1)`, with exact relative density `2^-A` among odd starts and child mass ratio `2^-b`. The full mathematical statement and proof are in `Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md`.
 
 
 Latest exact-head recheck: run [42724343412](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42724343412) was triggered on current branch head `29b27dc529b9e81a33b5211e9e01a01e19edc256`. Checkout and Lean manifest setup succeeded; Mathlib cache restoration was in progress at the latest retrieval. Earlier rechecks 42721911555 and 42722186081 are preserved in the chronology. The completed positive audits 42721006544 and 42721305220 remain the verified evidence for the initial-cylinder declaration.
 
 
-### Lubuimi terminal-residue collision energy — 10 November 2026
+### Terminal-residue collision energy — 10 November 2026
 
-A new mathematical note, [Lubuimi's Terminal-Residue Collision Energy](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md), derives a finite-place incidence map from length-k valuation words to terminal unit residues modulo 3^k. With source weights 2^-A, its exact energy splits as E_k = 3^-k + C_k^coll, and C_k^coll ≥ 1/(2·3^k). This is an exact APW4-style diagonal/off-diagonal collision identity in the Syracuse model, not yet the historical APW4 BIB reserve and not a Collatz descent proof. Its Lean formalization remains open.
+A new mathematical note, [terminal-residue collision energy](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md), derives a finite-place incidence map from length-k valuation words to terminal unit residues modulo 3^k. With source weights 2^-A, its exact energy splits as E_k = 3^-k + C_k^coll, and C_k^coll ≥ 1/(2·3^k). This is an exact APW4-style diagonal/off-diagonal collision identity in the Syracuse model, not yet the historical APW4 BIB reserve and not a Collatz descent proof. Its Lean formalization remains open.
 
 
 ### Finite Markov representation of terminal-residue collision energy

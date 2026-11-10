@@ -1,4 +1,4 @@
-# Lubuimi's Finite Valuation-Word Cylinder Partition Theorem
+# Finite Exact Valuation-Word Cylinder Classification
 
 **Author:** Ta-Yoshua Lubuimi  
 **Research date:** 10 November 2026  
@@ -27,7 +27,7 @@ Define the exact valuation-word cylinder
 \text{ exact exponents are }\alpha\}.
 \]
 
-**Lubuimi's Finite Valuation-Word Cylinder Partition Theorem:** There is a unique odd residue class
+**Finite exact valuation-word cylinder classification:** There is a unique odd residue class
 \[
 r_\alpha\pmod {2^{A(\alpha)+1}}
 \]
@@ -115,7 +115,7 @@ Thus
 \mathcal C_{(1,\ldots,1)}
 =\{n_0>0:n_0\equiv-1\pmod {2^{N+1}}\},
 \]
-which is exactly Lubuimi's Initial Valuation-One Cylinder Theorem.
+which is exactly the initial valuation-one cylinder classification.
 
 ## 5. Prefix tree and exact child masses
 
@@ -190,3 +190,7 @@ The partition is disjoint and exhaustive because the next exact exponent is eith
 For a finite prefix alpha of total exponent A and signed margin D(alpha), extension by next exponent b satisfies D(alpha b)=3D(alpha)+(2^b-4)2^A. For any cutoff B with 3D(alpha)+(2^(B+1)-4)2^A>0, the exact tail cylinder a_k>=B+1 has relative parent mass 2^-B and every start in it has positive next margin, hence strict descent. Such a finite B exists for each fixed prefix. The cutoff is prefix-dependent; the finite lower-exponent children remain unresolved, so this is not a global Collatz proof. The canonical standalone manuscript contains the full derivation, worked examples and scope statement.
 
 The general theorem and tail partition are mathematically proved in the manuscript but not yet Lean-compiled. The initial all-one specialization alone has four successful exact-commit Lean audits.
+
+## Literature and naming correction — version 1.1
+
+The finite exact valuation-word residue-class statement is the parity-vector congruence coding expressed in accelerated-Syracuse valuation coordinates. Its classical context is Terras (1976), Everett (1977), and Lagarias (1985), Theorem B. This manuscript records an independent derivation by Ta-Yoshua Lubuimi; it does not claim a new general parity-vector theorem, an eponymous theorem name, or historical priority. Tao (2022), Proposition 1.9, concerns approximate distribution of finite Syracuse valuation vectors under an equidistribution hypothesis and is not cited as the exact unique-residue-class theorem. The mathematical content above is unchanged.

@@ -1,4 +1,4 @@
-# Lubuimis Satz über den anfänglichen Valuierungs-eins-Zylinder für die beschleunigte Syracuse-Abbildung
+# Klassifikation des anfänglichen Valuierungs-eins-Zylinders der beschleunigten Syracuse-Abbildung
 
 **Autor:** Ta-Yoshua Lubuimi  
 **Benennung:** Dieser exakte Zylinderklassifikationssatz wird in diesem Projekt zu Ehren seines Autors unter seinem Namen geführt.  
@@ -182,9 +182,9 @@ Diese Verifikation ist auf die genannte Deklaration und ihren transitiven Abhän
 
 ## 6. Verallgemeinerungen und nächste Inzidenzebene
 
-Der anfängliche Eins-Zylinder ist der Spezialfall von [Lubuimis Satz über die Partition endlicher Valuierungswörter](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md). Dieser ordnet jedem endlichen positiven exakten Valuierungswort eine eindeutige ungerade Restklasse modulo (2^{A+1}) mit relativer Dichte (2^{-A}) unter den ungeraden Startzahlen zu.
+Der anfängliche Eins-Zylinder ist der Spezialfall von [Klassifikation endlicher exakter Valuierungswort-Zylinder](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md). Dieser ordnet jedem endlichen positiven exakten Valuierungswort eine eindeutige ungerade Restklasse modulo (2^{A+1}) mit relativer Dichte (2^{-A}) unter den ungeraden Startzahlen zu.
 
-Eine weitere mathematische Entwicklung ist [Lubuimis terminale Restklassen-Kollisionsenergie](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md). Sie bildet Wörter der Länge (k) auf terminale Einheitsrestklassen modulo (3^k) ab; das zweite Moment besitzt Diagonalmasse (3^{-k}) und Off-Diagonal-Kollisionsmasse mindestens (1/(2\cdot3^k)). Hinzu kommt eine endliche rationale Markov-Darstellung. Diese Verallgemeinerungen sind von der bereits erfolgreich formalisierten Anfangszylinder-Aussage getrennte Resultate und Formalisierungsziele.
+Eine weitere mathematische Entwicklung ist [terminale Restklassen-Kollisionsenergie](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md). Sie bildet Wörter der Länge (k) auf terminale Einheitsrestklassen modulo (3^k) ab; das zweite Moment besitzt Diagonalmasse (3^{-k}) und Off-Diagonal-Kollisionsmasse mindestens (1/(2\cdot3^k)). Hinzu kommt eine endliche rationale Markov-Darstellung. Diese Verallgemeinerungen sind von der bereits erfolgreich formalisierten Anfangszylinder-Aussage getrennte Resultate und Formalisierungsziele.
 
 **Autorschaft:** Ta-Yoshua Lubuimi. KI-Systeme dienen ausschließlich als Hilfsmittel und sind weder Autoren noch unabhängige mathematische Verifikatoren.
 
@@ -192,3 +192,8 @@ Eine weitere mathematische Entwicklung ist [Lubuimis terminale Restklassen-Kolli
 ## 7. Dritter späterer Auditlauf auf dem aktuellen Quellstand
 
 Ein dritter, zeitlich späterer Auditlauf ist ebenfalls erfolgreich: Workflow [42738528207](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738528207) kompilierte den aktuellen Quell-Commit `a1becbc8e837f10abcd952a2e03832cb057fb2b8` und gab für `lubuimi_initial_valuation_one_cylinder` sowie `dyadicUniformFibre_partition_card` dasselbe Standardprofil der transitiven Axiome aus. Die explizite `sorryAx`-Prüfung bestand. Dieser spätere Lauf stärkt den Nachweis für den exakten Quellstand, erweitert aber nicht den mathematischen Geltungsbereich der beiden Aussagen.
+
+
+## Literatur- und Namenskorrektur — Version 1.1
+
+Dieses Manuskript dokumentiert die eigenständige Beweisführung und Lean-Formalisierung von Ta-Yoshua Lubuimi für die Klassifikation des anfänglichen Valuierungs-eins-Zylinders. Die endliche Kongruenzaussage ist eine klassische Konsequenz der Paritätsvektor-Kodierung; einschlägig sind Terras (1976), Everett (1977) und Lagarias (1985), Theorem B. Es wird kein nach dem Autor benannter Satz und kein Prioritätsanspruch behauptet. Tao (2022), Proposition 1.9, wird nicht als Beleg für den exakten Eindeutigkeits-/Restklassensatz zitiert; die Proposition betrifft die angenäherte Verteilung endlicher Syracuse-Valuierungsvektoren unter einer Gleichverteilungsvoraussetzung. Die mathematische Aussage und der Beweistext oben werden durch diese Namens- und Literaturkorrektur nicht verändert.
