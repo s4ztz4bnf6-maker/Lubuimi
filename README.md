@@ -350,3 +350,8 @@ These declarations directly address the first two steps of the deterministic-tai
 New source head: `a8b593cd8ef59105e6b62b11d0dfc7e41e89a3bb`; workflow [42762395691](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42762395691) has been created with the Lean 4.34.1 build, compile-drafts, and Lean 4.35.0 paranoid jobs queued at the latest poll.
 
 The candidate adds `every_state_odd_of_positive_affine_steps` and `every_affine_exponent_is_exact` to derive the first two links of the deterministic-tail chain. These are not yet verified: the workflow is queued and no compile or axiom output is available. The previous run 42759509255 remains a completed PASS only for its exact earlier source head `b0509fb5944f172ad9f7d71e7316907d4e988842`.
+
+
+## Verification update for parity/exact-valuation candidate
+
+Workflow [42762395691](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42762395691) has started on the new candidate source commit `a8b593cd8ef59105e6b62b11d0dfc7e41e89a3bb`: the Lean 4.34.1 build job is in progress; `compile-drafts` and Lean 4.35.0 paranoid are queued. The two new parity/exactness declarations remain unverified until all exact-head jobs complete and their named axiom outputs are inspected.
