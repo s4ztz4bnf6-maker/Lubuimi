@@ -396,3 +396,8 @@ The Lean 4.35.0 paranoid and Lean 4.34.1 kernel-check jobs have both passed on e
 ### PR #62 complete exact-head result — 10 November 2026
 
 Workflow [42811286670](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42811286670) has now passed all three jobs: compile-drafts, Lean 4.35.0 paranoid, and Lean 4.34.1. Both new declarations `affine_minimal_counterexample_prefix_mem_finiteCapTree` and `affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit` print `[propext, Classical.choice, Quot.sound]`. The compile job completed; the `sorryAx` guards did not trigger; the paranoid kernel accepted the solution. This closes the finite-cap-tree interface formalization at this exact head, but not the global infinite-branch exclusion.
+
+
+### Collatz terminal-residue bridge update — 10 November 2026
+
+PR #65 exact head `78222bfae2e28a767d3482531b495ef48d85a342`, workflow [42812080857](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42812080857): all three jobs failed at the new bridge because the depth hypothesis was stated using `n₀`, while `canonicalTerminalResidue_val_eq_actual_iterate` requires `n 0`. The exact type mismatch is recorded; the declaration's error-recovery output includes `sorryAx`, so PR #65 is not verified. PR #66 / head `1ad0cf18bb8d2fd8a76376cb3768fd3b60bc6a7c` derives `n 0 = n₀` from the affine offset identity at index zero and transports the depth bound. It is a candidate pending exact-head CI. The PR #59 shifted-tail/minimality lemmas and PR #62 finite-cap-tree bridge remain independently verified at their exact heads. Global Collatz termination remains open: the finite-depth certificate does not exclude an infinite branch.
