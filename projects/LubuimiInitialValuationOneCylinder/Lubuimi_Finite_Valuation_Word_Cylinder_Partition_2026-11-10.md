@@ -1,8 +1,8 @@
-# Lubuimi's Finite Valuation-Word Cylinder Partition Theorem
+# Finite Exact Valuation-Word Cylinders for the Accelerated Syracuse Map
 
 **Author:** Ta-Yoshua Lubuimi  
 **Research date:** 10 November 2026  
-**Status:** Exact mathematical derivation; Lean formalization target, not yet a compiled Lean theorem.
+**Status:** Independent derivation of a classical parity-vector consequence; Lean formalization target, not yet a compiled Lean theorem. No novelty or priority claim is made.
 
 ## 1. Statement
 
@@ -27,7 +27,7 @@ Define the exact valuation-word cylinder
 \text{ exact exponents are }\alpha\}.
 \]
 
-**Lubuimi's Finite Valuation-Word Cylinder Partition Theorem:** There is a unique odd residue class
+**Finite valuation-word cylinder classification:** There is a unique odd residue class
 \[
 r_\alpha\pmod {2^{A(\alpha)+1}}
 \]
@@ -115,7 +115,7 @@ Thus
 \mathcal C_{(1,\ldots,1)}
 =\{n_0>0:n_0\equiv-1\pmod {2^{N+1}}\},
 \]
-which is exactly Lubuimi's Initial Valuation-One Cylinder Theorem.
+which is exactly the initial valuation-one cylinder classification in the companion note.
 
 ## 5. Prefix tree and exact child masses
 
@@ -129,21 +129,17 @@ Every positive odd terminal state has one and only one exact next exponent, so t
 \]
 Thus the finite valuation words form an exact, measure-consistent prefix tree of residue cylinders.
 
-## 6. APW4 interface and the next proof obligation
+## 6. Relation to classical parity-vector coding
 
-This result gives an exact finite source family for an APW4-style incidence analysis:
-- prefix nodes are finite valuation words;
-- each node has a unique residue-class cylinder and exact mass \(2^{-A}\);
-- parent/child incidences have exact relative weights \(2^{-b}\);
-- terminal states and block margins are attached to the same index-preserving word.
+Let \(T\) be the standard map \(T(n)=(3n+1)/2\) for odd \(n\) and \(T(n)=n/2\) for even \(n\). An exact Syracuse valuation word \(\alpha=(a_0,\ldots,a_{k-1})\) with total exponent \(A\) determines a parity vector of length \(A+1\): concatenate the blocks \(1,0,\ldots,0\), with \(a_j-1\) zeros in the block corresponding to \(a_j\), and append the final \(1\) recording that the terminal Syracuse state is odd. Conversely, this parity pattern determines the valuation word by reading the gaps between successive odd positions.
 
-The next step is to define a finite incidence matrix between prefix cylinders and terminal-state/collision events, then separate diagonal mass from off-diagonal overlap and identify a genuine BIB/Hall capacity. The APW4 transport theorem can only be applied after an explicit index-preserving map and all its hypotheses have been proved.
+The finite parity-vector permutation theorem therefore gives exactly one residue class modulo \(2^{A+1}\) for this prescribed pattern. Restricting to odd starting values gives relative density \(2^{-A}\). The recursive proof above is an independent derivation in accelerated-valuation coordinates of this classical consequence; it is not a new partition theorem.
 
-A zero-measure exceptional family alone would not exclude an individual integer orbit. The Collatz application must produce a quantitative finite obstruction or a uniform arithmetic lower bound for every hypothetical non-descending integer path.
+Lagarias [3, Theorem B] gives the explicit finite parity-vector permutation statement. Terras [1] and Everett [2] are part of the classical historical development. Tao [4, §1.2, Proposition 1.9] studies approximate distributions of finite Syracuse valuation vectors under a residue equidistribution hypothesis. That proposition should not be described as the exact unique-residue-class theorem.
 
 ## 7. Formalization target
 
-Add a Lean theorem, named for the author, asserting that for every finite positive exponent word the set of positive odd starts realizing that exact word is one residue class modulo \(2^{A+1}\). Prove it recursively using:
+Formalize the finite-word corollary as a separate Lean declaration with a neutral mathematical name, and record the exact source commit and declaration-scoped axiom profile. No compile or axiom-audit success is currently claimed. Prove it recursively using:
 1. invertibility of \(3\) modulo \(2^m\);
 2. exactness of the first valuation from the odd tail residue;
 3. the affine offset identity for the explicit residue formula;
@@ -183,3 +179,14 @@ They sum exactly to one:
 \boxed{\sum_{b=1}^{B}2^{-b}+2^{-B}=1.}
 \]
 The partition is disjoint and exhaustive because the next exact exponent is either one of \(1,\ldots,B\) or is at least \(B+1\). This gives a genuinely finite weighted refinement at every cutoff, with an explicit tail atom. It is a useful finite interface for later incidence and moment constructions; it does not by itself provide an APW4 BIB capacity or an orbitwise descent theorem.
+
+
+## 9. References
+
+[1] R. Terras, “A stopping time problem on the positive integers,” *Acta Arithmetica* **30** (1976), 241–252. https://doi.org/10.4064/aa-30-3-241-252
+
+[2] C. J. Everett, “Iteration of the number-theoretic function f(2n) = n, f(2n + 1) = 3n + 2,” *Advances in Mathematics* **25** (1977), no. 1, 42–45. https://doi.org/10.1016/0001-8708(77)90087-1
+
+[3] J. C. Lagarias, “The 3x + 1 Problem and Its Generalizations,” *The American Mathematical Monthly* **92** (1985), no. 1, 3–23, Theorem B. https://doi.org/10.1080/00029890.1985.11971528
+
+[4] T. Tao, “Almost all orbits of the Collatz map attain almost bounded values,” *Forum of Mathematics, Pi* **10** (2022), e12. https://doi.org/10.1017/fmp.2022.8; arXiv:1909.03562, §1.2 and Proposition 1.9.
