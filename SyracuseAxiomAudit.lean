@@ -4,3 +4,6 @@ import SyracuseAffineCore
 #print axioms SyracuseAudit.three_step_affine_identity
 #print axioms SyracuseAudit.four_step_affine_identity
 #print axioms SyracuseAudit.finite_prefix_affine_identity
+
+#print axioms SyracuseAudit.terminalExact_backward_step
+#print axioms SyracuseAudit.terminalExact_backward_prefix
