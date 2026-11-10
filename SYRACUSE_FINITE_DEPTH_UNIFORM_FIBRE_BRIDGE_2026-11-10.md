@@ -197,3 +197,12 @@ for (B\leq B^*\). Exact source head a1becbc8e837f10abcd952a2e03832cb057fb2b8 is 
 The finite count lemma dyadicUniformFibre_partition_card has now passed compile-drafts workflow 42738528207 on exact source commit a1becbc8e837f10abcd952a2e03832cb057fb2b8. Its transitive profile is [propext, Classical.choice, Quot.sound]; the complete log contains no actual sorryAx occurrence and reports successful completion of the 8,932-job build.
 
 This verifies the algebraic cardinality identity only. The dependent cap maximum, finite surviving tree, interval partition and residue-cylinder bijection are not yet Lean-formalized. The APW4 historical hyperplane/BIB map remains open.
+
+
+## 7. Exact finite cap-tree path certificate — 10 November 2026
+
+PR #42 now has an exact-head compile PASS. On source head d3b2a55c1987b4a4f2cdbaef2a97486679d68f26, run 42747001077 completed successfully. The explicit integer bound for every next valuation on a nondecreasing exact affine endpoint is kernel-checked with standard axiom profile [propext, Classical.choice, Quot.sound]; the Syracuse offset file's no-sorryAx scan passed. No lake check --paranoid run is included in this workflow.
+
+PR #48 formalizes the next finite-depth step: a prefix state carrying accumulated exponent, canonical offset, and signed margin; a finite child set cut off by the state-dependent bound; and the finite cap tree at each depth. The target theorem embeds every prefix of a nondecreasing exact affine path into that tree. A companion map sends its exact endpoint to a unit modulo 3^j. Exact head 82cb74118eff69afd667c0fd827b266d115284ca, run 42748141012 queued at the latest check.
+
+This does not yet formalize the interval partition for every child valuation, the full residue-cylinder bijection for arbitrary words, or an upper energy capacity that rules out an infinite path. The verified k=2 terminal-residue energy remains a separate finite module; its collision mass is not silently treated as a survival obstruction.
