@@ -2904,10 +2904,8 @@ theorem finiteCapPrefixState_eq_actual
         canonicalOffset, signedOffsetMargin, hA0]
   | succ j ih =>
       rw [valuationPrefix, finiteCapPrefixState_append_singleton, ih]
-      apply FiniteCapPrefixState.ext
-      · exact (hA j).symm
-      · rfl
-      · exact (signedOffsetMargin_succ A a hA j).symm
+      simp [finiteCapExtendState, hA j, canonicalOffset,
+        signedOffsetMargin_succ]
 
 /-- The integer margin cap converted into a natural finite branching bound. -/
 def finiteCapBoundState (s : FiniteCapPrefixState) : ℕ :=
