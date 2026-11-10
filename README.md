@@ -191,3 +191,6 @@ Terminology is now corrected: the old nondecreasing theorem names are compatibil
 ## Licensing and attribution
 
 Original Collatz/Syracuse research and Lean source are attributed to Ta-Yoshua Lubuimi. The repository's current licensing status and proposed release choices are recorded in [LICENSING_REGISTER_AND_RELEASE_PLAN_2026-11-10.md](LICENSING_REGISTER_AND_RELEASE_PLAN_2026-11-10.md). No public reuse licence is claimed until the author selects one.
+
+
+The 10 November finite-prefix scale bridge from actual Syracuse iterates to terminal-residue representatives is documented in [COLLATZ_TERMINAL_RESIDUE_SCALE_BRIDGE_2026-11-10.md](COLLATZ_TERMINAL_RESIDUE_SCALE_BRIDGE_2026-11-10.md). Its new Lean declarations remain pending exact-head dual-toolchain verification.
