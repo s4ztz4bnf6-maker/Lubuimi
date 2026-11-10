@@ -38,3 +38,8 @@ Do not infer a global Collatz proof from finite-depth membership, average energy
 ### Attribution and licence boundary
 
 The original Collatz/Syracuse research, scripts, manuscripts, and Lean formalization authored by Ta-Yoshua Lubuimi remain attributed to him. AI tools are assistants only. The existing proprietary-rights and commercial-use notices remain unchanged; this entry grants no new licence or reuse permission. Lean, Mathlib, upstream results, and third-party material retain their own licences.
+
+
+### PR #66 exact three-job outcome
+
+Workflow [42812961296](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42812961296) on head `1ad0cf18bb8d2fd8a76376cb3768fd3b60bc6a7c` completed with all three jobs failed: Lean 4.34.1, Lean 4.35.0 paranoid, and compile-drafts. The inspected paranoid log pinpoints the single source error at line 3504: reverse rewrite `rw [← hn0eq]` cannot find (n_0) in the target `n 0 + 1 < 2 ^ j`. The resulting declaration is reported with `sorryAx` in that failed build. PR #68 reverses the rewrite direction to `rw [hn0eq]`; it remains a separate, unverified source head until its own CI and named axiom checks complete.
