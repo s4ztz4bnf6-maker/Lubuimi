@@ -14,16 +14,16 @@ r_\alpha\equiv(2^A-C_k)(3^k)^{-1}\pmod{2^{A+1}}.
 ## 2. Historical priority and mathematical scope
 
 The one-cylinder classification is a direct reformulation of the classical finite parity-vector coding. Let
-\\[
+\[
 T(n)=
-\\begin{cases}
-(3n+1)/2,&n\\text{ odd},\\\\
-n/2,&n\\text{ even}.
-\\end{cases}
-\\]
-For a valuation word \\(\\alpha\\) with cumulative sums \\(A_j\\), the exact word corresponds to the length-`A+1` parity vector whose entries are one exactly at \\(A_0,\\ldots,A_k\\) and zero at all intervening positions. The finite parity-vector map is a permutation modulo \\(2^{A+1}\\).
+\begin{cases}
+(3n+1)/2,&n\text{ odd},\\
+n/2,&n\text{ even}.
+\end{cases}
+\]
+For a valuation word \(\alpha\) with cumulative sums \(A_j\), the exact word corresponds to the length-\(A+1\) parity vector whose entries are one exactly at \(A_0,\ldots,A_k\) and zero at all intervening positions. The finite parity-vector map is a permutation modulo \(2^{A+1}\).
 
-The coding originates with Terras (1976) and Everett (1977); Lagarias (1985), Theorem B, is a standard explicit reference. Kontorovich–Lagarias (2009), Theorem 2.1, restates the result and identifies that history. Tao (2022), §4 in the proof of Proposition 1.9, also explicitly notes that fixing a finite Syracuse valuation tuple constrains the starting odd integer to one residue class modulo \\(2^{|\\alpha|+1}\\). Tao's Proposition 1.9 is a conditional approximate-distribution theorem, not merely the exact residue-class statement.
+The coding originates with Terras (1976) and Everett (1977); Lagarias (1985), Theorem B, is a standard explicit reference. Kontorovich–Lagarias (2009), Theorem 2.1, restates the result and identifies that history. Tao (2022), §4 in the proof of Proposition 1.9, also explicitly notes that fixing a finite Syracuse valuation tuple constrains the starting odd integer to one residue class modulo \(2^{|\alpha|+1}\). Tao's Proposition 1.9 is a conditional approximate-distribution theorem, not merely the exact residue-class statement.
 
 Accordingly, the residue-class classification and density are classical and are not claimed as a new discovery. This manuscript's role is an independent exposition in accelerated-valuation coordinates, with the affine offset formula and explicit finite-tail and margin consequences. No eponymous theorem name or priority claim is used. The novelty of any additional finite-tail or margin corollary is a separate literature question.
 
