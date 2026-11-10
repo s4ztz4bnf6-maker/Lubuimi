@@ -43,3 +43,10 @@ This cylinder theorem only characterizes finite valuation itineraries. It does n
 ## Local terminal-exactness step — 10 November 2026
 
 A direct divisibility proof of the one-step backward implication is now recorded in [SYRACUSE_TERMINAL_EXACT_BACKWARD_STEP_2026-11-10.md](SYRACUSE_TERMINAL_EXACT_BACKWARD_STEP_2026-11-10.md). The key hypotheses are terminal exactness at `k+1` and `1 ≤ a k`; the proof reduces to coprime cancellation for `3` and `2^A`, followed by an explicit parity witness. No Lean compilation is claimed. The next implementation must test the exact Mathlib lemma names rather than assume them.
+
+
+## Verified backward-exactness result — 10 November 2026
+
+The local terminal-exactness implication and its finite backward induction are no longer open Lean obligations on the terminal-backward candidate branch. Exact source head: `e44eb4331cc1481e10d6f60780d695412c47a726`. GitHub Actions run `42844423707` completed successfully under Lean 4.34.1 / Mathlib 4.34.1. Both declarations, `SyracuseAudit.terminalExact_backward_step` and `SyracuseAudit.terminalExact_backward_prefix`, were elaborated and kernel-checked. Their explicit transitive axiom reports are both `[propext, Classical.choice, Quot.sound]`; neither includes `sorryAx`.
+
+This closes only the finite backward-propagation obligation. It does not close the separate arbitrary finite-word cylinder realization theorem, the 2-adic Haar-measure derivation, density-to-pointwise transfer, or global orbit descent. The authoritative branch `collatz/valuation-cylinders-2026-10-26` remains unchanged; the verified code is isolated in draft PR #72. A `lake check --paranoid` run is not yet recorded.
