@@ -781,3 +781,8 @@ The exact shifted-tail and minimality reduction is now formally verified at this
 PR #62 adds `affine_minimal_counterexample_prefix_mem_finiteCapTree` and `affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit`. The first composes the PR #59 verified lower-bound theorem with the existing finite-cap-tree membership result; the second adds the terminal-residue unit conclusion. Exact source head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow 42811286670, has all three jobs in progress at the latest poll. No verification claim is made yet.
 
 This closes a formal interface gap between deterministic minimality and the existing finite-depth path certificate if the exact-head CI passes. It does not exclude an infinite branch. The average (k=2) terminal-residue energy bound remains an average statement; no pathwise upper bound is inferred from it.
+
+
+## PR #62 partial kernel verification — 10 November 2026
+
+The new finite-cap-tree bridge declarations have passed Lean 4.34.1 and Lean 4.35.0 paranoid checks on exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, each with `[propext, Classical.choice, Quot.sound]`. The paranoid kernel accepted and no `sorryAx` was detected. The compile-drafts job remains in progress, so the full exact-head workflow is not yet complete.
