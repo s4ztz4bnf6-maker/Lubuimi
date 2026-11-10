@@ -400,3 +400,8 @@ This bridge does not rule out the existence of a least odd nonterminating start.
 The initial valuation-one cylinder declaration is renamed in the continuation candidate to `initial_valuation_one_cylinder_iff_dyadic_divisibility`. The proposition and proof are unchanged. Earlier CI records verify the prior source identifier only and must not be represented as verification of the renamed declaration.
 
 PR #56 now includes the rename together with the shifted-tail, least-start, suffix-return, and minimal-counterexample lower-bound declarations. Current exact head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow 42808797159, queued at latest poll. No fresh verification claim is made until all exact-head jobs and axiom/no-`sorryAx` gates pass.
+## Shifted-tail/minimality exact-head correction — 10 November 2026
+
+PR #56 head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow 42808797159, failed the module build. The finite iterate identity compiled with `[propext, Classical.choice, Quot.sound]`; the renamed initial-cylinder declaration also printed `[propext, Classical.choice, Quot.sound]`. The later least-start proof failed because `Nat.find` required a local classical decision procedure, `omega` needed the explicit instantiated oddness fact `hodd j`, and the lower-bound proof referenced a theorem declared later in the file. No full-module PASS is claimed.
+
+PR #58 exact head `a2eea6f3c979e25a705c3da60d09d6ec84a41b7f`, workflow 42809723676, is the repair candidate. It adds `classical`, names `hoddj`, and proves the lower bound directly from suffix return and the no-hit hypothesis. Its exact-head jobs were queued at the latest poll. No verification claim is made until all jobs and axiom/no-`sorryAx` checks pass.
