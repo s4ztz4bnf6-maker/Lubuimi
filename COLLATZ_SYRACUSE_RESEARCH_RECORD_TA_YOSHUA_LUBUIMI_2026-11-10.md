@@ -697,3 +697,23 @@ The initial-cylinder theorem, valuation bounds, exact offset and strict-margin r
 The next global proof obligation remains to derive the suffix-return premise from the deterministic accelerated Syracuse dynamics and the minimal-counterexample definition. The intended chain is: establish oddness of every orbit term from the exact affine identity and positive exponent; identify each exponent as the exact 2-adic valuation; prove the shifted tail is the unique deterministic Syracuse orbit from its current term; then apply minimality to obtain the suffix-return premise. Each link must be proved explicitly. Until then, the current minimal-counterexample wrapper remains conditional. Even after that bridge, finite-tree membership alone does not rule out an infinite branch; a separate descent, ranking, or well-foundedness argument is required.
 
 **Status:** PR #48 CI fully green on run 42759509255; finite-depth theorem verified within its exact scope; global Collatz theorem remains open.
+
+
+## Deterministic minimality-to-suffix bridge — 10 November 2026
+
+The affine Syracuse sequence is now connected directly to the deterministic accelerated Syracuse map by the shifted-tail identity
+`affine_trajectory_eq_syracuse_iterate`. Together with `every_state_odd_of_positive_affine_steps` and the exact-exponent successor identity `affine_step_eq_syracuse_of_exact_exponent`, this supplies the source dynamics needed for the least-start argument.
+
+The resulting declarations are:
+- `exists_least_odd_nonterminating_syracuse_start`: well-ordering supplies a least odd positive nonterminating start from the explicit nonempty-start premise.
+- `affine_suffix_returns_of_least_odd_nonterminating_start`: if (n_0) is least among odd positive nonterminating Syracuse starts, every state (n_j<n_0) has a finite future suffix equal to 1.
+- `affine_minimal_counterexample_orbit_lower_bound`: a trajectory that never reaches 1 and starts at that least counterexample satisfies (n_0le n_j) for every (j).
+- `affine_minimal_counterexample_prefix_mem_finiteCapTree) and `affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit`: the deterministic minimality reduction feeds the already-established finite-cap-tree and terminal-unit statements.
+
+Exact successful source snapshots retained:
+- Commit `5f6e46de8bed7061f8336089857143c54e997af5`, workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956): all three jobs PASS (Lean 4.34.1 build/audit, draft compilation, Lean 4.35.0 paranoid kernel check).
+- Commit `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow [42811286670](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42811286670): all three jobs PASS, including the deterministic minimality-to-finite-cap-tree bridge.
+
+A later axiom-audit branch exposed a documentation-command placement error: `#print axioms exists_least_odd_nonterminating_syracuse_start` had been placed immediately after a docstring, so Lean parsed it where a declaration was expected. It has been moved before the docstring in source commit `121dc8591f2610ac2ce5ec17e4ea9618b2e3427f`. **This syntax repair is not yet CI-verified on its exact head.** The successful runs above remain valid for their exact source commits; no status is transferred to the later branch.
+
+This closes the sequence-level suffix-return premise under the explicit least-odd-nonterminating-start hypothesis. It does not prove that the finite cap tree has no infinite branch, nor global Collatz termination.

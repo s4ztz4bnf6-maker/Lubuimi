@@ -101,3 +101,23 @@ This invalidates the proposed deterministic implication “maximal exponent-one 
 ## CI status update — 2026-10-24
 
 Workflow run [40125303822](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/40125303822) completed successfully. It compiled the library modules, `IterationLemmas.lean`, `ThresholdLemmas.lean`, `SyracuseReferenceTest.lean`, `SyracuseQuarterDescent.lean`, the offset-identity/strict-margin audit, and the stronger offset lower-bound audit. This confirms compilation for the checked targets in this commit; it does not by itself certify axiom-freedom unless the recorded `#print axioms` outputs are inspected, and it does not prove global Collatz convergence.
+
+
+## Deterministic minimality-to-suffix bridge — 10 November 2026
+
+The affine Syracuse sequence is now connected directly to the deterministic accelerated Syracuse map by the shifted-tail identity
+`affine_trajectory_eq_syracuse_iterate`. Together with `every_state_odd_of_positive_affine_steps` and the exact-exponent successor identity `affine_step_eq_syracuse_of_exact_exponent`, this supplies the source dynamics needed for the least-start argument.
+
+The resulting declarations are:
+- `exists_least_odd_nonterminating_syracuse_start`: well-ordering supplies a least odd positive nonterminating start from the explicit nonempty-start premise.
+- `affine_suffix_returns_of_least_odd_nonterminating_start`: if (n_0) is least among odd positive nonterminating Syracuse starts, every state (n_j<n_0) has a finite future suffix equal to 1.
+- `affine_minimal_counterexample_orbit_lower_bound`: a trajectory that never reaches 1 and starts at that least counterexample satisfies (n_0le n_j) for every (j).
+- `affine_minimal_counterexample_prefix_mem_finiteCapTree) and `affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit`: the deterministic minimality reduction feeds the already-established finite-cap-tree and terminal-unit statements.
+
+Exact successful source snapshots retained:
+- Commit `5f6e46de8bed7061f8336089857143c54e997af5`, workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956): all three jobs PASS (Lean 4.34.1 build/audit, draft compilation, Lean 4.35.0 paranoid kernel check).
+- Commit `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow [42811286670](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42811286670): all three jobs PASS, including the deterministic minimality-to-finite-cap-tree bridge.
+
+A later axiom-audit branch exposed a documentation-command placement error: `#print axioms exists_least_odd_nonterminating_syracuse_start` had been placed immediately after a docstring, so Lean parsed it where a declaration was expected. It has been moved before the docstring in source commit `121dc8591f2610ac2ce5ec17e4ea9618b2e3427f`. **This syntax repair is not yet CI-verified on its exact head.** The successful runs above remain valid for their exact source commits; no status is transferred to the later branch.
+
+This closes the sequence-level suffix-return premise under the explicit least-odd-nonterminating-start hypothesis. It does not prove that the finite cap tree has no infinite branch, nor global Collatz termination.
