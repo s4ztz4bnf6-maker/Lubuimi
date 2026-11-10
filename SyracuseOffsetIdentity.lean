@@ -3316,6 +3316,61 @@ theorem minimal_counterexample_prefix_cap_tree_and_terminal_unit
 #print axioms minimal_counterexample_prefix_mem_finiteCapTree
 #print axioms minimal_counterexample_prefix_cap_tree_and_terminal_unit
 
+/-- A least odd nonterminating Syracuse start, together with the exact
+affine trajectory relation, supplies the suffix-return property needed
+to place every valuation prefix in the finite cap tree. Unlike the
+sequence-level wrapper above, this theorem derives the lower bound from
+the deterministic Syracuse dynamics. It remains a necessary path
+certificate and does not exclude an infinite branch. -/
+theorem affine_minimal_counterexample_prefix_mem_finiteCapTree
+    (n₀ : ℕ) (n A a : ℕ → ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (ha : ∀ j, 0 < a j)
+    (hn₀ : 1 < n₀)
+    (hoffset :
+      ∀ j, 2 ^ A j * n j =
+        3 ^ j * n₀ + canonicalOffset A j)
+    (hstep :
+      ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1)
+    (hleast :
+      ∀ m, isOddNonterminatingSyracuseStart m → n₀ ≤ m)
+    (hnever : ∀ j, n j ≠ 1) :
+    ∀ j, valuationPrefix a j ∈ finiteCapTreeLevel j := by
+  apply initial_lower_bounded_orbit_prefix_mem_finiteCapTree
+    n₀ n A a hA0 hA ha hn₀ hoffset
+  exact affine_minimal_counterexample_orbit_lower_bound
+    n₀ n a ha hstep hleast hnever
+
+/-- The deterministic minimality bridge gives both the finite-cap-tree
+prefix and the terminal-residue unit condition at every positive depth. -/
+theorem affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit
+    (n₀ : ℕ) (n A a : ℕ → ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (ha : ∀ j, 0 < a j)
+    (hn₀ : 1 < n₀)
+    (hoffset :
+      ∀ j, 2 ^ A j * n j =
+        3 ^ j * n₀ + canonicalOffset A j)
+    (hstep :
+      ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1)
+    (hleast :
+      ∀ m, isOddNonterminatingSyracuseStart m → n₀ ≤ m)
+    (hnever : ∀ j, n j ≠ 1)
+    (j : ℕ) (hj : 0 < j) :
+    valuationPrefix a j ∈ finiteCapTreeLevel j ∧
+      IsUnit (n j : ZMod (3 ^ j)) := by
+  constructor
+  · exact affine_minimal_counterexample_prefix_mem_finiteCapTree
+      n₀ n A a hA0 hA ha hn₀ hoffset hstep hleast hnever j
+  · exact terminal_residue_unit_of_affine_identity
+      A j n₀ (n j) hj (hoffset j)
+
+#print axioms affine_minimal_counterexample_prefix_mem_finiteCapTree
+#print axioms affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit
+
+
 
 /-!
 ## Exact scale bridge from Syracuse iterates to terminal residues
