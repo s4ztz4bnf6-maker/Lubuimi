@@ -292,3 +292,15 @@ The APW4–Syracuse bridge remains a separate research programme. Its open mathe
 ## 18. Current exact-head Collatz recheck — 10 November 2026
 
 The latest research-record/documentation commit is `29b27dc529b9e81a33b5211e9e01a01e19edc256`. Run [42724343412](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42724343412) is active on that exact head. Checkout and Lean manifest setup completed; Mathlib cache restoration was in progress at the latest retrieval. This is a current recheck of the source tree and does not alter the already established positive cylinder theorem audits `42721006544` and `42721305220`.
+
+
+## 19. Four successful exact-commit audits of the initial cylinder theorem
+
+The initial-cylinder declaration has now passed four full, independent, commit-bound workflows:
+
+1. Run `42721006544` — merge `44bb2ac`, PR head `013192ce524a4572a9d96c8d4dcb2796830b1f62`.
+2. Run `42721305220` — merge `3d79761`, PR head `ad7203f5571d03e5989b9ac935973a837cea8a2`.
+3. Run `42721911555` — merge `7b84a1b`, PR head `21829b4dd3b82a73edb19cf0d09ed011f55ef384`.
+4. Run `42722186081` — merge `5d4a19c`, PR head `a36894eefc52e5d28cd43110f5e289805509ad33`.
+
+All four full compile workflows completed successfully. Each printed the transitive axiom profile `[propext, Classical.choice, Quot.sound]` for `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder`; the explicit complete-log `sorryAx` audit steps passed. The subsequent current-head recheck `42724343412` is in progress on head `29b27dc529b9e81a33b5211e9e01a01e19edc256`. The general finite valuation-word partition, finite tail partition, terminal-residue collision energy and Markov matrix remain separate Lean formalization targets.
