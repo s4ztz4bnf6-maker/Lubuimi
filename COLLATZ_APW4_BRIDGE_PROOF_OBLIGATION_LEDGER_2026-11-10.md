@@ -203,3 +203,16 @@ The new precise declarations are:
 The old theorem names containing nondecreasing are retained only as compatibility aliases, with docstrings recording the actual lower-bound condition. The exact source head is 3cc651a5257dfae87061f7c12cd806814354b28e; workflow 42751535385 is queued.
 
 This lower-bound condition is exactly the type needed in a minimal-counterexample reduction: if a counterexample orbit ever fell below its initial odd value, the smaller odd iterate would itself be a smaller counterexample. The current theorem embeds all prefixes of such a hypothetical lower-bounded orbit in a finite state-dependent cap tree and attaches the terminal-residue unit condition. It still does not prove that the tree has no infinite branch; that remains the central global Collatz obstruction.
+
+
+## 1.10 — Explicit minimal-counterexample reduction to the cap tree
+
+New source head: ffae3ea4ca6fdd54d607d99c846b51fa75519790. New declarations:
+
+- orbit_lower_bound_of_minimal_counterexample: from the explicit premise that every suffix beginning at a value below n₀ eventually reaches 1, and the candidate orbit never reaches 1, it proves n₀ ≤ n_j for every j.
+- minimal_counterexample_prefix_mem_finiteCapTree: feeds that lower-bound conclusion into the exact affine finite cap-tree embedding.
+- minimal_counterexample_prefix_cap_tree_and_terminal_unit: at every positive depth, packages finite-tree membership with the terminal-residue unit condition.
+
+The suffix-return premise is explicit and must still be derived from the actual deterministic Syracuse dynamics and the chosen minimal-counterexample definition. The theorem does not show that the finite tree has no infinite branch. Exact-head workflow 42751669336 is queued; the new declarations are candidates until compile, named axiom audit, no-sorryAx scan, and the supported Lake check finish.
+
+Terminology is now corrected: the old nondecreasing theorem names are compatibility aliases, while the actual hypothesis is that no iterate falls below the initial value. This is the standard lower-bound property relevant to a minimal-counterexample argument, not stepwise monotonicity.
