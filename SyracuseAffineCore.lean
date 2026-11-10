@@ -240,6 +240,46 @@ theorem terminalExact_backward_step
           rw [Nat.mul_mod_right, Nat.mod_eq_of_lt hlt]
           simp
 
+
+/--
+Finite backward propagation of terminal exactness.  Every valuation in the
+finite suffix is assumed positive; exactness at N then propagates to every
+earlier index k ≤ N by repeated use of terminalExact_backward_step.
+This is a finite accumulator statement, not a realization theorem for
+arbitrary valuation words and not a global Collatz convergence result.
+-/
+theorem terminalExact_backward_prefix
+    (a n : Nat → Nat) (N : Nat)
+    (ha : ∀ k, k < N → 1 ≤ a k)
+    (hterminal :
+      affineCompositionRhs a n N %
+          2 ^ (prefixExponentSum a N + 1) =
+        2 ^ prefixExponentSum a N) :
+    ∀ k, k ≤ N →
+      affineCompositionRhs a n k %
+          2 ^ (prefixExponentSum a k + 1) =
+        2 ^ prefixExponentSum a k := by
+  induction N with
+  | zero =>
+      intro ha hterminal k hk
+      have hk0 : k = 0 := by omega
+      subst k
+      exact hterminal
+  | succ N ih =>
+      intro ha hterminal k hk
+      by_cases hkEq : k = N + 1
+      · subst k
+        exact hterminal
+      · have hkN : k ≤ N := by omega
+        have hterminalN :
+            affineCompositionRhs a n N %
+                2 ^ (prefixExponentSum a N + 1) =
+              2 ^ prefixExponentSum a N :=
+          terminalExact_backward_step a n N (ha N (by omega)) hterminal
+        exact ih (fun j hj => ha j (by omega)) hterminalN k hkN
+
+#print axioms terminalExact_backward_prefix
+
 #print axioms terminalExact_backward_step
 
 
