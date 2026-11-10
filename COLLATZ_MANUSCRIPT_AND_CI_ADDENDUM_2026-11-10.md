@@ -41,3 +41,15 @@ Only after this bridge is proved may the conditional minimal-counterexample lowe
 This addendum supplements the existing published finite valuation-word cylinder manuscript; it does not edit, replace, or downgrade that manuscript. The exact finite-word theorem remains established independently of the current PR #48 cap-tree work.
 
 **Status: finite cap-tree CI PASS at the exact head above; global Collatz proof OPEN.**
+
+
+## New Lean proof candidate — parity and exact valuation bridge, 10 November 2026
+
+Source head: `a8b593cd8ef59105e6b62b11d0dfc7e41e89a3bb`.
+
+Two new declarations have been added immediately before the minimal-counterexample wrapper in `SyracuseOffsetIdentity.lean`:
+
+- `every_state_odd_of_positive_affine_steps`: from `0 < a(j)` and `2^(a(j))*n(j+1)=3*n(j)+1`, it derives `n(j) % 2 = 1) for every j by parity of the exact affine identity.
+- `every_affine_exponent_is_exact`: uses oddness of the next state and the existing `exponent_is_maximal_of_odd_quotient` lemma to show `2^(a(j)+1)` does not divide `3*n(j)+1`.
+
+These declarations directly address the first two steps of the deterministic-tail proof plan. They do not yet define the canonical successor, prove uniqueness of its odd quotient, identify shifted tails with iterates of that successor, or derive the suffix-return premise from minimality. This is a new Lean source candidate only; no compile, axiom-profile, or paranoid PASS is claimed until exact-head CI runs and logs are inspected.
