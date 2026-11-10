@@ -121,3 +121,10 @@ The signed-margin development now records a necessary next-exponent cap for ever
 The APW4 bridge ledger remains the acceptance gate for cross-project use: exact atom map, index multiplicity, original weight preservation, diagonal identity, weighted off-diagonal demand versus actual BIB capacities, and a strict positive realized block margin must all be proved. Otherwise the APW4 and Collatz results remain independent.
 
 PR #9 remains a draft and is currently reported non-mergeable against its base; it is retained as a working integration branch, not merged. No existing theorem or historical definition is replaced.
+
+
+## Terminal-residue congruence bridge — 10 November 2026
+
+The exact affine offset identity now yields a separately Lean-compiled terminal-residue congruence in `SyracuseOffsetIdentity.lean`: `CollatzSyracuseAudit.terminal_residue_congruence_of_affine_identity`, exact source commit `db58a4054238e1a52ea935968dc96a7066de20d6`, workflow [42742247801](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42742247801). Its transitive axiom profile is `[propext, Quot.sound]`; no actual `sorryAx` appears in the complete log. It proves the multiplicative congruence modulo (3^k), not yet the inverse formula or terminal-unit property.
+
+The terminal-residue collision energy remains a separate finite-place model. Its full-source off-diagonal lower bound is an average over valuation words and cannot alone exclude a single exceptional infinite word. A Collatz transport theorem still needs a non-tautological target capacity derived from the signed-margin dynamics and a proved weighted Hall inequality on the surviving non-descending events. The APW4/BIB reserve is not identified with this collision energy.
