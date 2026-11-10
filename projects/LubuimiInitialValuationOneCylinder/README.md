@@ -37,7 +37,17 @@ Thus the initial run length is exactly `v₂(n₀+1) − 1`.
 
 ## Scope
 
-This theorem is not a proof of the global Collatz conjecture. The initial-cylinder Lean declaration is now compiled and axiom-audited on two exact CI snapshots: run 42721006544 (merge commit 44bb2ac, PR head 013192ce524a4572a9d96c8d4dcb2796830b1f62) and run 42721305220 (merge commit 3d79761, PR head ad7203f5571d03e5989b9ac935b2103300f02409). Both completed every workflow step successfully. The transitive axiom profile is [propext, Classical.choice, Quot.sound], and the explicit sorryAx scan found none. Runs 42721911555 and 42722186081 are both additional successful exact-head rechecks: the full workflows completed, the theorem retained [propext, Classical.choice, Quot.sound], and the complete-log sorryAx scans passed. The initial cylinder theorem now has four successful exact-commit CI snapshots in total. The broader finite valuation-word partition theorem remains a separate Lean formalization target. The APW4–Syracuse cylinder–energy bridge remains a research programme, not a theorem used here.
+This theorem is not a proof of the global Collatz conjecture. The initial-cylinder Lean declaration is now compiled and axiom-audited on five exact CI snapshots:
+
+- Run 42721006544 (merge `44bb2ac`, PR head `013192ce524a4572a9d96c8d4dcb2796830b1f62`).
+- Run 42721305220 (merge `3d79761`, PR head `ad7203f5571d03e5989b9ac935b2103300f02409`).
+- Run 42721911555 (merge `7b84a1b`, PR head `21829b4dd3b82a73edb19cf0d09ed011f55ef384`).
+- Run 42722186081 (merge `5d4a19c`, PR head `a36894eefc52e5d28cd43110f5e289805509ad33`).
+- Run 42724343412 (merge `06675a1`, PR head `29b27dc529b9e81a33b5211e9e01a01e19edc256`).
+
+All five full workflows completed successfully. The transitive axiom profile for `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` was `[propext, Classical.choice, Quot.sound]` in every run, and the explicit complete-log `sorryAx` audit steps passed. Earlier failed attempts 42719689591 and 42720406876 remain in the historical record but do not invalidate these five later positive audits. Current documentation/status recheck 42725493567 is in progress on head `a52dffc23b323964f33bc7f6c61c2cb24bcdf708`.
+
+The broader finite valuation-word partition theorem, finite tail-cylinder partition, terminal-residue collision energy and finite Markov matrix remain separate Lean formalization targets. The APW4–Syracuse cylinder–energy bridge remains a research programme, not a theorem used in the initial-cylinder proof.
 
 The manuscript is a self-contained preprint draft for scholarly circulation and review. No journal acceptance, DOI, or independent peer review is claimed. The result is named **Lubuimi's Initial Valuation-One Cylinder Theorem** and attributed to Ta-Yoshua Lubuimi. AI systems are assistants only, never authors or independent mathematical verifiers.
 
