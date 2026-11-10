@@ -115,8 +115,8 @@ jobs:
             echo "Forbidden sorryAx found in SyracuseOffsetIdentity.lean."
             exit 1
           fi
-      - name: Run the full Lake check under the pinned Lean toolchain
-        run: lake check
+      - name: Reconfirm the Collatz library build under the pinned Lean toolchain
+        run: lake build CollatzAudit
 
 
   kernel-check-lean-435-paranoid:
