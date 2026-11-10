@@ -47,3 +47,14 @@ Every CI statement is bound to an immutable commit, Lean/Mathlib version, named 
 The existing proprietary notices and commercial licensing terms remain unchanged. Third-party Lean/Mathlib licenses remain separate. Authorship remains Ta-Yoshua Lubuimi; AI systems are assistants only.
 
 **Current conclusion:** substantial exact finite arithmetic and Lean milestones are verified. The global Collatz conjecture remains open in this project record. The APW4 energy bridge is a research candidate, not an established Collatz theorem.
+
+
+## 6. Exact finite Kolaz recheck and universal descent obligation — 10 November 2026
+
+Exact source head `54f8b177d70f216fac81aa6cf6b28b8fec36596c` passed both [42739986917](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42739986917) and [42739979513](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42739979513). The reproducibility suite checks the nine finite thresholds 31 through 8191 (powers-of-two-minus-one), exact enumerated tables, CSV tables, the B=1023 1097-cylinder/margin certificate, direct return to one, escape-source characterization, and common suffixes across selected thresholds. The finite outputs include common-suffix lengths 45 and 29 for the recorded pairs (1023,2047) and (4095,8191). This verifies the specified finite data and regression tests only.
+
+The universal Collatz gap is unchanged: show that the necessary state-dependent cap for nondecreasing endpoints cannot be satisfied indefinitely along any realizable infinite valuation word, or derive a uniform positive descent margin with a valid block-to-global descent implication. Neither finite branching nor a finite threshold table alone supplies this conclusion.
+
+The dyadic uniform-fibre cardinality identity remains a separate Lean-verified finite counting lemma at exact commit `a1becbc8e837f10abcd952a2e03832cb057fb2b8` / workflow [42738528207](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738528207). The full prefix-dependent cap/tree/interval/residue-atom bijection remains open.
+
+The APW4-to-Collatz transport checklist in §§2–3 remains mandatory and unchanged. No bridge is admitted without exact source/target atoms, index multiplicities, original weight preservation, diagonal identity, weighted Hall/BIB capacity, and strict positive margin. No historical APW4 definitions are retrofitted to the Syracuse setting.
