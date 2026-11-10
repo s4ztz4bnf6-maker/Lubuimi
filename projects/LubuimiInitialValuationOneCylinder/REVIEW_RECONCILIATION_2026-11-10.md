@@ -29,7 +29,7 @@ The current Section 6 also states that the next-valuation threshold is exact but
 
 The initial all-one declaration has seven successful historical exact-commit audit snapshots, as listed in `WRITTEN_REVIEW.md`. The neutral declaration `initial_valuation_one_cylinder_iff_dyadic_divisibility` was separately checked on exact source commit `5f6e46de8bed7061f8336089857143c54e997af5` by workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956), with Lean 4.34.1 kernel check, compile-drafts, Lean 4.35.0 paranoid check, standard transitive axiom profile, and no-`sorryAx` guard passing.
 
-The current publication PR [#35](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/35) is still open/draft at head `2fa0eb333bddc145ad1a34eb2b42d6b97453d6cd). The exact-head workflow query returned [42827159570](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42827159570) completed successfully. This records the workflow result associated with that head; it does not expand the audited theorem scope.
+The current publication PR [#35](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/35) is still open/draft at head `2fa0eb333bddc145ad1a34eb2b42d6b97453d6cd`. The exact-head workflow query returned [42827159570](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42827159570) completed successfully. This records the workflow result associated with that head; it does not expand the audited theorem scope.
 
 The general finite valuation-word theorem, its density corollary, and finite tail partition are separate mathematical statements and remain **OFFEN – NICHT VERIFIZIERT** as general Lean results. A verified special case does not certify the arbitrary-word theorem.
 
