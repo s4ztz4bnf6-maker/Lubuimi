@@ -26,12 +26,12 @@ The edge x -> z0 is not counted in m. This convention matters for reproducing th
 - B=127: ten source edges x=87,91,95,99,103,107,111,115,119,123; longest excursion starts at z0=155, returns to 61 in 25 steps, and reaches H=3077. The z0=167 excursion returns to 61 in 18 steps.
 - B=255: twenty-one source edges x=171,175,...,251; longest excursion starts at z0=335, returns to 61 in 18 steps, and reaches H=3077. Another starts at z0=359 (11 steps to 61), and z0=377 (16 steps to 61). The z0=341 excursion returns directly to 1.
 
-The full exact tables and confluence suffixes are in MANUSCRIPT.md. The independent integer-only reproduction script is threshold_return.py; its regression tests are test_threshold_return.py.
+The full B=31,63,127,255 tables and confluence suffixes are in MANUSCRIPT.md. The complete extended B=511 and B=1023 tables are archived in threshold_511.csv and threshold_1023.csv. The independent integer-only reproduction script is threshold_return.py; its regression tests are test_threshold_return.py.
 
 ## Reproducibility and scope
 
-The script uses exact integer arithmetic only and has no third-party dependencies. The CI workflow checks the exact tables and named common suffixes. This is a finite computational audit, not a proof about all thresholds or all starting values.
+The script uses exact integer arithmetic only and has no third-party dependencies. The CI workflow checks all six thresholds, the two complete extended CSV tables, and the named common suffixes. This is a finite computational audit, not a proof about all thresholds or all starting values.
 
-The earlier numerical lead “1097” is not assigned a verified mathematical meaning in the archived material and is deliberately not included as a result.
+The value 1097 occurs as z0=T(731) in the B=1023 finite table, with first return 823 after one further step. This does not identify or verify the separate earlier “1097 threshold/count” lead, whose definition remains unresolved.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
