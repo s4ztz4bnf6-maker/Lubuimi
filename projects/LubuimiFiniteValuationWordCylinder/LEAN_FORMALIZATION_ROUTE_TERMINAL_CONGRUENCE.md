@@ -1,6 +1,6 @@
 # Lean formalization route: terminal exact-residue criterion
 
-**Project:** Lubuimi's Finite Valuation-Word Cylinder Partition Theorem  
+**Project:** Finite Exact Valuation-Word Cylinder Classification and Tail Partition  
 **Author:** Ta-Yoshua Lubuimi  
 **Date:** 10 November 2026  
 **Status:** Mathematical derivation and formalization design; not yet Lean-compiled or axiom-audited.
