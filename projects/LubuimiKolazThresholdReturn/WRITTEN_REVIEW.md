@@ -65,3 +65,8 @@ The integer-only script and regression assertions have been locally checked, inc
 ## Exact-head CI result — 10 November 2026
 
 Expanded reproducibility run 42732032993 on source head `5a01e5e56d203c0ed987f6bb70c1519b107e9f23` passed. Job 129552163491 (`exact-finite-tables`) verified all six thresholds, both complete extended CSV tables, the original and new confluence suffixes, and the B=1023 valuation-word/cylinder/margin certificate. This is finite Python reproducibility CI only; no Lean kernel verification or universal Collatz result is claimed.
+
+
+## Exact-head expanded reproducibility result — 10 November 2026
+
+Workflow 42732216205 passed on source head `821579ea5555a6f5e2e38fa771f8797dc4650106`. All seven regression tests passed, including the complete B=511 and B=1023 CSV tables, the two new cross-threshold confluence suffixes, and the exact x=731 valuation-word/cylinder/offset/signed-margin certificate. This is Python integer-arithmetic reproducibility only. The current PR head may advance with documentation-only changes; the exact code/test commit above is the verified snapshot.
