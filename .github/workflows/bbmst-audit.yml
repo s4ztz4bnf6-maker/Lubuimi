@@ -31,6 +31,17 @@ jobs:
           use-mathlib-cache: true
       - name: Compile the audited formalization
         run: lake env lean ErdosSelfridge_v17_fixed.lean
+      - name: Build the audited Erdős-Selfridge source module
+        run: lake build ErdosSelfridgeAudit
+      - name: Run raw degeneracy and admissibility-guard audit
+        run: |
+          lake env lean AuditCheck.lean 2>&1 | tee /tmp/erdos-selfridge-audit.log
+          if grep -q 'sorryAx' /tmp/erdos-selfridge-audit.log; then
+            echo "::error::sorryAx detected in the Erdős-Selfridge audit scope"
+            exit 1
+          fi
+          grep -q 'admitted_sieve_criterion' /tmp/erdos-selfridge-audit.log
+          grep -q 'admitted_sf_sieve_certificate_exists' /tmp/erdos-selfridge-audit.log
       - name: Build the endpoint-safe fiber mass core and probability interface
         run: lake build BBMSTFiberMassCore BBMSTProbabilityInterface
       - name: Compile strict interior-mass witness theorem
