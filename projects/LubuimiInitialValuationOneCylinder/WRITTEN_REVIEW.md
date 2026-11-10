@@ -53,3 +53,8 @@ The revised manuscript v1.0 is self-contained, includes a literature-context sec
 **Verdict:** The initial valuation-one cylinder theorem is mathematically established and independently Lean-audited on the listed exact snapshots. The wider Collatz programme remains open.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
+
+
+## Verification-scope clarification
+
+The seven listed exact-commit workflows audit the main initial-cylinder declaration. The separate Syracuse margin-cap declarations passed workflow 42728049650 on exact source commit ca48ec7fdad5e8d6f8aeb82fed8586a1b57c12bc. Neither record should be overread as a claim that every displayed signed-margin corollary in the manuscript has its own named Lean theorem and audit.
