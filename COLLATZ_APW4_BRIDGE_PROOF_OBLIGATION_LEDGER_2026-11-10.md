@@ -190,3 +190,16 @@ Exact code head 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb, workflow 42749969443, 
 The exact source-file sorryAx scan passed. This is a genuine Lean kernel compile and axiom-audit PASS for the listed declarations on that code head. The separate paranoid job did not pass: lake check --paranoid is not a recognized option in the repository-pinned Lean 4.34.1 toolchain. The workflow is being corrected to run the supported lake check under 4.34.1; new run 42750825692 is queued. An earlier experimental Lean 4.35.0 job failed while compiling Mathlib Cache/Requests.lean, before the project theorem was checked.
 
 The theorem remains a finite-depth path certificate only. It embeds each prefix of a hypothetical nondecreasing exact affine orbit into a finite state-dependent cap tree and attaches a terminal-residue unit condition. It does not prove the tree has no infinite branch or establish global Collatz termination.
+
+
+## Terminology correction — lower-bounded orbit, not stepwise monotone orbit
+
+The previous entries used the phrase "nondecreasing orbit" for the hypothesis hnd : ∀ j, n₀ ≤ n j. That phrase is misleading: the hypothesis says that no iterate falls below the initial value; it does not say n j ≤ n (j+1). The source docstrings now state this explicitly.
+
+The new precise declarations are:
+- initial_lower_bounded_orbit_prefix_mem_finiteCapTree
+- initial_lower_bounded_orbit_prefix_cap_tree_and_terminal_unit
+
+The old theorem names containing nondecreasing are retained only as compatibility aliases, with docstrings recording the actual lower-bound condition. The exact source head is 3cc651a5257dfae87061f7c12cd806814354b28e; workflow 42751535385 is queued.
+
+This lower-bound condition is exactly the type needed in a minimal-counterexample reduction: if a counterexample orbit ever fell below its initial odd value, the smaller odd iterate would itself be a smaller counterexample. The current theorem embeds all prefixes of such a hypothetical lower-bounded orbit in a finite state-dependent cap tree and attaches the terminal-residue unit condition. It still does not prove that the tree has no infinite branch; that remains the central global Collatz obstruction.
