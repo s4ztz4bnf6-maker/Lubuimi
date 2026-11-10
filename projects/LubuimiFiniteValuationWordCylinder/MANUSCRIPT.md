@@ -1,4 +1,4 @@
-# Lubuimi's Finite Valuation-Word Cylinder Partition Theorem
+# Finite Exact Valuation-Word Cylinder Classification and Tail Partition
 
 **Author:** Ta-Yoshua Lubuimi  
 **Research date:** 10 November 2026  
@@ -37,7 +37,7 @@ Define the exact valuation-word cylinder
 \text{ exact exponents are }\alpha\}.
 \]
 
-**Lubuimi's Finite Valuation-Word Cylinder Partition Theorem:** There is a unique odd residue class
+**Finite exact valuation-word cylinder theorem:** There is a unique odd residue class
 \[
 r_\alpha\pmod {2^{A(\alpha)+1}}
 \]
@@ -125,7 +125,7 @@ Thus
 \mathcal C_{(1,\ldots,1)}
 =\{n_0>0:n_0\equiv-1\pmod {2^{N+1}}\},
 \]
-which is exactly Lubuimi's Initial Valuation-One Cylinder Theorem.
+which is exactly the initial valuation-one cylinder classification.
 
 ## 5. Prefix tree and exact child masses
 
