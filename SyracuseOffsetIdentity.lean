@@ -3165,7 +3165,8 @@ forces every iterate to stay at least the initial value.
 
 /-- An infinite exact accelerated-Syracuse path from an odd starting value.
 Each state is odd, and every transition removes a positive power of two
-from 3*n+1 to the next odd state. -/
+from 3*n+1 to the next odd state. The path is existential: the suffix-shift
+argument needs no separate global uniqueness theorem for transitions. -/
 def HasNonterminatingOddSyracusePath (m : ℕ) : Prop :=
   ∃ p : ℕ → ℕ,
     p 0 = m ∧
