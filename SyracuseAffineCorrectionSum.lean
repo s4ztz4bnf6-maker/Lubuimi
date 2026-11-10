@@ -105,7 +105,6 @@ theorem affineCorrectionSum_ge_last_power
     (a : Nat → Nat) (N : Nat) :
     2 ^ prefixExponentSum a N ≤ affineCorrectionSum a (N + 1) := by
   simp [affineCorrectionSum]
-  omega
 
 theorem descent_requires_last_power_bound
     (a n : Nat → Nat)
