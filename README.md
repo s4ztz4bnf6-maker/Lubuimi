@@ -76,3 +76,30 @@ The valuation-word program records the realized-block identity
 For a realized block, `M_N>0` is equivalent to descent. Neither identity supplies a uniform upper bound on `C_N` or `M_N>0` for every starting value. The finite congruence-cylinder representation is useful for exact enumeration, but the universal infinite-branch exclusion remains open.
 
 Existing verified PR #59/#62 results remain valid at their exact heads and are not withdrawn by the later PR #65 failure.
+
+
+## Exact-head update — signed-offset margin and terminal bridge (10 November 2026, 13:55 CET)
+
+### Verified margin result retained
+
+The signed-offset margin result remains verified at exact commit `ca48ec7fdad5e8d6f8aeb82fed8586a1b57c12bc`, workflow [42728049650](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42728049650). The checked declarations are:
+
+- `signedOffsetMargin_nonpos_succ_iff_exponent_cap`;
+- `signedOffsetMargin_nonpos_of_nondecreasing_orbit`;
+- `nondecreasing_orbit_next_exponent_cap`.
+
+The local equivalence is
+
+\[
+D_{j+1}\le 0\iff 2^{A_j+a_j}+3D_j\le 4\cdot 2^{A_j}.
+\]
+
+This gives a necessary local exponent cap under the stated nondecreasing-orbit condition. It is not a global descent theorem and does not exclude every infinite branch. Preserve it as an independent proved component; do not erase it because a later bridge candidate fails.
+
+### Minimal-counterexample and finite-cap-tree chain
+
+PR [#59](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/59) and PR [#62](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/62) remain exact-head verified with all three CI jobs passing and the named standard axiom profiles. In particular, PR #62 connects least-start minimality/suffix-return to a necessary finite-depth cap-tree and terminal-unit certificate. It does not yet prove the finite cap tree has no infinite branch.
+
+PRs [#68](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/68) and [#70](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/70) are parallel proof-script candidates for transporting the initial depth bound through `n 0 = n₀`; neither is promoted to verified without exact-head runs. PR [#71](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/71) installs the exact-head audit workflow on the default branch; once it is merged, trigger fresh runs for #68 and #70 and inspect all three jobs, named axioms, and the no-`sorryAx` guard.
+
+The remaining mathematical target is still the infinite-branch exclusion / well-founded descent step. The verified margin and finite-depth certificates are useful constraints on that step, not substitutes for it. No global Collatz proof is claimed.
