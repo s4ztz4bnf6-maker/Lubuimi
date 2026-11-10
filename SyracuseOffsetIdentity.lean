@@ -3190,6 +3190,7 @@ theorem exists_least_odd_nonterminating_syracuse_start
     (h : ∃ m, isOddNonterminatingSyracuseStart m) :
     ∃ n₀, isOddNonterminatingSyracuseStart n₀ ∧
       ∀ m, isOddNonterminatingSyracuseStart m → n₀ ≤ m := by
+  classical
   refine ⟨Nat.find h, Nat.find_spec h, ?_⟩
   intro m hm
   exact Nat.find_min' h hm
@@ -3207,6 +3208,7 @@ theorem affine_suffix_returns_of_least_odd_nonterminating_start
     ∀ j, n j < n₀ → ∃ k, n (j + k) = 1 := by
   intro j hj
   have hodd := every_state_odd_of_positive_affine_steps n a ha hstep
+  have hodd_j : n j % 2 = 1 := hodd j
   have hpos : 0 < n j := by omega
   by_contra hnot
   have hnonterm : ∀ k, (syracuse^[k]) (n j) ≠ 1 := by
@@ -3232,11 +3234,13 @@ theorem affine_minimal_counterexample_orbit_lower_bound
       ∀ m, isOddNonterminatingSyracuseStart m → n₀ ≤ m)
     (hnever : ∀ j, n j ≠ 1) :
     ∀ j, n₀ ≤ n j := by
-  apply orbit_lower_bound_of_minimal_counterexample n₀ n
-  · intro j hj
-    exact affine_suffix_returns_of_least_odd_nonterminating_start
+  intro j
+  by_contra hnot
+  have hj : n j < n₀ := Nat.lt_of_not_ge hnot
+  obtain ⟨k, hk⟩ :=
+    affine_suffix_returns_of_least_odd_nonterminating_start
       n₀ n a ha hstep hleast j hj
-  · exact hnever
+  exact hnever (j + k) hk
 
 #print axioms affine_minimal_counterexample_orbit_lower_bound
 
