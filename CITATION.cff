@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use the Syracuse/Collatz research and formalization artifacts, please cite Ta-Yoshua Lubuimi."
+title: "Lubuimi's Syracuse Offset, Valuation Cylinders, and Terminal-Residue Energy"
+authors:
+  - family-names: "Lubuimi"
+    given-names: "Ta-Yoshua"
+date-released: 2026-11-10
+version: "0.2.0"
+type: software
+abstract: >-
+  Research and Lean formalization artifacts for accelerated Syracuse dynamics.
+  The repository records exact affine offset and signed-margin identities,
+  Lubuimi's initial valuation-one cylinder theorem (Lean-compiled and
+  axiom-audited on multiple exact CI snapshots), the finite valuation-word
+  cylinder partition, and the terminal-residue collision-energy and finite
+  Markov-matrix constructions. The citation does not imply a proof of the
+  global Collatz conjecture; the broader finite-word and collision-energy
+  extensions remain separate Lean formalization targets.
+repository-code: "https://github.com/s4ztz4bnf6-maker/Lubuimi"
+url: "https://github.com/s4ztz4bnf6-maker/Lubuimi"
+keywords:
+  - "Collatz conjecture"
+  - "Syracuse dynamics"
+  - "2-adic valuation"
+  - "valuation cylinders"
+  - "affine offset identity"
+  - "terminal residue"
+  - "collision energy"
+  - "Lean 4"
+  - "formal verification"
