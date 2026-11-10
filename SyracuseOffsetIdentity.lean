@@ -3150,6 +3150,96 @@ theorem affine_step_eq_syracuse_of_exact_exponent
       exact Nat.mul_div_cancel_left _ (by positivity)
     _ = (3 * n + 1) / 2 ^ a := by rw [hstep]
 
+
+/-- A positive-exponent affine trajectory agrees at every finite time
+with the deterministic accelerated Syracuse iterate from each of its
+states. This identifies all shifted sequence tails with actual orbits. -/
+theorem affine_trajectory_eq_syracuse_iterate
+    (n a : ℕ → ℕ)
+    (ha : ∀ j, 0 < a j)
+    (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1) :
+    ∀ j k, (syracuse^[k]) (n j) = n (j + k) := by
+  have hsucc : ∀ j, syracuse (n j) = n (j + 1) := by
+    intro j
+    have hodd := every_state_odd_of_positive_affine_steps n a ha hstep
+    exact
+      (affine_step_eq_syracuse_of_exact_exponent
+        (n j) (n (j + 1)) (a j) (hodd (j + 1)) (hstep j)).symm
+  intro j k
+  induction k generalizing j with
+  | zero => simp
+  | succ k ih =>
+      calc
+        (syracuse^[k + 1]) (n j) =
+            (syracuse^[k]) (syracuse (n j)) := by
+          rw [Function.iterate_add_apply]
+          simp
+        _ = (syracuse^[k]) (n (j + 1)) := by rw [hsucc j]
+        _ = n ((j + 1) + k) := ih (j + 1)
+        _ = n (j + (k + 1)) := by congr 1 <;> omega
+
+#print axioms affine_trajectory_eq_syracuse_iterate
+
+/-- An odd positive Syracuse start that never reaches one. -/
+def isOddNonterminatingSyracuseStart (m : ℕ) : Prop :=
+  0 < m ∧ m % 2 = 1 ∧ ∀ k, (syracuse^[k]) m ≠ 1
+
+/-- Every nonempty set of odd positive nonterminating Syracuse starts has
+a least member, by well-ordering of the natural numbers. -/
+theorem exists_least_odd_nonterminating_syracuse_start
+    (h : ∃ m, isOddNonterminatingSyracuseStart m) :
+    ∃ n₀, isOddNonterminatingSyracuseStart n₀ ∧
+      ∀ m, isOddNonterminatingSyracuseStart m → n₀ ≤ m := by
+  refine ⟨Nat.find h, Nat.find_spec h, ?_⟩
+  intro m hm
+  exact Nat.find_min' h hm
+
+/-- If n₀ is least among odd positive nonterminating Syracuse starts,
+then every state of a positive-exponent affine trajectory below n₀
+has a future suffix equal to one. The shifted-tail identity above is
+what connects the affine sequence to the actual deterministic orbit. -/
+theorem affine_suffix_returns_of_least_odd_nonterminating_start
+    (n₀ : ℕ) (n a : ℕ → ℕ)
+    (ha : ∀ j, 0 < a j)
+    (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1)
+    (hleast :
+      ∀ m, isOddNonterminatingSyracuseStart m → n₀ ≤ m) :
+    ∀ j, n j < n₀ → ∃ k, n (j + k) = 1 := by
+  intro j hj
+  have hodd := every_state_odd_of_positive_affine_steps n a ha hstep
+  have hpos : 0 < n j := by omega
+  by_contra hnot
+  have hnonterm : ∀ k, (syracuse^[k]) (n j) ≠ 1 := by
+    intro k hk
+    have htail := affine_trajectory_eq_syracuse_iterate n a ha hstep j k
+    exact hnot ⟨k, htail.symm.trans hk⟩
+  have hleast_j :
+      isOddNonterminatingSyracuseStart (n j) :=
+    ⟨hpos, hodd j, hnonterm⟩
+  have hbound := hleast (n j) hleast_j
+  omega
+
+#print axioms affine_suffix_returns_of_least_odd_nonterminating_start
+
+/-- A least odd nonterminating start discharges the sequence-level
+suffix-return premise, so a trajectory that never reaches one cannot
+fall below that start. -/
+theorem affine_minimal_counterexample_orbit_lower_bound
+    (n₀ : ℕ) (n a : ℕ → ℕ)
+    (ha : ∀ j, 0 < a j)
+    (hstep : ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1)
+    (hleast :
+      ∀ m, isOddNonterminatingSyracuseStart m → n₀ ≤ m)
+    (hnever : ∀ j, n j ≠ 1) :
+    ∀ j, n₀ ≤ n j := by
+  apply orbit_lower_bound_of_minimal_counterexample n₀ n
+  · intro j hj
+    exact affine_suffix_returns_of_least_odd_nonterminating_start
+      n₀ n a ha hstep hleast j hj
+  · exact hnever
+
+#print axioms affine_minimal_counterexample_orbit_lower_bound
+
 #print axioms affine_step_eq_syracuse_of_exact_exponent
 
 #print axioms every_affine_exponent_is_exact
