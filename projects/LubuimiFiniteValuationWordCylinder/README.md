@@ -1,4 +1,4 @@
-# Lubuimi's Finite Valuation-Word Cylinder Partition Theorem
+# Finite Exact Valuation-Word Cylinder Classification and Tail Partition
 
 **Author:** Ta-Yoshua Lubuimi · **Date:** 10 November 2026
 
