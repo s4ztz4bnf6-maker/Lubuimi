@@ -24,6 +24,7 @@ This is a genuine finite-place second-moment theorem for Syracuse valuation word
 
 ## Contents
 
+- WRITTEN_REVIEW.md — internal mathematical review of the moment identity, truncation, Markov representation, and open interfaces.
 - MANUSCRIPT.md — full mathematical statement and proof, finite truncation, exact Markov matrix, examples, APW4 interface and limitations.
 - LICENSE.md — project-specific rights and attribution notice.
 - CITATION.cff — citation metadata.
