@@ -25,3 +25,5 @@ The theorem gives exact finite prefix distributions; it does not prove global Co
 ## Mathematical reach
 
 The theorem classifies every finite exact valuation word as one odd residue class modulo 2^(A+1), with relative density 2^(-A) among odd starts and absolute natural density 2^(-(A+1)) among all positive integers. The explicit residue is computed from the affine offset. The finite tail partition has one exact terminal cylinder at every cutoff. A further local corollary: for any fixed prefix, a sufficiently high next valuation forces positive next signed margin and strict descent; the cutoff is prefix-dependent and does not prove global Collatz.
+
+The manuscript also derives an exact finite valuation cap for a least hypothetical nonterminating start: at a prefix with total exponent A and signed margin D, every next exponent b must satisfy 2^(A+b)+3D <= 4*2^A. Thus each node has only finitely many possible non-descending children. This reduces a least counterexample to an infinite path in a state-dependent finitely branching tree; ruling out such a path remains open.
