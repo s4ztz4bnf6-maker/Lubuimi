@@ -35,3 +35,8 @@ The note is not a proof of global Collatz descent. No journal acceptance or inde
 ## Attribution
 
 The research exposition and Lean formalization are by **Ta-Yoshua Lubuimi**. AI systems, where used, are assistance tools only and are not authors, co-authors, or independent mathematical verifiers.
+
+
+## Current Lean declaration and exact-head audit — 10 November 2026
+
+The neutral declaration `initial_valuation_one_cylinder_iff_dyadic_divisibility` is located at `SyracuseOffsetIdentity.lean:2603`, exact source commit `5f6e46de8bed7061f8336089857143c54e997af5`. Workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956) passed Lean 4.34.1, `compile-drafts`, and Lean 4.35.0 paranoid. Its named transitive profile is `[propext, Classical.choice, Quot.sound]`; the no-`sorryAx` guard passed. The seven earlier successful workflows apply to the historical identifier and remain recorded as such; they are not transferred to the neutral declaration. The arbitrary finite-word theorem and tail partition remain separate formalization targets.
