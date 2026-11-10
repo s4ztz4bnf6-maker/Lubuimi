@@ -636,3 +636,11 @@ The previously verified initial-cylinder, valuation-bound, offset identity and s
 The previous exact-head 4.34.1 job reached its final command and failed only because Lake 4.34.1 does not recognize the command lake check (unknown command 'check'). The library build and exact source-file compile had already succeeded. The workflow now replaces that unsupported command with a second explicit lake build CollatzAudit confirmation. This 4.34.1 job is a compile/build check only; the separate Lean 4.35.0 lake check --paranoid job remains the paranoid kernel-verification path.
 
 Workflow source commit: e95d21771a38c1748169672d326f54162aae4dcd. Exact-head CI is pending; no result is claimed for this workflow revision.
+
+
+## Verification queue snapshot — 10 November 2026 (latest)
+
+- PR #48 exact source head 7920b26f8a230c6f9fdc144be40fb2070eba5f00 has three queued jobs: compile-drafts, Lean 4.34.1 build check, and Lean 4.35.0 paranoid kernel check. The previous 4.34.1 workflow command mismatch was corrected to use the supported lake build CollatzAudit command; the current exact-head result is still pending.
+- The separate Collatz documentation workflow on commit 54d9e0aab85982387585eb8fd403c6306aeb9742 also has all three jobs queued. No result is claimed until those jobs complete.
+- Established initial-cylinder, valuation-bound, offset, strict-margin, mixed valuation-word (1,2) residue-11-mod-16, and dyadic uniform-fibre cardinality results remain separate results with their prior verification records. The finite cap-tree terminal-path statement is a finite structural result, not a global Collatz proof.
+- Kolaz PR #39 workflow 42739986917 passed finite-table reproducibility checks only; this is not a Lean kernel check or a proof of the global conjecture.
