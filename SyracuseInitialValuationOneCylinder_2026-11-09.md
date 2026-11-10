@@ -1,4 +1,4 @@
-# Lubuimi's Initial Valuation-One Cylinder Theorem for accelerated Syracuse
+# Initial Valuation-One Cylinder Classification for the Accelerated Syracuse Map
 
 **Author:** Ta-Yoshua Lubuimi  
 **Naming:** This exact cylinder classification is named in this project in honour of its author.
@@ -118,9 +118,13 @@ The theorem is formalized in `SyracuseOffsetIdentity.lean` as `lubuimi_initial_v
 
 ## Generalizations and next incidence layer
 
-The exact all-one cylinder is the special case of [Lubuimi's Finite Valuation-Word Cylinder Partition Theorem](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md), which assigns every finite positive exact valuation word a unique odd residue class modulo \(2^{A+1}\) and relative odd-start density \(2^{-A}\).
+The exact all-one cylinder is the special case of [finite exact valuation-word cylinder classification](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md), which assigns every finite positive exact valuation word a unique odd residue class modulo \(2^{A+1}\) and relative odd-start density \(2^{-A}\).
 
-A further consequence is [Lubuimi's Terminal-Residue Collision Energy](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md): every length-k word maps to a terminal unit residue modulo \(3^k\); the resulting second moment has diagonal mass \(3^{-k}\) and off-diagonal collision mass at least \(1/(2\cdot3^k)\). It also has an explicit finite rational Markov representation. These generalizations are mathematical derivations; their Lean formalizations remain separate from the already verified initial-cylinder declaration.
+A further consequence is [terminal-residue collision energy](Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md): every length-k word maps to a terminal unit residue modulo \(3^k\); the resulting second moment has diagonal mass \(3^{-k}\) and off-diagonal collision mass at least \(1/(2\cdot3^k)\). It also has an explicit finite rational Markov representation. These generalizations are mathematical derivations; their Lean formalizations remain separate from the already verified initial-cylinder declaration.
 
 
 A third, later exact-source audit is also successful: workflow [42738528207](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738528207) compiled the current source commit `a1becbc8e837f10abcd952a2e03832cb057fb2b8` and printed the same standard transitive profile for both `lubuimi_initial_valuation_one_cylinder` and `dyadicUniformFibre_partition_card`. Its explicit `sorryAx` gate passed. This later run strengthens the exact-source record; it does not enlarge either theorem's mathematical scope.
+
+## Literature and naming correction — version 1.1
+
+This manuscript records an independent proof and Lean formalization by Ta-Yoshua Lubuimi of the initial valuation-one cylinder classification. The finite congruence statement is a classical consequence of parity-vector coding: see Terras (1976), Everett (1977), and Lagarias (1985), Theorem B. No eponymous theorem name or priority claim is made. Tao (2022), Proposition 1.9, is not cited as the exact unique-residue-class theorem; it concerns approximate distribution of finite Syracuse valuation vectors under an equidistribution hypothesis. The mathematical statement and proof above are unchanged by this naming/literature correction.
