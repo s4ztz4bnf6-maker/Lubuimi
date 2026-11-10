@@ -400,3 +400,13 @@ This bridge does not rule out the existence of a least odd nonterminating start.
 The initial valuation-one cylinder declaration is renamed in the continuation candidate to `initial_valuation_one_cylinder_iff_dyadic_divisibility`. The proposition and proof are unchanged. Earlier CI records verify the prior source identifier only and must not be represented as verification of the renamed declaration.
 
 PR #56 now includes the rename together with the shifted-tail, least-start, suffix-return, and minimal-counterexample lower-bound declarations. Current exact head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow 42808797159, queued at latest poll. No fresh verification claim is made until all exact-head jobs and axiom/no-`sorryAx` gates pass.
+
+## 7. Exact-head verified one-step bridge and current tail/minimality candidate — 10 November 2026
+
+The parity/exactness repair in PR #53 is verified on exact source head `7d17d7111946b328421f9046f95b03c939dfddb1`, workflow [42805867475](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42805867475): all three jobs passed and the two declarations have profiles `[propext, Quot.sound]` and `[propext, Classical.choice, Quot.sound]`; the no-`sorryAx` gate passed.
+
+The deterministic one-step transition in PR #55 is verified on exact head `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, workflow [42807396471](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42807396471): Lean 4.34.1, `compile-drafts`, and Lean 4.35.0 paranoid all passed. `affine_step_eq_syracuse_of_exact_exponent` prints `[propext, Classical.choice, Quot.sound]`; the paranoid kernel accepted and no-`sorryAx` gate passed.
+
+The current PR #56 head is `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow [42808797159](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42808797159). It adds the shifted-tail iterate identity and the least odd nonterminating-start/minimality reduction, and renames the historical cylinder declaration to `initial_valuation_one_cylinder_iff_dyadic_divisibility`. At the latest poll, `compile-drafts` and Lean 4.34.1 were in progress; Lean 4.35.0 paranoid was queued. This is OFFEN – NICHT VERIFIZIERT. The old-name axiom/CI results are not transferred to the renamed declaration.
+
+Even if the deterministic shifted-tail/minimality bridge passes, the existence of a least nonterminating start is only conditional on nontermination, and it does not contradict that existence. A separate infinite-trajectory exclusion or well-founded descent argument remains essential. Finite branching and finite-depth cap-tree membership alone do not close this obligation.
