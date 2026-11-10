@@ -45,3 +45,8 @@ All mathematical research and authorship are attributed to Ta-Yoshua Lubuimi. AI
 ## Initial valuation-one review reconciliation
 
 The 10 November editorial/source reconciliation for the initial valuation-one cylinder note is recorded in [the project review reconciliation](LubuimiInitialValuationOneCylinder/REVIEW_RECONCILIATION_2026-11-10.md). It is distinct from the general finite valuation-word formalization status and from APW4.
+
+
+## Workflow scope correction — 10 November 2026
+
+The PR #35 draft workflow runs 42827159570 and 42835418762 completed at workflow level but skipped all Lean compilation/kernel jobs because no Lean project was detected at the checkout root. They are not Lean passes. The actual neutral initial-cylinder declaration evidence remains run 42809750956 on exact source commit 5f6e46de8bed7061f8336089857143c54e997af5. See the project [review reconciliation](LubuimiInitialValuationOneCylinder/REVIEW_RECONCILIATION_2026-11-10.md).
