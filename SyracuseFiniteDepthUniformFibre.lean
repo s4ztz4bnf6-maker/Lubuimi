@@ -131,4 +131,45 @@ theorem card_tailBlock (Bstar B : ℕ) (hB : B ≤ Bstar) :
 #print axioms card_childBlock
 #print axioms card_tailBlock
 
+/-- The lower endpoint of the tail moves right as the cutoff increases. -/
+private theorem tailLower_mono (Bstar B : ℕ) (hB : B + 1 ≤ Bstar) :
+    2 ^ Bstar - 2 ^ (Bstar - B) ≤
+      2 ^ Bstar - 2 ^ (Bstar - (B + 1)) := by
+  have hq : Bstar - (B + 1) + 1 = Bstar - B := by omega
+  have hpow : 2 ^ (Bstar - (B + 1)) ≤ 2 ^ (Bstar - B) := by
+    rw [← hq]
+    simp [pow_succ]
+  exact Nat.sub_le_sub_left hpow _
+
+/-- Every retained child atom lies strictly before the current tail. -/
+theorem mem_childBlocks_lt_tailLower
+    (Bstar B x : ℕ) (hB : B ≤ Bstar)
+    (hx : x ∈ childBlocks Bstar B) :
+    x < 2 ^ Bstar - 2 ^ (Bstar - B) := by
+  induction B with
+  | zero =>
+      simp [childBlocks] at hx
+  | succ B ih =>
+      rcases Finset.mem_union.mp hx with hx | hx
+      · have hB' : B ≤ Bstar := by omega
+        have hxlt := ih hB' hx
+        have hmono := tailLower_mono Bstar B hB
+        exact lt_of_lt_of_le hxlt hmono
+      · have hxI : x ∈ childBlock Bstar (B + 1) := hx
+        change x < 2 ^ Bstar - 2 ^ (Bstar - (B + 1))
+        exact (Finset.mem_Ico.mp hxI).2
+
+/-- The combined child region and its terminal tail are disjoint. -/
+theorem childBlocks_disjoint_tail
+    (Bstar B : ℕ) (hB : B ≤ Bstar) :
+    Disjoint (childBlocks Bstar B) (tailBlock Bstar B) := by
+  apply Finset.disjoint_left.mpr
+  intro x hxChild hxTail
+  have hxlt := mem_childBlocks_lt_tailLower Bstar B x hB hxChild
+  have htail := (Finset.mem_Ico.mp hxTail).1
+  omega
+
+#print axioms mem_childBlocks_lt_tailLower
+#print axioms childBlocks_disjoint_tail
+
 end SyracuseUniformFibre
