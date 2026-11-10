@@ -42,7 +42,10 @@ The declared Lean library, standalone record-time module, deterministic exceptio
 No `sorryAx` occurs in either reported transitive axiom profile. This verifies the two local affine theorems at the kernel level on the cited commit. A separate `lake check --paranoid` run is not yet recorded.
 
 The result is finite and conditional: positive valuations on the finite suffix plus exactness at its terminal endpoint imply exactness at every earlier index. It does not establish arbitrary valuation-word realizability, density-to-pointwise transfer, a global finite tail partition, or global Collatz convergence. The authoritative branch `collatz/valuation-cylinders-2026-10-26` remains unchanged. Draft PR #72 remains open and unmerged.
-\n\n### Toolchain audit boundary correction\n\nThe pinned Lean 4.34.1 / Mathlib 4.34.1 environment does not provide `lake check` at all; `lake check --paranoid` therefore fails as an unsupported command, not as a theorem or trust failure. The workflow now omits that unavailable command and instead requires: successful compilation of the declared Lean library, the explicit axiom report for the named theorems, and an automated rejection if `sorryAx` appears in that report. No project-wide paranoid Lake check is claimed for this toolchain.\n
+\n\n### Toolchain audit boundary correction
+
+The pinned Lean 4.34.1 / Mathlib 4.34.1 environment does not provide `lake check` at all; `lake check --paranoid` therefore fails as an unsupported command, not as a theorem or trust failure. The workflow now omits that unavailable command and instead requires: successful compilation of the declared Lean library, the explicit axiom report for the named theorems, and an automated rejection if `sorryAx` appears in that report. No project-wide paranoid Lake check is claimed for this toolchain.
+
 
 ## Cross-project research continuity — 10 November 2026, 22:58 CET
 
