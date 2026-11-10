@@ -184,7 +184,7 @@ This is an exact weighted collision identity on Syracuse valuation words and a c
 
 The mathematical proof in this manuscript is also formally checked in Lean. The Collatz/Syracuse source repository contains the declaration `lubuimi_initial_valuation_one_cylinder` and helper lemma `valuation_exponent_eq_one_of_mod_four_three`.
 
-Six complete exact-commit GitHub Actions workflows passed:
+Seven complete exact-commit GitHub Actions workflows passed:
 
 - Run `42721006544`: merge `44bb2ac`, PR head `013192ce524a4572a9d96c8d4dcb2796830b1f62`.
 - Run `42721305220`: merge `3d79761`, PR head `ad7203f5571d03e5989b9ac935b2103300f02409`.
@@ -192,8 +192,9 @@ Six complete exact-commit GitHub Actions workflows passed:
 - Run `42722186081`: merge `5d4a19c`, PR head `a36894eefc52e5d28cd43110f5e289805509ad33`.
 - Run `42724343412`: merge `06675a1`, PR head `29b27dc529b9e81a33b5211e9e01a01e19edc256`.
 - Run `42725006480`: exact source commit `b1a8599c686c37893a33453b759dee42047c7727` on the Syracuse programme PR #9 branch.
+- Run `42725493567`: exact source commit `a52dffc23b323964f33bc7f6c61c2cb24bcdf708`, a documentation-only descendant of the preceding source snapshot.
 
-All six workflows completed the full compile/audit sequence. In each log, `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` has transitive axiom profile `[propext, Classical.choice, Quot.sound]`; the explicit complete-log `sorryAx` audit steps passed. The initial valuation-one cylinder equivalence is therefore Lean-compiled and axiom-audited on five distinct exact snapshots.
+All seven workflows completed the full compile/audit sequence. In each log, `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` has transitive axiom profile `[propext, Classical.choice, Quot.sound]`; the explicit complete-log `sorryAx` audit steps passed. The initial valuation-one cylinder equivalence is therefore Lean-compiled and axiom-audited on five distinct exact snapshots.
 
 Earlier attempts `42719689591` and `42720406876` failed at proof-script obligations and remain preserved as historical diagnostics; they do not invalidate the later five positive runs. Current documentation/status recheck `42725493567` is in progress on head `a52dffc23b323964f33bc7f6c61c2cb24bcdf708` and does not supersede the completed results.
 
