@@ -168,3 +168,10 @@ The new bound is b < 4*2^A - 3D, derived from the already-established exponentia
 PR #48 adds a finite prefix state (A,C,D), exact append transition, finite child set, and finite cap tree at every depth. Its principal target is that every prefix of a nondecreasing exact affine Syracuse path lies in the finite cap tree. It also attaches the exact terminal-residue unit map to the path certificate. Exact head 82cb74118eff69afd667c0fd827b266d115284ca; workflow 42748141012 is queued. This is a proof candidate until the exact build and axiom logs complete.
 
 The theorem is deliberately a finite-depth path embedding, not a proof that the tree has no infinite path. The full general valuation-word cylinder bijection and the k=2 terminal-residue energy remain distinct modules; no energy upper bound or global Collatz conclusion is inferred.
+
+
+## 1.8 — Finite cap-tree proof repair and toolchain-aligned recheck
+
+The first finite cap-tree compile candidate exposed a duplicate extensionality declaration and a downstream coordinate-equality mismatch. The duplicate declaration has been removed; the existing structure extensionality lemma is retained. The exact source head is now 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb.
+
+The workflow's paranoid job has been aligned with the repository's pinned Lean/Mathlib 4.34.1 pair. The earlier Lean 4.35.0 job was a separate dependency-build experiment and did not establish a theorem PASS. Exact-head run 42749969443 is queued/in progress; its compile-drafts and paranoid-lean-434 jobs have not completed. The finite cap-tree path theorem remains a candidate; no sorryAx-free or paranoid result is claimed yet.
