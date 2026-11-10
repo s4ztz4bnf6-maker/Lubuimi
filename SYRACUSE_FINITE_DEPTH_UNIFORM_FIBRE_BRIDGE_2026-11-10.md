@@ -206,3 +206,10 @@ PR #42 now has an exact-head compile PASS. On source head d3b2a55c1987b4a4f2cdba
 PR #48 formalizes the next finite-depth step: a prefix state carrying accumulated exponent, canonical offset, and signed margin; a finite child set cut off by the state-dependent bound; and the finite cap tree at each depth. The target theorem embeds every prefix of a nondecreasing exact affine path into that tree. A companion map sends its exact endpoint to a unit modulo 3^j. Exact head 82cb74118eff69afd667c0fd827b266d115284ca, run 42748141012 queued at the latest check.
 
 This does not yet formalize the interval partition for every child valuation, the full residue-cylinder bijection for arbitrary words, or an upper energy capacity that rules out an infinite path. The verified k=2 terminal-residue energy remains a separate finite module; its collision mass is not silently treated as a survival obstruction.
+
+
+## 8. Finite cap-tree proof repair — 10 November 2026
+
+The finite cap-tree candidate now uses the structure's existing extensionality theorem; a duplicate extensionality declaration from the previous attempt was removed. The exact head 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb is under CI run 42749969443. The paranoid job now uses the repository-pinned Lean/Mathlib 4.34.1 pair, rather than changing only the toolchain for a separate 4.35.0 experiment. Both jobs remain pending at this entry.
+
+The candidate still asserts only finite-depth embedding of any hypothetical nondecreasing exact affine path into the state-dependent finite cap tree, plus the terminal-residue unit property. It does not show that the tree has no infinite branch.
