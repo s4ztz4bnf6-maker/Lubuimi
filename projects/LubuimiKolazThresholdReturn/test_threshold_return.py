@@ -1,4 +1,6 @@
 import unittest
+import csv
+from pathlib import Path
 
 from threshold_return import analyze_threshold, common_suffix, row_by_z0
 
@@ -70,6 +72,8 @@ class ThresholdReturnTests(unittest.TestCase):
             (255, 335, 255, 377, 15, 425, 61),
             (255, 359, 255, 377, 8, 911, 61),
             (255, 263, 255, 311, 5, 263, 167),
+            (511, 671, 1023, 1151, 10, 1151, 173),
+            (511, 623, 1023, 1403, 7, 1403, 125),
         ]
         for B1, z1, B2, z2, length, first, last in pairs:
             suffix = common_suffix(
@@ -79,6 +83,21 @@ class ThresholdReturnTests(unittest.TestCase):
             self.assertEqual(len(suffix), length)
             self.assertEqual(suffix[0], first)
             self.assertEqual(suffix[-1], last)
+
+    def test_extended_csv_tables(self):
+        for B in (511, 1023):
+            path = Path(__file__).with_name(f"threshold_{B}.csv")
+            with path.open(newline="", encoding="utf-8") as handle:
+                expected = [
+                    (int(row["x"]), int(row["z0"]), int(row["m"]),
+                     int(row["H"]), int(row["R"]))
+                    for row in csv.DictReader(handle)
+                ]
+            actual = [
+                (r["x"], r["z0"], r["m"], r["H"], r["R"])
+                for r in analyze_threshold(B)
+            ]
+            self.assertEqual(actual, expected)
 
     def test_direct_return_to_one(self):
         row = row_by_z0(255, 341)
