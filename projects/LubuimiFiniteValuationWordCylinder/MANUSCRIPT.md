@@ -1,158 +1,232 @@
 # Lubuimi's Finite Valuation-Word Cylinder Partition Theorem
-## Exact 2-adic residue cylinders for accelerated Syracuse valuation words
 
 **Author:** Ta-Yoshua Lubuimi  
-**Date:** 10 November 2026  
-**Version:** 1.0 — standalone research manuscript
+**Research date:** 10 November 2026  
+**Status:** Exact mathematical derivation; Lean formalization target, not yet a compiled Lean theorem.
 
-## Abstract
+## 1. Statement
 
-Every finite exact valuation word of the accelerated odd Syracuse map is represented by exactly one odd residue class modulo a power of two. If \(\alpha=(a_0,\ldots,a_{k-1})\) is a finite word of positive exponents and \(A=\sum_i a_i\), then the set of positive odd starts whose first \(k\) exact exponents equal \(\alpha\) is one unique class modulo \(2^{A+1}\), and its relative natural density among odd starts is \(2^{-A}\). We derive an explicit residue formula from the affine offset cocycle, exact parent/child mass identities, and a finite truncation with one explicit tail cylinder. The all-one initial cylinder theorem is recovered as a special case. These results give an exact finite-prefix probability and incidence structure for Syracuse dynamics, but do not prove global Collatz descent.
-
-## 1. Setup
-
-For a positive odd integer \(n_0\), define
+Let
 \[
-a_j=v_2(3n_j+1),\qquad n_{j+1}=\frac{3n_j+1}{2^{a_j}}.
+\alpha=(a_0,\ldots,a_{k-1}),\qquad a_i\ge1,
 \]
-Then \(a_j\ge1\) and each \(n_j\) is positive and odd. Equivalently,
+be a finite word of exact accelerated Syracuse exponents, and let
 \[
-2^{a_j}n_{j+1}=3n_j+1.
+A(\alpha)=a_0+\cdots+a_{k-1}.
 \]
-For a finite word \(\alpha=(a_0,\ldots,a_{k-1})\), put \(A(\alpha)=\sum_{j<k}a_j\) and let \(\mathcal C_\alpha\) be the set of positive odd starts realizing exactly those first \(k\) exponents.
-
-## 2. Main theorem
-
-**Theorem 2.1 (Lubuimi's Finite Valuation-Word Cylinder Partition Theorem).**  
-For every finite word \(\alpha=(a_0,\ldots,a_{k-1})\) with all \(a_j\ge1\), there is a unique odd residue class \(r_\alpha\pmod {2^{A(\alpha)+1}}\) such that
+For a positive odd starting value \(n_0\), write
 \[
-\boxed{\mathcal C_\alpha=\{n_0>0:n_0\equiv r_\alpha\pmod {2^{A(\alpha)+1}}\}.}
+n_{j+1}=\frac{3n_j+1}{2^{a_j}},
+\qquad a_j=v_2(3n_j+1).
 \]
-Its relative natural density among positive odd integers is
+
+Define the exact valuation-word cylinder
 \[
-\boxed{\mu_{\rm odd}(\mathcal C_\alpha)=2^{-A(\alpha)}.}
+\mathcal C_\alpha
+=\{n_0\in\mathbb N_{>0}: n_0\text{ odd and its first }k
+\text{ exact exponents are }\alpha\}.
 \]
-For the empty word, \(A=0\) and the cylinder is all odd integers, the class \(1\bmod2\).
 
-### Proof
-
-We induct on word length. The empty word is immediate. Write a nonempty word as \(\alpha=(a_0,\beta)\), where the tail \(\beta\) has total exponent \(B\). By induction the tail cylinder is one odd residue \(r_\beta\pmod {2^{B+1}}\).
-
-A start realizes \(\alpha\) precisely when
+**Lubuimi's Finite Valuation-Word Cylinder Partition Theorem:** There is a unique odd residue class
 \[
-3n_0+1\equiv2^{a_0}r_\beta\pmod {2^{a_0+B+1}}.
+r_\alpha\pmod {2^{A(\alpha)+1}}
 \]
-Since \(3\) is invertible modulo every power of two, this determines exactly one residue class modulo \(2^{a_0+B+1}=2^{A(\alpha)+1}\).
+such that
+\[
+\boxed{
+\mathcal C_\alpha
+=\{n_0>0:n_0\equiv r_\alpha\pmod {2^{A(\alpha)+1}}\}.
+}
+\]
+Consequently, among positive odd residue classes, the exact cylinder has relative natural density
+\[
+\boxed{\mu(\mathcal C_\alpha)=2^{-A(\alpha)}.}
+\]
 
-Reducing the congruence modulo \(2^{a_0+1}\), the right side is \(2^{a_0}\) times an odd number. Hence \(3n_0+1\) is divisible by \(2^{a_0}\) but not \(2^{a_0+1}\), so its exact valuation is \(a_0\). Division by \(2^{a_0}\) puts the next iterate in the tail residue class. Conversely every start realizing the word satisfies the congruence. This proves existence, uniqueness and exactness.
+The empty word has \(A=0\) and its cylinder is the single odd residue class modulo \(2\).
 
-There are \(2^{A(\alpha)}\) odd residue classes modulo \(2^{A(\alpha)+1}\), and the cylinder is exactly one of them. Its relative density is \(2^{-A(\alpha)}\). \(\square\)
+## 2. Proof by recursive residue construction
+
+Proceed by induction on the word length.
+
+For the empty word, every positive odd integer belongs to the cylinder, which is exactly the class \(1\bmod2\).
+
+Suppose the word is \(\alpha=(a_0,\beta)\), where the tail word \(\beta\) has total exponent \(B\). By induction there is a unique odd residue \(r_\beta\) modulo \(2^{B+1}\) describing the tail cylinder.
+
+The first step has exact exponent \(a_0\) and its next odd value is
+\[
+n_1=(3n_0+1)/2^{a_0}.
+\]
+The requirement that \(n_1\) belong to the tail cylinder is exactly
+\[
+3n_0+1\equiv 2^{a_0}r_\beta
+\pmod {2^{a_0+B+1}}.
+\]
+Since \(3\) is invertible modulo every power of \(2\), this congruence determines a unique residue class for \(n_0\) modulo \(2^{a_0+B+1}\).
+
+Because \(r_\beta\) is odd, the right side has exact 2-adic valuation \(a_0\) modulo \(2^{a_0+1}\). Thus every \(n_0\) in the constructed residue class has exact first exponent \(a_0\), and its next iterate lies in the tail cylinder. Conversely, every start realizing the full word satisfies this congruence. This proves both existence and uniqueness.
+
+There are \(2^{A(\alpha)}\) odd residue classes modulo \(2^{A(\alpha)+1}\), and the cylinder is exactly one of them. Its relative density among odd classes is therefore \(2^{-A(\alpha)}\).
 
 ## 3. Explicit residue from the affine offset
 
-For the word define
+For the word \(\alpha\), define
 \[
-A_0=0,\quad A_{j+1}=A_j+a_j,\qquad
-C_0=0,\quad C_{j+1}=3C_j+2^{A_j}.
+A_0=0,\qquad A_{j+1}=A_j+a_j,
 \]
-The affine identity is
+\[
+C_0=0,\qquad C_{j+1}=3C_j+2^{A_j}.
+\]
+The certified affine identity is
 \[
 2^{A(\alpha)}n_k=3^kn_0+C_k.
 \]
 Since \(n_k\) is odd,
 \[
-3^kn_0+C_k\equiv2^{A(\alpha)}\pmod {2^{A(\alpha)+1}}.
+3^kn_0+C_k\equiv2^{A(\alpha)}
+\pmod {2^{A(\alpha)+1}}.
+\]
+Therefore the unique residue has the explicit form
+\[
+\boxed{
+r_\alpha\equiv
+(2^{A(\alpha)}-C_k)(3^k)^{-1}
+\pmod {2^{A(\alpha)+1}}.
+}
+\]
+The inverse exists because \(3^k\) is odd.
+
+This formula connects the recursive cylinder construction directly to the already formalized affine offset cocycle.
+
+## 4. The initial valuation-one cylinder as a special case
+
+For \(\alpha=(1,\ldots,1)\) of length \(N\),
+\[
+A_N=N,\qquad C_N=3^N-2^N.
+\]
+Hence
+\[
+r_\alpha\equiv
+(2^N-(3^N-2^N))(3^N)^{-1}
+\equiv -1\pmod {2^{N+1}}.
 \]
 Thus
 \[
-\boxed{r_\alpha\equiv(2^{A(\alpha)}-C_k)(3^k)^{-1}
-\pmod {2^{A(\alpha)+1}}.}
+\mathcal C_{(1,\ldots,1)}
+=\{n_0>0:n_0\equiv-1\pmod {2^{N+1}}\},
 \]
-The inverse exists because \(3^k\) is odd. This connects the cylinder partition directly to the affine offset cocycle.
+which is exactly Lubuimi's Initial Valuation-One Cylinder Theorem.
 
-## 4. Prefix tree and exact child masses
+## 5. Prefix tree and exact child masses
 
-If a prefix \(\alpha\) has total exponent \(A\), extending it by a next exponent \(b\ge1\) gives a child with total exponent \(A+b\), contained in the parent. Its relative mass is \(2^{-b}\). Every positive odd terminal state has exactly one next exponent, so the children are disjoint and exhaust the parent:
+If \(\alpha\) has total exponent \(A\), then extending it by a next exponent \(b\ge1\) gives a child cylinder with total exponent \(A+b\). The child is contained in the parent, and its relative mass is
+\[
+\frac{2^{-(A+b)}}{2^{-A}}=2^{-b}.
+\]
+Every positive odd terminal state has one and only one exact next exponent, so the children partition the parent. The exact mass identity is
 \[
 \boxed{\sum_{b\ge1}2^{-b}=1.}
 \]
-The finite exact valuation words form a measure-consistent rooted prefix tree.
+Thus the finite valuation words form an exact, measure-consistent prefix tree of residue cylinders.
 
-## 5. Finite truncation and the exact tail cylinder
+## 6. APW4 interface and the next proof obligation
 
-Fix a prefix of total exponent \(A\) and a cutoff \(B\ge1\). Partition its cylinder into exact children with next exponent \(b=1,\ldots,B\), and the tail event \(a_k\ge B+1\). The tail condition is
+This result gives an exact finite source family for an APW4-style incidence analysis:
+- prefix nodes are finite valuation words;
+- each node has a unique residue-class cylinder and exact mass \(2^{-A}\);
+- parent/child incidences have exact relative weights \(2^{-b}\);
+- terminal states and block margins are attached to the same index-preserving word.
+
+The next step is to define a finite incidence matrix between prefix cylinders and terminal-state/collision events, then separate diagonal mass from off-diagonal overlap and identify a genuine BIB/Hall capacity. The APW4 transport theorem can only be applied after an explicit index-preserving map and all its hypotheses have been proved.
+
+A zero-measure exceptional family alone would not exclude an individual integer orbit. The Collatz application must produce a quantitative finite obstruction or a uniform arithmetic lower bound for every hypothetical non-descending integer path.
+
+## 7. Formalization target
+
+Add a Lean theorem, named for the author, asserting that for every finite positive exponent word the set of positive odd starts realizing that exact word is one residue class modulo \(2^{A+1}\). Prove it recursively using:
+1. invertibility of \(3\) modulo \(2^m\);
+2. exactness of the first valuation from the odd tail residue;
+3. the affine offset identity for the explicit residue formula;
+4. exact relative cylinder mass and parent/child partition.
+
+No Lean compile or axiom-audit success is claimed for this new theorem yet.
+
+---
+
+**Ta-Yoshua Lubuimi**  
+Copyright © 2026 Ta-Yoshua Lubuimi. All rights reserved for the original text and formalization materials, subject to the repository's proprietary license and third-party rights.
+
+
+## 8. Finite truncation with an exact tail cylinder
+
+Fix a finite prefix word \(\alpha\) of total exponent \(A\), and let \(B\ge1\). The parent cylinder \(\mathcal C_\alpha\) is partitioned into the \(B\) exact child cylinders
 \[
-3n_k+1\equiv0\pmod {2^{B+1}}.
+\mathcal C_{\alpha b},\qquad 1\le b\le B,
 \]
-
-Write the parent residue as \(n_0=r+2^{A+1}t\). The affine identity gives
+and the single tail cylinder
 \[
-n_k=n_k^*+2\cdot3^k t.
+\mathcal T_{\alpha,B}=\{n_0\in\mathcal C_\alpha:a_k\ge B+1\},
 \]
-As \(3^k\) is invertible modulo \(2^B\), these values run bijectively through odd residue classes modulo \(2^{B+1}\) as \(t\) runs modulo \(2^B\). The tail condition therefore selects exactly one value of \(t\bmod2^B\). The tail is one residue class modulo \(2^{A+B+1}\), not an uncontrolled union.
+where \(k\) is the length of \(\alpha\). The tail condition is the congruence
+\[
+3n_k+1\equiv0\pmod{2^{B+1}}.
+\]
+Write the parent residue as \(n_0=r+2^{A+1}t\). The affine identity shows that, along this parent cylinder, the terminal value has the form \(n_k=n_k^*+2\cdot3^k t\). As \(t\) ranges modulo \(2^B\), these values run bijectively through all odd residue classes modulo \(2^{B+1}\), because \(3^k\) is invertible modulo \(2^B\). The tail condition therefore selects exactly one value of \(t\) modulo \(2^B\), hence one residue class of starting values modulo \(2^{A+B+1}\). Thus the tail is itself one cylinder, not an uncontrolled union.
 
-The relative masses inside the parent are
+The relative measures inside the parent are
 \[
 \mu_\alpha(\mathcal C_{\alpha b})=2^{-b},\qquad
-\mu_\alpha(\mathcal T_{\alpha,B})=2^{-B},
+\mu_\alpha(\mathcal T_{\alpha,B})=2^{-B}.
 \]
-and
+They sum exactly to one:
 \[
 \boxed{\sum_{b=1}^{B}2^{-b}+2^{-B}=1.}
 \]
-This is a finite, disjoint, exhaustive weighted refinement with one explicit tail atom.
-
-## 6. Initial all-one cylinder as a special case
-
-For \(\alpha=(1,\ldots,1)\) of length \(N\), \(A_N=N\) and \(C_N=3^N-2^N\). The residue formula reduces to \(r_\alpha\equiv-1\pmod {2^{N+1}}\). Thus the cylinder is exactly \(n_0\equiv-1\pmod {2^{N+1}}\), recovering **Lubuimi's Initial Valuation-One Cylinder Theorem** and the exact initial run length \(v_2(n_0+1)-1\).
-
-## 7. Mathematical contribution and limits
-
-The theorem gives (i) unique residue realization of every finite exact valuation word; (ii) exact density determined by cumulative exponent; (iii) an explicit residue formula from the offset cocycle; (iv) exact child masses; and (v) a finite cutoff with one exact tail cylinder. These are concrete tools for valuation-word trees, stopping-time distributions, affine offset budgets and signed-margin compensation.
-
-A zero-density exceptional family can still contain individual integers. The cylinder density identities alone do not establish an orbitwise finite descent block or prove the global Collatz conjecture.
-
-## 8. The Lubuimi APW4–Syracuse Cylinder–Energy Bridge
-
-The finite valuation-word tree supplies a candidate source structure for an APW4-style transport argument: prefix words are nodes, exact residue cylinders are fibres, containment gives incidence, and \(2^{-b}\) are exact refinement weights. Finite tail cylinders provide a terminal atom at every cutoff. Signed margins can be attached to the same valuation-word indices.
-
-This motivates the named **Lubuimi APW4–Syracuse Cylinder–Energy Bridge**. It is a research programme, not a theorem already established by the cylinder result. A valid bridge requires explicit finite source and target index sets, a concrete index-preserving map, the APW4 diagonal and off-diagonal weights on those indices, and a genuine BIB/Hall capacity inequality. Diagonal mass, off-diagonal mass and pair reserve remain distinct until their exact identifications are proved. APW4 remains an independent mathematical result; no unproved APW4-to-Collatz implication is assumed here.
-
-## 9. Lean status
-
-The all-one special case is formally verified as CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder. Two full exact-commit workflows passed:
-- Run 42721006544, merge commit 44bb2ac, PR head 013192ce524a4572a9d96c8d4dcb2796830b1f62.
-- Run 42721305220, merge commit 3d79761, PR head ad7203f5571d03e5989b9ac935b2103300f02409.
-
-Both compiled the library, iteration/threshold, Syracuse reference/quarter-descent, offset, closed form, stronger lower bound, margin block and valuation-transition modules. Both printed the main theorem's transitive profile as [propext, Classical.choice, Quot.sound]; the complete-log sorryAx scan passed. These checks apply to the named theorem and exact snapshots.
-
-The general finite valuation-word theorem and finite tail partition in this manuscript are mathematically derived but are not yet claimed as Lean-compiled or axiom-audited. They are the next formalization milestone.
-
-## 10. Conclusion
-
-Every finite exact valuation word is one unique odd residue class modulo \(2^{A+1}\), with relative density \(2^{-A}\), where \(A\) is the total exponent. The exact prefix tree has child weights \(2^{-b}\) and a single tail cylinder at every finite cutoff. This is a self-contained local theorem and a foundation for further arithmetic and incidence research, not a proof of global Collatz descent.
-
-**Author:** Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
+The partition is disjoint and exhaustive because the next exact exponent is either one of \(1,\ldots,B\) or is at least \(B+1\). This gives a genuinely finite weighted refinement at every cutoff, with an explicit tail atom. It is a useful finite interface for later incidence and moment constructions; it does not by itself provide an APW4 BIB capacity or an orbitwise descent theorem.
 
 
-## 8. Terminal exact-residue characterization and formalization route
+## 9. Worked residue examples
 
-The finite-word cylinder also admits a direct terminal characterization. With
+The explicit formula gives the following small cases. The residue is the unique odd class modulo \(2^{A+1}\); the final column is its relative density among odd starts.
+
+| Exact word \(\alpha\) | \(A\) | \(C_k\) | Modulus | Residue \(r_\alpha\) | Density |
+|---|---:|---:|---:|---:|---:|
+| \((1)\) | 1 | 1 | 4 | 3 | \(1/2\) |
+| \((2)\) | 2 | 1 | 8 | 1 | \(1/4\) |
+| \((1,2)\) | 3 | 5 | 16 | 11 | \(1/8\) |
+| \((2,1)\) | 3 | 7 | 16 | 9 | \(1/8\) |
+| \((1,1,2)\) | 4 | 19 | 32 | 7 | \(1/16\) |
+| \((3,1)\) | 4 | 11 | 32 | 29 | \(1/16\) |
+
+For example, the exact word \((1,2)\) is realized precisely by positive odd starts
 \[
-X_j=3^j n_0+C_j,\qquad A_j=\sum_{t<j}a_t,
+n_0\equiv11\pmod{16}.
 \]
-the exact word is characterized by the terminal congruence
+Its least positive representative follows
 \[
-X_k\equiv2^{A_k}\pmod{2^{A_k+1}}.
+11\xrightarrow{a_0=1}17\xrightarrow{a_1=2}13,
 \]
-Indeed, for every \(j<k\), the suffix expansion
-\[
-X_k=3^{k-j}X_j+2^{A_j}R_j,
-\qquad
-R_j=\sum_{t=j}^{k-1}3^{k-1-t}2^{A_t-A_j}
-\]
-has \(R_j\) odd: its first summand is odd and all later summands are even. The terminal congruence therefore forces \(2^{A_j}\mid X_j\), and after division by \(2^{A_j}\) forces the quotient to be odd. Thus exactness propagates backwards to every prefix. Conversely, an exact realized word has an odd terminal quotient and hence satisfies the terminal congruence.
+since \(3\cdot11+1=2\cdot17\) and \(3\cdot17+1=4\cdot13\). Similarly, \((2,1)\) is realized precisely by \(n_0\equiv9\pmod{16}\), with least representative \(9\to7\to11\). Thus two words with the same total exponent have equal cylinder density, but their residue classes need not coincide.
 
-Solving the terminal congruence for \(n_0\) gives the same explicit residue formula as §3, because \(3^k\) is invertible modulo \(2^{A_k+1}\). This is an alternative proof architecture for Lean: it replaces nested quotient recursion by a finite suffix expansion, an oddness lemma, backward propagation of exact prefix residues, and reconstruction of the quotient orbit. The detailed declaration sequence is recorded separately in `LEAN_FORMALIZATION_ROUTE_TERMINAL_CONGRUENCE.md`.
+## 10. What the theorem supplies
 
-**Formalization status:** This terminal characterization is a mathematical derivation and a Lean proof route only. It is not yet Lean-compiled or axiom-audited. The four successful CI snapshots continue to certify only the initial all-one special case.
+The result gives a complete finite-prefix arithmetic coding of accelerated Syracuse valuation data:
+
+1. Every finite positive valuation word is realized by a nonempty arithmetic progression of positive odd starts.
+2. The progression is unique modulo \(2^{A+1}\).
+3. Its residue is explicitly computable from the affine offset \(C_k\) and the inverse of \(3^k\).
+4. Its relative measure depends only on the total exponent \(A\), not on the order of the letters.
+5. Parent/child cylinders form a disjoint exhaustive refinement with exact edge masses \(2^{-b}\).
+6. At every finite cutoff, the unresolved tail is itself one residue cylinder.
+
+This supplies a finite arithmetic model for valuation-prefix trees, exact cylinder counting, finite truncations, and later incidence or moment constructions. It also gives a precise interface with the signed-margin recurrence: the same finite word determines both its residue cylinder and its offset/margin data.
+
+The theorem does not imply that almost every orbit descends, that every orbit descends, or that a zero-density exceptional set is empty. It does not establish a BIB/Hall capacity statement. Those are separate obligations. The result proved here is the exact finite-word classification and its finite tail partition.
+
+## 11. Publication and verification status
+
+This manuscript contains the mathematical proof of the general finite valuation-word cylinder theorem and the finite tail partition. The initial all-one specialization has a separate Lean declaration and four successful exact-commit CI snapshots (42721006544, 42721305220, 42721911555, 42722186081), with the reported standard transitive axiom profile and complete-log absence of \(\texttt{sorryAx}\).
+
+The general finite-word theorem and its finite tail partition are not yet Lean-compiled or axiom-audited. The terminal-congruence note is a formalization route, not verification evidence. No global Collatz theorem is claimed.
+
+**Author:** Ta-Yoshua Lubuimi. AI tools are assistants only and are not authors or independent mathematical verifiers.
