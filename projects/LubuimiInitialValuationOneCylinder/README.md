@@ -19,6 +19,7 @@ Thus the initial run length is exactly `v₂(n₀+1) − 1`.
 ## Contents
 
 - `Lubuimi_Initial_Valuation_One_Cylinder_2026-11-10.md` — self-contained manuscript draft.
+- `WRITTEN_REVIEW.md` — internal mathematical and formalization review, with scope and verification boundaries.
 - `Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md` — stronger companion theorem for every finite positive valuation word.
 - `Lubuimi_Terminal_Residue_Collision_Energy_2026-11-10.md` — exact finite-place incidence and diagonal/off-diagonal collision energy identity.
 - `CITATION.cff` — citation metadata.
