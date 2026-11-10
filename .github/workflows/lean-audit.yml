@@ -35,5 +35,6 @@ jobs:
             echo "::error::sorryAx detected in the explicit axiom report"
             exit 1
           fi
-      - name: Run Lake check
-        run: lake check
+      # Lean 4.34.1 does not ship the Lake "check" command.  The
+      # declared-library build plus the explicit axiom report above are the
+      # supported kernel and trust checks for this pinned toolchain.
