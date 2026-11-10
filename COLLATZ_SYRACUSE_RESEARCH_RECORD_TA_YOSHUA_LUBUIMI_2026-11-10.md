@@ -484,3 +484,8 @@ The declaration CollatzSyracuseAudit.dyadicUniformFibre_partition_card passed co
 The printed transitive profile is [propext, Classical.choice, Quot.sound]. The complete log contains no actual sorryAx occurrence and reports “Build completed successfully (8932 jobs).”
 
 This is a formal verification of the finite cardinality conservation law underlying the common dyadic refinement. It does not yet verify the state-dependent cap maximum, finite prefix tree, interval disjointness as a finset partition, the residue-atom bijection, or the historical APW4 event/BIB transport. The exact run is scoped to the new counting declaration and the declarations actually printed by the workflow.
+
+
+## 21. Final initial-cylinder manuscript source snapshot
+
+The manuscript v1.0 in PR #35 has a final documentation commit ddf366d7654a275958157daab9d3d489ad3e6fd0. Its LaTeX source was regenerated with raw-string preservation and re-read; TeX commands remain intact and a control-character scan found no non-whitespace control characters. No Lean source was changed by this editorial correction. The seven exact-commit theorem audits remain valid within their original declaration scope.
