@@ -403,3 +403,32 @@ The full compile-drafts workflow 42728049650 completed successfully on exact sou
 **Scope boundary:** This formally verifies the margin equivalence, nonpositive-margin implication for a nondecreasing affine endpoint, and the next-exponent inequality. It does not yet formalize the existence of the maximum cap B_alpha, the finite tail-cylinder partition, the full arbitrary-word cylinder theorem, or exclusion of an infinite surviving path. No global Collatz proof is claimed.
 
 The new cap result is a genuine Lean-verified strengthening of the Syracuse proof infrastructure, not a numerical observation. It is recorded separately from the seven initial all-one cylinder audits and the earlier offset/margin CI snapshots.
+
+
+## 16. Cross-project finite-word witness and formalization status — 10 November 2026
+
+### Exact mixed valuation word (1,2)
+
+The finite Kolaz archive contains the exact orbit segment
+[
+731\xrightarrow{a_0=1}1097\xrightarrow{a_1=2}823.
+]
+Its valuation word is (1,2), total exponent A=3, affine offset C=5, and
+[
+8\cdot823=9\cdot731+5.
+]
+The corresponding initial residue cylinder is 11 mod 16. The signed margins are D_0=0, D_1=-2, D_2=-6, and both local next-exponent cap inequalities hold. This is a finite exact bridge between the threshold-return archive, the valuation-cylinder formula, and the signed-margin recurrence.
+
+A Lean declaration, realizesValuationWord12_iff_mod_sixteen_eleven, has now been added to SyracuseOffsetIdentity.lean on exact PR #9 head 56c6d6d86fb5122d75f89f5e614f7f333e2d31a9. It formalizes the two-step witness definition and proves equivalence with n mod 16 = 11. Exact-head workflow 42736159935 is still in progress at this record update. No Lean success is claimed until the completed build prints the declaration's transitive axioms and the full log has no actual sorryAx.
+
+### Terminal-residue k=2 module formally checked
+
+Standalone PR #38 exact-head workflow 42735716873 passed on source commit 4e30c083f3e1657edd08b0945cdda4e16c8b0e14 with Lean 4.35.0 and Mathlib v4.35.0. Seven declarations for the transition row sums, two-step numerator, two-step mass and exact energy compiled with profile [propext, Classical.choice, Quot.sound]. The completed log contains no actual sorryAx and lake check --paranoid passed. The exact two-step distribution is (8,16,11,4,2,22)/63 and E_2=5/21. This closes the finite k=2 formalization target only; the general k theorem and infinite-word collision identity remain open Lean targets.
+
+### Kolaz threshold-return archive extended
+
+PR #39 exact-head workflow 42735880399 passed on source head 012c8717e9d80025e7aa6cbb99f0b7ed5affd176. The full B=511 and B=1023 CSV tables, all earlier thresholds, two additional cross-threshold common suffixes, and the x=731 valuation/cylinder/margin certificate passed seven exact integer-arithmetic regression tests. This is finite reproducibility evidence, not a uniform return theorem or a global Collatz result.
+
+### Initial valuation-one manuscript v1.0
+
+The standalone manuscript for Lubuimi's Initial Valuation-One Cylinder Theorem is now consolidated as version 1.0 at PR #35 head 6dd47a9b18b373c274b0bc4d4001d9fad4e8ba24. It includes the complete two-way proof, explicit orbit formula, exact run length, natural densities, signed-margin consequence, worked example, literature context, references, limitations, and seven exact-commit Lean audit records. The Lean source was not changed by this editorial revision; the seven previously completed exact-commit audits remain the formal evidence for the theorem declaration.
