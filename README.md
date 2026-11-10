@@ -47,3 +47,10 @@ The new [Lubuimi Terminal-Residue Collision Energy](Lubuimi_Terminal_Residue_Col
 
 
 Repository citation metadata is provided in [`CITATION.cff`](CITATION.cff). Original Syracuse/Collatz research, mathematical statements, manuscripts and original Lean formalization are attributed to **Ta-Yoshua Lubuimi**; AI tools are acknowledged only as assistance, not as authors or independent mathematical verifiers.
+
+
+### 10 November 2026 — exact mixed-word bridge and finite k=2 Lean result
+
+The finite Kolaz path 731 -> 1097 -> 823 realizes valuation word (1,2), with cylinder residue 11 mod 16 and affine offset identity 8*823=9*731+5. The corresponding Lean declaration realizesValuationWord12_iff_mod_sixteen_eleven is in SyracuseOffsetIdentity.lean on PR #9 head 56c6d6d86fb5122d75f89f5e614f7f333e2d31a9; exact-head run 42736159935 is pending.
+
+The standalone terminal-residue k=2 module passed Lean 4.35.0 workflow 42735716873 with seven standard-profile declarations, no actual sorryAx, and lake check --paranoid. It proves the finite distribution (8,16,11,4,2,22)/63 and energy 5/21. Kolaz PR #39's B=511/B=1023 archive and x=731 regression bridge passed run 42735880399. These finite results do not prove global Collatz descent.
