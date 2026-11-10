@@ -14,12 +14,6 @@ The manuscript gives recursive and affine proofs, exact residue formulas, worked
 
 ---
 
-# Lubuimi's Finite Valuation-Word Cylinder Partition Theorem
-
-**Author:** Ta-Yoshua Lubuimi  
-**Research date:** 10 November 2026  
-**Status:** Exact mathematical derivation; Lean formalization target, not yet a compiled Lean theorem.
-
 ## 1. Statement
 
 Let
@@ -309,53 +303,43 @@ The main theorem and finite tail partition are fully proved in this manuscript. 
 
 ## 13. Exact finite cap for a non-descending next valuation
 
-The local tail certificate has a useful contrapositive. Let a realized prefix have length k, cumulative exponent A, offset C, and signed margin D=2^A-C-3^k. If the next exact valuation is b, then
+For a finite realized prefix \(\alpha=(a_0,\ldots,a_{k-1})\), let
 \[
-D_{k+1}=3D+(2^b-4)2^A.
+A=A_k,\qquad C=C_k,\qquad D=D(\alpha)=2^A-C-3^k.
 \]
-If the next accelerated odd iterate does not fall below the initial value, i.e. n_{k+1}≥n_0, then D_{k+1}≤0, since positive next margin implies strict descent. Hence every such non-descending extension must satisfy the exact integer inequality
-\[
-\boxed{2^{A+b}+3D\le 4\cdot2^A.}
-\]
-Equivalently, its next valuation belongs to the finite set
-\[
-\mathcal B(A,D)=\{b\in\mathbb N: b\ge1,\ 2^{A+b}+3D\le4\cdot2^A\}.
-\]
-This set is finite for every fixed prefix because the left-hand power of two tends to infinity with b. If the set is empty, every possible next valuation forces strict descent below n_0.
-
-If a counterexample to eventual termination exists, choose the least positive odd counterexample n_0 by well-ordering. Its accelerated odd orbit cannot fall below n_0, since any smaller positive odd iterate would terminate by minimality and would force the original orbit to terminate as well. Thus a least counterexample determines an infinite path through the prefix tree in which, at every node (A,D), the next letter b is restricted to the finite set \(\mathcal B(A,D)\).
-
-This is a stronger structural reduction than merely saying that a sufficiently high valuation descends: it gives an explicit finite branching rule for every hypothetical non-descending trajectory. It still does not rule out an infinite path through the resulting state-dependent finite sets. The remaining global problem is to prove that this constrained tree has no infinite realized path, or to derive a uniform arithmetic obstruction from its recurrence.
-
-
-## 13. Exact finite cap for a non-descending next valuation
-
-The tail-margin certificate can be stated as an exact necessary cap on any next valuation along a trajectory that has not yet descended below its initial value.
-
-For a prefix \(\alpha\) with total exponent \(A\) and signed margin \(D=D(\alpha)\), extension by exponent \(b\ge1\) has
+If the next exact valuation is \(b\ge1\), the signed-margin recurrence gives
 \[
 D(\alpha b)=3D+(2^b-4)2^A.
 \]
-Positive next margin forces strict descent. Therefore, if an extension does **not** descend below its initial odd start, it is necessary that
+Positive next margin forces strict descent below the initial odd start. Therefore, if the next accelerated odd iterate has not fallen below that initial value, it is necessary that
 \[
-D(\alpha b)\le0.
+D(\alpha b)\le0,
 \]
-Equivalently,
+equivalently
 \[
 \boxed{2^{A+b}+3D\le4\cdot2^A.}
 \]
-For each fixed prefix, this inequality permits only finitely many positive integers \(b\), because \(2^{A+b}\) tends to infinity. Define the local cap
-\[
-B_\alpha=\max\bigl(\{b\ge1:2^{A+b}+3D\le4\cdot2^A\}\cup\{0\}\bigr).
-\]
-Then every next valuation on a non-descending path must satisfy \(1\le b\le B_\alpha\). If \(B_\alpha=0\), no non-descending next valuation is possible.
 
-When \(B_\alpha\ge1\), the exact children \(b=1,\ldots,B_\alpha\) have total relative parent mass
+For each fixed prefix, only finitely many positive integers \(b\) satisfy this inequality. Define
+\[
+B_\alpha=
+\max\left(
+\{b\in\mathbb N:\ b\ge1,\ 2^{A+b}+3D\le4\cdot2^A\}
+\cup\{0\}
+\right).
+\]
+Then every next valuation along a non-descending continuation must lie in
+\[
+1\le b\le B_\alpha.
+\]
+If \(B_\alpha=0\), no non-descending next valuation is possible. If \(B_\alpha\ge1\), the exact children \(b=1,\ldots,B_\alpha\) have total relative parent mass
 \[
 \sum_{b=1}^{B_\alpha}2^{-b}=1-2^{-B_\alpha},
 \]
-and the complementary single tail cylinder \(b\ge B_\alpha+1\) has relative mass \(2^{-B_\alpha}\). Every start in that tail has positive next margin and strict descent. Thus the local cap and the exact tail-cylinder partition are two sides of the same finite-pruning statement.
+while the complementary single tail cylinder \(b\ge B_\alpha+1\) has relative mass \(2^{-B_\alpha}\) and every start in it has positive next margin and strict descent.
 
-For a least hypothetical nonterminating odd start, every accelerated odd iterate must remain at least the initial start; otherwise a smaller nonterminating start would contradict minimality. Its valuation sequence would therefore define an infinite path in the state-dependent tree whose node \(\alpha\) has at most \(B_\alpha\) possible non-descending children. This is a genuine finite-branching reduction.
+If a nonterminating positive odd start existed, choose the least such start \(n_0\) by well-ordering. Its accelerated odd orbit could never fall below \(n_0\), since any smaller nonterminating iterate would contradict minimality. Its valuation sequence would therefore define an infinite path through the prefix tree, with at most \(B_\alpha\) possible non-descending children at each node.
 
-**What remains open.** The cap \(B_\alpha\) depends on the current prefix. The theorem does not give a uniform bound on all \(B_\alpha\), does not rule out an infinite path through the surviving finite children, and does not prove global Collatz. A further argument must exclude such an infinite path or show that its weights/margins cannot persist.
+This is a genuine state-dependent finite-branching reduction. It does **not** give a uniform bound on \(B_\alpha\), does not rule out an infinite path through the surviving children, and does not prove global Collatz. The remaining global task is to exclude every infinite realized path in this constrained tree or derive a further arithmetic obstruction from its recurrence.
+
+**Lean status:** The exact cap and finite-branching corollary are mathematical consequences of the signed-margin recurrence, but are not yet Lean-compiled or axiom-audited. The initial all-one special case retains seven successful exact-commit Lean audit snapshots.
