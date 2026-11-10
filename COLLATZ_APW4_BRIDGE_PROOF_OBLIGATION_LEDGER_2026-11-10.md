@@ -175,3 +175,18 @@ The theorem is deliberately a finite-depth path embedding, not a proof that the 
 The first finite cap-tree compile candidate exposed a duplicate extensionality declaration and a downstream coordinate-equality mismatch. The duplicate declaration has been removed; the existing structure extensionality lemma is retained. The exact source head is now 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb.
 
 The workflow's paranoid job has been aligned with the repository's pinned Lean/Mathlib 4.34.1 pair. The earlier Lean 4.35.0 job was a separate dependency-build experiment and did not establish a theorem PASS. Exact-head run 42749969443 is queued/in progress; its compile-drafts and paranoid-lean-434 jobs have not completed. The finite cap-tree path theorem remains a candidate; no sorryAx-free or paranoid result is claimed yet.
+
+
+## 1.9 — Finite cap-tree path certificate: Lean compile and axiom audit PASS
+
+Exact code head 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb, workflow 42749969443, job compile-drafts completed successfully. The full Collatz library build and the source compile of SyracuseOffsetIdentity.lean passed. The five new declarations printed these profiles:
+
+- finiteCapPrefixState_eq_actual: [propext, Quot.sound]
+- finiteCapChildren_mem_of_int_bound: [propext, Classical.choice, Quot.sound]
+- nondecreasing_orbit_prefix_mem_finiteCapTree: [propext, Classical.choice, Quot.sound]
+- terminal_residue_unit_of_affine_identity: [propext, Classical.choice, Quot.sound]
+- nondecreasing_orbit_prefix_cap_tree_and_terminal_unit: [propext, Classical.choice, Quot.sound]
+
+The exact source-file sorryAx scan passed. This is a genuine Lean kernel compile and axiom-audit PASS for the listed declarations on that code head. The separate paranoid job did not pass: lake check --paranoid is not a recognized option in the repository-pinned Lean 4.34.1 toolchain. The workflow is being corrected to run the supported lake check under 4.34.1; new run 42750825692 is queued. An earlier experimental Lean 4.35.0 job failed while compiling Mathlib Cache/Requests.lean, before the project theorem was checked.
+
+The theorem remains a finite-depth path certificate only. It embeds each prefix of a hypothetical nondecreasing exact affine orbit into a finite state-dependent cap tree and attaches a terminal-residue unit condition. It does not prove the tree has no infinite branch or establish global Collatz termination.
