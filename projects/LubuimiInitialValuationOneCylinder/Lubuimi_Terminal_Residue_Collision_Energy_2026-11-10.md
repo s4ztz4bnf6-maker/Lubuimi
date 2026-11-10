@@ -1,4 +1,4 @@
-# Lubuimi's Terminal-Residue Collision Energy
+# Terminal-Residue Collision Energy in Finite Syracuse Valuation Cylinders
 ## A finite-place second-moment identity for Syracuse valuation words
 
 **Author:** Ta-Yoshua Lubuimi  
@@ -11,7 +11,7 @@ Fix a prefix length \(k\ge1\). Let \(\mathcal W_k=\mathbb N_{>0}^k\) be the set 
 
 \[A(\alpha)=\sum_{j=0}^{k-1}a_j,\qquad w_\alpha=2^{-A(\alpha)}.\]
 
-By Lubuimi's Finite Valuation-Word Cylinder Partition Theorem, every such word is realized by exactly one odd starting residue class modulo \(2^{A(\alpha)+1}\), and its relative natural density among odd starts is \(w_\alpha\). At fixed length \(k\), the word cylinders form a disjoint partition of the odd starting integers. Consequently
+By the finite valuation-word cylinder classification, every such word is realized by exactly one odd starting residue class modulo \(2^{A(\alpha)+1}\), and its relative natural density among odd starts is \(w_\alpha\). At fixed length \(k\), the word cylinders form a disjoint partition of the odd starting integers. Consequently
 
 \[\sum_{\alpha\in\mathcal W_k}w_\alpha=\left(\sum_{a\ge1}2^{-a}\right)^k=1.\tag{1}\]
 
