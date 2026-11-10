@@ -168,3 +168,19 @@ There is no `sorryAx` in either transitive profile. The two declarations are the
 
 The authoritative branch `collatz/valuation-cylinders-2026-10-26` was not changed; it still does not contain either new declaration. Draft PR #72 remains open and unmerged. The mathematical scope remains local finite backward propagation only: no arbitrary-word realizability, density-to-pointwise transfer, global infinite-orbit exclusion, or global Collatz theorem follows from these declarations.
 \n\n## Lean 4.34.1 audit-command boundary\n\nA follow-up attempt to add a project-wide Lake check established that the pinned Lean 4.34.1 toolchain has no `lake check` command (and consequently no `--paranoid` option). This is a toolchain capability boundary, not a theorem failure. The branch workflow was corrected to keep the successful declared-library build, print the explicit axiom profiles for both backward-exactness theorems, and fail automatically if `sorryAx` appears in that report. No project-wide paranoid check is claimed. A separate Lean 4.35.0 migration/audit would need its own isolated compatibility pass.\n
+
+## Exact-head Lean verification update — 10 November 2026, 15:38 UTC
+
+The earlier candidate-only status above is superseded for the two declarations on the exact source head recorded here.
+
+- Branch head: `f36fdcc157e2f40dffd96485898f4ad35136550b`.
+- GitHub Actions run: [42845962042](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42845962042), completed successfully.
+- Toolchain: Lean 4.34.1 with the pinned project dependencies.
+- Build: the audited Collatz library and dependent modules completed successfully (8,930 build jobs).
+- Declarations: `SyracuseAudit.terminalExact_backward_step` and `SyracuseAudit.terminalExact_backward_prefix`.
+- Axiom output: both declarations have transitive profile `[propext, Classical.choice, Quot.sound]`.
+- The workflow's complete `sorryAx` guard passed.
+
+The one-step theorem proves that, for (a_k\geq1), terminal exactness of (C_{k+1}) modulo (2^{A_{k+1}+1}) forces exactness of (C_k) modulo (2^{A_k+1}). The prefix theorem iterates this implication backwards through every (k\leq N), provided all exponents in the finite suffix are positive.
+
+This is a genuine finite accumulator result. It does not establish arbitrary valuation-word realizability, the general tail partition, a density-to-pointwise transfer, or global Collatz convergence. The run used Lean 4.34.1; it did **not** run `lake check --paranoid`, which is unavailable in that toolchain. No result is transferred to the authoritative `collatz/valuation-cylinders-2026-10-26` branch or to APW4.
