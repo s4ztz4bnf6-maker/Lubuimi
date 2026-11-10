@@ -44,3 +44,14 @@ The one-step implication from terminal exactness at `k+1` to exactness at `k` is
 ## Compile blocker exposed on backward-step branch — 10 November 2026
 
 Workflow 42835859458 failed at `SyracuseAffineCorrectionSum.lean:108:2` with `No goals to be solved`: `simp [affineCorrectionSum]` closed the goal before the following `omega`. The isolated repair removes only that redundant tactic in commit `b9a89872e39b6688f7c7ef567755beceb0c1e5f9`. The fresh exact-head build is pending. This is separate from the terminalExact backward-step theorem, which remains a target signature only.
+
+
+## Status correction — terminal backward exactness is kernel-verified
+
+The earlier statement that the terminal-exact backward lemma and finite induction were unimplemented is superseded. Both declarations were kernel-verified at exact source commit `e44eb4331cc1481e10d6f60780d695412c47a726`, run `42844423707`, with axiom profile `[propext, Classical.choice, Quot.sound]` and no `sorryAx`. The later candidate-branch head `f36fdcc157e2f40dffd96485898f4ad35136550b` also passed its corrected workflow. Their mathematical scope remains finite backward propagation only.
+
+## Status addition — finite-depth uniform-fibre interval core
+
+On isolated candidate branch `collatz/finite-depth-uniform-fibre-2026-11-10`, exact source commit `8a9d2b32a265e70d662aeedd21ec8a3ca9a7e594`, workflow `42861207383` succeeded under Lean 4.34.1 / Mathlib 4.34.1. The interval union identity and the exact child/tail cardinality lemmas in `SyracuseFiniteDepthUniformFibre.lean` each report `[propext, Classical.choice, Quot.sound]`; the dedicated `sorryAx` rejection step passed.
+
+Still open: finite-level construction and maximum cap, pairwise disjointness of the complete family, rational mass identities, residue-cylinder refinement bijection, and any global infinite-path exclusion. This candidate does not identify the finite atoms with historical APW4 events/BIB slots. The authoritative branch `collatz/valuation-cylinders-2026-10-26` remains unchanged.
