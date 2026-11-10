@@ -241,7 +241,7 @@ The theorem does not imply that almost every orbit descends, that every orbit de
 
 ## 11. Publication and verification status
 
-This manuscript contains the mathematical proof of the general finite valuation-word cylinder theorem and the finite tail partition. The initial all-one specialization has a separate Lean declaration and four successful exact-commit CI snapshots (42721006544, 42721305220, 42721911555, 42722186081), with the reported standard transitive axiom profile and complete-log absence of \(\texttt{sorryAx}\).
+This manuscript contains the mathematical proof of the general finite valuation-word cylinder theorem and the finite tail partition. The initial all-one specialization has a separate Lean declaration and six successful exact-commit CI snapshots (42721006544, 42721305220, 42721911555, 42722186081, 42724343412, 42725006480), with the reported standard transitive axiom profile and complete-log absence of \(\texttt{sorryAx}\).
 
 The general finite-word theorem and its finite tail partition are not yet Lean-compiled or axiom-audited. The terminal-congruence note is a formalization route, not verification evidence. No global Collatz theorem is claimed.
 
@@ -305,4 +305,4 @@ which is exactly the previously recorded one-step signed-margin recovery thresho
 
 ## Publication summary and scope
 
-The main theorem and finite tail partition are fully proved in this manuscript. The explicit affine residue formula and worked examples make the classification constructive. The local tail-margin corollary gives a finite pruning rule: for each fixed prefix, all sufficiently high next valuations lie in one exact tail cylinder and force descent; only finitely many lower next valuations remain to be analyzed. This is a genuine local arithmetic descent certificate, not a global Collatz proof. The general finite-word theorem, finite partition and tail-margin corollary remain pending Lean formalization and exact-commit kernel audit. The all-one special case retains its four independent successful CI snapshots.
+The main theorem and finite tail partition are fully proved in this manuscript. The explicit affine residue formula and worked examples make the classification constructive. The local tail-margin corollary gives a finite pruning rule: for each fixed prefix, all sufficiently high next valuations lie in one exact tail cylinder and force descent; only finitely many lower next valuations remain to be analyzed. This is a genuine local arithmetic descent certificate, not a global Collatz proof. The general finite-word theorem, finite partition and tail-margin corollary remain pending Lean formalization and exact-commit kernel audit. The all-one special case retains its six independent successful CI snapshots.
