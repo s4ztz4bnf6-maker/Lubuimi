@@ -33,7 +33,7 @@ The source was refined to explicitly apply the induction hypothesis to the two r
 
 Both completed the complete library build and every workflow step, including `SyracuseOffsetIdentity.lean`, closed-form offset, lower bound, margin block and valuation transition. Both logs print `CollatzSyracuseAudit.lubuimi_initial_valuation_one_cylinder` with transitive axiom profile `[propext, Classical.choice, Quot.sound]`. The workflow's explicit complete-log `sorryAx` scan found no occurrence. This is a positive Lean/kernel-audit result for the initial cylinder declaration on those exact snapshots.
 
-Runs `42721911555` and `42722186081` are both complete and successful. Both completed the full workflow, printed the same transitive profile `[propext, Classical.choice, Quot.sound]` for the main declaration, and passed the complete-log `sorryAx` scan. The main cylinder theorem therefore has six successful exact-commit CI snapshots: 42721006544, 42721305220, 42721911555 and 42722186081. The latest checked run, 42722186081, belongs to the Syracuse offset-roadmap pull-request workflow and is successful on its exact checked snapshot.
+Runs `42721911555` and `42722186081` are both complete and successful. Both completed the full workflow, printed the same transitive profile `[propext, Classical.choice, Quot.sound]` for the main declaration, and passed the complete-log `sorryAx` scan. The main cylinder theorem has six successful exact-commit CI snapshots: 42721006544, 42721305220, 42721911555, 42722186081, 42724343412 and 42725006480. The latest checked run, 42722186081, belongs to the Syracuse offset-roadmap pull-request workflow and is successful on its exact checked snapshot.
 
 The earlier failed attempts are preserved above as part of the chronology. They are not erased, but are superseded for the main cylinder theorem by the six later successful exact-commit audits.
 
@@ -63,7 +63,7 @@ In addition to runs 42721006544 and 42721305220, the same declaration passed run
 - `42721911555`: merge `7b84a1b`, PR head `21829b4dd3b82a73edb19cf0d09ed011f55ef384`.
 - `42722186081`: merge `5d4a19c`, PR head `a36894eefc52e5d28cd43110f5e289805509ad33`.
 
-All six complete workflows succeeded. The main theorem's transitive axiom profile is `[propext, Classical.choice, Quot.sound]`, and the explicit `sorryAx` audit steps passed. Current recheck 42724343412 is in progress on head `29b27dc529b9e81a33b5211e9e01a01e19edc256`. The finite valuation-word partition, tail partition, terminal-residue collision energy and Markov matrix remain separate Lean targets.
+All six complete workflows succeeded. The main theorem's transitive axiom profile is `[propext, Classical.choice, Quot.sound]`, and the explicit `sorryAx` audit steps passed. Run 42724343412 subsequently completed successfully on head `29b27dc529b9e81a33b5211e9e01a01e19edc256`; run 42725006480 is the sixth successful exact-source snapshot. The current documentation/status recheck is 42725493567. The finite valuation-word partition, tail partition, terminal-residue collision energy and Markov matrix remain separate Lean targets.
 
 
 ## Fifth successful exact-commit audit
