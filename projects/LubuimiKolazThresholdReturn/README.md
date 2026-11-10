@@ -40,3 +40,8 @@ The value 1097 occurs as z0=T(731) in the B=1023 finite table, with first return
 ## Exact-head CI result — 10 November 2026
 
 Expanded reproducibility run 42732032993 on source head `5a01e5e56d203c0ed987f6bb70c1519b107e9f23` passed. Job 129552163491 (`exact-finite-tables`) verified all six thresholds, both complete extended CSV tables, the original and new confluence suffixes, and the B=1023 valuation-word/cylinder/margin certificate. This is finite Python reproducibility CI only; no Lean kernel verification or universal Collatz result is claimed.
+
+
+## Reproducibility CI
+
+The expanded B=511/B=1023 archive and all seven regression tests passed workflow 42732216205 on code/test commit `821579ea5555a6f5e2e38fa771f8797dc4650106`. This is exact finite Python reproducibility, not Lean kernel verification.
