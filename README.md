@@ -307,3 +307,24 @@ Previously verified source result remains exact-head scoped: on commit e1fb06eaa
 PR #48 is currently at exact head `cbe9f19b9ba1bd4bad290b1cbc56da2881c238b8`. Its own workflow [42757504798](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42757504798) has three jobs — `kernel-check-lean-435-paranoid`, `compile-drafts`, and `kernel-check-lean-434` — all QUEUED at the latest poll. This head has no new compile, axiom, or paranoid PASS yet. Previously verified finite-cap path declarations on the earlier exact head remain valid at that earlier scope and are not downgraded by this pending run.
 
 The current conditional minimal-counterexample wrapper still assumes the suffix-return premise. A concrete Lean target is to derive it from the actual accelerated Syracuse dynamics: `2^(a j) * n(j+1) = 3*n(j)+1` and `0<a j` imply `n j` is odd; oddness of `n(j+1)` then makes the quotient odd and `a j` the exact 2-adic valuation. Prove the shifted tail is therefore the deterministic Syracuse orbit from `n j`. Minimality among odd nonterminating starting values can then yield the suffix-return premise. This is a proof plan, not a completed theorem. The finite cap tree still gives only finite-depth membership and does not exclude an infinite branch.
+
+
+## Exact-head CI addendum — 10 November 2026, 06:25 CET
+
+### PR #48 — finite cap-tree path work
+
+Workflow [42759509255](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42759509255) completed all three jobs successfully:
+
+- `kernel-check-lean-434`: success;
+- `kernel-check-lean-435-paranoid`: success, including the full paranoid kernel check and the exact finite-path/terminal-residue module guard;
+- `compile-drafts`: success, including the listed iteration, threshold, Syracuse reference, quarter-descent, offset, valuation-transition, terminal-residue energy, and L945 moment modules.
+
+This is a complete job-level PASS for run 42759509255. The result is scoped to that run's exact source commit and the declarations printed or checked by those jobs. It does not prove the finite cap tree has no infinite branch and does not prove global Collatz termination.
+
+### Preserve the established results and the remaining global obligation
+
+The initial-cylinder theorem, valuation bounds, exact offset and strict-margin results, mixed valuation-word cylinder, dyadic uniform-fibre cardinality identity, and the published arbitrary finite valuation-word cylinder theorem remain independent established results at their respective stated scopes. No later cap-tree integration or workflow failure reopens or downgrades them.
+
+The next global proof obligation remains to derive the suffix-return premise from the deterministic accelerated Syracuse dynamics and the minimal-counterexample definition. The intended chain is: establish oddness of every orbit term from the exact affine identity and positive exponent; identify each exponent as the exact 2-adic valuation; prove the shifted tail is the unique deterministic Syracuse orbit from its current term; then apply minimality to obtain the suffix-return premise. Each link must be proved explicitly. Until then, the current minimal-counterexample wrapper remains conditional. Even after that bridge, finite-tree membership alone does not rule out an infinite branch; a separate descent, ranking, or well-foundedness argument is required.
+
+**Status:** PR #48 CI fully green on run 42759509255; finite-depth theorem verified within its exact scope; global Collatz theorem remains open.
