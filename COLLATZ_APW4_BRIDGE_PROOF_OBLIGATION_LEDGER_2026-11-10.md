@@ -313,3 +313,12 @@ Workflow source commit: e95d21771a38c1748169672d326f54162aae4dcd. Exact-head CI 
 ## Latest branch and run identifiers — 10 November 2026
 
 The PR #48 branch now includes documentation snapshot head 9ee3a7c92ac16c3b0f20cbb1e8cef27b1a3241bf; the latest code-bearing finite-cap-tree source head remains 7920b26f8a230c6f9fdc144be40fb2070eba5f00. Workflow 42755702331 has compile-drafts and Lean 4.34.1 build jobs in progress, with Lean 4.35.0 paranoid queued. A second workflow on the documentation-updated head, 42756847368, is queued with all three jobs. No PASS is claimed for either current run yet.
+
+
+## Latest exact-head workflow queue — 10 November 2026
+
+Current PR #48 source head: 7920b26f8a230c6f9fdc144be40fb2070eba5f00. Exact workflow [42756479069](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42756479069) is queued with three jobs: Lean 4.34.1 build check, compile-drafts, and Lean 4.35.0 paranoid kernel check.
+
+The workflow source was corrected in commit e95d21771a38c1748169672d326f54162aae4dcd: Lean 4.34.1 no longer invokes the unsupported lake check command; it repeats lake build CollatzAudit instead. The 4.34.1 job is therefore a build/compile check only. The separate 4.35.0 job performs lake check --paranoid.
+
+Previously verified source result remains exact-head scoped: on commit e1fb06eaa07190d8abfb3fc7368f3dc0663a5a66, workflow 42754461228 passed both compile-drafts and Lean 4.35.0 paranoid kernel verification for the finite-cap/minimal-counterexample path declarations. Its 4.34.1 job failed only at the unsupported lake check command. No new PASS is claimed for current head 7920b26f8a230c6f9fdc144be40fb2070eba5f00 until workflow 42756479069 completes.
