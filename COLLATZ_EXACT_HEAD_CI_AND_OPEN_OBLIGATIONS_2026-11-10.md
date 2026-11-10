@@ -151,3 +151,12 @@ On exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, Lean 4.35.0 paranoid j
 Exact source head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow [42811286670](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42811286670): all three jobs passed — compile-drafts `129813061512`, Lean 4.35.0 paranoid `129813061895`, and Lean 4.34.1 `129813062043`. Both new declarations `affine_minimal_counterexample_prefix_mem_finiteCapTree` and `affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit` print `[propext, Classical.choice, Quot.sound]`. The compile job completed, no `sorryAx` guard triggered, and the paranoid kernel accepted the solution.
 
 This verifies the finite-cap-tree/terminal-unit packaging at this exact head. It does not exclude an infinite branch and therefore does not prove global Collatz termination.
+
+
+## 17. PR #65 terminal-residue bridge failure; PR #66 repair candidate — 10 November 2026
+
+PR #65 source head `78222bfae2e28a767d3482531b495ef48d85a342`, workflow [42812080857](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42812080857): compile-drafts `129815789124`, Lean 4.35.0 paranoid `129815789442`, and Lean 4.34.1 kernel `129815789458` all failed. The root error at `SyracuseOffsetIdentity.lean:3503:30` is an application type mismatch: `hdepth : n₀ + 1 < 2^j` but the called theorem requires `n 0 + 1 < 2^j`. Error recovery prints `sorryAx` for the new bridge. No PASS is claimed.
+
+PR #66 candidate head `1ad0cf18bb8d2fd8a76376cb3768fd3b60bc6a7c` derives `n 0 = n₀` by simplifying `hoffset 0` with `hA0` and `canonicalOffset`, then rewrites the depth hypothesis. This is a proof-script repair from existing hypotheses, not a new assumption. Exact-head three-job CI, named axioms, and no-`sorryAx` checks are pending.
+
+Previously verified results remain separately recorded: PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5`, workflow `42809750956`, all three jobs PASS; PR #62 head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow `42811286670`, all three jobs PASS. Neither proves absence of an infinite branch. Global Collatz remains open.
