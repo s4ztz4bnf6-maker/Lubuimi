@@ -244,3 +244,10 @@ Final Lean acceptance requires:
 **Current status:** all results in the companion manuscript are mathematical derivations. This route is not Lean verification. No global Collatz proof is claimed.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
+
+
+## Addendum — finite k=2 Lean formalization candidate, 10 November 2026
+
+A standalone Lean module `LubuimiTerminalResidueEnergyK2.lean` has now been added on the companion Syracuse/Collatz formalization branch `collatz/offset-margin-roadmap-2026-10-23`, at commit `c0d3e93e19d13fda2044e24f7c8902d4c47d75d8`. It encodes the six unit residues modulo 9, the initial row and two unit-state row types with denominator 63, proves all row numerators sum to 63, proves the exact two-step numerator vector `(8,16,11,4,2,22)`, and states the rational energy theorem `twoStepEnergy_eq_five_div_twentyOne`.
+
+The module is registered in the Lean library and in the Collatz draft audit workflow. Exact-head run 42730248268 is queued at this update. Therefore this is an implemented formalization candidate, **not yet a Lean-verified result**. The audit must complete successfully, print the named axiom profiles, and show no actual `sorryAx` before the status is upgraded. This finite k=2 module does not formalize the general Markov-chain theorem, the infinite word-space moment identity, or the APW4/BIB identification.
