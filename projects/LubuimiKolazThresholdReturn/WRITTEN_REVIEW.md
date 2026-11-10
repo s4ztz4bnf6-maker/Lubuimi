@@ -16,7 +16,11 @@ The exact integer-only implementation reproduces:
 - 2 source edges for B=31;
 - 5 for B=63;
 - 10 for B=127;
-- 21 for B=255.
+- 21 for B=255;
+- 42 for B=511;
+- 85 for B=1023.
+
+The two extended tables are preserved row-by-row in CSV and checked against fresh enumeration by the regression suite.
 
 It reproduces every row in the manuscript tables. The longest excursion lengths are respectively 36, 32, 25 and 18; the maximum observed height is 3077 at each threshold. These statements are restricted to the enumerated source sets.
 
@@ -28,15 +32,15 @@ The most substantial structural observation is the nested common suffix:
 - that path enters the B=255 z0=377 path;
 - the B=255 z0=335 and z0=359 paths join the same terminal route at 425 and 911 respectively.
 
-The shared terminal suffix from 155 to 61 is printed explicitly in the manuscript. The exact tests verify these path identities under T. This is a genuine finite confluence result, not an extrapolation.
+The shared terminal suffix from 155 to 61 is printed explicitly in the manuscript. The extended B=511 and B=1023 tables add two exact common suffixes of lengths 10 and 7, also checked by regression tests. This is a genuine finite confluence result, not an extrapolation.
 
 ## 4. Limitations
 
-No uniform bound on excursion length or height as B varies has been proved. The finite tables do not establish that all orbits return below every threshold, nor that all orbits reach 1. The number 1097 remains unverified and is not used. The data are exact computational observations, not a theorem about all starting values.
+No uniform bound on excursion length or height as B varies has been proved. The finite tables do not establish that all orbits return below every threshold, nor that all orbits reach 1. The integer 1097 appears as the first image T(731) in the B=1023 table and returns to 823 in one further step; this does not resolve the separate earlier 1097 threshold/count lead, which remains unverified. The data are exact computational observations, not a theorem about all starting values.
 
 ## 5. Verification status
 
-The Python script uses integer arithmetic only and no third-party libraries. The project includes a CI workflow that checks the four exact tables and named common suffixes. This is reproducibility CI, not Lean kernel verification. No Lean proof is claimed.
+The Python script uses integer arithmetic only and no third-party libraries. The project includes a CI workflow that checks the four inline exact tables, the complete B=511 and B=1023 CSV tables, and the named common suffixes. This is reproducibility CI, not Lean kernel verification. No Lean proof is claimed.
 
 **Verdict:** The finite threshold tables and confluence suffixes are exact, reproducible, and worth preserving as a numerical research archive. The general mathematical consequences remain open.
 
