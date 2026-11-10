@@ -39,3 +39,8 @@ Earlier exact-integer regression tested 180 valuation words (length 1–4, entri
 ## New local backward-exactness lemma — 10 November 2026
 
 The one-step implication from terminal exactness at `k+1` to exactness at `k` is derived in [the dedicated proof note](research/SYRACUSE_TERMINAL_EXACT_BACKWARD_STEP_2026-11-10.md). It uses only the accumulator recursion and `1 ≤ a k`; no orbit step equations are needed for this local implication. The Lean theorem and finite backward induction remain unimplemented and unverified. This does not close the general finite-word realization or tail-partition obligations.
+
+
+## Compile blocker exposed on backward-step branch — 10 November 2026
+
+Workflow 42835859458 failed at `SyracuseAffineCorrectionSum.lean:108:2` with `No goals to be solved`: `simp [affineCorrectionSum]` closed the goal before the following `omega`. The isolated repair removes only that redundant tactic in commit `b9a89872e39b6688f7c7ef567755beceb0c1e5f9`. The fresh exact-head build is pending. This is separate from the terminalExact backward-step theorem, which remains a target signature only.
