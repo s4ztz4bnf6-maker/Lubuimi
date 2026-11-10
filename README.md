@@ -64,3 +64,8 @@ The specific valuation word (1,2) is now formally verified by declaration realiz
 ### Finite-depth APW4-style uniform-fibre bridge
 
 See [SYRACUSE_FINITE_DEPTH_UNIFORM_FIBRE_BRIDGE_2026-11-10.md](SYRACUSE_FINITE_DEPTH_UNIFORM_FIBRE_BRIDGE_2026-11-10.md). The exact cap and dyadic child/tail partition yield a common uniform finite fibre at every fixed depth, with prefix-dependent distinguished proportion 1-2^-B_α. This is a mathematical bridge candidate, not yet Lean-formalized and not the historical APW4/BIB incidence map.
+
+
+### Uniform-fibre cardinality formalization — pending
+
+A Lean declaration dyadicUniformFibre_partition_card was added to SyracuseOffsetIdentity.lean. It states the exact count of child blocks plus tail block at a common dyadic refinement depth. Exact source head a1becbc8e837f10abcd952a2e03832cb057fb2b8 is under compile/audit in workflow 42738528207. The general cap/tree/residue-fibre bridge remains outside this lemma.
