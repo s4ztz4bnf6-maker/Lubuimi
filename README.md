@@ -143,3 +143,18 @@ Induction yields
 Consequently, if `n 0 + 1 < 2^j`, then `n j < 3^j`. Combined with the exact affine-offset identity, the canonical terminal residue modulo `3^j` therefore has least nonnegative representative exactly `n j`; under the least-counterexample hypotheses, that same prefix lies in the finite cap tree and its terminal residue is a unit. The source theorem is `affine_minimal_counterexample_terminal_residue_cap_tree_bridge` in `SyracuseOffsetIdentity.lean`.
 
 This is a finite-depth bridge between the actual Syracuse orbit, the cap-tree prefix, and the terminal residue. It does not establish a descent, exclude an infinite branch, or prove global Collatz termination. The independent k=2 energy calculation and the signed-offset margin theorem remain separate verified/checked inputs, not substitutes for this missing global step.
+
+## Exact-head audit correction — 10 November 2026, 14:31 CET
+
+The default-branch audit workflow installation is complete: PR [#71](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/71) was merged at commit `6cf56c2fc5c3c0fbc04f34c618da63fb690dfac7`; its workflow-installation check passed in run [42817093578](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42817093578). This is infrastructure evidence only.
+
+The current terminal-residue depth-transport candidates are:
+
+- PR [#68](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/68), source head `214561c9e680f503ec000e74003fe61e8854cc55).
+- PR [#70](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/70), source head `5fd8588fb85d0e05971d6893d29ac0f737d1029d`.
+
+For both exact heads, the current GitHub status query returned no status checks and no pull-request workflow runs. Therefore both remain **OFFEN – NICHT VERIFIZIERT**. The earlier statement that fresh runs were still to be triggered after PR #71 is now superseded only as to workflow availability; it is not evidence that either candidate has passed. No theorem is promoted until all required exact-head jobs, named `#print axioms`, paranoid-kernel checks, and transitive no-`sorryAx` checks pass.
+
+The established PR #59 and PR #62 results and the signed-offset margin-cap result at exact source commit `ca48ec7fdad5e8d6f8aeb82fed8586a1b57c12bc` / run [42728049650](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42728049650) retain their original scope. The finite-depth cap-tree certificate and the k=2 terminal-residue energy are not an infinite-branch exclusion. **Global Collatz termination remains unproved.**
+
+The proprietary and commercial-use notices remain in force for original copyrightable materials owned by Ta-Yoshua Lubuimi; no licensing terms are changed by this status update. Lean, Mathlib, upstream source, and third-party materials retain their own licenses.
