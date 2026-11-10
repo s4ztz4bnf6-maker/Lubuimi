@@ -9,7 +9,8 @@ This repository records Ta-Yoshua Lubuimi's Collatz/Syracuse mathematical resear
 The affine-offset and signed-margin framework and the initial valuation-one cylinder theorem are attributed to Ta-Yoshua Lubuimi. The APW4–Syracuse cylinder–energy bridge is tracked as a named research programme, not asserted as an established theorem.
 
 - [Consolidated Collatz–Syracuse research record](COLLATZ_SYRACUSE_RESEARCH_RECORD_TA_YOSHUA_LUBUIMI_2026-11-10.md)
-- [Lubuimi's Initial Valuation-One Cylinder Theorem](SyracuseInitialValuationOneCylinder_2026-11-09.md)
+- [Lubuimi's Initial Valuation-One Cylinder Theorem — English](SyracuseInitialValuationOneCylinder_2026-11-09.md)
+- [Lubuimis Satz über den anfänglichen Valuierungs-eins-Zylinder — Deutsch](Lubuimi_Anfangszylinder_Syracuse_DE_2026-11-10.md)
 - [Lubuimi's Finite Valuation-Word Cylinder Partition Theorem](Lubuimi_Finite_Valuation_Word_Cylinder_Partition_2026-11-10.md)
 - [Syracuse affine offset, signed margin, and Lubuimi cylinder theorem source](SyracuseOffsetIdentity.lean)
 - [Closed-form offset](SyracuseOffsetClosedForm.lean)
@@ -76,3 +77,8 @@ A Lean declaration `dyadicUniformFibre_partition_card` was added to `SyracuseOff
 The exact dyadic common-refinement cardinality identity `dyadicUniformFibre_partition_card` passed Lean 4.35.0 compile/audit on source commit `a1becbc8e837f10abcd952a2e03832cb057fb2b8`, workflow [42738528207](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738528207). The complete finite-depth cap/tree/residue-fibre construction is still not fully formalized. This local result is suitable as a component of the longer proof architecture, but it does not establish the infinite-path exclusion or global Collatz conjecture.
 
 The APW4 connection remains conditional on explicit mathematical maps that preserve the historical event indices, weights, and incidence/capacity structure. No such identification is asserted here. The Syracuse-derived finite fibre is used as a test model only until those obligations are proved.
+
+
+### Initial-cylinder manuscript correction and German edition — 10 November 2026
+
+The theorem note and consolidated research record now reflect the two completed exact-commit audits for `lubuimi_initial_valuation_one_cylinder`: [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) and [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220). Both report `[propext, Classical.choice, Quot.sound]` and no `sorryAx` in the complete-log scan. A matching German manuscript has been added at [Lubuimi_Anfangszylinder_Syracuse_DE_2026-11-10.md](Lubuimi_Anfangszylinder_Syracuse_DE_2026-11-10.md). The exact theorem remains distinct from the global Collatz conjecture.
