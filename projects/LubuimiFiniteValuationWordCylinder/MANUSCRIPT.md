@@ -230,3 +230,58 @@ This manuscript contains the mathematical proof of the general finite valuation-
 The general finite-word theorem and its finite tail partition are not yet Lean-compiled or axiom-audited. The terminal-congruence note is a formalization route, not verification evidence. No global Collatz theorem is claimed.
 
 **Author:** Ta-Yoshua Lubuimi. AI tools are assistants only and are not authors or independent mathematical verifiers.
+
+
+## 12. Tail-cylinder margin certificate
+
+The finite tail partition has a direct signed-margin consequence. For a finite word \(\alpha=(a_0,\ldots,a_{k-1})\), let
+\[
+A=A_k,\qquad C=C_k,\qquad D(\alpha)=2^A-C-3^k.
+\]
+If the next exact exponent is \(b\), the signed-margin recurrence gives
+\[
+\boxed{D(\alpha b)=3D(\alpha)+(2^b-4)2^A.}
+\]
+Fix a cutoff \(B\ge1\). On the single tail cylinder \(\mathcal T_{\alpha,B}\), the next exponent satisfies \(b\ge B+1\). Since \(2^b\ge2^{B+1}\),
+\[
+D(\alpha b)\ge
+3D(\alpha)+(2^{B+1}-4)2^A.
+\]
+Consequently, whenever
+\[
+\boxed{3D(\alpha)+(2^{B+1}-4)2^A>0,}
+\]
+every starting value in the tail cylinder has positive signed margin after the next accelerated step.
+
+A suitable finite cutoff always exists for each fixed prefix \(\alpha\), because \(2^{B+1}\) is unbounded as \(B\to\infty\). Positive signed margin implies strict descent of the corresponding odd iterate: from
+\[
+2^{A'}n_{k+1}=3^{k+1}n_0+C_{k+1}
+\]
+and \(D_{k+1}=2^{A'}-C_{k+1}-3^{k+1}>0\), one obtains
+\[
+3^{k+1}n_0+C_{k+1}
+<
+2^{A'}n_0,
+\]
+hence \(n_{k+1}<n_0\).
+
+Thus every finite prefix admits a finite, exact partition into:
+- the \(B\) exact child cylinders \(\mathcal C_{\alpha b}\), \(1\le b\le B\), which are the only branches still requiring separate analysis; and
+- one exact tail cylinder \(\mathcal T_{\alpha,B}\), which is already certified to descend whenever the displayed cutoff inequality holds.
+
+The tail has relative mass \(2^{-B}\), and the finite partition identity remains
+\[
+\sum_{b=1}^{B}2^{-b}+2^{-B}=1.
+\]
+
+**Scope limitation.** The cutoff \(B\) depends on the current prefix through \(A\) and \(D(\alpha)\). This is a local finite-pruning theorem, not a uniform bound over all prefixes. It does not show that every orbit eventually enters a certified tail, and it does not prove global Collatz descent. The remaining challenge is to control the finite unresolved child branches uniformly along every possible orbit.
+
+For the initial all-one prefix of length \(r\), one has
+\[
+A=r,\qquad D=-2(3^r-2^r).
+\]
+The tail cutoff inequality becomes
+\[
+2^{B+1+r}>6\cdot3^r-2^{r+1},
+\]
+which is exactly the previously recorded one-step signed-margin recovery threshold when the next exponent is at least \(B+1\). This confirms that the initial-run threshold is the special case of the general tail-cylinder margin certificate.
