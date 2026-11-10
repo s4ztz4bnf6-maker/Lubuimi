@@ -64,3 +64,8 @@ This manuscript is a complete mathematical derivation and a standalone preprint 
 **Verdict:** The second-moment identity, forced off-diagonal lower bound, finite truncation estimate, and finite-state Markov representation form a coherent separate mathematical contribution. Formal verification and the APW4 historical transport remain open.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI tools are assistants only, not authors or independent mathematical verifiers.
+
+
+## 7. Reproducibility of the \(k=2\) Markov example
+
+The manuscript now prints the exact transition matrix in column order \(1,2,4,5,7,8\). Its initial row is \((1,2,4,32,16,8)/63\); the three unit states congruent to \(1\pmod3\) share row \((16,32,1,8,4,2)/63\), and the three unit states congruent to \(2\pmod3\) share row \((4,8,16,2,1,32)/63\). Every row sums to one, and two transitions from state zero give the stated vector \((8,16,11,4,2,22)/63\). This provides a direct rational check of the general transition formula.
