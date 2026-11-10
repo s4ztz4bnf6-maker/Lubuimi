@@ -388,3 +388,10 @@ Current exact head: `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, PR #55, workflow
 Source head `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, workflow [42807396471](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42807396471): all three jobs passed (Lean 4.34.1, Lean 4.35.0 paranoid, and `compile-drafts`). `CollatzSyracuseAudit.affine_step_eq_syracuse_of_exact_exponent` has transitive profile `[propext, Classical.choice, Quot.sound]`; the paranoid kernel accepts the solution and the no-`sorryAx` gate passed. The earlier parity and exact-exponent lemmas remain separately verified on their exact source head `7d17d7111946b328421f9046f95b03c939dfddb1`.
 
 The verified one-step identity is the next link in the chain. The shifted-tail iterate identity, suffix-return derivation from least odd nonterminating counterexample minimality, and infinite-branch exclusion remain open.
+## Shifted-tail and least-counterexample bridge — candidate PR #56
+
+Following the exact-head PASS for `affine_step_eq_syracuse_of_exact_exponent` at head `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, candidate PR #56 adds the finite iterate identity for every shifted affine sequence tail and derives suffix return from the least odd nonterminating Syracuse start. It replaces the earlier abstract sequence-level suffix-return assumption with an explicit deterministic-orbit/minimality interface.
+
+Exact candidate head `1fd204750a1088efbf5e81b40b9ad95962fdb2ed`, workflow 42808379459, was in progress at the latest poll. The new declarations remain unverified until all exact-head jobs, named axiom outputs, and no-`sorryAx` checks pass.
+
+This bridge does not rule out the existence of a least odd nonterminating start. The global infinite-trajectory/infinite-branch exclusion remains open.
