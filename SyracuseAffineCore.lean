@@ -204,7 +204,7 @@ theorem terminalExact_backward_step
   have hdivSmall : 2 ^ A ∣ 3 * C + 2 ^ A := by
     exact dvd_trans (Nat.pow_dvd_pow 2 (Nat.le_succ A)) hdiv
   have hdivThree : 2 ^ A ∣ 3 * C := by
-    exact (Nat.dvd_add_iff_right (Nat.dvd_refl (2 ^ A))).mp hdivSmall
+    exact (Nat.dvd_add_iff_right (Nat.dvd_refl (2 ^ A))).mpr hdivSmall
   have hcop : (2 ^ A).Coprime 3 := by
     exact Nat.Coprime.pow_left A (by norm_num : Nat.Coprime 2 3)
   have hdivC : 2 ^ A ∣ C :=
@@ -219,12 +219,12 @@ theorem terminalExact_backward_step
   have hparity : 2 ∣ 3 * q + 1 := by
     rw [pow_succ] at hstrong
     exact (Nat.mul_dvd_mul_iff_left (by positivity : 0 < 2 ^ A)).mp hstrong
-  have hqOdd_aux : ∀ q : Nat, 2 ∣ 3 * q + 1 → ∃ r, q = 2 * r + 1 := by
-    intro q hqEven
-    obtain ⟨s, hs⟩ := hqEven
+  have hqOdd : ∃ r, q = 2 * r + 1 := by
+    have hparity' : 2 ∣ 3 * q + 1 := hparity
+    clear hterminal hAB hterm hdecomp hdiv hdivSmall hdivThree hcop hq
+      hfactor hstrong hparity
+    obtain ⟨s, hs⟩ := hparity'
     omega
-  have hqOdd : ∃ r, q = 2 * r + 1 :=
-    hqOdd_aux q hparity
   obtain ⟨r, hr⟩ := hqOdd
   have hC : C = 2 ^ (A + 1) * r + 2 ^ A := by
     rw [hq, hr, pow_succ]
@@ -242,8 +242,8 @@ theorem terminalExact_backward_step
     _ = 2 ^ A := by
           have hrem : (2 ^ A) % 2 ^ (A + 1) = 2 ^ A :=
             Nat.mod_eq_of_lt hlt
-          rw [Nat.mul_mod_right, hrem]
-          simp
+          rw [Nat.mul_mod_right]
+          simpa [Nat.zero_add, Nat.mod_mod] using hrem
 
 
 /--
