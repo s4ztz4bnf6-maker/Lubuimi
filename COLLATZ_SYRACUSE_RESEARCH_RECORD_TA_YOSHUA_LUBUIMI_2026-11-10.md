@@ -620,3 +620,12 @@ Standalone PR #38 head `a4775db22e2ff774aa6992441da8e70673298e41` passed exact w
 ### PR #39 — Kolaz finite archive
 
 PR #39 exact finite-table/confluence workflow [42739986917](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42739986917) passed. Its evidence is exact finite integer computation and archive reproducibility, not Lean kernel verification or a uniform infinite bound.
+
+
+## Exact-head CI continuation — 10 November 2026
+
+The finite cap-tree embedding branch now has updated head `5699182344be6a7950c6265551112a7a6d50e58d`; exact workflow [42755702331](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42755702331) was queued at the latest snapshot. The immediately preceding head `e1fb06eaa07190d8abfb3fc7368f3dc0663a5a66` passed its Lean 4.35.0 paranoid kernel job and draft compile job. The Lean 4.34.1 job failed because the installed Lake does not support the `check` command (`unknown command 'check'`); this is a toolchain-command mismatch, not a reported failure of the theorem statements.
+
+This branch's mathematical target is the finite cap-tree embedding for a minimal counterexample orbit bounded below by its initial value, together with the terminal-residue unit condition. This is a finite structural lemma; it does not by itself prove a uniform cap bound or global Collatz.
+
+The previously verified initial-cylinder, valuation-bound, offset identity and strict-margin results remain independent results with their existing exact-head verification records. The mixed valuation word (1,2) iff residue 11 mod 16, and the dyadic uniform-fibre cardinality identity, also retain their own exact Lean evidence. Kolaz PR #39 workflow [42739986917](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42739986917) passed finite-table reproducibility checks; those are finite computation, not Lean kernel verification or a global theorem.
