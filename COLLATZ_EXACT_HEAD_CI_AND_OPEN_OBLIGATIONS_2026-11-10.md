@@ -80,3 +80,10 @@ The next target is the shifted-tail identity `syracuse^[k] (n j) = n (j+k)` by i
 On exact source head `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, workflow [42807396471](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42807396471) passed Lean 4.34.1, Lean 4.35.0 paranoid, and `compile-drafts`. The declaration `affine_step_eq_syracuse_of_exact_exponent` has transitive axiom profile `[propext, Classical.choice, Quot.sound]`; the paranoid kernel accepted the solution and the no-`sorryAx` gate passed. The previously verified parity and exact-exponent declarations remain verified on their own exact head `7d17d7111946b328421f9046f95b03c939dfddb1`.
 
 This closes the affine-to-one-step deterministic transition obligation. It does not yet prove the shifted-tail iterate identity, suffix return from minimality, or global termination.
+## Shifted-tail and least-counterexample bridge — candidate
+
+After the one-step theorem passed, candidate PR [#56](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/56) adds `affine_trajectory_eq_syracuse_iterate`, the least odd nonterminating-start predicate and well-ordering lemma, and a suffix-return theorem derived from least-start minimality. It also packages the resulting sequence lower bound without the earlier abstract `hminimal` premise.
+
+Exact source head `1fd204750a1088efbf5e81b40b9ad95962fdb2ed`; workflow [42808379459](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42808379459) was in progress at the latest poll. All new declarations in PR #56 remain **OFFEN – NICHT VERIFIZIERT** until the exact-head three-job run, named axiom outputs, and no-`sorryAx` gate pass.
+
+Even if this bridge passes, it only shows that a hypothetical least odd nonterminating Syracuse start generates a nondecreasing affine orbit whose shifted tails are deterministic Syracuse orbits. It does not exclude the existence of such a nonterminating start. A separate infinite-trajectory/infinite-branch exclusion remains the global open problem.
