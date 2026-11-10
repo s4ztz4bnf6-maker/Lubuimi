@@ -153,3 +153,8 @@ Combining this with the affine identity and \(2^{A_j}>0\) yields \(n_j<n_0\). Th
 ## Exact-head follow-up — 10 November 2026
 
 The historical identifier `lubuimi_initial_valuation_one_cylinder` was replaced in the continuation candidate by `initial_valuation_one_cylinder_iff_dyadic_divisibility`. In PR #56's partial build log, the renamed declaration printed `[propext, Classical.choice, Quot.sound]`; however, the overall source module failed later in the new least-start proof block, so this is not recorded as a completed exact-head verification. PR #59 repairs those later proof-script errors; a fresh complete run and no-`sorryAx` gate are still required before the renamed declaration is accepted.
+
+
+## Exact-head verification of the neutral Lean identifier — 10 November 2026
+
+The renamed declaration `initial_valuation_one_cylinder_iff_dyadic_divisibility` is now verified at exact source head `5f6e46de8bed7061f8336089857143c54e997af5`, workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956). All three CI jobs passed; its named profile is `[propext, Classical.choice, Quot.sound]`; the compile job's no-`sorryAx` guard passed and the paranoid kernel accepted the solution. This is a neutral internal declaration name for a classical parity-vector cylinder classification. No eponymous theorem or novelty claim is made.
