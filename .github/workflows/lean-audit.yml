@@ -28,3 +28,5 @@ jobs:
         run: lake env lean SyracuseDensityArithmetic.lean
       - name: Run explicit axiom report for affine theorems
         run: lake env lean SyracuseAxiomAudit.lean
+      - name: Run paranoid kernel check
+        run: lake check --paranoid
