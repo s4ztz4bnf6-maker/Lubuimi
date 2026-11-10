@@ -1,10 +1,10 @@
 # Initial Valuation-One Cylinder Classification for the Accelerated Syracuse Map
 
 **Author:** Ta-Yoshua Lubuimi  
-**Naming:** This exact cylinder classification is named in this project in honour of its author.
+**Naming:** Descriptive mathematical label only. The statement is a classical finite parity-vector cylinder classification; no eponymous theorem name or priority claim is made. The independent derivation and this formalization are attributed to Ta-Yoshua Lubuimi.
 
 **Original derivation date:** 9 November 2026  
-**Status:** Mathematical derivation and Lean formalization. The declaration `lubuimi_initial_valuation_one_cylinder` passed two complete exact-commit CI workflows: run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) on merge commit `44bb2ac` (PR head `013192ce524a4572a9d96c8d4dcb2796830b1f62`) and run [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220) on merge commit `3d79761` (PR head `ad7203f5571d03e5989b9ac935b2103300f02409`). Both printed the transitive profile `[propext, Classical.choice, Quot.sound]`; the workflow's explicit complete-log `sorryAx` scans found none. The later documentation-only recheck is not needed to establish the theorem's two successful exact-source audits. The broader finite valuation-word cylinder partition theorem remains a separate Lean formalization target.
+**Status:** Independent mathematical derivation and Lean formalization by Ta-Yoshua Lubuimi of a classical finite parity-vector cylinder classification. The historical Lean identifier `lubuimi_initial_valuation_one_cylinder` passed two complete exact-commit CI workflows: run [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) on merge commit `44bb2ac` (PR head `013192ce524a4572a9d96c8d4dcb2796830b1f62`) and run [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220) on merge commit `3d79761` (PR head `ad7203f5571d03e5989b9ac935b2103300f02409`). Both printed `[propext, Classical.choice, Quot.sound]`; complete-log `sorryAx` scans found none. PR #56 introduces the neutral identifier `initial_valuation_one_cylinder_iff_dyadic_divisibility`; its exact-head verification is pending and the historical audits are not transferred to the renamed declaration. The broader finite valuation-word cylinder classification remains a separate Lean formalization target.
 
 ## Setup
 
@@ -113,7 +113,7 @@ This is an exact, start-dependent recovery threshold. It identifies the next qua
 
 ## Lean formalization and audit record
 
-The theorem is formalized in `SyracuseOffsetIdentity.lean` as `lubuimi_initial_valuation_one_cylinder`, using the certified-step recurrence and the existing accelerated-odd orbit convention. It passed the two complete exact-commit CI workflows listed above. Both workflows printed the transitive profile `[propext, Classical.choice, Quot.sound]`, and both complete-log scans found no `sorryAx`. This evidence is declaration- and commit-scoped: it verifies the named cylinder theorem and its dependency closure, not the general finite valuation-word theorem or global Collatz descent.
+The theorem was historically formalized in `SyracuseOffsetIdentity.lean` under the internal identifier `lubuimi_initial_valuation_one_cylinder`, using the certified-step recurrence and the accelerated-odd orbit convention. The two cited workflows verify that historical declaration and its dependency closure only. PR #56 replaces the internal identifier with `initial_valuation_one_cylinder_iff_dyadic_divisibility`; that renamed declaration requires its own exact-head compilation, named axiom audit, and no-`sorryAx` check. Neither identifier nor its audits prove the general finite valuation-word theorem or global Collatz descent.
 
 
 ## Generalizations and next incidence layer
