@@ -82,3 +82,8 @@ The APW4 connection remains conditional on explicit mathematical maps that prese
 ### Initial-cylinder manuscript correction and German edition — 10 November 2026
 
 The theorem note and consolidated research record now reflect the two completed exact-commit audits for `lubuimi_initial_valuation_one_cylinder`: [42721006544](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721006544) and [42721305220](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42721305220). Both report `[propext, Classical.choice, Quot.sound]` and no `sorryAx` in the complete-log scan. A matching German manuscript has been added at [Lubuimi_Anfangszylinder_Syracuse_DE_2026-11-10.md](Lubuimi_Anfangszylinder_Syracuse_DE_2026-11-10.md). The exact theorem remains distinct from the global Collatz conjecture.
+
+
+### Exact current-source audit for the initial cylinder — 10 November 2026
+
+The current source commit `a1becbc8e837f10abcd952a2e03832cb057fb2b8` passed [workflow 42738528207](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42738528207). The log prints the standard transitive axiom profile for both `lubuimi_initial_valuation_one_cylinder` and `dyadicUniformFibre_partition_card`; the explicit `sorryAx` gate passed. This is a later exact-source recheck, not a claim of global Collatz descent.
