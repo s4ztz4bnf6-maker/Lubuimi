@@ -1026,6 +1026,67 @@ theorem terminal_residue_eq_offset_mul_inv_of_affine_identity
 #print axioms twoPow_isUnit_mod_threePow
 #print axioms terminal_residue_eq_offset_mul_inv_of_affine_identity
 
+
+/-- A positive power of two is never divisible by three. -/
+theorem twoPow_mod_three_ne_zero (a : ℕ) : 2 ^ a % 3 ≠ 0 := by
+  intro hmod
+  have hdiv : 3 ∣ 2 ^ a := Nat.dvd_iff_mod_eq_zero.mpr hmod
+  have hcop : Nat.Coprime (2 ^ a) 3 :=
+    Nat.Coprime.pow_left a (by decide : Nat.Coprime 2 3)
+  have hone : 3 = 1 :=
+    Nat.eq_one_of_dvd_coprimes hcop.symm (dvd_refl 3) hdiv
+  omega
+
+/-- Every positive-index canonical affine offset is nonzero modulo three. -/
+theorem canonicalOffset_not_dvd_three (A : ℕ → ℕ) {k : ℕ}
+    (hk : 0 < k) : ¬ 3 ∣ canonicalOffset A k := by
+  obtain ⟨j, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : k ≠ 0)
+  intro hdiv
+  have hmod : canonicalOffset A (j + 1) % 3 = 0 :=
+    Nat.dvd_iff_mod_eq_zero.mp hdiv
+  rw [canonicalOffset_succ_mod_three] at hmod
+  exact twoPow_mod_three_ne_zero (A j) hmod
+
+/-- The canonical affine offset is a unit modulo every positive power of three. -/
+theorem canonicalOffset_isUnit_mod_three_pow (A : ℕ → ℕ) (k : ℕ)
+    (hk : 0 < k) :
+    IsUnit ((canonicalOffset A k : ℕ) : ZMod (3 ^ k)) := by
+  have hcop3 : Nat.Coprime 3 (canonicalOffset A k) :=
+    (Nat.prime_three.coprime_iff_not_dvd).2
+      (canonicalOffset_not_dvd_three A hk)
+  have hcop : Nat.Coprime (canonicalOffset A k) (3 ^ k) :=
+    Nat.Coprime.pow_right k hcop3.symm
+  exact (ZMod.isUnit_iff_coprime (canonicalOffset A k) (3 ^ k)).2 hcop
+
+/-- The canonical terminal residue tau_k = C_k * 2^(-A_k) is a unit modulo 3^k. -/
+def canonicalTerminalResidue (A : ℕ → ℕ) (k : ℕ) : ZMod (3 ^ k) :=
+  (canonicalOffset A k : ZMod (3 ^ k)) *
+    (((2 ^ A k : ℕ) : ZMod (3 ^ k))⁻¹)
+
+/-- The terminal residue is a unit for every positive depth. -/
+theorem canonicalTerminalResidue_isUnit (A : ℕ → ℕ) (k : ℕ)
+    (hk : 0 < k) : IsUnit (canonicalTerminalResidue A k) := by
+  unfold canonicalTerminalResidue
+  exact (canonicalOffset_isUnit_mod_three_pow A k hk).mul
+    (twoPow_isUnit_mod_threePow (A k) k).inv
+
+/-- For an exact affine trajectory identity, the terminal state is precisely
+the canonical unit residue defined above. -/
+theorem terminal_residue_eq_canonicalTerminalResidue_of_affine_identity
+    (A : ℕ → ℕ) (k n₀ nₖ : ℕ)
+    (hidentity :
+      2 ^ A k * nₖ = 3 ^ k * n₀ + canonicalOffset A k) :
+    (nₖ : ZMod (3 ^ k)) = canonicalTerminalResidue A k := by
+  simpa [canonicalTerminalResidue] using
+    terminal_residue_eq_offset_mul_inv_of_affine_identity
+      k (A k) n₀ nₖ (canonicalOffset A k) hidentity
+
+#print axioms twoPow_mod_three_ne_zero
+#print axioms canonicalOffset_not_dvd_three
+#print axioms canonicalOffset_isUnit_mod_three_pow
+#print axioms canonicalTerminalResidue_isUnit
+#print axioms terminal_residue_eq_canonicalTerminalResidue_of_affine_identity
+
 end CollatzSyracuseAudit
 
 
