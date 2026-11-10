@@ -104,3 +104,8 @@ PR #55 head `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, workflow [42807396471](h
 PR #56 exact head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow [42808797159](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42808797159), completed with all three jobs failed. The errors in `SyracuseOffsetIdentity.lean` were: missing local classical instance for `Nat.find`; failure to derive positivity of `n j` because the proof did not use the already established oddness fact; and a forward reference to `orbit_lower_bound_of_minimal_counterexample`, declared later. The shifted-tail identity itself printed `[propext, Classical.choice, Quot.sound]`. The renamed cylinder declaration also printed that profile in the partial build log, but the complete module failed later, so the renamed declaration is not accepted as a completed exact-head CI result.
 
 PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5` applies the local classical instance, explicitly passes oddness to `omega`, and proves the lower-bound wrapper directly from the suffix-return lemma. No exact-head workflow was visible at the latest poll. Status: OFFEN – NICHT VERIFIZIERT. The global infinite-branch exclusion remains open.
+
+
+## 11. Latest PR #59 exact-head poll — 10 November 2026
+
+Workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956) is now attached to exact head `5f6e46de8bed7061f8336089857143c54e997af5`. Job states: `compile-drafts` `129807911809` in progress; Lean 4.34.1 `129807911748` queued; Lean 4.35.0 paranoid `129807911880` queued. No successful result or axiom profile is claimed for PR #59 until all three jobs finish and their logs are inspected.
