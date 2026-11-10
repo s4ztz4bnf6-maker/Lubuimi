@@ -456,3 +456,8 @@ Lean 4.34.1 and Lean 4.35.0 paranoid jobs passed for exact head `b0c2d514d903dd1
 ## PR #62 final result — exact-head PASS
 
 All three jobs in workflow 42811286670 passed on head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`. The two new finite-cap-tree bridge declarations print `[propext, Classical.choice, Quot.sound]`; no `sorryAx` was detected and the paranoid kernel accepted. The deterministic-minimality-to-finite-cap-tree interface is now formally verified at this head. The infinite-branch exclusion remains open.
+
+
+## 10 November 2026 — terminal-residue bridge start-index normalization
+
+PR #65 failed all three exact-head jobs because the terminal-residue lemma expects a depth bound in terms of `n 0`, whereas the bridge supplied it in terms of `n₀`. PR #66 attempts to derive `n 0 = n₀` directly from the affine offset identity at zero. Keep the bridge obligation OPEN until all three exact-head jobs and named axiom/no-`sorryAx` checks pass. PR #59 and PR #62 verified components remain valid at their own exact heads; they are not downgraded by PR #65's failure.
