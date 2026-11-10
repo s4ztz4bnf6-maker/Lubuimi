@@ -32,3 +32,7 @@ No `LICENSE` file has been added and no public reuse permission is claimed until
 **Decision required:** (A) proprietary/all rights reserved for both research projects; (B) Apache-2.0 for Lean code plus CC BY 4.0 for manuscripts/docs; or (C) another explicit scheme.
 
 Last checked: 10 November 2026.
+
+## Neutral Lean declaration identifier — 10 November 2026
+
+The current Collatz continuation candidate renames the initial valuation-one cylinder declaration to `initial_valuation_one_cylinder_iff_dyadic_divisibility`. The mathematical proposition and proof are unchanged. Earlier successful CI snapshots remain historical evidence for the then-current source declaration only; they do not automatically verify the new identifier. The rename and all new shifted-tail/minimality declarations are being checked together on PR #56, exact head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow 42808797159, queued at the latest poll.
