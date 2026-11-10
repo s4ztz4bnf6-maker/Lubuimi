@@ -41,22 +41,21 @@ theorem childBlocks_tail_partition (Bstar B : ℕ) (hB : B ≤ Bstar) :
       Finset.range (2 ^ Bstar) := by
   induction B with
   | zero =>
-      simp [childBlocks, tailBlock, Nat.sub_self]
+      simp [childBlocks, tailBlock]
   | succ B ih =>
       have hB' : B ≤ Bstar := by omega
       have hq : Bstar - (B + 1) + 1 = Bstar - B := by omega
       have hpow : 2 ^ (Bstar - (B + 1)) ≤ 2 ^ (Bstar - B) := by
         rw [← hq]
         simp [pow_succ]
-        omega
       have hinterval :
           childBlock Bstar (B + 1) ∪ tailBlock Bstar (B + 1) =
             tailBlock Bstar B := by
         unfold childBlock tailBlock
         rw [hq]
         apply ico_union_adjacent
-        · omega
-        · omega
+        · exact Nat.sub_le_sub_left hpow _
+        · exact Nat.sub_le _ _
       calc
         childBlocks Bstar (B + 1) ∪ tailBlock Bstar (B + 1)
             = (childBlocks Bstar B ∪ childBlock Bstar (B + 1)) ∪
@@ -64,7 +63,7 @@ theorem childBlocks_tail_partition (Bstar B : ℕ) (hB : B ≤ Bstar) :
         _ = childBlocks Bstar B ∪
               (childBlock Bstar (B + 1) ∪ tailBlock Bstar (B + 1)) := by
                 ext x
-                simp [or_assoc]
+                simp
         _ = childBlocks Bstar B ∪ tailBlock Bstar B := by
               rw [hinterval]
         _ = Finset.range (2 ^ Bstar) := ih hB'
