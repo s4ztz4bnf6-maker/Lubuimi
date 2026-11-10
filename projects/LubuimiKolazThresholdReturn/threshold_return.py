@@ -144,7 +144,7 @@ def row_by_z0(B: int, z0: int) -> dict:
 
 
 def main() -> None:
-    for B in (31, 63, 127, 255, 511, 1023, 2047, 4095, 8191):
+    for B in (31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383):
         print(f"B={B}")
         for row in analyze_threshold(B):
             print(row["x"], row["z0"], row["m"], row["H"], row["R"])
@@ -162,6 +162,9 @@ def main() -> None:
         (1023, 1055, 2047, 2375),
         (1023, 1055, 2047, 2111),
         (4095, 4607, 8191, 10367),
+        (8191, 11291, 16383, 19055),
+        (8191, 11291, 16383, 22583),
+        (4095, 4607, 16383, 23327),
     )
     for B1, z1, B2, z2 in pairs:
         suffix = common_suffix(
