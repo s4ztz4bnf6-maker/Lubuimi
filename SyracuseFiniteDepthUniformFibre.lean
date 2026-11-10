@@ -223,4 +223,20 @@ theorem childBlocks_disjoint_tail
 #print axioms mem_childBlocks_lt_tailLower
 #print axioms childBlocks_disjoint_tail
 
+/-- The next child block is disjoint from the union of all earlier child
+blocks.  By induction, the recursive child family is pairwise disjoint. -/
+theorem childBlocks_disjoint_next
+    (Bstar B : ℕ) (hB : B + 1 ≤ Bstar) :
+    Disjoint (childBlocks Bstar B) (childBlock Bstar (B + 1)) := by
+  apply Finset.disjoint_left.mpr
+  intro x hxEarlier hxNext
+  have hB' : B ≤ Bstar := by omega
+  have hxlt := mem_childBlocks_lt_tailLower Bstar B x hB' hxEarlier
+  have hnext := (Finset.mem_Ico.mp hxNext).1
+  have hq : Bstar - (B + 1) + 1 = Bstar - B := by omega
+  rw [hq] at hnext
+  omega
+
+#print axioms childBlocks_disjoint_next
+
 end SyracuseUniformFibre
