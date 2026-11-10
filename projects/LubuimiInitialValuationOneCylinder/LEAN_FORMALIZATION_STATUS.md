@@ -64,3 +64,8 @@ In addition to runs 42721006544 and 42721305220, the same declaration passed run
 - `42722186081`: merge `5d4a19c`, PR head `a36894eefc52e5d28cd43110f5e289805509ad33`.
 
 All four complete workflows succeeded. The main theorem's transitive axiom profile is `[propext, Classical.choice, Quot.sound]`, and the explicit `sorryAx` audit steps passed. Current recheck 42724343412 is in progress on head `29b27dc529b9e81a33b5211e9e01a01e19edc256`. The finite valuation-word partition, tail partition, terminal-residue collision energy and Markov matrix remain separate Lean targets.
+
+
+## Fifth successful exact-commit audit
+
+Run `42724343412` also completed successfully on merge commit `06675a1`, PR head `29b27dc529b9e81a33b5211e9e01a01e19edc256`. It completed the full compile-drafts workflow, including library build, iteration and threshold modules, Syracuse reference and quarter-descent modules, offset identity, closed-form offset, stronger lower bound, valuation-one margin block and exact valuation transition. The main cylinder theorem again printed `[propext, Classical.choice, Quot.sound]`, and both explicit `sorryAx` audit steps passed. The current documentation/status recheck is run `42725493567` on head `a52dffc23b323964f33bc7f6c61c2cb24bcdf708`, in progress.
