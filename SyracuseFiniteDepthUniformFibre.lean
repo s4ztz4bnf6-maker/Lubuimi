@@ -1,4 +1,5 @@
 import Mathlib
+import Mathlib.Order.Interval.Finset.Nat
 
 /-!
 # Finite-depth uniform fibre: dyadic interval partition
@@ -72,10 +73,11 @@ theorem childBlocks_tail_partition (Bstar B : ℕ) (hB : B ≤ Bstar) :
 private theorem pow_two_le_pow_two_add (a b : ℕ) :
     2 ^ a ≤ 2 ^ (a + b) := by
   rw [pow_add]
+  have hfactor : 1 ≤ 2 ^ b := by positivity
   calc
     2 ^ a = 2 ^ a * 1 := by simp
     _ ≤ 2 ^ a * 2 ^ b :=
-      Nat.mul_le_mul_left _ (by positivity)
+      Nat.mul_le_mul_left _ hfactor
 
 /-- Each child block has exactly the dyadic number of atoms prescribed
 by its exponent. -/
