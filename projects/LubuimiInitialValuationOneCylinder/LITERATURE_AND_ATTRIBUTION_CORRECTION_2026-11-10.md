@@ -38,9 +38,11 @@ No novelty or priority claim is made for the parity-vector congruence classifica
 
 ## 5. Formal verification boundary
 
-The Lean declaration recorded at SyracuseOffsetIdentity.lean:2397 and source commit b1a8599c686c37893a33453b759dee42047c7727 is a source-level formalization of the initial-cylinder statement. The existing successful CI/axiom records apply only to that declaration at the exact checked snapshots. They do not certify the arbitrary finite-word companion, its finite tail partition, the terminal-residue collision-energy note, or global Collatz descent.
+The historical declaration recorded at SyracuseOffsetIdentity.lean:2397 and source commit b1a8599c686c37893a33453b759dee42047c7727 is a source-level formalization of the initial-cylinder statement. Its seven successful CI/axiom snapshots apply only to that historical identifier at the exact checked snapshots.
 
-The historical source identifier lubuimi_initial_valuation_one_cylinder is retained in the record to identify the exact audited declaration. It is not used as a mathematical eponym. A future neutral source-identifier rename must be a separate source change followed by a fresh exact-commit build and axiom audit; no verification status is transferred automatically.
+A later source change introduced the neutral declaration `initial_valuation_one_cylinder_iff_dyadic_divisibility` at SyracuseOffsetIdentity.lean:2603 and exact source commit `5f6e46de8bed7061f8336089857143c54e997af5`. Exact-head workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956) passed Lean 4.34.1, compile-drafts, and Lean 4.35.0 paranoid; the declaration-scoped transitive profile is [propext, Classical.choice, Quot.sound], and the no-sorryAx guard passed.
+
+The historical identifier remains in the record to identify the earlier audited declaration; it is not a mathematical eponym. The new neutral declaration has its own independent exact-head verification. Neither record certifies the arbitrary finite-word companion, its finite tail partition, the terminal-residue collision-energy note, or global Collatz descent.
 
 ## 6. Editorial corrections
 
