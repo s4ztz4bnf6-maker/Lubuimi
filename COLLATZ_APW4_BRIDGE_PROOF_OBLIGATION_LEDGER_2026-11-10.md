@@ -446,3 +446,8 @@ PR #62 exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow [42811286
 At the latest poll, compile-drafts `129813061512`, Lean 4.35.0 paranoid `129813061895`, and Lean 4.34.1 `129813062043` were all in progress. The new declarations are not verified yet.
 
 Mathematical scope: the result derives a necessary finite-depth path certificate under a least odd nonterminating start. It does not prove the finite cap tree has no infinite branch. The central global obligation remains an infinite-branch exclusion / well-founded descent argument. Do not convert the finite-depth certificate or average (k=2) terminal-residue energy into a pathwise theorem without a proved pointwise inequality.
+
+
+## PR #62 partial CI result — 10 November 2026
+
+Lean 4.34.1 and Lean 4.35.0 paranoid jobs passed for exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`; both new declarations have standard profile `[propext, Classical.choice, Quot.sound]`, the paranoid kernel accepted, and no `sorryAx` was detected. Compile-drafts is still in progress. The exact-head three-job gate remains open.
