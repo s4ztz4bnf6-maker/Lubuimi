@@ -51,7 +51,7 @@ The following mathematical statements are now documented but are not claimed as 
 
 - Finite exact valuation-word cylinder classification (all finite exact positive exponent words, explicit residue class and mass), a classical parity-vector consequence; not yet Lean-verified.
 - The finite truncation/tail-cylinder partition with exact weights.
-- Lubuimi's Terminal-Residue Collision Energy: terminal residue map modulo 3^k, exact diagonal mass 3^-k, off-diagonal collision energy and lower bound 1/(2·3^k), including finite truncation error control.
+- Terminal-residue collision-energy identity: terminal residue map modulo 3^k, exact diagonal mass 3^-k, off-diagonal collision energy and lower bound 1/(2·3^k), including finite truncation error control.
 
 The initial valuation-one cylinder theorem remains the separately verified declaration described above. No failed attempt for that declaration overrides its two later successful full CI audits.
 
