@@ -60,13 +60,13 @@ EXPECTED = {
 
 class ThresholdReturnTests(unittest.TestCase):
     def test_exact_escape_source_characterization(self):
-        for B in (31, 63, 127, 255, 511, 1023, 2047, 4095, 8191):
+        for B in (31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383):
             brute_force = [x for x in range(1, B, 2) if T(x) >= B]
             self.assertEqual(escape_source_characterization(B), brute_force)
             self.assertEqual([r["x"] for r in analyze_threshold(B)], brute_force)
 
     def test_power_two_threshold_source_count(self):
-        for k in range(2, 14):
+        for k in range(2, 15):
             B = 2**k - 1
             self.assertEqual(
                 len(escape_source_characterization(B)),
@@ -94,6 +94,9 @@ class ThresholdReturnTests(unittest.TestCase):
             (1023, 1055, 2047, 2375, 49, 2375, 157),
             (1023, 1055, 2047, 2111, 45, 3007, 157),
             (4095, 4607, 8191, 10367, 29, 10367, 3371),
+            (8191, 11291, 16383, 19055, 43, 19055, 3533),
+            (8191, 11291, 16383, 22583, 43, 19055, 3533),
+            (4095, 4607, 16383, 23327, 27, 23327, 3371),
         ]
         for B1, z1, B2, z2, length, first, last in pairs:
             suffix = common_suffix(
@@ -105,7 +108,7 @@ class ThresholdReturnTests(unittest.TestCase):
             self.assertEqual(suffix[-1], last)
 
     def test_extended_csv_tables(self):
-        for B in (511, 1023, 2047, 4095, 8191):
+        for B in (511, 1023, 2047, 4095, 8191, 16383):
             path = Path(__file__).with_name(f"threshold_{B}.csv")
             with path.open(newline="", encoding="utf-8") as handle:
                 expected = [
@@ -153,6 +156,22 @@ class ThresholdReturnTests(unittest.TestCase):
             (row_by_z0(8191, 10367)["m"], row_by_z0(8191, 10367)["H"],
              row_by_z0(8191, 10367)["R"]),
             (28, 425645, 3371),
+        )
+
+    def test_b16383_extended_summary(self):
+        rows = analyze_threshold(16383)
+        self.assertEqual(len(rows), 1365)
+        self.assertEqual(max(r["m"] for r in rows), 51)
+        self.assertEqual(max(r["H"] for r in rows), 9038141)
+        self.assertEqual(
+            (row_by_z0(16383, 22559)["m"], row_by_z0(16383, 22559)["H"],
+             row_by_z0(16383, 22559)["R"]),
+            (51, 3211973, 10049),
+        )
+        self.assertEqual(
+            (row_by_z0(16383, 21743)["m"], row_by_z0(16383, 21743)["H"],
+             row_by_z0(16383, 21743)["R"]),
+            (32, 9038141, 8947),
         )
 
     def test_b1023_1097_cylinder_and_margin_certificate(self):
