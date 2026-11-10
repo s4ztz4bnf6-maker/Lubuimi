@@ -222,3 +222,8 @@ Zusammen mit der affinen Identität und \(2^{A_j}>0\) ergibt sich \(n_j<n_0\). E
 ## Exakter Folgeaudit — 10. November 2026
 
 Der historische Bezeichner `lubuimi_initial_valuation_one_cylinder` wurde im Fortsetzungszweig durch `initial_valuation_one_cylinder_iff_dyadic_divisibility` ersetzt. Im Teillog des fehlgeschlagenen PR-#56-Builds gab die umbenannte Deklaration `[propext, Classical.choice, Quot.sound]` aus. Das gesamte Quellmodul scheiterte jedoch später im neuen Beweisblock zur Minimalität; daher wird dies nicht als abgeschlossene exakte Verifikation geführt. PR #59 repariert die späteren Beweisskriptfehler. Vor einer Anerkennung des neuen Bezeichners sind ein vollständiger erfolgreicher CI-Lauf und die `sorryAx`-Prüfung erforderlich.
+
+
+## Exakte Verifikation des neutralen Lean-Bezeichners — 10. November 2026
+
+Die umbenannte Deklaration `initial_valuation_one_cylinder_iff_dyadic_divisibility` ist nun auf dem exakten Quellstand `5f6e46de8bed7061f8336089857143c54e997af5`, Workflow [42809750956](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42809750956), verifiziert. Alle drei CI-Jobs waren erfolgreich; das deklarationsbezogene Axiomprofil lautet `[propext, Classical.choice, Quot.sound]`; die `sorryAx`-Prüfung des Compile-Jobs war erfolgreich und der Paranoid-Kernel akzeptierte die Lösung. Es handelt sich um einen neutralen internen Bezeichner für eine klassische Paritätsvektor-Zylinderklassifikation. Ein eponymischer Satzname oder Neuheitsanspruch wird nicht erhoben.
