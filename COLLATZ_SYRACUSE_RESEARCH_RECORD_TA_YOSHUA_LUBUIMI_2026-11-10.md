@@ -767,3 +767,10 @@ Workflow 42809750956 has started on head `5f6e46de8bed7061f8336089857143c54e997a
 ## Parallel minimality proof-script candidates — 10 November 2026
 
 Two independent Lean proof-script variants now address the PR #56 errors. PR #58 head `a2eea6f3c979e25a705c3da60d09d6ec84a41b7f` (workflow 42809723676) and PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5` (workflow 42809750956) both have compile, Lean 4.34.1, and Lean 4.35.0 paranoid jobs in progress. They share the same mathematical argument; the final contradiction is discharged by `omega` in #58 and by `Nat.lt_of_not_ge` in #59. No new theorem is claimed from these uncompleted candidates.
+
+
+## 15. PR #59 exact-head verification completed — 10 November 2026
+
+PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5`, workflow 42809750956, passed all three jobs. The no-`sorryAx` guard passed, and the Lean 4.35.0 paranoid kernel accepted the solution. Declaration-scoped profiles: `initial_valuation_one_cylinder_iff_dyadic_divisibility` `[propext, Classical.choice, Quot.sound]`; `every_state_odd_of_positive_affine_steps` `[propext, Quot.sound]`; `every_affine_exponent_is_exact`, `affine_trajectory_eq_syracuse_iterate`, `affine_suffix_returns_of_least_odd_nonterminating_start`, and `affine_minimal_counterexample_orbit_lower_bound` each `[propext, Classical.choice, Quot.sound]`.
+
+The exact shifted-tail and minimality reduction is now formally verified at this commit. Its logical scope is conditional: it derives a lower bound from a least odd positive nonterminating start and a sequence that never reaches one. It does not prove that no such start exists. A separate infinite-trajectory exclusion remains the central global obligation.
