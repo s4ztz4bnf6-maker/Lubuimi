@@ -5,12 +5,12 @@ authors:
   - family-names: "Lubuimi"
     given-names: "Ta-Yoshua"
 date-released: 2026-11-10
-version: "0.1.0"
+version: "0.2.0"
 type: software
 abstract: >-
   Exact integer computations of first-return excursions above thresholds
-  B=31, 63, 127 and 255 for the accelerated odd Syracuse map, including
-  complete finite tables and verified common terminal suffixes. This archive
+  B=31, 63, 127, 255, 511 and 1023 for the accelerated odd Syracuse map, including
+  complete finite tables, exact source-set classification, common terminal suffixes, and a worked valuation-cylinder/signed-margin certificate. This archive
   records finite computations only and does not claim a proof of the global
   Collatz conjecture.
 repository-code: "https://github.com/s4ztz4bnf6-maker/Lubuimi"
