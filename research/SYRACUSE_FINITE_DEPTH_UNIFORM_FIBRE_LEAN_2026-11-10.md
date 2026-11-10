@@ -9,8 +9,8 @@
 
 Repository: `s4ztz4bnf6-maker/Lubuimi`  
 Candidate branch: `collatz/finite-depth-uniform-fibre-2026-11-10`  
-Exact source commit: `8a9d2b32a265e70d662aeedd21ec8a3ca9a7e594`  
-GitHub Actions run: `42861207383` — success  
+Exact source commit: `de022f653de94dd589c98eb51a31f57559682004`  
+GitHub Actions run: `42861870848` — success  
 Toolchain: Lean 4.34.1 / Mathlib 4.34.1
 
 File: `SyracuseFiniteDepthUniformFibre.lean`
