@@ -2851,18 +2851,6 @@ structure FiniteCapPrefixState where
   margin : ℤ
   deriving DecidableEq, Repr
 
-namespace FiniteCapPrefixState
-
-@[ext] theorem ext {s t : FiniteCapPrefixState}
-    (hexponent : s.exponent = t.exponent)
-    (hoffset : s.offset = t.offset)
-    (hmargin : s.margin = t.margin) :
-    s = t := by
-  cases s
-  cases t
-  simp_all
-
-end FiniteCapPrefixState
 
 /-- Initial affine/margin state for the empty valuation word. -/
 def finiteCapInitialState : FiniteCapPrefixState :=
