@@ -1072,8 +1072,10 @@ theorem canonicalTerminalResidue_isUnit (A : ℕ → ℕ) (k : ℕ)
   have h2 : IsUnit ((2 ^ A k : ℕ) : ZMod (3 ^ k)) :=
     twoPow_isUnit_mod_threePow (A k) k
   have h2inv :
-      IsUnit (((2 ^ A k : ℕ) : ZMod (3 ^ k))⁻¹) :=
-    IsUnit.inv h2
+      IsUnit (((2 ^ A k : ℕ) : ZMod (3 ^ k))⁻¹) := by
+    rcases h2 with ⟨u, hu⟩
+    refine ⟨u⁻¹, ?_⟩
+    simpa [hu]
   exact IsUnit.mul hC h2inv
 
 /-- For an exact affine trajectory identity, the terminal state is precisely
