@@ -89,6 +89,17 @@ Thus the first images, sometimes informally called the escape values, are 35 and
 | 247 | 371 | 2 | 557 | 209 |
 | 251 | 377 | 16 | 3077 | 61 |
 
+### Extended thresholds B=511 and B=1023
+
+The exact integer-only enumerator and regression tests have now been extended to two further thresholds. The complete row-by-row tables are archived as `threshold_511.csv` and `threshold_1023.csv`; the tests compare every computed row against those files.
+
+| Threshold | Escape sources | Maximum excursion length | Maximum height | All first returns found? |
+|---:|---:|---:|---:|:---:|
+| 511 | 42 | 24 | 13,121 | Yes |
+| 1023 | 85 | 50 | 83,501 | Yes |
+
+At B=1023, the source x=731 has first image z0=1097 and returns below the threshold in one further step, at 823. This is an exact entry in the B=1023 table. It does **not** verify or identify the earlier separate “1097 threshold/count” lead, whose definition remains unresolved.
+
 ## 3. Exact confluence and common suffixes
 
 The excursions display exact confluence, not merely similar maxima.
@@ -122,26 +133,40 @@ The z0=263 and z0=311 excursions share the suffix
 263\to395\to593\to445\to167.
 \]
 
+### D. B=511 to B=1023 confluence
+
+Two further exact common suffixes appear between the new threshold tables:
+\[
+1151\to1727\to2591\to3887\to5831\to8747\to13121
+\to9841\to7381\to173,
+\]
+shared by the B=511 path from z0=671 and the B=1023 path from z0=1151 (10 terms), and
+\[
+1403\to2105\to1579\to2369\to1777\to1333\to125,
+\]
+shared by the B=511 path from z0=623 and the B=1023 path from z0=1403 (7 terms).
+
 These are exact path identities under the deterministic map T. They show that several threshold excursions feed into a small number of long suffixes. They do not show that every orbit does so.
 
 ## 4. Observed finite bounds
 
 For the tested thresholds:
-- the maximum observed excursion length is 36 at B=31, 32 at B=63, 25 at B=127, and 18 at B=255;
-- the maximum observed height is 3077 at all four thresholds;
-- B=255 includes the direct return z0=341 to 1.
+- the maximum observed excursion lengths are 36, 32, 25, 18, 24 and 50 at B=31, 63, 127, 255, 511 and 1023 respectively;
+- the maximum observed heights are 3077, 3077, 3077, 3077, 13121 and 83501 respectively;
+- B=255 includes the direct return z0=341 to 1;
+- all 42 B=511 and all 85 B=1023 escape sources have a recorded first return below their threshold.
 
 These are finite-sample facts about the specified escape-source sets. They do not establish a uniform bound as B grows, nor do they classify all Syracuse orbits.
 
 ## 5. Reproducibility
 
-The exact integer-only script threshold_return.py enumerates E_B and computes every row. The tests in test_threshold_return.py verify all four tables, the first-return convention, the repeated maximum 3077, and the named common suffixes. The workflow kolaz-threshold-return.yml runs those tests.
+The exact integer-only script threshold_return.py enumerates E_B and computes every row. The tests in test_threshold_return.py verify the four inline tables, all rows in threshold_511.csv and threshold_1023.csv, the first-return convention, the direct return to 1, and the named common suffixes. The workflow kolaz-threshold-return.yml runs those tests.
 
 The archival “1097” lead has no recovered definition or verified relation to these threshold tables. It remains OFFEN – NICHT VERIFIZIERT and is not used.
 
 ## 6. Open mathematical questions
 
-1. Determine whether the observed common-suffix structure persists for larger B, beginning with B=511.
+1. Determine whether the observed common-suffix structure persists for larger B, beginning with B=2047.
 2. Classify which terminal returns recur and whether a finite set of suffix attractors emerges.
 3. Relate the threshold excursion tree to the exact valuation cylinders and signed-margin cap, without treating finite data as a universal statement.
 4. Prove or refute any proposed uniform bound on m_B or H_B; no such bound is currently established.
