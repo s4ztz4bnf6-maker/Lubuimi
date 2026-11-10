@@ -20,7 +20,7 @@ The exact integer-only implementation reproduces:
 - 42 for B=511;
 - 85 for B=1023.
 
-The two extended tables are preserved row-by-row in CSV and checked against fresh enumeration by the regression suite.
+The two extended tables are preserved row-by-row in CSV and checked against fresh enumeration by the regression suite. The B=1023 source x=731 also gives a checked exact valuation word (1,2), cylinder residue 11 mod 16, affine offset identity 8·823=9·731+5, and two signed-margin cap inequalities.
 
 It reproduces every row in the manuscript tables and both extended CSV files. The maximum excursion lengths at B=31,63,127,255,511,1023 are 36,32,25,18,24,50; the maximum heights are 3077,3077,3077,3077,13121,83501. These statements are restricted to the enumerated source sets.
 
