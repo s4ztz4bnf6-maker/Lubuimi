@@ -196,3 +196,61 @@ The integer 1097 is recorded above as the B=1023 first image T(731), returning t
 4. Prove or refute any proposed uniform bound on m_B or H_B; no such bound is currently established.
 
 **Conclusion:** This archive is a reproducible finite computational result and a source of conjectures. It is not a proof of global Collatz and is not Lean-verified.
+
+
+## 7. Exact source-set characterization and power-of-two count
+
+The source values that escape a positive odd threshold admit a closed-form description. Let
+\[
+E_B=\{x\in\mathbb N:x\text{ odd},\ 1\le x<B,\ T(x)\ge B\},
+\quad
+T(x)=\frac{3x+1}{2^{v_2(3x+1)}}.
+\]
+For every positive odd B,
+\[
+\boxed{
+E_B=\{x:1\le x<B,\ x\equiv3\pmod4,\ 2B\le3x+1\}.
+}
+\]
+
+**Proof.** Put \(a=v_2(3x+1)\ge1\). If \(T(x)\ge B\), then
+\[
+2^aB\le3x+1\le3(B-1)+1=3B-2<4B.
+\]
+Since B is positive, this forces \(2^a<4\), hence \(a=1\). Therefore \(3x+1\equiv2\pmod4\), which is equivalent to \(x\equiv3\pmod4\). The threshold condition becomes \(2B\le3x+1\). Conversely, \(x\equiv3\pmod4\) forces \(v_2(3x+1)=1\), so the same inequality gives \(T(x)\ge B\). This proves the equality.
+
+For \(B=2^k-1\), \(k\ge2\), one has \(B\equiv3\) or \(7\pmod{12}\). Writing B as \(12m+3\) or \(12m+7\), the source set is respectively
+\[
+\{8m+3+4j:0\le j<m\}
+\quad\text{or}\quad
+\{8m+7+4j:0\le j<m\}.
+\]
+In either case its cardinality is m. Hence
+\[
+\boxed{|E_{2^k-1}|=\left\lfloor\frac{2^k}{12}\right\rfloor
+=\left\lfloor\frac{(2^k-1)+1}{12}\right\rfloor.}
+\]
+For k=5,6,7,8,9,10 this gives the observed counts 2,5,10,21,42,85. The script now enumerates the source set using this exact criterion; regression tests compare it with direct evaluation of T.
+
+## 8. The B=1023 value 1097 and its exact valuation-cylinder certificate
+
+The B=1023 table contains source x=731 with first image z0=1097 and first return 823:
+\[
+731\longmapsto1097\longmapsto823.
+\]
+The exact valuation word is \(\alpha=(1,2)\). Its total exponent and offset are
+\[
+A_2=3,\qquad C_2=5,
+\]
+and the affine identity is
+\[
+2^3\cdot823=3^2\cdot731+5=6584.
+\]
+The exact cylinder modulus and residue are
+\[
+2^{A_2+1}=16,\qquad
+r_\alpha\equiv(2^3-C_2)(3^2)^{-1}\equiv11\pmod{16}.
+\]
+Indeed \(731\equiv11\pmod{16}\). The signed margins at the two prefix positions are \(D_0=0\) and \(D_1=-2\); the corresponding local cap inequalities are \(2\le4\) and \(2\le8\).
+
+The regression test recomputes the valuation word, endpoint, offset identity, cylinder residue and both cap inequalities. This is an exact finite bridge between the threshold table, the general valuation-word cylinder formula and the Lean-verified margin-cap core. It does not by itself formalize the general finite-word cylinder theorem. The earlier archival “1097 threshold/count” lead remains distinct unless its original definition is recovered.
