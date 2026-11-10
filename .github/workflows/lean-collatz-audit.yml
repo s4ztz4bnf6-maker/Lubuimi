@@ -72,3 +72,12 @@ jobs:
             echo "Forbidden sorryAx found in exact k=2 terminal-residue energy declarations."
             exit 1
           fi
+
+      - name: Compile and axiom-audit exact L945 odd-covering moments
+        run: |
+          set -o pipefail
+          lake env lean OddCoveringL945MomentAudit.lean 2>&1 | tee /tmp/odd-covering-l945-axioms.log
+          if grep -q 'sorryAx' /tmp/odd-covering-l945-axioms.log; then
+            echo "Forbidden sorryAx found in exact L945 odd-covering declarations."
+            exit 1
+          fi
