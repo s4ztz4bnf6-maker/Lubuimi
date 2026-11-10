@@ -378,3 +378,8 @@ The named declaration outputs are:
 The completed Lean 4.35.0 log explicitly reports `Lean paranoid kernel accepts the solution`. The `sorryAx` guard passed for `SyracuseOffsetIdentity.lean`; no actual `sorryAx` dependency is reported for the two new declarations. This verifies these two named affine/parity lemmas on this exact source head and the listed toolchains only.
 
 The global Collatz conjecture remains open. The suffix-return premise still must be derived from deterministic Syracuse dynamics and minimality, and a separate well-founded descent/ranking or other infinite-branch exclusion is still required.
+## Deterministic Syracuse successor bridge — 10 November 2026
+
+The next candidate declaration is `affine_step_eq_syracuse_of_exact_exponent`, connecting the affine transition with odd quotient to the deterministic map in `SyracuseReferenceTest.lean`. The first candidate head `400307622c62488878c1fa00362d06bddfa54744` did not reach proof checking because the imported module was not registered as a library root. The candidate build graph now includes `SyracuseReferenceTest` in `CollatzAudit` roots.
+
+Current exact head: `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, PR #55, workflow 42807396471. The three jobs were in progress at the latest poll. This theorem remains unverified until exact-head compilation, named axiom audit, and no-`sorryAx` checks pass. If it passes, the next proof target is the shifted-tail iterate identity by induction; the suffix-return and infinite-branch obligations remain open.
