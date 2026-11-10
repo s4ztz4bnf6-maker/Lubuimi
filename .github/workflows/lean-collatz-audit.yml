@@ -63,3 +63,12 @@ jobs:
             echo "Forbidden sorryAx found in exact Syracuse valuation transition."
             exit 1
           fi
+
+      - name: Compile and axiom-audit exact k=2 terminal-residue energy
+        run: |
+          set -o pipefail
+          lake env lean LubuimiTerminalResidueEnergyK2.lean 2>&1 | tee /tmp/terminal-residue-k2-axioms.log
+          if grep -q 'sorryAx' /tmp/terminal-residue-k2-axioms.log; then
+            echo "Forbidden sorryAx found in exact k=2 terminal-residue energy declarations."
+            exit 1
+          fi
