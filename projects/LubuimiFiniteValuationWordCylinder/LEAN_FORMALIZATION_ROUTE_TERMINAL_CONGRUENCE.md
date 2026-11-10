@@ -138,3 +138,12 @@ Formalize this only after parent-cylinder reconstruction and the exact-next-expo
 The general finite valuation-word cylinder theorem and its exact tail partition remain mathematically proved in the companion manuscript but are not yet Lean-formalized. A separate finite-state sub-result arising from the terminal-residue project has now been implemented as `LubuimiTerminalResidueEnergyK2.lean` on the Syracuse/Collatz formalization branch, commit `c0d3e93e19d13fda2044e24f7c8902d4c47d75d8`. It encodes the rational k=2 transition matrix modulo 9 and the exact two-step distribution/energy. Workflow 42730248268 was queued for that exact head when this note was written.
 
 This is a formalization of the finite k=2 calculation only. It does not formalize the general finite-word cylinder classification, its density theorem, or the exact finite tail partition. Those remain separate obligations in Sections 4–5 above. No formal verification claim is made until the exact-head run completes and the named declarations pass the axiom audit.
+
+
+## Cross-project verification update — 10 November 2026
+
+The separate finite k=2 terminal-residue transition matrix and collision-energy calculation is now Lean-verified independently in its own project. Standalone Lean 4.35.0/Mathlib v4.35.0 workflow 42735188229 passed on code commit `26c7b92fd529bf03582995e1bee301b0d07c131c`; all seven named declarations print [propext, Classical.choice, Quot.sound], with no actual `sorryAx` hit. The unified Syracuse/Collatz root-library workflow 42733657952 also passed and compiled the same k=2 module alongside the signed-margin cap and finite L945 CRT audit.
+
+The B=1023 threshold-return archive supplies a concrete exact word `(1,2)`: (731\to1097\to823), (A=3), (C=5), residue (11\pmod{16}), and affine identity (8\cdot823=9\cdot731+5). Its regression certificate also checks the local margin caps. This is a finite cross-check of the cylinder and margin formulae, not a Lean proof of the general finite-word theorem.
+
+**Unchanged formalization boundary:** this project’s general finite-word one-cylinder theorem, its exact density corollary, and the finite cutoff/tail-cylinder partition remain mathematically proved in the manuscript but not yet Lean-compiled. The all-one special case and the local signed-margin cap are separately Lean-verified; neither substitutes for this general theorem.
