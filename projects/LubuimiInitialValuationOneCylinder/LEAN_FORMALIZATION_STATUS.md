@@ -54,3 +54,13 @@ The initial valuation-one cylinder theorem remains the separately verified decla
 
 
 The terminal-residue collision-energy note now also gives an explicit finite rational Markov matrix `P_k`, with terminal mass vector `m_k = δ_0 P_k^k`; the order formula for 2 modulo 3^k supplies the matrix entries. The exact k=2 distribution and second moment are recorded. This Markov representation, like the collision-energy identity itself, remains a Lean formalization target and is not part of the already verified initial-cylinder declaration.
+
+
+## Four completed exact-commit audits of the initial cylinder declaration
+
+In addition to runs 42721006544 and 42721305220, the same declaration passed runs 42721911555 and 42722186081:
+
+- `42721911555`: merge `7b84a1b`, PR head `21829b4dd3b82a73edb19cf0d09ed011f55ef384`.
+- `42722186081`: merge `5d4a19c`, PR head `a36894eefc52e5d28cd43110f5e289805509ad33`.
+
+All four complete workflows succeeded. The main theorem's transitive axiom profile is `[propext, Classical.choice, Quot.sound]`, and the explicit `sorryAx` audit steps passed. Current recheck 42724343412 is in progress on head `29b27dc529b9e81a33b5211e9e01a01e19edc256`. The finite valuation-word partition, tail partition, terminal-residue collision energy and Markov matrix remain separate Lean targets.
