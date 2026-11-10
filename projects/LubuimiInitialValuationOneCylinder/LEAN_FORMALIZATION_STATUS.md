@@ -1,10 +1,13 @@
 # Lean formalization status — 10 November 2026
 
+> **Scholarly-framing correction (version 1.1):** The initial valuation-one cylinder statement is a classical parity-vector congruence consequence, not a new theorem. The general finite exact valuation-word cylinder statement is likewise a classical consequence of the finite parity-vector permutation theorem. The author's independent proof, exposition, and formalization remain attributed to Ta-Yoshua Lubuimi. The historical Lean identifier lubuimi_initial_valuation_one_cylinder is a source-level name, not a claim of mathematical priority. The finite-word statement remains a separate formalization target and is not covered by the initial-cylinder CI audits.
+
+
 **Author:** Ta-Yoshua Lubuimi
 
 ## Mathematical result versus Lean status
 
-The mathematical equivalence in the project manuscript has a complete direct proof. The main Lean declaration `lubuimi_initial_valuation_one_cylinder` is now compiled and transitive-axiom-audited on two independent exact-commit workflow snapshots. The broader finite valuation-word cylinder partition theorem remains a separate formalization task.
+The mathematical equivalence in the project manuscript has a complete direct proof. The main Lean declaration `lubuimi_initial_valuation_one_cylinder` is now compiled and transitive-axiom-audited on two independent exact-commit workflow snapshots. The finite-word cylinder classification is a separate formalization task. Its mathematical content is a classical parity-vector consequence; no novelty claim is made.
 
 ## Relevant successful baseline
 
@@ -46,7 +49,7 @@ This Lean target concerns the initial valuation-one cylinder only. It is not a p
 
 The following mathematical statements are now documented but are not claimed as Lean-verified:
 
-- Lubuimi's Finite Valuation-Word Cylinder Partition Theorem (all finite exact positive exponent words, explicit residue class and mass).
+- Finite exact valuation-word cylinder classification (all finite exact positive exponent words, explicit residue class and mass), a classical parity-vector consequence; not yet Lean-verified.
 - The finite truncation/tail-cylinder partition with exact weights.
 - Lubuimi's Terminal-Residue Collision Energy: terminal residue map modulo 3^k, exact diagonal mass 3^-k, off-diagonal collision energy and lower bound 1/(2·3^k), including finite truncation error control.
 
