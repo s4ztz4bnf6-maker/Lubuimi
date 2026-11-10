@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this research project, please cite the author and manuscript."
-title: "Initial Valuation-One Cylinders in the Accelerated Syracuse Map"
+title: "Finite Exact Valuation-Word Cylinders in the Accelerated Syracuse Map"
 authors:
   - family-names: Lubuimi
     given-names: Ta-Yoshua
@@ -8,11 +8,10 @@ date-released: 2026-11-10
 version: "0.1.0"
 type: article
 abstract: >-
-  An independent exposition and Lean formalization of the classical parity-vector
-  congruence classification for initial valuation-one runs in accelerated Syracuse
-  orbits, with exact run length, natural densities, and a signed-offset margin.
-  The companion finite valuation-word cylinder statement is likewise framed as a
-  classical parity-vector consequence, not as a novelty or priority claim.
+  An independent derivation of the classical finite parity-vector congruence coding
+  in accelerated-Syracuse valuation coordinates. Every finite exact valuation word
+  determines one odd residue class modulo the corresponding power of two, with
+  relative odd density given by its total exponent. No novelty or priority claim is made.
 keywords:
   - Collatz conjecture
   - Syracuse dynamics
