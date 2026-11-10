@@ -703,3 +703,16 @@ The next global proof obligation remains to derive the suffix-return premise fro
 The exact CI state for the new affine parity/exponent lemmas is recorded in [COLLATZ_EXACT_HEAD_CI_AND_OPEN_OBLIGATIONS_2026-11-10.md](COLLATZ_EXACT_HEAD_CI_AND_OPEN_OBLIGATIONS_2026-11-10.md). The previous candidate commit `a8b593cd8ef59105e6b62b11d0dfc7e41e89a3bb` failed at line 3095 because `omega` could not derive `a j ≠ 0` from `ha : ∀ j, 0 < a j`. The repair candidate is `7d17d7111946b328421f9046f95b03c939dfddb1`, PR #53, workflow 42805867475. Its three jobs were still in progress at the latest poll. The repair uses `Nat.ne_of_gt (ha j)`; it remains unverified until all exact-head jobs and the named axiom/no-`sorryAx` checks pass.
 
 The already successful finite-cap baseline run 42759509255 on exact source `b0509fb5944f172ad9f7d71e7316907d4e988842` remains valid at its own scope. No later candidate failure downgrades the initial valuation-one cylinder, exact offset/margin, mixed-word, dyadic-cardinality, or finite cap-tree results previously verified on their own commits. The global Collatz theorem remains open because the deterministic suffix-return implication and infinite-path exclusion are not yet proved.
+## Exact-head repair result — 10 November 2026
+
+Workflow [42805867475](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42805867475) completed successfully on exact source commit `7d17d7111946b328421f9046f95b03c939dfddb1`. All three jobs passed: Lean 4.34.1 kernel/build check, `compile-drafts`, and Lean 4.35.0 paranoid kernel check.
+
+The named declaration outputs are:
+
+- `CollatzSyracuseAudit.every_state_odd_of_positive_affine_steps`: `[propext, Quot.sound]`.
+- `CollatzSyracuseAudit.every_affine_exponent_is_exact`: `[propext, Classical.choice, Quot.sound]`.
+- `CollatzSyracuseAudit.orbit_lower_bound_of_minimal_counterexample`: no axioms, but still conditional on its explicit suffix-return premise.
+
+The completed Lean 4.35.0 log explicitly reports `Lean paranoid kernel accepts the solution`. The `sorryAx` guard passed for `SyracuseOffsetIdentity.lean`; no actual `sorryAx` dependency is reported for the two new declarations. This verifies these two named affine/parity lemmas on this exact source head and the listed toolchains only.
+
+The global Collatz conjecture remains open. The suffix-return premise still must be derived from deterministic Syracuse dynamics and minimality, and a separate well-founded descent/ranking or other infinite-branch exclusion is still required.
