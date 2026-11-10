@@ -87,3 +87,16 @@ After the one-step theorem passed, candidate PR [#56](https://github.com/s4ztz4b
 After adding the neutral cylinder declaration name, the current PR #56 head is `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`; exact-head workflow [42808797159](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42808797159) was queued at the latest poll. The earlier tail candidate head `1fd204750a1088efbf5e81b40b9ad95962fdb2ed` is superseded and its run is not evidence for the renamed source. All new declarations and the renamed cylinder declaration remain **OFFEN – NICHT VERIFIZIERT** until the new exact-head three-job run, named axiom outputs, and no-`sorryAx` gate pass.
 
 Even if this bridge passes, it only shows that a hypothetical least odd nonterminating Syracuse start generates a nondecreasing affine orbit whose shifted tails are deterministic Syracuse orbits. It does not exclude the existence of such a nonterminating start. A separate infinite-trajectory/infinite-branch exclusion remains the global open problem.
+
+## Separate terminal-exact backward propagation — exact-head PASS, 10 November 2026
+
+This result belongs to the isolated branch `collatz/terminal-exact-backward-step-2026-11-10` and draft PR [#72](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/72); it is not silently transferred to the current parity/shifted-tail branch.
+
+- Lean source head: `e44eb4331cc1481e10d6f60780d695412c47a726`.
+- Workflow [42844423707](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42844423707): PASS.
+- Later documentation head `f36fdcc157e2f40dffd96485898f4ad35136550b`; workflow [42845962042](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42845962042): PASS.
+- Declarations: `SyracuseAudit.terminalExact_backward_step`, `SyracuseAudit.terminalExact_backward_prefix`.
+- Both named profiles: `[propext, Classical.choice, Quot.sound]`; explicit no-`sorryAx` gate passed.
+- Toolchain: Lean 4.34.1 / Mathlib 4.34.1. `lake check` is unavailable, so no `lake check --paranoid` pass is claimed.
+
+Scope is finite backward propagation under positive valuation hypotheses. Arbitrary-word realization, the general tail partition, density-to-pointwise transfer, and global orbit descent remain open.
