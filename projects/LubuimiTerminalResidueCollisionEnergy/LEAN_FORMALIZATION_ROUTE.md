@@ -251,3 +251,12 @@ Final Lean acceptance requires:
 A standalone Lean module `LubuimiTerminalResidueEnergyK2.lean` has now been added on the companion Syracuse/Collatz formalization branch `collatz/offset-margin-roadmap-2026-10-23`, at commit `c0d3e93e19d13fda2044e24f7c8902d4c47d75d8`. It encodes the six unit residues modulo 9, the initial row and two unit-state row types with denominator 63, proves all row numerators sum to 63, proves the exact two-step numerator vector `(8,16,11,4,2,22)`, and states the rational energy theorem `twoStepEnergy_eq_five_div_twentyOne`.
 
 The module is registered in the Lean library and in the Collatz draft audit workflow. Exact-head run 42730248268 is queued at this update. Therefore this is an implemented formalization candidate, **not yet a Lean-verified result**. The audit must complete successfully, print the named axiom profiles, and show no actual `sorryAx` before the status is upgraded. This finite k=2 module does not formalize the general Markov-chain theorem, the infinite word-space moment identity, or the APW4/BIB identification.
+
+
+## Standalone Lean project added — 10 November 2026
+
+A self-contained Lean project now lives in `projects/LubuimiTerminalResidueCollisionEnergy/lean/`, pinned to Lean 4.34.1 and Mathlib v4.34.1. It includes its own Lake library, the exact finite k=2 transition/distribution/energy module, and a dedicated GitHub Actions workflow at `.github/workflows/terminal-residue-k2.yml` that builds the library, prints transitive axiom profiles, rejects `sorryAx), and runs `lake check --paranoid`.
+
+The module source is synchronized with the copy at the root of the Syracuse/Collatz formalization branch, whose exact-head compile/audit workflow is run 42730248268. That run was queued when this addendum was written. The standalone PR branch has the corresponding module at commit `aec1dd4399fbe86cd3503fb5dc905c4416eb999e`; its dedicated workflow is triggered by the branch push and its result is not inferred from the separate root-module run.
+
+Until the exact workflow result is retrieved, this remains an implemented formalization candidate, not a verified theorem. The general (k)-state Markov theorem, countable source moment identity, and APW4/BIB transport remain outside the scope of this finite k=2 module.
