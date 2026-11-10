@@ -737,3 +737,14 @@ This bridge does not rule out the existence of a least odd nonterminating start.
 ## Neutral Lean declaration identifier — 10 November 2026
 
 The current Collatz continuation candidate renames the initial valuation-one cylinder declaration to `initial_valuation_one_cylinder_iff_dyadic_divisibility`. The mathematical proposition and proof are unchanged. Earlier successful CI snapshots remain historical evidence for the then-current source declaration only; they do not automatically verify the new identifier. The rename and all new shifted-tail/minimality declarations are being checked together on PR #56, exact head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow 42808797159, queued at the latest poll.
+
+
+## 13. Exact-head continuation: parity, deterministic step, shifted tails, and naming — 10 November 2026
+
+The two affine parity/exactness declarations passed all three exact-head jobs on PR #53 head `7d17d7111946b328421f9046f95b03c939dfddb1`, workflow 42805867475. Their transitive axiom profiles are `[propext, Quot.sound]` and `[propext, Classical.choice, Quot.sound]`; the no-`sorryAx` guard passed.
+
+The exact affine-to-deterministic Syracuse one-step theorem passed all three jobs on PR #55 head `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, workflow 42807396471. Its profile is `[propext, Classical.choice, Quot.sound]`, the paranoid kernel accepted the solution, and the no-`sorryAx` gate passed.
+
+PR #56 now has exact head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f` and workflow 42808797159. It adds the shifted-tail iterate identity and least-counterexample/minimality consequences, and renames the old internal theorem identifier to `initial_valuation_one_cylinder_iff_dyadic_divisibility` without changing the mathematical proposition. At the latest poll, compile-drafts and Lean 4.34.1 jobs were in progress, with Lean 4.35.0 paranoid queued. The new declarations and the renamed identifier are not verified until this exact run passes and its named axiom/no-`sorryAx` evidence is inspected. The prior audits of the historical identifier remain valid only for their recorded commits.
+
+The next global mathematical obligation remains a genuine infinite-branch exclusion: a hypothetical least nonterminating odd start yields an orbit whose shifted tails are deterministic and cannot fall below the least start, but that does not by itself rule out the hypothetical start. No global Collatz proof is claimed.
