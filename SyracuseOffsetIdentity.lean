@@ -3471,4 +3471,39 @@ theorem canonicalTerminalResidue_val_eq_actual_iterate
 #print axioms syracuse_iterate_lt_terminal_modulus
 #print axioms canonicalTerminalResidue_val_eq_actual_iterate
 
+/-- At sufficiently large depth, a least-counterexample trajectory gives
+a finite-cap-tree prefix whose terminal residue is represented by the
+actual Syracuse state. The state is a unit modulo the terminal modulus.
+This joins the finite-depth cap-tree and terminal-residue strands without
+turning the average energy estimate into a pathwise statement. -/
+theorem affine_minimal_counterexample_terminal_residue_cap_tree_bridge
+    (n₀ : ℕ) (n A a : ℕ → ℕ)
+    (hA0 : A 0 = 0)
+    (hA : ∀ j, A (j + 1) = A j + a j)
+    (ha : ∀ j, 0 < a j)
+    (hn₀ : 1 < n₀)
+    (hoffset :
+      ∀ j, 2 ^ A j * n j =
+        3 ^ j * n₀ + canonicalOffset A j)
+    (hstep :
+      ∀ j, 2 ^ (a j) * n (j + 1) = 3 * n j + 1)
+    (hleast :
+      ∀ m, isOddNonterminatingSyracuseStart m → n₀ ≤ m)
+    (hnever : ∀ j, n j ≠ 1)
+    (j : ℕ) (hj : 0 < j)
+    (hdepth : n₀ + 1 < 2 ^ j) :
+    valuationPrefix a j ∈ finiteCapTreeLevel j ∧
+      IsUnit (n j : ZMod (3 ^ j)) ∧
+      (canonicalTerminalResidue A j).val = n j := by
+  have hcap :=
+    affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit
+      n₀ n A a hA0 hA ha hn₀ hoffset hstep hleast hnever j hj
+  have hval :=
+    canonicalTerminalResidue_val_eq_actual_iterate
+      n a A hA0 hA hstep ha j hdepth
+  exact ⟨hcap.1, hcap.2, hval⟩
+
+#print axioms affine_minimal_counterexample_terminal_residue_cap_tree_bridge
+
+
 end CollatzSyracuseAudit
