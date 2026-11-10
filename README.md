@@ -138,3 +138,8 @@ The exact affine identity now yields the Lean-verified formula (n_k=C_k(2^{A_k})
 ### Canonical terminal-residue unit proof — current status
 
 The inverse formula itself remains verified at commit `b58e1ddc859caaf678c2239c5ed3e952b0ef4ae0` (run 42743672688). The first attempt to prove the canonical offset unit failed at the inverse-unit typeclass inference; the current explicit proof repair is at head `daa2fd1cf945b15abc7e8fc11b2f67104f8c0fa8`, run [42745303364](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42745303364) in progress. No canonical unit claim is made until it passes.
+
+
+### Inverse-unit witness repair — 10 November 2026
+
+The canonical terminal-residue unit proof no longer relies on the generic IsUnit.inv inference that failed at run 42745303364. The current root head `628a0a4d67428251fbf32f627aea3843d7a090e3` constructs the inverse unit directly from the existing Units witness. Exact-head CI is pending; the canonical unit claim remains open.
