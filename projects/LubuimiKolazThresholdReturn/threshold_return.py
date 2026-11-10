@@ -85,7 +85,7 @@ def row_by_z0(B: int, z0: int) -> dict:
 
 
 def main() -> None:
-    for B in (31, 63, 127, 255):
+    for B in (31, 63, 127, 255, 511, 1023):
         print(f"B={B}")
         for row in analyze_threshold(B):
             print(row["x"], row["z0"], row["m"], row["H"], row["R"])
