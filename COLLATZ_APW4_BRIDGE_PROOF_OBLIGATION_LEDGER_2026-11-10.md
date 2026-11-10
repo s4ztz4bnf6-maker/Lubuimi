@@ -359,3 +359,90 @@ The initial-cylinder theorem, valuation bounds, exact offset and strict-margin r
 The next global proof obligation remains to derive the suffix-return premise from the deterministic accelerated Syracuse dynamics and the minimal-counterexample definition. The intended chain is: establish oddness of every orbit term from the exact affine identity and positive exponent; identify each exponent as the exact 2-adic valuation; prove the shifted tail is the unique deterministic Syracuse orbit from its current term; then apply minimality to obtain the suffix-return premise. Each link must be proved explicitly. Until then, the current minimal-counterexample wrapper remains conditional. Even after that bridge, finite-tree membership alone does not rule out an infinite branch; a separate descent, ranking, or well-foundedness argument is required.
 
 **Status:** PR #48 CI fully green on run 42759509255; finite-depth theorem verified within its exact scope; global Collatz theorem remains open.
+
+## 2026-11-10 exact-head update: affine parity and minimal-counterexample bridge
+
+The failed candidate `a8b593cd8ef59105e6b62b11d0dfc7e41e89a3bb` / workflow 42762395691 is diagnosed at `SyracuseOffsetIdentity.lean:3095`: `omega` cannot derive `a j ≠ 0` from the quantified strict-positivity assumption. Both new declarations therefore remain unverified at that source head, and the error-recovery axiom output contains `sorryAx`. The candidate repair `7d17d7111946b328421f9046f95b03c939dfddb1` (PR #53; run 42805867475) uses `Nat.ne_of_gt (ha j)`; all three exact-head jobs were in progress at the latest poll. No pass is claimed.
+
+The earlier run 42759509255 on `b0509fb5944f172ad9f7d71e7316907d4e988842` passed all three jobs and remains valid for its exact scope. The conditional suffix-return premise remains open. Oddness, exact valuation, deterministic tail identification, and minimality must all be proved; even after those steps, finite cap-tree membership does not exclude an infinite branch. Preserve all earlier verified results independently; do not infer a global Collatz proof from these local components.
+## Exact-head repair result — 10 November 2026
+
+Workflow [42805867475](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42805867475) completed successfully on exact source commit `7d17d7111946b328421f9046f95b03c939dfddb1`. All three jobs passed: Lean 4.34.1 kernel/build check, `compile-drafts`, and Lean 4.35.0 paranoid kernel check.
+
+The named declaration outputs are:
+
+- `CollatzSyracuseAudit.every_state_odd_of_positive_affine_steps`: `[propext, Quot.sound]`.
+- `CollatzSyracuseAudit.every_affine_exponent_is_exact`: `[propext, Classical.choice, Quot.sound]`.
+- `CollatzSyracuseAudit.orbit_lower_bound_of_minimal_counterexample`: no axioms, but still conditional on its explicit suffix-return premise.
+
+The completed Lean 4.35.0 log explicitly reports `Lean paranoid kernel accepts the solution`. The `sorryAx` guard passed for `SyracuseOffsetIdentity.lean`; no actual `sorryAx` dependency is reported for the two new declarations. This verifies these two named affine/parity lemmas on this exact source head and the listed toolchains only.
+
+The global Collatz conjecture remains open. The suffix-return premise still must be derived from deterministic Syracuse dynamics and minimality, and a separate well-founded descent/ranking or other infinite-branch exclusion is still required.
+## Deterministic Syracuse successor bridge — 10 November 2026
+
+The next candidate declaration is `affine_step_eq_syracuse_of_exact_exponent`, connecting the affine transition with odd quotient to the deterministic map in `SyracuseReferenceTest.lean`. The first candidate head `400307622c62488878c1fa00362d06bddfa54744` did not reach proof checking because the imported module was not registered as a library root. The candidate build graph now includes `SyracuseReferenceTest` in `CollatzAudit` roots.
+
+Current exact head: `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, PR #55, workflow 42807396471. The three jobs were in progress at the latest poll. This theorem remains unverified until exact-head compilation, named axiom audit, and no-`sorryAx` checks pass. If it passes, the next proof target is the shifted-tail iterate identity by induction; the suffix-return and infinite-branch obligations remain open.
+## Deterministic Syracuse one-step transition — exact-head PASS
+
+Source head `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, workflow [42807396471](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42807396471): all three jobs passed (Lean 4.34.1, Lean 4.35.0 paranoid, and `compile-drafts`). `CollatzSyracuseAudit.affine_step_eq_syracuse_of_exact_exponent` has transitive profile `[propext, Classical.choice, Quot.sound]`; the paranoid kernel accepts the solution and the no-`sorryAx` gate passed. The earlier parity and exact-exponent lemmas remain separately verified on their exact source head `7d17d7111946b328421f9046f95b03c939dfddb1`.
+
+The verified one-step identity is the next link in the chain. The shifted-tail iterate identity, suffix-return derivation from least odd nonterminating counterexample minimality, and infinite-branch exclusion remain open.
+## Shifted-tail and least-counterexample bridge — candidate PR #56
+
+Following the exact-head PASS for `affine_step_eq_syracuse_of_exact_exponent` at head `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, candidate PR #56 adds the finite iterate identity for every shifted affine sequence tail and derives suffix return from the least odd nonterminating Syracuse start. It replaces the earlier abstract sequence-level suffix-return assumption with an explicit deterministic-orbit/minimality interface.
+
+Exact candidate head `1fd204750a1088efbf5e81b40b9ad95962fdb2ed`, workflow 42808379459, was in progress at the latest poll. The new declarations remain unverified until all exact-head jobs, named axiom outputs, and no-`sorryAx` checks pass.
+
+This bridge does not rule out the existence of a least odd nonterminating start. The global infinite-trajectory/infinite-branch exclusion remains open.
+## Neutral cylinder identifier and refreshed shifted-tail head — 10 November 2026
+
+The initial valuation-one cylinder declaration is renamed in the continuation candidate to `initial_valuation_one_cylinder_iff_dyadic_divisibility`. The proposition and proof are unchanged. Earlier CI records verify the prior source identifier only and must not be represented as verification of the renamed declaration.
+
+PR #56 now includes the rename together with the shifted-tail, least-start, suffix-return, and minimal-counterexample lower-bound declarations. Current exact head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow 42808797159, queued at latest poll. No fresh verification claim is made until all exact-head jobs and axiom/no-`sorryAx` gates pass.
+
+## 7. Exact-head verified one-step bridge and current tail/minimality candidate — 10 November 2026
+
+The parity/exactness repair in PR #53 is verified on exact source head `7d17d7111946b328421f9046f95b03c939dfddb1`, workflow [42805867475](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42805867475): all three jobs passed and the two declarations have profiles `[propext, Quot.sound]` and `[propext, Classical.choice, Quot.sound]`; the no-`sorryAx` gate passed.
+
+The deterministic one-step transition in PR #55 is verified on exact head `d5c32aba3e9e767cb1051d7aac6b54ff1196ea2d`, workflow [42807396471](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42807396471): Lean 4.34.1, `compile-drafts`, and Lean 4.35.0 paranoid all passed. `affine_step_eq_syracuse_of_exact_exponent` prints `[propext, Classical.choice, Quot.sound]`; the paranoid kernel accepted and no-`sorryAx` gate passed.
+
+The current PR #56 head is `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow [42808797159](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42808797159). It adds the shifted-tail iterate identity and the least odd nonterminating-start/minimality reduction, and renames the historical cylinder declaration to `initial_valuation_one_cylinder_iff_dyadic_divisibility`. At the latest poll, `compile-drafts` and Lean 4.34.1 were in progress; Lean 4.35.0 paranoid was queued. This is OFFEN – NICHT VERIFIZIERT. The old-name axiom/CI results are not transferred to the renamed declaration.
+
+Even if the deterministic shifted-tail/minimality bridge passes, the existence of a least nonterminating start is only conditional on nontermination, and it does not contradict that existence. A separate infinite-trajectory exclusion or well-founded descent argument remains essential. Finite branching and finite-depth cap-tree membership alone do not close this obligation.
+
+
+## Exact-head failure and repair record for PR #56 / PR #59 — 10 November 2026
+
+PR #56 head `1da1e7f97622f709bd0a8b56427e1872dc7fce1f`, workflow [42808797159](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42808797159), failed all three jobs. The exact errors were: (i) `Nat.find` lacked a local classical instance for `DecidablePred isOddNonterminatingSyracuseStart`; (ii) the positivity proof did not feed the already established oddness `n j % 2 = 1` to `omega`; and (iii) `affine_minimal_counterexample_orbit_lower_bound` forward-referenced `orbit_lower_bound_of_minimal_counterexample`, which is declared later. The shifted-tail identity itself compiled and printed `[propext, Classical.choice, Quot.sound]`. The renamed cylinder declaration printed the same standard profile in the partial build, but the full module failed later, so no complete exact-head verification is claimed.
+
+PR #59 head `5f6e46de8bed7061f8336089857143c54e997af5` fixes those three proof-script issues. No exact-head workflow was visible at the latest poll. Status: OFFEN – NICHT VERIFIZIERT. Even after this bridge passes, a global infinite-branch exclusion remains open.
+
+
+## Latest PR #59 CI poll — 10 November 2026
+
+Workflow 42809750956 is attached to exact head `5f6e46de8bed7061f8336089857143c54e997af5`. Compile job `129807911809` is in progress; Lean 4.34.1 job `129807911748` and Lean 4.35.0 paranoid job `129807911880` are queued. This is still OFFEN – NICHT VERIFIZIERT.
+
+
+## Parallel exact-head checks for minimality repair variants — 10 November 2026
+
+PR #58 / head `a2eea6f3c979e25a705c3da60d09d6ec84a41b7f`, run 42809723676, and PR #59 / head `5f6e46de8bed7061f8336089857143c54e997af5`, run 42809750956, both have all three jobs in progress. They implement the same three corrections to PR #56; PR #58 uses `omega` for the final natural-number contradiction, while PR #59 uses `Nat.lt_of_not_ge`. Keep their exact-head CI and axiom evidence separate. The global infinite-branch exclusion remains open.
+
+
+## 9. Verified PR #59 minimality/suffix-return reduction — 10 November 2026
+
+PR #59 exact head `5f6e46de8bed7061f8336089857143c54e997af5`, workflow 42809750956, passed compile-drafts, Lean 4.34.1, and Lean 4.35.0 paranoid. The no-`sorryAx` guard passed; the paranoid kernel accepted the solution. The neutral cylinder identifier and the shifted-tail, suffix-return, and lower-bound declarations printed the standard profile `[propext, Classical.choice, Quot.sound]`; `every_state_odd_of_positive_affine_steps` printed `[propext, Quot.sound]`.
+
+This closes the formal obligations added in PR #56 for the shifted-tail/minimality layer at this exact source head. It does not close the global Collatz proof: the least-start lower bound is a conditional reduction, not an infinite-branch exclusion. PR #58 was closed as a superseded alternative after its two kernel jobs passed; its compile job was still running at closure.
+
+
+## 10. PR #62: deterministic minimality to finite-cap-tree bridge — 10 November 2026
+
+PR #62 exact head `b0c2d514d903dd17e34247da743bbb666d1e8c1c`, workflow [42811286670](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42811286670), adds two declarations:
+
+- `affine_minimal_counterexample_prefix_mem_finiteCapTree`: derives every valuation prefix's finite-cap-tree membership by composing `affine_minimal_counterexample_orbit_lower_bound` with `initial_lower_bounded_orbit_prefix_mem_finiteCapTree`.
+- `affine_minimal_counterexample_prefix_cap_tree_and_terminal_unit`: packages cap-tree membership and the terminal-residue unit condition at positive depth.
+
+At the latest poll, compile-drafts `129813061512`, Lean 4.35.0 paranoid `129813061895`, and Lean 4.34.1 `129813062043` were all in progress. The new declarations are not verified yet.
+
+Mathematical scope: the result derives a necessary finite-depth path certificate under a least odd nonterminating start. It does not prove the finite cap tree has no infinite branch. The central global obligation remains an infinite-branch exclusion / well-founded descent argument. Do not convert the finite-depth certificate or average (k=2) terminal-residue energy into a pathwise theorem without a proved pointwise inequality.
