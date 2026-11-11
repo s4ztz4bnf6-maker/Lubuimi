@@ -26,3 +26,8 @@ Every Lean claim is source-commit and declaration scoped. A successful module co
 ## Original-materials licensing
 
 Original materials owned by Ta-Yoshua Lubuimi are subject to the [proprietary rights notice](LICENSE-PROPRIETARY.md) and [commercial licensing policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md). These notices exclude upstream Erdős–Selfridge source files, Lean, Mathlib, dependencies, and other third-party materials, which remain under their respective licenses. They do not claim exclusive rights over mathematical facts or theorem statements as such. The 11 November documentation updates do not change the licensing terms.
+
+
+## Exact quotient-sequence checkpoint — 12 November 2026
+
+The append-only [Syracuse quotient-sequence CI checkpoint](docs/SYRACUSE_QUOTIENT_SEQUENCE_CI_CHECKPOINT_2026-11-12.md) records PR #81 / exact head `44b7ce6e991e6b975a5f85fe3a34babe4bec68d5`, workflow 43115942497: Lean build SUCCESS, named axiom output recorded, explicit `sorryAx` gate passed. The quotient states, oddness, and accelerated transition are formalized. Complete word-realization equivalence, residue uniqueness, lift counting, and product density remain open; no global Collatz termination is claimed.
