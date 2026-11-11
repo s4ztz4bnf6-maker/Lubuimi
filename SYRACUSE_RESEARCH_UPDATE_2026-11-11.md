@@ -238,3 +238,43 @@ adopted without proof for arbitrary prefixes. The quotient-first decision
 therefore stands; the modulus exponent is **OPEN — TO BE DERIVED FROM THE
 ACTUAL RECURRENCE**. This correction supersedes the provisional modulus
 notation in §10, not the choice of a finite residue quotient.
+
+
+## 15. Arithmetic-fibre convention and cardinality scope — 11 November 2026
+
+The quotient-first modelling decision is now explicit:
+
+\[
+A_N=\sum_{i=0}^{N-1}a_i,
+\qquad
+F^{\mathrm{arith}}_{s,N}\subseteq\mathbb Z/2^{A_N}\mathbb Z.
+\]
+
+This is a **definition/model convention**, not a theorem that the quotient is sufficient to encode every orbit condition. The defining congruence predicate must be taken from the actual finite transition recursion. The additional parity information, when required, is not silently built into this general definition.
+
+The actual orbit fibre remains a separate object. The map from actual positive odd starting values (or a rigorously chosen finite set of representatives) to the quotient, its compatibility with the prefix conditions, and the inclusion of the orbit image in the arithmetic fibre are separate **open lemmas**. Surjectivity onto the full arithmetic fibre is also open. No equality or bijection is assumed.
+
+### Run-of-ones comparison: precise scope
+
+For the all-ones prefix of length \(N\), the cited Lubuimi Theorem 3.1 states
+\[
+n_0\equiv-1\pmod{2^{N+1}}
+\iff
+\text{the first }N\text{ valuations are }1.
+\]
+This is an external cited result for this ledger entry, not a newly proved internal Lean theorem.
+
+Reduction modulo \(2^N\) sends the qualifying class to the single residue \(-1\pmod{2^N}\). That residue has two lifts modulo \(2^{N+1}\), and exactly one is \(-1\pmod{2^{N+1}}\). Thus the extra bit distinguishes the two lifts of the same residue modulo \(2^N\).
+
+**Counting caution:** The theorem does not imply that half of all classes in \(\mathbb Z/2^N\mathbb Z\) satisfy the stronger modulus-\(2^{N+1}\) condition. A condition modulo \(2^{N+1}\) is not a predicate on a class modulo \(2^N\) until a lift is specified. The actual qualifying integers have density \(2^{-(N+1)}\) among integers modulo \(2^{N+1}\); their reduction modulo \(2^N\) is one residue class. Any claimed cardinality such as \(2^{N-1}\) for the arithmetic fibre requires the exact definition of its congruence predicate and a separate count. It is not inferred from Theorem 3.1 alone.
+
+### Order of formalization
+
+1. Define the arithmetic fibre as a finite subset/type of the chosen quotient and prove finiteness.
+2. Prove its cardinality as a separate, currently open theorem; do not assume a product or power-of-two formula.
+3. State the Run-of-ones comparison as a cited external theorem and prove the reduction/lift bookkeeping separately.
+4. Define the orbit fibre and prove the residue compatibility/inclusion map.
+5. Only then define conditional counting measures, retain the explicit tail as an absorbing part, and derive the chain rule.
+6. A geometric product law requires separate proof of every state-conditioned transition probability; it is not supplied by the chain rule.
+
+PR #78 currently adds only the one-step finite child-block mass identity and has no exact-head workflow. It must not be treated as depending on, or having implemented, this prefix-fibre convention. The convention is recorded here before any future PR #78 extension.
