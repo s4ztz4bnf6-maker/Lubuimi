@@ -23,3 +23,8 @@ The repository's pinned Erdős–Selfridge audit materials remain a separate wor
 ### Exact-head one-step mass update — 11 November 2026
 
 PR [#78](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/78) now has an exact-head successful workflow on commit `3af286a1da893fc51b40343412056e0be2b8faa1`: [run 43042316671](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43042316671). The named `childBlock_uniform_mass` declaration reports `[propext, Classical.choice, Quot.sound]`, and the explicit `sorryAx` rejection gate passed. This is a one-step finite counting result only; iterated-cylinder independence/product law, orbit realization, density transfer, and global Collatz termination remain open. See [the append-only research update](SYRACUSE_RESEARCH_UPDATE_2026-11-11.md) §17.
+
+
+### Iterated Syracuse cylinders — next mathematical obligation
+
+The [11 November research update](SYRACUSE_RESEARCH_UPDATE_2026-11-11.md) now defines the common finite cylinder as an intersection, requires the single cardinality (N_m=|Z_m|) to be determined before any factorization, and treats the product identity as an independent test. PR #76, #78, and #79 remain three exact-head verified finite components; none proves the iterated product law or the actual orbit-fibre realization.
