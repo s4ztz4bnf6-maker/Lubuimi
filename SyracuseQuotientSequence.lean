@@ -61,8 +61,7 @@ theorem quotientState_factor
           (affineCompositionRhs a n k /
             2 ^ prefixExponentSum a k) := rfl
     _ = 2 ^ prefixExponentSum a k * (2 * t + 1) := by
-      rw [ht]
-      exact Nat.mul_div_cancel_left _ hpos
+      rw [ht, Nat.mul_div_cancel_left _ hpos]
     _ = affineCompositionRhs a n k := ht.symm
 
 /-- The quotient state is odd whenever the corresponding prefix has the
