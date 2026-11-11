@@ -199,3 +199,16 @@ These are separate formalization obligations. They are not certified by workflow
 The finite-word cylinder classification and fixed-depth fibre construction do not establish an infinite-orbit exclusion, a density-to-orbit transfer, or global Collatz termination. The global Collatz conjecture remains open in this project record.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI systems are assistants only, not authors or independent mathematical verifiers.
+
+
+---
+
+## Dated formalization-status addendum — 12 November 2026
+
+This addendum records the first Lean-verified constructive quotient-sequence stage. It does not change the finite-depth fibre construction or any theorem statement above.
+
+PR [#81](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/81), exact source commit `44b7ce6e991e6b975a5f85fe3a34babe4bec68d5`, workflow [43115942497](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43115942497), Lean job 130843833193: **SUCCESS**. The new `SyracuseQuotientSequence.lean` module defines (q_k=N_k(x)/2^{A_k}), proves the quotient states odd, and establishes the accelerated transition relation. The explicit axiom output is `[propext]` for `terminalExact_factor` and `[propext, Classical.choice, Quot.sound]` for the other four named declarations: `quotientState_factor`, `quotientState_odd`, `quotientState_transition_of_exact`, and `quotientSequence_from_terminal`. The explicit `sorryAx` rejection gate passed.
+
+This closes only the quotient-sequence formalization stage at that exact commit. The full terminal-congruence iff complete-word-realization theorem, unique residue class, lift count, and product density remain open Lean obligations. The mathematical derivation and the formalization status are distinct. The earlier backward lemmas retain their own exact-source audit boundary. No global Collatz termination, infinite-orbit exclusion, or density-to-orbit transfer is claimed.
+
+**Attribution:** Ta-Yoshua Lubuimi. AI systems are assistants only, not authors or independent mathematical verifiers.
