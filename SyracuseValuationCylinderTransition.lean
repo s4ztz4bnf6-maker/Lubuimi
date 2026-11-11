@@ -61,8 +61,9 @@ theorem transition_congruence_forces_start_exact
     intro hnext
     have hdivThreeNext : 2 ^ (k + 1) ∣ 3 * (3 * n + 1) :=
       dvd_mul_of_dvd_right hnext 3
-    have hdivPow : 2 ^ (k + 1) ∣ 2 ^ k :=
-      Nat.dvd_sub' hdivBig' hdivThreeNext (Nat.le_add_right _ _)
+    have hdivPow : 2 ^ (k + 1) ∣ 2 ^ k := by
+      simpa [Nat.add_sub_cancel_left] using
+        Nat.dvd_sub hdivBig' hdivThreeNext
     have hle : 2 ^ (k + 1) ≤ 2 ^ k :=
       Nat.le_of_dvd (by positivity) hdivPow
     have hlt : 2 ^ k < 2 ^ (k + 1) := by
