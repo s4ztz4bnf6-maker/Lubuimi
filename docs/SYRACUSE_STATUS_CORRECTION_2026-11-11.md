@@ -19,7 +19,7 @@ Der exakte Workflow-Lauf **43076503425** verifizierte den betreffenden Source-St
 [\texttt{propext},\texttt{Classical.choice},\texttt{Quot.sound}]
 \]
 
-und bestand die explizite `sorryAx)-Prüfung. Damit ist das Rückwärtslemma **mathematisch und formal geschlossen** – für genau diese endliche affine-/Kongruenzbehauptung und den dort geprüften Source-Stand.
+und bestand die explizite `sorryAx`-Prüfung. Damit ist das Rückwärtslemma **mathematisch und formal geschlossen** – für genau diese endliche affine-/Kongruenzbehauptung und den dort geprüften Source-Stand.
 
 Zusätzlich ist `affineCompositionRhs_closed_form` in `SyracuseAffineCorrectionSum.lean` mit Profil `[propext]` verifiziert. Diese Aussage wird nicht mit einem globalen Collatz-Ergebnis gleichgesetzt.
 
