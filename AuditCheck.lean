@@ -46,7 +46,8 @@ theorem audit_extractPrimes_nonempty
     · subst p
       have hmodEven : cs.moduli i % 2 = 0 :=
         Nat.mod_eq_zero_of_dvd hpdvd
-      omega [h_odd i]
+      have hodd_i : cs.moduli i % 2 = 1 := h_odd i
+      omega
     · exact hpodd
   have hpExtract : p ∈ extractPrimes cs := by
     simp only [extractPrimes]
