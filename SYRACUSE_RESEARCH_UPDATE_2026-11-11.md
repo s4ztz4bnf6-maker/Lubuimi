@@ -130,3 +130,12 @@ Die Forschungsresultate und Originalmaterialien werden Ta-Yoshua Lubuimi zugerec
 ---
 
 **Append-only-Vermerk:** Der Forschungscheckpoint vom 10.11.2026 bleibt unverändert. Dieser Nachtrag dokumentiert ausschließlich die zusätzlichen Ergebnisse und Grenzen vom 11.11.2026.
+
+
+## 7. One-step uniform-mass formalization candidate — PR #78
+
+PR [#78](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/78) adds the finite counting identity `childBlock_uniform_mass` on top of the exact verified Child/Tail source commit `cc63565dd55859a0e6ae8514173967e7d52334d9`.
+
+The proposed lemma states that the normalized cardinality of a single child block in the ambient dyadic interval is exactly $2^{-b}$. This is the one-step geometric mass already suggested by the interval cardinality formula.
+
+**Status: OPEN — NOT VERIFIED.** Exact-head Lean CI and the named transitive axiom/sorryAx audit have not yet been observed for this candidate. It does not establish independence or the iterated valuation-cylinder product formula.
