@@ -213,3 +213,28 @@ returned no PR-triggered workflow run. The cause is **undetermined** from
 the available evidence (for example, Actions/event delivery or a run not
 registered by the queried endpoint); it must not be described as a test
 failure or as a passing CI result. Status remains **CI NOT VERIFIED**.
+
+
+## 14. Modulus-exponent correction to §10 — 11 November 2026
+
+The residue-quotient convention in §10 is accepted, but the displayed exponent
+\(2^{A(w)}\) is **provisional and must not be treated as established**.
+There is an indexing/parity-offset issue: for the all-ones run of length \(N\),
+the cited Lubuimi Theorem 3.1 describes a residue class modulo
+\(2^{N+1}\), whereas \(A(w)=\sum_{i<N}a_i=N\). Thus the naive formula
+\(2^{A(w)}\) misses one power of two in that case.
+
+The corrected convention is:
+
+- define the finite arithmetic fibre in a quotient modulo \(2^{E(s,N)}\);
+- derive \(E(s,N)\) from the exact transition/congruence recursion and the
+  chosen encoding of odd initial values;
+- prove separately how \(E(s,N)\) relates to the valuation sum \(A(w)\);
+- in particular, recover the \(N+1\) exponent for the all-ones run before
+  asserting a general closed formula.
+
+A candidate relation such as \(E=A+1\) may be investigated, but is not
+adopted without proof for arbitrary prefixes. The quotient-first decision
+therefore stands; the modulus exponent is **OPEN — TO BE DERIVED FROM THE
+ACTUAL RECURRENCE**. This correction supersedes the provisional modulus
+notation in §10, not the choice of a finite residue quotient.
