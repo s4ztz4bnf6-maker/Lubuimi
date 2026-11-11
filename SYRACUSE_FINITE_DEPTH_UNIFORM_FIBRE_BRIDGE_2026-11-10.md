@@ -197,3 +197,140 @@ for (B\leq B^*\). Exact source head a1becbc8e837f10abcd952a2e03832cb057fb2b8 is 
 The finite count lemma dyadicUniformFibre_partition_card has now passed compile-drafts workflow 42738528207 on exact source commit a1becbc8e837f10abcd952a2e03832cb057fb2b8. Its transitive profile is [propext, Classical.choice, Quot.sound]; the complete log contains no actual sorryAx occurrence and reports successful completion of the 8,932-job build.
 
 This verifies the algebraic cardinality identity only. The dependent cap maximum, finite surviving tree, interval partition and residue-cylinder bijection are not yet Lean-formalized. The APW4 historical hyperplane/BIB map remains open.
+
+
+## 7. Exact finite cap-tree path certificate — 10 November 2026
+
+PR #42 now has an exact-head compile PASS. On source head d3b2a55c1987b4a4f2cdbaef2a97486679d68f26, run 42747001077 completed successfully. The explicit integer bound for every next valuation on a nondecreasing exact affine endpoint is kernel-checked with standard axiom profile [propext, Classical.choice, Quot.sound]; the Syracuse offset file's no-sorryAx scan passed. No lake check --paranoid run is included in this workflow.
+
+PR #48 formalizes the next finite-depth step: a prefix state carrying accumulated exponent, canonical offset, and signed margin; a finite child set cut off by the state-dependent bound; and the finite cap tree at each depth. The target theorem embeds every prefix of a nondecreasing exact affine path into that tree. A companion map sends its exact endpoint to a unit modulo 3^j. Exact head 82cb74118eff69afd667c0fd827b266d115284ca, run 42748141012 queued at the latest check.
+
+This does not yet formalize the interval partition for every child valuation, the full residue-cylinder bijection for arbitrary words, or an upper energy capacity that rules out an infinite path. The verified k=2 terminal-residue energy remains a separate finite module; its collision mass is not silently treated as a survival obstruction.
+
+
+## 8. Finite cap-tree proof repair — 10 November 2026
+
+The finite cap-tree candidate now uses the structure's existing extensionality theorem; a duplicate extensionality declaration from the previous attempt was removed. The exact head 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb is under CI run 42749969443. The paranoid job now uses the repository-pinned Lean/Mathlib 4.34.1 pair, rather than changing only the toolchain for a separate 4.35.0 experiment. Both jobs remain pending at this entry.
+
+The candidate still asserts only finite-depth embedding of any hypothetical nondecreasing exact affine path into the state-dependent finite cap tree, plus the terminal-residue unit property. It does not show that the tree has no infinite branch.
+
+
+## 9. Finite cap-tree theorem — exact Lean compile PASS
+
+On code head 2b299f1826d2960ca42fd5dce5aaae3d3666a2bb, workflow 42749969443 completed the full compile-drafts job successfully. The five new cap-tree/path declarations compiled and printed standard profiles: finiteCapPrefixState_eq_actual has [propext, Quot.sound]; the child-bound, path-embedding, terminal-unit, and combined path-certificate theorems have [propext, Classical.choice, Quot.sound]. The source-file sorryAx scan passed.
+
+The separate 4.34.1 job failed only because that Lake version does not recognize the --paranoid option. The workflow now invokes the supported lake check; exact-head run 42750825692 is queued. The earlier 4.35.0 dependency attempt failed inside Mathlib Cache/Requests.lean before checking project code.
+
+This is a finite-depth path embedding result, not a proof that no infinite branch exists.
+
+
+## Terminology correction — lower-bounded orbit, not stepwise monotone orbit
+
+The previous entries used the phrase "nondecreasing orbit" for the hypothesis hnd : ∀ j, n₀ ≤ n j. That phrase is misleading: the hypothesis says that no iterate falls below the initial value; it does not say n j ≤ n (j+1). The source docstrings now state this explicitly.
+
+The new precise declarations are:
+- initial_lower_bounded_orbit_prefix_mem_finiteCapTree
+- initial_lower_bounded_orbit_prefix_cap_tree_and_terminal_unit
+
+The old theorem names containing nondecreasing are retained only as compatibility aliases, with docstrings recording the actual lower-bound condition. The exact source head is 3cc651a5257dfae87061f7c12cd806814354b28e; workflow 42751535385 is queued.
+
+This lower-bound condition is exactly the type needed in a minimal-counterexample reduction: if a counterexample orbit ever fell below its initial odd value, the smaller odd iterate would itself be a smaller counterexample. The current theorem embeds all prefixes of such a hypothetical lower-bounded orbit in a finite state-dependent cap tree and attaches the terminal-residue unit condition. It still does not prove that the tree has no infinite branch; that remains the central global Collatz obstruction.
+
+
+## 1.10 — Explicit minimal-counterexample reduction to the cap tree
+
+New source head: ffae3ea4ca6fdd54d607d99c846b51fa75519790. New declarations:
+
+- orbit_lower_bound_of_minimal_counterexample: from the explicit premise that every suffix beginning at a value below n₀ eventually reaches 1, and the candidate orbit never reaches 1, it proves n₀ ≤ n_j for every j.
+- minimal_counterexample_prefix_mem_finiteCapTree: feeds that lower-bound conclusion into the exact affine finite cap-tree embedding.
+- minimal_counterexample_prefix_cap_tree_and_terminal_unit: at every positive depth, packages finite-tree membership with the terminal-residue unit condition.
+
+The suffix-return premise is explicit and must still be derived from the actual deterministic Syracuse dynamics and the chosen minimal-counterexample definition. The theorem does not show that the finite tree has no infinite branch. Exact-head workflow 42751669336 is queued; the new declarations are candidates until compile, named axiom audit, no-sorryAx scan, and the supported Lake check finish.
+
+Terminology is now corrected: the old nondecreasing theorem names are compatibility aliases, while the actual hypothesis is that no iterate falls below the initial value. This is the standard lower-bound property relevant to a minimal-counterexample argument, not stepwise monotonicity.
+
+
+## Exact-head continuation — 10 November 2026, 05:20 CET
+
+### Finite cap-tree path theorem — PR #48
+
+- Exact source head: `e1fb06eaa07190d8abfb3fc7368f3dc0663a5a66`.
+- Exact-head workflow: [42754461228](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42754461228).
+- At this snapshot, three jobs were running: `kernel-check-lean-435-paranoid`, `kernel-check-lean-434`, and `compile-drafts). No result is claimed yet.
+- The semantically precise path statement is `initial_lower_bounded_orbit_prefix_mem_finiteCapTree): an exact affine Syracuse orbit whose every iterate satisfies (n_0\le n_j) has every finite prefix in the explicitly defined finite cap tree.
+- The new minimal-counterexample bridge derives that lower-bound property from the explicit suffix-return premise and the assumption that the candidate orbit never reaches 1. The suffix-return premise still needs derivation from the actual deterministic Syracuse dynamics and the chosen minimal-counterexample definition.
+- The result is a necessary finite-depth path certificate. It does not prove that the cap tree has no infinite branch and does not prove global Collatz.
+
+### Existing Collatz results retained
+
+The Initial Valuation-One Cylinder Theorem, the finite valuation-word cylinder theorem, the mixed-word ((1,2)) cylinder, the exact offset/margin results, the dyadic uniform-fibre cardinality identity and the existing declaration-scoped kernel evidence remain distinct established results at their respective stated scopes. In particular, no later cap-tree integration attempt reopens or downgrades the mathematical finite-word cylinder theorem.
+
+### Kolaz finite-return archive
+
+PR #39's exact finite-table reproducibility workflow [42739986917](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42739986917) passed on its exact source head `54f8b177d70f216fac81aa6cf6b28b8fec36596c`. This is a finite integer-computation archive and confluence test, not Lean kernel verification, a uniform bound, or a global Collatz proof. The earlier 1097 lead remains explicitly unverified.
+
+
+## Lean 4.35.0 exact-source verification result — 10 November 2026
+
+The Lean 4.35.0 paranoid kernel job has now **passed** on the code head `e1fb06eaa07190d8abfb3fc7368f3dc0663a5a66`:
+
+- Workflow: [42754461228](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42754461228)
+- Job: `kernel-check-lean-435-paranoid` (job 129625495913)
+- Full Collatz library build: success.
+- Exact finite-path and terminal-residue module compile plus forbidden-`sorryAx` check: success. The only two `sorryAx` strings in the job log are the shell guard itself; there is no actual `sorryAx` declaration in the Lean output.
+- `lake check --paranoid`: success; log states that the paranoid kernel accepts the solution.
+- The four new finite-cap/minimal-counterexample path declarations print exactly `[propext, Classical.choice, Quot.sound]`:
+  - `initial_lower_bounded_orbit_prefix_mem_finiteCapTree`
+  - `initial_lower_bounded_orbit_prefix_cap_tree_and_terminal_unit`
+  - `minimal_counterexample_prefix_mem_finiteCapTree`
+  - `minimal_counterexample_prefix_cap_tree_and_terminal_unit`
+
+This verifies the stated finite-depth path embedding and terminal-residue unit certificate on that exact source commit. It does not prove that the finite cap tree has no infinite branch or that every Syracuse orbit reaches 1.
+
+The PR branch subsequently advanced to documentation-only head `307b1c174199ed3ad8038c41bc12ff536419d2cb). A separate exact-head workflow [42755030352](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42755030352) is queued for that later branch head; the successful source result above remains scoped to `e1fb06e...`.
+
+
+## Dual-toolchain and compile-drafts reconciliation — 10 November 2026
+
+On source head `e1fb06eaa07190d8abfb3fc7368f3dc0663a5a66`, workflow [42754461228](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42754461228) produced a split result:
+
+- `kernel-check-lean-435-paranoid`: **PASS**. The library build, exact finite-path/terminal-residue compile and no-`sorryAx` guard succeeded; `lake check --paranoid) completed with “Lean paranoid kernel accepts the solution.” The four named finite-cap/minimal-counterexample path declarations have profile `[propext, Classical.choice, Quot.sound]`.
+- `compile-drafts`: **PASS**. All listed steps completed, including `IterationLemmas.lean`, `ThresholdLemmas.lean`, `SyracuseReferenceTest.lean`, `SyracuseQuarterDescent.lean`, offset identity, closed-form offset, stronger offset lower bound, exact valuation-one block margin, valuation-one-to-two transition, terminal-residue k=2 energy, and L945 odd-covering moment audit.
+- `kernel-check-lean-434`: **FAIL** only at the final command `lake check`, with exact error `unknown command 'check'`. The Lean 4.34.1 build had completed, but this Lake version does not expose that command. This is a workflow/toolchain command-availability failure, not a failed mathematical theorem or a kernel counterexample. The Lean 4.35.0 paranoid PASS remains valid on its exact source commit.
+
+The PR branch later advanced through documentation-only commits to `022f019d9673e5fa5e7e7642324b7f373d689599). The new exact-head run for that later documentation head was queued; the source-code PASS above remains scoped to `e1fb06e...`.
+
+
+## Published valuation-word cylinder and standalone finite-energy audits — 10 November 2026
+
+### PR #36 — published finite valuation-word cylinder theorem
+
+The standalone manuscript project is published in PR #36 (head `ed2348b427dd89f5c3ca0787037247b16d1cf916`). Its theorem states that every finite exact accelerated-Syracuse valuation word with cumulative exponent (A) is realized by one unique odd residue class modulo (2^{A+1}), with relative natural density (2^{-A}) among odd starts. The manuscript records the recursive existence/uniqueness proof, explicit residue formula from the affine offset cocycle, exact parent/child mass identity, and finite truncation into exact children plus one explicit tail cylinder. This theorem is an established mathematical result and is not reopened by the later Lean integration work.
+
+The Lean route is separately tracked. The exact mixed word ((1,2)) has its own declaration and prior exact-head compile evidence; the arbitrary-word manuscript theorem is not to be conflated with a full Lean formalization of every word or the finite-depth APW4 historical bridge.
+
+### PR #38 — terminal-residue k=2 energy
+
+Standalone PR #38 head `a4775db22e2ff774aa6992441da8e70673298e41` passed exact workflow [42744750457](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42744750457): library build, seven named axiom audits, forbidden-`sorryAx` guard and paranoid kernel check all succeeded. The seven declarations for the initial row, row-one, row-two, transition row, two-step numerator, two-step mass and exact energy (5/21) print `[propext, Classical.choice, Quot.sound]). This is the exact finite k=2 terminal-residue energy result, not a global Collatz proof.
+
+### PR #39 — Kolaz finite archive
+
+PR #39 exact finite-table/confluence workflow [42739986917](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42739986917) passed. Its evidence is exact finite integer computation and archive reproducibility, not Lean kernel verification or a uniform infinite bound.
+
+
+## Exact-head CI continuation — 10 November 2026
+
+The finite cap-tree embedding branch now has updated head `5699182344be6a7950c6265551112a7a6d50e58d`; exact workflow [42755702331](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42755702331) was queued at the latest snapshot. The immediately preceding head `e1fb06eaa07190d8abfb3fc7368f3dc0663a5a66` passed its Lean 4.35.0 paranoid kernel job and draft compile job. The Lean 4.34.1 job failed because the installed Lake does not support the `check` command (`unknown command 'check'`); this is a toolchain-command mismatch, not a reported failure of the theorem statements.
+
+This branch's mathematical target is the finite cap-tree embedding for a minimal counterexample orbit bounded below by its initial value, together with the terminal-residue unit condition. This is a finite structural lemma; it does not by itself prove a uniform cap bound or global Collatz.
+
+The previously verified initial-cylinder, valuation-bound, offset identity and strict-margin results remain independent results with their existing exact-head verification records. The mixed valuation word (1,2) iff residue 11 mod 16, and the dyadic uniform-fibre cardinality identity, also retain their own exact Lean evidence. Kolaz PR #39 workflow [42739986917](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42739986917) passed finite-table reproducibility checks; those are finite computation, not Lean kernel verification or a global theorem.
+
+
+## Latest exact-head workflow queue — 10 November 2026
+
+Current PR #48 source head: 7920b26f8a230c6f9fdc144be40fb2070eba5f00. Exact workflow [42756479069](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/42756479069) is queued with three jobs: Lean 4.34.1 build check, compile-drafts, and Lean 4.35.0 paranoid kernel check.
+
+The workflow source was corrected in commit e95d21771a38c1748169672d326f54162aae4dcd: Lean 4.34.1 no longer invokes the unsupported lake check command; it repeats lake build CollatzAudit instead. The 4.34.1 job is therefore a build/compile check only. The separate 4.35.0 job performs lake check --paranoid.
+
+Previously verified source result remains exact-head scoped: on commit e1fb06eaa07190d8abfb3fc7368f3dc0663a5a66, workflow 42754461228 passed both compile-drafts and Lean 4.35.0 paranoid kernel verification for the finite-cap/minimal-counterexample path declarations. Its 4.34.1 job failed only at the unsupported lake check command. No new PASS is claimed for current head 7920b26f8a230c6f9fdc144be40fb2070eba5f00 until workflow 42756479069 completes.
