@@ -169,7 +169,7 @@ theorem quotientState_transition_exact_power_two
   constructor
   · exact ⟨quotientState a n (k + 1), htransition.symm⟩
   · intro hdiv
-    rw [htransition] at hdiv
+    rw [← htransition] at hdiv
     have hstrong :
         2 ^ (a k + 1) ∣ 2 ^ a k * quotientState a n (k + 1) := hdiv
     rw [pow_succ] at hstrong
