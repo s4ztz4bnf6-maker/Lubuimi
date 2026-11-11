@@ -285,3 +285,21 @@ PR #78 currently adds only the one-step finite child-block mass identity and has
 The PR metadata confirms that PR #78's head repository is the same repository (`s4ztz4bnf6-maker/Lubuimi`), not a fork. Therefore the hypothesis that GitHub withheld the workflow pending approval of a fork-originated pull request is not supported for this PR.
 
 A second lookup for the PR merge commit `960bbdbefbb6dc5ce3d67454cec4c093f8743398` also returned no pull-request workflow run, as did the lookup for head `59b5920d0dac35a0594b8f7c445418cce50c00b8`. Thus the missing run is not explained by merely querying the head SHA instead of the merge SHA. The cause remains **undetermined**; no conclusion about event delivery, skipped workflow, or CI success/failure is justified. Status remains **CI NOT VERIFIED**.
+
+
+## 17. Superseding exact-head verification — PR #78, 11 November 2026
+
+The earlier diagnostics in §§7–8 and §§13, 16 correctly recorded that no workflow was visible for the then-current candidate head. Those entries are retained as historical observations. They are superseded for the newer exact PR head below.
+
+- PR: [#78 — Formalize exact one-step uniform mass of Syracuse child blocks](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/78)
+- Verified PR head: `3af286a1da893fc51b40343412056e0be2b8faa1`.
+- Exact PR workflow: [43042316671 — SUCCESS](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43042316671).
+- Job `lean`: completed successfully; declared Lean library compiled; finite-depth uniform-fibre audit completed; explicit axiom report completed; the `sorryAx` rejection steps completed successfully.
+- The job log prints `SyracuseUniformFibre.childBlock_uniform_mass` with transitive axioms `[propext, Classical.choice, Quot.sound]`.
+- The job also prints the already-listed Child/Tail partition declarations with the same standard profile. No `sorryAx` was reported by the explicit rejection gate.
+
+This verifies the named one-step finite counting identity on the exact PR #78 head. It does **not** establish mutually independent successive valuations, the iterated valuation-cylinder product law, arbitrary finite valuation-word realizability, an orbit-fibre density theorem, a density-to-pointwise transfer, or global Collatz termination. The theorem remains one-step only.
+
+The previous head SHA `59b5920d0dac35a0594b8f7c445418cce50c00b8` and its missing workflow observation remain in the chronology; they are not the verified head. The exact-head correction supersedes only the prior `CI NOT VERIFIED` status for the newer head, not the mathematical limitations above.
+
+**Verification label:** `BEWIESEN – ISOLIERT` for `childBlock_uniform_mass` at commit `3af286a1da893fc51b40343412056e0be2b8faa1`; all iterated/orbit/global bridges remain `OFFEN – NICHT VERIFIZIERT`.
