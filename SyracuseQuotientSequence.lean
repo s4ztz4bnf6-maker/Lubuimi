@@ -145,10 +145,47 @@ theorem quotientSequence_from_terminal
     exact quotientState_transition_of_exact a n k
       (hprefix k (by omega)) (hprefix (k + 1) (by omega))
 
+/--
+The accelerated quotient transition has exact 2-adic valuation: its right
+hand side is divisible by 2^(a k), but not by 2^(a k+1).  The nondivisibility
+uses oddness of the next quotient state, supplied by the exact terminal
+prefix residue.  This is a finite-word local statement, not global
+Collatz termination.
+-/
+theorem quotientState_transition_exact_power_two
+    (a n : Nat → Nat) (k : Nat)
+    (hExactK :
+      affineCompositionRhs a n k %
+          2 ^ (prefixExponentSum a k + 1) =
+        2 ^ prefixExponentSum a k)
+    (hExactNext :
+      affineCompositionRhs a n (k + 1) %
+          2 ^ (prefixExponentSum a (k + 1) + 1) =
+        2 ^ prefixExponentSum a (k + 1)) :
+    2 ^ a k ∣ 3 * quotientState a n k + 1 ∧
+      ¬ 2 ^ (a k + 1) ∣ 3 * quotientState a n k + 1 := by
+  have htransition :=
+    quotientState_transition_of_exact a n k hExactK hExactNext
+  constructor
+  · exact ⟨quotientState a n (k + 1), htransition.symm⟩
+  · intro hdiv
+    rw [htransition] at hdiv
+    have hstrong :
+        2 ^ (a k + 1) ∣ 2 ^ a k * quotientState a n (k + 1) := hdiv
+    rw [pow_succ] at hstrong
+    have htwo : 2 ∣ quotientState a n (k + 1) :=
+      (Nat.mul_dvd_mul_iff_left
+        (by positivity : 0 < 2 ^ a k)).mp hstrong
+    obtain ⟨t, ht⟩ :=
+      quotientState_odd a n (k + 1) hExactNext
+    rw [ht] at htwo
+    omega
+
 #print axioms terminalExact_factor
 #print axioms quotientState_factor
 #print axioms quotientState_odd
 #print axioms quotientState_transition_of_exact
 #print axioms quotientSequence_from_terminal
+#print axioms quotientState_transition_exact_power_two
 
 end SyracuseAudit
