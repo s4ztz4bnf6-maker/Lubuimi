@@ -1,4 +1,5 @@
 import Mathlib
+import SyracuseReferenceTest
 
 namespace CollatzSyracuseAudit
 
@@ -3119,6 +3120,37 @@ theorem every_affine_exponent_is_exact
   intro j
   exact exponent_is_maximal_of_odd_quotient
     (n j) (n (j + 1)) (a j) (hodd (j + 1)) (hstep j)
+
+
+/-- An affine transition with an odd quotient and maximal 2-adic exponent
+is exactly the deterministic accelerated Syracuse step. This is the
+one-step bridge needed before identifying shifted sequence tails. -/
+theorem affine_step_eq_syracuse_of_exact_exponent
+    (n next a : ℕ)
+    (hnext : next % 2 = 1)
+    (hstep : 2 ^ a * next = 3 * n + 1) :
+    next = syracuse n := by
+  have hmax : ¬ 2 ^ (a + 1) ∣ 3 * n + 1 :=
+    exponent_is_maximal_of_odd_quotient n next a hnext hstep
+  have hnum : 3 * n + 1 ≠ 0 := by omega
+  have hpow : 2 ^ a ∣ 3 * n + 1 := ⟨next, hstep.symm⟩
+  have hle : a ≤ v2 (3 * n + 1) :=
+    (Nat.prime_two.pow_dvd_iff_le_factorization hnum).mp hpow
+  have hnot : ¬ a + 1 ≤ v2 (3 * n + 1) := by
+    intro h
+    have hdvd : 2 ^ (a + 1) ∣ 3 * n + 1 :=
+      (Nat.prime_two.pow_dvd_iff_le_factorization hnum).mpr h
+    exact hmax hdvd
+  have hv : v2 (3 * n + 1) = a := by omega
+  unfold syracuse
+  rw [hv]
+  calc
+    next = (2 ^ a * next) / 2 ^ a := by
+      symm
+      exact Nat.mul_div_cancel_left _ (by positivity)
+    _ = (3 * n + 1) / 2 ^ a := by rw [hstep]
+
+#print axioms affine_step_eq_syracuse_of_exact_exponent
 
 #print axioms every_affine_exponent_is_exact
 
