@@ -163,3 +163,39 @@ The Lean development should be isolated from the historical APW4 proof until eac
 The initial all-one cylinder theorem, the signed-margin cap core, and the finite (k=2) terminal-residue module have their own successful Lean audits. None of those audits is evidence that this new finite-depth uniformization note has already been compiled.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI systems are assistants only, not authors or independent mathematical verifiers.
+
+---
+
+## Dated formalization-status addendum — 11 November 2026
+
+This addendum updates the formalization record without changing the finite-depth mathematical construction above and without claiming a global Collatz result.
+
+### Backward affine lemma: already Lean-verified
+
+The backward congruence step and its finite-prefix consequence are already formalized in SyracuseAffineCore.lean as:
+
+- terminalExact_backward_step;
+- terminalExact_backward_prefix;
+- finite_prefix_affine_identity.
+
+The exact audited workflow snapshot [43076503425](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43076503425) reports the standard transitive profile [propext, Classical.choice, Quot.sound] and passed the explicit sorryAx rejection check for the named declarations. In addition, affineCompositionRhs_closed_form in SyracuseAffineCorrectionSum.lean has the separately reported profile [propext].
+
+The earlier description of the backward lemma as “mathematically closed, Lean formalization open” is superseded by this dated correction. Its mathematical and formal status is closed for the exact finite affine/congruence statement and audited source snapshot; the audit is not silently transferred to later commits.
+
+### Next open formalization obligations
+
+The next work is downstream of the backward lemma:
+
+1. construct the quotient states \(x_k=N_k(x)/2^{A_k}\) and prove integrality and oddness at every stage;
+2. prove the equivalence between the terminal congruence and realization of the complete prescribed positive valuation word;
+3. prove uniqueness of the residue class modulo \(2^{A+1}\);
+4. count its lifts modulo \(2^K\) for \(K\ge A+1\);
+5. derive the normalized density \(2^{-A}=\prod_{i<r}2^{-a_i}\).
+
+These are separate formalization obligations. They are not certified by workflow 43076503425 merely because the backward lemma is a dependency of a future proof.
+
+### Global scope boundary
+
+The finite-word cylinder classification and fixed-depth fibre construction do not establish an infinite-orbit exclusion, a density-to-orbit transfer, or global Collatz termination. The global Collatz conjecture remains open in this project record.
+
+**Attribution:** Ta-Yoshua Lubuimi. AI systems are assistants only, not authors or independent mathematical verifiers.
