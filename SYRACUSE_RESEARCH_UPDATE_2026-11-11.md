@@ -303,3 +303,52 @@ This verifies the named one-step finite counting identity on the exact PR #78 he
 The previous head SHA `59b5920d0dac35a0594b8f7c445418cce50c00b8` and its missing workflow observation remain in the chronology; they are not the verified head. The exact-head correction supersedes only the prior `CI NOT VERIFIED` status for the newer head, not the mathematical limitations above.
 
 **Verification label:** `BEWIESEN – ISOLIERT` for `childBlock_uniform_mass` at commit `3af286a1da893fc51b40343412056e0be2b8faa1`; all iterated/orbit/global bridges remain `OFFEN – NICHT VERIFIZIERT`.
+
+
+## 18. Iterierte Zylinder: Schnittmenge zuerst, Produktgesetz als Test — 11. November 2026
+
+### 18.1 Gemeinsamer Grundraum und Zylinderdefinition
+
+Für eine feste Tiefe (m\) sei (\Omega_m\) der ausdrücklich festgelegte endliche gemeinsame Grundraum der betrachteten Anfangszustände bzw. kanonischen Repräsentanten. Für jedes (i<m\) sei (C_i\subseteq\Omega_m\) das Ereignis, dass die (i\)-te Übergangs-/Bewertungsbedingung erfüllt ist. Dann wird der Präfixzylinder definiert durch
+
+\[
+Z_m:=\bigcap_{i=0}^{m-1} C_i,
+\qquad
+N_m:=|Z_m|.
+\]
+
+Falls eine Bedingung zunächst auf einem Zwischenzustandsraum (\Omega_i\) formuliert ist, muss sie vor dem Schnitt über die konkret definierte Abbildung (\pi_i:\Omega_m\to\Omega_i\) als Urbild (\pi_i^{-1}(C_i)\subseteq\Omega_m\) in denselben Grundraum zurückgezogen werden. Ein Schnitt von Teilmengen verschiedener Grundräume ist nicht definiert.
+
+### 18.2 Zählung vor Faktorisierung
+
+(N_m\) ist zunächst als **eine einzelne endliche Kardinalität** zu bestimmen: aus der konkreten Übergangsrekursion, durch eine exakte Fallunterscheidung oder eine vollständige endliche Zählung. Weder eine Produktformel noch Unabhängigkeit darf in die Definition oder Zählung eingebaut werden.
+
+Erst nach dieser unabhängigen Bestimmung wird geprüft, ob
+
+\[
+\frac{N_m}{|\Omega_m|}
+\stackrel{?}{=}
+\prod_{i=0}^{m-1}\frac{|C_i|}{|\Omega_m|}.
+\]
+
+Diese Gleichheit ist eine zu prüfende mathematische Behauptung, keine Folgerung aus der Ein-Schritt-Massengleichheit. Bei abhängigen Ereignissen kann sie scheitern; dann ist die Abweichung der Befund über die gewählte Zylinderfamilie und kein Lean-Fehler. Für eine Kettenregel mit bedingten Wahrscheinlichkeiten sind die tatsächlich zustandsabhängigen bedingten Faktoren separat zu bestimmen.
+
+### 18.3 Verhältnis zu den verifizierten Syracuse-Komponenten
+
+- PR #76, Commit `cc63565dd55859a0e6ae8514173967e7d52334d9`, Workflow [43026427449](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43026427449): endliche Child/Tail-Partition, isoliert verifiziert.
+- PR #78, Commit `3af286a1da893fc51b40343412056e0be2b8faa1`, Workflow [43042316671](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43042316671): exakte Ein-Schritt-Masse eines Child-Blocks, isoliert verifiziert.
+- PR #79, Commit `7e3365ebfa2c0ee3802d1ae4f8b81d62f40a4f3b`, Workflow [43076503425](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43076503425): `SyracuseAudit.transition_congruence_forces_start_exact), isolierter Kongruenz-/Paritätsschritt; der Workflow war erfolgreich und die Deklaration meldet `[propext, Classical.choice, Quot.sound]`. Die explizite Axiom-Ausgabe enthält kein `sorryAx`.
+
+Diese drei exakten Commit-/Workflow-Ergebnisse sind getrennte endliche Komponenten. Sie liefern weder die mehrstufige Produktformel noch die Realisierung der arithmetischen Faser als tatsächliche Orbit-Faser.
+
+### 18.4 Offene Brücken und nächste Reihenfolge
+
+1. Den gemeinsamen endlichen Grundraum (\Omega_m\) und die konkreten Ereignisse (C_i\) aus der tatsächlichen Übergangsrekursion festlegen.
+2. Falls nötig, alle Ereignisse über explizite Projektions-/Übergangsabbildungen in denselben Grundraum zurückziehen.
+3. (Z_m\) als Schnittmenge definieren und (N_m=|Z_m|\) ohne Produktannahme bestimmen.
+4. Erst danach die Produktgleichheit testen und eine eventuelle Abweichung exakt angeben.
+5. Arithmetische Restklassenfaser und tatsächliche positive-ungerade Orbit-Faser weiterhin getrennt halten; die Realisierungsabbildung und ihre Eigenschaften bleiben offene Beweisverpflichtungen.
+
+**Status:** Mehrstufiges Produktgesetz **OFFEN – NICHT VERIFIZIERT**. (N_m\) ist in diesem Nachtrag noch nicht berechnet. Es wird weder eine Produktformel behauptet noch ein Lean-Fehler aus einer möglichen Abweichung abgeleitet.
+
+**Arbeitsgrenze:** Dieser Nachtrag ändert keine Lean-Deklaration, keinen mathematischen Satz und keine Lizenz. Er dokumentiert den mathematischen nächsten Schritt.
