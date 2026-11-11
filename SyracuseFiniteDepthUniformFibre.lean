@@ -152,7 +152,8 @@ theorem childBlock_disjoint_tail (Bstar b B : ℕ)
       2 ^ Bstar - 2 ^ (Bstar - b) ≤
         2 ^ Bstar - 2 ^ (Bstar - B) :=
     Nat.sub_le_sub_left hpow _
-  unfold childBlock tailBlock at hxChild hxTail
+  unfold childBlock at hxChild
+  unfold tailBlock at hxTail
   simp only [Finset.mem_Ico] at hxChild hxTail
   omega
 
