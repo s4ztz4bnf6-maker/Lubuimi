@@ -122,7 +122,8 @@ theorem childBlock_uniform_mass (Bstar b : ℕ)
   rw [← hexp, pow_add]
   push_cast
   field_simp
-  <;> ring
+  congr 1
+  omega
 
 /-- Distinct child blocks are disjoint in increasing exponent order. -/
 theorem childBlock_disjoint (Bstar b₁ b₂ : ℕ)
