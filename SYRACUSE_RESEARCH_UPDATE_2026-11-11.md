@@ -58,52 +58,50 @@ Eine Aussage „für fast alle 2-adischen Startwerte“ schließt einzelne Ausna
 
 ## 3. Chernoff-Rechnung — bedingtes unabhängiges Modell
 
-Für unabhängige Zufallsvariablen (X_i) mit geometrischer Verteilung
+Für unabhängige Zufallsvariablen \(X_i\) mit geometrischer Verteilung
 
-[
-Pr(X_i=j)=2^{-j},qquad jge1,
-]
+\[
+\Pr(X_i=j)=2^{-j},\qquad j\ge1,
+\]
 
-und (q=8/9) gilt
+und \(q=8/9\) gilt
 
-[
-mathbb E(q^{X_i})
-=sum_{jge1}(4/9)^j=4/5.
-]
+\[
+\mathbb E(q^{X_i})
+=\sum_{j\ge1}(4/9)^j=4/5.
+\]
 
-Für (S_N=sum_{i=1}^N X_i) liefert Markov
+Für \(S_N=\sum_{i=1}^N X_i\) liefert Markov
 
-[
-Pr(S_N<9N/5)
-le
-left(rac45ight)^N(9/8)^{9N/5}
-=eta^N,
-]
+\[
+\Pr(S_N<9N/5)
+\le
+\left(\frac45\right)^N(9/8)^{9N/5}
+=\beta^N,
+\]
 
 wobei
 
-[
-eta=rac45(9/8)^{9/5},
-qquad
-eta^5=(9/10)^5(9/8)^4<1.
-]
-
-Die rationale Konstante ist exakt und die Chernoff-Rechnung ist im unabhängigen geometrischen Modell mathematisch korrekt.
+\[
+\beta=\frac45(9/8)^{9/5},
+\qquad
+\beta^5=(9/10)^5(9/8)^4<1.
+\]
 
 **Wichtige Grenze:** Diese Modellrechnung ist noch kein Satz über tatsächliche Syracuse-Orbits. Dafür ist die exakte iterierte Zylinderformel zu beweisen:
 
-[
-Pr(X_0=a_0,ldots,X_{N-1}=a_{N-1})
-=2^{-(a_0+cdots+a_{N-1})}.
-]
+\[
+\Pr(X_0=a_0,\ldots,X_{N-1}=a_{N-1})
+=2^{-(a_0+\cdots+a_{N-1})}.
+\]
 
 Die Einzelfaser-Partition reicht nicht aus, um diese Produktformel zu erhalten. Die bedingten Faserverteilungen, Abhängigkeiten, Realisierung und die Eindeutigkeit müssen aus der konkreten Syracuse-Rekursion hergeleitet werden.
 
 Selbst eine bewiesene Dichte-eins-Aussage liefert noch keine punktweise universelle Abstiegsbehauptung. Für die beschleunigte Syracuse-Abbildung auf positiven ungeraden Zahlen ist die Aussage
 
-[
-orall n>1 exists kge1: S^{[k]}(n)<n
-]
+\[
+\forall n>1\ \exists k\ge1:\ S^{[k]}(n)<n
+\]
 
 im Wesentlichen äquivalent zur Collatz-Vermutung. Sie darf nicht als bloßes technisches Restlemma behandelt werden.
 
