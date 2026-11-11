@@ -148,3 +148,68 @@ The GitHub workflow lookup for PR #78 head `59b5920d0dac35a0594b8f7c445418cce50c
 ## 9. Measure-theoretic next step
 
 The existing Syracuse finite-depth module currently works with finite sets of natural-number residues, `childBlock Bstar b`, and `tailBlock Bstar B`; it does not yet define a prefix-state fibre or its conditional probability kernel. The next formalization must first specify the fibre type over a fixed prefix state, equip that finite type with its discrete measurable space (all subsets measurable), define cylinder events as subsets of that fibre, and define the normalized finite counting measure. Then prove event measurability, total mass one, and the transition restriction/extension maps are measurable. Only after these definitions and compatibility lemmas are in place should conditional distributions and the iterated cylinder formula be stated. A one-step cardinality identity alone does not imply independence or a product law.
+
+
+## 10. Explicit fibre convention — decision, 11 November 2026
+
+For a fixed finite valuation prefix \(w=(a_0,\ldots,a_{N-1})\), write
+\(A(w)=\sum_{i<N}a_i\). The first finite fibre used for counting is to be
+defined as an **arithmetic residue fibre**: a subset of the finite quotient
+\(\mathbb Z/(2^{A(w)}\mathbb Z)\) (equivalently, a finite type of canonical
+residue representatives), selected by the exact congruence conditions
+induced by the Syracuse transition relation.
+
+This is a modelling convention, not yet a theorem about actual positive
+integer orbits. The corresponding **orbit fibre** consists of positive
+odd integers whose actual Syracuse iterates realize the prefix. It remains
+a separate object. The residue-to-orbit map, its compatibility with the
+transition relation, and any required surjectivity/bijectivity or
+representative theorem must be proved separately. No equality between the
+two fibres is assumed.
+
+The finite quotient is preferred for the first counting and measurable-space
+layer because finiteness is intrinsic to the type. The orbit-realization
+bridge is deliberately postponed rather than hidden in a choice of
+representatives. In Lean, the concrete encoding must be aligned with the
+existing Fin/natural-residue definitions before implementation; this
+paragraph records the mathematical convention, not a claim that the current
+source already implements it.
+
+## 11. Child/Tail partition: source boundary and independent verification
+
+The statement in the Lubuimi manuscript PDF §9 that the PDF audit does not
+certify the finite tail partition is correct as a statement about that PDF.
+It does **not** erase the separate, later PR #76 source-and-CI evidence:
+https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/76, exact source
+commit cc63565dd55859a0e6ae8514173967e7d52334d9, and
+workflow 43026427449:
+https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43026427449.
+That run passed the finite-depth partition build/audit and explicit
+sorryAx rejection for the named declarations listed in §1.2 above.
+Thus the finite Child/Tail partition is Lean-verified **on that exact PR #76
+commit and workflow**, independently of what the PDF §9 covers. It is not
+certified by the PDF, and the PR remains an open draft. No claim beyond the
+listed finite-depth declarations is made.
+
+## 12. Chernoff hypothesis made explicit
+
+The Chernoff/Markov calculation in §3 is conditional on the model assumption
+that \(X_0,\ldots,X_{N-1}\) are mutually independent and identically
+distributed with \(\Pr(X_i=j)=2^{-j}\) for every \(j\ge1\). The factorization
+of the joint law is part of that independent geometric model. It is not
+derived from the Syracuse recurrence, the Child/Tail partition, or PR #76.
+Consequently the calculation is a valid model estimate but cannot be used as
+evidence for the Syracuse cylinder product formula; deriving that formula
+for actual orbit fibres remains an independent open obligation.
+
+## 13. Exact-head CI diagnostic — PR #78
+
+The workflow definition on the base branch main has a pull_request
+trigger without a branch restriction and only paths-ignore: "**.md".
+PR #78 changes a Lean source file, not only Markdown. Therefore the visible
+workflow filters do not explain the absence of an exact-head run. The
+workflow lookup for head 59b5920d0dac35a0594b8f7c445418cce50c00b8
+returned no PR-triggered workflow run. The cause is **undetermined** from
+the available evidence (for example, Actions/event delivery or a run not
+registered by the queried endpoint); it must not be described as a test
+failure or as a passing CI result. Status remains **CI NOT VERIFIED**.
