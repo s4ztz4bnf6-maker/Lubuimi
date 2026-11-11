@@ -107,6 +107,26 @@ theorem card_childBlock (Bstar b : ℕ) (hb : 1 ≤ b) (hB : b ≤ Bstar) :
     rw [pow_succ]
   omega
 
+/--
+Under the uniform counting measure on the full dyadic interval, a child
+block has exactly the geometric mass 2^{-b}. This is a one-step statement;
+it does not assert independence across successive Syracuse stages.
+-/
+theorem childBlock_uniform_mass (Bstar b : ℕ)
+    (hb : 1 ≤ b) (hB : b ≤ Bstar) :
+    ((childBlock Bstar b).card : ℚ) /
+        ((2 ^ Bstar : ℕ) : ℚ) =
+      1 / ((2 ^ b : ℕ) : ℚ) := by
+  rw [card_childBlock Bstar b hb hB]
+  have hexp : Bstar - b + b = Bstar := Nat.sub_add_cancel hB
+  rw [← hexp, pow_add]
+  push_cast
+  field_simp
+  congr 1
+  omega
+
+#print axioms childBlock_uniform_mass
+
 /-- Distinct child blocks are disjoint in increasing exponent order. -/
 theorem childBlock_disjoint (Bstar b₁ b₂ : ℕ)
     (hb₁ : 1 ≤ b₁) (hb₂ : b₂ ≤ Bstar) (hlt : b₁ < b₂) :
