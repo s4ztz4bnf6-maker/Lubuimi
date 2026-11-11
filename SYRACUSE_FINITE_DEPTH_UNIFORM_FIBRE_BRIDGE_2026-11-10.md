@@ -163,3 +163,10 @@ The Lean development should be isolated from the historical APW4 proof until eac
 The initial all-one cylinder theorem, the signed-margin cap core, and the finite (k=2) terminal-residue module have their own successful Lean audits. None of those audits is evidence that this new finite-depth uniformization note has already been compiled.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI systems are assistants only, not authors or independent mathematical verifiers.
+
+
+---
+
+## Verification addendum — 11 November 2026
+
+The exact Child/Tail partition result is now recorded in [SYRACUSE_RESEARCH_UPDATE_2026-11-11.md](SYRACUSE_RESEARCH_UPDATE_2026-11-11.md): commit `cc63565dd55859a0e6ae8514173967e7d52334d9`, workflow 43026427449 PASS, explicit sorryAx rejection PASS. This update does not change the mathematical scope of the finite-depth bridge and does not claim arbitrary valuation-word realizability or global Collatz termination.
