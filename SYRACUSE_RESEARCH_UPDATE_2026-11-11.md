@@ -139,3 +139,12 @@ PR [#78](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/78) adds the finite co
 The proposed lemma states that the normalized cardinality of a single child block in the ambient dyadic interval is exactly $2^{-b}$. This is the one-step geometric mass already suggested by the interval cardinality formula.
 
 **Status: OPEN — NOT VERIFIED.** Exact-head Lean CI and the named transitive axiom/sorryAx audit have not yet been observed for this candidate. It does not establish independence or the iterated valuation-cylinder product formula.
+
+
+## 8. Exact-head CI observation — 11 November 2026
+
+The GitHub workflow lookup for PR #78 head `59b5920d0dac35a0594b8f7c445418cce50c00b8` returned no workflow runs. This is **not** a test failure and not a pass: no exact-head Lean result is currently available from Actions. The one-step lemma `childBlock_uniform_mass` remains **OPEN — NOT VERIFIED**. Do not infer an axiom profile or sorryAx-freedom without an actual exact-head run.
+
+## 9. Measure-theoretic next step
+
+The existing Syracuse finite-depth module currently works with finite sets of natural-number residues, `childBlock Bstar b`, and `tailBlock Bstar B`; it does not yet define a prefix-state fibre or its conditional probability kernel. The next formalization must first specify the fibre type over a fixed prefix state, equip that finite type with its discrete measurable space (all subsets measurable), define cylinder events as subsets of that fibre, and define the normalized finite counting measure. Then prove event measurability, total mass one, and the transition restriction/extension maps are measurable. Only after these definitions and compatibility lemmas are in place should conditional distributions and the iterated cylinder formula be stated. A one-step cardinality identity alone does not imply independence or a product law.
