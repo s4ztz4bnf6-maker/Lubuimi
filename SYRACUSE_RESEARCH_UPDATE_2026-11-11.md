@@ -278,3 +278,10 @@ Reduction modulo \(2^N\) sends the qualifying class to the single residue \(-1\p
 6. A geometric product law requires separate proof of every state-conditioned transition probability; it is not supplied by the chain rule.
 
 PR #78 currently adds only the one-step finite child-block mass identity and has no exact-head workflow. It must not be treated as depending on, or having implemented, this prefix-fibre convention. The convention is recorded here before any future PR #78 extension.
+
+
+## 16. PR #78 trigger diagnostic follow-up — 11 November 2026
+
+The PR metadata confirms that PR #78's head repository is the same repository (`s4ztz4bnf6-maker/Lubuimi`), not a fork. Therefore the hypothesis that GitHub withheld the workflow pending approval of a fork-originated pull request is not supported for this PR.
+
+A second lookup for the PR merge commit `960bbdbefbb6dc5ce3d67454cec4c093f8743398` also returned no pull-request workflow run, as did the lookup for head `59b5920d0dac35a0594b8f7c445418cce50c00b8`. Thus the missing run is not explained by merely querying the head SHA instead of the merge SHA. The cause remains **undetermined**; no conclusion about event delivery, skipped workflow, or CI success/failure is justified. Status remains **CI NOT VERIFIED**.
