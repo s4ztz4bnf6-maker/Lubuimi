@@ -56,3 +56,12 @@ Die endlichen Resultate aus PR #76 (Child/Tail-Partition), PR #78 (Ein-Schritt-M
 **Korrigierter Status:** Rückwärtslemma mathematisch und formal geschlossen; Quotientenfolge, vollständige Wortrealisierung, eindeutige Restklasse und Hebungszählung als nächste Formalisierungsschritte offen; globaler Collatz-Satz weiterhin offen.
 
 Keine Lean-Datei geändert, kein Build oder CI-Lauf ausgelöst, kein PR gemergt.
+
+
+## 12 November 2026 — konstruktive Quotientensequenz: exakter CI-Abschluss
+
+Der append-only [Quotientensequenz-CI-Checkpoint vom 12. November 2026](docs/SYRACUSE_QUOTIENT_SEQUENCE_CI_CHECKPOINT_2026-11-12.md) sichert PR #81, Commit `44b7ce6e991e6b975a5f85fe3a34babe4bec68d5`, Workflow [43115942497](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43115942497), Lean-Job 130843833193: **SUCCESS**.
+
+Das neue Modul `SyracuseQuotientSequence.lean` wurde kompiliert; der explizite Workflow-Axiombericht weist für `terminalExact_factor` das Profil `[propext]` und für `quotientState_factor`, `quotientState_odd`, `quotientState_transition_of_exact` sowie `quotientSequence_from_terminal` jeweils `[propext, Classical.choice, Quot.sound]` aus. Die explizite `sorryAx`-Prüfung bestand.
+
+Dies formalisiert die Quotientenzustände, ihre Ungeradheit und die beschleunigte Übergangsrelation auf genau diesem Commit. Die vollständige terminale-Kongruenz-iff-Wortrealisierung, Restklassen-Eindeutigkeit, Lift-Zählung und Produktdichte bleiben offen. PR #81 bleibt Draft/offen/ungemergt. Keine globale Collatz-Terminierung wird behauptet.
