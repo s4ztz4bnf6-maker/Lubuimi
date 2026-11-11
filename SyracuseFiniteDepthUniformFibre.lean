@@ -125,6 +125,8 @@ theorem childBlock_uniform_mass (Bstar b : ℕ)
   congr 1
   omega
 
+#print axioms childBlock_uniform_mass
+
 /-- Distinct child blocks are disjoint in increasing exponent order. -/
 theorem childBlock_disjoint (Bstar b₁ b₂ : ℕ)
     (hb₁ : 1 ≤ b₁) (hb₂ : b₂ ≤ Bstar) (hlt : b₁ < b₂) :
