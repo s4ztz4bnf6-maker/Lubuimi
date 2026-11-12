@@ -71,3 +71,20 @@ Die mathematische Herleitung der endlichen Wortkongruenz ist nicht mit ihrer vol
 Nur Dokumentation. Keine Änderung an Lean-Quelldateien, mathematischen Theorem-Aussagen, Lizenztexten oder einer veröffentlichten Manuskript-PDF. PR #81 bleibt offen, Draft und ungemergt.
 
 **Attribution:** Ta-Yoshua Lubuimi. KI-Systeme sind Assistenzwerkzeuge, keine Autoren und keine unabhängigen mathematischen Verifizierer.
+
+
+## Superseding exact-head result — 12 November 2026
+
+The initial checkpoint above records the earlier PR #81 commit `44b7ce6e991e6b975a5f85fe3a34babe4bec68d5` and workflow 43115942497. The current PR #81 head has since advanced to `2f7f3e3aabf4b05b8097228f7fe6ae433ae85b3e`. Its exact-head workflow [43121953918](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43121953918), Lean job 130864363776, completed **SUCCESS**. The log reports `Build completed successfully (8933 jobs)` and prints these exact profiles:
+
+| Declaration | Profile |
+|---|---|
+| `SyracuseAudit.terminalExact_factor` | `[propext]` |
+| `SyracuseAudit.quotientState_factor` | `[propext, Classical.choice, Quot.sound]` |
+| `SyracuseAudit.quotientState_odd` | `[propext, Classical.choice, Quot.sound]` |
+| `SyracuseAudit.quotientState_transition_of_exact` | `[propext, Classical.choice, Quot.sound]` |
+| `SyracuseAudit.quotientSequence_from_terminal` | `[propext, Classical.choice, Quot.sound]` |
+
+The explicit `sorryAx` rejection gate passed on this exact-head workflow. This is the current PR #81 verification record; the earlier 44b7ce6/431159 record is retained as a historical intermediate snapshot, not silently overwritten.
+
+PR #81 remains OPEN/DRAFT/UNMERGED. The full terminal-congruence iff complete-word-realization theorem, unique residue class, lift count, and product density remain open. No global Collatz termination or infinite-path exclusion is claimed. No Lean source, theorem statement, or licensing text changed in this documentation update.
