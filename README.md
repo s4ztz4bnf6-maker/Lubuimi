@@ -31,3 +31,8 @@ Original materials owned by Ta-Yoshua Lubuimi are subject to the [proprietary ri
 ## Exact quotient-sequence checkpoint — 12 November 2026
 
 The append-only [Syracuse quotient-sequence CI checkpoint](docs/SYRACUSE_QUOTIENT_SEQUENCE_CI_CHECKPOINT_2026-11-12.md) records PR #81 / exact head `44b7ce6e991e6b975a5f85fe3a34babe4bec68d5`, workflow 43115942497: Lean build SUCCESS, named axiom output recorded, explicit `sorryAx` gate passed. The quotient states, oddness, and accelerated transition are formalized. Complete word-realization equivalence, residue uniqueness, lift counting, and product density remain open; no global Collatz termination is claimed.
+
+
+## Current exact-head quotient-sequence status — 12 November 2026
+
+The current PR #81 source head is `2f7f3e3aabf4b05b8097228f7fe6ae433ae85b3e`, not the earlier checkpoint head `44b7ce6e991e6b975a5f85fe3a34babe4bec68d5`. Its exact workflow [43121953918](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43121953918) passed the Lean job (130864363776): 8,933 jobs built, named profiles printed for all five declarations, and the explicit `sorryAx` rejection gate passed. See the [superseding exact-head checkpoint](docs/SYRACUSE_QUOTIENT_SEQUENCE_CI_CHECKPOINT_2026-11-12.md). PR #81 remains Draft/open/unmerged. Full word-realization equivalence, residue uniqueness, lift counting, product density, and global Collatz termination remain unproved/unverified.
