@@ -65,3 +65,37 @@ Der append-only [Quotientensequenz-CI-Checkpoint vom 12. November 2026](docs/SYR
 Das neue Modul `SyracuseQuotientSequence.lean` wurde kompiliert; der explizite Workflow-Axiombericht weist für `terminalExact_factor` das Profil `[propext]` und für `quotientState_factor`, `quotientState_odd`, `quotientState_transition_of_exact` sowie `quotientSequence_from_terminal` jeweils `[propext, Classical.choice, Quot.sound]` aus. Die explizite `sorryAx`-Prüfung bestand.
 
 Dies formalisiert die Quotientenzustände, ihre Ungeradheit und die beschleunigte Übergangsrelation auf genau diesem Commit. Die vollständige terminale-Kongruenz-iff-Wortrealisierung, Restklassen-Eindeutigkeit, Lift-Zählung und Produktdichte bleiben offen. PR #81 bleibt Draft/offen/ungemergt. Keine globale Collatz-Terminierung wird behauptet.
+
+
+## 12 November 2026 — exact-head CI correction for PR #81
+
+This entry supersedes the earlier checkpoint's status as the **current** PR #81 head. The earlier source commit `44b7ce6e991e6b975a5f85fe3a34babe4bec68d5` and workflow `43115942497` remain preserved as historical evidence.
+
+Current exact source:
+- PR [#81](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/81), **OPEN / DRAFT / UNMERGED**.
+- Branch `formalize/syracuse-quotient-sequence-source-2026-11-11`.
+- Current head `2f7f3e3aabf4b05b8097228f7fe6ae433ae85b3e`.
+- File `SyracuseQuotientSequence.lean`, registered in `lakefile.lean`.
+
+Exact-head workflow [43121953918](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43121953918), job `lean` 130864363776: **SUCCESS**. The log reports `Build completed successfully (8933 jobs)`, prints the following named transitive axiom profiles, and the workflow's explicit `sorryAx` rejection gate did not fail:
+
+| Declaration | Exact-head profile |
+|---|---|
+| `SyracuseAudit.terminalExact_factor` | `[propext]` |
+| `SyracuseAudit.quotientState_factor` | `[propext, Classical.choice, Quot.sound]` |
+| `SyracuseAudit.quotientState_odd` | `[propext, Classical.choice, Quot.sound]` |
+| `SyracuseAudit.quotientState_transition_of_exact` | `[propext, Classical.choice, Quot.sound]` |
+| `SyracuseAudit.quotientSequence_from_terminal` | `[propext, Classical.choice, Quot.sound]` |
+
+**Current-head conclusion:** the constructive quotient states, their oddness, the exact accelerated transition, and the bundled finite quotient sequence are Lean-compiled and audited at commit `2f7f3e3aabf4b05b8097228f7fe6ae433ae85b3e`, with the named profiles above and no accepted `sorryAx`.
+
+Still open:
+1. the full terminal-congruence iff complete positive valuation-word realization theorem;
+2. the full equivalence directions as a single packaged theorem;
+3. uniqueness of the terminal residue class modulo `2^(A+1)`;
+4. lift counting modulo `2^K`;
+5. the product-density conclusion `2^(-A) = ∏ 2^(-a_i)`.
+
+This is a finite-word/finite-state formalization result only. It does not prove an infinite-path exclusion, density-to-orbit transfer, or global Collatz termination.
+
+No Syracuse source file, theorem statement, or license was changed by this documentation synchronization. PR #81 remains Draft/open/unmerged.
