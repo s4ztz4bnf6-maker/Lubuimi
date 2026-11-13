@@ -147,3 +147,12 @@ Current PR #82 head: 4c782523c9e86d22b1267e8ebfc3d99cccdf9e1d. Exact workflow [4
 The exact run 43411629727 still failed at the hunit declaration: the left side used the power of the ZMod cast, while ZMod.isUnit_iff_coprime returns IsUnit of the cast of the natural power. The local hunit target is now written explicitly as IsUnit (↑(3^r) : ZMod ...), matching the theorem's coefficient and the unit criterion.
 
 Current PR #82 source head: 926f0fd2f627d504e1f32c61a00d38e763afea38. Exact workflow [43412074002](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43412074002), Lean job 131840693951, is **IN PROGRESS**. No compile success or axiom profile is claimed yet.
+
+
+
+
+## 13 November 2026 — explicit Nat exponentiation and ZMod coercion
+
+The prior source head 926f0fd2f627d504e1f32c61a00d38e763afea38 still failed because Lean continued to elaborate the hunit target as the power of a ZMod cast rather than the cast of a natural power. The theorem coefficient and hunit target are now explicitly written as ((3 ^ r : Nat) : ZMod (2^(A+1))).
+
+Current PR #82 head: c5698519a86caf860eb6c2ede0f4d65d82de8541. Exact workflow [43412794362](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43412794362) is **IN PROGRESS**. No compile success, axiom profile, or sorryAx result is claimed yet.
