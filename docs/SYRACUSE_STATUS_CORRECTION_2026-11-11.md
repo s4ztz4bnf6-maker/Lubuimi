@@ -99,3 +99,15 @@ Still open:
 This is a finite-word/finite-state formalization result only. It does not prove an infinite-path exclusion, density-to-orbit transfer, or global Collatz termination.
 
 No Syracuse source file, theorem statement, or license was changed by this documentation synchronization. PR #81 remains Draft/open/unmerged.
+
+
+
+
+## 13 November 2026 — SYR-02/03/04 algebraic closure
+
+The finite terminal-congruence calculation is now written out in [the residue-class counting note](SYRACUSE_RESIDUE_CLASS_COUNTING_2026-11-13.md):
+- **SYR-02 — BELEGT algebraically:** the terminal congruence has one residue class modulo \(2^{A+1}\), and that class is odd.
+- **SYR-03 — BELEGT algebraically:** it has exactly \(2^{K-A-1}\) lifts modulo \(2^K\), for \(K\geq A+1\).
+- **SYR-04 — BELEGT algebraically:** among odd residues the finite normalized density is \(2^{-A}=\prod_{i<r}2^{-a_i}\).
+
+The Lean formalizations of these three statements remain **OFFEN** until named declarations are compiled and audited at an exact source head. This calculation concerns the terminal congruence class; it is not yet the density of the exact valuation-word cylinder unless SYR-01 (the two-way word-realization equivalence) is proved. SYR-01, the infinite-path exclusion SYR-05, and global termination SYR-06 remain **OFFEN**. PR #81's current source head and workflow 43121953918 verify only the quotient-state sequence and its named transitions.
