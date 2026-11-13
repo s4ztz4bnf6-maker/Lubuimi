@@ -188,7 +188,7 @@ a prescribed valuation word. -/
 theorem terminalCongruence_unique_residue_class
     (A r C : Nat) :
     ∃! x : ZMod (2 ^ (A + 1)),
-      (3 ^ r : ZMod (2 ^ (A + 1))) * x + C = 2 ^ A := by
+      (↑(3 ^ r) : ZMod (2 ^ (A + 1))) * x + C = 2 ^ A := by
   have hbase : Nat.Coprime 3 2 := by norm_num
   have hcop : Nat.Coprime (3 ^ r) (2 ^ (A + 1)) := by
     exact Nat.Coprime.pow_left r (Nat.Coprime.pow_right (A + 1) hbase)
