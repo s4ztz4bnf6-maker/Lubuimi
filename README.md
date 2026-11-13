@@ -86,3 +86,12 @@ Current PR #82 source head: 926f0fd2f627d504e1f32c61a00d38e763afea38. Exact work
 The prior source head 926f0fd2f627d504e1f32c61a00d38e763afea38 still failed because Lean continued to elaborate the hunit target as the power of a ZMod cast rather than the cast of a natural power. The theorem coefficient and hunit target are now explicitly written as ((3 ^ r : Nat) : ZMod (2^(A+1))).
 
 Current PR #82 head: c5698519a86caf860eb6c2ede0f4d65d82de8541. Exact workflow [43412794362](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43412794362) is **IN PROGRESS**. No compile success, axiom profile, or sorryAx result is claimed yet.
+
+
+
+
+## 13 November 2026 — SYR-02 uniqueness theorem: exact Lean PASS
+
+PR [#82](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/82), exact source head c5698519a86caf860eb6c2ede0f4d65d82de8541, completed workflow [43412794362](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43412794362), Lean job 131843106387: **SUCCESS**. The workflow reports Build completed successfully (8933 jobs). The named declaration SyracuseAudit.terminalCongruence_unique_residue_class has axiom profile **[propext, Classical.choice, Quot.sound]**. The explicit sorryAx rejection step passed.
+
+This formally establishes uniqueness of the terminal congruence solution class in ZMod (2^(A+1)). It does not yet formalize oddness of the canonical representative, the lift count, or the normalized density. It also does not identify the unique congruence class with the exact valuation-word cylinder; that requires SYR-01. SYR-05 infinite-path exclusion and SYR-06 global termination remain **OFFEN**.
