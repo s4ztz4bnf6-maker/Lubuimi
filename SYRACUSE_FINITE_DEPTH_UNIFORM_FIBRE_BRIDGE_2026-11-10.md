@@ -239,3 +239,12 @@ For \(K\geq A+1\), this class has exactly \(2^{K-A-1}\) lifts modulo \(2^K\). Re
 These are algebraic facts about the terminal congruence class. They give the density of the exact valuation-word cylinder only after the still-open two-way equivalence between terminal congruence and complete word realization (SYR-01) is established. They do not imply an infinite-orbit density or exclude an infinite path.
 
 The full proof and status separation are recorded in [SYRACUSE_RESIDUE_CLASS_COUNTING_2026-11-13.md](../docs/SYRACUSE_RESIDUE_CLASS_COUNTING_2026-11-13.md). SYR-02/03/04 are algebraically **BELEGT** and remain Lean-formalization targets; SYR-01, SYR-05, and SYR-06 remain **OFFEN**.
+
+
+
+
+## 13 November 2026 — Lean candidate for SYR-02
+
+PR [#82](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/82) adds the declaration terminalCongruence_unique_residue_class to SyracuseQuotientSequence.lean. Exact source head: bf814a9e7ee30b23e3c90d10ee3553cb4fb71f8c. Workflow [43410857139](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43410857139), Lean job 131836620024, was **IN PROGRESS** at this update. No compile, axiom-profile, or sorryAx conclusion is claimed yet.
+
+The declaration targets uniqueness of the solution class in ZMod (2^(A+1)) only. It does not yet formalize the oddness of the canonical representative, the lift count, or the density formula. Those remain separate obligations. The paper-level SYR-02/03/04 statements remain algebraically BELEGT as recorded in the residue-class counting note; their formal status is not promoted until exact-head CI and named axiom output are inspected.
