@@ -43,3 +43,10 @@ The current PR #81 source head is `2f7f3e3aabf4b05b8097228f7fe6ae433ae85b3e`, no
 ## 13 November 2026 — terminal residue and finite density
 
 The new [terminal residue-class counting note](docs/SYRACUSE_RESIDUE_CLASS_COUNTING_2026-11-13.md) proves algebraically that the terminal congruence has one odd residue class modulo \(2^{A+1}\), that it has \(2^{K-A-1}\) lifts modulo \(2^K\), and that its normalized density among odd residues is \(2^{-A}=\prod_i2^{-a_i}\). These are finite congruence facts. The Lean formalizations remain open, and the density is not identified with the exact valuation-word cylinder until the full word-realization equivalence is proved. No infinite-path exclusion or global Collatz termination is claimed.
+
+
+
+
+## 13 November 2026 — SYR-02 Lean candidate
+
+PR [#82](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/82) adds a candidate Lean theorem for uniqueness of the terminal congruence class in ZMod (2^(A+1)). Exact source head bf814a9e7ee30b23e3c90d10ee3553cb4fb71f8c; workflow [43410857139](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43410857139), job 131836620024, is in progress. No formal pass is claimed. The candidate covers uniqueness only, not representative oddness, lift counting, product density, complete word realization, or global termination.
