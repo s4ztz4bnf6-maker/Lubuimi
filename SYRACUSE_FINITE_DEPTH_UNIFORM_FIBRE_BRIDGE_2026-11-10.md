@@ -163,3 +163,133 @@ The Lean development should be isolated from the historical APW4 proof until eac
 The initial all-one cylinder theorem, the signed-margin cap core, and the finite (k=2) terminal-residue module have their own successful Lean audits. None of those audits is evidence that this new finite-depth uniformization note has already been compiled.
 
 **Attribution:** Ta-Yoshua Lubuimi. AI systems are assistants only, not authors or independent mathematical verifiers.
+
+---
+
+## Dated formalization-status addendum — 11 November 2026
+
+This addendum updates the formalization record without changing the finite-depth mathematical construction above and without claiming a global Collatz result.
+
+### Backward affine lemma: already Lean-verified
+
+The backward congruence step and its finite-prefix consequence are already formalized in SyracuseAffineCore.lean as:
+
+- terminalExact_backward_step;
+- terminalExact_backward_prefix;
+- finite_prefix_affine_identity.
+
+The exact audited workflow snapshot [43076503425](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43076503425) reports the standard transitive profile [propext, Classical.choice, Quot.sound] and passed the explicit sorryAx rejection check for the named declarations. In addition, affineCompositionRhs_closed_form in SyracuseAffineCorrectionSum.lean has the separately reported profile [propext].
+
+The earlier description of the backward lemma as “mathematically closed, Lean formalization open” is superseded by this dated correction. Its mathematical and formal status is closed for the exact finite affine/congruence statement and audited source snapshot; the audit is not silently transferred to later commits.
+
+### Next open formalization obligations
+
+The next work is downstream of the backward lemma:
+
+1. construct the quotient states \(x_k=N_k(x)/2^{A_k}\) and prove integrality and oddness at every stage;
+2. prove the equivalence between the terminal congruence and realization of the complete prescribed positive valuation word;
+3. prove uniqueness of the residue class modulo \(2^{A+1}\);
+4. count its lifts modulo \(2^K\) for \(K\ge A+1\);
+5. derive the normalized density \(2^{-A}=\prod_{i<r}2^{-a_i}\).
+
+These are separate formalization obligations. They are not certified by workflow 43076503425 merely because the backward lemma is a dependency of a future proof.
+
+### Global scope boundary
+
+The finite-word cylinder classification and fixed-depth fibre construction do not establish an infinite-orbit exclusion, a density-to-orbit transfer, or global Collatz termination. The global Collatz conjecture remains open in this project record.
+
+**Attribution:** Ta-Yoshua Lubuimi. AI systems are assistants only, not authors or independent mathematical verifiers.
+
+
+---
+
+## Dated formalization-status addendum — 12 November 2026
+
+This addendum records the first Lean-verified constructive quotient-sequence stage. It does not change the finite-depth fibre construction or any theorem statement above.
+
+PR [#81](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/81), exact source commit `44b7ce6e991e6b975a5f85fe3a34babe4bec68d5`, workflow [43115942497](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43115942497), Lean job 130843833193: **SUCCESS**. The new `SyracuseQuotientSequence.lean` module defines (q_k=N_k(x)/2^{A_k}), proves the quotient states odd, and establishes the accelerated transition relation. The explicit axiom output is `[propext]` for `terminalExact_factor` and `[propext, Classical.choice, Quot.sound]` for the other four named declarations: `quotientState_factor`, `quotientState_odd`, `quotientState_transition_of_exact`, and `quotientSequence_from_terminal`. The explicit `sorryAx` rejection gate passed.
+
+This closes only the quotient-sequence formalization stage at that exact commit. The full terminal-congruence iff complete-word-realization theorem, unique residue class, lift count, and product density remain open Lean obligations. The mathematical derivation and the formalization status are distinct. The earlier backward lemmas retain their own exact-source audit boundary. No global Collatz termination, infinite-orbit exclusion, or density-to-orbit transfer is claimed.
+
+**Attribution:** Ta-Yoshua Lubuimi. AI systems are assistants only, not authors or independent mathematical verifiers.
+
+
+
+## 12 November 2026 — quotient-sequence formalization update
+
+The current PR #81 head `2f7f3e3aabf4b05b8097228f7fe6ae433ae85b3e` passed exact-head workflow [43121953918](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43121953918), Lean job 130864363776. The declared Lean library completed successfully (8,933 jobs); the named quotient-sequence declarations report the standard profiles and the explicit `sorryAx` rejection gate passed. This is a formalization of quotient states, oddness, and the accelerated transition at that exact source head.
+
+This result does not alter the separate finite-depth uniform-fibre construction or identify its fibres with historical APW4 events. It also does not complete the general finite valuation-word equivalence, residue-class uniqueness, lift counting, or product density. No density-to-orbit transfer or global Collatz termination is claimed. The exact current-head record is in `docs/SYRACUSE_QUOTIENT_SEQUENCE_CI_CHECKPOINT_2026-11-12.md`.
+
+
+
+
+## Mathematical addendum — 13 November 2026: unique terminal class and finite lifts
+
+For a fixed positive word \(a_0,\ldots,a_{r-1}\), let \(A=\sum_{i<r}a_i\), \(A_i=\sum_{t<i}a_t\), and \(C_0=0,\ C_{i+1}=3C_i+2^{A_i}\). The terminal congruence
+\[
+3^r x+C_r\equiv2^A\pmod{2^{A+1}}
+\]
+has exactly one residue class modulo \(2^{A+1}\), because \(3^r\) is invertible modulo this power of two. The recurrence gives \(C_1=1\) and preserves oddness thereafter, since \(A_i\geq1\) for \(i\geq1\). Thus \(2^A-C_r\) and the unique solution class are odd.
+
+For \(K\geq A+1\), this class has exactly \(2^{K-A-1}\) lifts modulo \(2^K\). Relative to the \(2^{K-1}\) odd residues, the normalized finite density is
+\[
+2^{-A}=\prod_{i<r}2^{-a_i}.
+\]
+These are algebraic facts about the terminal congruence class. They give the density of the exact valuation-word cylinder only after the still-open two-way equivalence between terminal congruence and complete word realization (SYR-01) is established. They do not imply an infinite-orbit density or exclude an infinite path.
+
+The full proof and status separation are recorded in [SYRACUSE_RESIDUE_CLASS_COUNTING_2026-11-13.md](../docs/SYRACUSE_RESIDUE_CLASS_COUNTING_2026-11-13.md). SYR-02/03/04 are algebraically **BELEGT** and remain Lean-formalization targets; SYR-01, SYR-05, and SYR-06 remain **OFFEN**.
+
+
+
+
+## 13 November 2026 — Lean candidate for SYR-02
+
+PR [#82](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/82) adds the declaration terminalCongruence_unique_residue_class to SyracuseQuotientSequence.lean. Exact source head: bf814a9e7ee30b23e3c90d10ee3553cb4fb71f8c. Workflow [43410857139](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43410857139), Lean job 131836620024, was **IN PROGRESS** at this update. No compile, axiom-profile, or sorryAx conclusion is claimed yet.
+
+The declaration targets uniqueness of the solution class in ZMod (2^(A+1)) only. It does not yet formalize the oddness of the canonical representative, the lift count, or the density formula. Those remain separate obligations. The paper-level SYR-02/03/04 statements remain algebraically BELEGT as recorded in the residue-class counting note; their formal status is not promoted until exact-head CI and named axiom output are inspected.
+
+
+
+
+## 13 November 2026 — PR #82 exact-head correction and retry
+
+The first PR #82 source head bf814a9e7ee30b23e3c90d10ee3553cb4fb71f8c failed because the coprime power lemmas take their exponents explicitly and ZMod.isUnit_iff_coprime takes the natural representative and modulus explicitly. The proof script has been corrected to pass these arguments.
+
+Current PR #82 head: e0c275fd94d8ee24c3348888952335b06657ce41. Exact workflow [43411256426](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43411256426), Lean job 131837949086, is **IN PROGRESS**. No compile success, axiom profile, or sorryAx conclusion is claimed yet. The initial failure remains preserved for its own source head.
+
+
+
+
+## 13 November 2026 — ZMod cast-alignment retry
+
+The second exact-head run 43411256426 confirmed that the coprime-power construction and unit criterion elaborate, but exposed a mismatch between the cast of the natural power \(3^r\) and the power of the cast in ZMod. The theorem coefficient is now explicitly written as the cast of the natural power, matching the unit witness.
+
+Current PR #82 head: 4c782523c9e86d22b1267e8ebfc3d99cccdf9e1d. Exact workflow [43411629727](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43411629727) is **QUEUED** at this update. No compile or axiom result is claimed.
+
+
+
+
+## 13 November 2026 — unit-witness type correction
+
+The exact run 43411629727 still failed at the hunit declaration: the left side used the power of the ZMod cast, while ZMod.isUnit_iff_coprime returns IsUnit of the cast of the natural power. The local hunit target is now written explicitly as IsUnit (↑(3^r) : ZMod ...), matching the theorem's coefficient and the unit criterion.
+
+Current PR #82 source head: 926f0fd2f627d504e1f32c61a00d38e763afea38. Exact workflow [43412074002](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43412074002), Lean job 131840693951, is **IN PROGRESS**. No compile success or axiom profile is claimed yet.
+
+
+
+
+## 13 November 2026 — explicit Nat exponentiation and ZMod coercion
+
+The prior source head 926f0fd2f627d504e1f32c61a00d38e763afea38 still failed because Lean continued to elaborate the hunit target as the power of a ZMod cast rather than the cast of a natural power. The theorem coefficient and hunit target are now explicitly written as ((3 ^ r : Nat) : ZMod (2^(A+1))).
+
+Current PR #82 head: c5698519a86caf860eb6c2ede0f4d65d82de8541. Exact workflow [43412794362](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43412794362) is **IN PROGRESS**. No compile success, axiom profile, or sorryAx result is claimed yet.
+
+
+
+
+## 13 November 2026 — SYR-02 uniqueness theorem: exact Lean PASS
+
+PR [#82](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/82), exact source head c5698519a86caf860eb6c2ede0f4d65d82de8541, completed workflow [43412794362](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43412794362), Lean job 131843106387: **SUCCESS**. The workflow reports Build completed successfully (8933 jobs). The named declaration SyracuseAudit.terminalCongruence_unique_residue_class has axiom profile **[propext, Classical.choice, Quot.sound]**. The explicit sorryAx rejection step passed.
+
+This formally establishes uniqueness of the terminal congruence solution class in ZMod (2^(A+1)). It does not yet formalize oddness of the canonical representative, the lift count, or the normalized density. It also does not identify the unique congruence class with the exact valuation-word cylinder; that requires SYR-01. SYR-05 infinite-path exclusion and SYR-06 global termination remain **OFFEN**.
