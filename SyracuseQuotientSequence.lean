@@ -191,9 +191,9 @@ theorem terminalCongruence_unique_residue_class
       (3 ^ r : ZMod (2 ^ (A + 1))) * x + C = 2 ^ A := by
   have hbase : Nat.Coprime 3 2 := by norm_num
   have hcop : Nat.Coprime (3 ^ r) (2 ^ (A + 1)) := by
-    exact Nat.Coprime.pow_left (Nat.Coprime.pow_right hbase)
+    exact Nat.Coprime.pow_left r (Nat.Coprime.pow_right (A + 1) hbase)
   have hunit : IsUnit (3 ^ r : ZMod (2 ^ (A + 1))) :=
-    (ZMod.isUnit_iff_coprime).2 hcop
+    (ZMod.isUnit_iff_coprime (3 ^ r) (2 ^ (A + 1))).2 hcop
   obtain ⟨u, hu⟩ := hunit
   refine ⟨(↑(u⁻¹) : ZMod (2 ^ (A + 1))) *
       ((2 ^ A : ZMod (2 ^ (A + 1))) - C), ?_, ?_⟩
