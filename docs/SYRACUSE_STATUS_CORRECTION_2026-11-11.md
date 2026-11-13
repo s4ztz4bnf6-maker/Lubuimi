@@ -111,3 +111,12 @@ The finite terminal-congruence calculation is now written out in [the residue-cl
 - **SYR-04 — BELEGT algebraically:** among odd residues the finite normalized density is \(2^{-A}=\prod_{i<r}2^{-a_i}\).
 
 The Lean formalizations of these three statements remain **OFFEN** until named declarations are compiled and audited at an exact source head. This calculation concerns the terminal congruence class; it is not yet the density of the exact valuation-word cylinder unless SYR-01 (the two-way word-realization equivalence) is proved. SYR-01, the infinite-path exclusion SYR-05, and global termination SYR-06 remain **OFFEN**. PR #81's current source head and workflow 43121953918 verify only the quotient-state sequence and its named transitions.
+
+
+
+
+## 13 November 2026 — Lean candidate for SYR-02
+
+PR [#82](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/82) adds the declaration terminalCongruence_unique_residue_class to SyracuseQuotientSequence.lean. Exact source head: bf814a9e7ee30b23e3c90d10ee3553cb4fb71f8c. Workflow [43410857139](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43410857139), Lean job 131836620024, was **IN PROGRESS** at this update. No compile, axiom-profile, or sorryAx conclusion is claimed yet.
+
+The declaration targets uniqueness of the solution class in ZMod (2^(A+1)) only. It does not yet formalize the oddness of the canonical representative, the lift count, or the density formula. Those remain separate obligations. The paper-level SYR-02/03/04 statements remain algebraically BELEGT as recorded in the residue-class counting note; their formal status is not promoted until exact-head CI and named axiom output are inspected.
