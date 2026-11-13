@@ -36,3 +36,10 @@ The append-only [Syracuse quotient-sequence CI checkpoint](docs/SYRACUSE_QUOTIEN
 ## Current exact-head quotient-sequence status — 12 November 2026
 
 The current PR #81 source head is `2f7f3e3aabf4b05b8097228f7fe6ae433ae85b3e`, not the earlier checkpoint head `44b7ce6e991e6b975a5f85fe3a34babe4bec68d5`. Its exact workflow [43121953918](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43121953918) passed the Lean job (130864363776): 8,933 jobs built, named profiles printed for all five declarations, and the explicit `sorryAx` rejection gate passed. See the [superseding exact-head checkpoint](docs/SYRACUSE_QUOTIENT_SEQUENCE_CI_CHECKPOINT_2026-11-12.md). PR #81 remains Draft/open/unmerged. Full word-realization equivalence, residue uniqueness, lift counting, product density, and global Collatz termination remain unproved/unverified.
+
+
+
+
+## 13 November 2026 — terminal residue and finite density
+
+The new [terminal residue-class counting note](docs/SYRACUSE_RESIDUE_CLASS_COUNTING_2026-11-13.md) proves algebraically that the terminal congruence has one odd residue class modulo \(2^{A+1}\), that it has \(2^{K-A-1}\) lifts modulo \(2^K\), and that its normalized density among odd residues is \(2^{-A}=\prod_i2^{-a_i}\). These are finite congruence facts. The Lean formalizations remain open, and the density is not identified with the exact valuation-word cylinder until the full word-realization equivalence is proved. No infinite-path exclusion or global Collatz termination is claimed.
