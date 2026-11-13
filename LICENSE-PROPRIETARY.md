@@ -46,3 +46,8 @@ This is a proprietary rights notice, not a standard open-source license, negotia
 ## Documentation-status clarification — 11 November 2026
 
 The dated research-status and manuscript addenda in this repository are documentation and evidence-record updates only. They do not amend, expand, narrow, or replace this notice or the separate commercial licensing policy. No new license is granted by the status corrections, manuscript addenda, README updates, or pull requests. Existing exclusions for third-party materials and the distinction between protected original expression and mathematical facts, abstract ideas, methods, and theorem statements remain unchanged. Any permission for protected original materials must still be obtained under the terms stated above and, where applicable, in a separate written agreement.
+
+
+## Documentation-status clarification — 13 November 2026
+
+The 13 November 2026 terminal-residue uniqueness, lift-counting, and finite-density note, together with the corresponding README/manuscript updates, is a research-status addition only. It does not amend this notice, the separate commercial licensing policy, ownership, third-party exclusions, or any license terms.
