@@ -220,3 +220,22 @@ This closes only the quotient-sequence formalization stage at that exact commit.
 The current PR #81 head `2f7f3e3aabf4b05b8097228f7fe6ae433ae85b3e` passed exact-head workflow [43121953918](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43121953918), Lean job 130864363776. The declared Lean library completed successfully (8,933 jobs); the named quotient-sequence declarations report the standard profiles and the explicit `sorryAx` rejection gate passed. This is a formalization of quotient states, oddness, and the accelerated transition at that exact source head.
 
 This result does not alter the separate finite-depth uniform-fibre construction or identify its fibres with historical APW4 events. It also does not complete the general finite valuation-word equivalence, residue-class uniqueness, lift counting, or product density. No density-to-orbit transfer or global Collatz termination is claimed. The exact current-head record is in `docs/SYRACUSE_QUOTIENT_SEQUENCE_CI_CHECKPOINT_2026-11-12.md`.
+
+
+
+
+## Mathematical addendum — 13 November 2026: unique terminal class and finite lifts
+
+For a fixed positive word \(a_0,\ldots,a_{r-1}\), let \(A=\sum_{i<r}a_i\), \(A_i=\sum_{t<i}a_t\), and \(C_0=0,\ C_{i+1}=3C_i+2^{A_i}\). The terminal congruence
+\[
+3^r x+C_r\equiv2^A\pmod{2^{A+1}}
+\]
+has exactly one residue class modulo \(2^{A+1}\), because \(3^r\) is invertible modulo this power of two. The recurrence gives \(C_1=1\) and preserves oddness thereafter, since \(A_i\geq1\) for \(i\geq1\). Thus \(2^A-C_r\) and the unique solution class are odd.
+
+For \(K\geq A+1\), this class has exactly \(2^{K-A-1}\) lifts modulo \(2^K\). Relative to the \(2^{K-1}\) odd residues, the normalized finite density is
+\[
+2^{-A}=\prod_{i<r}2^{-a_i}.
+\]
+These are algebraic facts about the terminal congruence class. They give the density of the exact valuation-word cylinder only after the still-open two-way equivalence between terminal congruence and complete word realization (SYR-01) is established. They do not imply an infinite-orbit density or exclude an infinite path.
+
+The full proof and status separation are recorded in [SYRACUSE_RESIDUE_CLASS_COUNTING_2026-11-13.md](../docs/SYRACUSE_RESIDUE_CLASS_COUNTING_2026-11-13.md). SYR-02/03/04 are algebraically **BELEGT** and remain Lean-formalization targets; SYR-01, SYR-05, and SYR-06 remain **OFFEN**.
