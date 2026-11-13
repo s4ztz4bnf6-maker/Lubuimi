@@ -181,6 +181,43 @@ theorem quotientState_transition_exact_power_two
     rw [ht] at htwo
     omega
 
+/-- For every modulus exponent A, iterate count r, and affine offset C,
+the terminal congruence has exactly one solution class modulo 2^(A+1).
+This is a finite residue-class statement and does not assert realization of
+a prescribed valuation word. -/
+theorem terminalCongruence_unique_residue_class
+    (A r C : Nat) :
+    ∃! x : ZMod (2 ^ (A + 1)),
+      (((3 ^ r : Nat) : ZMod (2 ^ (A + 1)))) * x + C = 2 ^ A := by
+  have hbase : Nat.Coprime 3 2 := by norm_num
+  have hcop : Nat.Coprime (3 ^ r) (2 ^ (A + 1)) := by
+    exact Nat.Coprime.pow_left r (Nat.Coprime.pow_right (A + 1) hbase)
+  have hunit : IsUnit (((3 ^ r : Nat) : ZMod (2 ^ (A + 1)))) :=
+    (ZMod.isUnit_iff_coprime (3 ^ r) (2 ^ (A + 1))).2 hcop
+  obtain ⟨u, hu⟩ := hunit
+  refine ⟨(↑(u⁻¹) : ZMod (2 ^ (A + 1))) *
+      ((2 ^ A : ZMod (2 ^ (A + 1))) - C), ?_, ?_⟩
+  · rw [← hu]
+    simp [mul_assoc, sub_add_cancel]
+  · intro y hy
+    have hy' :
+        (↑u : ZMod (2 ^ (A + 1))) * y + C = 2 ^ A := by
+      simpa only [← hu] using hy
+    have hmul :
+        (↑u : ZMod (2 ^ (A + 1))) * y =
+          (2 ^ A : ZMod (2 ^ (A + 1))) - C := by
+      apply add_right_cancel
+      calc
+        (↑u : ZMod (2 ^ (A + 1))) * y + C = 2 ^ A := hy'
+        _ = ((2 ^ A : ZMod (2 ^ (A + 1))) - C) + C := by simp
+    calc
+      y = (↑(u⁻¹) : ZMod (2 ^ (A + 1))) *
+          ((↑u : ZMod (2 ^ (A + 1))) * y) := by simp [mul_assoc]
+      _ = (↑(u⁻¹) : ZMod (2 ^ (A + 1))) *
+          ((2 ^ A : ZMod (2 ^ (A + 1))) - C) := by rw [hmul]
+
+#print axioms terminalCongruence_unique_residue_class
+
 #print axioms terminalExact_factor
 #print axioms quotientState_factor
 #print axioms quotientState_odd
