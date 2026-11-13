@@ -120,3 +120,12 @@ The Lean formalizations of these three statements remain **OFFEN** until named d
 PR [#82](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/82) adds the declaration terminalCongruence_unique_residue_class to SyracuseQuotientSequence.lean. Exact source head: bf814a9e7ee30b23e3c90d10ee3553cb4fb71f8c. Workflow [43410857139](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43410857139), Lean job 131836620024, was **IN PROGRESS** at this update. No compile, axiom-profile, or sorryAx conclusion is claimed yet.
 
 The declaration targets uniqueness of the solution class in ZMod (2^(A+1)) only. It does not yet formalize the oddness of the canonical representative, the lift count, or the density formula. Those remain separate obligations. The paper-level SYR-02/03/04 statements remain algebraically BELEGT as recorded in the residue-class counting note; their formal status is not promoted until exact-head CI and named axiom output are inspected.
+
+
+
+
+## 13 November 2026 — PR #82 exact-head correction and retry
+
+The first PR #82 source head bf814a9e7ee30b23e3c90d10ee3553cb4fb71f8c failed because the coprime power lemmas take their exponents explicitly and ZMod.isUnit_iff_coprime takes the natural representative and modulus explicitly. The proof script has been corrected to pass these arguments.
+
+Current PR #82 head: e0c275fd94d8ee24c3348888952335b06657ce41. Exact workflow [43411256426](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43411256426), Lean job 131837949086, is **IN PROGRESS**. No compile success, axiom profile, or sorryAx conclusion is claimed yet. The initial failure remains preserved for its own source head.
