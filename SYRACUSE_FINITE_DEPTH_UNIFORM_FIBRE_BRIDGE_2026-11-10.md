@@ -257,3 +257,12 @@ The declaration targets uniqueness of the solution class in ZMod (2^(A+1)) only.
 The first PR #82 source head bf814a9e7ee30b23e3c90d10ee3553cb4fb71f8c failed because the coprime power lemmas take their exponents explicitly and ZMod.isUnit_iff_coprime takes the natural representative and modulus explicitly. The proof script has been corrected to pass these arguments.
 
 Current PR #82 head: e0c275fd94d8ee24c3348888952335b06657ce41. Exact workflow [43411256426](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43411256426), Lean job 131837949086, is **IN PROGRESS**. No compile success, axiom profile, or sorryAx conclusion is claimed yet. The initial failure remains preserved for its own source head.
+
+
+
+
+## 13 November 2026 — ZMod cast-alignment retry
+
+The second exact-head run 43411256426 confirmed that the coprime-power construction and unit criterion elaborate, but exposed a mismatch between the cast of the natural power \(3^r\) and the power of the cast in ZMod. The theorem coefficient is now explicitly written as the cast of the natural power, matching the unit witness.
+
+Current PR #82 head: 4c782523c9e86d22b1267e8ebfc3d99cccdf9e1d. Exact workflow [43411629727](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43411629727) is **QUEUED** at this update. No compile or axiom result is claimed.
