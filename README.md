@@ -34,3 +34,10 @@ The full terminal-congruence iff finite-word-realization theorem, positive repre
 ## Original-materials licensing
 
 ## Original-materials licensingOriginal materials owned by Ta-Yoshua Lubuimi are subject to the [proprietary rights notice](LICENSE-PROPRIETARY.md) and [commercial licensing policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md). These notices expressly exclude upstream Erdős–Selfridge source files, Lean, Mathlib, dependencies, and all other third-party materials, which remain under their respective licenses. They do not claim exclusive rights over mathematical facts or theorem statements as such.
+
+
+## Parallel research note — quantum/operator formulations
+
+- [Quantum-operator reformulations: literature, exact encodings, and proof criteria](research/QUANTUM_OPERATOR_BRIDGE_NOTE_2026-11-14.md)
+
+This is an exploratory note only. It is not part of the established proof chain and claims no new theorem.
