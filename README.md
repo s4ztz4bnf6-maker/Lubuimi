@@ -77,3 +77,10 @@ Original materials owned by Ta-Yoshua Lubuimi are subject to the [proprietary ri
 - [Quantum-operator reformulations: literature, exact encodings, and proof criteria](research/QUANTUM_OPERATOR_BRIDGE_NOTE_2026-11-14.md)
 
 This is an exploratory note only. It is not part of the established proof chain and claims no new theorem.
+
+
+## Lean formalization — initial exact audit scope (17 Nov 2026)
+
+A separate Lean 4.35.0 / Mathlib project is now present at [formalization/TLDRB](formalization/TLDRB/). It contains named declarations for the overlap identity, its one-step residual update, and the generic positive-denominator descent-threshold equivalence. The latter is an abstract arithmetic interface: the Syracuse-specific affine/valuation hypotheses have not yet been connected to the existing trajectory definitions.
+
+The dedicated workflow is [TL-DRB Lean formalization audit](.github/workflows/tldrbaudit.yml). Exact-head run [43997407311](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43997407311) is in progress as of this update. An initial setup attempt failed because the Lake manifest had not been generated; the workflow was corrected to install the pinned toolchain and run lake update first. No Lean pass or axiom profile is claimed until the corrected run completes and its logs are inspected. The separate legacy workflow's success on this documentation-only repository snapshot only reflects its root-project detection/skip path and is not a Lean verification result.
