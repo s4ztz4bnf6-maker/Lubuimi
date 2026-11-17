@@ -1,13 +1,14 @@
-# Manuscript — A dynamic residual identity for the Syracuse affine descent problem
+# Manuscript — The Ta-Yoshua Lubuimi Dynamic Residual Bound (TL-DRB) for the Syracuse affine descent problem
 
 **Author:** Ta-Yoshua Lubuimi  
 **Date:** 17 November 2026  
-**Version:** 0.1.0  
+**Named method:** Ta-Yoshua Lubuimi Dynamic Residual Bound (**TL-DRB**)  
+**Version:** 0.1.1  
 **Status:** Research manuscript; algebraic results derived here are not yet Lean-formalized.
 
 ## Abstract
 
-We identify an exact representation of the signed valuation surplus in the accelerated Syracuse affine formula as a difference of two weighted exponential sums with overlapping exponent words. If (A_0=0) and (A_{k+1}=A_k+a_{k+1}), and if (C_0=0), (C_{k+1}=3C_k+2^{A_k}), then the residual
+We present the Collatz specialization of the Ta-Yoshua Lubuimi Dynamic Residual Bound (TL-DRB), giving an exact representation of the signed valuation surplus in the accelerated Syracuse affine formula as a difference of two weighted exponential sums with overlapping exponent words. If (A_0=0) and (A_{k+1}=A_k+a_{k+1}), and if (C_0=0), (C_{k+1}=3C_k+2^{A_k}), then the residual
 \[
 R_k=3^k+C_k-2^{A_k}
 \]
@@ -74,7 +75,7 @@ Then
 \]
 The final equality follows by expanding the recurrence for (D_k). Hence:
 
-**Theorem 2.1 (Overlapping-word residual identity).**
+**Theorem 2.1 (TL-DRB overlapping-word residual identity).**
 For every finite positive valuation word,
 \[
 \boxed{4T_k(A_0,\ldots,A_{k-1})-
@@ -97,7 +98,7 @@ n_0(C_k-R_k)>C_k,
 \]
 and therefore to:
 
-**Theorem 3.1 (Residual threshold criterion).**
+**Theorem 3.1 (TL-DRB state-dependent descent criterion).**
 \[
 \boxed{S^k(n_0)<n_0\iff n_0R_k<(n_0-1)C_k.}
 \]
@@ -154,8 +155,8 @@ The results do not provide:
 
 The global Collatz conjecture remains open. The identities here are intended as a precise new coordinate system for the descent margin, not as a claim that the global obstruction has been solved.
 
-## 8. Verification and licensing
+## 8. Verification, attribution, and licensing
 
 The algebraic proofs in this manuscript are written out explicitly, but they have not yet been formalized in Lean. No compilation or axiom audit is claimed.
 
-This original manuscript is covered by the repository's [proprietary rights notice](../LICENSE-PROPRIETARY.md) and [commercial licensing policy](../LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md), subject to their stated exclusions and limitations. Mathematical facts, abstract ideas, and theorem statements are not claimed as exclusively owned merely by this notice.
+The eponym identifies the research method and its author; it does not assert copyright ownership over mathematical facts, abstract ideas, or methods as such. This original manuscript is covered by the repository's [proprietary rights notice](../LICENSE-PROPRIETARY.md) and [commercial licensing policy](../LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md), subject to their stated exclusions and limitations. Mathematical facts, abstract ideas, and theorem statements are not claimed as exclusively owned merely by this notice.
