@@ -1,13 +1,14 @@
-# Dynamic residual bridge for Syracuse / Collatz
+# Ta-Yoshua Lubuimi Dynamic Residual Bound (TL-DRB): Syracuse / Collatz application
 
 **Date:** 17 November 2026  
 **Author:** Ta-Yoshua Lubuimi  
 **Repository:** `s4ztz4bnf6-maker/Lubuimi`  
-**Status:** Exact algebraic identity proved on paper; not yet Lean-formalized; no global Collatz conclusion.
+**Named method:** Ta-Yoshua Lubuimi Dynamic Residual Bound (**TL-DRB**); German name: Ta-Yoshua-Lubuimi-Dynamische-Residuen-Schranke.  
+**Status:** Exact algebraic identity and state-dependent descent criterion proved algebraically; not yet Lean-formalized; no global Collatz conclusion.
 
 ## 1. Purpose and scope
 
-This note records an exact bridge between the independent Dynamic Residual Bound research and the affine valuation bookkeeping in the Syracuse/Collatz project. The bridge is used here as a mathematical identity only. The two research projects remain separately versioned and separately licensed; this file records the Collatz-side specialization and does not import the general project's repository or silently merge its theorem claims.
+This note records the Collatz application of the Ta-Yoshua Lubuimi Dynamic Residual Bound (TL-DRB), an eponymous name for the state-dependent residual method developed in the separate Dynamic Residual Bound research project and the affine valuation bookkeeping in the Syracuse/Collatz project. The bridge is used here as a mathematical identity only. The two research projects remain separately versioned and separately licensed; this file records the Collatz-side specialization and does not import the general project's repository or silently merge its theorem claims.
 
 The useful point is that the Collatz affine correction and the valuation surplus can be encoded by one signed residual of the form (4T_k(u)-T_k(v)), where the two exponent words overlap.
 
@@ -147,7 +148,11 @@ Every finite all-ones prefix of length (k) is realized by the starting value (n_
 
 The residual recursion alone therefore does not force a uniform sign change or a uniform descent time. It must be combined with the start-value-dependent threshold and a theorem controlling which valuation words are realizable by a given start value.
 
-## 8. What this does and does not establish
+## 8. Mathematical contribution: what has been proved
+
+The advance is concrete and exact: the signed affine surplus in the accelerated Syracuse iteration is represented by a weighted difference of two overlapping exponential words, and the ordinary-size descent question is reduced to the exact inequality involving both the residual and affine correction. This supplies a state-dependent descent certificate for each finite valuation prefix. It improves the bookkeeping and the precision of the descent test; it is not yet a theorem that forces the inequality for every starting integer.
+
+## 9. What this does and does not establish
 
 **Established algebraically in this note**
 - The exact identity (4T_k(u)-T_k(v)=-D_k=R_k).
@@ -165,9 +170,9 @@ The residual recursion alone therefore does not force a uniform sign change or a
 
 No Lean verification is claimed for this note. Formalization would require named declarations, exact-head CI, printed transitive axiom profiles, and an explicit `sorryAx` rejection gate.
 
-## 9. Licensing and provenance
+## 10. Licensing and provenance
 
-This file is original research documentation authored by Ta-Yoshua Lubuimi and is covered by the repository's [proprietary rights notice](../LICENSE-PROPRIETARY.md) and [commercial licensing policy](../LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md), subject to the limitations and exclusions stated there. The underlying mathematical identities and ideas are not claimed as exclusive property merely by this notice. Third-party code, libraries, and publications remain under their own terms.
+This file documents the Ta-Yoshua Lubuimi Dynamic Residual Bound (TL-DRB) Collatz application and is original research documentation authored by Ta-Yoshua Lubuimi and is covered by the repository's [proprietary rights notice](../LICENSE-PROPRIETARY.md) and [commercial licensing policy](../LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md), subject to the limitations and exclusions stated there. The underlying mathematical identities and ideas are not claimed as exclusive property merely by this notice. Third-party code, libraries, and publications remain under their own terms.
 
 ---
 *Research status: exact algebraic bridge recorded; global theorem open.*
