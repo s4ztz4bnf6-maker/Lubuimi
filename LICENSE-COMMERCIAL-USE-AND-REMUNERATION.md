@@ -1,53 +1,45 @@
-# Commercial Licensing and Remuneration Policy
+# Commercial Use, Revenue Share and Attribution Terms
 
-**Rights holder:** Ta-Yoshua Lubuimi  
-**Copyright:** © 2026 Ta-Yoshua Lubuimi. All rights reserved.  
-**Applies to:** Original research materials, Lean code, proofs, manuscripts, scripts, and documentation owned by the rights holder in this repository, subject to third-party rights and file-specific notices. This includes the original TL-DRB research documentation and Collatz application manuscript identified below, but does not claim ownership of the underlying mathematical method or ideas.
+**Rights holder / licensor:** Ta-Yoshua Lubuimi  
+**Effective for new releases:** 17 November 2026  
+**Scope:** only original materials for which the licensor owns or controls the relevant rights.
 
-## 1. No free commercial-use permission
+## 1. Core rule
 
-Public availability, citation, download, cloning, or access to the repository does not grant commercial-use permission for protected Original Materials. Commercial exploitation of those materials requires prior express written permission under a separate signed license agreement.
+Commercial exploitation of covered project material is permitted only under a separate written commercial licence accepted by the licensor. A commercial user must not rely on a repository notice, public download, citation, research use, or access to a public repository as a commercial licence.
 
-## 2. Negotiated paid-license terms
+The commercial licence must provide the licensor with a continuing financial participation in value generated through use, integration, adaptation, distribution, hosting, sublicensing, or sale of covered material. The default proposed royalty is **10% of attributable gross receipts**, excluding VAT/sales tax actually remitted, bona fide refunds, and separately itemised pass-through amounts paid to unaffiliated third parties at cost. If revenue cannot reasonably be isolated, the agreement must use a documented allocation of the relevant product/service revenue or, where that is not practicable, **10% of attributable net profit**. No cost allocation may be used to artificially eliminate the royalty.
 
-A commercial license may include, as appropriate:
-- an upfront license fee;
-- recurring fees or royalties on an agreed auditable basis;
-- minimum guarantees;
-- usage, deployment, distribution, seat, or revenue reporting;
-- attribution and preservation of copyright notices;
-- field-of-use, territory, duration, redistribution, sublicensing, and derivative-work limits;
-- proportionate audit and record-retention provisions.
+The parties may agree in a signed writing to a higher rate, minimum guarantee, advance, per-product, per-deployment, per-site, per-seat, or usage-based fee. A lower rate or waiver is effective only if the licensor expressly signs it.
 
-No fee, royalty rate, minimum guarantee, or payment formula is fixed by this policy. The terms must be expressly agreed in a signed license.
+## 2. Reporting, payment and audit
 
-## 3. Unauthorized commercial exploitation
+Unless a signed licence states otherwise, the commercial licensee must report covered exploitation and the calculation of attributable receipts quarterly, pay accrued royalties within 30 days after each calendar quarter, keep complete supporting books and records for at least seven years, and provide a reasonable annual audit right on notice. If an audit finds an underpayment greater than 5%, the licensee must pay reasonable audit costs as well as the shortfall.
 
-Use outside a valid license may infringe rights in protected expression, depending on the materials, conduct, applicable law, and statutory exceptions. The rights holder reserves remedies available under applicable law.
+The written licence must identify the covered files/material, product or service, territory, duration, permitted acts, reporting contact, payment details, and any sublicensing rights. No sublicensing is allowed unless expressly included.
 
-This policy does not create an automatic contractual royalty for every unauthorized use. Contractual payment obligations arise from an applicable signed agreement; infringement remedies are determined by law and facts.
+## 3. Scholarly use and attribution
 
-## 4. Named method and covered original materials
+Public access and scholarly citation do not transfer ownership. Proper citation, quotation, review, criticism, and other statutory exceptions remain governed by applicable law. This notice does not claim ownership of mathematical facts, abstract ideas, methods, procedures, independently derived results, or independently created implementations.
 
-The Ta-Yoshua Lubuimi Dynamic Residual Bound (**TL-DRB**) is the author-attributed name used for the state-dependent residual method and its documented Collatz application. The original repository note, manuscript wording, explanatory diagrams, and any original code implementing the method are covered only to the extent the rights holder owns protectable rights in those materials. The name and attribution do not create a monopoly over the mathematical method, equations, abstract ideas, or independently developed implementations.
+Where protected project expression or code is lawfully reused, retain all applicable author, copyright, provenance, and third-party notices. Cite Ta-Yoshua Lubuimi and the relevant project/source version in scholarly publications that rely on or reproduce protected project material. Citation does not itself create co-authorship.
 
-## 5. Scholarly citation and independent mathematical work
+## 4. Existing licences and prior recipients
 
-Citation, linking, discussion, and uses permitted by copyright law remain available. This policy does not claim ownership over mathematical facts, abstract ideas, methods, procedures, or theorem statements as such. Independent implementation of an unprotected mathematical idea may differ legally from copying protected source code or substantial protected expression.
+This policy applies prospectively to new releases and to rights not already granted. It does not retroactively revoke or rewrite licences validly granted before its effective date. Recipients who already received a copy under AGPL-3.0, MIT, CC BY 4.0, or another irrevocable licence may continue to rely on that existing grant according to its terms.
 
-## 6. Third-party materials
+For future releases, remove permissive/open-source or Creative Commons grants from licensor-controlled material unless the licensor expressly approves them in a later signed writing. Legacy licence texts and headers apply only to copies/releases already distributed under them. This policy does not cancel third-party licences or rights.
 
-This policy applies only to original materials in which Ta-Yoshua Lubuimi owns the relevant rights. It does not relicense upstream Erdős–Selfridge source code, Lean, Mathlib, dependencies, third-party publications, or other third-party materials. Each remains subject to its own license.
+## 5. Rights and exclusions
 
-## 7. Requesting a commercial license
+This policy applies only to rights actually owned or controlled by Ta-Yoshua Lubuimi. It does not relicense third-party works, upstream research, Lean, Mathlib, dependencies, external contributions, data, or materials subject to other rights. Such materials retain their own terms. The policy does not create exclusive rights in facts, ideas, mathematical theorems as abstract propositions, or independent discoveries.
 
-A request should identify the exact files or materials, intended product or service, users, deployment and distribution scale, territory, duration, and proposed compensation/reporting model. A license is effective only when scope and terms are expressly agreed in writing.
+AI-assisted material is covered only to the extent protectable rights exist and are controlled by the licensor. No exclusive copyright is claimed in purely autonomous AI output merely because it appears in a project.
 
-## 8. Legal status
+## 6. No implied commercial permission
 
-This is a public licensing policy, not a negotiated license, legal opinion, or guarantee of enforceability in every jurisdiction. Obtain qualified intellectual-property advice for licensing or enforcement decisions.
+Until a separate written commercial licence is signed, no commercial permission is granted for new releases covered by this policy. Public availability is not permission to commercially exploit protected material.
 
----
+## 7. Legal status
 
-**Ta-Yoshua Lubuimi**  
-**Copyright © 2026 Ta-Yoshua Lubuimi. All rights reserved.**
+This document is a licensing policy and proposed standard commercial term sheet, not a substitute for a fully executed licence agreement or jurisdiction-specific legal advice. The 10% rate is the licensor's default proposed term for new commercial agreements; enforceable payment obligations depend on a valid licence/contract and the licensor's ownership or control of the relevant rights.
