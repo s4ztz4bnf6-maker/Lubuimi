@@ -1,6 +1,6 @@
 /-
 Copyright (c) 2026 Ta-Yoshua Lubuimi.
-SPDX-License-Identifier: AGPL-3.0-only
+SPDX-License-Identifier: LicenseRef-Lubuimi-Commercial-Revenue-Share
 
 Original project contribution. Third-party imports and dependencies retain
 their own licenses. AI assistance is disclosed in the repository notice.
