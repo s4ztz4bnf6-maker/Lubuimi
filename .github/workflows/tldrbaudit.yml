@@ -1,0 +1,43 @@
+name: TL-DRB Lean formalization audit
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tldrbaudit-lean-435:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Lean and generate the Lake manifest
+        shell: bash
+        run: |
+          curl --fail --location --retry 3 --max-time 60 https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
+          sh elan-init.sh -y --default-toolchain leanprover/lean4:v4.35.0
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          cd formalization/TLDRB
+          lake update
+      - uses: leanprover/lean-action@v1
+        with:
+          lake-package-directory: formalization/TLDRB
+          build: false
+          use-mathlib-cache: true
+      - name: Build formalized TL-DRB declarations
+        working-directory: formalization/TLDRB
+        run: lake build
+      - name: Print theorem axiom profiles and reject sorryAx
+        working-directory: formalization/TLDRB
+        shell: bash
+        run: |
+          set -o pipefail
+          lake env lean TLDRB.lean 2>&1 | tee /tmp/tldrbaudit-axioms.log
+          if grep -q 'sorryAx' /tmp/tldrbaudit-axioms.log; then
+            echo "Forbidden sorryAx found in TL-DRB declarations."
+            exit 1
+          fi
+          grep -E '^(axioms|theorem|declaration)' /tmp/tldrbaudit-axioms.log || true

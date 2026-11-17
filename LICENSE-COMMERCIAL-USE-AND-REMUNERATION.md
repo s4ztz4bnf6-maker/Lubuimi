@@ -2,7 +2,7 @@
 
 **Rights holder:** Ta-Yoshua Lubuimi  
 **Copyright:** © 2026 Ta-Yoshua Lubuimi. All rights reserved.  
-**Applies to:** Original research materials, Lean code, proofs, manuscripts, scripts, and documentation owned by the rights holder in this repository, subject to third-party rights and file-specific notices.
+**Applies to:** Original research materials, Lean code, proofs, manuscripts, scripts, and documentation owned by the rights holder in this repository, subject to third-party rights and file-specific notices. This includes the original TL-DRB research documentation and Collatz application manuscript identified below, but does not claim ownership of the underlying mathematical method or ideas.
 
 ## 1. No free commercial-use permission
 
@@ -27,19 +27,23 @@ Use outside a valid license may infringe rights in protected expression, dependi
 
 This policy does not create an automatic contractual royalty for every unauthorized use. Contractual payment obligations arise from an applicable signed agreement; infringement remedies are determined by law and facts.
 
-## 4. Scholarly citation and independent mathematical work
+## 4. Named method and covered original materials
+
+The Ta-Yoshua Lubuimi Dynamic Residual Bound (**TL-DRB**) is the author-attributed name used for the state-dependent residual method and its documented Collatz application. The original repository note, manuscript wording, explanatory diagrams, and any original code implementing the method are covered only to the extent the rights holder owns protectable rights in those materials. The name and attribution do not create a monopoly over the mathematical method, equations, abstract ideas, or independently developed implementations.
+
+## 5. Scholarly citation and independent mathematical work
 
 Citation, linking, discussion, and uses permitted by copyright law remain available. This policy does not claim ownership over mathematical facts, abstract ideas, methods, procedures, or theorem statements as such. Independent implementation of an unprotected mathematical idea may differ legally from copying protected source code or substantial protected expression.
 
-## 5. Third-party materials
+## 6. Third-party materials
 
 This policy applies only to original materials in which Ta-Yoshua Lubuimi owns the relevant rights. It does not relicense upstream Erdős–Selfridge source code, Lean, Mathlib, dependencies, third-party publications, or other third-party materials. Each remains subject to its own license.
 
-## 6. Requesting a commercial license
+## 7. Requesting a commercial license
 
 A request should identify the exact files or materials, intended product or service, users, deployment and distribution scale, territory, duration, and proposed compensation/reporting model. A license is effective only when scope and terms are expressly agreed in writing.
 
-## 7. Legal status
+## 8. Legal status
 
 This is a public licensing policy, not a negotiated license, legal opinion, or guarantee of enforceability in every jurisdiction. Obtain qualified intellectual-property advice for licensing or enforcement decisions.
 
