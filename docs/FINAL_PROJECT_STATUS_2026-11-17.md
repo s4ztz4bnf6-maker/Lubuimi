@@ -122,7 +122,7 @@ The named TL-DRB application manuscript and research note are original repositor
 
 ## 10. TL-DRB Lean formalization — initial status (17 November 2026)
 
-A separate Lean 4.35.0 / Mathlib package has been added at [formalization/TLDRB](../formalization/TLDRB/). It currently formalizes the overlap identity for the recursively defined weighted word sum and signed surplus, the one-step overlap-residual recurrence, and a generic descent-threshold equivalence under explicit affine and positive-denominator hypotheses.
+A separate Lean 4.35.0 / Mathlib package has been added at [formalization/TLDRB](../formalization/TLDRB/). It formalizes the finite-prefix affine identity for abstract exact division witnesses, the dynamic-residual embedding, the overlap identity, the one-step overlap-residual recurrence, and a generic descent-threshold equivalence under explicit affine and positive-denominator hypotheses.
 
 **Scope limitation:** this first package does not yet instantiate the generic threshold lemma with the actual accelerated Syracuse trajectory, valuation partial sums, affine correction, and quotient. It therefore verifies neither the full Collatz application nor any global descent statement unless and until those links are formalized.
 
