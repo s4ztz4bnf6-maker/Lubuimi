@@ -18,7 +18,7 @@ jobs:
         with:
           lake-package-directory: formalization/TLDRB
           build: false
-          use-mathlib-cache: true
+          use-mathlib-cache: false
       - name: Resolve package dependencies
         working-directory: formalization/TLDRB
         run: lake update
