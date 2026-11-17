@@ -118,3 +118,12 @@ The overlap-constrained backward residual recursion is also stated in the resear
 This is a proved exact algebraic bridge and a proved state-dependent descent threshold. It is a genuine advance in the finite-prefix descent analysis: it identifies the precise residual coordinate and the exact inequality that decides descent for a given start value and valuation prefix. It is not a global descent theorem. The all-ones valuation prefixes give arbitrarily long finite examples, so the residual recursion alone does not yield a uniform finite horizon. The new identities are not yet Lean-formalized and have no CI audit. The full terminal-word realization theorem, exclusion of all infinite non-descending paths, and global Collatz conjecture remain open.
 
 The named TL-DRB application manuscript and research note are original repository materials covered by the existing proprietary rights notice and commercial licensing policy. Third-party code, Lean, Mathlib, dependencies, and upstream materials remain under their respective licenses. No blanket open-source license is introduced by this update.
+
+
+## 10. TL-DRB Lean formalization — initial status (17 November 2026)
+
+A separate Lean 4.35.0 / Mathlib package has been added at [formalization/TLDRB](../formalization/TLDRB/). It currently formalizes the overlap identity for the recursively defined weighted word sum and signed surplus, the one-step overlap-residual recurrence, and a generic descent-threshold equivalence under explicit affine and positive-denominator hypotheses.
+
+**Scope limitation:** this first package does not yet instantiate the generic threshold lemma with the actual accelerated Syracuse trajectory, valuation partial sums, affine correction, and quotient. It therefore verifies neither the full Collatz application nor any global descent statement unless and until those links are formalized.
+
+The dedicated workflow is [tldrbaudit.yml](../.github/workflows/tldrbaudit.yml). Exact-head run [43997407311](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43997407311) is in progress. The first workflow attempt failed at setup because no Lake manifest existed; the bootstrap was corrected to install Lean 4.35.0 and run lake update before lean-action. The successful completion of the legacy root audit on this commit only means that its detector skipped because no root-level Lean project exists; it is not a formalization pass. A final status will be recorded only after inspecting the corrected run, named theorem axiom output, and sorryAx gate.
