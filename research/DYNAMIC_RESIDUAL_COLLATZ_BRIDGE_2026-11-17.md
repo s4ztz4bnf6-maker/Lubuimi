@@ -4,7 +4,7 @@
 **Author:** Ta-Yoshua Lubuimi  
 **Repository:** `s4ztz4bnf6-maker/Lubuimi`  
 **Named method:** Ta-Yoshua Lubuimi Dynamic Residual Bound (**TL-DRB**); German name: Ta-Yoshua-Lubuimi-Dynamische-Residuen-Schranke.  
-**Status:** Exact algebraic identity and state-dependent descent criterion proved algebraically; not yet Lean-formalized; no global Collatz conclusion.
+**Status:** Exact algebraic identity and state-dependent descent criterion proved algebraically; generic Lean formalization passes CI; actual valuation instantiation and global Collatz conclusion remain open.
 
 ## 1. Purpose and scope
 
@@ -165,10 +165,10 @@ The advance is concrete and exact: the signed affine surplus in the accelerated 
 - A uniform finite horizon for all starting integers.
 - Exclusion of all infinite non-descending valuation paths.
 - The full terminal-congruence / valuation-word-realization equivalence.
-- A Lean formalization or CI audit of the new identity.
+- An end-to-end Lean instantiation of the actual 2-adic valuation and concrete Syracuse orbit; see Section 11 for the formalized generic identities and their exact CI scope.
 - The global Collatz conjecture.
 
-No Lean verification is claimed for this note. Formalization would require named declarations, exact-head CI, printed transitive axiom profiles, and an explicit `sorryAx` rejection gate.
+The generic finite-prefix identities have now been formalized and audited; see Section 11. No Lean verification is claimed for the complete actual-orbit instantiation or any global descent theorem.
 
 ## 10. Licensing and provenance
 
@@ -180,12 +180,15 @@ This file documents the Ta-Yoshua Lubuimi Dynamic Residual Bound (TL-DRB) Collat
 
 ## 11. Initial Lean formalization and verification boundary (17 November 2026)
 
-The repository now contains an isolated Lean 4.35.0 / Mathlib package in [formalization/TLDRB](../formalization/TLDRB/). The initial declarations are:
+The repository now contains an isolated Lean 4.35.0 / Mathlib package in [formalization/TLDRB](../formalization/TLDRB/). The package now contains these declarations:
 
-- `overlap_identity`: the weighted overlapping-word difference equals the negative signed-surplus recurrence;
-- `overlapResidual_succ`: the exact one-step residual update;
+- `affine_trajectory_identity`: the finite-prefix affine identity for any sequence satisfying the exact division-witness recurrence;
+- `dynamicResidual_eq_affineCorrection`: the dynamic residual is exactly the affine correction plus the explicit power-of-three / power-of-two offset;
+- `overlap_identity` and `overlapResidual_succ`: the abstract overlapping-word identity and its one-step update;
 - `descent_threshold`: the generic equivalence between quotient descent and the residual inequality, assuming a positive denominator and the stated affine equations.
 
-The first two declarations formalize the abstract overlap algebra. The third formalizes the arithmetic threshold interface. It does **not** yet prove that the actual accelerated Syracuse iterate and valuation data satisfy those generic hypotheses. In particular, the finite-prefix affine identity, valuation extraction, positivity/divisibility facts, and the connection to the concrete Syracuse function still need to be imported and proved in Lean.
+These declarations formalize the finite algebraic interfaces. The abstract trajectory theorem has not yet been instantiated with the concrete accelerated Syracuse function and its actual 2-adic valuation. The generic descent threshold has not yet been connected to an end-to-end actual-orbit theorem.
 
-The dedicated CI workflow is `../.github/workflows/tldrbaudit.yml`. Exact-head run [43997407311](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43997407311) is in progress. An initial attempt failed because the workflow expected a pre-existing Lake manifest; this was corrected by explicitly installing Lean 4.35.0 and running `lake update` before invoking lean-action. No compile pass, axiom profile, or `sorryAx` result is claimed until the corrected run completes and the logs are checked. The legacy workflow's root-project detector skipped its Lean jobs on this documentation-only root; its green status is not evidence for this formalization.
+The dedicated CI workflow is `../.github/workflows/tldrbaudit.yml`. Exact-head run [44026016138](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/44026016138) completed successfully. PR #90 head is `1a7c7a7df4c5ba014c3a6a932d2bdcb2d8d6c42d`; GitHub tested merge ref `1c9e501699557cccfeb8c97f96fc3f2ca5bb1593`. The build `lake build TLDRB` completed successfully (9048 jobs), named axiom profiles were printed, and the explicit `sorryAx` rejection gate passed. Profiles: `affine_trajectory_identity` `[propext]`; `dynamicResidual_eq_affineCorrection`, `overlap_identity`, `overlapResidual_succ` `[propext, Quot.sound]`; `descent_threshold` `[propext, Classical.choice, Quot.sound]`. See the [full audit report](../docs/TLDRB_LEAN_CI_AUDIT_2026-11-17.md).
+
+A previous attempt failed on a cast-normalization goal; the proof was corrected by inserting `push_cast` before `ring`. The successful run above is for the corrected head. The legacy workflow's root-project detector skipped its Lean jobs on the repository root; that green status is not counted as evidence for this package.
