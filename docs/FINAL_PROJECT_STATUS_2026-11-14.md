@@ -141,3 +141,25 @@ The sole proof-documentation priority recorded here is to recover the author's e
 ## 10. Licensing status checked 17 November 2026
 
 The repository's existing proprietary rights notice and commercial licensing policy remain unchanged. This project has **not** been relicensed under MIT or CC BY 4.0. Third-party materials remain under their own licenses. See [the licensing index](LICENSING.md).
+
+
+---
+
+## 11. Superseding licensing and publication update — 17 November 2026
+
+**Author:** Ta-Yoshua Lubuimi.  
+**Copyright:** © 2026 Ta-Yoshua Lubuimi.
+
+The repository's original project materials are now separated by material type:
+
+- Original manuscripts, mathematical exposition, prose, diagrams, and documentation: CC BY 4.0.
+- Original source code, project-authored Lean code, scripts, and tests: MIT.
+- Third-party, upstream, generated, and dependency materials: their own applicable licenses and notices.
+
+See [the licensing index](LICENSING.md), [CC BY 4.0 notice](../LICENSE-DOCUMENTATION-CC-BY-4.0.md), and [MIT notice](../LICENSE-CODE-MIT.md). The former proprietary and commercial-remuneration notices are retained as historical records and are superseded for original materials covered by the new licenses. They do not impose a separate royalty or prohibit commercial uses permitted by CC BY 4.0 or MIT.
+
+The new full research manuscript is [A Dynamic Residual Framework for Strict Descent in the Accelerated Syracuse Map](../manuscript/DYNAMIC_RESIDUAL_STRICT_DESCENT_PREPRINT_2026-11-17.md). It presents the affine identity, exact residual threshold, recurrence, overlap representation, dynamic offsets, universal envelope, valuation coupling, intermediate-index decomposition, and the final universal descent interface.
+
+**Step 12 boundary:** Ta-Yoshua Lubuimi reports that the universal dynamic descent theorem has already been proved in prior work. The remaining repository deliverable is recovery of the primary proof artifact and exact matching of its hypotheses and conclusion to (UD). This status is not a claim that the theorem is mathematically open, and this documentation update is not an independent proof audit. No new Lean build, CI run, axiom audit, or sorryAx rejection is claimed.
+
+The earlier sections of this file remain a historical status snapshot as of 14 November 2026. Where they conflict with this dated update, this section and the 17 November checkpoint govern the current repository documentation.
