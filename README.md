@@ -10,6 +10,11 @@ This repository contains the Syracuse/Collatz finite-prefix arithmetic, exact va
 - [Consolidated project status and results (14 Nov 2026)](docs/FINAL_PROJECT_STATUS_2026-11-14.md)
 - [Finite-word / terminal-residue manuscript addendum (14 Nov 2026)](manuscript/SYRACUSE_MANUSCRIPT_ADDENDUM_2026-11-14.md)
 
+## New exact dynamic transition lemma (17 Nov 2026)
+
+- [Universal dynamic Lubuimi/Syracuse transition lemma](docs/UNIVERSAL_DYNAMIC_LUBUIMI_SYRACUSE_TRANSITION_LEMMA_2026-11-17.md): proves the exact embedding of the Syracuse valuation word into the dynamic residual recurrence and the general prefix/tail coupling invariant, with offsets updated at every valuation transition.
+- The lemma is universal over every finite admissible valuation word and its stated hypotheses. It does not by itself prove that every orbit satisfies the start-dependent strict-descent threshold at some finite depth; no global Collatz theorem is claimed.
+
 ## Verified finite results
 
 - Exact affine finite-prefix identities and backward reconstruction lemmas, on their documented source snapshots.
