@@ -1,43 +1,61 @@
-# Lubuimi — Syracuse / Collatz research and Lean audit
+# Lubuimi — Syracuse / Collatz research
 
 **Research author:** Ta-Yoshua Lubuimi  
-**Status date:** 14 November 2026
+**Latest research checkpoint:** 17 November 2026  
+**Repository:** `s4ztz4bnf6-maker/Lubuimi`
 
-This repository contains the Syracuse/Collatz finite-prefix arithmetic, exact valuation and terminal-residue work, Lean formalizations, reproducible CI audits, and research manuscripts. It does **not** contain a proof of the global Collatz conjecture.
+This repository contains the Syracuse/Collatz research programme: exact affine and valuation identities, dynamic residual bounds, valuation-dependent coupling, finite-residue and terminal-congruence work, Lean formalizations, CI audit records, and manuscripts.
 
-## Project status and manuscripts
+## Latest research checkpoint — 17 November 2026
 
-- [Consolidated project status and results (14 Nov 2026)](docs/FINAL_PROJECT_STATUS_2026-11-14.md)
-- [Finite-word / terminal-residue manuscript addendum (14 Nov 2026)](manuscript/SYRACUSE_MANUSCRIPT_ADDENDUM_2026-11-14.md)
+The author reports completion of the universal dynamic Syracuse descent argument in the preceding research work. The 17 November reconstruction records the backward implication from that descent theorem to Collatz, using the exact affine identity and residual descent threshold.
 
-## Verified finite results
+The central research contributions identified by the author are:
 
-- Exact affine finite-prefix identities and backward reconstruction lemmas, on their documented source snapshots.
-- Constructive quotient-state sequence, PR [#81](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/81), exact-head workflow [43121953918](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43121953918).
+- a **dynamic bound** with exponent windows that update with the realized valuation sequence;
+- a **dynamic coupling** that combines positive, neutral, and negative valuation contributions and retains intermediate-block information;
+- a **third theorem** from the same research line, whose exact statement and name are to be inserted from its original source;
+- the recognition of valuation-driven structure changes and recurring patterns, developed through an exploratory and alternative approach.
+
+See:
+- [17 Nov dynamic residual/coupling checkpoint](docs/RESEARCH_CHECKPOINT_2026-11-17_DYNAMIC_RESIDUAL_COUPLING.md)
+- [17 Nov conversation research log](docs/CHAT_RESEARCH_LOG_2026-11-17.md)
+- [Working manuscript draft: dynamic residual coupling](manuscript/DYNAMIC_RESIDUAL_COUPLING_WORKING_DRAFT_2026-11-17.md)
+
+**Proof-integrity note:** the 17 November backward chain proves that the universal descent theorem implies Collatz. The independent proof of the universal descent theorem is reported by the author as completed in prior work, but its exact source derivation has not yet been attached to this repository checkpoint. Therefore this README does not yet label the global Collatz result as independently audited or Lean-verified. The next publication pass must insert that exact proof, state all three theorems precisely, and complete the relevant independent/formal checks.
+
+## Earlier verified finite results
+
+The following earlier results remain valid only for their exact source snapshots and named CI runs:
+
+- Constructive quotient-state sequence, PR [#81](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/81), workflow [43121953918](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43121953918).
 - Child/tail finite partition, PR [#76](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/76), workflow [43026427449](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43026427449).
 - One-step child-block uniform mass, PR [#78](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/78), workflow [43042316671](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43042316671).
-- Unique terminal congruence class, PR [#82](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/82), exact-head workflow [43412794362](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43412794362), named profile `[propext, Classical.choice, Quot.sound]`, `sorryAx` gate passed.
+- Unique terminal congruence class, PR [#82](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/82), workflow [43412794362](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43412794362), named profile `[propext, Classical.choice, Quot.sound]`, explicit `sorryAx` gate passed.
 
-Each result is restricted to its exact theorem, source commit, and CI run. A one-step mass identity is not an iterated product law; terminal-class uniqueness is not full word realization.
+The 14 November status report preserves the scope and limitations of those results: [consolidated project status](docs/FINAL_PROJECT_STATUS_2026-11-14.md).
 
-## Open mathematical frontier
+## Reproducibility and formal verification
 
-The full terminal-congruence iff finite-word-realization theorem, positive representative/lift construction, affine-offset-to-strict-descent bridge, exclusion of all infinite non-descending paths, and global Collatz termination remain open. No density or compactness argument is presented as a substitute for pointwise descent.
+- A successful build alone is not a proof audit.
+- Record exact source SHA, Lean/toolchain version, workflow and job.
+- Preserve the named `#print axioms` output and explicit `sorryAx` rejection gate.
+- Never transfer a CI result to a different source commit.
+- Keep hand proofs, exact finite computation, manuscript claims, and Lean verification as separate evidence categories.
 
-## Reproducibility and integrity
+## Licensing
 
-- Keep the named `#print axioms` output and explicit `sorryAx` rejection gate for each promoted Lean theorem.
-- Record every result against the exact source SHA and workflow/job.
-- Preserve earlier successful checks for their own source snapshots; do not transfer them to later commits.
-- Keep mathematical proof, finite arithmetic, manuscript exposition, and Lean verification as separate evidence categories.
+The repository currently contains proprietary rights and commercial-use notices:
+- [Proprietary rights notice](LICENSE-PROPRIETARY.md)
+- [Commercial licensing and remuneration policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md)
 
-## Original-materials licensing
+Those notices apply only to original materials owned by the author and exclude third-party materials, which remain under their respective licenses. No license change is made in this research checkpoint. Any transition to open licenses must be explicitly selected and applied consistently by file category; mathematical facts and theorem statements are not made exclusively ownable by a copyright notice.
 
-## Original-materials licensingOriginal materials owned by Ta-Yoshua Lubuimi are subject to the [proprietary rights notice](LICENSE-PROPRIETARY.md) and [commercial licensing policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md). These notices expressly exclude upstream Erdős–Selfridge source files, Lean, Mathlib, dependencies, and all other third-party materials, which remain under their respective licenses. They do not claim exclusive rights over mathematical facts or theorem statements as such.
+## Parallel research note
 
+- [Quantum/operator reformulations](research/QUANTUM_OPERATOR_BRIDGE_NOTE_2026-11-14.md) — exploratory only, not part of the established proof chain.
 
-## Parallel research note — quantum/operator formulations
+---
 
-- [Quantum-operator reformulations: literature, exact encodings, and proof criteria](research/QUANTUM_OPERATOR_BRIDGE_NOTE_2026-11-14.md)
-
-This is an exploratory note only. It is not part of the established proof chain and claims no new theorem.
+**Ta-Yoshua Lubuimi**  
+Syracuse / Collatz research
