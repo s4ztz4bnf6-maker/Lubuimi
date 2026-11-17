@@ -53,6 +53,37 @@ The policy covers only rights actually owned or controlled by the author. It doe
 
 Read the [commercial revenue-share policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md) and [AI assistance and authorship disclosure](AI-ASSISTANCE-AND-AUTHORSHIP.md).
 
+## Separate research project — Ta-Yoshua Lubuimi: Adjacent Values
+
+> **PROJECT BOUNDARY — THIS IS NOT PART OF THE SYRACUSE/COLLATZ RESEARCH ABOVE.**
+>
+> This subsection is an orientation notice only. The Adjacent-Values project has its own research dossier, mathematical claims, evidence ledger, version history, code, tests, and licensing decisions. No theorem, computation, Lean result, CI result, authorship statement, or licence from either project is automatically transferable to the other.
+
+**Project name:** Ta-Yoshua-Lubuimi-Adjacent-Values  
+**Research author:** Ta-Yoshua Lubuimi  
+**Research status (17 November 2026):** Main universal existence question **OPEN — NOT PROVED**.
+
+The separate project studies adjacent values of the ternary-weighted binary exponential sum
+\[
+T_n(e)=\sum_{j=0}^{n-1}3^{n-1-j}2^{e_j},
+\]
+for strictly increasing nonnegative integer exponent sequences. Its central question asks when admissible sequences \(e,f\) can satisfy \(T_n(f)-T_n(e)=1\). The current dossier records exact structural identities, a coupled 2-adic/3-adic state formulation, finite witnesses, and open proof obligations. These reformulations do **not** establish universal existence.
+
+**Evidence boundary:** exact algebraic identities are distinguished from finite computed witnesses and from the still-open universal statement. The separate package currently includes independently checked witnesses for lengths \(n=1,\ldots,7\); reported examples beyond that range are not promoted here to verified results. No Lean compilation, CI run, or theorem-level formal audit is claimed for this separate project.
+
+**Separate licensing decision for the Adjacent-Values project only:**
+- Manuscripts, mathematical exposition, README and documentation: **CC BY 4.0**.
+- Original code and tests: **MIT**.
+- Third-party material remains under its respective licence.
+
+These terms apply only to material specifically released as part of the Adjacent-Values project and do not amend, replace, or grant rights in this Syracuse/Collatz repository or its legacy releases. Conversely, this repository's licensing and commercial-use terms do not automatically govern the separate Adjacent-Values package. Mathematical facts and abstract ideas are not claimed as proprietary by this notice.
+
+**Project archive:** the prepared v0.5.0 package is maintained separately in the author's ChatGPT file library at `/Research/Lubuimi-Adjacent-Values/`. It has not been imported into this repository. A dedicated public repository is not yet available; no GitHub publication or commit is implied by this notice.
+
+For avoidance of doubt: this section records the existence and boundary of a parallel research project. It does not merge the two projects, certify the Adjacent-Values conjecture, or alter any existing file licence.
+
+---
+
 ## Parallel research note
 
 - [Quantum/operator reformulations](research/QUANTUM_OPERATOR_BRIDGE_NOTE_2026-11-14.md) — exploratory only, not part of the established proof chain.
