@@ -1,5 +1,7 @@
 # Lubuimi — Syracuse / Collatz research and Lean audit
 
+**Named method:** Ta-Yoshua Lubuimi Dynamic Residual Bound (**TL-DRB**); German: Ta-Yoshua-Lubuimi-Dynamische-Residuen-Schranke.
+
 **Research author:** Ta-Yoshua Lubuimi  
 **Status date:** 17 November 2026
 
@@ -9,9 +11,13 @@ This repository contains the Syracuse/Collatz finite-prefix arithmetic, exact va
 
 - [Consolidated project status and results (17 Nov 2026)](docs/FINAL_PROJECT_STATUS_2026-11-17.md)
 - [Previous dated status (14 Nov 2026)](docs/FINAL_PROJECT_STATUS_2026-11-14.md)
-- [Dynamic residual bridge: exact Collatz identity and state-dependent descent threshold (17 Nov 2026)](research/DYNAMIC_RESIDUAL_COLLATZ_BRIDGE_2026-11-17.md)
-- [Dynamic residual bridge — manuscript (17 Nov 2026)](manuscript/DYNAMIC_RESIDUAL_COLLATZ_BRIDGE_2026-11-17.md)
+- [Ta-Yoshua Lubuimi Dynamic Residual Bound (TL-DRB): exact Collatz identity and state-dependent descent threshold (17 Nov 2026)](research/DYNAMIC_RESIDUAL_COLLATZ_BRIDGE_2026-11-17.md)
+- [TL-DRB — manuscript (17 Nov 2026)](manuscript/DYNAMIC_RESIDUAL_COLLATZ_BRIDGE_2026-11-17.md)
 - [Finite-word / terminal-residue manuscript addendum (14 Nov 2026)](manuscript/SYRACUSE_MANUSCRIPT_ADDENDUM_2026-11-14.md)
+
+## TL-DRB: exact Collatz application (17 Nov 2026)
+
+The Ta-Yoshua Lubuimi Dynamic Residual Bound (TL-DRB) is the name used in this project for the state-dependent, set-valued residual construction developed in the separate research project. Its Collatz specialization yields the exact overlapping-word identity and, crucially, the start-value-dependent descent criterion below. This is a proved algebraic contribution to the Collatz descent analysis: it gives an exact residual coordinate and a sharper criterion than the sign of the residual alone. It does **not** prove a global descent theorem or the Collatz conjecture. The underlying mathematical method is not claimed as exclusively owned by copyright; see the licensing notices.
 
 ## New exact cross-project identity (17 Nov 2026)
 
