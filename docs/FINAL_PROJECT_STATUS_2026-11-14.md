@@ -96,28 +96,3 @@ The finite valuation-word and finite-depth manuscripts should be read together w
 
 ---
 *Prepared as an append-only project status record. It is not a claim that the Collatz conjecture has been solved.*
-
-
-## 9. Dynamic residual bridge (17 November 2026)
-
-A new exact algebraic connection between the affine Collatz bookkeeping and the independent Dynamic Residual Bound investigation is recorded in:
-
-- [Research note: Dynamic residual bridge](../research/DYNAMIC_RESIDUAL_COLLATZ_BRIDGE_2026-11-17.md)
-- [Manuscript: Dynamic residual identity](../manuscript/DYNAMIC_RESIDUAL_COLLATZ_BRIDGE_2026-11-17.md)
-
-For partial valuation sums (A_0=0), (A_{k+1}=A_k+a_{k+1}), affine correction (C_0=0), (C_{k+1}=3C_k+2^{A_k}), and
-(D_k=2^{A_k}-C_k-3^k), put (R_k=-D_k). With
-(T_k(x)=\sum_{j<k}3^{k-1-j}2^{x_j}), the overlapping words
-(u=(A_0,\ldots,A_{k-1})), (v=(A_1,\ldots,A_k)) satisfy
-[
-4T_k(u)-T_k(v)=R_k.
-]
-The exact ordinary-size descent test becomes
-[
-S^k(n_0)<n_0\iff n_0R_k<(n_0-1)C_k.
-]
-The overlap-constrained backward residual recursion is also stated in the research note.
-
-This is an exact algebraic bridge and an exact state-dependent threshold, not a global descent theorem. The all-ones valuation prefixes give arbitrarily long finite examples, so the residual recursion alone does not yield a uniform finite horizon. The new identities are not yet Lean-formalized and have no CI audit. The full terminal-word realization theorem, exclusion of all infinite non-descending paths, and global Collatz conjecture remain open.
-
-The new manuscript and research note are original repository materials covered by the existing proprietary rights notice and commercial licensing policy. Third-party code, Lean, Mathlib, dependencies, and upstream materials remain under their respective licenses. No blanket open-source license is introduced by this update.
