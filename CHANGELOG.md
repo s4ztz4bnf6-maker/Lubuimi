@@ -7,3 +7,5 @@
 - Updated the root README and consolidated status to distinguish this exact algebraic bridge from the still-open global descent problem.
 - Confirmed that the new original TL-DRB materials fall under the repository's existing proprietary rights and commercial licensing notices; clarified that the eponym is attribution, not a copyright claim over mathematical ideas or methods. No third-party code or upstream license is changed.
 - No Lean formalization, CI run, or global Collatz proof is claimed.
+
+- Added an isolated Lean 4.35.0 / Mathlib formalization project with named declarations for the overlap identity, residual update, and generic descent-threshold interface, plus a dedicated CI workflow. The first setup attempt failed due to a missing Lake manifest; the workflow was corrected and exact-head run 43997407311 is pending. No Lean verification pass is claimed yet.
