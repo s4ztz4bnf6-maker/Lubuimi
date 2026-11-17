@@ -24,7 +24,7 @@ jobs:
         run: lake update
       - name: Build formalized TL-DRB declarations
         working-directory: formalization/TLDRB
-        run: lake build
+        run: lake build TLDRB
       - name: Print theorem axiom profiles and reject sorryAx
         working-directory: formalization/TLDRB
         shell: bash
