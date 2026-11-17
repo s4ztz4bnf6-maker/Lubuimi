@@ -10,6 +10,8 @@ This repository contains the Syracuse/Collatz finite-prefix arithmetic, exact va
 ## Project status and manuscripts
 
 - [Consolidated project status and results (17 Nov 2026)](docs/FINAL_PROJECT_STATUS_2026-11-17.md)
+- [TL-DRB Lean CI audit report — exact head and axiom profiles](docs/TLDRB_LEAN_CI_AUDIT_2026-11-17.md)
+- [TL-DRB Lean formalization guide](formalization/TLDRB/README.md)
 - [Previous dated status (14 Nov 2026)](docs/FINAL_PROJECT_STATUS_2026-11-14.md)
 - [Ta-Yoshua Lubuimi Dynamic Residual Bound (TL-DRB): exact Collatz identity and state-dependent descent threshold (17 Nov 2026)](research/DYNAMIC_RESIDUAL_COLLATZ_BRIDGE_2026-11-17.md)
 - [TL-DRB — manuscript (17 Nov 2026)](manuscript/DYNAMIC_RESIDUAL_COLLATZ_BRIDGE_2026-11-17.md)
@@ -70,7 +72,7 @@ The full terminal-congruence iff finite-word-realization theorem, positive repre
 
 ## Original-materials licensing
 
-For new releases, commercial exploitation of original materials owned or controlled by Ta-Yoshua Lubuimi requires a separate written licence with financial participation. The default proposed term is 10% of attributable gross receipts, with a documented allocation / attributable-net-profit fallback, quarterly reporting, payment, recordkeeping, and audit terms in the [commercial licensing policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md). Original source files use [LicenseRef-Lubuimi-Commercial-Revenue-Share](LICENSE-REF-LUBUIMI-COMMERCIAL-REVENUE-SHARE.md).
+For new releases, original materials owned or controlled by Ta-Yoshua Lubuimi are subject to the [proprietary rights notice](LICENSE-PROPRIETARY.md). Commercial exploitation requires a separate written licence under the [commercial licensing policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md); the default proposed term is 10% of attributable gross receipts, with the stated allocation/net-profit fallback and reporting/audit terms. Original source files may carry [LicenseRef-Lubuimi-Commercial-Revenue-Share](LICENSE-REF-LUBUIMI-COMMERCIAL-REVENUE-SHARE.md). Existing valid grants remain effective for copies already distributed under those terms; no third-party rights are overridden.
 
 Valid earlier AGPL/MIT/CC or other grants remain effective for copies already distributed under those terms; this update is prospective and does not retroactively revoke them. Upstream Erdős–Selfridge source files, Lean, Mathlib, dependencies, external contributions, and all other third-party materials remain under their own rights and licences. The policy does not claim exclusive rights over mathematical facts, abstract ideas, or theorem statements as such.
 
@@ -83,6 +85,6 @@ This is an exploratory note only. It is not part of the established proof chain 
 
 ## Lean formalization — initial exact audit scope (17 Nov 2026)
 
-A separate Lean 4.35.0 / Mathlib project is now present at [formalization/TLDRB](formalization/TLDRB/). It contains named declarations for the overlap identity, its one-step residual update, and the generic positive-denominator descent-threshold equivalence. The latter is an abstract arithmetic interface: the Syracuse-specific affine/valuation hypotheses have not yet been connected to the existing trajectory definitions.
+A separate Lean 4.35.0 / Mathlib project is now present at [formalization/TLDRB](formalization/TLDRB/). It contains named declarations for the abstract finite-prefix affine trajectory identity, the exact dynamic-residual embedding, the overlapping-word identity and one-step residual update, and the generic positive-denominator descent-threshold equivalence. The actual 2-adic valuation of the concrete Syracuse map has not yet been instantiated.
 
-The dedicated workflow is [TL-DRB Lean formalization audit](.github/workflows/tldrbaudit.yml). Exact-head run [43997407311](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43997407311) is in progress as of this update. An initial setup attempt failed because the Lake manifest had not been generated; the workflow was corrected to install the pinned toolchain and run lake update first. No Lean pass or axiom profile is claimed until the corrected run completes and its logs are inspected. The separate legacy workflow's success on this documentation-only repository snapshot only reflects its root-project detection/skip path and is not a Lean verification result.
+The dedicated workflow is [TL-DRB Lean formalization audit](.github/workflows/tldrbaudit.yml). Exact-head run [44026016138](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/44026016138) completed successfully on 17 November 2026 for PR #90 (head `1a7c7a7df4c5ba014c3a6a932d2bdcb2d8d6c42d`; GitHub tested merge ref `1c9e501699557cccfeb8c97f96fc3f2ca5bb1593`). `lake build TLDRB` completed successfully (9048 jobs), the named theorem axiom profiles were printed, and the explicit `sorryAx` rejection gate passed. This is a successful formalization build and axiom-output gate for the declarations currently in `TLDRB.lean`; it is not a global theorem audit, `lake check --paranoid`, or proof of the global descent statement. See the [full audit report](docs/TLDRB_LEAN_CI_AUDIT_2026-11-17.md). The separate legacy workflow's success on this documentation-only repository snapshot only reflects its root-project detection/skip path and is not a Lean verification result.

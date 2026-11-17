@@ -47,9 +47,20 @@ theorem overlap_identity (k : Nat) (A : Nat → Nat) :
   | zero =>
       simp [overlapResidual, wordSum, signedSurplus]
   | succ k ih =>
-      simp only [overlapResidual, wordSum, signedSurplus]
-      rw [ih]
-      ring
+      change
+        4 * (3 * wordSum k A + (2 : Int) ^ A k)
+          - (3 * wordSum k (fun i => A (i + 1)) + (2 : Int) ^ A (k + 1)) =
+        -(3 * signedSurplus k A
+          + ((2 : Int) ^ A (k + 1) - 4 * (2 : Int) ^ A k))
+      calc
+        _ = 3 * (4 * wordSum k A - wordSum k (fun i => A (i + 1)))
+              + (4 * (2 : Int) ^ A k - (2 : Int) ^ A (k + 1)) := by ring
+        _ = 3 * overlapResidual k A
+              + (4 * (2 : Int) ^ A k - (2 : Int) ^ A (k + 1)) := by rfl
+        _ = 3 * (-signedSurplus k A)
+              + (4 * (2 : Int) ^ A k - (2 : Int) ^ A (k + 1)) := by rw [ih]
+        _ = -(3 * signedSurplus k A
+              + ((2 : Int) ^ A (k + 1) - 4 * (2 : Int) ^ A k)) := by ring
 
 /-- Forward one-step update of the overlap residual. -/
 theorem overlapResidual_succ (k : Nat) (A : Nat → Nat) :
@@ -84,10 +95,107 @@ theorem descent_threshold
     have hmul : den * q < den * n := by
       rw [haffine, hden]
       nlinarith
-    exact (mul_lt_mul_left hden_pos).mp hmul
+    have hqn : q < n := by
+      by_contra h
+      have hnq : n ≤ q := le_of_not_gt h
+      have hle : den * n ≤ den * q :=
+        mul_le_mul_of_nonneg_left hnq (le_of_lt hden_pos)
+      exact (not_lt_of_ge hle) hmul
+    exact hqn
 
+
+/-! ## Concrete accelerated-trajectory affine identity
+
+We first formalize the orbit through its exact division witnesses.  This avoids
+assuming any unproved property of a valuation function: a later bridge will
+instantiate `g` with the actual 2-adic valuation and prove the witness
+equation from divisibility.
+-/
+
+/-- Cumulative exponent of the exact powers of two removed from the orbit. -/
+def valuationPrefix (g : Nat → Nat) : Nat → Nat
+  | 0 => 0
+  | k + 1 => valuationPrefix g k + g (k + 1)
+
+/-- Affine correction in the accelerated Syracuse iterate. -/
+def affineCorrection (g : Nat → Nat) : Nat → Nat
+  | 0 => 0
+  | k + 1 => 3 * affineCorrection g k + 2 ^ valuationPrefix g k
+
+/-- Exact finite-prefix affine identity for any trajectory satisfying
+    x_(k+1) * 2^(g_(k+1)) = 3*x_k+1. -/
+theorem affine_trajectory_identity
+    (n : Nat) (x g : Nat → Nat)
+    (hx0 : x 0 = n)
+    (hstep : ∀ k, x (k + 1) * 2 ^ g (k + 1) = 3 * x k + 1) :
+    ∀ k, 2 ^ valuationPrefix g k * x k =
+      3 ^ k * n + affineCorrection g k := by
+  intro k
+  induction k with
+  | zero =>
+      simp [valuationPrefix, affineCorrection, hx0]
+  | succ k ih =>
+      simp only [valuationPrefix, affineCorrection, pow_add]
+      calc
+        (2 ^ valuationPrefix g k * 2 ^ g (k + 1)) * x (k + 1)
+            = 2 ^ valuationPrefix g k * (x (k + 1) * 2 ^ g (k + 1)) := by ring
+        _ = 2 ^ valuationPrefix g k * (3 * x k + 1) := by rw [hstep k]
+        _ = 3 * (2 ^ valuationPrefix g k * x k) + 2 ^ valuationPrefix g k := by ring
+        _ = 3 * (3 ^ k * n + affineCorrection g k) +
+              2 ^ valuationPrefix g k := by rw [ih]
+        _ = 3 ^ (k + 1) * n
+              + (3 * affineCorrection g k + 2 ^ valuationPrefix g k) := by
+              simp [pow_succ]
+              ring
+        _ = 3 ^ (k + 1) * n + affineCorrection g (k + 1) := by
+              rfl
+
+/-! ## Exact embedding of the dynamic residual
+
+The dynamic residual is indexed so that its zero state is the predecessor
+R_{-1}=0. Its next update is the Syracuse specialization
+R_k = 3 R_{k-1} + 4*2^(A_k) - 2^(A_(k+1)).
+-/
+
+/-- Dynamic residual attached to a valuation-prefix sequence. -/
+def dynamicResidual (g : Nat → Nat) : Nat → Int
+  | 0 => 0
+  | k + 1 =>
+      3 * dynamicResidual g k
+        + (4 * (2 : Int) ^ valuationPrefix g k
+          - (2 : Int) ^ valuationPrefix g (k + 1))
+
+/-- Exact embedding of the dynamic residual into the Syracuse affine
+correction. This is Lemma A of the 17 November dynamic transition note,
+with the residual shifted by one index. -/
+theorem dynamicResidual_eq_affineCorrection
+    (g : Nat → Nat) (k : Nat) :
+    dynamicResidual g k =
+      affineCorrection g k + 3 ^ k - (2 : Int) ^ valuationPrefix g k := by
+  induction k with
+  | zero =>
+      simp [dynamicResidual, affineCorrection, valuationPrefix]
+  | succ k ih =>
+      simp only [dynamicResidual, affineCorrection, valuationPrefix]
+      rw [ih]
+      simp only [pow_succ]
+      push_cast
+      ring
+
+/-- The affine correction has the expected weighted-word expansion. -/
+theorem affineCorrection_succ
+    (g : Nat → Nat) (k : Nat) :
+    affineCorrection g (k + 1) =
+      3 * affineCorrection g k + 2 ^ valuationPrefix g k := by
+  rfl
+
+
+#print axioms affine_trajectory_identity
+#print axioms dynamicResidual_eq_affineCorrection
 #print axioms overlap_identity
 #print axioms overlapResidual_succ
 #print axioms descent_threshold
 
 end TaYoshuaLubuimi.TLDRB
+
+-- End of the explicit finite-prefix affine and dynamic-residual audit surface.

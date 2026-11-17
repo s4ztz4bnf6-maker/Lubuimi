@@ -13,23 +13,18 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
-      - name: Install pinned Lean and generate the Lake manifest
-        shell: bash
-        run: |
-          curl --fail --location --retry 3 --max-time 60 https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o elan-init.sh
-          sh elan-init.sh -y --default-toolchain leanprover/lean4:v4.35.0
-          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
-          export PATH="$HOME/.elan/bin:$PATH"
-          cd formalization/TLDRB
-          lake update
-      - uses: leanprover/lean-action@v1
+      - name: Install pinned Lean and initialize Lake package
+        uses: leanprover/lean-action@v1
         with:
           lake-package-directory: formalization/TLDRB
           build: false
-          use-mathlib-cache: true
+          use-mathlib-cache: false
+      - name: Resolve package dependencies
+        working-directory: formalization/TLDRB
+        run: lake update
       - name: Build formalized TL-DRB declarations
         working-directory: formalization/TLDRB
-        run: lake build
+        run: lake build TLDRB
       - name: Print theorem axiom profiles and reject sorryAx
         working-directory: formalization/TLDRB
         shell: bash
