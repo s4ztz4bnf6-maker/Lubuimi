@@ -1,49 +1,27 @@
-# Commercial Licensing and Remuneration Policy
+# Historical commercial licensing policy — superseded for CC BY 4.0 / MIT materials
 
-**Rights holder:** Ta-Yoshua Lubuimi  
-**Copyright:** © 2026 Ta-Yoshua Lubuimi. All rights reserved.  
-**Applies to:** Original research materials, Lean code, proofs, manuscripts, scripts, and documentation owned by the rights holder in this repository, subject to third-party rights and file-specific notices.
+**Former rights holder:** Ta-Yoshua Lubuimi  
+**Historical policy date:** 2026  
+**Superseded for covered original materials:** 17 November 2026
 
-## 1. No free commercial-use permission
+This file is retained for historical traceability. It is not an additional restriction on material now licensed under the repository's operative licenses.
 
-Public availability, citation, download, cloning, or access to the repository does not grant commercial-use permission for protected Original Materials. Commercial exploitation of those materials requires prior express written permission under a separate signed license agreement.
+## 1. Operative licenses
 
-## 2. Negotiated paid-license terms
+As of 17 November 2026:
 
-A commercial license may include, as appropriate:
-- an upfront license fee;
-- recurring fees or royalties on an agreed auditable basis;
-- minimum guarantees;
-- usage, deployment, distribution, seat, or revenue reporting;
-- attribution and preservation of copyright notices;
-- field-of-use, territory, duration, redistribution, sublicensing, and derivative-work limits;
-- proportionate audit and record-retention provisions.
+- Original research manuscripts, mathematical exposition, prose, diagrams, and documentation are licensed under [Creative Commons Attribution 4.0 International](LICENSE-DOCUMENTATION-CC-BY-4.0.md).
+- Original source code, Lean code authored for this project, scripts, and tests are licensed under the [MIT License](LICENSE-CODE-MIT.md).
 
-No fee, royalty rate, minimum guarantee, or payment formula is fixed by this policy. The terms must be expressly agreed in a signed license.
+Both licenses permit commercial use of covered materials subject to their respective terms. No additional royalty, license fee, or remuneration obligation is imposed for a use that complies with the applicable CC BY 4.0 or MIT license.
 
-## 3. Unauthorized commercial exploitation
+## 2. Rights outside the licenses
 
-Use outside a valid license may infringe rights in protected expression, depending on the materials, conduct, applicable law, and statutory exceptions. The rights holder reserves remedies available under applicable law.
+The licenses do not grant rights that the author does not own, and do not automatically license third-party materials, patents, trademarks, privacy rights, publicity rights, or separately identified materials excluded by the license notices. Separate permission may be required for those rights.
 
-This policy does not create an automatic contractual royalty for every unauthorized use. Contractual payment obligations arise from an applicable signed agreement; infringement remedies are determined by law and facts.
+## 3. Historical status
 
-## 4. Scholarly citation and independent mathematical work
-
-Citation, linking, discussion, and uses permitted by copyright law remain available. This policy does not claim ownership over mathematical facts, abstract ideas, methods, procedures, or theorem statements as such. Independent implementation of an unprotected mathematical idea may differ legally from copying protected source code or substantial protected expression.
-
-## 5. Third-party materials
-
-This policy applies only to original materials in which Ta-Yoshua Lubuimi owns the relevant rights. It does not relicense upstream Erdős–Selfridge source code, Lean, Mathlib, dependencies, third-party publications, or other third-party materials. Each remains subject to its own license.
-
-## 6. Requesting a commercial license
-
-A request should identify the exact files or materials, intended product or service, users, deployment and distribution scale, territory, duration, and proposed compensation/reporting model. A license is effective only when scope and terms are expressly agreed in writing.
-
-## 7. Legal status
-
-This is a public licensing policy, not a negotiated license, legal opinion, or guarantee of enforceability in every jurisdiction. Obtain qualified intellectual-property advice for licensing or enforcement decisions.
-
----
+The former no-free-commercial-use policy and negotiated-royalty framework are superseded for original materials covered by the CC BY 4.0 and MIT licenses. They remain in this file solely as a record of the repository's prior licensing position and must not be used to contradict the operative license notices.
 
 **Ta-Yoshua Lubuimi**  
-**Copyright © 2026 Ta-Yoshua Lubuimi. All rights reserved.**
+Copyright © 2026 Ta-Yoshua Lubuimi.
