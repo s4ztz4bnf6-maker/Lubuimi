@@ -67,7 +67,7 @@ The separate project studies adjacent values of the ternary-weighted binary expo
 \[
 T_n(e)=\sum_{j=0}^{n-1}3^{n-1-j}2^{e_j},
 \]
-for strictly increasing nonnegative integer exponent sequences. Its central question asks when admissible sequences \(e,f\) can satisfy \(T_n(f)-T_n(e)=1\). The current dossier records exact structural identities, a coupled 2-adic/3-adic state formulation, finite witnesses, and open proof obligations. These reformulations do **not** establish universal existence.
+for strictly increasing nonnegative integer exponent sequences. Its central question asks when admissible sequences \(e,f\) can satisfy \(T_n(f)-T_n(e)=1\). The v0.6.0 dossier adds two standalone proved results: (1) the **Dynamic Residual Envelope Theorem**, which gives a two-sided state-dependent bound for every prefix residual; and (2) the **Odd-Target Coupled Tail-Window Theorem**, which combines that envelope with the 2-adic/3-adic coupling to give explicit integer windows, power-of-two congruence classes, propagated one-step windows, and the forced initial congruence for odd targets. Both have complete ordinary integer proofs. They strengthen the admissibility constraints but do **not** establish universal existence.
 
 **Evidence boundary:** exact algebraic identities are distinguished from finite computed witnesses and from the still-open universal statement. The separate package currently includes independently checked witnesses for lengths \(n=1,\ldots,7\); reported examples beyond that range are not promoted here to verified results. No Lean compilation, CI run, or theorem-level formal audit is claimed for this separate project.
 
@@ -78,7 +78,7 @@ for strictly increasing nonnegative integer exponent sequences. Its central ques
 
 These terms apply only to material specifically released as part of the Adjacent-Values project and do not amend, replace, or grant rights in this Syracuse/Collatz repository or its legacy releases. Conversely, this repository's licensing and commercial-use terms do not automatically govern the separate Adjacent-Values package. Mathematical facts and abstract ideas are not claimed as proprietary by this notice.
 
-**Project archive:** a v0.5.0 source package has been assembled and locally verified, but has not yet been published as a GitHub release or dedicated repository. It is intentionally not imported into this Syracuse/Collatz repository.
+**Project archive:** the standalone v0.6.0 source package has been assembled, its exact-arithmetic test suite passes (including 20,000 deterministic random monotone-offset checks), and its theorem documents and claim ledger are preserved separately. It has not yet been published as a GitHub release or dedicated repository. It is intentionally not imported into this Syracuse/Collatz repository.
 
 For avoidance of doubt: this section records the existence and boundary of a parallel research project. It does not merge the two projects, certify the Adjacent-Values conjecture, or alter any existing file licence.
 
