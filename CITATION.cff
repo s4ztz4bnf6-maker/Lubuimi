@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this research, please cite the manuscript and identify modifications."
+title: "A Dynamic Residual Framework for Strict Descent in the Accelerated Syracuse Map"
+authors:
+  - family-names: Lubuimi
+    given-names: Ta-Yoshua
+date-released: 2026-11-17
+version: "research-preprint-2026-11-17"
+license: CC-BY-4.0
+copyright: "Copyright © 2026 Ta-Yoshua Lubuimi"
+repository-code: "https://github.com/s4ztz4bnf6-maker/Lubuimi"

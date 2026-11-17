@@ -1,0 +1,268 @@
+# A Dynamic Residual Framework for Strict Descent in the Accelerated Syracuse Map
+
+**Ta-Yoshua Lubuimi**  
+17 November 2026
+
+**Research manuscript / preprint**  
+**License:** Creative Commons Attribution 4.0 International (CC BY 4.0)  
+**Copyright:** © 2026 Ta-Yoshua Lubuimi
+
+## Abstract
+
+The Collatz problem can be reduced to a strict-descent statement for the accelerated Syracuse map on positive odd integers. This manuscript develops a residual coordinate in which that descent condition becomes an exact inequality. It records the affine recurrence, shifted-overlap representation, dynamic exponent offsets, a universal dynamic envelope, and a valuation-sensitive coupling that treats the three valuation regimes in a single weighted identity. The final target is a universal dynamic descent theorem asserting that every odd starting value admits a strictly smaller accelerated iterate.
+
+The author reports that the universal dynamic descent theorem has been proved in preceding research. The complete primary proof artifact and its exact source mapping are the remaining Step 12 materials to be recovered into the repository. Accordingly, this manuscript gives the algebraic framework and exact theorem interface, but does not claim that the recovered primary proof has been independently audited in this version. The Collatz conclusion is stated with that final theorem as its explicit hinge.
+
+**Keywords:** Collatz conjecture; Syracuse map; accelerated orbit; 2-adic valuation; residual recurrence; strict descent; dynamic exponent bounds.
+
+## 1. Introduction
+
+The Collatz iteration is defined by
+\[
+C(m)=
+\begin{cases}
+m/2,&m\equiv0\pmod2,\\
+3m+1,&m\equiv1\pmod2.
+\end{cases}
+\]
+For an odd positive integer \(x\), put
+\[
+g=v_2(3x+1),\qquad S(x)=\frac{3x+1}{2^g}.
+\]
+The accelerated map \(S\) sends positive odd integers to positive odd integers.
+
+The purpose of this paper is to organize a dynamic residual framework for proving strict descent in this accelerated system. The construction keeps the accumulated affine correction and the terminal residual together. The resulting threshold is exact.
+
+## 2. The affine orbit identity
+
+Fix an odd positive starting value \(n\). Define
+\[
+x_0=n,\qquad
+g_{k+1}=v_2(3x_k+1),\qquad
+x_{k+1}=\frac{3x_k+1}{2^{g_{k+1}}}.
+\]
+Define cumulative exponents and affine corrections by
+\[
+A_0=C_0=0,\quad
+A_{k+1}=A_k+g_{k+1},\quad
+C_{k+1}=3C_k+2^{A_k}.
+\]
+
+**Lemma 2.1 (affine identity).** For every \(k\geq0\),
+\[
+\boxed{2^{A_k}x_k=3^kn+C_k.}\tag{2.1}
+\]
+
+*Proof.* At \(k=0\), both sides equal \(n\). Suppose the identity holds at \(k\). By the accelerated transition,
+\[
+2^{g_{k+1}}x_{k+1}=3x_k+1.
+\]
+Multiplying by \(2^{A_k}\) and using the induction hypothesis gives
+\[
+\begin{aligned}
+2^{A_{k+1}}x_{k+1}
+&=3(2^{A_k}x_k)+2^{A_k}\\
+&=3(3^kn+C_k)+2^{A_k}\\
+&=3^{k+1}n+C_{k+1}.
+\end{aligned}
+\]
+This proves the induction step. \(\square\)
+
+## 3. The exact residual threshold
+
+Define
+\[
+R_k=C_k+3^k-2^{A_k}.
+\]
+
+**Lemma 3.1 (exact descent criterion).** For every \(k\geq0\),
+\[
+\boxed{x_k<n\iff nR_k<(n-1)C_k.}\tag{3.1}
+\]
+
+*Proof.* By (2.1), since \(2^{A_k}>0\),
+\[
+x_k<n
+\iff 3^kn+C_k<n2^{A_k}.
+\]
+Rearranging gives
+\[
+C_k<n(2^{A_k}-3^k).
+\]
+Substitute \(2^{A_k}=C_k+3^k-R_k\). The last inequality becomes
+\[
+C_k<n(C_k-R_k),
+\]
+which is equivalent to \(nR_k<(n-1)C_k\). \(\square\)
+
+The criterion is an equivalence, not merely a sufficient estimate.
+
+## 4. Residual recurrence and valuation regimes
+
+**Lemma 4.1 (residual recurrence).** For every \(k\geq0\),
+\[
+\boxed{R_{k+1}=3R_k+2^{A_k}(4-2^{g_{k+1}}).}\tag{4.1}
+\]
+
+*Proof.* Substitute the recurrences for \(A_{k+1}\) and \(C_{k+1}\):
+\[
+\begin{aligned}
+R_{k+1}
+&=3C_k+2^{A_k}+3^{k+1}-2^{A_k+g_{k+1}}\\
+&=3(C_k+3^k-2^{A_k})
+  +2^{A_k}(4-2^{g_{k+1}})\\
+&=3R_k+2^{A_k}(4-2^{g_{k+1}}).
+\end{aligned}
+\]
+\(\square\)
+
+The correction term is positive for valuation \(1\), zero for valuation \(2\), and negative for valuation at least \(3\). A proof must control their accumulated interaction.
+
+## 5. The shifted-overlap representation
+
+For a finite exponent vector \(e=(e_0,\ldots,e_{k-1})\), define
+\[
+T_k(e)=\sum_{j=0}^{k-1}3^{k-1-j}2^{e_j}.
+\]
+Repeated expansion gives
+\[
+C_k=T_k(A_0,\ldots,A_{k-1}),
+\]
+and shifting the exponent window gives
+\[
+\boxed{
+R_k=4T_k(A_0,\ldots,A_{k-1})
+-T_k(A_1,\ldots,A_k).
+}\tag{5.1}
+\]
+This is an exact rewriting of the residual.
+
+## 6. Dynamic exponent offsets
+
+For each \(j\geq0\), define
+\[
+c_j=A_{j+1}-j,\qquad d_j=A_j+2-j.
+\]
+Then
+\[
+2^j(2^{d_j}-2^{c_j})
+=2^{A_j}(4-2^{g_{j+1}}).
+\]
+Set
+\[
+\mathcal R_{-1}=0,\qquad \mathcal R_j=R_{j+1}.
+\]
+The residual recurrence becomes
+\[
+\boxed{
+\mathcal R_j=3\mathcal R_{j-1}
++2^j(2^{d_j}-2^{c_j}).
+}\tag{6.1}
+\]
+
+## 7. Universal dynamic envelope
+
+The prior research records the dynamic estimate
+\[
+\boxed{
+(1-2^{c_j})(3^j-2^j)
+\leq \mathcal R_{j-1}
+\leq(2^{d_j}-1)(3^j-2^j).
+}\tag{7.1}
+\]
+It is formulated for the actual varying offsets generated by the Syracuse valuation sequence, rather than for a fixed valuation regime. The complete primary proof source for this estimate is to be retained with the Step 12 proof artifact. This manuscript records the interface and does not manufacture a substitute proof for a nontrivial prior lemma.
+
+## 8. Universal coupling of valuation regimes
+
+Fix a terminal horizon \(N\). Define
+\[
+\lambda_j=j+\min(c_j,d_j)=A_j+\min(g_{j+1},2),
+\]
+and
+\[
+q_j=
+\begin{cases}
+3^{N-1-j},&g_{j+1}=1,\\
+0,&g_{j+1}=2,\\
+-3^{N-1-j}(2^{g_{j+1}-2}-1),&g_{j+1}\geq3.
+\end{cases}
+\]
+
+**Lemma 8.1 (weighted valuation identity).** For \(0\leq j<N\),
+\[
+\boxed{
+3^{N-1-j}2^j(2^{d_j}-2^{c_j})
+=2^{\lambda_j}q_j.
+}\tag{8.1}
+\]
+
+*Proof.* If \(g_{j+1}=1\), then \(\lambda_j=A_j+1\), and both sides equal \(3^{N-1-j}2^{A_j+1}\). If \(g_{j+1}=2\), then \(c_j=d_j\), so both sides vanish. If \(g_{j+1}\geq3\), then \(\lambda_j=A_j+2\) and
+\[
+2^{d_j}-2^{c_j}
+=-2^{A_j+2-j}(2^{g_{j+1}-2}-1),
+\]
+which gives the stated right side. \(\square\)
+
+Iterating the recurrence and applying (8.1) yields
+\[
+\boxed{
+\mathcal R_{N-1}=\sum_{j=0}^{N-1}2^{\lambda_j}q_j.
+}\tag{8.2}
+\]
+
+## 9. Intermediate-index decomposition
+
+For \(0\leq k\leq N\), put
+\[
+Y_k=\sum_{j=k}^{N-1}2^{\lambda_j-\lambda_k}q_j.
+\]
+Splitting the iterated recurrence at index \(k\) gives
+\[
+\boxed{
+\mathcal R_{N-1}
+=3^{N-k}\mathcal R_{k-1}+2^{\lambda_k}Y_k.
+}\tag{9.1}
+\]
+If the dynamic envelope gives \(L_j\leq\mathcal R_{j-1}\leq U_j\), then
+\[
+\boxed{
+L_N-3^{N-k}U_k
+\leq2^{\lambda_k}Y_k
+\leq U_N-3^{N-k}L_k.
+}\tag{9.2}
+\]
+
+## 10. The universal dynamic descent theorem — Step 12
+
+The exact final target is
+\[
+\boxed{
+\forall n>1\text{ odd}\ \exists N\geq1:
+\quad nR_N<(n-1)C_N.
+}\tag{UD}
+\]
+By Lemma 3.1, this is equivalent to the existence of a strictly smaller positive odd iterate for every odd start.
+
+**Author-reported status.** Ta-Yoshua Lubuimi reports that the universal dynamic descent theorem establishing (UD) has already been proved in earlier work. The remaining Step 12 task for this repository publication package is to recover the original complete proof artifact and match it to the exact definitions and quantifiers above. The theorem is not being declared mathematically open merely because its source is not yet attached here. Conversely, this manuscript does not claim an independent verification of a proof artifact that has not yet been recovered into the repository.
+
+The recovery record must identify the original document or source file, revision, hypotheses, precise theorem statement, and any formal verification evidence. A Lean compilation alone is not sufficient: the named declaration, axiom output, and explicit rejection of sorryAx must be recorded for the exact source revision.
+
+## 11. Collatz implication
+
+**Theorem 11.1 (strict descent implies Collatz termination).** If (UD) holds for every positive odd integer and for the genuine accelerated Syracuse valuation sequence, then every positive integer reaches \(1\) under the Collatz iteration.
+
+*Proof.* Strong induction on positive odd integers. The case \(n=1\) is immediate. Let \(n>1\) be odd and assume all smaller positive odd integers reach \(1\). By (UD) and Lemma 3.1, there is \(N\geq1\) with \(x_N<n\). The iterate \(x_N\) is positive and odd, so the induction hypothesis says it reaches \(1\). The original orbit reaches \(x_N\) after finitely many accelerated steps and therefore also reaches \(1\). An arbitrary positive even integer can be divided by \(2\) repeatedly until an odd positive integer is reached. This takes finitely many steps and reduces to the odd case. \(\square\)
+
+## 12. Research status and limitations
+
+This manuscript consolidates the algebraic framework and states the final universal descent interface. The author reports that the dynamic descent theorem exists in prior work. Its primary proof source and exact mapping to (UD) are the remaining Step 12 source-recovery and audit deliverables.
+
+No new Lean build, CI run, axiom audit, or independent proof verification is claimed here. Existing formal results remain restricted to their exact declarations, commits, and workflow records. The finite-prefix identities do not, without (UD), imply global termination.
+
+This manuscript is suitable for circulation as a research preprint describing the framework and the reported prior theorem with its precise verification boundary. It must not be represented as an independently verified proof of the Collatz conjecture until the Step 12 primary proof is recovered and checked.
+
+---
+
+**Ta-Yoshua Lubuimi**  
+Copyright © 2026 Ta-Yoshua Lubuimi.  
+Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).

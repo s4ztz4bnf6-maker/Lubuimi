@@ -1,43 +1,59 @@
 # Lubuimi — Syracuse / Collatz research and Lean audit
 
-**Research author:** Ta-Yoshua Lubuimi  
-**Status date:** 14 November 2026
+**Author and copyright holder:** Ta-Yoshua Lubuimi  
+**Research status date:** 17 November 2026
 
-This repository contains the Syracuse/Collatz finite-prefix arithmetic, exact valuation and terminal-residue work, Lean formalizations, reproducible CI audits, and research manuscripts. It does **not** contain a proof of the global Collatz conjecture.
+This repository contains research on the accelerated Syracuse map, finite valuation words, affine and residual identities, dynamic bounds, formal Lean developments, reproducible CI audits, and research manuscripts.
 
-## Project status and manuscripts
+## Main research documents
 
-- [Consolidated project status and results (14 Nov 2026)](docs/FINAL_PROJECT_STATUS_2026-11-14.md)
-- [Finite-word / terminal-residue manuscript addendum (14 Nov 2026)](manuscript/SYRACUSE_MANUSCRIPT_ADDENDUM_2026-11-14.md)
+- [Publication manuscript: dynamic residual framework and the final descent theorem](manuscript/DYNAMIC_RESIDUAL_STRICT_DESCENT_PREPRINT_2026-11-17.md)
+- [Universal dynamic descent — project checkpoint](docs/COLLATZ_UNIVERSAL_DESCENT_CHECKPOINT_2026-11-17.md)
+- [Backward reconstruction](manuscript/COLLATZ_BACKWARD_PROOF_RECONSTRUCTION_2026-11-17.md)
+- [Consolidated project status](docs/FINAL_PROJECT_STATUS_2026-11-14.md)
+- [Finite-word / terminal-residue manuscript addendum](manuscript/SYRACUSE_MANUSCRIPT_ADDENDUM_2026-11-14.md)
+- [Licensing index](docs/LICENSING.md)
 
-## Verified finite results
+## Mathematical target
 
-- Exact affine finite-prefix identities and backward reconstruction lemmas, on their documented source snapshots.
-- Constructive quotient-state sequence, PR [#81](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/81), exact-head workflow [43121953918](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43121953918).
-- Child/tail finite partition, PR [#76](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/76), workflow [43026427449](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43026427449).
-- One-step child-block uniform mass, PR [#78](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/78), workflow [43042316671](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43042316671).
-- Unique terminal congruence class, PR [#82](https://github.com/s4ztz4bnf6-maker/Lubuimi/pull/82), exact-head workflow [43412794362](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43412794362), named profile `[propext, Classical.choice, Quot.sound]`, `sorryAx` gate passed.
+For the accelerated odd Syracuse orbit
+\[
+x_0=n,\qquad x_{k+1}=\frac{3x_k+1}{2^{g_{k+1}}},
+\qquad g_{k+1}=v_2(3x_k+1),
+\]
+the affine and residual coordinates are
+\[
+2^{A_k}x_k=3^kn+C_k,\qquad
+R_k=C_k+3^k-2^{A_k}.
+\]
+They give the exact equivalence
+\[
+x_k<n\quad\Longleftrightarrow\quad nR_k<(n-1)C_k.
+\]
 
-Each result is restricted to its exact theorem, source commit, and CI run. A one-step mass identity is not an iterated product law; terminal-class uniqueness is not full word realization.
+The final universal descent interface is
+\[
+\forall n>1\text{ odd}\ \exists N\ge1:
+\quad nR_N<(n-1)C_N.
+\tag{UD}
+\]
+The author reports that the universal dynamic descent theorem establishing this interface has been proved in prior work. The primary proof artifact and exact source mapping still need to be recovered into this repository checkpoint. The publication manuscript therefore states the theorem precisely and identifies this final proof-recovery / source-matching task without claiming that this documentation update independently proves or formally verifies the Collatz conjecture.
 
-## Open mathematical frontier
+## Evidence policy
 
-The full terminal-congruence iff finite-word-realization theorem, positive representative/lift construction, affine-offset-to-strict-descent bridge, exclusion of all infinite non-descending paths, and global Collatz termination remain open. No density or compactness argument is presented as a substitute for pointwise descent.
+A finite-prefix identity, a successful Lean compilation, a CI status, and a global termination theorem are different kinds of evidence. Formal verification claims are tied to exact source commits, named declarations, axiom output, and an explicit sorryAx rejection gate. No evidence is transferred to a later commit without a new audit.
 
-## Reproducibility and integrity
+## Licensing
 
-- Keep the named `#print axioms` output and explicit `sorryAx` rejection gate for each promoted Lean theorem.
-- Record every result against the exact source SHA and workflow/job.
-- Preserve earlier successful checks for their own source snapshots; do not transfer them to later commits.
-- Keep mathematical proof, finite arithmetic, manuscript exposition, and Lean verification as separate evidence categories.
+Original project materials are now separated by type:
 
-## Original-materials licensing
+- Original research manuscripts, prose, diagrams, and documentation: **CC BY 4.0**.
+- Original source code and tests: **MIT**.
+- Third-party, upstream, generated, and dependency materials: their own applicable licenses and notices.
 
-## Original-materials licensingOriginal materials owned by Ta-Yoshua Lubuimi are subject to the [proprietary rights notice](LICENSE-PROPRIETARY.md) and [commercial licensing policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md). These notices expressly exclude upstream Erdős–Selfridge source files, Lean, Mathlib, dependencies, and all other third-party materials, which remain under their respective licenses. They do not claim exclusive rights over mathematical facts or theorem statements as such.
+See [docs/LICENSING.md](docs/LICENSING.md), [LICENSE-DOCUMENTATION-CC-BY-4.0.md](LICENSE-DOCUMENTATION-CC-BY-4.0.md), and [LICENSE-CODE-MIT.md](LICENSE-CODE-MIT.md). The former proprietary notices are retained only as historical records and are superseded for original materials expressly covered by the new licenses.
 
+---
 
-## Parallel research note — quantum/operator formulations
-
-- [Quantum-operator reformulations: literature, exact encodings, and proof criteria](research/QUANTUM_OPERATOR_BRIDGE_NOTE_2026-11-14.md)
-
-This is an exploratory note only. It is not part of the established proof chain and claims no new theorem.
+**Ta-Yoshua Lubuimi**  
+Copyright © 2026 Ta-Yoshua Lubuimi.
