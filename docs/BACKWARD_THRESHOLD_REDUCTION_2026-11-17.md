@@ -40,53 +40,39 @@ This is the natural threshold form for the overlap-constrained backward recursio
 
 ## 2. Exact backward stripping recurrence
 
-For any consecutive subword (g_{k+1},ldots,g_N), define its local partial sums
-[
-B_0=0,qquad B_{r+1}=B_r+g_{k+r+1},
-]
-and its local affine correction
-[
-D_0=0,qquad D_{r+1}=3D_r+2^{B_r}.
-]
-Its local signed margin at starting state (x_k) is
-[
-mathfrak M_r(x_k)
-=x_k T_r(B_1,ldots,B_r)
--(3x_k+1)T_r(B_0,ldots,B_{r-1}).
-]
-Termwise stripping of the first overlapping pair gives
-[
-oxed{
-mathfrak M_r(x_k)
-=3^{r-1}2^{B_0}
-igl(x_k(2^{g_{k+1}}-3)-1igr)
-+mathfrak M_{r-1}(x_{k+1}),
-}
-	ag{3}
-]
-where the remaining word is based at (x_{k+1}), with its own shifted local exponents. Equivalently, for the global margin,
+The global margin satisfies
 [
 oxed{
 M_{k+1}(n)=3M_k(n)+
 2^{A_k}igl(n(2^{g_{k+1}}-3)-1igr).
 }
-	ag{4}
+	ag{3}
 ]
-Solving (4) backward is exact:
+Solving (3) backward gives
 [
 oxed{
 M_k(n)=
 rac{M_{k+1}(n)-2^{A_k}(n(2^{g_{k+1}}-3)-1)}{3}.
 }
-	ag{5}
+	ag{4}
 ]
-Thus every backward step imposes an exact divisibility-by-three condition on the numerator. The valuation cases are:
+Thus every backward step imposes an exact divisibility-by-three condition on the numerator. The valuation cases in the additive term are
 [
 g=1: -n-1,qquad
 g=2: n-1,qquad
 gge3: n(2^g-3)-1>0.
 ]
 These are exact local contributions, not by themselves a universal sign argument.
+
+For a fixed terminal depth (N), iterating (3) forward from an intermediate index (k) gives the exact suffix expansion
+[
+oxed{
+M_N(n)=3^{N-k}M_k(n)+
+sum_{j=k}^{N-1}3^{N-1-j}2^{A_j}
+igl(n(2^{g_{j+1}}-3)-1igr).
+}
+	ag{5}
+]
 
 ## 3. Reverse reconstruction of the orbit
 
@@ -102,10 +88,17 @@ For a terminal value (x_N), iterating (6) backward gives
 oxed{
 3^{N-k}x_k
 =2^{A_N-A_k}x_N
--sum_{j=k}^{N-1}3^{j-k}2^{A_j-A_k}.
+-sum_{j=k}^{N-1}3^{N-1-j}2^{A_j-A_k}.
 }
 	ag{7}
 ]
+For example, at depth two this reads
+[
+9x_k=2^{g_{k+1}+g_{k+2}}x_{k+2}
+-3-2^{g_{k+1}},
+]
+as required by two applications of (6).
+
 The exact reverse admissibility conditions include:
 - integrality at every reverse step (the numerator in (6) is divisible by (3));
 - positivity and oddness of every reconstructed (x_j);
@@ -124,7 +117,7 @@ and in particular
 [
 M_k(n)le0quad(0le kle N).
 ]
-The backward recurrence (5), together with (7), must then show that no infinite sequence of reverse-admissible states can satisfy all these inequalities.
+The backward recurrence (4), together with (7), must then show that no infinite sequence of reverse-admissible states can satisfy all these inequalities.
 
 The overlap-constrained set recursion
 [
