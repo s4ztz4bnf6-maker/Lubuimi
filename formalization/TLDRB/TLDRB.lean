@@ -137,6 +137,7 @@ theorem affineCorrection_succ
       3 * affineCorrection g k + 2 ^ valuationPrefix g k := by
   rfl
 
+#print axioms affine_trajectory_identity
 #print axioms overlap_identity
 #print axioms overlapResidual_succ
 #print axioms descent_threshold
