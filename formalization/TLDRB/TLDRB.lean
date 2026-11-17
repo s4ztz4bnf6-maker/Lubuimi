@@ -86,6 +86,57 @@ theorem descent_threshold
       nlinarith
     exact (mul_lt_mul_left hden_pos).mp hmul
 
+
+/-! ## Concrete accelerated-trajectory affine identity
+
+We first formalize the orbit through its exact division witnesses.  This avoids
+assuming any unproved property of a valuation function: a later bridge will
+instantiate `g` with the actual 2-adic valuation and prove the witness
+equation from divisibility.
+-/
+
+/-- Cumulative exponent of the exact powers of two removed from the orbit. -/
+def valuationPrefix (g : Nat → Nat) : Nat → Nat
+  | 0 => 0
+  | k + 1 => valuationPrefix g k + g (k + 1)
+
+/-- Affine correction in the accelerated Syracuse iterate. -/
+def affineCorrection (g : Nat → Nat) : Nat → Nat
+  | 0 => 0
+  | k + 1 => 3 * affineCorrection g k + 2 ^ valuationPrefix g k
+
+/-- Exact finite-prefix affine identity for any trajectory satisfying
+    x_(k+1) * 2^(g_(k+1)) = 3*x_k+1. -/
+theorem affine_trajectory_identity
+    (n : Nat) (x g : Nat → Nat)
+    (hx0 : x 0 = n)
+    (hstep : ∀ k, x (k + 1) * 2 ^ g (k + 1) = 3 * x k + 1) :
+    ∀ k, 2 ^ valuationPrefix g k * x k =
+      3 ^ k * n + affineCorrection g k := by
+  intro k
+  induction k with
+  | zero =>
+      simp [valuationPrefix, affineCorrection, hx0]
+  | succ k ih =>
+      simp only [valuationPrefix, affineCorrection, pow_add]
+      calc
+        (2 ^ valuationPrefix g k * 2 ^ g (k + 1)) * x (k + 1)
+            = 2 ^ valuationPrefix g k * (x (k + 1) * 2 ^ g (k + 1)) := by ring
+        _ = 2 ^ valuationPrefix g k * (3 * x k + 1) := by rw [hstep k]
+        _ = 3 * (2 ^ valuationPrefix g k * x k) + 2 ^ valuationPrefix g k := by ring
+        _ = 3 * (3 ^ k * n + affineCorrection g k) +
+              2 ^ valuationPrefix g k := by rw [ih]
+        _ = 3 ^ (k + 1) * n + affineCorrection g (k + 1) := by
+              simp [pow_succ]
+              ring
+
+/-- The affine correction has the expected weighted-word expansion. -/
+theorem affineCorrection_succ
+    (g : Nat → Nat) (k : Nat) :
+    affineCorrection g (k + 1) =
+      3 * affineCorrection g k + 2 ^ valuationPrefix g k := by
+  rfl
+
 #print axioms overlap_identity
 #print axioms overlapResidual_succ
 #print axioms descent_threshold
