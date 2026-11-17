@@ -47,9 +47,20 @@ theorem overlap_identity (k : Nat) (A : Nat → Nat) :
   | zero =>
       simp [overlapResidual, wordSum, signedSurplus]
   | succ k ih =>
-      simp only [overlapResidual, wordSum, signedSurplus]
-      rw [ih]
-      ring
+      change
+        4 * (3 * wordSum k A + (2 : Int) ^ A k)
+          - (3 * wordSum k (fun i => A (i + 1)) + (2 : Int) ^ A (k + 1)) =
+        -(3 * signedSurplus k A
+          + ((2 : Int) ^ A (k + 1) - 4 * (2 : Int) ^ A k))
+      calc
+        _ = 3 * (4 * wordSum k A - wordSum k (fun i => A (i + 1)))
+              + (4 * (2 : Int) ^ A k - (2 : Int) ^ A (k + 1)) := by ring
+        _ = 3 * overlapResidual k A
+              + (4 * (2 : Int) ^ A k - (2 : Int) ^ A (k + 1)) := by rfl
+        _ = 3 * (-signedSurplus k A)
+              + (4 * (2 : Int) ^ A k - (2 : Int) ^ A (k + 1)) := by rw [ih]
+        _ = -(3 * signedSurplus k A
+              + ((2 : Int) ^ A (k + 1) - 4 * (2 : Int) ^ A k)) := by ring
 
 /-- Forward one-step update of the overlap residual. -/
 theorem overlapResidual_succ (k : Nat) (A : Nat → Nat) :
@@ -84,7 +95,13 @@ theorem descent_threshold
     have hmul : den * q < den * n := by
       rw [haffine, hden]
       nlinarith
-    exact (mul_lt_mul_left hden_pos).mp hmul
+    have hqn : q < n := by
+      by_contra h
+      have hnq : n ≤ q := le_of_not_gt h
+      have hle : den * n ≤ den * q :=
+        mul_le_mul_of_nonneg_left hnq (le_of_lt hden_pos)
+      exact (not_lt_of_ge hle) hmul
+    exact hqn
 
 
 /-! ## Concrete accelerated-trajectory affine identity
@@ -126,9 +143,12 @@ theorem affine_trajectory_identity
         _ = 3 * (2 ^ valuationPrefix g k * x k) + 2 ^ valuationPrefix g k := by ring
         _ = 3 * (3 ^ k * n + affineCorrection g k) +
               2 ^ valuationPrefix g k := by rw [ih]
-        _ = 3 ^ (k + 1) * n + affineCorrection g (k + 1) := by
+        _ = 3 ^ (k + 1) * n
+              + (3 * affineCorrection g k + 2 ^ valuationPrefix g k) := by
               simp [pow_succ]
               ring
+        _ = 3 ^ (k + 1) * n + affineCorrection g (k + 1) := by
+              rfl
 
 /-- The affine correction has the expected weighted-word expansion. -/
 theorem affineCorrection_succ
@@ -138,42 +158,6 @@ theorem affineCorrection_succ
   rfl
 
 
-/-! ## Exact embedding of the dynamic residual into Syracuse coordinates
-
-The dynamic recurrence below is indexed from zero (the first residual is
-already the first valuation contribution). This matches the convention
-R_j = C_(j+1) + 3^(j+1) - 2^(A_(j+1)) used in the transition lemma.
--/
-
-/-- Dynamic residual attached to a finite Syracuse valuation word. -/
-def dynamicSyracuseResidual (g : Nat → Nat) : Nat → Int
-  | 0 => 4 - (2 : Int) ^ valuationPrefix g 1
-  | j + 1 =>
-      3 * dynamicSyracuseResidual g j
-        + 4 * (2 : Int) ^ valuationPrefix g (j + 1)
-        - (2 : Int) ^ valuationPrefix g (j + 2)
-
-/-- The dynamic residual is exactly the affine Syracuse residual, with the
-    one-step index shift. This is Lemma A of the 17 November transition note. -/
-theorem dynamic_residual_syracuse_embedding
-    (g : Nat → Nat) :
-    ∀ j, dynamicSyracuseResidual g j =
-      (affineCorrection g (j + 1) : Int)
-        + (3 : Int) ^ (j + 1)
-        - (2 : Int) ^ valuationPrefix g (j + 1) := by
-  intro j
-  induction j with
-  | zero =>
-      simp [dynamicSyracuseResidual, affineCorrection, valuationPrefix]
-      ring
-  | succ j ih =>
-      simp only [dynamicSyracuseResidual, affineCorrection, valuationPrefix]
-      rw [ih]
-      push_cast
-      simp [pow_succ]
-      ring
-
-#print axioms dynamic_residual_syracuse_embedding
 #print axioms affine_trajectory_identity
 #print axioms overlap_identity
 #print axioms overlapResidual_succ
