@@ -78,7 +78,7 @@ for strictly increasing nonnegative integer exponent sequences. Its central ques
 
 These terms apply only to material specifically released as part of the Adjacent-Values project and do not amend, replace, or grant rights in this Syracuse/Collatz repository or its legacy releases. Conversely, this repository's licensing and commercial-use terms do not automatically govern the separate Adjacent-Values package. Mathematical facts and abstract ideas are not claimed as proprietary by this notice.
 
-**Project archive:** the prepared v0.5.0 package is maintained separately in the author's ChatGPT file library at `/Research/Lubuimi-Adjacent-Values/`. It has not been imported into this repository. A dedicated public repository is not yet available; no GitHub publication or commit is implied by this notice.
+**Project archive:** a v0.5.0 source package has been assembled and locally verified, but has not yet been published as a GitHub release or dedicated repository. It is intentionally not imported into this Syracuse/Collatz repository.
 
 For avoidance of doubt: this section records the existence and boundary of a parallel research project. It does not merge the two projects, certify the Adjacent-Values conjecture, or alter any existing file licence.
 
