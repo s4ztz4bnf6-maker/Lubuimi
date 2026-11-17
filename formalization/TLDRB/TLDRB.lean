@@ -137,6 +137,43 @@ theorem affineCorrection_succ
       3 * affineCorrection g k + 2 ^ valuationPrefix g k := by
   rfl
 
+
+/-! ## Exact embedding of the dynamic residual into Syracuse coordinates
+
+The dynamic recurrence below is indexed from zero (the first residual is
+already the first valuation contribution). This matches the convention
+R_j = C_(j+1) + 3^(j+1) - 2^(A_(j+1)) used in the transition lemma.
+-/
+
+/-- Dynamic residual attached to a finite Syracuse valuation word. -/
+def dynamicSyracuseResidual (g : Nat → Nat) : Nat → Int
+  | 0 => 4 - (2 : Int) ^ valuationPrefix g 1
+  | j + 1 =>
+      3 * dynamicSyracuseResidual g j
+        + 4 * (2 : Int) ^ valuationPrefix g (j + 1)
+        - (2 : Int) ^ valuationPrefix g (j + 2)
+
+/-- The dynamic residual is exactly the affine Syracuse residual, with the
+    one-step index shift. This is Lemma A of the 17 November transition note. -/
+theorem dynamic_residual_syracuse_embedding
+    (g : Nat → Nat) :
+    ∀ j, dynamicSyracuseResidual g j =
+      (affineCorrection g (j + 1) : Int)
+        + (3 : Int) ^ (j + 1)
+        - (2 : Int) ^ valuationPrefix g (j + 1) := by
+  intro j
+  induction j with
+  | zero =>
+      simp [dynamicSyracuseResidual, affineCorrection, valuationPrefix]
+      ring
+  | succ j ih =>
+      simp only [dynamicSyracuseResidual, affineCorrection, valuationPrefix]
+      rw [ih]
+      push_cast
+      simp [pow_succ]
+      ring
+
+#print axioms dynamic_residual_syracuse_embedding
 #print axioms affine_trajectory_identity
 #print axioms overlap_identity
 #print axioms overlapResidual_succ
