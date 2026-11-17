@@ -154,7 +154,7 @@ the exact affine identity is
 \]
 With the Syracuse-indexed residual (R^{\mathrm{Syr}}_k=C_k+3^k-2^{A_k}) and the index relation (R^{\mathrm{Syr}}_{j+1}=R^{\mathrm{dyn}}_j) from Lemma A, the strict-descent criterion is
 \[
-\boxed{x_k<x_0\iff x_0R^{\\mathrm{Syr}}_k<(x_0-1)C_k.}
+\boxed{x_k<x_0\iff x_0R^{\mathrm{Syr}}_k<(x_0-1)C_k.}
 \]
 This is an exact equivalence. Lemmas A and B identify the dynamic residual and its coupled states with the Syracuse valuation word at every finite depth.
 
