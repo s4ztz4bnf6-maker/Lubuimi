@@ -2,7 +2,7 @@
 
 **Copyright © 2026 Ta-Yoshua Lubuimi. All rights reserved.**
 
-This notice applies to original source code, Lean formalizations, research notes, manuscripts, scripts, and project documentation in this repository to the extent those materials are owned by Ta-Yoshua Lubuimi (the “Original Materials”). It applies to existing and subsequently added Original Materials, including the Dynamic Residual / Collatz bridge note and manuscript dated 17 November 2026, unless a later file-specific written license expressly states otherwise.
+This notice applies to original source code, Lean formalizations, research notes, manuscripts, scripts, and project documentation in this repository to the extent those materials are owned by Ta-Yoshua Lubuimi (the “Original Materials”). It applies to existing and subsequently added Original Materials, including the Ta-Yoshua Lubuimi Dynamic Residual Bound (TL-DRB) Collatz application note and manuscript dated 17 November 2026, unless a later file-specific written license expressly states otherwise.
 
 ## No general license granted
 
@@ -26,6 +26,10 @@ This notice does not claim ownership of or relicense:
 - third-party publications, data, or other materials identified by separate notices.
 
 Those materials remain governed by their respective licenses and rights holders. No rights are claimed beyond rights actually held by Ta-Yoshua Lubuimi.
+
+## Named research method and mathematical ideas
+
+The designation “Ta-Yoshua Lubuimi Dynamic Residual Bound (TL-DRB)” is an author/method attribution used to identify this line of research and its Collatz application. It does not, by itself, create exclusive rights in the mathematical method, equations, facts, abstract ideas, or theorem statements. The scope of this notice remains limited to protectable original expression and other rights actually held by the rights holder.
 
 ## Mathematical ideas and results
 
