@@ -2,9 +2,6 @@ name: TL-DRB Lean formalization audit
 
 on:
   pull_request:
-    paths:
-      - "formalization/TLDRB/**"
-      - ".github/workflows/tldrbaudit.yml"
   workflow_dispatch:
 
 permissions:
