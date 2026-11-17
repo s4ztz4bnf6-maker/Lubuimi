@@ -38,6 +38,8 @@ Before offering a code file under both AGPL and a paid commercial license, the r
 
 Future external contributions should be accepted only with clear written terms that preserve the ability to distribute the author's original code under both licensing tracks. Do not assume that a GitHub contribution automatically grants every right needed for commercial relicensing.
 
+Before any code is relicensed or sold, verify that the rights holder is actually entitled to grant both licenses. In Germany, § 69b UrhG provides that the employer alone is entitled to exercise the economic rights in a computer program created by an employee in performing their duties or following employer instructions; the provision also applies correspondingly to service relationships, unless otherwise agreed. If any code may have been created in that context, obtain a contract-specific review and, where necessary, written clearance before publishing it under AGPL or offering a paid license. Official text: https://www.gesetze-im-internet.de/urhg/__69b.html.
+
 ## 4. Existing and third-party materials
 
 This policy applies only to rights actually owned or controlled by Ta-Yoshua Lubuimi. Upstream Erdős–Selfridge files, Lean, Mathlib, dependencies, third-party publications, data, and other third-party materials remain under their own licenses. No third-party license is overridden.
