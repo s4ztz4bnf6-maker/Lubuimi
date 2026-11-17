@@ -43,3 +43,31 @@ The global Collatz conjecture is not claimed as proved by the results summarized
 ## E. Verification record
 
 The exact Lean checkpoints and their scope are maintained in [the consolidated project status](../docs/FINAL_PROJECT_STATUS_2026-11-14.md). The named axiom output and explicit `sorryAx` gate, rather than build success alone, define the formal verification boundary.
+
+
+---
+
+## F. Research update — 17 November 2026: universal dynamic descent and backward Collatz interface
+
+The author states that the universal dynamic descent theorem has already been proved in prior work. The theorem must not be represented as a new open problem. The original complete statement and derivation have not yet been located in the repository materials inspected for this update; this is a retrieval and source-mapping task.
+
+The required interface is
+[
+orall n>1	ext{ odd} exists Nge1:
+quad nR_N<(n-1)C_N.
+	ag{UD}
+]
+The exact affine identity and residual definition give
+[
+2^{A_N}x_N=3^Nn+C_N,qquad
+R_N=C_N+3^N-2^{A_N},
+]
+hence
+[
+x_N<niff nR_N<(n-1)C_N.
+]
+The dynamic-offset bound and valuation-sensitive universal coupling, including the intermediate-index decomposition, are recorded in the [17 November backward reconstruction](COLLATZ_BACKWARD_PROOF_RECONSTRUCTION_2026-11-17.md) and [project checkpoint](../docs/COLLATZ_UNIVERSAL_DESCENT_CHECKPOINT_2026-11-17.md).
+
+If the existing theorem's exact hypotheses and conclusion match (UD) on actual Syracuse valuation sequences, strong induction on odd starts proves termination at 1; even starts first reduce to odd starts.
+
+**Status distinction:** the author-reported proof of universal descent is treated as already existing. This addendum does not claim to have recovered or independently audited its original proof text, nor does it report a new Lean/CI verification. The next documentation action is to recover that existing primary proof artifact and map it exactly to (UD). No substitute proof is to be invented.
