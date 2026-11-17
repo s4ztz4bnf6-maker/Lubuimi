@@ -150,6 +150,37 @@ theorem affine_trajectory_identity
         _ = 3 ^ (k + 1) * n + affineCorrection g (k + 1) := by
               rfl
 
+/-! ## Exact embedding of the dynamic residual
+
+The dynamic residual is indexed so that its zero state is the predecessor
+R_{-1}=0. Its next update is the Syracuse specialization
+R_k = 3 R_{k-1} + 4*2^(A_k) - 2^(A_(k+1)).
+-/
+
+/-- Dynamic residual attached to a valuation-prefix sequence. -/
+def dynamicResidual (g : Nat → Nat) : Nat → Int
+  | 0 => 0
+  | k + 1 =>
+      3 * dynamicResidual g k
+        + (4 * (2 : Int) ^ valuationPrefix g k
+          - (2 : Int) ^ valuationPrefix g (k + 1))
+
+/-- Exact embedding of the dynamic residual into the Syracuse affine
+correction. This is Lemma A of the 17 November dynamic transition note,
+with the residual shifted by one index. -/
+theorem dynamicResidual_eq_affineCorrection
+    (g : Nat → Nat) (k : Nat) :
+    dynamicResidual g k =
+      affineCorrection g k + 3 ^ k - (2 : Int) ^ valuationPrefix g k := by
+  induction k with
+  | zero =>
+      simp [dynamicResidual, affineCorrection, valuationPrefix]
+  | succ k ih =>
+      simp only [dynamicResidual, affineCorrection, valuationPrefix]
+      rw [ih]
+      simp only [pow_succ]
+      ring
+
 /-- The affine correction has the expected weighted-word expansion. -/
 theorem affineCorrection_succ
     (g : Nat → Nat) (k : Nat) :
@@ -159,6 +190,7 @@ theorem affineCorrection_succ
 
 
 #print axioms affine_trajectory_identity
+#print axioms dynamicResidual_eq_affineCorrection
 #print axioms overlap_identity
 #print axioms overlapResidual_succ
 #print axioms descent_threshold
