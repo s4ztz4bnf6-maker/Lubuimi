@@ -176,3 +176,16 @@ This file documents the Ta-Yoshua Lubuimi Dynamic Residual Bound (TL-DRB) Collat
 
 ---
 *Research status: exact algebraic bridge recorded; global theorem open.*
+
+
+## 11. Initial Lean formalization and verification boundary (17 November 2026)
+
+The repository now contains an isolated Lean 4.35.0 / Mathlib package in [formalization/TLDRB](../formalization/TLDRB/). The initial declarations are:
+
+- `overlap_identity`: the weighted overlapping-word difference equals the negative signed-surplus recurrence;
+- `overlapResidual_succ`: the exact one-step residual update;
+- `descent_threshold`: the generic equivalence between quotient descent and the residual inequality, assuming a positive denominator and the stated affine equations.
+
+The first two declarations formalize the abstract overlap algebra. The third formalizes the arithmetic threshold interface. It does **not** yet prove that the actual accelerated Syracuse iterate and valuation data satisfy those generic hypotheses. In particular, the finite-prefix affine identity, valuation extraction, positivity/divisibility facts, and the connection to the concrete Syracuse function still need to be imported and proved in Lean.
+
+The dedicated CI workflow is `../.github/workflows/tldrbaudit.yml`. Exact-head run [43997407311](https://github.com/s4ztz4bnf6-maker/Lubuimi/actions/runs/43997407311) is in progress. An initial attempt failed because the workflow expected a pre-existing Lake manifest; this was corrected by explicitly installing Lean 4.35.0 and running `lake update` before invoking lean-action. No compile pass, axiom profile, or `sorryAx` result is claimed until the corrected run completes and the logs are checked. The legacy workflow's root-project detector skipped its Lean jobs on this documentation-only root; its green status is not evidence for this formalization.
