@@ -71,3 +71,27 @@ The dynamic-offset bound and valuation-sensitive universal coupling, including t
 If the existing theorem's exact hypotheses and conclusion match (UD) on actual Syracuse valuation sequences, strong induction on odd starts proves termination at 1; even starts first reduce to odd starts.
 
 **Status distinction:** the author-reported proof of universal descent is treated as already existing. This addendum does not claim to have recovered or independently audited its original proof text, nor does it report a new Lean/CI verification. The next documentation action is to recover that existing primary proof artifact and map it exactly to (UD). No substitute proof is to be invented.
+
+
+---
+
+## G. Publication and licensing update — 17 November 2026
+
+**Author:** Ta-Yoshua Lubuimi  
+**Copyright:** © 2026 Ta-Yoshua Lubuimi  
+**License:** CC BY 4.0
+
+The consolidated research manuscript is [A Dynamic Residual Framework for Strict Descent in the Accelerated Syracuse Map](DYNAMIC_RESIDUAL_STRICT_DESCENT_PREPRINT_2026-11-17.md). It sets out the affine orbit identity, exact residual threshold, residual recurrence, shifted-overlap identity, dynamic exponent offsets, universal dynamic envelope, valuation-sensitive coupling, intermediate-index decomposition, and the final universal descent target.
+
+The final target is
+\[
+\forall n>1\text{ odd}\ \exists N\geq1:
+\quad nR_N<(n-1)C_N.
+\]
+The author reports that the universal dynamic descent theorem proving this target has already been established in prior work. The remaining Step 12 repository task is to recover the original proof artifact and match it exactly to the definitions and quantifiers in the manuscript. This is a source-recovery and audit requirement, not a declaration that the theorem is mathematically open.
+
+No new Lean build, CI run, axiom audit, or independent proof verification is claimed by this addendum.
+
+### License update
+
+Original research manuscripts and documentation authored by Ta-Yoshua Lubuimi are licensed under CC BY 4.0. Original project code and tests are licensed under MIT. Third-party and upstream materials remain under their own licenses. See the repository [licensing index](../docs/LICENSING.md).
