@@ -1,190 +1,184 @@
 # Syracuse / Collatz — universal dynamic descent checkpoint
 
+**Author:** Ta-Yoshua Lubuimi  
+**Copyright:** © 2026 Ta-Yoshua Lubuimi  
 **Date:** 17 November 2026  
-**Research author:** Ta-Yoshua Lubuimi  
-**Repository:** `s4ztz4bnf6-maker/Lubuimi`  
-**Scope:** Syracuse / Collatz only. This record does not modify or merge the separate APW4/BBMST or Adjacent-Values projects.
+**License:** CC BY 4.0
 
-## 1. Status statement and attribution
+## 1. Status and attribution
 
-The research author states that the **universal dynamic descent theorem has already been formulated and proved in the preceding research work**. The proof is not to be treated as a new open obligation or reconstructed by inventing a replacement argument.
+Ta-Yoshua Lubuimi reports that the universal dynamic descent theorem was formulated and proved in preceding research. It must not be described as a newly open mathematical problem merely because its original proof artifact has not yet been recovered into this repository snapshot.
 
-The theorem's complete original statement and derivation have not yet been located in the files inspected for this checkpoint. This is a documentation/retrieval limitation of the present repository inspection, not a mathematical finding that the author's proof does not exist.
+The exact original statement and full derivation are not included in the materials inspected for this checkpoint. The remaining Step 12 task is to recover that primary source and match its hypotheses, quantifiers, definitions, and conclusion to the interface below. This is a source-recovery and audit task. This checkpoint does not independently certify the reported proof or claim a new Lean/CI verification.
 
-The exact target interface used in the 17 November backward reconstruction is:
+## 2. Accelerated Syracuse orbit
 
-[
-oxed{orall n>1	ext{ odd} exists Ngeq1:quad
-nR_N<(n-1)C_N.}	ag{UD}
-]
+For an odd positive integer \(n\), define
+\[
+x_0=n,\quad
+g_{k+1}=v_2(3x_k+1),\quad
+x_{k+1}=\frac{3x_k+1}{2^{g_{k+1}}}.
+\]
+Each \(x_k\) is a positive odd integer.
 
-Here (C_N) is the affine correction term and (R_N) is the residual defined below. The author identifies (UD), for all positive odd starts, as the conclusion guaranteed by the already-proved universal dynamic descent theorem. The full proof of (UD) must be recovered from the author's existing material and matched to these definitions before a formal or independent audit can mark that exact interface verified.
-
-**Do not relabel the universal descent theorem as an unproved conjecture. Do not claim that this checkpoint itself independently verifies its proof.**
-
-## 2. Backward Collatz interface
-
-For odd positive (n), define the accelerated Syracuse orbit
-[
-x_0=n,qquad x_{k+1}=rac{3x_k+1}{2^{g_{k+1}}},
-qquad g_{k+1}=v_2(3x_k+1).
-]
-Then every (x_k) is positive and odd.
-
-Set
-[
-A_0=C_0=0,quad A_{k+1}=A_k+g_{k+1},quad
+Define
+\[
+A_0=C_0=0,\quad
+A_{k+1}=A_k+g_{k+1},\quad
 C_{k+1}=3C_k+2^{A_k}.
-]
-The affine identity is
-[
-oxed{2^{A_k}x_k=3^kn+C_k.}	ag{1}
-]
-It follows by induction from the accelerated transition.
+\]
+Induction gives
+\[
+\boxed{2^{A_k}x_k=3^kn+C_k.}\tag{1}
+\]
 
-Define the residual
-[
-oxed{R_k=C_k+3^k-2^{A_k}.}	ag{2}
-]
-Since (2^{A_k}>0), the strict descent condition is exactly
-[
-oxed{x_k<niff nR_k<(n-1)C_k.}	ag{3}
-]
-Thus (UD) is precisely the assertion that every odd start (n>1) has a strict smaller odd Syracuse iterate.
+Define
+\[
+\boxed{R_k=C_k+3^k-2^{A_k}.}\tag{2}
+\]
+Substituting (1) and clearing the positive denominator gives
+\[
+\boxed{x_k<n\iff nR_k<(n-1)C_k.}\tag{3}
+\]
+This is an exact equivalence.
 
 The residual recurrence is
-[
-oxed{R_{k+1}=3R_k+2^{A_k}(4-2^{g_{k+1}}).}	ag{4}
-]
-The correction term is positive for valuation (1), zero for valuation (2), and negative for valuation at least (3).
+\[
+\boxed{R_{k+1}=3R_k+2^{A_k}(4-2^{g_{k+1}}).}\tag{4}
+\]
+The new contribution is positive for valuation \(1\), zero for valuation \(2\), and negative for valuation at least \(3\).
 
 ## 3. Overlap representation
 
 For
-[
-T_k(e_0,ldots,e_{k-1})
-=sum_{j=0}^{k-1}3^{k-1-j}2^{e_j},
-]
-the affine correction is
-[
-C_k=T_k(A_0,ldots,A_{k-1}),
-]
-and the residual has the overlap form
-[
-oxed{R_k=
-4T_k(A_0,ldots,A_{k-1})
--T_k(A_1,ldots,A_k).}	ag{5}
-]
-This is the shifted-exponent representation of the same residual recurrence, not a separate descent assumption.
+\[
+T_k(e_0,\ldots,e_{k-1})
+=\sum_{j=0}^{k-1}3^{k-1-j}2^{e_j},
+\]
+the affine recurrence gives
+\[
+C_k=T_k(A_0,\ldots,A_{k-1}),
+\]
+and the shifted exponent window gives
+\[
+\boxed{
+R_k=4T_k(A_0,\ldots,A_{k-1})
+-T_k(A_1,\ldots,A_k).
+}\tag{5}
+\]
 
-## 4. Dynamic offsets and universal bound
+## 4. Dynamic offsets and universal envelope
 
-Use the dynamic offsets
-[
-c_j=A_{j+1}-j,qquad d_j=A_j+2-j.
-]
+Put
+\[
+c_j=A_{j+1}-j,\qquad d_j=A_j+2-j.
+\]
 Then
-[
+\[
 2^j(2^{d_j}-2^{c_j})
 =2^{A_j}(4-2^{g_{j+1}}).
-]
-With the shifted residual (mathcal R_{-1}=0) and
-(mathcal R_j=R_{j+1}), the recurrence is
-[
-oxed{mathcal R_j
-=3mathcal R_{j-1}+2^j(2^{d_j}-2^{c_j}).}	ag{6}
-]
+\]
+With
+\[
+\mathcal R_{-1}=0,\qquad \mathcal R_j=R_{j+1},
+\]
+the recurrence becomes
+\[
+\boxed{
+\mathcal R_j=3\mathcal R_{j-1}+2^j(2^{d_j}-2^{c_j}).
+}\tag{6}
+\]
 
-The universal dynamic bound, in this indexing convention, is
-[
-oxed{
+The universal dynamic envelope recorded in prior research is
+\[
+\boxed{
 (1-2^{c_j})(3^j-2^j)
-leqmathcal R_{j-1}leq
-(2^{d_j}-1)(3^j-2^j).
-}	ag{7}
-]
-It is stated for the varying offsets generated by the actual valuation sequence; it is not restricted to a constant valuation regime.
+\leq\mathcal R_{j-1}
+\leq(2^{d_j}-1)(3^j-2^j).
+}\tag{7}
+\]
+It is intended for the varying offsets generated by the actual valuation sequence, not just for a fixed valuation regime. Its original proof source must be recovered with the Step 12 material; this checkpoint does not substitute an unproved estimate for that source.
 
-## 5. Universal coupling and intermediate decomposition
+## 5. Universal valuation coupling
 
-For a terminal horizon (N), put
-[
-lambda_j=j+min(c_j,d_j)
-=A_j+min(g_{j+1},2),
-]
+For a terminal horizon \(N\), define
+\[
+\lambda_j=j+\min(c_j,d_j)=A_j+\min(g_{j+1},2),
+\]
 and
-[
+\[
 q_j=
-egin{cases}
-3^{N-1-j},&g_{j+1}=1,\
-0,&g_{j+1}=2,\
--3^{N-1-j}(2^{g_{j+1}-2}-1),&g_{j+1}geq3.
-end{cases}
-]
+\begin{cases}
+3^{N-1-j},&g_{j+1}=1,\\
+0,&g_{j+1}=2,\\
+-3^{N-1-j}(2^{g_{j+1}-2}-1),&g_{j+1}\geq3.
+\end{cases}
+\]
 Then
-[
-oxed{
+\[
+\boxed{
 3^{N-1-j}2^j(2^{d_j}-2^{c_j})
-=2^{lambda_j}q_j.
-}	ag{8}
-]
-Summing the recurrence gives
-[
-oxed{mathcal R_{N-1}
-=sum_{j=0}^{N-1}2^{lambda_j}q_j.}	ag{9}
-]
+=2^{\lambda_j}q_j.
+}\tag{8}
+\]
+Summing gives
+\[
+\boxed{\mathcal R_{N-1}
+=\sum_{j=0}^{N-1}2^{\lambda_j}q_j.}\tag{9}
+\]
 
-For (kleq N), define
-[
-Y_k=sum_{j=k}^{N-1}2^{lambda_j-lambda_k}q_j.
-]
-The exact intermediate-index decomposition is
-[
-oxed{
-mathcal R_{N-1}
-=3^{N-k}mathcal R_{k-1}+2^{lambda_k}Y_k.
-}	ag{10}
-]
-If (L_jleqmathcal R_{j-1}leq U_j) are the lower and upper bounds supplied by (7), then
-[
-oxed{
+For \(0\leq k\leq N\), set
+\[
+Y_k=\sum_{j=k}^{N-1}2^{\lambda_j-\lambda_k}q_j.
+\]
+Then
+\[
+\boxed{
+\mathcal R_{N-1}
+=3^{N-k}\mathcal R_{k-1}+2^{\lambda_k}Y_k.
+}\tag{10}
+\]
+If \(L_j\leq\mathcal R_{j-1}\leq U_j\) are supplied by (7), then
+\[
+\boxed{
 L_N-3^{N-k}U_k
-leq2^{lambda_k}Y_k
-leq U_N-3^{N-k}L_k.
-}	ag{11}
-]
-The three valuation regimes are therefore coupled in one exact sum, with every intermediate horizon controlled by the same dynamic bound.
+\leq2^{\lambda_k}Y_k
+\leq U_N-3^{N-k}L_k.
+}\tag{11}
+\]
 
-## 6. The final backward implication to Collatz
+## 6. Step 12 — universal dynamic descent
 
-By (3), (UD) implies
-[
-orall n>1	ext{ odd} exists Ngeq1:quad x_N<n.
-]
-Strong induction on positive odd integers then proves that every odd start reaches (1): the smaller odd iterate reaches (1) by the induction hypothesis, so the original orbit does as well. Every positive even start first reduces to an odd start by dividing by powers of two. Hence (UD), with the stated universal quantifiers and genuine Syracuse valuations, implies the full Collatz conjecture.
+The final theorem interface is
+\[
+\boxed{
+\forall n>1\text{ odd}\ \exists N\geq1:
+\quad nR_N<(n-1)C_N.
+}\tag{UD}
+\]
+By (3), (UD) is equivalent to the assertion that every odd start \(n>1\) has a strictly smaller positive odd iterate in its accelerated Syracuse orbit.
 
-The backward chain is therefore:
-[
-	ext{Collatz termination}
-Leftarrow 	ext{universal strict odd descent}
-Leftarrow 	ext{(UD)}
-]
-together with the exact affine, residual, overlap, dynamic-bound, and coupling identities (1)–(11).
+**Attribution and status.** Ta-Yoshua Lubuimi reports that the universal dynamic descent theorem establishing this conclusion has already been proved in prior work. The complete original proof artifact is the remaining Step 12 item to recover and map into the repository. This is a source-recovery and audit task, not a claim that the theorem is mathematically open. The missing repository source is not evidence that the author's proof does not exist.
 
-## 7. What is established here, and what is not
+The recovery audit must establish:
+1. the original theorem statement and all hypotheses;
+2. agreement of the variables \(A_k,C_k,R_k,c_j,d_j,\lambda_j,q_j\) with the definitions here;
+3. that the quantifiers range over every positive odd start and its genuine exact Syracuse valuations;
+4. that the conclusion is (UD), or that a proved translation yields (UD);
+5. the source file/document, revision, and any reproducible Lean/CI evidence.
 
-This checkpoint records the exact backward interface and the formulas used in the 17 November reconstruction. It does not present a new proof of (UD), nor does it claim a Lean verification of (UD).
+Until that source mapping is recorded, the precise status is **AUTHOR-REPORTED PROVED — PRIMARY PROOF ARTIFACT NOT YET RECOVERED INTO THIS CHECKPOINT**.
 
-The author reports that the universal descent theorem and its proof already exist in the prior research work. The remaining repository task is to **locate and recover that exact theorem statement and proof**, then:
-1. confirm its hypotheses and quantifiers match the actual Syracuse valuation sequence;
-2. confirm its conclusion is exactly (UD), or provide the proved translation to (UD);
-3. record its source file/document, revision, and any Lean/CI evidence;
-4. update the manuscript and audit ledger from the recovered primary source.
+## 7. Consequence for Collatz
 
-Until that source is recovered, label the theorem **AUTHOR-REPORTED PROVED — ORIGINAL PROOF NOT YET LOCATED IN THIS REPOSITORY CHECKPOINT**. Do not label it “mathematically open”; do not label it “independently verified here”.
+Assume (UD) with the exact scope above. For every odd \(n>1\), equation (3) gives an index \(N\) with \(x_N<n\). Strong induction on positive odd integers proves that every odd start reaches \(1\): the smaller odd iterate \(x_N\) reaches \(1\) by the induction hypothesis, and the original orbit reaches \(x_N\) after finitely many accelerated steps.
 
-## 8. Licensing and project boundaries
+Every positive even integer can first be divided by a finite power of \(2\) to reach an odd positive integer. Therefore (UD) implies that every positive integer reaches \(1\) under the ordinary Collatz iteration.
 
-The repository's existing `LICENSE-PROPRIETARY.md` and `LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md` remain in force for original project materials owned by the author. They are not replaced by CC BY or MIT in this checkpoint. Upstream Erdős–Selfridge materials, Lean, Mathlib, dependencies, third-party publications, and other externally owned materials remain under their respective licenses. Mathematical facts and theorem statements are not claimed as exclusive property by the existing notices.
+## 8. Formal verification boundary
 
-This document is original project documentation and is covered by the existing proprietary notice, subject to applicable law and third-party rights.
+This checkpoint does not report a new Lean build, CI run, named theorem audit, axiom profile, or sorryAx rejection for (UD). Existing Lean results remain valid only for their recorded declarations, exact source commits, and workflows. A successful package compilation alone is not a proof audit.
+
+## 9. Licensing and project boundaries
+
+This original document is © 2026 Ta-Yoshua Lubuimi and licensed under CC BY 4.0. Original code and tests are separately licensed under MIT. Third-party and upstream materials remain under their own licenses. The separate APW4/BBMST and Adjacent-Values projects are not relicensed by this document.
