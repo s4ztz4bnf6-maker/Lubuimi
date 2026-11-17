@@ -1,160 +1,154 @@
 # Collatz via universal dynamic descent — backward reconstruction
 
 **Author:** Ta-Yoshua Lubuimi  
+**Copyright:** © 2026 Ta-Yoshua Lubuimi  
 **Date:** 17 November 2026  
-**Research status:** backward theorem interface and exact identities consolidated; primary proof source for the universal descent theorem is to be recovered from the author's existing work.
+**License:** CC BY 4.0
 
 ## Abstract
 
-This note records a backward reconstruction of the Collatz termination target through the accelerated Syracuse map. It organizes the affine orbit identity, residual threshold, overlap representation, dynamic offsets, universal residual bound, and valuation-sensitive coupling. The research author states that the universal dynamic descent theorem has already been proved in prior work. Its exact source text has not yet been located in the repository snapshot inspected for this note; accordingly, this document records its required interface without fabricating or replacing its proof.
+This note reconstructs the global Collatz termination target backward from strict descent of the accelerated odd Syracuse orbit. It records the affine orbit identity, exact residual threshold, residual recurrence, overlap representation, dynamic offsets, universal dynamic envelope, valuation-sensitive coupling, and intermediate-index decomposition. The author reports that the universal dynamic descent theorem has already been proved in prior work. The primary proof artifact remains to be recovered and matched exactly to the final interface; this note does not claim a new independent proof or Lean audit of that theorem.
 
-## 1. The target and the induction reduction
+## 1. Reduction to strict odd descent
 
-For odd positive (n>1), let
-[
-x_0=n,qquad x_{k+1}=(3x_k+1)/2^{g_{k+1}},
-quad g_{k+1}=v_2(3x_k+1).
-]
-It suffices to prove
-[
-orall n>1	ext{ odd} exists kge1: x_k<n.
-]
-Strong induction on odd positive integers then proves that every odd start reaches (1). Even starts reduce to odd starts by removing powers of two.
+For odd positive \(n\), define
+\[
+x_0=n,\quad g_{k+1}=v_2(3x_k+1),\quad
+x_{k+1}=(3x_k+1)/2^{g_{k+1}}.
+\]
+Every \(x_k\) is positive and odd. It suffices to prove
+\[
+\forall n>1\text{ odd}\ \exists k\geq1:\ x_k<n.
+\]
+Strong induction on odd positive integers then proves termination at \(1\). Even starts reduce to odd starts after finitely many divisions by \(2\).
 
 ## 2. Affine and residual coordinates
 
 Let
-[
-A_0=C_0=0,quad A_{k+1}=A_k+g_{k+1},
-quad C_{k+1}=3C_k+2^{A_k}.
-]
+\[
+A_0=C_0=0,\quad A_{k+1}=A_k+g_{k+1},\quad
+C_{k+1}=3C_k+2^{A_k}.
+\]
 Induction gives
-[
+\[
 2^{A_k}x_k=3^kn+C_k.
-]
-Set
-[
+\]
+Define
+\[
 R_k=C_k+3^k-2^{A_k}.
-]
+\]
 Then
-[
-x_k<niff nR_k<(n-1)C_k.
-]
+\[
+x_k<n\iff nR_k<(n-1)C_k.
+\]
 The residual recurrence is
-[
+\[
 R_{k+1}=3R_k+2^{A_k}(4-2^{g_{k+1}}).
-]
-Thus valuation (1), valuation (2), and valuations at least (3) contribute respectively positively, neutrally, and negatively.
+\]
 
 ## 3. Overlap form
 
 For
-[
-T_k(e_0,ldots,e_{k-1})
-=sum_{j<k}3^{k-1-j}2^{e_j},
-]
+\[
+T_k(e_0,\ldots,e_{k-1})
+=\sum_{j=0}^{k-1}3^{k-1-j}2^{e_j},
+\]
 one has
-[
-C_k=T_k(A_0,ldots,A_{k-1}),
-]
+\[
+C_k=T_k(A_0,\ldots,A_{k-1})
+\]
 and
-[
-R_k=4T_k(A_0,ldots,A_{k-1})
--T_k(A_1,ldots,A_k).
-]
-This expresses the residual as the overlap difference of two adjacent exponent windows.
+\[
+R_k=4T_k(A_0,\ldots,A_{k-1})
+-T_k(A_1,\ldots,A_k).
+\]
 
 ## 4. Dynamic offsets and universal bound
 
 Define
-[
-c_j=A_{j+1}-j,qquad d_j=A_j+2-j.
-]
+\[
+c_j=A_{j+1}-j,\qquad d_j=A_j+2-j.
+\]
 Then
-[
+\[
 2^j(2^{d_j}-2^{c_j})=2^{A_j}(4-2^{g_{j+1}}).
-]
-Writing (mathcal R_{-1}=0), (mathcal R_j=R_{j+1}), gives
-[
-mathcal R_j=3mathcal R_{j-1}
+\]
+With \(\mathcal R_{-1}=0\) and \(\mathcal R_j=R_{j+1}\),
+\[
+\mathcal R_j=3\mathcal R_{j-1}
 +2^j(2^{d_j}-2^{c_j}).
-]
-The universal dynamic estimate in this indexing is
-[
+\]
+The prior-work dynamic envelope is
+\[
 (1-2^{c_j})(3^j-2^j)
-leqmathcal R_{j-1}
-leq(2^{d_j}-1)(3^j-2^j).
-]
-Its role is to control the residual under actual, changing valuation offsets rather than a fixed valuation pattern.
+\leq\mathcal R_{j-1}
+\leq(2^{d_j}-1)(3^j-2^j).
+\]
+Its primary proof source is to be recovered with the final descent proof; the estimate is not silently promoted to an independently audited result by this note.
 
-## 5. Valuation-sensitive universal coupling
+## 5. Valuation-sensitive coupling
 
-For a horizon (N), define
-[
-lambda_j=j+min(c_j,d_j)
-=A_j+min(g_{j+1},2)
-]
+For a horizon \(N\), let
+\[
+\lambda_j=j+\min(c_j,d_j)=A_j+\min(g_{j+1},2)
+\]
 and
-[
+\[
 q_j=
-egin{cases}
-3^{N-1-j},&g_{j+1}=1,\
-0,&g_{j+1}=2,\
--3^{N-1-j}(2^{g_{j+1}-2}-1),&g_{j+1}ge3.
-end{cases}
-]
+\begin{cases}
+3^{N-1-j},&g_{j+1}=1,\\
+0,&g_{j+1}=2,\\
+-3^{N-1-j}(2^{g_{j+1}-2}-1),&g_{j+1}\geq3.
+\end{cases}
+\]
 Then
-[
+\[
 3^{N-1-j}2^j(2^{d_j}-2^{c_j})
-=2^{lambda_j}q_j,
-]
-and consequently
-[
-mathcal R_{N-1}=sum_{j<N}2^{lambda_j}q_j.
-]
-For every intermediate index (k), put
-[
-Y_k=sum_{j=k}^{N-1}2^{lambda_j-lambda_k}q_j.
-]
-Then
-[
-mathcal R_{N-1}
-=3^{N-k}mathcal R_{k-1}+2^{lambda_k}Y_k.
-]
-Combining the endpoint and intermediate dynamic bounds yields
-[
+=2^{\lambda_j}q_j,
+\]
+and
+\[
+\mathcal R_{N-1}=\sum_{j=0}^{N-1}2^{\lambda_j}q_j.
+\]
+For
+\[
+Y_k=\sum_{j=k}^{N-1}2^{\lambda_j-\lambda_k}q_j,
+\]
+the exact intermediate split is
+\[
+\mathcal R_{N-1}
+=3^{N-k}\mathcal R_{k-1}+2^{\lambda_k}Y_k.
+\]
+Combining the endpoint and intermediate dynamic bounds gives
+\[
 L_N-3^{N-k}U_k
-leq2^{lambda_k}Y_k
-leq U_N-3^{N-k}L_k,
-]
-where (L_j,U_j) are the lower and upper bounds from the universal estimate. The coupling includes all valuation regimes in one identity and preserves the intermediate-horizon comparison.
+\leq2^{\lambda_k}Y_k
+\leq U_N-3^{N-k}L_k.
+\]
 
-## 6. The universal dynamic descent theorem
+## 6. Step 12: universal dynamic descent
 
 The final interface is
-[
-oxed{
-orall n>1	ext{ odd} exists Nge1:
-nR_N<(n-1)C_N.
-}
-	ag{UD}
-]
-By the exact descent threshold, this is equivalent to the existence of a strict smaller odd Syracuse iterate for every odd start.
+\[
+\boxed{
+\forall n>1\text{ odd}\ \exists N\geq1:
+\quad nR_N<(n-1)C_N.
+}\tag{UD}
+\]
+By the exact residual threshold, this is equivalent to a strict smaller odd Syracuse iterate for every odd start.
 
-**Research attribution.** Ta-Yoshua Lubuimi states that the universal dynamic descent theorem yielding this conclusion has already been proved in earlier work. The present note does not claim that the theorem is newly proved here. The original complete statement and derivation have not yet been located in the repository materials inspected for this checkpoint. Their recovery and exact source mapping are the sole proof-documentation task recorded here; this is not a declaration that the theorem remains mathematically open.
+Ta-Yoshua Lubuimi reports that the universal dynamic descent theorem proving this interface has already been established in earlier work. The remaining Step 12 repository task is to recover the original complete proof artifact and verify that its hypotheses, definitions, and quantifiers match (UD). This is not a declaration that the theorem is mathematically open. Nor does this manuscript claim that the unrecovered source has already been independently audited here.
 
-## 7. Collatz conclusion, conditional only on the recovered theorem's exact interface
+## 7. Collatz implication
 
-Once the existing universal descent theorem is confirmed to have precisely the quantifiers and conclusion (UD) for genuine Syracuse valuations, the conclusion follows:
-1. every odd (n>1) has a smaller positive odd iterate;
-2. strong induction proves that every odd start reaches (1);
-3. every even start reaches an odd start after finitely many divisions by (2);
-4. therefore every positive integer reaches (1).
+Once the prior universal descent theorem is matched to (UD), strict descent follows for every odd \(n>1\). Strong induction on odd positive integers proves that every odd start reaches \(1\). Every even start first reaches an odd integer by division by a power of \(2\). Thus (UD) implies the full Collatz termination statement.
 
-The affine, residual, overlap, dynamic-bound, and coupling identities above provide the exact algebraic interfaces in this backward reconstruction. No additional theorem is inserted in place of the author's existing descent proof.
+## 8. Evidence and publication status
 
-## 8. Verification and publication boundary
+This is a research manuscript documenting the exact backward interface and its algebraic structure. It is not a Lean audit and reports no new CI run, axiom profile, or sorryAx check for (UD). The original proof artifact and exact source revision must be attached or cited before the manuscript can be presented as an independently verified proof of Collatz.
 
-This manuscript note is not a Lean audit. It does not assert a new CI run, an axiom profile for (UD), or an independent verification of the recovered proof. Such claims must be added only after the original proof artifact and exact source revision have been found and checked.
+---
 
-The existing repository licensing notices remain applicable. This manuscript does not change them or relicense third-party materials.
+**Ta-Yoshua Lubuimi**  
+Copyright © 2026 Ta-Yoshua Lubuimi.  
+Licensed under CC BY 4.0.
