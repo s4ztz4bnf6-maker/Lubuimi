@@ -98,9 +98,9 @@ The finite valuation-word and finite-depth manuscripts should be read together w
 *Prepared as an append-only project status record. It is not a claim that the Collatz conjecture has been solved.*
 
 
-## 9. Dynamic residual bridge (17 November 2026)
+## 9. Ta-Yoshua Lubuimi Dynamic Residual Bound (TL-DRB) — Collatz application (17 November 2026)
 
-A new exact algebraic connection between the affine Collatz bookkeeping and the independent Dynamic Residual Bound investigation is recorded in:
+The Collatz application of the **Ta-Yoshua Lubuimi Dynamic Residual Bound (TL-DRB)** is recorded in:
 
 - [Research note: Dynamic residual bridge](../research/DYNAMIC_RESIDUAL_COLLATZ_BRIDGE_2026-11-17.md)
 - [Manuscript: Dynamic residual identity](../manuscript/DYNAMIC_RESIDUAL_COLLATZ_BRIDGE_2026-11-17.md)
@@ -115,6 +115,6 @@ S^k(n_0)<n_0\iff n_0R_k<(n_0-1)C_k.
 ]
 The overlap-constrained backward residual recursion is also stated in the research note.
 
-This is an exact algebraic bridge and an exact state-dependent threshold, not a global descent theorem. The all-ones valuation prefixes give arbitrarily long finite examples, so the residual recursion alone does not yield a uniform finite horizon. The new identities are not yet Lean-formalized and have no CI audit. The full terminal-word realization theorem, exclusion of all infinite non-descending paths, and global Collatz conjecture remain open.
+This is a proved exact algebraic bridge and a proved state-dependent descent threshold. It is a genuine advance in the finite-prefix descent analysis: it identifies the precise residual coordinate and the exact inequality that decides descent for a given start value and valuation prefix. It is not a global descent theorem. The all-ones valuation prefixes give arbitrarily long finite examples, so the residual recursion alone does not yield a uniform finite horizon. The new identities are not yet Lean-formalized and have no CI audit. The full terminal-word realization theorem, exclusion of all infinite non-descending paths, and global Collatz conjecture remain open.
 
-The new manuscript and research note are original repository materials covered by the existing proprietary rights notice and commercial licensing policy. Third-party code, Lean, Mathlib, dependencies, and upstream materials remain under their respective licenses. No blanket open-source license is introduced by this update.
+The named TL-DRB application manuscript and research note are original repository materials covered by the existing proprietary rights notice and commercial licensing policy. Third-party code, Lean, Mathlib, dependencies, and upstream materials remain under their respective licenses. No blanket open-source license is introduced by this update.
