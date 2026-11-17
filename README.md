@@ -43,13 +43,16 @@ The 14 November status report preserves the scope and limitations of those resul
 - Never transfer a CI result to a different source commit.
 - Keep hand proofs, exact finite computation, manuscript claims, and Lean verification as separate evidence categories.
 
-## Licensing
+## Licensing and commercial model
 
-The repository currently contains proprietary rights and commercial-use notices:
-- [Proprietary rights notice](LICENSE-PROPRIETARY.md)
-- [Commercial licensing and remuneration policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md)
+The project uses a file-specific, revenue-oriented dual-licensing plan:
+- **Original code:** GNU AGPL-3.0, where an individual source file carries an explicit AGPL notice, with a separately negotiated paid commercial license available for closed-source integration, OEM, embedded, and enterprise use.
+- **Research manuscripts and non-code documentation:** all rights reserved; commercial republication or substantial reuse of protected expression requires a separate written license.
+- **Third-party materials:** remain under their own licenses and are never relicensed by this repository's notices.
 
-Those notices apply only to original materials owned by the author and exclude third-party materials, which remain under their respective licenses. No license change is made in this research checkpoint. Any transition to open licenses must be explicitly selected and applied consistently by file category; mathematical facts and theorem statements are not made exclusively ownable by a copyright notice.
+Read the [AGPL license text](LICENSE-AGPL-3.0.txt), [proprietary rights notice](LICENSE-PROPRIETARY.md), and [commercial licensing and remuneration policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md).
+
+**Important:** AGPL permits commercial use without paying a royalty if its terms are followed. The paid commercial alternative is for customers who need permissions beyond AGPL, especially closed-source distribution or integration. This model can create licensing revenue, but does not guarantee payment from every commercial user. No source file is automatically relicensed merely by adding these policy documents; each code file must be individually checked and marked.
 
 ## Parallel research note
 
