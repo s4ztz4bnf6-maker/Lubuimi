@@ -70,7 +70,9 @@ The full terminal-congruence iff finite-word-realization theorem, positive repre
 
 ## Original-materials licensing
 
-Original materials owned by Ta-Yoshua Lubuimi are subject to the [proprietary rights notice](LICENSE-PROPRIETARY.md) and [commercial licensing policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md). This includes the new research note and manuscript unless a later file-specific written license expressly says otherwise. These notices exclude upstream Erdős–Selfridge source files, Lean, Mathlib, dependencies, and all other third-party materials, which remain under their respective licenses. They do not claim exclusive rights over mathematical facts or theorem statements as such.
+For new releases, commercial exploitation of original materials owned or controlled by Ta-Yoshua Lubuimi requires a separate written licence with financial participation. The default proposed term is 10% of attributable gross receipts, with a documented allocation / attributable-net-profit fallback, quarterly reporting, payment, recordkeeping, and audit terms in the [commercial licensing policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md). Original source files use [LicenseRef-Lubuimi-Commercial-Revenue-Share](LICENSE-REF-LUBUIMI-COMMERCIAL-REVENUE-SHARE.md).
+
+Valid earlier AGPL/MIT/CC or other grants remain effective for copies already distributed under those terms; this update is prospective and does not retroactively revoke them. Upstream Erdős–Selfridge source files, Lean, Mathlib, dependencies, external contributions, and all other third-party materials remain under their own rights and licences. The policy does not claim exclusive rights over mathematical facts, abstract ideas, or theorem statements as such.
 
 ## Parallel research note — quantum/operator formulations
 
