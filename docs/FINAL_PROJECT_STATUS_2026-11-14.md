@@ -96,3 +96,48 @@ The finite valuation-word and finite-depth manuscripts should be read together w
 
 ---
 *Prepared as an append-only project status record. It is not a claim that the Collatz conjecture has been solved.*
+
+
+---
+
+## 9. Superseding research update — 17 November 2026: universal dynamic descent
+
+This section supersedes the earlier global-descent disposition above **to the extent of the author's newly clarified research status**. The 14 November report remains a historical snapshot of the evidence and files inspected on that date.
+
+The research author, Ta-Yoshua Lubuimi, states that the **universal dynamic descent theorem has already been formulated and proved in prior work**. It must not be described as a newly open mathematical problem. The complete original statement and derivation have not yet been located in the repository files inspected for the 17 November checkpoint. That is a source-recovery and audit task, not evidence that the proof is absent from the author's work.
+
+The backward interface recorded on 17 November is
+[
+orall n>1	ext{ odd} exists Nge1:
+quad nR_N<(n-1)C_N.
+	ag{UD}
+]
+For the accelerated Syracuse orbit, the exact threshold
+[
+x_N<niff nR_N<(n-1)C_N
+]
+follows from the affine identity
+[
+2^{A_N}x_N=3^Nn+C_N
+]
+and the residual definition
+[
+R_N=C_N+3^N-2^{A_N}.
+]
+The 17 November checkpoint consolidates the residual recurrence, overlap identity, dynamic offsets, universal dynamic bound, valuation-sensitive coupling, and intermediate-index decomposition. See [the complete checkpoint](COLLATZ_UNIVERSAL_DESCENT_CHECKPOINT_2026-11-17.md) and [the backward reconstruction manuscript](../manuscript/COLLATZ_BACKWARD_PROOF_RECONSTRUCTION_2026-11-17.md).
+
+If the already-proved universal descent theorem has precisely the quantifiers and conclusion (UD) for genuine Syracuse valuations, then the Collatz conclusion follows by strong induction on odd positive integers, followed by reduction of even starts to odd starts.
+
+### Evidence boundary
+
+- **Author-reported mathematical status:** universal dynamic descent theorem already proved.
+- **Algebraic interfaces in the 17 November reconstruction:** written out and checked by direct algebra/induction in the reconstruction.
+- **Primary-source recovery:** exact original theorem text and derivation still to be located and mapped to (UD).
+- **Independent audit / Lean status:** this documentation update does not assert a new Lean build, CI pass, axiom audit, or independent verification of (UD).
+- **Global Collatz publication claim:** do not mark as independently verified until the original proof artifact is recovered and its hypotheses, quantifiers, and final implication are checked.
+
+The sole proof-documentation priority recorded here is to recover the author's existing universal descent proof and establish the exact source mapping to (UD). Do not replace it with a newly invented proof attempt or downgrade the author's claim to “open” merely because the source file has not yet been found.
+
+## 10. Licensing status checked 17 November 2026
+
+The repository's existing proprietary rights notice and commercial licensing policy remain unchanged. This project has **not** been relicensed under MIT or CC BY 4.0. Third-party materials remain under their own licenses. See [the licensing index](LICENSING.md).
