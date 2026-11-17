@@ -180,3 +180,5 @@ theorem dynamic_residual_syracuse_embedding
 #print axioms descent_threshold
 
 end TaYoshuaLubuimi.TLDRB
+
+-- End of the explicit finite-prefix affine and dynamic-residual audit surface.
