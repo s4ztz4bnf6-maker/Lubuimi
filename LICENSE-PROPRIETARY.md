@@ -2,7 +2,7 @@
 
 **Copyright © 2026 Ta-Yoshua Lubuimi. All rights reserved.**
 
-This notice applies only to original source code, Lean formalizations, research notes, manuscripts, scripts, and project documentation in this repository to the extent those materials are owned by Ta-Yoshua Lubuimi (the “Original Materials”).
+This notice applies to original source code, Lean formalizations, research notes, manuscripts, scripts, and project documentation in this repository to the extent those materials are owned by Ta-Yoshua Lubuimi (the “Original Materials”). It applies to existing and subsequently added Original Materials, including the Dynamic Residual / Collatz bridge note and manuscript dated 17 November 2026, unless a later file-specific written license expressly states otherwise.
 
 ## No general license granted
 
