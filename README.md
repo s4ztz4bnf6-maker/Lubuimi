@@ -45,15 +45,13 @@ The 14 November status report preserves the scope and limitations of those resul
 
 ## Licensing and commercial model
 
-The project uses a file-specific, revenue-oriented dual-licensing plan:
-- **Original code across repository branches:** GNU AGPL-3.0-only, subject to file-specific third-party notices and the rights-holder scope in the commercial licensing policy. A separately negotiated paid commercial license is available for closed-source integration, OEM, embedded, and enterprise use.
-- **Research manuscripts and non-code documentation:** all rights reserved for original human-authored protected expression; commercial republication or substantial reuse requires a separate written license.
-- **AI-assisted material:** AI use is disclosed. Licensing claims cover only rights actually held in human-authored contributions and protectable human creative choices; no exclusive copyright is asserted over purely autonomous AI output merely because it appears in the project.
-- **Third-party materials:** remain under their own licenses and are never relicensed by this repository's notices.
+For new releases, commercial exploitation of original project material controlled by Ta-Yoshua Lubuimi requires a separate written commercial licence with financial participation. The default proposed term is 10% of attributable gross receipts (excluding remitted VAT/sales tax, bona fide refunds, and separately itemised third-party pass-through costs); if revenue cannot reasonably be isolated, a documented allocation or 10% of attributable net profit applies. Quarterly reporting, payment, recordkeeping, and audit terms are set out in [the commercial revenue-share policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md).
 
-Read the [AGPL license text](LICENSE-AGPL-3.0.txt), [proprietary rights notice](LICENSE-PROPRIETARY.md), [commercial licensing and remuneration policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md), and [AI assistance and authorship disclosure](AI-ASSISTANCE-AND-AUTHORSHIP.md).
+**Legacy licence warning:** earlier copies/releases carrying AGPL-3.0, MIT, CC BY 4.0, or another licence remain subject to the licence validly granted with those copies. This update does not retroactively revoke those grants. Legacy licence texts and SPDX headers must not be read as a new grant for future releases. Third-party material remains under its own licence.
 
-**Important:** AGPL permits commercial use without paying a royalty if its terms are followed. The paid commercial alternative is for customers who need permissions beyond AGPL, especially closed-source distribution or integration. This model can create licensing revenue, but does not guarantee payment from every commercial user. The repository-wide grant covers only original code authored and controlled by the rights holder; third-party and externally contributed files are excluded unless their rights expressly permit relicensing.
+The policy covers only rights actually owned or controlled by the author. It does not claim ownership over mathematical facts, ideas, methods, theorem statements as abstract propositions, independent discoveries, third-party materials, or purely autonomous AI output. Scholarly citation and attribution are requested for protected project material; citation does not itself establish co-authorship.
+
+Read the [commercial revenue-share policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md) and [AI assistance and authorship disclosure](AI-ASSISTANCE-AND-AUTHORSHIP.md).
 
 ## Parallel research note
 

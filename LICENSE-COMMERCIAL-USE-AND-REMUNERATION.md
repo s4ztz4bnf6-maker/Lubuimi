@@ -1,63 +1,50 @@
-# Commercial Licensing and Remuneration Policy
+# Commercial Use, Revenue Share and Attribution Terms
 
-**Rights holder:** Ta-Yoshua Lubuimi  
-**Copyright:** © 2026 Ta-Yoshua Lubuimi, to the extent copyright subsists in the relevant human-authored material.  
-**Applies to:** Original materials in this repository only to the extent the rights holder owns or controls the relevant rights.
+**Rights holder / licensor:** Ta-Yoshua Lubuimi  
+**Effective for new releases:** 17 November 2026  
+**Scope:** only original materials for which the licensor owns or controls the relevant rights.
 
-This policy establishes distinct licensing tracks intended to preserve attribution, control commercial reuse, and create opportunities for remuneration. It does not promise or automatically generate revenue.
+## 1. Core rule
 
-## 1. Software code: AGPL plus a paid commercial alternative
+Commercial exploitation of covered project material is permitted only under a separate written commercial licence accepted by the licensor. A commercial user must not rely on a repository notice, public download, citation, research use, or access to a public repository as a commercial licence.
 
-Original software/source-code files are intended to carry an explicit **GNU AGPL version 3** notice, where the rights holder owns or controls the relevant copyright and all third-party license obligations have been checked. The full license text is in [LICENSE-AGPL-3.0.txt](LICENSE-AGPL-3.0.txt).
+The commercial licence must provide the licensor with a continuing financial participation in value generated through use, integration, adaptation, distribution, hosting, sublicensing, or sale of covered material. The default proposed royalty is **10% of attributable gross receipts**, excluding VAT/sales tax actually remitted, bona fide refunds, and separately itemised pass-through amounts paid to unaffiliated third parties at cost. If revenue cannot reasonably be isolated, the agreement must use a documented allocation of the relevant product/service revenue or, where that is not practicable, **10% of attributable net profit**. No cost allocation may be used to artificially eliminate the royalty.
 
-The AGPL permits commercial use. A person or company may use, modify, and distribute covered code commercially if it complies with the AGPL, including the applicable source-code and network-interaction obligations. **The AGPL does not require an AGPL-compliant user to pay the author a royalty.**
+The parties may agree in a signed writing to a higher rate, minimum guarantee, advance, per-seat/per-deployment fee, or other additional compensation. A lower rate or waiver is effective only if the licensor expressly signs it.
 
-The rights holder may separately offer the same original code under a **paid proprietary commercial license**, but only for rights the rights holder controls. This alternative is intended for businesses that want to incorporate or distribute the code in closed-source products, avoid the AGPL's reciprocal obligations, or obtain negotiated enterprise permissions.
+## 2. Reporting, payment and audit
 
-A commercial agreement may include:
-- an upfront license fee and/or annual minimum;
-- per-product, per-deployment, per-site, per-seat, or usage-based fees;
-- royalties or revenue share on a clearly defined and auditable basis;
-- enterprise, OEM, embedded, redistribution, and sublicensing rights;
-- maintenance, updates, support, response-time commitments, and warranties;
-- reporting, proportionate audit rights, territory, duration, and termination terms.
+Unless a signed licence states otherwise, the commercial licensee must:
+- report covered exploitation and the calculation of attributable receipts quarterly;
+- pay accrued royalties within 30 days after each calendar quarter;
+- keep complete supporting books and records for at least seven years;
+- provide a reasonable annual audit right on notice; and
+- pay reasonable audit costs if an underpayment of more than 5% is found.
 
-No price, royalty rate, minimum guarantee, or payment formula is fixed by this public policy. A paid license exists only when the parties expressly agree to its scope and terms in a signed written agreement.
+The written licence must identify the covered files/material, product or service, territory, duration, permitted acts, reporting contact, payment details, and any sublicensing rights. No sublicensing is allowed unless expressly included.
 
-## 2. Research manuscripts, mathematical exposition, and documentation
+## 3. Non-commercial scholarly use and attribution
 
-Original human-authored manuscript text, research notes, explanatory prose, diagrams, and other non-code materials remain **all rights reserved** unless a file-specific notice states otherwise. Commercial republication, adaptation, inclusion in a paid product, or substantial reuse of protected expression requires a separately negotiated written license.
+Public access and scholarly citation do not transfer ownership. Proper citation, quotation, review, criticism, and other statutory exceptions remain governed by applicable law. This notice does not claim ownership of mathematical facts, abstract ideas, methods, procedures, independently derived results, or independently created implementations.
 
-This does not create ownership over mathematical facts, abstract ideas, methods, procedures, or theorem statements. Independent research and independently written or implemented work are not prohibited by this notice.
+Where protected project expression or code is lawfully reused, retain all applicable author, copyright, provenance, and third-party notices. Cite Ta-Yoshua Lubuimi and the relevant project/source version in scholarly publications that rely on or reproduce protected project material. Citation does not itself create co-authorship, and this policy does not assert a right to co-authorship where the applicable scholarly or legal criteria are not met.
 
-## 3. AI assistance, transparency, and scope of rights
+## 4. Existing licences and prior recipients
 
-AI systems were used as tools during research and development, and that use is disclosed in the project records. The author is responsible for the research direction, mathematical formulation, proof design, selection and arrangement of material, critical evaluation, corrections, testing decisions, and final acceptance of the work.
+This policy applies prospectively to new releases and to rights not already granted. It does not retroactively revoke or rewrite licences validly granted before its effective date. In particular, recipients who already received a copy under AGPL-3.0, MIT, CC BY 4.0, or another irrevocable licence may continue to rely on that existing grant according to its terms.
 
-This policy licenses only rights actually held or controlled by Ta-Yoshua Lubuimi. Purely autonomous AI-generated output may not itself qualify for copyright protection under applicable law. The policy therefore does not claim exclusive copyright in such output merely because an AI system produced it. Where human creative choices, original edits, selection, arrangement, or other protectable expression are present, the license applies to those contributions to the extent protected by law.
+For future releases, remove permissive/open-source or Creative Commons grants from licensor-controlled material unless the licensor expressly approves them in a later signed writing. Mark legacy licence texts and headers as applying only to copies/releases already distributed under them. Do not represent this policy as cancelling third-party licences or rights.
 
-AI-provider terms, third-party source material, and any rights held by other parties remain unaffected. AI disclosure is not a transfer of ownership to an AI provider, nor does it establish that every generated component is exclusively owned by the author.
+## 5. Rights and exclusions
 
-## 4. Code-file identification and contributor rights
+This policy applies only to copyright, database, contractual, or other rights actually owned or controlled by Ta-Yoshua Lubuimi. It does not relicense third-party works, upstream research, Lean, Mathlib, dependencies, external contributions, data, or materials subject to other rights. Such materials retain their own terms. The policy does not create exclusive rights in facts, ideas, mathematical theorems as abstract propositions, or independent discoveries.
 
-**Repository-wide scope:** all original software/source-code files authored by Ta-Yoshua Lubuimi and present in any branch of this repository are offered under GNU AGPL-3.0-only, unless a file contains a different explicit license or third-party notice. This repository-wide grant is the clear identification of those original project code files; individual SPDX headers are added to current source files where practicable. The grant does not cover third-party code, dependencies, copied upstream files, or contributions whose rights are not controlled by the author. Adding this policy does not relicense material owned by others.
+AI-assisted material is covered only to the extent protectable rights exist and are controlled by the licensor. No exclusive copyright is claimed in purely autonomous AI output merely because it appears in a project.
 
-Before offering a code file under both AGPL and a paid commercial license, the rights holder must control the relevant copyright or have express relicensing permission from every relevant copyright holder. Third-party code, dependencies, Lean, Mathlib, copied upstream files, and contributions by others are excluded unless their respective rights and licenses expressly permit the proposed treatment.
+## 6. No implied commercial permission
 
-Future external contributions should be accepted only with clear written terms that preserve the ability to distribute the author's original code under both licensing tracks. Do not assume that a GitHub contribution automatically grants every right needed for commercial relicensing.
+Until a separate written commercial licence is signed, no commercial permission is granted for new releases covered by this policy. A request for a licence should describe the intended use and expected revenue model. Public availability is not permission to commercially exploit protected material.
 
-The author declares that the projects and their associated research/code were created during the author's period of unemployment and independently of any employer's duties or instructions. This declaration is the author's statement of provenance; repository history, source attribution, third-party notices, and applicable license obligations must still be checked file by file before commercial release.
+## 7. Legal status
 
-## 5. Existing and third-party materials
-
-This policy applies only to rights actually owned or controlled by Ta-Yoshua Lubuimi. Upstream files, Lean, Mathlib, dependencies, third-party publications, data, AI-provider materials, and other third-party materials remain under their own licenses and terms. No third-party license is overridden.
-
-## 6. Requesting a commercial license
-
-A request should identify the exact files, product or service, intended integration, deployment and distribution scale, number of users or sites, territory, duration, and proposed commercial model. Contact the rights holder through the repository profile or project documentation. No license or payment obligation arises until the parties sign an agreement.
-
-## 7. Important limitations
-
-This policy is not legal advice, a signed commercial contract, a promise of income, or a guarantee that every commercial user must pay. AGPL-compliant commercial use is permitted without a royalty under the AGPL. The paid alternative creates a revenue opportunity where a customer needs rights beyond the AGPL, but demand, enforceability, collection, and revenue are not guaranteed.
-
-Obtain qualified intellectual-property advice before commercial launch, especially to review authorship, AI-provider terms, contributor history, third-party dependencies, and the exact scope of rights being licensed.
+This document is a licensing policy and proposed standard commercial term sheet, not a substitute for a fully executed licence agreement or jurisdiction-specific legal advice. The 10% rate is the licensor's default proposed term for new commercial agreements; enforceable payment obligations depend on a valid licence/contract and the licensor's ownership or control of the relevant rights. Obtain qualified intellectual-property advice before relying on it in a commercial transaction.
