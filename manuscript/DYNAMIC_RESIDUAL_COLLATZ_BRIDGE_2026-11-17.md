@@ -4,7 +4,7 @@
 **Date:** 17 November 2026  
 **Named method:** Ta-Yoshua Lubuimi Dynamic Residual Bound (**TL-DRB**)  
 **Version:** 0.1.1  
-**Status:** Research manuscript; algebraic results derived here are not yet Lean-formalized.
+**Status:** Research manuscript; generic finite-prefix identities are Lean-formalized and CI-verified; concrete valuation instantiation and global descent remain open.
 
 ## Abstract
 
