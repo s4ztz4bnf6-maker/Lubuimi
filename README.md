@@ -7,7 +7,8 @@ This repository contains the Syracuse/Collatz finite-prefix arithmetic, exact va
 
 ## Project status and manuscripts
 
-- [Consolidated project status and results (14 Nov 2026)](docs/FINAL_PROJECT_STATUS_2026-11-14.md)
+- [Consolidated project status and results (17 Nov 2026)](docs/FINAL_PROJECT_STATUS_2026-11-17.md)
+- [Previous dated status (14 Nov 2026)](docs/FINAL_PROJECT_STATUS_2026-11-14.md)
 - [Dynamic residual bridge: exact Collatz identity and state-dependent descent threshold (17 Nov 2026)](research/DYNAMIC_RESIDUAL_COLLATZ_BRIDGE_2026-11-17.md)
 - [Dynamic residual bridge — manuscript (17 Nov 2026)](manuscript/DYNAMIC_RESIDUAL_COLLATZ_BRIDGE_2026-11-17.md)
 - [Finite-word / terminal-residue manuscript addendum (14 Nov 2026)](manuscript/SYRACUSE_MANUSCRIPT_ADDENDUM_2026-11-14.md)
