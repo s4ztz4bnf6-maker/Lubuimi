@@ -179,6 +179,7 @@ theorem dynamicResidual_eq_affineCorrection
       simp only [dynamicResidual, affineCorrection, valuationPrefix]
       rw [ih]
       simp only [pow_succ]
+      push_cast
       ring
 
 /-- The affine correction has the expected weighted-word expansion. -/
