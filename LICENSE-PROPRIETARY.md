@@ -1,44 +1,44 @@
-# Proprietary License and All-Rights-Reserved Notice
+# Proprietary Rights Notice for Research Text and Documentation
 
 **Copyright © 2026 Ta-Yoshua Lubuimi. All rights reserved.**
 
-This notice applies only to original source code, Lean formalizations, research notes, manuscripts, scripts, and project documentation in this repository to the extent those materials are owned by Ta-Yoshua Lubuimi (the “Original Materials”).
+## 1. Scope
 
-## No general license granted
+This notice applies only to original copyrightable research expression authored and controlled by Ta-Yoshua Lubuimi in this repository, including:
+- manuscript text and article drafts;
+- research notes, explanatory prose, and non-code documentation;
+- original diagrams, figures, and presentation materials;
+- original selection, arrangement, commentary, and editorial structure;
+- other original written materials not expressly covered by a separate file-specific license.
 
-Public repository access does not grant an open-source, commercial, or other general license to the Original Materials. Except for rights that necessarily arise under GitHub's Terms of Service and applicable mandatory law, all rights are reserved.
+It does **not** apply to a source-code file that expressly identifies the GNU Affero General Public License (AGPL) in its file header or license notice. Such code is governed by the AGPL notice and the separate commercial dual-licensing policy.
 
-Without prior, express written permission from the rights holder, no person may reproduce, redistribute, publish, sublicense, sell, commercially exploit, modify, or distribute derivative versions of the Original Materials, except to the extent permitted by applicable law.
+## 2. Rights reserved; no implied commercial permission
 
-A permission request should identify the exact files, intended use, distribution model, and whether the use is commercial. Permission is effective only if granted expressly in writing.
+For materials within this notice, all rights are reserved unless a separate written license says otherwise. Public repository access, viewing, downloading, citation, or cloning does not grant a general right to republish, adapt, redistribute, sublicense, sell, or commercially exploit protected expression.
 
-## Scholarly citation and lawful use
+Scholarly citation, linking, discussion, quotation, and other uses permitted by applicable copyright law remain available. A commercial reuse permission must be agreed expressly in writing.
 
-Public visibility does not prevent scholarly reference. You may cite the work, link to the repository, discuss results, and make quotations or other uses permitted by applicable copyright law. Citation does not authorize reproduction of substantial protected expression or commercial exploitation of protected code or documentation.
+## 3. AI assistance and authorship transparency
 
-This notice does not restrict rights that cannot lawfully be restricted, including statutory exceptions and limitations.
+The author used AI systems as disclosed research and development tools. The author remains responsible for the mathematical direction, problem selection, definitions, proof strategy, verification decisions, source selection, critical review, corrections, organization, and final acceptance of the materials.
 
-## Third-party and upstream materials are excluded
+This notice claims rights only in copyrightable human-authored expression and other rights that the author is legally entitled to license. It does not claim copyright ownership over material generated autonomously by an AI system to the extent that such material is not protected by copyright under applicable law. AI-assisted passages and contributions are documented transparently in the relevant project records where applicable.
 
-This notice does not claim ownership of or relicense:
-- upstream Erdős–Selfridge source files copied into this repository for reproducibility;
-- Lean, Mathlib, package code, dependencies, and toolchains;
-- third-party publications, data, or other materials identified by separate notices.
+No statement in this notice implies that an AI system is a human co-author or that every AI-generated output is exclusively owned by the author.
 
-Those materials remain governed by their respective licenses and rights holders. No rights are claimed beyond rights actually held by Ta-Yoshua Lubuimi.
+## 4. Third-party materials excluded
 
-## Mathematical ideas and results
+This notice does not claim ownership of or relicense upstream Erdős–Selfridge materials, Lean, Mathlib, package code, dependencies, third-party publications, datasets, AI-provider materials, or other material identified by separate notices. Each remains governed by its own license and rights holder, including applicable contractual terms.
 
-Copyright protects original expression, such as source code, manuscript wording, diagrams, and documentation. It does not by itself create exclusive rights over mathematical facts, abstract ideas, methods, procedures, or a theorem merely because it was discovered or published. Independent implementations and lawful uses of unprotected mathematical ideas may therefore stand differently from copying protected expression.
+## 5. Mathematical ideas and results
 
-## No warranty
+Copyright protects original expression, not mathematical facts, abstract ideas, methods, procedures, or theorem statements as such. This notice does not claim an exclusive copyright monopoly over mathematical facts or independently developed implementations.
 
-The Original Materials are provided “as is”, without warranty to the maximum extent permitted by law. Nothing in this notice excludes liability where such exclusion is prohibited.
+## 6. No warranty; contact
 
-## Contact
-
-For written permission or licensing questions, contact the rights holder through the repository profile or project documentation.
+Materials are provided “as is”, without warranty to the maximum extent permitted by law. For permission requests, contact the rights holder through the repository profile or project documentation.
 
 ---
 
-This is a proprietary rights notice, not a standard open-source license, negotiated commercial license, or jurisdiction-specific legal opinion. Obtain qualified intellectual-property advice for material licensing decisions.
+This notice is not a negotiated commercial agreement or jurisdiction-specific legal opinion. Licensing and enforcement decisions should be reviewed by qualified counsel.
