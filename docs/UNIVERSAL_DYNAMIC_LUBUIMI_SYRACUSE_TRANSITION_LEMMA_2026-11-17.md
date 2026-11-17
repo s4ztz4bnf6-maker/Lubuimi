@@ -133,7 +133,7 @@ In particular, the Lubuimi bound applies at every stage with the *current* offse
 \le R_{j-1}\le
 (2^{d_{j+1}}-1)(3^j-2^j),
 \]
-for (j\ge1). This is a genuinely dynamic statement: no constant offset, periodic valuation pattern, or fixed jump size is assumed.
+for (1\le j\le N-2), namely whenever the next offset pair is defined. This is a genuinely dynamic statement: no constant offset, periodic valuation pattern, or fixed jump size is assumed.
 
 For the Syracuse specialization,
 \[
@@ -152,7 +152,7 @@ the exact affine identity is
 \[
 2^{A_k}x_k=3^kx_0+C_k.
 \]
-With (R_k=C_k+3^k-2^{A_k}), the strict-descent criterion is
+With the Syracuse-indexed residual (R^{\mathrm{Syr}}_k=C_k+3^k-2^{A_k}) and the index relation (R^{\mathrm{Syr}}_{j+1}=R^{\mathrm{dyn}}_j) from Lemma A, the strict-descent criterion is
 \[
 \boxed{x_k<x_0\iff x_0R^{\\mathrm{Syr}}_k<(x_0-1)C_k.}
 \]
@@ -164,7 +164,7 @@ The transition lemmas above are proved algebraically for every finite admissible
 
 They do **not**, by themselves, prove that the start-dependent inequality
 \[
-x_0R_k<(x_0-1)C_k
+x_0R^{\mathrm{Syr}}_k<(x_0-1)C_k
 \]
 must hold for some (k) for every (x_0>1). That final universal assertion is equivalent to the Collatz conjecture for the accelerated map. No proof of that assertion, no global Collatz theorem, and no Lean/CI verification is claimed here. The lemmas must not be misquoted as a completed Collatz proof.
 
