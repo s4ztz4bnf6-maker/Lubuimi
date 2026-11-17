@@ -43,3 +43,20 @@ The global Collatz conjecture is not claimed as proved by the results summarized
 ## E. Verification record
 
 The exact Lean checkpoints and their scope are maintained in [the consolidated project status](../docs/FINAL_PROJECT_STATUS_2026-11-14.md). The named axiom output and explicit `sorryAx` gate, rather than build success alone, define the formal verification boundary.
+
+
+## F. Universal dynamic transition: Lubuimi bound and 2-adic/3-adic coupling (17 November 2026)
+
+A separate exact algebraic addendum now proves the finite-step transition theorem for the Syracuse valuation word:
+
+- [Universal dynamic Lubuimi/Syracuse transition lemma](../docs/UNIVERSAL_DYNAMIC_LUBUIMI_SYRACUSE_TRANSITION_LEMMA_2026-11-17.md).
+
+For positive valuations (a_1,\ldots,a_N), define (A_0=0), (A_{j+1}=A_j+a_{j+1}), and offsets (c_j=A_{j+1}-j), (d_j=A_j+2-j). These are nonnegative nondecreasing sequences. The dynamic residual recurrence with these offsets is exactly the Syracuse affine residual, with the explicit index shift proved in the linked lemma.
+
+The same lemma proves the general integer prefix/tail coupling for arbitrary total residual (M), including divisibility, the tail recurrence, and preservation of
+[
+2^{\lambda_k}Y_k+3^{N-k}R_{k-1}=M
+]
+at every finite transition. Consequently the Lubuimi bound and the 2-adic/3-adic coupling apply to the *currently updated* Syracuse offsets, not to a frozen parameter choice.
+
+**Status:** the finite-step universal dynamic transition theorem is proved algebraically under its stated hypotheses. It is not a Lean-verified declaration. It does not by itself prove that every start reaches a smaller iterate; the global universal stopping-time statement and full Collatz conjecture are not claimed as proved by this addendum.

@@ -96,3 +96,16 @@ The finite valuation-word and finite-depth manuscripts should be read together w
 
 ---
 *Prepared as an append-only project status record. It is not a claim that the Collatz conjecture has been solved.*
+
+
+## 9. Dynamic Lubuimi/Syracuse transition lemma (17 November 2026)
+
+A new exact algebraic application is documented in [UNIVERSAL_DYNAMIC_LUBUIMI_SYRACUSE_TRANSITION_LEMMA_2026-11-17.md](UNIVERSAL_DYNAMIC_LUBUIMI_SYRACUSE_TRANSITION_LEMMA_2026-11-17.md).
+
+The note proves:
+- the Syracuse valuation-word substitution (c_j=A_{j+1}-j), (d_j=A_j+2-j), including nonnegative monotone offsets;
+- exact identity between the Lubuimi residual recurrence and the Syracuse affine residual;
+- the general integer prefix/tail coupling with arbitrary total residual (M), and its exact preservation at every transition;
+- application of the Lubuimi bound with the current, dynamically updated offsets.
+
+This closes the **finite-step dynamic transition lemma**. It does not close the distinct universal stopping-time assertion or the global Collatz conjecture. The latter remains explicitly unproved in this repository snapshot. No Lean or CI verification is claimed for the new note.
