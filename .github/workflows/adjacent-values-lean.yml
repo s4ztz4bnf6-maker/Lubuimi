@@ -35,6 +35,13 @@ jobs:
         run: lake exe cache get
       - name: Build Lean library
         run: lake build
+      - name: Reject placeholders and unproved axioms in project Lean sources
+        shell: bash
+        run: |
+          if grep -R -n -E "\\bsorry\\b|sorryAx|^[[:space:]]*axiom[[:space:]]" --include="*.lean" .; then
+            echo "ERROR: placeholder proof or unproved axiom declaration detected"
+            exit 1
+          fi
       - name: Run declaration-level axiom audit
         shell: bash
         run: |
