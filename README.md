@@ -53,21 +53,20 @@ The policy covers only rights actually owned or controlled by the author. It doe
 
 Read the [commercial revenue-share policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md) and [AI assistance and authorship disclosure](AI-ASSISTANCE-AND-AUTHORSHIP.md).
 
-## Separate research project — Consecutive Values of Restricted 2-3 Sums
+## Separate research project — Adjacent Values
 
-> **PROJECT BOUNDARY — THIS IS A SEPARATE RESEARCH STRAND.** The Adjacent-Values project is maintained under [AdjacentValues/](AdjacentValues/). Its claims, evidence, authorship, code, Lean formalization, CI results and licences are not part of the Syracuse/Collatz proof programme.
+> **PROJECT BOUNDARY:** The Adjacent-Values work is maintained separately under [AdjacentValues/](AdjacentValues/). It is not a Syracuse/Collatz theorem and does not inherit claims or CI evidence from the Collatz programme.
 
-**Project title:** *Consecutive Values of Restricted \(2\)-\(3\) Sums*  
-**Authors:** Tayoshua Luguimi and Phillipp Haas  
-**Status date:** 18 November 2026
+**Working title:** *Consecutive Values of Restricted \(2\)-\(3\) Sums*  
+**Current branch authorship line:** Tayoshua Luguimi and Phillipp Haas — canonical spelling awaits confirmation against the original author metadata.
 
 The project studies
 \[
 T_n(e)=\sum_{j=0}^{n-1}3^{n-1-j}2^{e_j}
 \]
-for strictly increasing nonnegative integer exponent sequences. The independent project dossier records a block-induction proof of universal adjacent-value existence, using an odd-target invariant, a concatenation identity and five finite block certificates.
+for strictly increasing nonnegative integer exponent sequences.
 
-**Evidence boundary:** The mathematical proof is recorded as established in the independent research dossier. The five exact block-certificate tables still need to be imported into this repository branch. The new Lean subproject currently formalizes the weighted-sum definition and exponent-shift identity only; it does **not** yet formalize the universal theorem. No Lean kernel verification or axiom audit is claimed for the main theorem.
+**Mathematical status:** The latest independently retrievable v0.6.0 validation record (17 November 2026) explicitly labels the universal adjacent-value conjecture **OPEN — NOT PROVED**. A later block-induction proof and five finite certificate tables have been reported in this research session, but the exact archive and proof script have not yet been available for source inspection in this branch. They are therefore **REPORTED — NOT VERIFIED HERE**. No universal theorem or Lean proof is claimed.
 
 The dedicated area includes:
 - [Project README and status](AdjacentValues/README.md)
@@ -77,9 +76,9 @@ The dedicated area includes:
 - [GitHub Actions workflow](.github/workflows/adjacent-values-lean.yml)
 - [Project-specific licensing](AdjacentValues/LICENSING.md)
 
-**Licensing for this project area only:** manuscript, mathematical exposition and documentation are CC BY 4.0; original code and tests are MIT. Third-party material remains under its own licence. These terms do not amend licences for the rest of this repository or for any legacy release.
+**Licensing for this project area only:** manuscript, mathematical exposition and documentation are CC BY 4.0; original code and tests are MIT. Third-party material remains under its own licence. These terms do not amend licences for the rest of this repository or any legacy release.
 
-AI tools assisted with research organization, drafting and formalization exploration; they are not authors or independent verifiers.
+AI assistance in the current research session included mathematical exploration, drafting support, and reported certificate/checker development. The exact archive provenance remains to be audited. AI tools are not authors or independent verifiers.
 
 ---
 
