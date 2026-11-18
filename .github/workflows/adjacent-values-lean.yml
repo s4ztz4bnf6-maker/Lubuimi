@@ -35,22 +35,42 @@ jobs:
         run: lake exe cache get
       - name: Build Lean library
         run: lake build
-      - name: Reject placeholders and unproved axioms in project Lean sources
+      - name: Reject placeholders, native_decide and project axioms
         shell: bash
         run: |
-          if grep -R -n -E "\\bsorry\\b|sorryAx|^[[:space:]]*axiom[[:space:]]" --include="*.lean" .; then
-            echo "ERROR: placeholder proof or unproved axiom declaration detected"
+          set -o pipefail
+          if find . -path './.lake' -prune -o -name '*.lean' -print0 |
+             xargs -0 -r grep -n -E '(^|[^[:alnum:]_])(sorry|sorryAx|native_decide)([^[:alnum:]_]|$)|^[[:space:]]*axiom[[:space:]]'; then
+            echo "ERROR: forbidden placeholder, native_decide, or project axiom found"
             exit 1
           fi
       - name: Run declaration-level axiom audit
         shell: bash
         run: |
           set -o pipefail
-          lake env lean AdjacentValues/AxiomAudit.lean 2>&1 | tee axiom-audit.txt
-          if grep -q "sorryAx" axiom-audit.txt; then
-            echo "ERROR: sorryAx detected in audited declaration output"
-            exit 1
-          fi
+          lake env lean AxiomAudit.lean 2>&1 | tee axiom-audit.txt
+          python3 - <<'PY'
+          import re, sys
+          from pathlib import Path
+
+          output = Path("axiom-audit.txt").read_text()
+          matches = re.findall(r"depends on axioms:\s*\[([^\]]*)\]", output)
+          if not matches:
+              print("ERROR: no '#print axioms' result found")
+              sys.exit(1)
+
+          allowed = {"propext", "Classical.choice", "Quot.sound"}
+          failed = False
+          for raw in matches:
+              actual = {x.strip() for x in raw.split(",") if x.strip()}
+              extra = actual - allowed
+              print(f"Axiom dependencies: {sorted(actual)}")
+              if extra:
+                  print(f"ERROR: disallowed axioms: {sorted(extra)}")
+                  failed = True
+          if failed:
+              sys.exit(1)
+          PY
       - name: Upload audit log
         if: always()
         uses: actions/upload-artifact@v4
