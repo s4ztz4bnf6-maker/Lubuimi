@@ -38,6 +38,7 @@ jobs:
       - name: Run declaration-level axiom audit
         shell: bash
         run: |
+          set -o pipefail
           lake env lean AdjacentValues/AxiomAudit.lean 2>&1 | tee axiom-audit.txt
           if grep -q "sorryAx" axiom-audit.txt; then
             echo "ERROR: sorryAx detected in audited declaration output"
