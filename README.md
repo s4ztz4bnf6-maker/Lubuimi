@@ -53,34 +53,33 @@ The policy covers only rights actually owned or controlled by the author. It doe
 
 Read the [commercial revenue-share policy](LICENSE-COMMERCIAL-USE-AND-REMUNERATION.md) and [AI assistance and authorship disclosure](AI-ASSISTANCE-AND-AUTHORSHIP.md).
 
-## Separate research project — Ta-Yoshua Lubuimi: Adjacent Values
+## Separate research project — Consecutive Values of Restricted 2-3 Sums
 
-> **PROJECT BOUNDARY — THIS IS NOT PART OF THE SYRACUSE/COLLATZ RESEARCH ABOVE.**
->
-> This subsection is an orientation notice only. The Adjacent-Values project has its own research dossier, mathematical claims, evidence ledger, version history, code, tests, and licensing decisions. No theorem, computation, Lean result, CI result, authorship statement, or licence from either project is automatically transferable to the other.
+> **PROJECT BOUNDARY — THIS IS A SEPARATE RESEARCH STRAND.** The Adjacent-Values project is maintained under [AdjacentValues/](AdjacentValues/). Its claims, evidence, authorship, code, Lean formalization, CI results and licences are not part of the Syracuse/Collatz proof programme.
 
-**Project name:** Ta-Yoshua-Lubuimi-Adjacent-Values  
-**Research author:** Ta-Yoshua Lubuimi  
-**Research status (17 November 2026):** Main universal existence question **OPEN — NOT PROVED**.
+**Project title:** *Consecutive Values of Restricted \(2\)-\(3\) Sums*  
+**Authors:** Tayoshua Luguimi and Phillipp Haas  
+**Status date:** 18 November 2026
 
-The separate project studies adjacent values of the ternary-weighted binary exponential sum
+The project studies
 \[
-T_n(e)=\sum_{j=0}^{n-1}3^{n-1-j}2^{e_j},
+T_n(e)=\sum_{j=0}^{n-1}3^{n-1-j}2^{e_j}
 \]
-for strictly increasing nonnegative integer exponent sequences. Its central question asks when admissible sequences \(e,f\) can satisfy \(T_n(f)-T_n(e)=1\). The current dossier records exact structural identities, a coupled 2-adic/3-adic state formulation, finite witnesses, and open proof obligations. These reformulations do **not** establish universal existence.
+for strictly increasing nonnegative integer exponent sequences. The independent project dossier records a block-induction proof of universal adjacent-value existence, using an odd-target invariant, a concatenation identity and five finite block certificates.
 
-**Evidence boundary:** exact algebraic identities are distinguished from finite computed witnesses and from the still-open universal statement. The separate package currently includes independently checked witnesses for lengths \(n=1,\ldots,7\); reported examples beyond that range are not promoted here to verified results. No Lean compilation, CI run, or theorem-level formal audit is claimed for this separate project.
+**Evidence boundary:** The mathematical proof is recorded as established in the independent research dossier. The five exact block-certificate tables still need to be imported into this repository branch. The new Lean subproject currently formalizes the weighted-sum definition and exponent-shift identity only; it does **not** yet formalize the universal theorem. No Lean kernel verification or axiom audit is claimed for the main theorem.
 
-**Separate licensing decision for the Adjacent-Values project only:**
-- Manuscripts, mathematical exposition, README and documentation: **CC BY 4.0**.
-- Original code and tests: **MIT**.
-- Third-party material remains under its respective licence.
+The dedicated area includes:
+- [Project README and status](AdjacentValues/README.md)
+- [Working manuscript](AdjacentValues/manuscript/main.md)
+- [Verification status and audit policy](AdjacentValues/VERIFICATION_STATUS.md)
+- [Lean project and axiom audit](AdjacentValues/AdjacentValues.lean)
+- [GitHub Actions workflow](.github/workflows/adjacent-values-lean.yml)
+- [Project-specific licensing](AdjacentValues/LICENSING.md)
 
-These terms apply only to material specifically released as part of the Adjacent-Values project and do not amend, replace, or grant rights in this Syracuse/Collatz repository or its legacy releases. Conversely, this repository's licensing and commercial-use terms do not automatically govern the separate Adjacent-Values package. Mathematical facts and abstract ideas are not claimed as proprietary by this notice.
+**Licensing for this project area only:** manuscript, mathematical exposition and documentation are CC BY 4.0; original code and tests are MIT. Third-party material remains under its own licence. These terms do not amend licences for the rest of this repository or for any legacy release.
 
-**Project archive:** a v0.5.0 source package has been assembled and locally verified, but has not yet been published as a GitHub release or dedicated repository. It is intentionally not imported into this Syracuse/Collatz repository.
-
-For avoidance of doubt: this section records the existence and boundary of a parallel research project. It does not merge the two projects, certify the Adjacent-Values conjecture, or alter any existing file licence.
+AI tools assisted with research organization, drafting and formalization exploration; they are not authors or independent verifiers.
 
 ---
 
