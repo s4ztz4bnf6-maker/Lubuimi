@@ -1,18 +1,33 @@
-# Verification status — 18 November 2026
+# Verification status — updated 18 November 2026
 
-## Verified in repository source
+## Current Lean source
 
-- The Lean subproject is pinned to Lean 4.28.0 and Mathlib v4.28.0.
-- The Lean source defines the weighted sum and an exponent-shift theorem.
-- A GitHub Actions workflow is configured to build this subproject and print the axiom dependencies of the exponent-shift theorem.
+- Lean toolchain: 4.28.0.
+- Mathlib dependency: pinned to tag v4.28.0 in the Lake project.
+- The Lean source defines the weighted sum, admissibility as strict monotonicity, and the exponent-shift identity.
+- AxiomAudit.lean currently audits only AdjacentValues.exponentShift.
 
-## Not yet verified
+## CI workflow corrections
 
-- No successful CI run for this new workflow has yet been inspected.
-- The five finite block-certificate tables have not yet been committed to this branch.
-- The odd-target induction invariant and block induction are not yet formalized.
-- The universal adjacent-values theorem is not yet a Lean declaration and has no Lean kernel or axiom-audit result.
+The workflow:
+- scans only Lean source files under this project directory and prunes .lake, so Mathlib's own test sources are not mistaken for project placeholders;
+- invokes lake env lean AxiomAudit.lean from the configured AdjacentValues/ working directory;
+- rejects sorry, sorryAx, native_decide, and explicit project axiom declarations in project Lean files;
+- enforces the explicit axiom allowlist {propext, Classical.choice, Quot.sound} on each #print axioms result it finds.
+
+The corrected workflow has been committed to the research branch. **A successful run has not yet been observed in the available GitHub status data.** Do not report the workflow as passing until the run and job logs have been inspected.
+
+## Mathematical claim status
+
+The latest independently retrievable v0.6.0 validation record dated 17 November 2026 says the universal adjacent-value conjecture remains **OPEN — NOT PROVED**.
+
+A later block-induction proof and five certificate tables, said to contain 89,824 witnesses plus an independent verifier and proof script, have been reported in the current research session. The archive and patch were not available among the accessible conversation uploads or Library search results at this update. Thus:
+- reported certificate count: 89,824;
+- independent verifier result: reported by the user, not independently replayed here;
+- exact certificate contents and hashes: not inspected here;
+- formalization of the block induction and universal theorem: not yet present;
+- Lean kernel verification of the universal theorem: **NOT ACHIEVED**.
 
 ## Audit policy
 
-Never describe a successful library build as verification of a theorem that is absent from the Lean source. Every theorem-level verification statement must identify the exact commit, declaration, Lean/Mathlib versions, workflow run, job, and complete axiom dependency output. Reject sorryAx and do not introduce unproved axioms to close proof obligations.
+Never describe a successful library build as verification of a theorem absent from the Lean source. Every theorem-level verification statement must identify the exact commit, declaration, Lean/Mathlib versions, workflow run, job, and full axiom dependency output. Reject sorryAx, project-specific unproved axioms, and Lean.ofReduceBool / native_decide in the trusted proof path.
