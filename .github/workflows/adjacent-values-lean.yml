@@ -1,0 +1,52 @@
+name: Adjacent Values — Lean kernel checks
+
+on:
+  push:
+    branches:
+      - research/adjacent-values-independent-track-2026-11-18
+    paths:
+      - "AdjacentValues/**"
+      - ".github/workflows/adjacent-values-lean.yml"
+  pull_request:
+    paths:
+      - "AdjacentValues/**"
+      - ".github/workflows/adjacent-values-lean.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean-build-and-audit:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: AdjacentValues
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan and selected Lean toolchain
+        shell: bash
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib dependency
+        run: lake update
+      - name: Download Mathlib build cache
+        run: lake exe cache get
+      - name: Build Lean library
+        run: lake build
+      - name: Run declaration-level axiom audit
+        shell: bash
+        run: |
+          lake env lean AdjacentValues/AxiomAudit.lean 2>&1 | tee axiom-audit.txt
+          if grep -q "sorryAx" axiom-audit.txt; then
+            echo "ERROR: sorryAx detected in audited declaration output"
+            exit 1
+          fi
+      - name: Upload audit log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: adjacent-values-lean-audit
+          path: AdjacentValues/axiom-audit.txt
+          if-no-files-found: ignore
