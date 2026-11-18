@@ -9,7 +9,7 @@ We study the values
 \[
 T_n(e)=\sum_{j=0}^{n-1}3^{n-1-j}2^{e_j}
 \]
-associated with strictly increasing sequences of nonnegative integer exponents. The central question is whether two admissible sequences of every fixed positive length can produce consecutive values. The project records a block-induction strategy based on a concatenation identity, an odd-target induction invariant, and finite block certificates.
+associated with strictly increasing sequences of nonnegative integer exponents. The central question is whether two admissible sequences of every fixed positive length can produce consecutive values. The project investigates a proposed block-induction strategy based on a concatenation identity, an odd-target induction invariant, and finite block certificates. The universal existence statement remains open in the latest independently retrievable v0.6.0 validation record.
 
 This file is the initial repository manuscript record. It states the mathematical architecture but is **not yet a complete publication proof**: the exact five certificate tables and their reproducible witness data still need to be inserted and checked against the source dossier.
 
@@ -35,14 +35,14 @@ where every exponent of \(e\) is at most \(E\). This separates the prefix contri
 
 ## 3. Odd-target invariant
 
-The induction invariant \(Q(L,E)\) is:
+The proposed induction invariant \(Q(L,E)\) is:
 
 For every odd integer \(t\) with \(|t|\leq 2^{E+1}\), there are admissible length-\(L\) sequences \(e,f\), with exponents bounded by \(E\), such that
 \[
 T_L(f)-T_L(e)=t.
 \]
 
-The block step is organized around the congruence
+The reported block-step strategy is organized around the congruence
 \[
 u\equiv 3^{-k}t\pmod{2^{E+1}},
 \qquad
@@ -52,7 +52,7 @@ Two representatives of the residue class differ by \(2^{E+1}\), so their corresp
 
 ## 4. Certificate parameters and exponent bound
 
-The five recorded block parameter pairs are
+The five reported block parameter pairs (not yet supported here by the underlying CSV archive) are
 \[
 (5,10),\ (6,11),\ (7,13),\ (8,14),\ (9,15).
 \]
@@ -64,7 +64,7 @@ The even-target consequence uses \(t=2^s t'\) with \(t'\) odd and the scaling id
 \[
 T_n(e+s)=2^sT_n(e).
 \]
-The stated corollary is that every integer \(t\) with \(|t|\leq2^{2n-3}\) is representable, with exponent bound \(4n-4\), subject to the full odd-target induction proof and certificates.
+The claimed corollary is that every integer \(t\) with \(|t|\leq2^{2n-3}\) is representable, with exponent bound \(4n-4\). This implication is conditional on a valid proof of the odd-target induction statement; neither the induction proof nor the finite certificates are independently available in this repository snapshot.
 
 ## 5. Base cases
 
@@ -82,11 +82,11 @@ n&e&f\\\hline
 
 These are finite base witnesses. They do not replace the induction step.
 
-## 6. Formal verification status
+## 6. Mathematical and formal verification status
 
-The accompanying Lean subproject currently formalizes the definition of \(T_n\), admissibility as strict monotonicity, and the exponent-shift identity. It does not yet formalize \(Q(L,E)\), the finite block tables, the block induction, or the universal adjacent-values theorem.
+The latest independently retrievable v0.6.0 validation log states that the universal adjacent-value conjecture remains **OPEN — NOT PROVED**. A later proof package and five certificate tables have been reported, but the archive and exact proof script were not available in the repository or Library during this update. Their reported 89,824 rows and independent verification therefore remain **REPORTED — NOT VERIFIED HERE**.
 
-Accordingly, no claim of Lean kernel verification or axiom audit for the main theorem is made in this version. The CI workflow checks only the declarations actually present in the Lean source.
+The accompanying Lean subproject currently formalizes the definition of \(T_n\), admissibility as strict monotonicity, and the exponent-shift identity. It does not yet formalize \(Q(L,E)\), the finite block tables, the block induction, or the universal adjacent-values theorem. No claim of Lean kernel verification or axiom audit for the main theorem is made in this version.
 
 ## 7. Required completion items
 
@@ -100,4 +100,4 @@ Accordingly, no claim of Lean kernel verification or axiom audit for the main th
 
 ## Acknowledgements and disclosure
 
-The authors are Tayoshua Luguimi and Phillipp Haas. AI tools assisted with research organization, drafting, and formalization exploration; they are not authors and do not constitute independent verification.
+The authors are Tayoshua Luguimi and Phillipp Haas. AI tools were used in this research session for mathematical exploration, drafting of the proposed block-induction route, and assistance with certificate/checker development. The precise provenance and contents of the reported certificate archive remain to be inspected. AI tools are not authors or independent verifiers; the authors remain responsible for the statements, proofs, code, and reproducibility.
