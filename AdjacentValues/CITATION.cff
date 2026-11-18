@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this research package, please cite it as follows."
+title: "Consecutive Values of Restricted 2-3 Sums"
+authors:
+  - family-names: Luguimi
+    given-names: Tayoshua
+  - family-names: Haas
+    given-names: Phillipp
+date-released: 2026-11-18
+type: software
