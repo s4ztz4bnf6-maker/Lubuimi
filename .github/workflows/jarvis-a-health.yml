@@ -1,0 +1,23 @@
+name: JARVIS A health monitor
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  gateway-health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Check Railway coordination core (A)
+        shell: bash
+        run: |
+          set -euo pipefail
+          URL="https://jarvis-gateway-production-c03df2bc.up.railway.app/health"
+          BODY="$(curl --fail --silent --show-error --max-time 20 "$URL")"
+          echo "$BODY"
+          echo "$BODY" | grep -q '"ok":true'
