@@ -2818,7 +2818,8 @@ theorem prefix_endpoint_affine_transport
       _ = 3 ^ k * (r + 2 ^ A * 2 * u) + C := by ring
   · rcases htodd with ⟨v, hv⟩
     refine ⟨v + 3 ^ k * u, ?_⟩
-    omega
+    rw [hv]
+    ring
 
 #print axioms prefix_endpoint_affine_transport
 
