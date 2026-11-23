@@ -50,3 +50,51 @@ descent. S3 must control concatenation and offset growth.
 No RH/GRH hypothesis is needed for S1–S3. Any future BBMST use
 must first identify a specific prime-distribution lemma; CRT fiber
 compatibility alone is not a GRH application.
+
+
+## L3: explicit compatibility proof (2026-11-23)
+
+**Correction:** The canonical offset `C_k` need not be even and
+need not be divisible by `2^A` (already `C_1=1`). Only
+`3^k*n+C_k` is divisible by `2^A` for an admissible prefix start.
+
+Let `A = ∑ σ'`, `C=C_k`, and let `r` be a **positive odd
+representative** of the prefix cylinder. Define
+`t=(3^k*r+C)/2^A`; by the prefix theorem `t` is an odd natural.
+All extensions of this cylinder modulo `2^(A+a+1)` are uniquely
+`n=r+2^(A+1)*u`, where `u` ranges modulo `2^a`.
+(For an arbitrary fixed representative of the prefix class, take
+the congruence modulo the larger modulus; positivity can be ensured by
+adding a sufficiently large multiple of that modulus.)
+
+The affine identity gives the integer equality
+`n_k=t+2*3^k*u` for these representatives. Thus
+`v₂(3*n_k+1)=a` is equivalent to
+`3*t+1+2*3^(k+1)*u ≡ 2^a (mod 2^(a+1))`.
+Since `t` is odd, divide the even congruence by two:
+`3^(k+1)*u ≡ 2^(a-1)-(3*t+1)/2 (mod 2^a)`.
+The coefficient `3^(k+1)` is a unit modulo `2^a`.
+Therefore exactly one `u mod 2^a` exists, and its lifted
+residue reduces to the prefix residue modulo `2^(A+1)`.
+
+This proves the constructive compatibility/uniqueness assertion,
+subject to the already stated prefix-cylinder hypothesis. The
+argument must not be replaced by the invalid claim that nested
+moduli alone imply compatibility.
+
+### Lean proof obligations
+
+1. Formalize exact valuation as the congruence
+   `3*n+1 ≡ 2^a (mod 2^(a+1))`, for positive odd `n`
+   and positive `a`.
+2. Establish the affine endpoint transport
+   `n_k(r+2^(A+1)*u)=n_k(r)+2*3^k*u`
+   under a fixed certified prefix.
+3. Establish the division-by-two congruence and the
+   invertibility of odd `3^(k+1)` modulo `2^a`.
+4. Prove existence and uniqueness of the lifted class and its
+   reduction to the prefix class.
+5. Only then execute the 120-pattern enumeration as an audit.
+
+**Status:** Human mathematical derivation recorded; the general L3
+statement has not yet been kernel-checked in Lean.
