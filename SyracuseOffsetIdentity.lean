@@ -2792,3 +2792,34 @@ theorem nondecreasing_orbit_next_exponent_cap
 #print axioms nondecreasing_orbit_next_exponent_cap
 
 end CollatzSyracuseAudit
+
+
+namespace CollatzSyracuseAudit
+
+/-- L3a/L3b transport in multiplicative form. The certified prefix
+endpoint is odd, and shifting the initial value by `2^(A+1) * u`
+shifts the endpoint by exactly `2 * 3^k * u`.
+This avoids any unjustified divisibility assumption on the offset `C`. -/
+theorem prefix_endpoint_affine_transport
+    (k A r C t u : ℕ)
+    (hprefix : 2 ^ A * t = 3 ^ k * r + C)
+    (htodd : Odd t) :
+    2 ^ A * (t + 2 * 3 ^ k * u) =
+      3 ^ k * (r + 2 ^ (A + 1) * u) + C ∧
+    Odd (t + 2 * 3 ^ k * u) := by
+  constructor
+  · rw [pow_succ]
+    calc
+      2 ^ A * (t + 2 * 3 ^ k * u)
+          = 2 ^ A * t + 2 ^ A * 2 * 3 ^ k * u := by ring
+      _ = (3 ^ k * r + C) + 3 ^ k * (2 ^ A * 2 * u) := by
+        rw [hprefix]
+        ring
+      _ = 3 ^ k * (r + 2 ^ A * 2 * u) + C := by ring
+  · rcases htodd with ⟨v, hv⟩
+    refine ⟨v + 3 ^ k * u, ?_⟩
+    omega
+
+#print axioms prefix_endpoint_affine_transport
+
+end CollatzSyracuseAudit
