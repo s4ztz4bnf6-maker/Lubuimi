@@ -1,3 +1,5 @@
+**Current licensing policy (2026-11-25):** All future authorized original research releases, code, algorithm implementations, artwork and documentation require a separate paid commercial agreement for commercial exploitation. See [LICENSE](LICENSE). Earlier valid grants and third-party rights remain intact.
+
 # Lubuimi — Syracuse / Collatz research
 
 **Research author:** Ta-Yoshua Lubuimi  
@@ -72,8 +74,7 @@ for strictly increasing nonnegative integer exponent sequences. Its central ques
 **Evidence boundary:** exact algebraic identities are distinguished from finite computed witnesses and from the still-open universal statement. The separate package currently includes independently checked witnesses for lengths \(n=1,\ldots,7\); reported examples beyond that range are not promoted here to verified results. No Lean compilation, CI run, or theorem-level formal audit is claimed for this separate project.
 
 **Separate licensing decision for the Adjacent-Values project only:**
-- Manuscripts, mathematical exposition, README and documentation: **CC BY 4.0**.
-- Original code and tests: **MIT**.
+- Future authorized original manuscripts, exposition, documentation, code and tests: **proprietary, paid commercial licensing**. Earlier valid CC BY 4.0 and MIT grants remain effective.
 - Third-party material remains under its respective licence.
 
 These terms apply only to material specifically released as part of the Adjacent-Values project and do not amend, replace, or grant rights in this Syracuse/Collatz repository or its legacy releases. Conversely, this repository's licensing and commercial-use terms do not automatically govern the separate Adjacent-Values package. Mathematical facts and abstract ideas are not claimed as proprietary by this notice.
