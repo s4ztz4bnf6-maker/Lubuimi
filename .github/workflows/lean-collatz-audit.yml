@@ -6,6 +6,8 @@ on:
       - collatz/compiler-audit-2026-10-19
       - collatz/quarter-descent-lemma-2026-10-20
       - collatz/syracuse-quarter-bridge-2026-10-21
+      - collatz/second-step-descent-mod-eight-zero-2026-10-21
+      - collatz/affine-transition-design-2026-10-21
   pull_request:
   workflow_dispatch:
 
@@ -27,7 +29,7 @@ jobs:
         with:
           build: false
           use-mathlib-cache: true
-      - name: Build Lean library modules
+      - name: Build all Lean library modules
         run: lake build CollatzAudit
       - name: Compile IterationLemmas.lean
         run: lake env lean IterationLemmas.lean
@@ -39,8 +41,33 @@ jobs:
         run: lake env lean SyracuseQuarterDescent.lean
       - name: Compile and audit SyracuseSecondStep.lean
         run: |
+          set -o pipefail
           lake env lean SyracuseSecondStep.lean 2>&1 | tee /tmp/syracuse-second-step-audit.log
           if grep -q 'sorryAx' /tmp/syracuse-second-step-audit.log; then
+            echo "Forbidden sorryAx dependency detected"
+            exit 1
+          fi
+      - name: Compile and audit AffineTransitionDesign.lean
+        run: |
+          set -o pipefail
+          lake env lean AffineTransitionDesign.lean 2>&1 | tee /tmp/affine-transition-audit.log
+          if grep -q 'sorryAx' /tmp/affine-transition-audit.log; then
+            echo "Forbidden sorryAx dependency detected"
+            exit 1
+          fi
+      - name: Compile and audit exact Mod64 transitions
+        run: |
+          set -o pipefail
+          lake env lean AffineTransitionExactMod64.lean 2>&1 | tee /tmp/affine-exact-mod64-audit.log
+          if grep -q 'sorryAx' /tmp/affine-exact-mod64-audit.log; then
+            echo "Forbidden sorryAx dependency detected"
+            exit 1
+          fi
+      - name: Compile and audit isolated valuation lemma
+        run: |
+          set -o pipefail
+          lake env lean AffineTransitionValuation.lean 2>&1 | tee /tmp/affine-transition-valuation-audit.log
+          if grep -q 'sorryAx' /tmp/affine-transition-valuation-audit.log; then
             echo "Forbidden sorryAx dependency detected"
             exit 1
           fi
